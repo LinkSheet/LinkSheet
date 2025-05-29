@@ -5,11 +5,12 @@ import assertk.assertions.isInstanceOf
 import fe.linksheet.experiment.engine.*
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.step.EngineStepId
+import fe.linksheet.testlib.core.JunitTest
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
+
 
 @RunWith(AndroidJUnit4::class)
 internal class ProfileForwardRuleTest : BaseRuleEngineTest() {
@@ -35,7 +36,7 @@ internal class ProfileForwardRuleTest : BaseRuleEngineTest() {
         dispatcher = dispatcher,
     )
 
-    @Test
+    @JunitTest
     fun `test rule matched`() = runTest(dispatcher) {
         val result = engine.process("https://sso.mycompany.com/login?foo=bar".toStdUrlOrThrow())
         assertResult(result).isInstanceOf<ForwardOtherProfileResult>()

@@ -28,14 +28,7 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
-import fe.linksheet.module.resolver.BrowserModeConfigHelper
-import fe.linksheet.module.resolver.ImprovedBrowserHandler
-import fe.linksheet.module.resolver.InAppBrowserHandler
-import fe.linksheet.module.resolver.IntentResolveResult
-import fe.linksheet.module.resolver.IntentResolver
-import fe.linksheet.module.resolver.ResolveEvent
-import fe.linksheet.module.resolver.ResolveModuleStatus
-import fe.linksheet.module.resolver.ResolverInteraction
+import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.module.BrowserSettings
 import fe.linksheet.module.resolver.module.IntentResolverSettings
@@ -43,7 +36,7 @@ import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.CustomTabInfo2
 import fe.linksheet.module.resolver.util.IntentSanitizer
-import fe.linksheet.module.resolver.util.ReferrerHelper
+import fe.linksheet.util.AndroidUriHelper
 import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.parser.UriException
 import fe.linksheet.util.intent.parser.UriParseException
@@ -51,7 +44,7 @@ import fe.std.result.IResult
 import fe.std.result.isFailure
 import fe.std.result.unaryPlus
 import fe.std.uri.StdUrl
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -143,7 +136,7 @@ class LinkEngineIntentResolver(
         }
 
         val startUrl = urlParseResult.value
-        val referringPackage = ReferrerHelper.getReferringPackage(referrer)
+        val referringPackage = AndroidUriHelper.get(AndroidUriHelper.Type.Package, referrer)
         emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = packageService.findHttpBrowsable(null)
 
@@ -213,7 +206,7 @@ class LinkEngineIntentResolver(
             newIntent,
             resultUri,
             sealedContext[ContextResultId.Preview]?.toUnfurlResult(),
-            referrer,
+            referringPackage?.packageName,
             sorted,
             filtered,
             app?.alwaysPreferred,

@@ -11,8 +11,8 @@ import fe.std.result.success
 import fe.std.time.unixMillisOf
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.runTest
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 internal class PreviewLinkFetcherTest : DatabaseTest() {
@@ -41,7 +41,7 @@ internal class PreviewLinkFetcherTest : DatabaseTest() {
         }
     }
 
-    @Test
+    @JunitTest
     fun test() = runTest {
         val fetcher = PreviewLinkFetcher(
             source = source,

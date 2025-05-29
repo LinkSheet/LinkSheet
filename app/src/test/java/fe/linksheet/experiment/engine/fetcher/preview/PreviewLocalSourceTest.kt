@@ -14,8 +14,8 @@ import io.ktor.client.engine.mock.*
 import io.ktor.client.engine.okhttp.OkHttp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 internal class PreviewLocalSourceTest : DatabaseTest() {
@@ -34,7 +34,7 @@ internal class PreviewLocalSourceTest : DatabaseTest() {
         )
     }
 
-    @Test
+    @JunitTest
     fun `bad request`() = runTest {
         val mockEngine = MockEngine {
             respondBadRequest()
@@ -49,7 +49,7 @@ internal class PreviewLocalSourceTest : DatabaseTest() {
             .isEqualTo(URL)
     }
 
-    @Test
+    @JunitTest
     fun test() = runTest {
         val client = HttpClient(OkHttp)
         val fetcher = PreviewLinkFetcher(

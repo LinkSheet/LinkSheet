@@ -15,12 +15,13 @@ import fe.linksheet.experiment.engine.rule.PreprocessorRule
 import fe.linksheet.experiment.engine.rule.StepTestResult
 import fe.linksheet.experiment.engine.rule.TestLinkModifier
 import fe.linksheet.experiment.engine.step.EngineStepId
-import fe.linksheet.module.resolver.util.AndroidAppPackage
+import fe.linksheet.testlib.core.JunitTest
+import fe.linksheet.util.AndroidAppPackage
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
+
 
 @RunWith(AndroidJUnit4::class)
 internal class EngineExtraTest : BaseRuleEngineTest() {
@@ -48,7 +49,7 @@ internal class EngineExtraTest : BaseRuleEngineTest() {
         dispatcher = dispatcher,
     )
 
-    @Test
+    @JunitTest
     fun `test rule matched`() = runTest(dispatcher) {
         val url = "https://linksheet.app".toStdUrlOrThrow()
         val extra = SourceAppExtra("com.google.chrome")

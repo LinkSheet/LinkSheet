@@ -8,8 +8,9 @@ import com.google.gson.GsonBuilder
 import fe.gson.typeadapter.ExtendedTypeAdapter
 import fe.linksheet.module.systeminfo.BuildInfo
 import fe.linksheet.testlib.core.BaseUnitTest
+import fe.linksheet.testlib.core.JunitTest
 import kotlinx.coroutines.runBlocking
-import kotlin.test.Test
+
 
 internal class LastVersionServiceTest : BaseUnitTest {
 
@@ -31,7 +32,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         private val buildInfoV2 = BuildInfo("2", 2, "2024-10-30 12:00:00", "foss")
     }
 
-    @Test
+    @JunitTest
     fun `empty input`(): Unit = runBlocking {
         val service = LastVersionService(gson, buildInfoV1)
         val expected = "[${buildInfoV1Json}]"
@@ -43,7 +44,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun `same version`(): Unit = runBlocking {
         val service = LastVersionService(gson, buildInfoV1)
         val input = "[${buildInfoV1Json}]"
@@ -51,7 +52,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         assertThat(service.handleVersions(input)).isNull()
     }
 
-    @Test
+    @JunitTest
     fun `new version`(): Unit = runBlocking {
         val service = LastVersionService(gson, buildInfoV2)
         val input = "[${buildInfoV1Json}]"

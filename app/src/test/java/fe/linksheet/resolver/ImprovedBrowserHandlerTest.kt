@@ -13,7 +13,7 @@ import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -30,7 +30,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         private val allResolvedInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allResolved)
     }
 
-    @Test
+    @JunitTest
     fun `always ask user which browser to choose`() {
         val config = BrowserModeConfigHelper.AlwaysAsk
 
@@ -51,7 +51,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `only list native apps`() {
         val config = BrowserModeConfigHelper.None
 
@@ -68,7 +68,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `only list native apps, of which user has single, but no browser`() {
         val config = BrowserModeConfigHelper.None
 
@@ -87,7 +87,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `only list native apps, of which user has multiple`() {
         val config = BrowserModeConfigHelper.None
 
@@ -108,7 +108,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `selected browser, but none specified`() {
         val config = BrowserModeConfigHelper.SelectedBrowser(null)
 
@@ -125,7 +125,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `selected browser`() {
         val config = BrowserModeConfigHelper.SelectedBrowser(PackageInfoFakes.MiBrowser.packageInfo.packageName)
 
@@ -142,7 +142,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `whitelisted browsers, but none selected`() {
         val config = BrowserModeConfigHelper.Whitelisted(null)
 
@@ -161,7 +161,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `whitelisted browsers, one selected`() {
         val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(PackageInfoFakes.MiBrowser))
 
@@ -178,7 +178,7 @@ internal class ImprovedBrowserHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `whitelisted browsers, multiple selected`() {
         val config = BrowserModeConfigHelper.Whitelisted(
             packageSetOf(

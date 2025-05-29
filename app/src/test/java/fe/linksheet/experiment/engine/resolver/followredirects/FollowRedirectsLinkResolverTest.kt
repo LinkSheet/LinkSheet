@@ -15,8 +15,8 @@ import fe.std.result.success
 import fe.std.time.unixMillisOf
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.runTest
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
@@ -40,7 +40,7 @@ internal class FollowRedirectsLinkResolverTest : DatabaseTest() {
         FollowRedirectsResult.LocationHeader(RESOLVED_URL).success
     }
 
-    @Test
+    @JunitTest
     fun test() = runTest {
         val resolver = FollowRedirectsLinkResolver(
             source = source,

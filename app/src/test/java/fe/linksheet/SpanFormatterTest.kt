@@ -7,8 +7,8 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.android.span.helper.formatter.SpanFormatter
+import fe.linksheet.testlib.core.JunitTest
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
@@ -28,7 +28,7 @@ internal class SpanFormatterTest : RobolectricTest {
         assertEquals(ex, result)
     }
 
-    @Test
+    @JunitTest
     fun test() {
         compareHtml(
             input = { append("%s") },

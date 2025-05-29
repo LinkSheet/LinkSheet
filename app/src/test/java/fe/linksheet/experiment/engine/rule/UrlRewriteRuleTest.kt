@@ -13,8 +13,8 @@ import fe.std.uri.extension.new
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 internal class UrlRewriteRuleTest : BaseRuleEngineTest() {
@@ -43,7 +43,7 @@ internal class UrlRewriteRuleTest : BaseRuleEngineTest() {
         dispatcher = dispatcher,
     )
 
-    @Test
+    @JunitTest
     fun `test rule not matched`() = runTest(dispatcher) {
         val result = engine.process("https://developer.android.com/jetpack/androidx/releases/compose-material3".toStdUrlOrThrow())
         assertResult(result)
@@ -53,7 +53,7 @@ internal class UrlRewriteRuleTest : BaseRuleEngineTest() {
             .isEqualTo("https://developer.android.com/jetpack/androidx/releases/compose-material3")
     }
 
-    @Test
+    @JunitTest
     fun `test rule matched`() = runTest(dispatcher) {
         val result = engine.process("https://www.reddit.com/r/androiddev/comments/1k69xx8/jetpack_compose_180_is_now_stable/".toStdUrlOrThrow())
         assertResult(result)

@@ -1,7 +1,7 @@
 package fe.linksheet.experiment.engine
 
 import fe.linksheet.experiment.engine.context.EngineRunContext
-import fe.linksheet.module.resolver.util.AndroidAppPackage
+import fe.linksheet.util.AndroidAppPackage
 import fe.std.uri.StdUrl
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

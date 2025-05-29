@@ -66,7 +66,7 @@ import io.ktor.client.*
 import io.ktor.client.engine.*
 import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.test.verify.definition
 import org.koin.test.verify.injectedParameters
@@ -185,7 +185,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<WorkDelegatorService>(WorkManager::class)
     )
 
-    @Test
+    @JunitTest
     fun test() {
         LinkSheetApp().provideKoinModules().verifyAll(
             extraTypes = extraTypes,

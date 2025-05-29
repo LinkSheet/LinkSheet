@@ -1,5 +1,4 @@
 @file:OptIn(ExperimentalTime::class)
-@file:OptIn(ExperimentalUuidApi::class)
 
 package fe.linksheet.module.resolver.module
 
@@ -29,7 +28,6 @@ import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 import kotlin.uuid.ExperimentalUuidApi
 
-@OptIn(ExperimentalTime::class)
 val resolverModule = module {
     single { BrowserResolver(getPackageManager(), get()) }
     single {

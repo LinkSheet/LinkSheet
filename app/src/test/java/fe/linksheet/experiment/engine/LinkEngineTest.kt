@@ -20,8 +20,8 @@ import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 internal class LinkEngineTest : BaseRuleEngineTest() {
@@ -38,7 +38,7 @@ internal class LinkEngineTest : BaseRuleEngineTest() {
         )
     }
 
-    @Test
+    @JunitTest
     fun test() = runTest(dispatcher) {
         // TODO: Test should not require real http
         val client = HttpClient(OkHttp)
@@ -73,7 +73,7 @@ internal class LinkEngineTest : BaseRuleEngineTest() {
             .isEqualTo("https://www.technologyreview.com/2021/03/26/1021318/google-security-shut-down-counter-terrorist-us-ally/")
     }
 
-    @Test
+    @JunitTest
     fun test2() = runTest(dispatcher) {
         val engine = LinkEngine(
             steps = listOf(

@@ -2,7 +2,7 @@ package fe.linksheet.experiment.engine.context
 
 import fe.linksheet.experiment.engine.fetcher.ContextResult
 import fe.linksheet.experiment.engine.fetcher.ContextResultId
-import fe.linksheet.module.resolver.util.AndroidAppPackage
+import fe.linksheet.util.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import java.util.EnumSet
 

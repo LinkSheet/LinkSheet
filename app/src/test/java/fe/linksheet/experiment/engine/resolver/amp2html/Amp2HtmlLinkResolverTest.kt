@@ -14,6 +14,7 @@ import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.database.entity.cache.ResolvedUrl
 import fe.linksheet.module.database.entity.cache.UrlEntry
 import fe.linksheet.module.repository.CacheRepository
+import fe.linksheet.testlib.core.JunitTest
 import fe.std.result.IResult
 import fe.std.result.success
 import fe.std.time.unixMillisOf
@@ -22,7 +23,7 @@ import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
+
 
 @RunWith(AndroidJUnit4::class)
 internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
@@ -61,7 +62,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         }
     }
 
-    @Test
+    @JunitTest
     fun `skip cache if disabled`() = runTest(dispatcher) {
         val resolver = Amp2HtmlLinkResolver(
             ioDispatcher = dispatcher,
@@ -83,7 +84,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         assertThat(resolved).isNull()
     }
 
-    @Test
+    @JunitTest
     fun `return cached url if present`() = runTest(dispatcher) {
         val resolver = Amp2HtmlLinkResolver(
             ioDispatcher = dispatcher,
@@ -107,7 +108,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
             .isEqualTo(testResolvedUrl)
     }
 
-    @Test
+    @JunitTest
     fun `use cached html if present`() = runTest(dispatcher) {
         val cachedHtml = "<html><body><h1>Cached html</h1></body></html>"
         val resolver = Amp2HtmlLinkResolver(

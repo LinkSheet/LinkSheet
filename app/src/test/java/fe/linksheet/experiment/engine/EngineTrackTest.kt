@@ -9,11 +9,11 @@ import assertk.assertions.isNotNull
 import assertk.assertions.prop
 import fe.linksheet.experiment.engine.rule.BaseRuleEngineTest
 import fe.linksheet.experiment.engine.rule.EmptyLinkEngine
+import fe.linksheet.testlib.core.JunitTest
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
@@ -21,7 +21,7 @@ import kotlin.uuid.Uuid
 internal class EngineTrackTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
 
-    @Test
+    @JunitTest
     fun test() = runTest(dispatcher) {
         val track1 = EngineTrack(
             id = Uuid.random(),

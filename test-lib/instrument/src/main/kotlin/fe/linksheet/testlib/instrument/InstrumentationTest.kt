@@ -3,9 +3,8 @@ package fe.linksheet.testlib.instrument
 import android.app.Instrumentation
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
-import fe.linksheet.testlib.core.BaseUnitTest
 
-interface InstrumentationTest : BaseUnitTest {
+interface InstrumentationTest {
     val instrumentation: Instrumentation
         get() = InstrumentationRegistry.getInstrumentation()
 

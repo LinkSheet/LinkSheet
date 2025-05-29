@@ -242,12 +242,10 @@ android {
     androidTest.assets.srcDir("$projectDir/schemas")
 
     packaging {
-
 //        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-//        resources {
-//            it.excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module")
-//        }
+        resources {
+            excludes += setOf("/META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module", "META-INF/LICENSE.md")
+        }
     }
 
     val main by sourceSets

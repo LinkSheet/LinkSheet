@@ -5,6 +5,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("com.gitlab.grrfe.build-logic-plugin")
+    id("de.mannodermaus.android-junit5")
 }
 
 group = "fe.linksheet.testlib.core"
@@ -29,6 +30,6 @@ kotlin {
 dependencies {
     api(AndroidX.test.runner)
     api(AndroidX.test.coreKtx)
-    api(AndroidX.test.ext.junit)
+    api(Testing.junit.jupiter.api)
     api(Koin.test)
 }

@@ -10,7 +10,7 @@ import androidx.test.uiautomator.Until
 import fe.linksheet.testlib.instrument.ui.UiTest
 import fe.linksheet.testlib.instrument.ui.AppInteractor
 import fe.linksheet.util.intent.buildIntent
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 internal class MainActivityTest : UiTest {
     private val interactor = AppInteractor(device, targetContext)

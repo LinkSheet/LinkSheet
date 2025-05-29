@@ -20,7 +20,7 @@ import fe.linksheet.composable.page.edit.EDITOR_APP_BAR_CANCEL_TEST_TAG
 import fe.linksheet.composable.page.edit.EDITOR_APP_BAR_DONE_TEST_TAG
 import fe.linksheet.testlib.core.ActivityInvoker
 import fe.linksheet.testlib.core.BaseUnitTest
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
 @OptIn(ExperimentalTestApi::class)

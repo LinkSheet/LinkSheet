@@ -5,7 +5,7 @@ import android.net.compatHost
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
@@ -36,7 +36,7 @@ internal class HostPublicityTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun test() {
         data.forEach { (hostname, expected) ->
             val actual = HostUtil.isAccessiblePublicly(Uri.parse("http://$hostname"))
@@ -45,7 +45,7 @@ internal class HostPublicityTest : RobolectricTest {
     }
 
     @Config(sdk = [Build.VERSION_CODES.P])
-    @Test
+    @JunitTest
     fun testIpv6PreApi28Q() {
         // Uri#host does not properly parse IPv6 hosts on < 28 / Q (https://issuetracker.google.com/issues/37069493)
         val uri = Uri.parse("http://[::1]")

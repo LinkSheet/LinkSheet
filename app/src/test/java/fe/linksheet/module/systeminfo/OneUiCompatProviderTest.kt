@@ -10,7 +10,7 @@ import fe.linksheet.module.systeminfo.device.`Samsung A02s running Android 12`
 import fe.linksheet.module.systeminfo.device.XiaomiRedmi2a
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -22,12 +22,12 @@ internal class OneUiCompatProviderTest : RobolectricTest {
         return provider.isRequired.value
     }
 
-    @Test
+    @JunitTest
     fun `compat required on stock samsung device`() {
         assertThat(`Samsung A02s running Android 12`.isProviderRequired()).isTrue()
     }
 
-    @Test
+    @JunitTest
     fun `compat not required on xiaomi device`() {
         assertThat(XiaomiRedmi2a.isProviderRequired()).isFalse()
     }

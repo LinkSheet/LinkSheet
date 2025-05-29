@@ -8,12 +8,12 @@ import fe.linksheet.testlib.core.RobolectricTest
 import fe.linksheet.util.IntentFlags
 import fe.linksheet.util.intent.buildIntent
 import mozilla.components.support.utils.toSafeIntent
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class IntentSanitizerTest : RobolectricTest {
-    @Test
+    @JunitTest
     fun test() {
         val flags = (Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
                 or Intent.FLAG_ACTIVITY_FORWARD_RESULT

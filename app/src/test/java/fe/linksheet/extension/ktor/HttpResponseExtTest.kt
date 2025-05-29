@@ -2,13 +2,14 @@ package fe.linksheet.extension.ktor
 
 import assertk.assertThat
 import assertk.assertions.isTrue
+import fe.linksheet.testlib.core.JunitTest
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.test.runTest
-import kotlin.test.Test
+
 
 internal class HttpResponseExtTest {
     private suspend fun create(contentType: String): HttpResponse {
@@ -19,7 +20,7 @@ internal class HttpResponseExtTest {
         return client.get(urlString = "https://linksheet.app")
     }
 
-    @Test
+    @JunitTest
     fun `test isHtml`() = runTest {
         assertThat(create("text/html").isHtml()).isTrue()
         assertThat(create("text/html; charset=utf-8").isHtml()).isTrue()

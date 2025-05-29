@@ -8,8 +8,8 @@ object AndroidUriHelper {
         Package("package"), AppScheme("android-app")
     }
 
-    fun get(type: Type, uri: Uri?): String? {
-        return if (uri?.scheme == type.scheme) uri.host else null
+    fun get(type: Type, uri: Uri?): AndroidAppPackage? {
+        return if (uri?.scheme == type.scheme) uri.host?.let { AndroidAppPackage(it) } else null
     }
 
     fun create(type: Type, context: Context): Uri {
@@ -20,3 +20,6 @@ object AndroidUriHelper {
         return Uri.fromParts(type.scheme, packageName, null)
     }
 }
+
+@JvmInline
+value class AndroidAppPackage(val packageName: String)

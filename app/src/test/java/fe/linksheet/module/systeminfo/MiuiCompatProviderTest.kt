@@ -11,7 +11,7 @@ import fe.linksheet.module.systeminfo.device.XiaomiRedmi2a
 import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote13_A14
 import fe.linksheet.module.systeminfo.device.XiaomiRedmiNote7Pro_DroidxA14
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -23,7 +23,7 @@ internal class MiuiCompatProviderTest : RobolectricTest {
         return provider.isRequired.value
     }
 
-    @Test
+    @JunitTest
     fun `compat required on stock xiaomi device`() {
         arrayOf(XiaomiMi5C, XiaomiRedmi2a, XiaomiRedmiNote13_A14)
             .forEach {
@@ -31,7 +31,7 @@ internal class MiuiCompatProviderTest : RobolectricTest {
             }
     }
 
-    @Test
+    @JunitTest
     fun `compat not required on custom rom xiaomi device`() {
         assertThat(XiaomiRedmiNote7Pro_DroidxA14.isProviderRequired()).isFalse()
     }

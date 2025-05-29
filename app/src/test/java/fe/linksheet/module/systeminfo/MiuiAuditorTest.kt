@@ -7,7 +7,7 @@ import assertk.tableOf
 import fe.linksheet.module.devicecompat.miui.MiuiAuditor
 import fe.linksheet.module.systeminfo.device.*
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -56,7 +56,7 @@ internal class MiuiAuditorTest : RobolectricTest {
             "Xiaomi/aurora/miproduct:15/AQ3A.240627.003/OS2.0.2.0.VNAEUXM:user/release-keys"
         )
 
-    @Test
+    @JunitTest
     fun test() = table.forAll { device, expectedDeviceInfo, expectedMiui, expectedFingerprint ->
         val infoService = SystemInfoService(device)
 

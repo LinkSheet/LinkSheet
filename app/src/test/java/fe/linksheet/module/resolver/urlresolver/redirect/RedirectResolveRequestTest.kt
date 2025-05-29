@@ -21,7 +21,7 @@ import okhttp3.OkHttpClient
 import okhttp3.mock.MockInterceptor
 import okhttp3.mock.head
 import okhttp3.mock.rule
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -40,7 +40,7 @@ internal class RedirectResolveRequestTest : RobolectricTest {
         private val cachedRequest = CachedRequest(request, logger)
     }
 
-    @Test
+    @JunitTest
     fun `test refresh header is redirect`() {
         val interceptor = MockInterceptor().apply {
             rule(head) {
@@ -65,7 +65,7 @@ internal class RedirectResolveRequestTest : RobolectricTest {
             .isEqualTo("https://linkin.bio/google")
     }
 
-    @Test
+    @JunitTest
     fun `test parse valid refresh header`() {
         tableOf("header", "expected")
             .row("0,https://linkin.bio/google", 0 to "https://linkin.bio/google")
@@ -83,7 +83,7 @@ internal class RedirectResolveRequestTest : RobolectricTest {
             }
     }
 
-    @Test
+    @JunitTest
     fun `test parse invalid refresh header`() {
         tableOf("header", "expected")
             .row<String, Pair<Int?, String?>?>("1.1", null)

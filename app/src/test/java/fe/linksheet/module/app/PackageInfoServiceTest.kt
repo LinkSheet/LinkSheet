@@ -11,7 +11,7 @@ import fe.linksheet.module.app.`package`.DefaultPackageLauncherService
 import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
 import fe.linksheet.module.app.`package`.domain.VerificationBrowserState
 import fe.linksheet.testlib.core.BaseUnitTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -19,7 +19,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class PackageInfoServiceTest : BaseUnitTest {
 
-    @Test
+    @JunitTest
     fun test() {
         val domainVerificationManager = DomainVerificationManagerCompat {
             VerificationBrowserState

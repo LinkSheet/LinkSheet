@@ -125,7 +125,7 @@ class ImprovedIntentResolver(
 
         logger.debug("Referrer=$referrer")
         val referringPackage = AndroidUriHelper.get(AndroidUriHelper.Type.Package, referrer)
-        val isReferrerBrowser = KnownBrowser.isKnownBrowser(referringPackage) != null
+        val isReferrerBrowser = KnownBrowser.isKnownBrowser(referringPackage?.packageName) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
         if (searchIntentResult != null) {
@@ -272,7 +272,7 @@ class ImprovedIntentResolver(
             packageInfoService = packageInfoService,
             uri = uri
         )
-        val resolveList = packageInfoService.findHandlers(uri, referringPackage)
+        val resolveList = packageInfoService.findHandlers(uri, referringPackage?.packageName)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
@@ -318,7 +318,7 @@ class ImprovedIntentResolver(
             newIntent,
             uri,
             unfurl,
-            referringPackage,
+            referringPackage?.packageName,
             sorted,
             filtered,
             app?.alwaysPreferred,

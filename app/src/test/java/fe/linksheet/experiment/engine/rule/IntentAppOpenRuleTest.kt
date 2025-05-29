@@ -17,7 +17,7 @@ import fe.linksheet.util.intent.buildIntent
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -48,7 +48,7 @@ internal class IntentAppOpenRuleTest : BaseRuleEngineTest() {
         dispatcher = dispatcher,
     )
 
-    @Test
+    @JunitTest
     fun `test rule not matched`() = runTest(dispatcher) {
         val result = engine.process("https://linksheet.app".toStdUrlOrThrow())
         assertResult(result)
@@ -58,7 +58,7 @@ internal class IntentAppOpenRuleTest : BaseRuleEngineTest() {
             .isEqualTo("https://linksheet.app")
     }
 
-    @Test
+    @JunitTest
     fun `test rule matched`() = runTest(dispatcher) {
         val result = engine.process("https://linksheet.app/fakevideo.mp4".toStdUrlOrThrow())
 

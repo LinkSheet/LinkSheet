@@ -6,19 +6,19 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isEqualToIgnoringGivenProperties
 import assertk.assertions.isInstanceOf
 import assertk.tableOf
-import fe.linksheet.UnitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import kotlinx.coroutines.test.runTest
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class HtmlMetadataParserTest : UnitTest {
+internal class HtmlMetadataParserTest : BaseUnitTest {
 
     private val parser = HtmlMetadataParser()
 
-    @Test
+    @JunitTest
     fun `test size parsing`() {
         tableOf("size", "expected")
             .row<String, Int?>("", null)
@@ -32,7 +32,7 @@ internal class HtmlMetadataParserTest : UnitTest {
             }
     }
 
-    @Test
+    @JunitTest
     fun `test largest icon finder`() {
         fun Element.createElement(href: String, sizes: String? = null): Element {
             return appendElement("link")
@@ -59,7 +59,7 @@ internal class HtmlMetadataParserTest : UnitTest {
             }
     }
 
-    @Test
+    @JunitTest
     fun `test parse unfurling`() = runTest {
         val html = """<!doctype html>
         <html lang="en" prefix="og: http://ogp.me/ns#" xmlns:og="http://opengraphprotocol.org/schema/">
@@ -253,7 +253,7 @@ internal class HtmlMetadataParserTest : UnitTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `test youtube rich preview`() = runTest {
         val html = """<!DOCTYPE html>
         <html style="font-size: 10px;font-family: Roboto, Arial, sans-serif;" lang="en" darker-dark-theme

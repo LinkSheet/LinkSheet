@@ -5,7 +5,7 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
 import assertk.fail
-import fe.linksheet.UnitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.assert.assertFailure
 import fe.std.result.assert.assertSuccess
 import io.ktor.client.*
@@ -14,17 +14,17 @@ import io.ktor.client.plugins.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.http.*
 import kotlinx.coroutines.test.runTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-internal class FollowRedirectsLocalSourceTest : UnitTest {
+internal class FollowRedirectsLocalSourceTest : BaseUnitTest {
     companion object {
         private const val INPUT = "https://linksheet.app/redirect-me"
         private const val TARGET = "https://linksheet.app/target"
     }
 
-    @Test
+    @JunitTest
     fun `redirect on head request`(): Unit = runTest {
         val mockEngine = MockEngine { request ->
             when (request.url.toString()) {
@@ -60,7 +60,7 @@ internal class FollowRedirectsLocalSourceTest : UnitTest {
             .isEqualTo(TARGET)
     }
 
-    @Test
+    @JunitTest
     fun `return 400 on head, redirect on get`(): Unit = runTest {
         val mockEngine = MockEngine { request ->
             when (request.method) {
@@ -83,7 +83,7 @@ internal class FollowRedirectsLocalSourceTest : UnitTest {
             .isEqualTo(TARGET)
     }
 
-    @Test
+    @JunitTest
     fun `redirect loop`(): Unit = runTest {
         val mockEngine = MockEngine { _ ->
             respondRedirect(TARGET)

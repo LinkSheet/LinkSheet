@@ -10,7 +10,7 @@ import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.testlib.core.RobolectricTest
 import fe.std.uri.toStdUrlOrThrow
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
@@ -31,7 +31,7 @@ internal class DownloaderTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun testCheckIsNonHtmlFileEnding() {
         mapOf(
             DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com",
@@ -53,7 +53,7 @@ internal class DownloaderTest : RobolectricTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun testIsNonHtmlContentUri() {
         val downloadable = downloader.isNonHtmlContentUri(
             "https://pbs.twimg.com/media/FyWt0wvWAAAxgYk?format=jpg&name=medium".toStdUrlOrThrow(),

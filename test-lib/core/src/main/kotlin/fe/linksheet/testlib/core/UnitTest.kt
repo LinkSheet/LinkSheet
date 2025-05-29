@@ -11,7 +11,7 @@ import org.koin.test.KoinTest
 interface BaseUnitTest : KoinTest {
     @After
     @AfterEach
-    fun teardown() {
+    fun stop() {
         if (KoinPlatformTools.defaultContext().getOrNull() != null) {
             stopKoin()
         }
@@ -22,3 +22,5 @@ interface RobolectricTest : BaseUnitTest {
     val applicationContext: Context
         get() = ApplicationProvider.getApplicationContext()
 }
+
+typealias JunitTest = org.junit.Test

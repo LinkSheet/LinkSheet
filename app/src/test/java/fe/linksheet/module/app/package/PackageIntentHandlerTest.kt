@@ -11,13 +11,13 @@ import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isNotNull
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class PackageIntentHandlerTest : RobolectricTest {
 
-    @Test
+    @JunitTest
     fun `test trampoline activity correctly handled`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> YatsePackageInfoFake.resolveInfos },
@@ -35,7 +35,7 @@ internal class PackageIntentHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `test non-exported activities are ignored`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> TurretPackageInfoFake.resolveInfos },
@@ -51,7 +51,7 @@ internal class PackageIntentHandlerTest : RobolectricTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `test find all http browsable`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> PackageInfoFakes.allBrowsers.flatResolveInfos() },

@@ -76,11 +76,6 @@ jobs:
     needs:
     - 'unit-tests'
     - 'integration-tests'
-    outputs:
-      fossVersionCode: '${{ steps.step-8.outputs.VERSION_CODE }}'
-      fossApkName: '${{ steps.step-8.outputs.OUTPUT_FILE }}'
-      proVersionCode: '${{ steps.step-9.outputs.VERSION_CODE }}'
-      proApkName: '${{ steps.step-9.outputs.OUTPUT_FILE }}'
     steps:
     - id: 'step-0'
       name: 'Install JQ'

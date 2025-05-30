@@ -188,6 +188,7 @@ fun JobBuilder<*>.createRelease(
             "BUILD_TYPE" to expr(BUILD_TYPE),
             releaseNoteVar.name to expr(releaseNote),
         ),
+        `if` = expr { contains(ENABLE_RELEASES, "true") }
     )
 }
 
@@ -348,17 +349,12 @@ sudo udevadm trigger --name-match=kvm"""
             ),
         )
     }
-    val buildReleaseJob = job(
+
+    job(
         id = "build-release",
         name = "Build release",
         runsOn = UbuntuLatest,
         needs = listOf(unitTestJob, integrationTestJob),
-        outputs = object : JobOutputs() {
-            var fossVersionCode by output()
-            var proVersionCode by output()
-            var fossApkName by output()
-            var proApkName by output()
-        },
     ) {
         run(name = "Install JQ", command = "sudo apt-get install jq -y")
         setupAndroid()
@@ -376,33 +372,20 @@ sudo udevadm trigger --name-match=kvm"""
             )
         )
 
-        jobOutputs.fossVersionCode = foss.versionCode
-        jobOutputs.fossApkName = foss.apkName
-        jobOutputs.proVersionCode = pro.versionCode
-        jobOutputs.proApkName = pro.apkName
-    }
-
-    if (release) {
-        job(
-            id = "create-release",
-            name = "Create release",
-            runsOn = UbuntuLatest,
-            needs = listOf(buildReleaseJob),
-            `if` = expr { contains(ENABLE_RELEASES, "true") }
-        ) {
+        if (release) {
             val nightlyReleaseNotesStep = uses(action = nightlyReleaseNotes)
             val releaseNote = nightlyReleaseNotesStep.outputs["releaseNote"]
 
             createRelease(
-                fossBaseOutPathExpr + "/" + expr(buildReleaseJob.outputs.fossApkName),
-                buildReleaseJob.outputs.fossVersionCode,
+                fossBaseOutPathExpr + "/" + expr(foss.apkName),
+                foss.versionCode,
                 NIGHTLY_REPO_ACCESS_TOKEN,
                 NIGHTLY_REPO_URL,
                 releaseNote
             )
             createRelease(
-                proBaseOutPathExpr + "/" + expr(buildReleaseJob.outputs.proApkName),
-                buildReleaseJob.outputs.proVersionCode,
+                proBaseOutPathExpr + "/" + expr(pro.apkName),
+                pro.versionCode,
                 NIGHTLY_PRO_REPO_ACCESS_TOKEN,
                 NIGHTLY_PRO_REPO_URL,
                 releaseNote

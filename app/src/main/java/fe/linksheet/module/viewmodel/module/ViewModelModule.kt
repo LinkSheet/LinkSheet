@@ -7,6 +7,7 @@ import fe.linksheet.module.profile.ProfileSwitcherModule
 import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
+import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -64,7 +65,19 @@ val viewModelModule = module {
     viewModelOf(::PrivacySettingsViewModel)
     viewModelOf(::ExportSettingsViewModel)
     viewModelOf(::AboutSettingsViewModel)
-    viewModelOf(::DevSettingsViewModel)
+    viewModel {
+        DevSettingsViewModel(
+            context = get(),
+            preferenceRepository = get(),
+            experimentRepository = get(),
+            shizukuHandler = get(),
+            miuiCompatProvider = get(),
+            gson = get(),
+            systemInfoService = get(),
+            logPersistService = get(),
+            ioDispatcher = Dispatchers.IO
+        )
+    }
     viewModelOf(::SettingsViewModel)
     viewModelOf(::NotificationSettingsViewModel)
     viewModelOf(::ExperimentsViewModel)

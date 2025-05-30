@@ -27,6 +27,7 @@ import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.language.AppLocaleService
 import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -62,6 +63,7 @@ import fe.linksheet.module.workmanager.WorkDelegatorService
 import fe.linksheet.testlib.core.BaseUnitTest
 import io.ktor.client.*
 import io.ktor.client.engine.*
+import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -162,7 +164,9 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             ShizukuHandler::class,
             MiuiCompatProvider::class,
             Gson::class,
-            SystemInfoService::class
+            SystemInfoService::class,
+            LogPersistService::class,
+            CoroutineDispatcher::class
         ),
         definition<LogTextSettingsViewModel>(),
         definition<MarkdownViewModel>(Request::class),

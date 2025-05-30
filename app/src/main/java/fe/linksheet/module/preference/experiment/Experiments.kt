@@ -65,6 +65,10 @@ object Experiments : PreferenceDefinition(
         key = "experiment_expressive_loading_sheet"
     )
 
+    val disableLogging = boolean(
+        key = "experiment_disable_log_persistence"
+    )
+
     val experiments = listOf(
         group(
             name = "enhanced_url_bar",
@@ -90,6 +94,11 @@ object Experiments : PreferenceDefinition(
             name = "edit_clipboard",
             displayName = "Edit clipboard content on home page",
             experiment("Enable", editClipboard)
+        ),
+        group(
+            name = "logging",
+            displayName = "Logging",
+            experiment("Disable log persistence", disableLogging)
         )
     )
 

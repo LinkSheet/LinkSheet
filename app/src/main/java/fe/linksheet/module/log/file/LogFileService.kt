@@ -38,7 +38,11 @@ abstract class LogSession(
     val info: String,
 )
 
-internal class LogFileService(logDir: Lazy<File>, override val startupTime: LocalDateTime) : LogPersistService {
+internal class LogFileService(
+    logDir: Lazy<File>,
+    override val startupTime: LocalDateTime,
+    private val persistenceDisabled: () -> Boolean,
+) : LogPersistService {
     private val logDir by logDir
 
     companion object {
@@ -119,6 +123,7 @@ internal class LogFileService(logDir: Lazy<File>, override val startupTime: Loca
     }
 
     override suspend fun onStop() = withContext(Dispatchers.IO) {
+        if (persistenceDisabled()) return@withContext
         val immutable = logEntries.toList()
         if (immutable.isNotEmpty()) {
             LogFile.new(logDir).file.toJson(immutable)

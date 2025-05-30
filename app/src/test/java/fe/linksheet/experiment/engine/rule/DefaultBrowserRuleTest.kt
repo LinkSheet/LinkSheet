@@ -8,30 +8,35 @@ import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.slot.AppRoleId
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.testlib.core.JunitTest
-import fe.std.uri.extension.new
+import fe.linksheet.util.AndroidAppPackage
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
-import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
-internal class UrlRewriteRuleTest : BaseRuleEngineTest() {
+internal class DefaultBrowserRuleTest : BaseRuleEngineTest() {
     private val dispatcher = StandardTestDispatcher()
 
-    // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/407
+    // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/415
+    // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/591
     private val rule = object : PostprocessorRule {
-        private val hosts = setOf("reddit.com", "www.reddit.com")
-        private val newHost = "old.reddit.com"
+        private val defaultBrowsers = mapOf(
+            "google.com" to AndroidAppPackage("com.google.chrome"),
+            "github.com" to AndroidAppPackage("org.mozilla.fennec_fdroid")
+        )
 
         override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
             val url = input.resultUrl
-            if (url.host !in hosts) return UrlEngineResult(url)
+            val appPackage = defaultBrowsers[url.host]
+            if (appPackage != null) {
+                roles[AppRoleId.Browser] = appPackage
+            }
 
-            val newUrl = url.new { setHost(newHost) }
-            return UrlEngineResult(newUrl)
+            return empty()
         }
     }
 
@@ -45,22 +50,16 @@ internal class UrlRewriteRuleTest : BaseRuleEngineTest() {
     )
 
     @JunitTest
-    fun `test rule not matched`() = runTest(dispatcher) {
-        val result = engine.process("https://developer.android.com/jetpack/androidx/releases/compose-material3".toStdUrlOrThrow())
-        assertResult(result)
-            .isInstanceOf<UrlEngineResult>()
-            .prop(UrlEngineResult::url)
-            .transform { it.toString() }
-            .isEqualTo("https://developer.android.com/jetpack/androidx/releases/compose-material3")
-    }
-
-    @JunitTest
     fun `test rule matched`() = runTest(dispatcher) {
-        val result = engine.process("https://www.reddit.com/r/androiddev/comments/1k69xx8/jetpack_compose_180_is_now_stable/".toStdUrlOrThrow())
+        val result = engine.process("https://github.com/LinkSheet/LinkSheet".toStdUrlOrThrow())
         assertResult(result)
             .isInstanceOf<UrlEngineResult>()
             .prop(UrlEngineResult::url)
             .transform { it.toString() }
-            .isEqualTo("https://old.reddit.com/r/androiddev/comments/1k69xx8/jetpack_compose_180_is_now_stable/")
+            .isEqualTo("https://github.com/LinkSheet/LinkSheet")
+
+        assertContext(result)
+            .transform { it.roles[AppRoleId.Browser]?.packageName }
+            .isEqualTo("org.mozilla.fennec_fdroid")
     }
 }

@@ -1,5 +1,7 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.buildlogic.Version
+import fe.buildlogic.common.CompilerOption
+import fe.buildlogic.common.extension.addCompilerOptions
 
 plugins {
     id("com.android.library")
@@ -25,6 +27,7 @@ android {
 
 kotlin {
     jvmToolchain(Version.JVM)
+    addCompilerOptions(CompilerOption.AllowKotlinPackage)
 }
 
 dependencies {

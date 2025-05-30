@@ -1,7 +1,9 @@
 package fe.linksheet.experiment.engine.context
 
+import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.fetcher.ContextResult
 import fe.linksheet.experiment.engine.fetcher.ContextResultId
+import fe.linksheet.experiment.engine.slot.AppRoleId
 import fe.linksheet.util.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import java.util.EnumSet
@@ -9,14 +11,18 @@ import java.util.EnumSet
 interface EngineRunContext {
     val extras: Set<EngineExtra>
     val flags: EnumSet<EngineFlag>
+    val roles: MutableMap<AppRoleId, AndroidAppPackage>
 
     fun <Result : ContextResult> put(id: ContextResultId<Result>, result: Result?)
     fun <Result : ContextResult> confirm(fetcher: ContextResultId<Result>): Boolean
     fun seal(): SealedRunContext
+
+    fun empty(): EngineResult? = null
 }
 
 class DefaultEngineRunContext(override val extras: Set<EngineExtra>) : EngineRunContext {
     override val flags: EnumSet<EngineFlag> = emptyEnumSet()
+    override val roles: MutableMap<AppRoleId, AndroidAppPackage> = mutableMapOf()
     private val results = mutableMapOf<ContextResultId<*>, ContextResult?>()
 
     // TODO: Consider splitting into input data class, runtime context and SealedRunContext to avoid allowing mutations of [results]
@@ -37,11 +43,15 @@ class DefaultEngineRunContext(override val extras: Set<EngineExtra>) : EngineRun
     }
 
     override fun seal(): SealedRunContext {
-        return SealedRunContext(flags, results)
+        return SealedRunContext(flags, roles, results)
     }
 }
 
-data class SealedRunContext(val flags: Set<EngineFlag>, private val results: Map<ContextResultId<*>, ContextResult?>) {
+data class SealedRunContext(
+    val flags: Set<EngineFlag>,
+    val roles: Map<AppRoleId, AndroidAppPackage>,
+    private val results: Map<ContextResultId<*>, ContextResult?>
+) {
 
     operator fun <Result : ContextResult> get(id: ContextResultId<Result>): Result? {
         @Suppress("UNCHECKED_CAST")

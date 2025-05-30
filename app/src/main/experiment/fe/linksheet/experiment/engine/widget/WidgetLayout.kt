@@ -7,7 +7,7 @@ import fe.linksheet.module.app.ActivityAppInfo
 typealias ActivityAppInfoWithDefaults = Map<ActivityAppInfo, Set<AppRoleId>>
 
 class WidgetLayout(
-    private val config: List<WidgetConfig>,
+    private val config: List<WidgetConfig<*>>,
 ) {
     fun create(apps: ActivityAppInfoWithDefaults): List<Widget> {
         val mutApps = apps.toMutableMap()
@@ -33,8 +33,8 @@ class WidgetLayout(
         return widgets
     }
 
-    private fun handle(
-        widget: SingleSlotWidgetConfig,
+    private fun <W : Widget> handle(
+        widget: SingleSlotWidgetConfig<W>,
         apps: ActivityAppInfoWithDefaults,
     ): Pair<AppRoleSlotWidget, ActivityAppInfo>? {
         when (widget) {
@@ -50,8 +50,8 @@ class WidgetLayout(
         return null
     }
 
-    private fun handle(
-        widget: MultiSlotWidgetConfig,
+    private fun <W : Widget> handle(
+        widget: MultiSlotWidgetConfig<W>,
         apps: ActivityAppInfoWithDefaults,
     ): Pair<ListWidget, List<ActivityAppInfo>> {
         when (widget) {

@@ -416,17 +416,16 @@ val env = mapOf(
     "BUILD_TYPE" to "nightly",
     "BUILD_FLAVOR_TYPE" to "fossNightly"
 )
-val on = listOf(
-    WorkflowDispatch(), Push(
-        tags = listOf("nightly-*"),
-        pathsIgnore = listOf("*.md")
-    )
-)
-
 workflow(
     name = "Build nightly APK",
     env = env,
-    on = on,
+    on = listOf(
+        WorkflowDispatch(),
+        Push(
+            tags = listOf("nightly-*"),
+            pathsIgnore = listOf("*.md")
+        )
+    ),
     consistencyCheckJobConfig = ConsistencyCheckJobConfig.Disabled,
     sourceFile = __FILE__,
     targetFileName = __FILE__.toPath().fileName?.let {
@@ -438,7 +437,7 @@ workflow(
 workflow(
     name = "Build nightly APK (nopublish)",
     env = env,
-    on = on,
+    on = listOf(WorkflowDispatch()),
     consistencyCheckJobConfig = ConsistencyCheckJobConfig.Disabled,
     sourceFile = __FILE__,
     targetFileName = __FILE__.toPath().fileName?.let {

@@ -5,11 +5,6 @@
 name: 'Build nightly APK (nopublish)'
 on:
   workflow_dispatch: {}
-  push:
-    paths-ignore:
-    - '*.md'
-    tags:
-    - 'nightly-*'
 env:
   BUILD_FLAVOR: 'foss'
   BUILD_TYPE: 'nightly'

@@ -545,4 +545,5 @@
     <string name="import_settings__text_failure">Грешка при внасяне на настройки!</string>
     <string name="export_settings__text_success">Изнесено!</string>
     <string name="export_settings__text_failure">Грешка при изнасяне на настройки!</string>
+    <string name="settings_remote_config__title_dialog">Включване на отдалечени настройки?</string>
 </resources>

@@ -20,21 +20,23 @@ import org.junit.jupiter.api.Test
 
 internal class CoreUseCaseTest : UiAutomatorTest {
     private val interactor = AppInteractor(device, targetContext)
+
     data class DefaultBrowser(val name: String, val packageName: String)
+
     private fun getDefaultBrowser(): DefaultBrowser? {
         val defaultBrowserIntent = buildIntent(Intent.ACTION_VIEW, "http://".toUri())
         val activityInfo = targetContext.packageManager
             .resolveActivity(defaultBrowserIntent, PackageManager.MATCH_DEFAULT_ONLY)
             ?.activityInfo
             ?: return null
-        val appName = activityInfo.applicationInfo.name
-        val packageName = activityInfo.packageName
+        val appName = activityInfo.applicationInfo?.name ?: return null
+        val packageName = activityInfo.packageName ?: return null
         return DefaultBrowser(appName, packageName)
     }
 
     @Test
     fun test() {
-        val regularDefaultBrowser = getDefaultBrowser()
+//        val regularDefaultBrowser = getDefaultBrowser()
 //        assertThat(regularDefaultBrowser).isNotNull()
 
         interactor.launch()

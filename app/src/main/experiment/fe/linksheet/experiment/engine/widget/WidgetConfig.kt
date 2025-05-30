@@ -2,14 +2,14 @@ package fe.linksheet.experiment.engine.widget
 
 import fe.linksheet.experiment.engine.slot.AppRoleId
 
-sealed interface WidgetConfig {
+sealed interface WidgetConfig<W : Widget> {
     val position: Int
 }
 
-sealed interface SingleSlotWidgetConfig : WidgetConfig {
+sealed interface SingleSlotWidgetConfig<W : Widget> : WidgetConfig<W> {
 }
 
-sealed interface MultiSlotWidgetConfig : WidgetConfig {
+sealed interface MultiSlotWidgetConfig<W : Widget> : WidgetConfig<W> {
 
 }
 
@@ -17,10 +17,16 @@ interface Order {
     companion object : Order
 }
 
-class ListWidgetConfig(val order: Order, override val position: Int) : MultiSlotWidgetConfig {
+class ListWidgetConfig(
+    val order: Order,
+    override val position: Int,
+) : MultiSlotWidgetConfig<ListWidget> {
 
 }
 
-class AppRoleSlotWidgetConfig(val role: AppRoleId, override val position: Int) : SingleSlotWidgetConfig {
+class AppRoleSlotWidgetConfig(
+    val role: AppRoleId,
+    override val position: Int,
+) : SingleSlotWidgetConfig<AppRoleSlotWidget> {
 
 }

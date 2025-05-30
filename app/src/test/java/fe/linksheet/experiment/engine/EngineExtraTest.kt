@@ -36,7 +36,7 @@ internal class EngineExtraTest : BaseRuleEngineTest() {
                 flags.add(EngineFlag.DisablePreview)
             }
 
-            return null
+            return empty()
         }
     }
 

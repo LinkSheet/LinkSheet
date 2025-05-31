@@ -18,5 +18,5 @@ fun Modifier.debugBorder(
         return border(width, SolidColor(color), shape)
     }
 
-    return Modifier
+    return this
 }

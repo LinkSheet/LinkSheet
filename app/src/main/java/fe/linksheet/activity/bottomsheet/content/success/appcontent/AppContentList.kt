@@ -36,6 +36,8 @@ import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.resolver.KnownBrowser
+import androidx.core.net.toUri
+import app.linksheet.preview.PreviewDebugProvider
 
 @Composable
 fun AppContentList(
@@ -62,8 +64,8 @@ fun AppContentList(
         showToast = showToast,
     ) { modifier ->
         LazyColumn(
-            state = state,
-            modifier = modifier.debugBorder(debug, 1.dp, Color.Green)
+            modifier = modifier.debugBorder(debug, 1.dp, Color.Green),
+            state = state
         ) {
             itemsIndexed(
                 items = apps,
@@ -170,16 +172,18 @@ private fun AppContentListPreview_Long() {
 
 @Composable
 private fun AppContentListPreviewBase(apps: List<ActivityAppInfo>) {
-    AppContentList(
-        apps = apps,
-        uri = Uri.parse("https://linksheet.app"),
-        appListSelectedIdx = -1,
-        hasPreferredApp = false,
-        hideChoiceButtons = false,
-        showNativeLabel = false,
-        showPackage = false,
-        dispatch = { },
-        isPrivateBrowser = { _, _ -> null },
-        showToast = { _, _, _ -> }
-    )
+    CompositionLocalProvider(LocalUiDebug provides PreviewDebugProvider()) {
+        AppContentList(
+            apps = apps,
+            uri = "https://linksheet.app".toUri(),
+            appListSelectedIdx = -1,
+            hasPreferredApp = false,
+            hideChoiceButtons = false,
+            showNativeLabel = false,
+            showPackage = false,
+            dispatch = { },
+            isPrivateBrowser = { _, _ -> null },
+            showToast = { _, _, _ -> }
+        )
+    }
 }

@@ -54,7 +54,6 @@ fun AppContentList(
 ) {
     val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     val state = rememberLazyListState()
-
     AppContent(
         info = apps.getOrFirstOrNull(appListSelectedIdx),
         appListSelectedIdx = appListSelectedIdx,

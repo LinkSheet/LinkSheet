@@ -2,10 +2,9 @@ package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -19,10 +18,9 @@ import app.linksheet.preview.PreviewDebugProvider
 import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.composable.util.debugBorder
 import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.debug.DebugPreferenceProvider
 import fe.linksheet.module.debug.LocalUiDebug
-import kotlinx.coroutines.flow.MutableStateFlow
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun AppContent(
     info: ActivityAppInfo?,
@@ -31,33 +29,21 @@ fun AppContent(
     hideChoiceButtons: Boolean,
     dispatch: (Interaction) -> Unit,
     showToast: (Int, Int, Boolean) -> Unit,
-    content: @Composable (Modifier) -> Unit,
+    content: @Composable ColumnScope.(Modifier) -> Unit,
 ) {
     val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     Column(
         modifier = Modifier.debugBorder(debug, 1.dp, Color.Magenta),
-        verticalArrangement = Arrangement.spacedBy(5.dp)
+        verticalArrangement = Arrangement.spacedBy(5.dp),
     ) {
-        content(
-            Modifier
-                .fillMaxWidth()
-                .weight(0.1f, fill = false)
-        )
-
+        content(Modifier.weight(0.9f, fill = false))
         if (!hasPreferredApp && !hideChoiceButtons) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .defaultMinSize(minHeight = ButtonDefaults.MinHeight)
-//                    .weight(0.1f, fill = true)
-            ) {
-                NoPreferredAppChoiceButtons(
-                    info = info,
-                    selected = appListSelectedIdx,
-                    dispatch = dispatch,
-                    showToast = showToast
-                )
-            }
+            NoPreferredAppChoiceButtons(
+                info = info,
+                selected = appListSelectedIdx,
+                dispatch = dispatch,
+                showToast = showToast
+            )
         }
     }
 }
@@ -82,7 +68,7 @@ private fun AppContentPreviewBase() {
             appListSelectedIdx = -1,
             hasPreferredApp = false,
             hideChoiceButtons = false,
-            dispatch = {  },
+            dispatch = { },
             showToast = { _, _, _ -> }
         ) { modifier ->
             LazyColumn(modifier = modifier) {

@@ -27,7 +27,7 @@ sealed interface IntentResolveResult {
         hasSingleMatchingOption: Boolean = false,
         val resolveModuleStatus: ResolveModuleStatus,
         val libRedirectResult: LibRedirectResult? = null,
-        val downloadable: DownloadCheckResult = DownloadCheckResult.NonDownloadable,
+        val downloadable: DownloadCheckResult? = DownloadCheckResult.NonDownloadable,
     ) : IntentResolveResult {
         private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
 
@@ -42,4 +42,5 @@ sealed interface IntentResolveResult {
     data class IntentParseFailed(val exception: UriException) : IntentResolveResult
     data object UrlModificationFailed : IntentResolveResult
     data object ResolveUrlFailed : IntentResolveResult
+    data object NoTrackFound : IntentResolveResult
 }

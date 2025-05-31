@@ -17,7 +17,7 @@ import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -79,7 +79,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun `no browsers, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(config, emptyList(), emptyMap())
@@ -90,7 +90,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun `single browser, single app`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(
@@ -105,7 +105,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun `single browser, many apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(
@@ -120,7 +120,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun `single browser, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(
@@ -135,7 +135,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun `many browsers, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(config, emptyList(), PackageInfoFakes.allBrowsers.toKeyedMap())

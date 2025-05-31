@@ -1,0 +1,55 @@
+package fe.linksheet.experiment.engine.fetcher.preview
+
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import assertk.assertThat
+import assertk.assertions.isInstanceOf
+import assertk.assertions.isNotNull
+import fe.linksheet.DatabaseTest
+import fe.linksheet.module.repository.CacheRepository
+import fe.std.result.IResult
+import fe.std.result.success
+import fe.std.time.unixMillisOf
+import fe.std.uri.toStdUrlOrThrow
+import kotlinx.coroutines.test.runTest
+import fe.linksheet.testlib.core.JunitTest
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+internal class PreviewLinkFetcherTest : DatabaseTest() {
+    companion object {
+        private const val PREVIEW_URL = "https://linksheet.app"
+    }
+
+    private val cacheRepository by lazy {
+        CacheRepository(
+            database.htmlCacheDao(),
+            database.previewCacheDao(),
+            database.resolvedUrlCacheDao(),
+            database.resolveTypeDao(),
+            database.urlEntryDao(),
+            now = { unixMillisOf(2025) }
+        )
+    }
+
+    private val source = object : PreviewSource {
+        override suspend fun fetch(urlString: String): IResult<PreviewFetchResult> {
+            return PreviewFetchResult.NonHtmlPage(PREVIEW_URL).success
+        }
+
+        override suspend fun parseHtml(htmlText: String, urlString: String): IResult<PreviewFetchResult> {
+            TODO("Not yet implemented")
+        }
+    }
+
+    @JunitTest
+    fun test() = runTest {
+        val fetcher = PreviewLinkFetcher(
+            source = source,
+            cacheRepository = cacheRepository,
+            useLocalCache = { true }
+        )
+
+        val result = fetcher.fetch(PREVIEW_URL.toStdUrlOrThrow())
+        assertThat(result).isNotNull().isInstanceOf<PreviewFetchResult.NonHtmlPage>()
+    }
+}

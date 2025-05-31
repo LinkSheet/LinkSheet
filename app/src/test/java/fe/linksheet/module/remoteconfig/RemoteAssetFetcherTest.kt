@@ -8,12 +8,12 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.http.*
 import io.ktor.serialization.gson.*
 import kotlinx.coroutines.test.runTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class RemoteAssetFetcherTest : BaseUnitTest {
-    @Test
+    @JunitTest
     fun test() = runTest {
         val assetsJson = """{
           "github.linksheet.wiki.privacy.logs": "https://github.com/LinkSheet/LinkSheet/wiki/Privacy#logs",

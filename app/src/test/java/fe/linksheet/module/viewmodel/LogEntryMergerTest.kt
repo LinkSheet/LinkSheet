@@ -10,7 +10,8 @@ import assertk.assertions.prop
 import fe.linksheet.composable.page.settings.debug.log.PrefixMessageCardContent
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.testlib.core.BaseUnitTest
-import kotlin.test.Test
+import fe.linksheet.testlib.core.JunitTest
+
 
 internal class LogEntryMergerTest : BaseUnitTest {
     private fun Assert<PrefixMessageCardContent>.assertContent(prefix: String, type: String, messages: Int) {
@@ -21,7 +22,7 @@ internal class LogEntryMergerTest : BaseUnitTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun test() {
         val entries = listOf(
             LogEntry.DefaultLogEntry(
@@ -57,7 +58,7 @@ internal class LogEntryMergerTest : BaseUnitTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun test2() {
         val entries = listOf(
             LogEntry.DefaultLogEntry(

@@ -3,7 +3,9 @@ package fe.linksheet.experiment.engine.rule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
+import assertk.assertions.isNull
 import assertk.assertions.prop
+import fe.linksheet.experiment.engine.ContextualEngineResult
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.UrlEngineResult
@@ -12,6 +14,7 @@ import fe.linksheet.experiment.engine.slot.AppRoleId
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.testlib.core.JunitTest
 import fe.linksheet.util.AndroidAppPackage
+import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -49,17 +52,40 @@ internal class DefaultBrowserRuleTest : BaseRuleEngineTest() {
         dispatcher = dispatcher,
     )
 
-    @JunitTest
-    fun `test rule matched`() = runTest(dispatcher) {
-        val result = engine.process("https://github.com/LinkSheet/LinkSheet".toStdUrlOrThrow())
+    private suspend fun baseTest(url: StdUrl): ContextualEngineResult {
+        val result = engine.process(url)
         assertResult(result)
             .isInstanceOf<UrlEngineResult>()
             .prop(UrlEngineResult::url)
-            .transform { it.toString() }
-            .isEqualTo("https://github.com/LinkSheet/LinkSheet")
+            .isEqualTo(url)
+
+        return result
+    }
+
+    @JunitTest
+    fun `test default browser 1`() = runTest(dispatcher) {
+        val result = baseTest("https://github.com/LinkSheet/LinkSheet".toStdUrlOrThrow())
 
         assertContext(result)
             .transform { it.roles[AppRoleId.Browser]?.packageName }
             .isEqualTo("org.mozilla.fennec_fdroid")
+    }
+
+    @JunitTest
+    fun `test default browser 2`() = runTest(dispatcher) {
+        val result = baseTest("https://google.com/hello".toStdUrlOrThrow())
+
+        assertContext(result)
+            .transform { it.roles[AppRoleId.Browser]?.packageName }
+            .isEqualTo("com.google.chrome")
+    }
+
+    @JunitTest
+    fun `test no default browser`() = runTest(dispatcher) {
+        val result = baseTest("https://linksheet.app".toStdUrlOrThrow())
+
+        assertContext(result)
+            .transform { it.roles[AppRoleId.Browser]?.packageName }
+            .isNull()
     }
 }

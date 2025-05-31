@@ -163,7 +163,7 @@ jobs:
       env:
         APK_FILE: 'app/build/outputs/apk/foss/nightly/${{ steps.step-8.outputs.OUTPUT_FILE }}'
         NIGHTLY_TAG: '${{ github.ref }}'
-        VERSION_CODE: 'steps.step-8.outputs.VERSION_CODE'
+        VERSION_CODE: '${{ steps.step-8.outputs.VERSION_CODE }}'
         GITHUB_TOKEN: '${{ secrets.NIGHTLY_REPO_ACCESS_TOKEN }}'
         NIGHTLY_REPO: '${{ vars.NIGHTLY_REPO_URL }}'
         BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'
@@ -175,7 +175,7 @@ jobs:
       env:
         APK_FILE: 'app/build/outputs/apk/pro/nightly/${{ steps.step-9.outputs.OUTPUT_FILE }}'
         NIGHTLY_TAG: '${{ github.ref }}'
-        VERSION_CODE: 'steps.step-9.outputs.VERSION_CODE'
+        VERSION_CODE: '${{ steps.step-9.outputs.VERSION_CODE }}'
         GITHUB_TOKEN: '${{ secrets.NIGHTLY_PRO_REPO_ACCESS_TOKEN }}'
         NIGHTLY_REPO: '${{ vars.NIGHTLY_PRO_REPO_URL }}'
         BUILD_FLAVOR: '${{ env.BUILD_FLAVOR }}'

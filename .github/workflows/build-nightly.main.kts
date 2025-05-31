@@ -378,14 +378,14 @@ sudo udevadm trigger --name-match=kvm"""
 
             createRelease(
                 fossBaseOutPathExpr + "/" + expr(foss.apkName),
-                foss.versionCode,
+                expr(foss.versionCode),
                 NIGHTLY_REPO_ACCESS_TOKEN,
                 NIGHTLY_REPO_URL,
                 releaseNote
             )
             createRelease(
                 proBaseOutPathExpr + "/" + expr(pro.apkName),
-                pro.versionCode,
+                expr(pro.versionCode),
                 NIGHTLY_PRO_REPO_ACCESS_TOKEN,
                 NIGHTLY_PRO_REPO_URL,
                 releaseNote

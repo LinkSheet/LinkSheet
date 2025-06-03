@@ -22,20 +22,13 @@ import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.composekit.route.Route
 import fe.linksheet.navigation.TextEditorRoute
+import androidx.core.net.toUri
 
 
 @Composable
-fun OpenCopiedLink(editClipboard: Boolean, uri: Uri, navigate: (Route) -> Unit) {
+fun OpenCopiedLink(uri: Uri, navigate: (Route) -> Unit) {
     val uriString = uri.toString()
     val context = LocalContext.current
-
-    val editRow = remember(key1 = editClipboard, key2 = uriString) {
-        val composable: @Composable () -> Unit = {
-            EditExperiment(uriString = uriString, navigate = navigate)
-        }
-
-        return@remember if (editClipboard) composable else null
-    }
 
     AlertCard(
         onClick = {
@@ -48,7 +41,9 @@ fun OpenCopiedLink(editClipboard: Boolean, uri: Uri, navigate: (Route) -> Unit) 
         iconContentDescription = stringResource(id = R.string.paste),
         headline = textContent(R.string.open_copied_link),
         subtitle = text(uriString),
-        content = editRow
+        content = {
+            EditExperiment(uriString = uriString, navigate = navigate)
+        }
     )
 }
 
@@ -88,7 +83,7 @@ fun EditButton(
 @Preview(apiLevel = 34)
 @Composable
 private fun OpenCopiedLinkPreview() {
-    OpenCopiedLink(editClipboard = true, uri = Uri.parse("https://google.com")) {
+    OpenCopiedLink(uri = "https://google.com".toUri()) {
 
     }
 }

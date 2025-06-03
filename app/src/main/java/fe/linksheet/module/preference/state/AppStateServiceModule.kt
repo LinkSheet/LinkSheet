@@ -28,8 +28,6 @@ internal class AppStateService(
 ) : LifecycleAwareService {
 
     private val updates = mapOf(
-        AppStatePreferences.newDefaults_2024_11_29 to NewDefaults2024_11_29,
-        AppStatePreferences.newDefaults_2024_11_30 to NewDefaults2024_11_30,
         AppStatePreferences.newDefaults_2024_12_16 to NewDefaults2024_12_16,
     )
 

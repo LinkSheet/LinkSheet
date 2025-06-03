@@ -25,12 +25,10 @@ import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.workmanager.WorkDelegatorService
-import fe.linksheet.navigation.loadDumpedPreferences
 import fe.linksheet.util.web.UriUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
@@ -57,7 +55,6 @@ class MainViewModel(
     val telemetryShowInfoDialog = experimentRepository.asViewModelState(AppPreferences.telemetryShowInfoDialog)
     val remoteConfigDialogDismissed = appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
     val remoteConfig = preferenceRepository.asViewModelState(AppPreferences.remoteConfig)
-    val editClipboard = experimentRepository.asViewModelState(Experiments.editClipboard)
     val homeClipboardCard = experimentRepository.asViewModelState(AppPreferences.homeClipboardCard)
 
     private val clipboardManager by lazy { context.getSystemService<ClipboardManager>()!! }

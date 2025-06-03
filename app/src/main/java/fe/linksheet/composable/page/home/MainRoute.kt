@@ -175,10 +175,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
 
             if (clipboardUri != null) {
                 item(key = R.string.open_copied_link, contentType = ContentType.ClickableAlert) {
-                    val editClipboard by viewModel.editClipboard.collectAsStateWithLifecycle()
-
                     OpenCopiedLink(
-                        editClipboard = editClipboard,
                         uri = clipboardUri!!,
                         navigate = { navController.navigate(it) }
                     )

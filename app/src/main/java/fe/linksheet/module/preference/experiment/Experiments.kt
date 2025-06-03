@@ -11,7 +11,8 @@ object Experiments : PreferenceDefinition(
     "experiment_new_query_manager",
     "experiment_url_bar",
     "experiment_url_bar_switch_profile",
-    "experiment_ui_overhaul"
+    "experiment_ui_overhaul",
+    "experiment_edit_clipboard"
 ) {
     val urlPreview = boolean(
         key = "experiment_url_bar_preview"
@@ -45,11 +46,6 @@ object Experiments : PreferenceDefinition(
     val enableAnalytics = boolean(
         key = "experiment_enable_analytics",
         default = false
-    )
-
-    val editClipboard = boolean(
-        key = "experiment_edit_clipboard",
-        default = true
     )
     val hideReferrerFromSheet = boolean(
         key = "experiment_hide_referrer_from_sheet"
@@ -89,11 +85,6 @@ object Experiments : PreferenceDefinition(
             experiment("Disable bottom sheet state save", noBottomSheetStateSave),
             experiment("Aggressive follow redirects", aggressiveFollowRedirects),
             experiment("Expressive loading indicator", expressiveLoadingSheet)
-        ),
-        group(
-            name = "edit_clipboard",
-            displayName = "Edit clipboard content on home page",
-            experiment("Enable", editClipboard)
         ),
         group(
             name = "logging",

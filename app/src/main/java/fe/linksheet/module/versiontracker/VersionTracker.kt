@@ -1,10 +1,10 @@
 package fe.linksheet.module.versiontracker
 
 import androidx.lifecycle.LifecycleOwner
-import com.google.gson.FormattingStyle
 import com.google.gson.Gson
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
+import fe.gson.GsonQualifier
 import fe.gson.globalGsonModule
 import fe.linksheet.BuildConfig
 import fe.linksheet.module.analytics.AnalyticsEvent
@@ -13,9 +13,10 @@ import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.preferenceRepositoryModule
+import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.util.buildconfig.Build
-import fe.linksheet.util.buildconfig.LinkSheetInfo
 import org.koin.core.module.Module
+import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
 val VersionTrackerModule = VersionTrackerModule()
@@ -24,19 +25,23 @@ private fun VersionTrackerModule(): Module = module {
     includes(globalGsonModule, preferenceRepositoryModule)
 
     service<VersionTracker, BaseAnalyticsService, AppPreferenceRepository> { _, analyticsService, preferences ->
-        val gson = scope.get<Gson>().newBuilder().setFormattingStyle(FormattingStyle.COMPACT).create()
-
-        VersionTracker(analyticsService, preferences, gson)
+        VersionTracker(
+            analyticsService = analyticsService,
+            preferenceRepository = preferences,
+            systemInfoService = scope.get<SystemInfoService>(),
+            gson = scope.get(qualifier(GsonQualifier.Compact))
+        )
     }
 }
 
 internal class VersionTracker(
     private val analyticsService: BaseAnalyticsService,
     val preferenceRepository: AppPreferenceRepository,
+    private val systemInfoService: SystemInfoService,
     val gson: Gson,
 ) : LifecycleAwareService {
     private val lastVersionsService by lazy {
-        LastVersionService(gson, LinkSheetInfo.buildInfo)
+        LastVersionService(gson, systemInfoService.buildInfo)
     }
 
     private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent {

@@ -140,7 +140,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             Redactor::class,
             SystemInfoService::class
         ),
-        definition<VersionTracker>(BaseAnalyticsService::class),
+        definition<VersionTracker>(BaseAnalyticsService::class, SystemInfoService::class),
         definition<MainViewModel>(
             BrowserResolver::class,
             BaseAnalyticsService::class,

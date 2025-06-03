@@ -56,7 +56,7 @@ internal class VersionTracker(
         }
 
         val lastVersions = preferenceRepository.get(AppPreferences.lastVersions)
-        val lastVersionJson = lastVersionsService.handleVersions(lastVersions)
+        val lastVersionJson = lastVersionsService.handleVersions(lastVersions, true)
 
         preferenceRepository.edit {
             lastVersionJson?.let {

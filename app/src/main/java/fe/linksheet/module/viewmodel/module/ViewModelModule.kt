@@ -1,6 +1,7 @@
 package fe.linksheet.module.viewmodel.module
 
 
+import fe.gson.GsonQualifier
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.preference.preferenceRepositoryModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
@@ -8,9 +9,9 @@ import fe.linksheet.module.repository.module.repositoryModule
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import kotlinx.coroutines.Dispatchers
-import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
+import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 
@@ -22,7 +23,16 @@ val viewModelModule = module {
         DefaultLogModule,
         ProfileSwitcherModule
     )
-    singleOf(::LogViewCommon)
+    single {
+        LogViewCommon(
+            preferenceRepository = get(),
+            experimentRepository = get(),
+            pasteService = get(),
+            gson = get(qualifier(GsonQualifier.Pretty)),
+            redactor = get(),
+            systemInfoService = get()
+        )
+    }
 
     viewModelOf(::MainViewModel)
     viewModelOf(::VerifiedLinkHandlersViewModel)
@@ -63,8 +73,22 @@ val viewModelModule = module {
     viewModelOf(::GeneralSettingsViewModel)
     viewModelOf(::LoadDumpedPreferencesViewModel)
     viewModelOf(::PrivacySettingsViewModel)
-    viewModelOf(::ExportSettingsViewModel)
-    viewModelOf(::AboutSettingsViewModel)
+    viewModel {
+        ExportSettingsViewModel(
+            context = get(),
+            preferenceRepository = get(),
+            gson = get(qualifier(GsonQualifier.Pretty)),
+            clock = get(),
+            zoneId = get()
+        )
+    }
+    viewModel {
+        AboutSettingsViewModel(
+            context = get(),
+            gson = get(qualifier(GsonQualifier.Pretty)),
+            preferenceRepository = get()
+        )
+    }
     viewModel {
         DevSettingsViewModel(
             context = get(),
@@ -72,7 +96,7 @@ val viewModelModule = module {
             experimentRepository = get(),
             shizukuHandler = get(),
             miuiCompatProvider = get(),
-            gson = get(),
+            gson = get(qualifier(GsonQualifier.Pretty)),
             systemInfoService = get(),
             logPersistService = get(),
             ioDispatcher = Dispatchers.IO

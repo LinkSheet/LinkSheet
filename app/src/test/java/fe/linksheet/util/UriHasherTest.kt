@@ -2,7 +2,7 @@ package fe.linksheet.util
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.testlib.core.BaseUnitTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import javax.crypto.Mac
 
@@ -18,7 +18,7 @@ internal class UriHasherTest : BaseUnitTest {
         mac = CryptoUtil.makeHmac(hmacSha256.algorithm, key)
     }
 
-    @Test
+    @JunitTest
     fun test() {
 //        assertEquals(buildHashedUriString("https://google.com/henlo/fren", mac), "https://b60687.8fc4dccb1dcf/b3901e/452116/")
         // TODO: query parameters are currently broken. Let's fix this later, there's more important stuff to do (tracked in #226)

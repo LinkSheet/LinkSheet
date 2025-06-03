@@ -4,9 +4,11 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import fe.gson.extension.json.array.elementsOrNull
+import fe.gson.dsl.jsonObject
+import fe.gson.extension.json.array.elementsFilterNull
 import fe.gson.extension.json.element.arrayOrNull
 import fe.gson.extension.json.`object`.asIntOrNull
+import fe.gson.extension.json.`object`.asStringOrNull
 import fe.linksheet.module.systeminfo.BuildInfo
 
 // TODO: Find a better way to do this
@@ -14,13 +16,36 @@ class LastVersionService(
     private val gson: Gson,
     private val buildInfo: BuildInfo,
 ) {
-    fun handleVersions(lastVersions: String?): String? {
+    private fun migrate(array: JsonArray): List<JsonObject> {
+        fun update(it: JsonObject): JsonObject {
+            val code = it.asIntOrNull("version_code")
+            val flavor = it.asStringOrNull("flavor")
+            return jsonObject {
+                "v" += code
+                "f" += flavor
+            }
+        }
+
+        return array.elementsFilterNull<JsonObject>().map { update(it) }
+    }
+
+    fun handleVersions(lastVersions: String?, migrate: Boolean = false): String? {
         val lastVersionArray = runCatching { parseLastVersions(lastVersions) }.getOrDefault(JsonArray())
         val lastVersionCodes = runCatching { parseVersionCodes(lastVersionArray) }.getOrDefault(emptySet())
 
         if (!lastVersionCodes.contains(buildInfo.versionCode)) {
-            lastVersionArray.add(gson.toJsonTree(buildInfo))
+            if (migrate) {
+                val returnArrays = migrate(lastVersionArray).toMutableList()
+                val currentObj = jsonObject {
+                    "v" += buildInfo.versionCode
+                    "f" += buildInfo.flavor
+                }
 
+                returnArrays.add(currentObj)
+                return gson.toJson(returnArrays)
+            }
+
+            lastVersionArray.add(gson.toJsonTree(buildInfo))
             return gson.toJson(lastVersionArray)
         }
 
@@ -34,8 +59,8 @@ class LastVersionService(
 
     private fun parseVersionCodes(versions: JsonArray?): Set<Int> {
         val lastVersionCodes = versions
-            ?.elementsOrNull<JsonObject>(keepNulls = false)
-            ?.mapNotNull { it?.asIntOrNull("version_code") }
+            ?.elementsFilterNull<JsonObject>()
+            ?.mapNotNull { it.asIntOrNull("version_code") ?: it.asIntOrNull("v") }
             ?.toSet()
 
         return lastVersionCodes ?: emptySet()

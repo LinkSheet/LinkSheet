@@ -5,11 +5,12 @@ import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.*
 import fe.linksheet.testlib.core.BaseUnitTest
+import fe.linksheet.testlib.core.JunitTest
 import fe.std.result.assert.assertSuccess
 import fe.std.test.tableTest
 import kotlinx.coroutines.test.runTest
 import java.util.*
-import kotlin.test.Test
+
 
 internal class AppLocaleServiceTest : BaseUnitTest {
     companion object {
@@ -25,7 +26,7 @@ internal class AppLocaleServiceTest : BaseUnitTest {
         private val IT_IT = createLocale("it", "IT").build()
     }
 
-    @Test
+    @JunitTest
     fun `test locale changing`() {
         val systemLocales = LocaleListCompat.create(EN_US, ZH_CN_HANS, IT_IT)
         var perAppLocales = LocaleListCompat.getEmptyLocaleList()
@@ -47,13 +48,13 @@ internal class AppLocaleServiceTest : BaseUnitTest {
         assertThat(service.hasPerAppLocale()).isTrue()
     }
 
-    @Test
+    @JunitTest
     fun `test isEquivalent`() {
         val result = AppLocaleService.isEquivalent(EN_US, Locale.ENGLISH)
         assertThat(result).isTrue()
     }
 
-    @Test
+    @JunitTest
     fun test() = runTest {
         val service = AppLocaleService(
             getDefaultLocaleList = { LocaleListCompat.create(Locale.ENGLISH, Locale.FRENCH, Locale.JAPANESE) },
@@ -76,7 +77,7 @@ internal class AppLocaleServiceTest : BaseUnitTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun `test locale fixing`() = tableTest<String, String>("locale", "expected")
         .row("en", "en")
         .row("de", "de")
@@ -91,13 +92,13 @@ internal class AppLocaleServiceTest : BaseUnitTest {
             assertThat(runTest(input)).isEqualTo(expected)
         }
 
-    @Test
+    @JunitTest
     fun `test locale parsing`() {
         val result = AppLocaleService.parseLocale("zh-Hans-CN-u-fw-mon-mu-celsius")
         assertSuccess(result).isEqualTo(ZH_CN_HANS)
     }
 
-    @Test
+    @JunitTest
     fun `test isDeviceLocale`() = tableTest<Locale, Locale>("system locale", "app locale")
         .row(Locale.ENGLISH, Locale.ENGLISH)
         .row(EN_US, Locale.ENGLISH)

@@ -12,6 +12,6 @@ data class LibRedirectDefault(
 ) {
     companion object {
         const val randomInstance = "RANDOM_INSTANCE"
-        const val libRedirectIgnore = "IGNORE_LIBREDIRECT"
+        const val IgnoreIntentKey = "IGNORE_LIBREDIRECT"
     }
 }

@@ -11,7 +11,8 @@ object Experiments : PreferenceDefinition(
     "experiment_new_query_manager",
     "experiment_url_bar",
     "experiment_url_bar_switch_profile",
-    "experiment_ui_overhaul"
+    "experiment_ui_overhaul",
+    "experiment_edit_clipboard"
 ) {
     val urlPreview = boolean(
         key = "experiment_url_bar_preview"
@@ -46,11 +47,6 @@ object Experiments : PreferenceDefinition(
         key = "experiment_enable_analytics",
         default = false
     )
-
-    val editClipboard = boolean(
-        key = "experiment_edit_clipboard",
-        default = true
-    )
     val hideReferrerFromSheet = boolean(
         key = "experiment_hide_referrer_from_sheet"
     )
@@ -64,7 +60,9 @@ object Experiments : PreferenceDefinition(
     val expressiveLoadingSheet = boolean(
         key = "experiment_expressive_loading_sheet"
     )
-
+    val linkEngine = boolean(
+        key = "experiment_link_engine"
+    )
     val disableLogging = boolean(
         key = "experiment_disable_log_persistence"
     )
@@ -91,14 +89,14 @@ object Experiments : PreferenceDefinition(
             experiment("Expressive loading indicator", expressiveLoadingSheet)
         ),
         group(
-            name = "edit_clipboard",
-            displayName = "Edit clipboard content on home page",
-            experiment("Enable", editClipboard)
-        ),
-        group(
             name = "logging",
             displayName = "Logging",
             experiment("Disable log persistence", disableLogging)
+        ),
+        group(
+            name = "link_engine",
+            displayName = "Link engine",
+            experiment("Use LinkEngine", linkEngine)
         )
     )
 

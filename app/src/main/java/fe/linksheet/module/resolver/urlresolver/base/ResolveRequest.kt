@@ -1,6 +1,6 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
-import fe.gson.extension.json.element.`object`
+import fe.gson.extension.json.element.objectOrNull
 import fe.gson.extension.json.`object`.asString
 import fe.httpkt.Request
 import fe.httpkt.isHttpSuccess
@@ -50,7 +50,7 @@ abstract class RemoteResolveRequest(
         }
 
         return runCatching {
-            val link = result.readToJson().`object`().asString(remoteResolveUrlField)
+            val link = result.readToJson()?.objectOrNull()?.asString(remoteResolveUrlField)!!
             ResolveResultType.Resolved.Remote(link)
         }
     }

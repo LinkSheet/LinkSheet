@@ -6,7 +6,7 @@ import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.testlib.instrument.InstrumentationTest
 import org.junit.Rule
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)

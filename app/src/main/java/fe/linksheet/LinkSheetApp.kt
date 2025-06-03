@@ -77,12 +77,11 @@ open class LinkSheetApp : Application(), DependencyProvider {
         registerActivityLifecycleCallbacks(currentActivityObserver)
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
-            val crashIntent = Intent(this, CrashHandlerActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                putExtra(CrashHandlerActivity.EXTRA_CRASH_EXCEPTION, Log.getStackTraceString(throwable))
-                putExtra(CrashHandlerActivity.EXTRA_CRASH_TIMESTAMP, System.currentTimeMillis())
-            }
+            val crashIntent = Intent(this, CrashHandlerActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .putExtra(CrashHandlerActivity.EXTRA_CRASH_EXCEPTION, Log.getStackTraceString(throwable))
+                .putExtra(CrashHandlerActivity.EXTRA_CRASH_TIMESTAMP, System.currentTimeMillis())
 
             startActivity(crashIntent)
             exitProcess(2)
@@ -105,7 +104,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             androidLogger()
             androidApplicationContext(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
-            if(!WorkManager.isInitialized()) {
+            if (!WorkManager.isInitialized()) {
                 workManagerFactory()
             }
             modules(koinModules)

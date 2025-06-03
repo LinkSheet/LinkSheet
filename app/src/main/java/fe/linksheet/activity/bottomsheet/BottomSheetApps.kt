@@ -88,7 +88,7 @@ fun BottomSheetApps(
                     .padding(horizontal = 15.dp)
 //                    .wrapContentHeight()
 //                    .weight(0.2f, fill = false)
-                    ,
+                ,
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 UrlBarWrapper(
@@ -123,7 +123,13 @@ fun BottomSheetApps(
                     showPackage = showPackage,
                     hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
                     onClick = { _, modifier ->
-                        controller.dispatch(PreferredAppChoiceButtonInteraction(result.filteredItem, modifier, result.intent))
+                        controller.dispatch(
+                            PreferredAppChoiceButtonInteraction(
+                                result.filteredItem,
+                                modifier,
+                                result.intent
+                            )
+                        )
                     }
                 )
 
@@ -189,10 +195,7 @@ object BottomSheetStateControllerStub : BottomSheetStateController {
     override fun hide(onCompletion: CompletionHandler?) {}
     override fun startActivity(intent: Intent) {}
     override fun finish() {}
-    override val dispatch: (Interaction) -> Unit
-        get() = {
-
-        }
+    override val dispatch: (Interaction) -> Unit = {}
 }
 
 private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {

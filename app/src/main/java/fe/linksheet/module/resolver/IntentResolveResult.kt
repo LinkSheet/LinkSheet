@@ -6,6 +6,7 @@ import androidx.compose.runtime.Stable
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.util.intent.parser.UriException
+import fe.std.uri.StdUrl
 import me.saket.unfurl.UnfurlResult
 
 sealed interface IntentResolveResult {
@@ -14,6 +15,9 @@ sealed interface IntentResolveResult {
     data class WebSearch(
         val query: String, val newIntent: Intent, val resolvedList: List<ActivityAppInfo>,
     ) : IntentResolveResult
+
+    class IntentResult(val intent: Intent) : IntentResolveResult
+    class OtherProfile(val url: StdUrl) : IntentResolveResult
 
     @Stable
     class Default(

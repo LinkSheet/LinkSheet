@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.experiment.engine.EngineTrackInput
+import fe.linksheet.experiment.engine.ForwardOtherProfileResult
+import fe.linksheet.experiment.engine.IntentEngineResult
 import fe.linksheet.experiment.engine.TrackSelector
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
@@ -127,7 +129,7 @@ class LinkEngineIntentResolver(
 
     override suspend fun resolve(
         intent: SafeIntent,
-        referrer: Uri?
+        referrer: Uri?,
     ): IntentResolveResult = coroutineScope scope@{
         val canAccessInternet = networkStateService.isNetworkConnected
         val urlParseResult = parseIntent(intent)
@@ -159,11 +161,15 @@ class LinkEngineIntentResolver(
         }
 
         val (sealedContext, result) = track.run(startUrl, context)
-        if (result !is UrlEngineResult) {
-            TODO("Handle this")
+        if (result is IntentEngineResult) {
+            return@scope IntentResolveResult.IntentResult(result.intent)
         }
 
-        val resultUrl = result.url
+        if (result is ForwardOtherProfileResult) {
+            return@scope IntentResolveResult.OtherProfile(result.url)
+        }
+
+        val resultUrl = (result as UrlEngineResult).url
         val resultUri = resultUrl.toAndroidUri()
 
         val downloadResult = sealedContext[ContextResultId.Download]

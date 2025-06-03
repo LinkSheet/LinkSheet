@@ -53,6 +53,7 @@ import fe.linksheet.activity.bottomsheet.LaunchFailure
 import fe.linksheet.activity.bottomsheet.LaunchHandler
 import fe.linksheet.activity.bottomsheet.LaunchResult
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
+import fe.linksheet.module.resolver.util.LaunchRawIntent
 
 //import relocated.androidx.compose.material3.SheetValue
 //import relocated.androidx.compose.material3.rememberModalBottomSheetState
@@ -103,14 +104,8 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         lifecycleScope.launch {
             viewModel.resolveResultFlow
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .mapNotNull { it as? IntentResolveResult.Default }
-                .filter { it.hasAutoLaunchApp && it.app != null }
-                .map {
-                    viewModel.makeOpenAppIntent(it.app!!, it.intent, referrer, it.isRegularPreferredApp, null, false)
-                }
-                .collectLatest {
-                    handleLaunch(it)
-                }
+                .mapNotNull(::maybeHandleResult)
+                .collectLatest(::handleLaunch)
         }
 
         lifecycleScope.launch {
@@ -287,6 +282,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {}
             is IntentResolveResult.WebSearch -> {}
             IntentResolveResult.NoTrackFound -> {}
+            else -> {}
         }
     }
 
@@ -300,6 +296,23 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     private fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): KnownBrowser? {
         if (!viewModel.enableRequestPrivateBrowsingButton.value || !hasUri) return null
         return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
+    }
+
+    private suspend fun maybeHandleResult(result: IntentResolveResult?): LaunchIntent? {
+        return when (result) {
+            is IntentResolveResult.Default if result.hasAutoLaunchApp && result.app != null -> {
+                viewModel.makeOpenAppIntent(
+                    result.app,
+                    result.intent,
+                    referrer,
+                    result.isRegularPreferredApp,
+                    null,
+                    false
+                )
+            }
+            is IntentResolveResult.IntentResult -> LaunchRawIntent(result.intent)
+            else -> null
+        }
     }
 
     private suspend fun handleLaunch(intent: LaunchIntent) {

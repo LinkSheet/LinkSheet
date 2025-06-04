@@ -1,6 +1,8 @@
 package fe.linksheet.intent.engine
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import fe.linksheet.experiment.engine.EngineTrack
 import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.TrackSelector
@@ -14,6 +16,9 @@ import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLinkResolver
 import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLocalSource
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLinkResolver
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSource
+import fe.linksheet.experiment.engine.rule.std.IntentPostprocessorRule
+import fe.linksheet.experiment.engine.rule.std.IntentRuleDefinition
+import fe.linksheet.experiment.engine.rule.std.RegexUrlMatcher
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.Logger
@@ -79,6 +84,16 @@ fun DefaultLinkEngineIntentResolver(
                 source = Amp2HtmlLocalSource(client = client),
                 cacheRepository = cacheRepository,
                 useLocalCache = settings.amp2HtmlSettings.amp2HtmlLocalCache
+            )
+        ),
+        rules = listOf(
+            IntentPostprocessorRule(
+                matcher = RegexUrlMatcher("""https://t\.me/(.+)""".toRegex()),
+                definition = IntentRuleDefinition(
+                    packageName = "org.telegram.messenger",
+                    cls = null,
+                    action = Intent.ACTION_VIEW,
+                )
             )
         ),
         fetchers = listOf(

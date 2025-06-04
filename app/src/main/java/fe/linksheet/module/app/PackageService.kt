@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.flow
 internal fun AndroidPackageServiceModule(
     context: Context,
     packageIconLoader: PackageIconLoader,
-    packageIntentHandler: PackageIntentHandler
+    packageIntentHandler: PackageIntentHandler,
 ): PackageService {
     val packageManager = context.packageManager
 
@@ -64,10 +64,12 @@ class PackageService(
     }
 
     fun getVerificationState(applicationInfo: ApplicationInfo): VerificationStateCompat? {
+        // TODO: There should be some sort of hybrid state which allows checking the domain verification status of browsers
+        // as well, as they may also have domains they can claim ownership over (Brave does this, for example)
+        val browsable = packageIntentHandler.findHttpBrowsable(applicationInfo.packageName)
+        if (!browsable.isNullOrEmpty()) return VerificationBrowserState
+
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
-            ?: packageIntentHandler.findHttpBrowsable(applicationInfo.packageName)
-                ?.takeIf { it.isNotEmpty() }
-                ?.let { VerificationBrowserState }
     }
 
     fun getDomainVerificationAppInfos(): Flow<DomainVerificationAppInfo> = flow {

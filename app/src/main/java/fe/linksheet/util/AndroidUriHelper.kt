@@ -20,3 +20,7 @@ object AndroidUriHelper {
         return Uri.fromParts(type.scheme, packageName, null)
     }
 }
+
+fun AndroidUriHelper.Type.create(packageName: String): Uri {
+    return AndroidUriHelper.create(this, packageName)
+}

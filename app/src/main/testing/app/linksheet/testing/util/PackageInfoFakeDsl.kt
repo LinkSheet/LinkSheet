@@ -9,8 +9,14 @@ import androidx.compose.ui.graphics.ImageBitmap
 import app.linksheet.testing.fake.ImageFakes
 import fe.linksheet.extension.android.activityDescriptor
 import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.module.app.DomainVerificationAppInfo
+import fe.linksheet.module.app.LinkHandling
 
-fun buildPackageInfoTestFake(packageName: String, name: String, block: PackageInfoFakeScope.() -> Unit): PackageInfoFake {
+fun buildPackageInfoTestFake(
+    packageName: String,
+    name: String,
+    block: PackageInfoFakeScope.() -> Unit,
+): PackageInfoFake {
     val packageInfo = PackageInfo()
     packageInfo.packageName = packageName
 
@@ -79,7 +85,7 @@ class ActivityScope(private val resolveInfos: MutableList<ResolveInfo>, val acti
 
 data class PackageInfoFake(
     val packageInfo: PackageInfo,
-    val resolveInfos: List<ResolveInfo>
+    val resolveInfos: List<ResolveInfo>,
 )
 
 fun packageSetOf(vararg packageInfos: PackageInfoFake): Set<String> {
@@ -104,7 +110,10 @@ val PackageInfoFake.packageName: String
 val PackageInfoFake.firstActivityResolveInfo: ResolveInfo?
     get() = resolveInfos.firstOrNull()
 
-fun PackageInfoFake.toActivityAppInfo(label: String, icon: Lazy<ImageBitmap> = ImageFakes.ImageBitmap): ActivityAppInfo {
+fun PackageInfoFake.toActivityAppInfo(
+    label: String,
+    icon: Lazy<ImageBitmap> = ImageFakes.ImageBitmap,
+): ActivityAppInfo {
     return ActivityAppInfo(firstActivityResolveInfo?.activityInfo!!, label, icon)
 }
 
@@ -114,6 +123,25 @@ fun PackageInfoFake.toActivityAppInfo(icon: Lazy<ImageBitmap> = ImageFakes.Image
 
 fun ResolveInfo.toActivityAppInfo(icon: Lazy<ImageBitmap> = ImageFakes.ImageBitmap): ActivityAppInfo {
     return ActivityAppInfo(activityInfo, activityInfo.name, icon)
+}
+
+fun PackageInfoFake.toDomainVerificationAppInfo(
+    linkHandling: LinkHandling,
+    stateNone: MutableList<String>,
+    stateSelected: MutableList<String>,
+    stateVerified: MutableList<String>,
+    icon: Lazy<ImageBitmap> = ImageFakes.ImageBitmap,
+): DomainVerificationAppInfo {
+    return DomainVerificationAppInfo(
+        packageInfo.applicationInfo!!.packageName,
+        packageInfo.applicationInfo!!.name,
+        icon,
+        0,
+        linkHandling,
+        stateNone,
+        stateSelected,
+        stateVerified,
+    )
 }
 
 fun Iterable<PackageInfoFake>.toKeyedMap(): Map<String, ResolveInfo> {

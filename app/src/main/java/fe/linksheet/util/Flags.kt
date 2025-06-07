@@ -62,6 +62,33 @@ value class ResolveInfoFlags(override val value: Int) : Flags {
 }
 
 @JvmInline
+value class ApplicationInfoFlags(override val value: Int) : Flags {
+    companion object : FlagCompanion<ApplicationInfoFlags> {
+        val EMPTY = ApplicationInfoFlags(0)
+
+        val GET_META_DATA = ApplicationInfoFlags(PackageManager.GET_META_DATA)
+        val GET_SHARED_LIBRARY_FILES = ApplicationInfoFlags(PackageManager.GET_SHARED_LIBRARY_FILES)
+        val MATCH_UNINSTALLED_PACKAGES = ApplicationInfoFlags(PackageManager.MATCH_UNINSTALLED_PACKAGES)
+        val MATCH_SYSTEM_ONLY = ApplicationInfoFlags(PackageManager.MATCH_SYSTEM_ONLY)
+        val MATCH_DEBUG_TRIAGED_MISSING = ApplicationInfoFlags(0x10000000)
+        val MATCH_DISABLED_COMPONENTS = ApplicationInfoFlags(PackageManager.MATCH_DISABLED_COMPONENTS)
+        val MATCH_DISABLED_UNTIL_USED_COMPONENTS = ApplicationInfoFlags(PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS)
+        val MATCH_INSTANT = ApplicationInfoFlags(0x00800000)
+        val MATCH_STATIC_SHARED_AND_SDK_LIBRARIES = ApplicationInfoFlags(0x04000000)
+        val GET_DISABLED_UNTIL_USED_COMPONENTS = ApplicationInfoFlags(PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS)
+        val GET_UNINSTALLED_PACKAGES = ApplicationInfoFlags(PackageManager.GET_UNINSTALLED_PACKAGES)
+        val MATCH_HIDDEN_UNTIL_INSTALLED_COMPONENTS = ApplicationInfoFlags(0x20000000)
+        val MATCH_APEX = ApplicationInfoFlags(PackageManager.MATCH_APEX)
+       // 1L << 32
+//        val MATCH_ARCHIVED_PACKAGES = ApplicationInfoFlags(PackageManager.MATCH_ARCHIVED_PACKAGES)
+
+        override val new: (Int) -> ApplicationInfoFlags = {
+            ApplicationInfoFlags(it)
+        }
+    }
+}
+
+@JvmInline
 value class ApplicationInfoPrivateFlags(override val value: Int) : Flags {
     companion object : FlagCompanion<ApplicationInfoPrivateFlags> {
         val SYSTEM = ApplicationInfoPrivateFlags(ApplicationInfo.FLAG_SYSTEM)

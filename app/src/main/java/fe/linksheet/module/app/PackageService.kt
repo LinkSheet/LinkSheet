@@ -6,16 +6,12 @@ import android.content.pm.verify.domain.DomainVerificationUserState
 import androidx.annotation.VisibleForTesting
 import fe.linksheet.extension.android.info
 import fe.linksheet.extension.android.toImageBitmap
+import fe.linksheet.module.app.`package`.*
 import fe.linksheet.module.app.`package`.domain.DomainVerificationManagerCompat
 import fe.linksheet.module.app.`package`.domain.VerificationBrowserState
 import fe.linksheet.module.app.`package`.domain.VerificationState
 import fe.linksheet.module.app.`package`.domain.VerificationStateCompat
-import fe.linksheet.module.app.`package`.PackageIconLoader
-import fe.linksheet.module.app.`package`.PackageLabelService
-import fe.linksheet.module.app.`package`.PackageLauncherService
-import fe.linksheet.module.app.`package`.DefaultPackageLabelService
-import fe.linksheet.module.app.`package`.DefaultPackageLauncherService
-import fe.linksheet.module.app.`package`.PackageIntentHandler
+import fe.linksheet.util.ApplicationInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -37,6 +33,7 @@ internal fun AndroidPackageServiceModule(
         packageLauncherService = DefaultPackageLauncherService(packageManager::queryIntentActivitiesCompat),
         packageIconLoader = packageIconLoader,
         packageIntentHandler = packageIntentHandler,
+        getApplicationInfoCompat = packageManager::getApplicationInfoCompat,
         getInstalledPackages = packageManager::getInstalledPackagesCompat,
     )
 }
@@ -47,6 +44,7 @@ class PackageService(
     private val packageLauncherService: PackageLauncherService,
     private val packageIconLoader: PackageIconLoader,
     private val packageIntentHandler: PackageIntentHandler,
+    val getApplicationInfoCompat: (String, ApplicationInfoFlags) -> ApplicationInfo,
     val getInstalledPackages: () -> List<PackageInfo>,
 ) : PackageLabelService by packageLabelService,
     PackageLauncherService by packageLauncherService,
@@ -72,7 +70,18 @@ class PackageService(
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
     }
 
-    fun getDomainVerificationAppInfos(): Flow<DomainVerificationAppInfo> = flow {
+    fun getDomainVerificationAppInfos(): List<DomainVerificationAppInfo> {
+        val list = mutableListOf<DomainVerificationAppInfo>()
+        val packages = getInstalledPackages()
+        for (packageInfo in packages) {
+            val status = createDomainVerificationAppInfo(packageInfo) ?: continue
+            list.add(status)
+        }
+
+        return list
+    }
+
+    fun getDomainVerificationAppInfoFlow(): Flow<DomainVerificationAppInfo> = flow {
         val packages = getInstalledPackages()
         for (packageInfo in packages) {
             val status = createDomainVerificationAppInfo(packageInfo) ?: continue
@@ -80,11 +89,21 @@ class PackageService(
         }
     }
 
-    @VisibleForTesting
+    fun createDomainVerificationAppInfo(packageName: String): DomainVerificationAppInfo? {
+        val info = getApplicationInfoCompat(packageName, ApplicationInfoFlags.EMPTY)
+        return createDomainVerificationAppInfo(info)
+    }
+
     fun createDomainVerificationAppInfo(packageInfo: PackageInfo): DomainVerificationAppInfo? {
         val applicationInfo = packageInfo.applicationInfo ?: return null
+        return createDomainVerificationAppInfo(applicationInfo)
+    }
+
+    @VisibleForTesting
+    fun createDomainVerificationAppInfo(applicationInfo: ApplicationInfo): DomainVerificationAppInfo? {
         val verificationState = getVerificationState(applicationInfo) ?: return null
-        val label = findBestLabel(packageInfo, getLauncherOrNull(packageInfo.packageName))
+        val launcher = getLauncherOrNull(applicationInfo.packageName)
+        val label = findBestLabel(applicationInfo, launcher)
 
         val stateNone = mutableListOf<String>()
         val stateSelected = mutableListOf<String>()
@@ -108,7 +127,7 @@ class PackageService(
         }
 
         val status = DomainVerificationAppInfo(
-            packageInfo.packageName,
+            applicationInfo.packageName,
             label,
             lazy { loadApplicationIcon(applicationInfo).toImageBitmap() },
             applicationInfo.flags,

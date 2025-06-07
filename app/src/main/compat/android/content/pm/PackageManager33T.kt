@@ -2,6 +2,7 @@ package android.content.pm
 
 import android.content.Intent
 import fe.composekit.core.AndroidVersion
+import fe.linksheet.util.ApplicationInfoFlags
 import fe.linksheet.util.ResolveInfoFlags
 
 fun PackageManager.resolveActivityCompat(
@@ -40,4 +41,13 @@ fun PackageManager.getInstalledPackagesCompat(flags: Int = 0): MutableList<Packa
     else getInstalledPackages(flags)
 }
 
-
+fun PackageManager.getApplicationInfoCompat(
+    packageName: String,
+    flags: ApplicationInfoFlags = ApplicationInfoFlags.EMPTY
+): ApplicationInfo {
+    return if (AndroidVersion.isAtLeastApi33T()) getApplicationInfo(
+        packageName,
+        PackageManager.ApplicationInfoFlags.of(flags.value.toLong())
+    )
+    else getApplicationInfo(packageName, flags.value)
+}

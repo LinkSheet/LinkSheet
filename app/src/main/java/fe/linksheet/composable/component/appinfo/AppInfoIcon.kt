@@ -1,15 +1,18 @@
 package fe.linksheet.composable.component.appinfo
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import app.linksheet.testing.fake.PackageInfoFakes
+import app.linksheet.testing.util.toActivityAppInfo
 import fe.composekit.component.icon.AppIconImage
 import fe.linksheet.composable.component.appinfo.AppInfoIconDefaults.DefaultIconSize
 import fe.linksheet.module.app.AppInfo
+import fe.linksheet.util.drawBitmap
 
 object AppInfoIconDefaults {
     val DefaultIconSize = 32.dp
@@ -35,12 +38,11 @@ fun <T : AppInfo> AppInfoIcon(
 @Preview(showBackground = true, apiLevel = 31)
 @Composable
 private fun AppInfoIconPreview() {
-    val icon = remember {
-        lazy { ImageBitmap(32, 32) }
+    val bitmap = drawBitmap(Size(24f, 24f)) {
+        drawCircle(Color.Red)
     }
 
     AppInfoIcon(
-        modifier = Modifier,
-        appInfo = AppInfo(packageName = "fe.linksheet", label = "LinkSheet", icon = icon)
+        appInfo = PackageInfoFakes.Youtube.toActivityAppInfo(lazy { bitmap })
     )
 }

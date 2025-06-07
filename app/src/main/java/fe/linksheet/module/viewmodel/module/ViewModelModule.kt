@@ -36,6 +36,15 @@ val viewModelModule = module {
 
     viewModelOf(::MainViewModel)
     viewModelOf(::VerifiedLinkHandlersViewModel)
+    viewModel { parameters ->
+        VerifiedLinkHandlerViewModel(
+            packageName  = parameters.get(),
+            preferenceRepository = get(),
+            preferredAppRepository = get(),
+            packageService = get(),
+            intentCompat = get()
+        )
+    }
     viewModelOf(::PreferredAppSettingsViewModel)
     viewModelOf(::InAppBrowserSettingsViewModel)
     viewModelOf(::PreferredBrowserViewModel)

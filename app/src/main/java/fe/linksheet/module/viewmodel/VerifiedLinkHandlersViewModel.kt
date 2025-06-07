@@ -25,6 +25,8 @@ import fe.linksheet.module.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
@@ -38,10 +40,12 @@ import kotlinx.coroutines.withContext
 class VerifiedLinkHandlersViewModel(
     private val shizukuHandler: ShizukuHandler,
     preferenceRepository: AppPreferenceRepository,
+    experimentRepository: ExperimentRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val packageInfoService: PackageService,
-    private val intentCompat: OneUiCompat
+    private val intentCompat: OneUiCompat,
 ) : BaseViewModel(preferenceRepository) {
+    val newVlh = experimentRepository.asViewModelState(Experiments.newVlh)
 
     val lastEmitted = MutableStateFlow(0L)
 
@@ -52,9 +56,13 @@ class VerifiedLinkHandlersViewModel(
     val searchQuery = MutableStateFlow("")
     private val sorting = MutableStateFlow(AppInfo.labelComparator)
 
-    private fun groupHosts( preferredApps: List<PreferredApp>, sideEffect: ProduceSideEffect<String>): Map<String, Collection<String>> {
+    private fun groupHosts(
+        preferredApps: List<PreferredApp>,
+        sideEffect: ProduceSideEffect<String>,
+    ): Map<String, Collection<String>> {
         return preferredApps.groupByNoNullKeys(
-            keySelector = { preferredApp -> preferredApp.pkg
+            keySelector = { preferredApp ->
+                preferredApp.pkg
 
 //                with(packageInfoService) {
 //                    getLauncherOrNull(preferredApp.pkg)?.let { toAppInfo(it, false) }
@@ -79,9 +87,16 @@ class VerifiedLinkHandlersViewModel(
             replay = 1
         )
 
-    val appsFiltered = packageInfoService.getDomainVerificationAppInfos()
+    //    private fun test(): Flow<List<DomainVerificationAppInfo>> {
+//        return flowOfLazy {
+//            packageInfoService.getDomainVerificationAppInfos()
+//        }
+//    }
+    val appsFiltered = packageInfoService.getDomainVerificationAppInfoFlow()
         .scan(emptyList<DomainVerificationAppInfo>()) { acc, elem -> acc + elem }
         .flowOn(Dispatchers.IO)
+//    val appsFiltered = test()
+//        .flowOn(Dispatchers.IO)
         .combine(userAppFilter) { apps, userAppFilter ->
             apps.filter { !userAppFilter || it.flags !in SYSTEM_APP_FLAGS }
         }

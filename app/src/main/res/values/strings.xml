@@ -555,4 +555,7 @@
     <string name="bottom_sheet__text_launch_not_allowed">Launch not allowed!</string>
     <string name="bottom_sheet__text_launch_failure_unknown">Unknown launch failure!</string>
     <string name="bottom_sheet__text_launch_failure_other">Launch failed!</string>
+    <string name="settings_verified_link_handler__text_hosts">Hosts</string>
+    <string name="settings_verified_link_handler__title_details">Details</string>
+    <string name="generic__button_text_settings">Settings</string>
 </resources>

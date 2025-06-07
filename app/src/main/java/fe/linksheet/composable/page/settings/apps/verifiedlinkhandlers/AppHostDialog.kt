@@ -189,7 +189,7 @@ private fun BoxScope.DialogContent(
 }
 
 @Composable
-private fun LazyItemScope.CheckboxListItem(host: String, isChecked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+fun LazyItemScope.CheckboxListItem(host: String, isChecked: Boolean, onCheckedChange: (Boolean) -> Unit) {
     val padding = DialogDefaults.ListItemInnerPadding.copy(
         vertical = 4.dp
     )

@@ -8,9 +8,12 @@ import android.content.pm.ResolveInfo
 import androidx.compose.ui.graphics.ImageBitmap
 import app.linksheet.testing.fake.ImageFakes
 import fe.linksheet.extension.android.activityDescriptor
+import fe.linksheet.extension.android.componentName
 import fe.linksheet.module.app.ActivityAppInfo
 import fe.linksheet.module.app.DomainVerificationAppInfo
 import fe.linksheet.module.app.LinkHandling
+import fe.linksheet.module.app.PackageIdHelper
+import fe.linksheet.module.database.entity.PreferredApp
 
 fun buildPackageInfoTestFake(
     packageName: String,
@@ -144,6 +147,18 @@ fun PackageInfoFake.toDomainVerificationAppInfo(
     )
 }
 
+fun PackageInfoFake.asPreferredApp(host: String, alwaysPreferred: Boolean = false): PreferredApp {
+    val resolveInfo = firstActivityResolveInfo
+    val componentName = resolveInfo?.activityInfo?.componentName
+
+    return PreferredApp(
+        _packageName = componentName?.packageName,
+        _component = componentName?.flattenToString(),
+        host = host,
+        alwaysPreferred = alwaysPreferred
+    )
+}
+
 fun Iterable<PackageInfoFake>.toKeyedMap(): Map<String, ResolveInfo> {
     return associate { it.packageName to it.firstActivityResolveInfo!! }
 }
@@ -154,4 +169,8 @@ fun PackageInfoFake.toKeyedMap(): Map<String, ResolveInfo> {
 
 fun Iterable<ResolveInfo>.asDescriptors(): List<String> {
     return map { it.activityInfo.activityDescriptor }.distinct()
+}
+
+fun ActivityAppInfo.asDescriptor(): String {
+    return PackageIdHelper.getDescriptor(this)
 }

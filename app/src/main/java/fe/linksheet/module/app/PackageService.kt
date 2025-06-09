@@ -33,7 +33,7 @@ internal fun AndroidPackageServiceModule(
         packageLauncherService = DefaultPackageLauncherService(packageManager::queryIntentActivitiesCompat),
         packageIconLoader = packageIconLoader,
         packageIntentHandler = packageIntentHandler,
-        getApplicationInfoCompat = packageManager::getApplicationInfoCompat,
+        getApplicationInfoOrNull = packageManager::getApplicationInfoCompatOrNull,
         getInstalledPackages = packageManager::getInstalledPackagesCompat,
     )
 }
@@ -44,7 +44,7 @@ class PackageService(
     private val packageLauncherService: PackageLauncherService,
     private val packageIconLoader: PackageIconLoader,
     private val packageIntentHandler: PackageIntentHandler,
-    val getApplicationInfoCompat: (String, ApplicationInfoFlags) -> ApplicationInfo,
+    val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
     val getInstalledPackages: () -> List<PackageInfo>,
 ) : PackageLabelService by packageLabelService,
     PackageLauncherService by packageLauncherService,
@@ -90,8 +90,8 @@ class PackageService(
     }
 
     fun createDomainVerificationAppInfo(packageName: String): DomainVerificationAppInfo? {
-        val info = getApplicationInfoCompat(packageName, ApplicationInfoFlags.EMPTY)
-        return createDomainVerificationAppInfo(info)
+        return getApplicationInfoOrNull(packageName, ApplicationInfoFlags.EMPTY)
+            ?.let { createDomainVerificationAppInfo(it) }
     }
 
     fun createDomainVerificationAppInfo(packageInfo: PackageInfo): DomainVerificationAppInfo? {

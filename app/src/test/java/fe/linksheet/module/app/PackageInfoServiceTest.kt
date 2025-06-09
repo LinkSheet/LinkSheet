@@ -41,6 +41,7 @@ internal class PackageInfoServiceTest : BaseUnitTest {
                 { _, _ -> ImageFakes.EmptyDrawable },
                 { ImageFakes.EmptyDrawable }
             ),
+            getApplicationInfoOrNull = { _, _ -> null },
             getInstalledPackages = { emptyList() },
         )
 

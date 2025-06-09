@@ -1,4 +1,4 @@
-package fe.linksheet.resolver
+package fe.linksheet.module.resolver
 
 import android.content.IntentFilter
 import android.net.Uri
@@ -9,7 +9,6 @@ import app.linksheet.testing.util.addDataPaths
 import app.linksheet.testing.util.buildIntentFilter
 import fe.linksheet.module.app.`package`.DefaultPackageIntentHandler
 import fe.linksheet.module.app.`package`.PackageIntentHandler
-import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.testlib.core.RobolectricTest
 import org.junit.Test
 import org.junit.runner.RunWith

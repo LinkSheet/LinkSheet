@@ -63,6 +63,7 @@ jobs:
       uses: './.github/actions/get-avd-info'
       with:
         api-level: '35'
+        target: 'google_apis'
     - id: 'step-6'
       uses: 'reactivecircus/android-emulator-runner@v2'
       with:

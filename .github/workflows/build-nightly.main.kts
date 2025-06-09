@@ -331,6 +331,7 @@ sudo udevadm trigger --name-match=kvm"""
                 actionPath = "./.github/actions/get-avd-info",
                 inputs = mapOf(
                     "api-level" to "$apiLevel",
+                    "target" to "google_apis"
                 )
             ),
         )

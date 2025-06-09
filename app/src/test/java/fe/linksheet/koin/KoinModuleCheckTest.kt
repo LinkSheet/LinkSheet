@@ -13,7 +13,7 @@ import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.feature.libredirect.LibRedirectSettingsUseCase
+import fe.linksheet.feature.libredirect.LibRedirectSettingsFeature
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.app.PackageService
 import fe.linksheet.module.app.`package`.PackageIntentHandler
@@ -170,7 +170,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<LogTextSettingsViewModel>(),
         definition<MarkdownViewModel>(Request::class),
-        definition<LibRedirectServiceSettingsViewModel>(LibRedirectSettingsUseCase::class),
+        definition<LibRedirectServiceSettingsViewModel>(),
         definition<BottomSheetViewModel>(ImageLoader::class, IntentResolver::class, IntentLauncher::class),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
         definition<Downloader>(CachedRequest::class),

@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class WikiArticleUseCase(
+class WikiArticleFeature(
     val request: Request,
     val repository: WikiCacheRepository,
     val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,

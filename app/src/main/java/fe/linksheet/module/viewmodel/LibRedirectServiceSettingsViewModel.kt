@@ -2,11 +2,10 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import fe.linksheet.extension.android.launchIO
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffect
 import fe.linksheet.feature.libredirect.FrontendState
-import fe.linksheet.feature.libredirect.LibRedirectSettingsUseCase
+import fe.linksheet.feature.libredirect.LibRedirectSettingsFeature
 import fe.linksheet.feature.libredirect.ServiceSettings
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.LibRedirectServiceState
@@ -24,29 +23,21 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-data class BuiltInFrontendHolder(
-    val key: String,
-    val name: String,
-    val instances: Set<String>,
-    val defaultInstance: String,
-)
-
-
 class LibRedirectServiceSettingsViewModel(
     val context: Application,
     private val serviceKey: String,
     private val defaultRepository: LibRedirectDefaultRepository,
     private val stateRepository: LibRedirectStateRepository,
     preferenceRepository: AppPreferenceRepository,
-    private val useCase: LibRedirectSettingsUseCase = LibRedirectSettingsUseCase()
 ) : BaseViewModel(preferenceRepository) {
+    private val feature = LibRedirectSettingsFeature()
 
     private val _settings = MutableStateFlow<ServiceSettings?>(null)
     val settings = _settings.asStateFlow()
 
     fun loadSettings() {
         viewModelScope.launch {
-            _settings.value = useCase.loadSettings(serviceKey)
+            _settings.value = feature.loadSettings(serviceKey)
         }
     }
 
@@ -118,3 +109,10 @@ class LibRedirectServiceSettingsViewModel(
         }
     }
 }
+
+data class BuiltInFrontendHolder(
+    val key: String,
+    val name: String,
+    val instances: Set<String>,
+    val defaultInstance: String,
+)

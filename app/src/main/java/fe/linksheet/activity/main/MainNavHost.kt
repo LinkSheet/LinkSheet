@@ -47,6 +47,8 @@ import fe.linksheet.navigation.addPageRoute
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
+import fe.linksheet.composable.page.settings.debug.SqlRoute
 import fe.linksheet.navigation.AdvancedRoute
 import fe.linksheet.navigation.DebugRoute
 import fe.linksheet.navigation.ExperimentRoute
@@ -56,6 +58,8 @@ import fe.linksheet.navigation.LibRedirectServiceRoute
 import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.Routes
+import fe.linksheet.navigation.SqlRoute
+import fe.linksheet.navigation.VlhAppRoute
 import fe.linksheet.navigation.aboutSettingsRoute
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.appsSettingsRoute
@@ -136,6 +140,14 @@ fun MainNavHost(
 
         animatedComposable<LibRedirectServiceRoute> { _, route ->
             NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed, serviceKey = route.serviceKey)
+        }
+
+        animatedComposable<VlhAppRoute> { _, route ->
+            VlhAppRoute(onBackPressed = onBackPressed, packageName = route.packageName)
+        }
+
+        animatedComposable<SqlRoute> { _, route ->
+            SqlRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = Routes.AboutVersion) {
@@ -263,7 +275,7 @@ fun MainNavHost(
 //        }
 
         animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
-            VerifiedLinkHandlersRoute(onBackPressed = onBackPressed)
+            VerifiedLinkHandlersRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
         }
 
         if (AndroidVersion.isAtLeastApi31S()) {

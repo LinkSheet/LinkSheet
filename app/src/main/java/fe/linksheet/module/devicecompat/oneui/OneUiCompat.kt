@@ -2,11 +2,13 @@ package fe.linksheet.module.devicecompat.oneui
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import fe.linksheet.module.systeminfo.SystemInfoService
+import fe.linksheet.util.AndroidUriHelper
+import fe.linksheet.util.create
+import fe.linksheet.util.intent.buildIntent
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
 
@@ -51,9 +53,9 @@ object DefaultOneUiIntentCompat : OneUiCompat {
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun createAppOpenByDefaultSettingsIntent(packageName: String): Intent {
-        return Intent(
+        return buildIntent(
             Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-            Uri.fromParts("package", packageName, null)
+            AndroidUriHelper.Type.Package.create(packageName)
         )
     }
 }

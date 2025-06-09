@@ -287,17 +287,6 @@ private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
     )
 }
 
-private fun PackageInfoFake.asPreferredApp(host: String): PreferredApp {
-    val resolveInfo = firstActivityResolveInfo
-    val componentName = resolveInfo?.activityInfo?.componentName
-
-    return PreferredApp(
-        _packageName = componentName?.packageName,
-        _component = componentName?.flattenToString(),
-        host = host,
-        alwaysPreferred = false
-    )
-}
 
 private data class PreviewState(
     val filteredBrowserList: FilteredBrowserList,

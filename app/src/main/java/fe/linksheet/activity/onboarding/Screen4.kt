@@ -20,7 +20,7 @@ fun Screen4(onBackClick: () -> Unit, onNextClick: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize().navigationBarsPadding()) {
         Column(modifier = Modifier.weight(1f)) {
             if (AndroidVersion.isAtLeastApi31S()) {
-                VerifiedLinkHandlersRoute(onBackPressed = onBackClick)
+                VerifiedLinkHandlersRoute(onBackPressed = onBackClick, navigateNew = {})
             }
         }
 

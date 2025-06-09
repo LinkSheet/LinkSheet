@@ -2,7 +2,10 @@ package android.content.pm
 
 import android.content.Intent
 import fe.composekit.core.AndroidVersion
+import fe.linksheet.util.ApplicationInfoFlags
 import fe.linksheet.util.ResolveInfoFlags
+import fe.std.result.getOrNull
+import fe.std.result.tryCatch
 
 fun PackageManager.resolveActivityCompat(
     intent: Intent,
@@ -21,11 +24,11 @@ fun PackageManager.resolveActivityCompat(
 fun PackageManager.queryIntentActivitiesCompat(
     intent: Intent,
     flags: ResolveInfoFlags = ResolveInfoFlags.EMPTY,
-): MutableList<ResolveInfo> {
+): List<ResolveInfo> {
     return queryIntentActivitiesCompat(intent, flags.value)
 }
 
-fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int = 0): MutableList<ResolveInfo> {
+fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int = 0): List<ResolveInfo> {
     return when {
         AndroidVersion.isAtLeastApi33T() -> queryIntentActivities(
             intent, PackageManager.ResolveInfoFlags.of(flags.toLong())
@@ -35,9 +38,25 @@ fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int = 0): 
     }
 }
 
-fun PackageManager.getInstalledPackagesCompat(flags: Int = 0): MutableList<PackageInfo> {
+fun PackageManager.getInstalledPackagesCompat(flags: Int = 0): List<PackageInfo> {
     return if (AndroidVersion.isAtLeastApi33T()) getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
     else getInstalledPackages(flags)
 }
 
+fun PackageManager.getApplicationInfoCompatOrNull(
+    packageName: String,
+    flags: ApplicationInfoFlags = ApplicationInfoFlags.EMPTY,
+): ApplicationInfo? {
+    return tryCatch { getApplicationInfoCompat(packageName, flags) }.getOrNull()
+}
 
+fun PackageManager.getApplicationInfoCompat(
+    packageName: String,
+    flags: ApplicationInfoFlags = ApplicationInfoFlags.EMPTY,
+): ApplicationInfo {
+    return if (AndroidVersion.isAtLeastApi33T()) getApplicationInfo(
+        packageName,
+        PackageManager.ApplicationInfoFlags.of(flags.value.toLong())
+    )
+    else getApplicationInfo(packageName, flags.value)
+}

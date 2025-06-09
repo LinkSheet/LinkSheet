@@ -65,6 +65,10 @@ object Experiments : PreferenceDefinition(
         key = "experiment_disable_log_persistence"
     )
 
+    val newVlh = boolean(
+        key = "experiment_new_vlh",
+    )
+
     val experiments = listOf(
         group(
             name = "enhanced_url_bar",
@@ -90,6 +94,11 @@ object Experiments : PreferenceDefinition(
             name = "logging",
             displayName = "Logging",
             experiment("Disable log persistence", disableLogging)
+        ),
+        group(
+            name = "new_vlh",
+            displayName = "New verified link handlers page",
+            experiment("Enable new VLH page", newVlh)
         )
     )
 

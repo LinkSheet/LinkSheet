@@ -3,6 +3,7 @@ package fe.linksheet.module.repository
 import android.net.Uri
 import fe.linksheet.module.database.dao.PreferredAppDao
 import fe.linksheet.module.database.entity.PreferredApp
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 
@@ -38,6 +39,10 @@ class PreferredAppRepository(private val dao: PreferredAppDao) {
 
     suspend fun insert(items: List<PreferredApp>) {
         dao.insert(items)
+    }
+
+    fun getByPackageNameFlow(packageName: String): Flow<List<PreferredApp>> {
+        return dao.getByPackageName(packageName)
     }
 
     suspend fun getByPackageName(packageName: String): List<PreferredApp> {

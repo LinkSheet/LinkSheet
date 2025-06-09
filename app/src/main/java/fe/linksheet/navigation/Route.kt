@@ -8,6 +8,7 @@ import fe.android.compose.route.util.*
 import fe.linksheet.util.WikiPage
 import kotlinx.serialization.Serializable
 import fe.composekit.route.Route
+import fe.linksheet.module.app.DomainVerificationAppInfo
 
 
 const val mainRoute = "main_route"
@@ -130,11 +131,19 @@ data class LibRedirectServiceRoute(val serviceKey: String) : Route
 
 @Keep
 @Serializable
+data class VlhAppRoute(val packageName: String) : Route
+
+@Keep
+@Serializable
 data object LibRedirectRoute : Route
 
 @Keep
 @Serializable
 data object LanguageRoute : Route
+
+@Keep
+@Serializable
+data object SqlRoute : Route
 
 //@Keep
 //data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {

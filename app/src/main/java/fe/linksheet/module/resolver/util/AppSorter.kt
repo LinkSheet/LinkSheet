@@ -12,11 +12,11 @@ import kotlin.time.Duration.Companion.days
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
-class AppSorter (
+class AppSorter(
     private val queryAndAggregateUsageStats: (beginTime: Long, endTime: Long) -> Map<String, UsageStats>,
     private val toAppInfo: (ResolveInfo, browser: Boolean) -> ActivityAppInfo,
     private val clock: Clock,
-    private val usageStatsPeriod: Duration = 14.days
+    private val usageStatsPeriod: Duration = 14.days,
 ) {
     private val emptyComparator: Comparator<ActivityAppInfo> = Comparator { _, _ -> 0 }
 
@@ -27,7 +27,10 @@ class AppSorter (
         returnLastChosen: Boolean = true,
     ): Pair<List<ActivityAppInfo>, ActivityAppInfo?> {
         val infos = toDisplay(appList.apps, appList.browsers)
-        val filtered = if (returnLastChosen) maybeGetAndRemoveLastChosen(infos, lastChosen) else null
+        val filtered = when {
+            lastChosen?.alwaysPreferred == true || returnLastChosen -> maybeGetAndRemoveLastChosen(infos, lastChosen)
+            else -> null
+        }
 
         val comparator = listOfNotNull(
             createHistoryComparator(historyMap),
@@ -41,7 +44,7 @@ class AppSorter (
 
     private fun maybeGetAndRemoveLastChosen(
         infos: MutableMap<String, ActivityAppInfo>,
-        lastChosen: PreferredApp?
+        lastChosen: PreferredApp?,
     ): ActivityAppInfo? {
         if (lastChosen == null) return null
 

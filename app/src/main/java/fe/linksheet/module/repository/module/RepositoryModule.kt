@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalTime::class)
+
 package fe.linksheet.module.repository.module
 
+import fe.linksheet.module.clock.clockModule
 import fe.linksheet.module.database.dao.module.daoModule
 import fe.linksheet.module.database.databaseModule
 import fe.linksheet.module.repository.*
@@ -9,9 +12,10 @@ import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersReposi
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import kotlin.time.ExperimentalTime
 
 val repositoryModule = module {
-    includes(databaseModule, daoModule)
+    includes(clockModule, databaseModule, daoModule)
 
     singleOf(::PreferredAppRepository)
     singleOf(::DisableInAppBrowserInSelectedRepository)
@@ -22,4 +26,5 @@ val repositoryModule = module {
     singleOf(::LibRedirectStateRepository)
     singleOf(::ResolvedRedirectRepository)
     singleOf(::Amp2HtmlRepository)
+    singleOf(::WikiCacheRepository)
 }

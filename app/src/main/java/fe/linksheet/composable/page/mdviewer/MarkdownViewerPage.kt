@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,6 +31,17 @@ import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.viewmodel.MarkdownViewModel
 import org.koin.androidx.compose.koinViewModel
 
+@Composable
+fun <T, R> rememberSaveableWithInit(key1: T, block: suspend (T) -> R?): R? {
+    var state by rememberSaveable(key1) { mutableStateOf<R?>(null) }
+
+    LaunchedEffect(key1 = key1) {
+        state = block(key1)
+    }
+
+    return state
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,12 +52,7 @@ fun MarkdownViewerWrapper(
     onBackPressed: () -> Unit,
     viewModel: MarkdownViewModel = koinViewModel(),
 ) {
-    var markdown by remember(rawUrl) { mutableStateOf<String?>(null) }
-
-    LaunchedEffect(key1 = rawUrl) {
-        markdown = viewModel.fetch(rawUrl)
-    }
-
+    val markdown = rememberSaveableWithInit(rawUrl) { viewModel.getWikiText(it) }
     val handler = LocalUriHandler.current
     MarkdownViewer(
         title = title,

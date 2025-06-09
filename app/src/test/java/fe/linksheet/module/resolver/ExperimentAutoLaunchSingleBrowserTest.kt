@@ -1,4 +1,4 @@
-package fe.linksheet.resolver
+package fe.linksheet.module.resolver
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -12,9 +12,6 @@ import assertk.all
 import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.*
-import fe.linksheet.module.resolver.AutoLaunchSingleBrowserExperiment
-import fe.linksheet.module.resolver.BrowserModeConfigHelper
-import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.testlib.core.RobolectricTest
 import org.junit.Test

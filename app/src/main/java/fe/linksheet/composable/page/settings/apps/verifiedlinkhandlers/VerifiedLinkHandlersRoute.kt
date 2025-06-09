@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.outlined.ArrowDropDown
+import androidx.compose.material.icons.rounded.FilterList
 import androidx.compose.material3.*
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.*
@@ -20,11 +21,13 @@ import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.composekit.core.AndroidVersion
 import fe.composekit.component.appbar.SearchTopAppBar
 import fe.composekit.component.list.column.SaneLazyColumnDefaults
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
+import fe.composekit.core.AndroidVersion
+import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
 import fe.linksheet.extension.android.startActivityWithConfirmation
@@ -34,6 +37,7 @@ import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.FilterMode
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
+import fe.linksheet.navigation.VlhAppRoute
 import org.koin.androidx.compose.koinViewModel
 
 private const val allPackages = "all"
@@ -41,6 +45,7 @@ private const val allPackages = "all"
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun VerifiedLinkHandlersRoute(
+    navigateNew: (Route) -> Unit,
     onBackPressed: () -> Unit,
     viewModel: VerifiedLinkHandlersViewModel = koinViewModel(),
 ) {
@@ -106,7 +111,15 @@ fun VerifiedLinkHandlersRoute(
                 placeholderContent = textContent(R.string.settings__title_filter_apps),
                 query = filter,
                 onQueryChange = viewModel::search,
-                onBackPressed = onBackPressed
+                onBackPressed = onBackPressed,
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Rounded.FilterList,
+                            contentDescription = null,
+                        )
+                    }
+                }
             )
         }
     ) { padding ->
@@ -148,6 +161,7 @@ fun VerifiedLinkHandlersRoute(
 //                state.scrollToItem(0)
             }
 
+            val newVlh by viewModel.newVlh.collectAsStateWithLifecycle()
             SaneLazyColumnLayout(
                 state = state,
                 padding = PaddingValues()
@@ -162,14 +176,17 @@ fun VerifiedLinkHandlersRoute(
                     val preferredHosts = remember(preferredApps, item) {
                         preferredApps[item.packageName]?.toSet() ?: emptySet()
                     }
-
                     VerifiedAppListItem(
                         item = item,
                         padding = padding,
                         shape = shape,
                         preferredHosts = preferredHosts.size,
                         onClick = {
-                            dialogState.open(AppHostDialogData(item, preferredHosts))
+                            if (newVlh) {
+                                navigateNew(VlhAppRoute(item.packageName))
+                            } else {
+                                dialogState.open(AppHostDialogData(item, preferredHosts))
+                            }
                         },
                         onOtherClick = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
                             {

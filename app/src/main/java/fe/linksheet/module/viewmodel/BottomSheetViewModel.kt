@@ -10,20 +10,15 @@ import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Environment
-import android.provider.Settings
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.core.net.toUri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.activity.bottomsheet.AppClickInteraction
-import fe.linksheet.activity.bottomsheet.ChoiceButtonInteraction
-import fe.linksheet.activity.bottomsheet.ClickModifier
-import fe.linksheet.activity.bottomsheet.ClickType
-import fe.linksheet.activity.bottomsheet.Interaction
-import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
-import fe.linksheet.activity.bottomsheet.TapConfig
+import fe.linksheet.activity.bottomsheet.*
+import fe.linksheet.extension.android.getSystemServiceOrThrow
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.app.ActivityAppInfo
@@ -44,7 +39,9 @@ import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.resolver.util.LaunchMainIntent
+import fe.linksheet.module.resolver.workaround.GithubWorkaround
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.util.intent.StandardIntents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -54,13 +51,6 @@ import mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
 import java.util.*
-import androidx.core.net.toUri
-import fe.android.preference.helper.Preference
-import fe.composekit.preference.ViewModelStatePreference
-import fe.linksheet.extension.android.getSystemServiceOrThrow
-import fe.linksheet.module.resolver.workaround.GithubWorkaround
-import fe.linksheet.util.AndroidUriHelper
-import fe.linksheet.util.intent.buildIntent
 
 class BottomSheetViewModel(
     val context: Application,
@@ -119,13 +109,7 @@ class BottomSheetViewModel(
     }
 
     fun startPackageInfoActivity(context: Activity, info: ActivityAppInfo): Boolean {
-        val intent = buildIntent(
-            action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-            uri = AndroidUriHelper.create(AndroidUriHelper.Type.Package, info.packageName)
-        ) {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-
+        val intent = StandardIntents.createAppSettingsIntent(info.packageName)
         return context.startActivityWithConfirmation(intent)
     }
 

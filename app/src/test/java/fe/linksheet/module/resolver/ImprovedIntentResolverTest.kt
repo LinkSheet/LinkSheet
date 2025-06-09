@@ -1,4 +1,4 @@
-package fe.linksheet.resolver
+package fe.linksheet.module.resolver
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat

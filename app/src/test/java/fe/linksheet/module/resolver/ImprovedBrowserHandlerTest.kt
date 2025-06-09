@@ -1,4 +1,4 @@
-package fe.linksheet.resolver
+package fe.linksheet.module.resolver
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -8,9 +8,6 @@ import app.linksheet.testing.util.packageSetOf
 import app.linksheet.testing.util.toKeyedMap
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
-import fe.linksheet.module.resolver.BrowserModeConfigHelper
-import fe.linksheet.module.resolver.FilteredBrowserList
-import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.testlib.core.RobolectricTest
 import org.junit.Test

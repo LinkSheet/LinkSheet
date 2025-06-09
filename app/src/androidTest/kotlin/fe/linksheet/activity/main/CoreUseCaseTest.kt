@@ -36,25 +36,25 @@ internal class CoreUseCaseTest : UiAutomatorTest {
 
     @Test
     fun test() {
-//        val regularDefaultBrowser = getDefaultBrowser()
-//        assertThat(regularDefaultBrowser).isNotNull()
+        val regularDefaultBrowser = getDefaultBrowser()
+        assertThat(regularDefaultBrowser).isNotNull()
 
         interactor.launch()
         interactor.dismissDialogs()
         interactor.setAsDefaultBrowser()
         interactor.stop()
 
-//        assertThat(getDefaultBrowser())
-//            .isNotNull()
-//            .prop(DefaultBrowser::packageName)
-//            .isEqualTo(interactor.targetPackageName)
+        assertThat(getDefaultBrowser())
+            .isNotNull()
+            .prop(DefaultBrowser::packageName)
+            .isEqualTo(interactor.targetPackageName)
 
         val intent = buildIntent(Intent.ACTION_VIEW, "https://linksheet.app".toUri())
         interactor.startApp(intent)
 
-//        if(regularDefaultBrowser != null) {
-//            device.findObjectWithTimeoutOrNull(By.text(regularDefaultBrowser!!.name))?.click()
-//            interactor.awaitApp(regularDefaultBrowser.packageName)
-//        }
+        if(regularDefaultBrowser != null) {
+            device.findObjectWithTimeoutOrNull(By.text(regularDefaultBrowser.name))?.click()
+            interactor.awaitApp(regularDefaultBrowser.packageName)
+        }
     }
 }

@@ -7,27 +7,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-
-data class FrontendState(
-    val serviceKey: String,
-    val frontendKey: String,
-    val name: String,
-    val instances: Set<String>,
-    val defaultInstance: String,
-)
-
-data class ServiceSettings(
-    val service: LibRedirectService,
-    val fallback: LibRedirectDefault?,
-    val frontends: List<FrontendState>,
-    val defaultFrontend: FrontendState?
-) {
-    fun maybeGetFrontend(frontendKey: String): FrontendState? {
-        return frontends.firstOrNull { it.frontendKey == frontendKey }
-    }
-}
-
-class LibRedirectSettingsUseCase(private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) {
+class LibRedirectSettingsFeature(private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) {
     suspend fun loadSettings(serviceKey: String) = withContext(ioDispatcher) {
         val builtInInstances = LibRedirectLoader.loadBuiltInInstances().associate { it.frontendKey to it.hosts.toSet() }
 
@@ -60,7 +40,7 @@ class LibRedirectSettingsUseCase(private val ioDispatcher: CoroutineDispatcher =
             if (instances.isNullOrEmpty()) continue
 
             val state = FrontendState(service.key, frontend.key, frontend.name, instances, instances.first())
-            if(frontend.key == defaultFrontendKey) {
+            if (frontend.key == defaultFrontendKey) {
                 fallback = state
             }
 
@@ -72,7 +52,7 @@ class LibRedirectSettingsUseCase(private val ioDispatcher: CoroutineDispatcher =
 
     private fun createFallback(
         service: LibRedirectService,
-        builtInFrontendInstances: Map<String, Set<String>>
+        builtInFrontendInstances: Map<String, Set<String>>,
     ): LibRedirectDefault? {
         val defaultFrontendKey = service.defaultFrontend.key
         val instances = builtInFrontendInstances[defaultFrontendKey]
@@ -83,5 +63,24 @@ class LibRedirectSettingsUseCase(private val ioDispatcher: CoroutineDispatcher =
             defaultFrontendKey,
             instances.first()
         )
+    }
+}
+
+data class FrontendState(
+    val serviceKey: String,
+    val frontendKey: String,
+    val name: String,
+    val instances: Set<String>,
+    val defaultInstance: String,
+)
+
+data class ServiceSettings(
+    val service: LibRedirectService,
+    val fallback: LibRedirectDefault?,
+    val frontends: List<FrontendState>,
+    val defaultFrontend: FrontendState?,
+) {
+    fun maybeGetFrontend(frontendKey: String): FrontendState? {
+        return frontends.firstOrNull { it.frontendKey == frontendKey }
     }
 }

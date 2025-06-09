@@ -558,4 +558,6 @@
     <string name="settings_verified_link_handler__text_hosts">Hosts</string>
     <string name="settings_verified_link_handler__title_details">Details</string>
     <string name="generic__button_text_settings">Settings</string>
+    <string name="settings__title_sql">Sql query</string>
+    <string name="settings_sql__text_query">Query</string>
 </resources>

@@ -141,6 +141,10 @@ data object LibRedirectRoute : Route
 @Serializable
 data object LanguageRoute : Route
 
+@Keep
+@Serializable
+data object SqlRoute : Route
+
 //@Keep
 //data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {
 //    companion object : Route1<ExperimentSettingsRouteArg, String?>(

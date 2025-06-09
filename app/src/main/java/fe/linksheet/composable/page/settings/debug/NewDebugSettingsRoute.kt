@@ -6,6 +6,7 @@ import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.DeleteForever
+import androidx.compose.material.icons.rounded.JoinLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,7 +52,7 @@ fun NewDebugSettingsRoute(
 
     val disableLogging by viewModel.disableLogging.collectAsStateWithLifecycle()
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.debug), onBackPressed = onBackPressed) {
-        group(size = groupSize(2, viewModel.miuiCompatRequired, disableLogging)) {
+        group(size = groupSize(3, viewModel.miuiCompatRequired, disableLogging)) {
             item(key = R.string.logs) { padding, shape ->
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),
@@ -105,6 +106,19 @@ fun NewDebugSettingsRoute(
                         }
                     )
                 }
+            }
+
+            item(key = "test") { padding, shape ->
+                DefaultTwoLineIconClickableShapeListItem(
+                    enabled = false,
+                    headlineContent = text("Database"),
+                    icon = Icons.Rounded.JoinLeft.iconPainter,
+                    shape = shape,
+                    padding = padding,
+                    onClick = {
+
+                    }
+                )
             }
         }
     }

@@ -21,8 +21,6 @@ pluginManagement {
     plugins {
         id("de.fayard.refreshVersions") version "0.60.5"
         id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
-////                                                       # available:"1.0.0-rc-1"
-////                                                       # available:"1.0.0"
         id("com.android.library")
         id("org.jetbrains.kotlin.android")
         id("net.nemerosa.versioning")
@@ -31,7 +29,7 @@ pluginManagement {
 
     buildscript {
         dependencies {
-            classpath("com.android.tools:r8:8.9.35")
+            classpath("com.android.tools:r8:8.10.21")
         }
     }
 

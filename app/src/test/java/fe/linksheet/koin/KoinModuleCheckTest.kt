@@ -179,7 +179,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<LanguageSettingsViewModel>(AppLocaleService::class),
         definition<SettingsViewModel>(AppLocaleService::class),
         definition<ThemeSettingsViewModel>(RemoteConfigRepository::class),
-        definition<WorkDelegatorService>(WorkManager::class)
+        definition<WorkDelegatorService>(WorkManager::class),
+        definition<VerifiedLinkHandlerViewModel>(PackageService::class, OneUiCompat::class),
     )
 
     @Test

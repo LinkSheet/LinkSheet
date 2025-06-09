@@ -1,10 +1,7 @@
-@file:OptIn(ExperimentalTestApi::class)
-
 package fe.linksheet.activity.main
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.core.net.toUri
 import androidx.test.uiautomator.By
 import assertk.assertThat

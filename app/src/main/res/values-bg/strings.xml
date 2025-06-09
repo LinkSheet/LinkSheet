@@ -546,4 +546,11 @@
     <string name="export_settings__text_success">Изнесено!</string>
     <string name="export_settings__text_failure">Грешка при изнасяне на настройки!</string>
     <string name="settings_remote_config__title_dialog">Включване на отдалечени настройки?</string>
+    <string name="settings_remote_config__text_content">Приложението LinkSheet може автоматично да обновява настройките и документацията като се свързва със сървър за настройки. <annotation url-id="github.linksheet.wiki.privacy.remote-config">Научете повече</annotation>.</string>
+    <string name="generic__button_text_enable">Включване</string>
+    <string name="generic__button_text_disable">Изключване</string>
+    <string name="bottom_sheet__text_launch_illegal">Непозволен опит за стартиране!</string>
+    <string name="bottom_sheet__text_launch_not_allowed">Стартирането е непозволено!</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">Неизвестна грешка при стартиране!</string>
+    <string name="bottom_sheet__text_launch_failure_other">Грешка при стартиране!</string>
 </resources>

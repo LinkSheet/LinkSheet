@@ -128,18 +128,16 @@ jobs:
         OUTPUT_METADATA_JSON: 'app/build/outputs/apk/foss/nightly/output-metadata.json'
       shell: 'bash'
       run: |-
-        json_content=$(cat "$OUTPUT_METADATA_JSON")
-        echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
-        echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
+        echo "VERSION_CODE=$(cat "$OUTPUT_METADATA_JSON" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+        echo "OUTPUT_FILE=$(cat "$OUTPUT_METADATA_JSON" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
     - id: 'step-9'
       name: 'Get output file path'
       env:
         OUTPUT_METADATA_JSON: 'app/build/outputs/apk/pro/nightly/output-metadata.json'
       shell: 'bash'
       run: |-
-        json_content=$(cat "$OUTPUT_METADATA_JSON")
-        echo "VERSION_CODE=$(echo "$json_content" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
-        echo "OUTPUT_FILE=$(echo "$json_content" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
+        echo "VERSION_CODE=$(cat "$OUTPUT_METADATA_JSON" | jq -r '.elements[0].versionCode')" >> "$GITHUB_OUTPUT"
+        echo "OUTPUT_FILE=$(cat "$OUTPUT_METADATA_JSON" | jq -r '.elements[0].outputFile')" >> "$GITHUB_OUTPUT"
     - id: 'step-10'
       uses: 'actions/upload-artifact@v4'
       with:

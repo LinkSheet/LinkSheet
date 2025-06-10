@@ -1,8 +1,8 @@
 #!/usr/bin/env kotlin
 
 @file:Repository("https://repo.maven.apache.org/maven2/")
-@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.4.0")
 @file:Repository("https://bindings.krzeminski.it")
+@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.4.0")
 @file:DependsOn("actions:checkout:v4")
 @file:DependsOn("actions:setup-java:v4")
 @file:DependsOn("actions:cache:v4")
@@ -13,7 +13,6 @@ import io.github.typesafegithub.workflows.actions.actions.Checkout
 import io.github.typesafegithub.workflows.actions.actions.SetupJava
 import io.github.typesafegithub.workflows.actions.actions.UploadArtifact
 import io.github.typesafegithub.workflows.actions.gradle.ActionsSetupGradle
-import io.github.typesafegithub.workflows.domain.JobOutputs
 import io.github.typesafegithub.workflows.domain.RunnerType.UbuntuLatest
 import io.github.typesafegithub.workflows.domain.Shell
 import io.github.typesafegithub.workflows.domain.actions.CustomAction
@@ -71,7 +70,7 @@ val base64ToFile = CustomAction(
 val nightlyReleaseNotes = CustomAction(
     actionOwner = "1fexd",
     actionName = "gh-create-release-notes",
-    actionVersion = "0.0.11",
+    actionVersion = "0.0.13",
     inputs = mapOf(
         "github-token" to expr { secrets.GITHUB_TOKEN },
         "stable-repo" to expr { github.repository },
@@ -93,6 +92,7 @@ val triggerRemoteWorkflow = CustomAction(
     )
 )
 
+val VARIABLE_GITHUB_OUTPUT = Variable("GITHUB_OUTPUT")
 
 fun cmdQuote(name: String): String {
     return """"$name""""
@@ -101,6 +101,14 @@ fun cmdQuote(name: String): String {
 
 fun subshell(cmd: String): String {
     return "$($cmd)"
+}
+
+infix fun String.pipe(to: String): String {
+    return "$this | $to"
+}
+
+infix fun String.redirectAppend(to: String): String {
+    return "$this >> $to"
 }
 
 class Variable(val name: String) {
@@ -117,42 +125,78 @@ class Variable(val name: String) {
 
 var outputMetaDataJsonVar = Variable("OUTPUT_METADATA_JSON")
 
-
 @DslMarker
 annotation class BashDslMarker
 
+@DslMarker
+annotation class ExecDslMarker
+
 @BashDslMarker
 class BashDsl {
-    fun cat(what: String): String {
-        return "cat $what"
-    }
-
-    fun echo(what: String): String {
-        return "echo $what"
-    }
-
-    fun jq(what: String): String {
-        return "jq $what"
-    }
-
-    infix fun String.pipe(to: String): String {
-        return "$this | $to"
-    }
-
     fun exec(cmd: String): String {
         return cmd
     }
 
-    fun exec(exec: ExecDsl.() -> Unit): String {
-        val dsl = ExecDsl().apply(exec)
-        return dsl.exec
+    fun exec(block: ExecDsl.() -> Unit): String {
+        val dsl = ExecDsl().apply(block)
+        return dsl.build()
     }
 }
 
-class ExecDsl(var exec: String = "") {
+enum class Tool(val what: String) {
+    Cat("cat"), Echo("echo"), Jq("jq"), Tee("tee")
+}
+
+private fun tool(tool: Tool, cmd: String, sudo: Boolean = false): String {
+    return buildString {
+        if (sudo) {
+            append("sudo")
+            append(" ")
+        }
+        append(tool.what)
+        append(" ")
+        append(cmd)
+    }
+}
+
+fun cat(what: String, sudo: Boolean = false): String {
+    return tool(Tool.Cat, what, sudo)
+}
+
+fun echo(what: String, sudo: Boolean = false): String {
+    return tool(Tool.Echo, what, sudo)
+}
+
+fun jq(what: String, sudo: Boolean = false): String {
+    return tool(Tool.Jq, what, sudo)
+}
+
+fun tee(what: String, sudo: Boolean = false): String {
+    return tool(Tool.Tee, what, sudo)
+}
+
+fun sudo(what: String): String {
+    return "sudo $what"
+}
+
+@ExecDslMarker
+class ExecDsl(private val lines: MutableList<String> = mutableListOf()) {
+
+    operator fun String.unaryPlus() {
+        lines.add(this)
+    }
 
     operator fun set(variable: Variable, value: String) {
-        exec = "$variable=$value"
+        lines.add("$variable=$value")
+    }
+
+    fun githubOutput(variable: Variable, what: String) {
+        val assignment = "${variable.name}=$what"
+        lines.add("""echo "$assignment" >> ${VARIABLE_GITHUB_OUTPUT()}""")
+    }
+
+    fun build(): String {
+        return lines.joinToString("\n")
     }
 }
 
@@ -193,41 +237,19 @@ fun JobBuilder<*>.createRelease(
 }
 
 fun JobBuilder<*>.parseOutput(baseOutPathExpr: String): BuildResult {
-    val jsonContentVar = Variable("json_content")
-
-    val cmdGetJsonContent = bash {
-        val cmdReadOutputMetaData = cat(outputMetaDataJsonVar())
-        exec {
-            this[jsonContentVar] = subshell(cmdReadOutputMetaData)
-        }
-    }
-
     val outputFileVar = Variable("OUTPUT_FILE")
-
-    val cmdGetVersionCode = bash {
-        val cmdReadVersionCode = echo(jsonContentVar()) pipe jq("-r '.elements[0].versionCode'")
-        exec {
-            this[versionCodeVar] = subshell(cmdReadVersionCode)
-        }
-    }
-
-    val cmdGetOutputFile = bash {
-        val cmdReadOutputFile = echo(jsonContentVar()) pipe jq("-r '.elements[0].outputFile'")
-        exec {
-            this[outputFileVar] = subshell(cmdReadOutputFile)
-        }
-    }
-
-    val githubOutputVar = Variable("GITHUB_OUTPUT")
 
     val outputFilePathStep = run(
         name = "Get output file path",
         shell = Shell.Bash,
-        command = """ 
-                $cmdGetJsonContent
-                echo "$cmdGetVersionCode" >> ${githubOutputVar()}
-                echo "$cmdGetOutputFile" >> ${githubOutputVar()}
-            """.trimIndent(),
+        command = bash {
+            val cmdReadVersionCode = cat(outputMetaDataJsonVar()) pipe jq("-r '.elements[0].versionCode'")
+            val cmdReadOutputFile = cat(outputMetaDataJsonVar()) pipe jq("-r '.elements[0].outputFile'")
+            exec {
+                githubOutput(versionCodeVar, subshell(cmdReadVersionCode))
+                githubOutput(outputFileVar, subshell(cmdReadOutputFile))
+            }
+        },
         env = mapOf(
             "OUTPUT_METADATA_JSON" to "$baseOutPathExpr/output-metadata.json"
         )
@@ -267,7 +289,6 @@ fun JobBuilder<*>.buildFlavor(keyStoreFilePath: String): Pair<BuildResult, Build
             "API_HOST" to expr(API_HOST)
         )
     )
-
 
     val foss = parseOutput(fossBaseOutPathExpr)
     val pro = parseOutput(proBaseOutPathExpr)
@@ -318,9 +339,14 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
         run(
             name = "Enable KVM",
             shell = Shell.Bash,
-            command = """echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-sudo udevadm control --reload-rules
-sudo udevadm trigger --name-match=kvm"""
+            command =  bash {
+                val echoKvm = echo("""'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"'""")
+                exec {
+                    +(echoKvm pipe tee("/etc/udev/rules.d/99-kvm4all.rules", sudo = true))
+                    +sudo("udevadm control --reload-rules")
+                    +sudo("udevadm trigger --name-match=kvm")
+                }
+            }
         )
 
         setupAndroid()
@@ -367,7 +393,7 @@ sudo udevadm trigger --name-match=kvm"""
             action = UploadArtifact(
                 name = "linksheet-nightly",
                 path = listOf(
-                    fossBaseOutPathExpr + "/" + expr(foss.apkName),
+                    """$fossBaseOutPathExpr/${expr(foss.apkName)}""",
                     "app/build/outputs/mapping/${expr(BUILD_FLAVOR_TYPE)}/*.txt"
                 )
             )
@@ -378,14 +404,14 @@ sudo udevadm trigger --name-match=kvm"""
             val releaseNote = nightlyReleaseNotesStep.outputs["releaseNote"]
 
             createRelease(
-                fossBaseOutPathExpr + "/" + expr(foss.apkName),
+                """$fossBaseOutPathExpr/${expr(foss.apkName)}""",
                 expr(foss.versionCode),
                 NIGHTLY_REPO_ACCESS_TOKEN,
                 NIGHTLY_REPO_URL,
                 releaseNote
             )
             createRelease(
-                proBaseOutPathExpr + "/" + expr(pro.apkName),
+                """$proBaseOutPathExpr/${expr(pro.apkName)}""",
                 expr(pro.versionCode),
                 NIGHTLY_PRO_REPO_ACCESS_TOKEN,
                 NIGHTLY_PRO_REPO_URL,
@@ -400,6 +426,7 @@ val env = mapOf(
     "BUILD_TYPE" to "nightly",
     "BUILD_FLAVOR_TYPE" to "fossNightly"
 )
+val baseFilePath = __FILE__.toPath().fileName?.toString()?.substringBeforeLast(".main.kts")
 workflow(
     name = "Build nightly APK",
     env = env,
@@ -412,9 +439,7 @@ workflow(
     ),
     consistencyCheckJobConfig = ConsistencyCheckJobConfig.Disabled,
     sourceFile = __FILE__,
-    targetFileName = __FILE__.toPath().fileName?.let {
-        it.toString().substringBeforeLast(".main.kts") + ".yml"
-    },
+    targetFileName = "$baseFilePath.yml",
     block = { setupWorkflow(true) }
 )
 
@@ -424,8 +449,6 @@ workflow(
     on = listOf(WorkflowDispatch()),
     consistencyCheckJobConfig = ConsistencyCheckJobConfig.Disabled,
     sourceFile = __FILE__,
-    targetFileName = __FILE__.toPath().fileName?.let {
-        it.toString().substringBeforeLast(".main.kts") + "-nopublish.yml"
-    },
+    targetFileName = "$baseFilePath-nopublish.yml",
     block = { setupWorkflow(false) }
 )

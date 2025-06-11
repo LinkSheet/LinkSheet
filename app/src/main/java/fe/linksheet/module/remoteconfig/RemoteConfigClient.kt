@@ -11,6 +11,7 @@ import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.util.LinkAssets
 import fe.linksheet.util.maybePrependProtocol
+import fe.std.result.IResult
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
 import io.ktor.client.*
@@ -55,13 +56,13 @@ class RemoteConfigClient(
     private val userAgent: String,
     private val client: HttpClient,
 ) {
-    suspend fun fetchLinkAssets(): LinkAssets {
+    suspend fun fetchLinkAssets(): IResult<LinkAssets> {
         val response = client.get(urlString = apiHost) {
             url { path("assets") }
             headers { append(HttpHeaders.UserAgent, userAgent) }
         }
 
-        return response.body<LinkAssets>()
+        return tryCatch { response.body<LinkAssets>() }
     }
 }
 
@@ -73,7 +74,7 @@ class RemoteAssetFetcherWorker(
     private val repository by inject<RemoteConfigRepository>()
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
-        val result = tryCatch { client.fetchLinkAssets() }
+        val result = client.fetchLinkAssets()
         when {
             result.isFailure() -> Result.failure()
             else -> {

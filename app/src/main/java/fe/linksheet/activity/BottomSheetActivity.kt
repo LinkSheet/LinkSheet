@@ -23,7 +23,6 @@ import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
 import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheet
 import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
 import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
-import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorSheetContent
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.util.debugBorder

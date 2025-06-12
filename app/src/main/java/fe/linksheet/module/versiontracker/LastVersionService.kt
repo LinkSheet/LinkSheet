@@ -73,3 +73,8 @@ class LastVersionService(
         return lastVersionCodes ?: emptySet()
     }
 }
+
+//data class LastVersion(
+//    @SerializedName("v") val versionCode: Int,
+//    @SerializedName("f") val flavor: String,
+//)

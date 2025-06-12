@@ -148,6 +148,7 @@ object AppPreferences : PreferenceDefinition(
 
     // TODO: This should be moved to a proper implementation which uses a string set or something similar, but we don't have an API for that (yet)
     val lastVersions = string("last_versions_v0")
+//    val lastVersionsV1 = jsonMapped<LastVersion?>("last_versions", null)
 
     val homeClipboardCard = boolean("home_clipboard_card", true)
     val remoteConfig = boolean("remote_config", false)

@@ -3,14 +3,11 @@ package fe.linksheet.util.intent
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import fe.linksheet.BuildConfig
 
 object Intents {
+    @Deprecated("Moved", replaceWith = ReplaceWith("StandardIntents.createSelfIntent(uri, extras)", "fe.linksheet.util.intent.StandardIntents"))
     fun createSelfIntent(uri: Uri?, extras: Bundle? = null): Intent {
-        return buildIntent(Intent.ACTION_VIEW, uri) {
-            `package` = BuildConfig.APPLICATION_ID
-            extras?.let { putExtras(it) }
-        }
+        return StandardIntents.createSelfIntent(uri, extras)
     }
 
     fun cloneIntent(intent: Intent, action: String, uri: Uri?, dropExtras: Boolean = false): Intent {

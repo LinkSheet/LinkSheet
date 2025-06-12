@@ -553,4 +553,9 @@
     <string name="bottom_sheet__text_launch_not_allowed">Стартирането е непозволено!</string>
     <string name="bottom_sheet__text_launch_failure_unknown">Неизвестна грешка при стартиране!</string>
     <string name="bottom_sheet__text_launch_failure_other">Грешка при стартиране!</string>
+    <string name="generic__button_text_settings">Настройки</string>
+    <string name="settings_verified_link_handler__title_details">Подробности</string>
+    <string name="settings_verified_link_handler__text_hosts">Хост</string>
+    <string name="settings__title_sql">Заявка на SQL</string>
+    <string name="settings_sql__text_query">Заявка</string>
 </resources>

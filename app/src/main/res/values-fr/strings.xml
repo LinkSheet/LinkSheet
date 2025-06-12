@@ -558,4 +558,9 @@
     <string name="settings_language__text_system_language">Langue du système</string>
     <string name="bottom_sheet__text_launch_illegal">Tentative de lancement illégale !</string>
     <string name="bottom_sheet__text_launch_not_allowed">Lancement non autorisé !</string>
+    <string name="settings_verified_link_handler__text_hosts">Hôtes</string>
+    <string name="settings_verified_link_handler__title_details">Détails</string>
+    <string name="settings_sql__text_query">Requête</string>
+    <string name="generic__button_text_settings">Paramètres</string>
+    <string name="settings__title_sql">Requête SQL</string>
 </resources>

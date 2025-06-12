@@ -62,7 +62,6 @@ class BottomSheetViewModel(
     val intentResolver: IntentResolver,
     val imageLoader: ImageLoader,
     val intentLauncher: IntentLauncher,
-    val state: SavedStateHandle,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
     val clipboardManager = context.getSystemServiceOrThrow<ClipboardManager>()

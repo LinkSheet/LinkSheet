@@ -151,13 +151,14 @@ jobs:
           app/build/outputs/apk/foss/nightly/${{ steps.step-8.outputs.OUTPUT_FILE }}
           app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
     - id: 'step-11'
-      uses: '1fexd/gh-create-release-notes@0.0.13'
+      uses: '1fexd/gh-create-release-notes@0.0.14'
       with:
         github-token: '${{ secrets.GITHUB_TOKEN }}'
         stable-repo: '${{ github.repository }}'
         nightly-repo: '${{ vars.NIGHTLY_REPO_URL }}'
         last-commit-sha: '${{ github.event.before }}'
         commit-sha: '${{ github.sha }}'
+        nightly-tag: '${{ github.ref }}'
     - id: 'step-12'
       env:
         APK_FILE: 'app/build/outputs/apk/foss/nightly/${{ steps.step-8.outputs.OUTPUT_FILE }}'

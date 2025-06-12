@@ -24,3 +24,12 @@ inline fun <reified T : Any> PreferenceDefinition.jsonMapped(
     val mapper = JsonTypeMapper<T>(gson)
     return mapped(key, default, mapper)
 }
+
+//inline fun <reified T : Any> PreferenceDefinition.jsonMappedNullable(
+//    key: String,
+//    default: T?,
+//    gson: Gson = Gson()
+//): Preference.Mapped<T, String> {
+//    val mapper = JsonTypeMapper<T>(gson)
+//    return mapped(key, default, mapper)
+//}

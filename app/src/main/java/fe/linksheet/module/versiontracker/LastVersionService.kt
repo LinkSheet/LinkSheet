@@ -17,16 +17,23 @@ class LastVersionService(
     private val buildInfo: BuildInfo,
 ) {
     private fun migrate(array: JsonArray): List<JsonObject> {
-        fun update(it: JsonObject): JsonObject {
-            val code = it.asIntOrNull("version_code")
-            val flavor = it.asStringOrNull("flavor")
+        fun maybeUpdate(it: JsonObject): JsonObject? {
+            if (it.size() == 2 && it.has("v") && it.has("f")) {
+                return it
+            }
+
+            val code = it.asIntOrNull("version_code") ?: return null
+            val flavor = it.asStringOrNull("flavor") ?: return null
             return jsonObject {
                 "v" += code
                 "f" += flavor
             }
         }
 
-        return array.elementsFilterNull<JsonObject>().map { update(it) }
+        return array
+            .elementsFilterNull<JsonObject>()
+            .mapNotNull { maybeUpdate(it) }
+            .filter { it.size() > 0 }
     }
 
     fun handleVersions(lastVersions: String?, migrate: Boolean = false): String? {
@@ -66,3 +73,8 @@ class LastVersionService(
         return lastVersionCodes ?: emptySet()
     }
 }
+
+//data class LastVersion(
+//    @SerializedName("v") val versionCode: Int,
+//    @SerializedName("f") val flavor: String,
+//)

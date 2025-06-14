@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="open_with">開啟方式</string>
-    <string name="just_once">僅此一次</string>
-    <string name="always">始終</string>
-    <string name="open_with_app">使用%s打開</string>
+    <string name="just_once">僅限一次</string>
+    <string name="always">一律採用</string>
+    <string name="open_with_app">透過「%s」開啟</string>
     <string name="use_a_different_app">使用其他應用程式</string>
-    <string name="opening_with_app">正在使用%s打開</string>
+    <string name="opening_with_app">正在透過「%s」開啟</string>
     <string name="default_apps">偏好應用程式</string>
     <string name="set_as_browser">設定為瀏覽器</string>
     <string name="set_as_browser_explainer">點擊此處以將LinkSheet設為預設瀏覽器</string>
@@ -14,31 +14,31 @@
     <string name="no_preferred_apps_set_yet">尚未設定偏好應用程式。</string>
     <string name="search">搜尋</string>
     <string name="copy_url">複製連結</string>
-    <string name="url_copied">網址已複製到剪貼簿</string>
+    <string name="url_copied">已將網址複製到剪貼簿</string>
     <string name="confirm">確認</string>
     <string name="clear">清除</string>
-    <string name="usage_stats_sorting">按使用統計排序應用程式</string>
+    <string name="usage_stats_sorting">依使用頻率排序應用程式</string>
     <string name="browser_mode">偏好瀏覽器</string>
     <string name="browser_mode_subtitle">設定偏好瀏覽器模式</string>
     <string name="always_ask">每次都詢問</string>
     <string name="none">無</string>
     <string name="always_ask_explainer">始終列出所有瀏覽器</string>
-    <string name="no_such_app_found">找不到此應用程式！</string>
+    <string name="no_such_app_found">找不到應用程式！</string>
     <string name="send_to">分享</string>
     <string name="default_apps_subtitle">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
     <string name="always_show_package_name">始終顯示套件名稱</string>
     <string name="always_show_package_name_explainer">始終顯示套件名稱而不僅僅是應用程式名稱。這適用於整個應用程式。</string>
     <string name="remove_all">全部移除</string>
     <string name="add_all">全部新增</string>
-    <string name="hide_after_copying">複製後隱藏</string>
-    <string name="hide_after_copying_explainer">在按下「複製網址」按鈕後隱藏底部工作表</string>
+    <string name="hide_after_copying">採取行動後自動隱藏</string>
+    <string name="hide_after_copying_explainer">當輕觸諸如「複製連結」或「下載」等按鈕後自動隱藏底部功能表</string>
     <string name="back">返回</string>
-    <string name="display_grid_layout">顯示網格佈局</string>
-    <string name="display_grid_layout_explainer">在底部工作表中顯示網格而不是清單</string>
+    <string name="display_grid_layout">格狀版面配置</string>
+    <string name="display_grid_layout_explainer">在底部功能表以格狀檢視而非清單</string>
     <string name="set_as_browser_done">LinkSheet已設定為預設瀏覽器！</string>
     <string name="browser_status">瀏覽器狀態</string>
     <string name="app_browsers">應用程式</string>
-    <string name="bottom_sheet">底部工作表</string>
+    <string name="bottom_sheet">底部功能表</string>
     <string name="settings">設定</string>
     <string name="selected_browser_explainer">如果沒有本機應用程式能夠處理所點擊的連結，將自動開啟此瀏覽器</string>
     <string name="enabled">已啟用</string>
@@ -48,15 +48,15 @@
     <string name="whitelisted_explainer">僅顯示白名單中的瀏覽器</string>
     <string name="save">儲存</string>
     <string name="whitelisted_browsers">白名單瀏覽器</string>
-    <string name="bottom_sheet_explainer">按使用情況排序、啟用複製按鈕、啟用分享按鈕等等</string>
+    <string name="bottom_sheet_explainer">組態與客製化</string>
     <string name="about">關於</string>
-    <string name="about_explainer">關於此應用程式、授權</string>
+    <string name="about_explainer">鳴謝、授權、連結、版本</string>
     <string name="credits">鳴謝</string>
     <string name="credits_explainer">開源授權</string>
     <string name="version">LinkSheet版本</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
-    <string name="github">Github</string>
-    <string name="github_explainer">原始碼存放庫</string>
+    <string name="github">GitHub</string>
+    <string name="github_explainer">原始碼儲存庫</string>
     <string name="donate_crypto">捐贈</string>
     <string name="donate_subtitle">如果你想捐贈並獲取<b>LinkSheet Pro</b></string>
     <string name="open_copied_link">開啟已複製的連結</string>
@@ -75,9 +75,9 @@
     <string name="follow_only_known_trackers">僅跟隨已知追蹤器</string>
     <string name="theme">主題</string>
     <string name="theme_explainer">更改應用程式的主題</string>
-    <string name="system">系統</string>
-    <string name="light">亮色</string>
-    <string name="dark">暗色</string>
+    <string name="system">系統預設</string>
+    <string name="light">淺色</string>
+    <string name="dark">深色</string>
     <string name="fastfoward_rules">使用 FastForward 規則</string>
     <string name="fastfoward_rules_explainer">使用實驗性的 <annotation url-id="fastforward-github">FastForward</annotation> 規則整合（通過從連結中提取重新導向來繞過某些主機的重新導向）</string>
     <string name="follow_redirects_local_cache">啟用本地重新導向快取</string>
@@ -108,7 +108,7 @@
     <string name="app_name">LinkSheet</string>
     <string name="in_app_browser">應用程式內瀏覽器</string>
     <string name="in_app_browser_subtitle">設定應用程式內瀏覽器模式</string>
-    <string name="use_app_settings">使用應用程式設定</string>
+    <string name="use_app_settings">預設</string>
     <string name="use_app_settings_explainer">讓應用程式決定是否使用應用程式內瀏覽器</string>
     <string name="always_disable">始終停用</string>
     <string name="always_disable_explainer">始終停用應用程式內瀏覽器，不論應用程式想要使用何種模式</string>
@@ -122,6 +122,7 @@
     <string name="enable_ignore_libredirect_button_explainer">如果連結經由 LibRedirect 重新導向，將在底部表單中顯示一個按鈕，可打開原始連結</string>
     <string name="ignore_libredirect">忽略 LibRedirect</string>
     <string name="follow_only_known_trackers_explainer">僅在知道主機是追蹤器/重定向時才嘗試遵循重定向。 如果啟用“透過外部服務追蹤重定向”，則該功能將始終啟用</string>
-    <string name="usage_stats_sorting_explainer">在排序演算法中包含 Android 系統使用統計資料。 第一次切換時需要請求權限。</string>
+    <string name="usage_stats_sorting_explainer">在排序演算法中納入 Android 系統的應用程式使用資料，首次啟用時需授予權限。</string>
     <string name="none_explainer">僅列出本地應用程序，刪除所有瀏覽器。 如果僅存在一個本地應用程序，將會自動開啟。 如果不存在本地應用程序，則會列出所有瀏覽器。</string>
+    <string name="urlbar_settings">網址列</string>
 </resources>

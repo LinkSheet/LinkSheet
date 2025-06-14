@@ -101,7 +101,6 @@
     <string name="enable_downloader">İndiriciyi etkinleştir</string>
     <string name="downloader_url_mime_type">URL\'den mime türünü kullan</string>
     <string name="random_instance">Rastgele oluşum</string>
-    <string name="app_name">LinkSheet</string>
     <string name="always_disable_explainer">Uygulama içi tarayıcıyı bütün uygulamalar için devre dışı bırak</string>
     <string name="disable_in_selected_explainer">Uygulama içi tarayıcıyı seçilen uygulamalarda devre dışı bırak</string>
     <string name="use_unified_preferred_browser">Birleştirilmiş ayarları kullan</string>

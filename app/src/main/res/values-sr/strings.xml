@@ -211,7 +211,6 @@
     <string name="no_logs_found">Нису пронађене прошле евиденције!</string>
     <string name="downloader_url_mime_type">Користите тип пантомиме из URL адресе</string>
     <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url-id="libredirect-github">LibRedirect</annotation> интеграцију</string>
-    <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
     <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
     <string name="system">Прати систем</string>

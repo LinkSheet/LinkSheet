@@ -110,7 +110,6 @@
     <string name="enable_downloader">Aktifkan pengunduh</string>
     <string name="downloader_url_mime_type">Gunakan jenis mime dari URL</string>
     <string name="random_instance">Instansi acak</string>
-    <string name="app_name">LinkSheet</string>
     <string name="download_started">Unduhan dimulai</string>
     <string name="url_copied_toast">URL disalin</string>
     <string name="notifications_explainer">URL disalin, Unduhan dimulai</string>

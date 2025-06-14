@@ -125,7 +125,6 @@
     <string name="preview_url">Преглед на адреса</string>
     <string name="preview_url_explainer">Показва посещаваната препратка (след обработката)</string>
     <string name="linksheet_download">Изтегляне на LinkSheet</string>
-    <string name="app_name">LinkSheet</string>
     <string name="random_instance">Произволен екземпляр</string>
     <string name="always_disable">Винаги изключено</string>
     <string name="use_app_settings">Подразбирани</string>

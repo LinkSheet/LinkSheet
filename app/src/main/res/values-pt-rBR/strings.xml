@@ -108,7 +108,6 @@
     <string name="enable_downloader">Ativar baixador</string>
     <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
     <string name="random_instance">Instância aleatória</string>
-    <string name="app_name">LinkSheet</string>
     <string name="in_app_browser">Navegador incorporado</string>
     <string name="in_app_browser_subtitle">Alterar configurações do navegador incorporado</string>
     <string name="use_app_settings">Padrão</string>

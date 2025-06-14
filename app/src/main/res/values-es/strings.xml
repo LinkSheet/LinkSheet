@@ -196,7 +196,6 @@
     <string name="no_logs_found">¡No se han encontrado registros pasados!</string>
     <string name="downloader_url_mime_type">Usar el tipo mime desde el enlace</string>
     <string name="enable_libredirect_explainer">Redirigir enlaces a frontends amigables para la privacidad utilizando la integración experimental <annotation url-id="libredirect-github">LibRedirect</annotation></string>
-    <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
     <string name="system">Seguir el sistema</string>

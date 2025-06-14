@@ -247,7 +247,6 @@
     <string name="github">Github</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="app_name">LinkSheet</string>
     <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url-id="fastforward-github">FastForward </annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="mastodon_redirect">MastodonRedirect</string>

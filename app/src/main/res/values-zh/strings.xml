@@ -212,7 +212,6 @@
     <string name="export_settings">导出设置</string>
     <string name="no_logs_found">未找到过去的日志！</string>
     <string name="export_explainer">将当前应用设置导出到文件</string>
-    <string name="app_name">LinkSheet</string>
     <string name="at_least_one_known_browser_installed">至少已安装一个浏览器</string>
     <string name="shizuku_integration_no_permission_explainer">点击此处请求 Shizuku 权限。</string>
     <string name="no_log_entries">这个会话不具有任何日志。</string>

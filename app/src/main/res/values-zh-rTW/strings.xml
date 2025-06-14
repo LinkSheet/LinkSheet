@@ -105,7 +105,6 @@
     <string name="downloader_url_mime_type">使用 URL 的 MIME 類型</string>
     <string name="downloader_url_mime_type_explainer">檢查 URL 是否以檔案副檔名結尾（例如「.jpg」）；如果是，則將此類型用於下載的檔案。</string>
     <string name="random_instance">隨機實例</string>
-    <string name="app_name">LinkSheet</string>
     <string name="in_app_browser">應用程式內瀏覽器</string>
     <string name="in_app_browser_subtitle">設定應用程式內瀏覽器模式</string>
     <string name="use_app_settings">使用應用程式設定</string>

@@ -136,7 +136,6 @@
     <string name="links">Links</string>
     <string name="links_explainer">ClearUrls, LibRedirect, omleidingen volgen</string>
     <string name="enable_downloader">Downloaden inschakelen</string>
-    <string name="app_name">LinkSheet</string>
     <string name="use_clear_urls">ClearURLs gebruiken</string>
     <string name="downloader_url_mime_type">Mime-type van URL gebruiken</string>
     <string name="dont_show_filtered_item">Sectie \"laatst gekozen app\" niet tonen</string>

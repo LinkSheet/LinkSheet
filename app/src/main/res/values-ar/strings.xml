@@ -96,7 +96,6 @@
     <string name="dont_show_filtered_item">عدم إظهار مطلقا قسم \"آخر تطبيق تم اختياره\"</string>
     <string name="dont_show_filtered_item_explainer">عدم إظهار القسم العلوي الذي يقترح التطبيق الأخير المستخدم للمضيف الذي تم النقر عليه</string>
     <string name="preview_url">معاينة عنوان الرابط</string>
-    <string name="app_name">ورقة الروابط</string>
     <string name="preview_url_explainer">إظهار عنوان الرابط الذي تم النقر عليه (بعد معالجته)</string>
     <string name="download">تحميل</string>
     <string name="linksheet_download">تنزيل ورقة الرابط</string>

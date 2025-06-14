@@ -164,7 +164,6 @@
     <string name="no_logs_found">Прошлые логи не найдены!</string>
     <string name="downloader_url_mime_type">Использовать тип mime из URL</string>
     <string name="enable_libredirect_explainer">Перенаправление ссылки на интерфейсы, обеспечивающие конфиденциальность, с помощью экспериментальной интеграции <annotation url-id="libredirect-github">LibRedirect</annotation></string>
-    <string name="app_name">LinkSheet</string>
     <string name="shizuku_integration_no_permission_explainer">Нажмите здесь, чтобы запросить разрешение Shizuku</string>
     <string name="system">Системная</string>
     <string name="no_log_entries">Эта сессия не содержит логов.</string>

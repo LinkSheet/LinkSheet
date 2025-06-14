@@ -87,7 +87,6 @@
     <string name="debug_explainer">Anwendungsprotokolle anzeigen</string>
     <string name="in_app">In-App</string>
     <string name="downloader_url_mime_type">Mime-Typ aus URL verwenden</string>
-    <string name="app_name">LinkSheet</string>
     <string name="no_log_entries">Diese Sitzung enthält keine Protokolle.</string>
     <string name="hide_after_copying_explainer">Unteres Blatt automatisch ausblenden, wenn eine Aktionsschaltfläche wie „Link kopieren“ oder „Herunterladen“ angetippt wird</string>
     <string name="import_dumped_preference">Gespeicherte Einstellungen importieren</string>

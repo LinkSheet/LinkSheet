@@ -77,7 +77,6 @@
     <string name="whitelisted_explainer">Csak az engedélyezőlistán szereplő böngészők megjelenítése</string>
     <string name="enable_ignore_libredirect_button">\"LibRedirect figyelmen kívül hagyása\" gomb engedélyezése</string>
     <string name="random_instance">Véletlenszerű példány</string>
-    <string name="app_name">LinkSheet</string>
     <string name="in_app_browser_subtitle">Alkalmazáson belüli böngésző beállításai</string>
     <string name="use_app_settings">Alapértelmezett</string>
     <string name="use_app_settings_explainer">Az alkalmazások döntik el, hogy az alkalmazáson belüli böngészőt kell-e használni</string>

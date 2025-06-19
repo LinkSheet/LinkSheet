@@ -560,4 +560,9 @@
     <string name="bottom_sheet__text_launch_not_allowed">Лансирање није дозвољено!</string>
     <string name="bottom_sheet__text_launch_failure_unknown">Непознати неуспех при лансирању!</string>
     <string name="bottom_sheet__text_launch_failure_other">Лансирање није успело!</string>
+    <string name="settings_verified_link_handler__text_hosts">Хостови</string>
+    <string name="settings_verified_link_handler__title_details">Детаљи</string>
+    <string name="generic__button_text_settings">Подешавања</string>
+    <string name="settings__title_sql">Sql упит</string>
+    <string name="settings_sql__text_query">Упит</string>
 </resources>

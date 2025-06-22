@@ -230,7 +230,7 @@
     <string name="theme_enable_amoled_explainer">在深色主題中採用純黑背景</string>
     <string name="onboarding_3_card_title">連結處理常式</string>
     <string name="build_info">建構資訊</string>
-    <string name="hide_bottom_sheet_choice_buttons">隱藏選擇按鈕</string>
+    <string name="hide_bottom_sheet_choice_buttons">隱藏預設值按鈕</string>
     <string name="clear_urls_version">ClearURLs 規則</string>
     <string name="settings_shortcuts__title_connected_apps">已連結的應用程式</string>
     <string name="settings_shortcuts__title_link_handlers">連結處理常式</string>
@@ -271,4 +271,37 @@
     <string name="settings_language__text_system_language">系統語言</string>
     <string name="request_private_browsing">隱私瀏覽</string>
     <string name="enable_amp2html_explainer">將 AMP 網頁重新導向至其一般版本。這可能引發<annotation url-id="privacy-amp2html">隱私顧慮</annotation></string>
+    <string name="version_name"><b>版本：</b> <font face="monospace">%s</font></string>
+    <string name="built_at"><b>建構於：</b> <font face="monospace">%s</font></string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">行為變動</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">部分實驗功能選項已功成身退並轉為預設行為。</string>
+    <string name="logs">記錄檔</string>
+    <string name="log_viewer">記錄檔檢視器</string>
+    <string name="current_session">目前工作階段</string>
+    <string name="no_log_entries">此工作階段未包含任何記錄檔。</string>
+    <string name="log_files">先前工作階段</string>
+    <string name="no_browsers_found">沒有瀏覽器。</string>
+    <string name="log_privacy">如欲瞭解與記錄檔相關的隱私權資訊，請參見<annotation url-id="privacy-logs">隱私權政策</annotation>。</string>
+    <string name="github_workflow_run_id"><b>工作流程識別碼：</b> <font face="monospace">%s</font></string>
+    <string name="crash_viewer__subtitle_app_crashed">糟糕，這不該發生的！</string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">記錄檔擷取於：%s</string>
+    <string name="shizuku_integration">Shizuku 整合</string>
+    <string name="log">記錄檔</string>
+    <string name="onboarding_2_install_shizuku">安裝 Shizuku</string>
+    <string name="tap_customization_dialog_text">選擇欲執行的動作</string>
+    <string name="thanks_for_donating">感謝您的支持！</string>
+    <string name="no_apps_found">沒有應用程式。</string>
+    <string name="debug_explainer">記錄檔、重設已驗證的處理常式</string>
+    <string name="no_logs_found">尚無先前的記錄檔！</string>
+    <string name="shizuku">Shizuku 整合</string>
+    <string name="shizuku_explainer_short">與系統 API 直接互動</string>
+    <string name="flavor"><b>變種：</b> <font face="monospace">%s</font></string>
+    <string name="onboarding_0_title">歡迎使用\nLinkSheet</string>
+    <string name="export_log_dialog__title_share_logs">分享記錄檔</string>
+    <string name="disable_all">全部停用</string>
+    <string name="logs_explainer">檢視記錄檔</string>
+    <string name="enable_all">全部啟用</string>
+    <string name="settings_main_news__button_read_more">閱讀更多</string>
+    <string name="export_log">匯出記錄檔</string>
+    <string name="import_and_override">匯入並覆寫</string>
 </resources>

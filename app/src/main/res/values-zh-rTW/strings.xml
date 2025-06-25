@@ -239,7 +239,7 @@
     <string name="resolve_event__applying_link_modifiers">正在套用連結修飾符</string>
     <string name="resolve_event__generating_preview">正在產生預覽畫面</string>
     <string name="resolve_embeds_explainer">將諸如 fxtwitter.com 這類的鏡像嵌入連結解析至原始主機</string>
-    <string name="last_updated"><b>版本：</b> <font face="monospace">%s</font></string>
+    <string name="last_updated"><b>版本：</b><font face="monospace">%s</font></string>
     <string name="resolve_embeds">解析嵌入用連結</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">尚未將 LinkSheet 設為預設的瀏覽器應用程式</string>
     <string name="settings_main_setup_success__button_change_browser">預設瀏覽器</string>
@@ -271,9 +271,9 @@
     <string name="settings_language__text_system_language">系統語言</string>
     <string name="request_private_browsing">隱私瀏覽</string>
     <string name="enable_amp2html_explainer">將 AMP 網頁重新導向至其一般版本。這可能引發<annotation url-id="privacy-amp2html">隱私顧慮</annotation></string>
-    <string name="version_name"><b>版本：</b> <font face="monospace">%s</font></string>
-    <string name="built_at"><b>建構於：</b> <font face="monospace">%s</font></string>
-    <string name="settings_main_experiment_news__title_experiment_state_updated">行為變動</string>
+    <string name="version_name"><b>版本：</b><font face="monospace">%s</font></string>
+    <string name="built_at"><b>建構於：</b><font face="monospace">%s</font></string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">行為變更</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">部分實驗功能選項已功成身退並轉為預設行為。</string>
     <string name="logs">記錄檔</string>
     <string name="log_viewer">記錄檔檢視器</string>
@@ -282,7 +282,7 @@
     <string name="log_files">先前工作階段</string>
     <string name="no_browsers_found">沒有瀏覽器。</string>
     <string name="log_privacy">如欲瞭解與記錄檔相關的隱私權資訊，請參見<annotation url-id="privacy-logs">隱私權政策</annotation>。</string>
-    <string name="github_workflow_run_id"><b>工作流程識別碼：</b> <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>工作流程識別碼：</b><font face="monospace">%s</font></string>
     <string name="crash_viewer__subtitle_app_crashed">糟糕，這不該發生的！</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">記錄檔擷取於：%s</string>
     <string name="shizuku_integration">Shizuku 整合</string>
@@ -295,7 +295,7 @@
     <string name="no_logs_found">尚無先前的記錄檔！</string>
     <string name="shizuku">Shizuku 整合</string>
     <string name="shizuku_explainer_short">與系統 API 直接互動</string>
-    <string name="flavor"><b>變種：</b> <font face="monospace">%s</font></string>
+    <string name="flavor"><b>變種：</b><font face="monospace">%s</font></string>
     <string name="onboarding_0_title">歡迎使用\nLinkSheet</string>
     <string name="export_log_dialog__title_share_logs">分享記錄檔</string>
     <string name="disable_all">全部停用</string>
@@ -304,4 +304,19 @@
     <string name="settings_main_news__button_read_more">閱讀更多</string>
     <string name="export_log">匯出記錄檔</string>
     <string name="import_and_override">匯入並覆寫</string>
+    <string name="opening_with_app_toast">已自動啟動應用程式</string>
+    <string name="open_link_with_subtitle_2">LinkSheet 最初是基於 OpenLinkWith 改造而成</string>
+    <string name="settings_links_follow_redirects__text_skip_browser">當觸發 LinkSheet 的應用程式為瀏覽器時，不要嘗試跟進重新導向</string>
+    <string name="settings_links_follow_redirects__title_skip_browser">略過來自瀏覽器的連結</string>
+    <string name="delete_log_dialog__subtitle_delete_info">確定要刪除此工作階段記錄檔嗎？此操作無法復原！</string>
+    <string name="mastodon_redirect_subtitle_2">Mastodon Redirect 的原始碼曾是實踐本應用程式與 Shizuku 互動的參考依據</string>
+    <string name="resolve_via_failed_toast">解析失敗</string>
+    <string name="resolve_via_toast">解析成功</string>
+    <string name="delete_log_dialog__title_delete_log">刪除工作階段？</string>
+    <string name="notifications_explainer">已複製網址、已開始下載</string>
+    <string name="generic__button_open_external">在外部開啟</string>
+    <string name="bottom_sheet__text_launch_illegal">啟動企圖無效！</string>
+    <string name="bottom_sheet__text_launch_failure_other">啟動失敗！</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">啟動時發生未知錯誤！</string>
+    <string name="bottom_sheet__text_launch_not_allowed">啟動遭拒！</string>
 </resources>

@@ -305,9 +305,9 @@
         <item quantity="zero">%d مضيف مفعل</item>
         <item quantity="one">%d مضيفين مفعل</item>
         <item quantity="two">%d مضيفين مفعلين</item>
-        <item quantity="few"></item>
+        <item quantity="few"/>
         <item quantity="many">%d مضيفين مفعلون</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="generic__button_text_done">تم</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">تغييرات في السلوك</string>
@@ -417,9 +417,9 @@
         <item quantity="zero">%d معطل</item>
         <item quantity="one">%d معطل</item>
         <item quantity="two">%d معطلين</item>
-        <item quantity="few"></item>
+        <item quantity="few"/>
         <item quantity="many">%d معطلون</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="settings_debug_log_viewer__title_log_captured_at">عرض السجل الذي تم التقاطه في: %s</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
@@ -434,9 +434,9 @@
         <item quantity="zero">%d مضيف: %s</item>
         <item quantity="one">%d مضيف: %s</item>
         <item quantity="two">%d مضيفين: %s</item>
-        <item quantity="few"></item>
+        <item quantity="few"/>
         <item quantity="many">%d مضيف: %s</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="resolve_embeds_explainer">حل المرايا المضمنة مثل fxtwitter.com إلى المضيف الحقيقي</string>
     <string name="settings_profile_switcher__title_profile_switcher">تبديل ملف التعريف</string>
@@ -463,10 +463,10 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
         <item quantity="zero">%d مفعل</item>
         <item quantity="one">%d مفعل</item>
-        <item quantity="two"></item>
-        <item quantity="few"></item>
+        <item quantity="two"/>
+        <item quantity="few"/>
         <item quantity="many">%d مفعلون</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="onboarding_1_title">تعيين LinkSheet كمتصفح افتراضي</string>
     <string name="onboarding_1_card_title">المتصفح الافتراضي</string>
@@ -474,18 +474,18 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="zero">%d مضيف تم التحقق منه</item>
         <item quantity="one">%d مضيف تم التحقق منه</item>
-        <item quantity="two"></item>
-        <item quantity="few"></item>
+        <item quantity="two"/>
+        <item quantity="few"/>
         <item quantity="many">%d مضيفين تم التحقق منهم</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
         <item quantity="zero">%d مضيف معطل</item>
         <item quantity="one">%d مضيف معطل</item>
         <item quantity="two">%d مضيفين معطلان</item>
-        <item quantity="few"></item>
+        <item quantity="few"/>
         <item quantity="many">%d مضيفا معطلا</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="bottom_sheet__button_manual_redirect">تتبع عمليات إعادة التوجيه</string>
     <string name="telemetry_dialog_text">اختر نوع مقاييس الاستخدام الذي ترتاح له أكثر.</string>
@@ -523,10 +523,10 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
         <item quantity="zero">%d تم التحقق منه</item>
         <item quantity="one">%d تم التحقق منه</item>
-        <item quantity="two"></item>
-        <item quantity="few"></item>
+        <item quantity="two"/>
+        <item quantity="few"/>
         <item quantity="many">%d تم التحقق منهم</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="settings__title_filter_apps">تصفية التطبيقات</string>
     <string name="telemetry_configure_type">نوع التحليلات</string>
@@ -546,4 +546,44 @@
     <string name="telemetry_level_disabled">مُعطَّل</string>
     <string name="telemetry_level_standard">قياسي</string>
     <string name="telemetry_dialog_title">LinkSheet يحترم خصوصيتك</string>
+    <string name="generic__button_text_share">شارك</string>
+    <string name="settings_home__title_clipboard_card">بطاقة الحافظة</string>
+    <string name="settings_home__text_clipboard_card">اعرض محتوى الحافظة الحالي على الصفحة الرئيسية إذا كان رابطًا</string>
+    <string name="export_settings__text_failure">فشل تصدير الإعدادات!</string>
+    <string name="export_settings__text_success">صُدِّر!</string>
+    <string name="import_settings__text_success">استورد!</string>
+    <string name="import_settings__text_failure">فشل استيراد الإعدادات!</string>
+    <string name="settings_verified_link_handlers__text_browser">متصفح</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="zero">%d مضيف افتراضي</item>
+        <item quantity="one">%d مضيف افتراضي</item>
+        <item quantity="two">مضيفان افتراضيان</item>
+        <item quantity="few">%d مضيف افتراضي</item>
+        <item quantity="many">%d مضيف افتراضي</item>
+        <item quantity="other">%d مضيف افتراضي</item>
+    </plurals>
+    <string name="app_host_dialog__title_hosts">المضيفون الافتراضيون</string>
+    <string name="generic__button_text_save">احفظ</string>
+    <string name="app_host_dialog__text_no_hosts">لم يتم تعيين أي مضيفين ليتم فتحهم افتراضيًا في هذا التطبيق!</string>
+    <string name="generic__button_text_close">أغلق</string>
+    <string name="resolve_event__idle">خامل</string>
+    <string name="generic__button_open_external">افتح خارجيًا</string>
+    <string name="settings_verified_link_handler__text_hosts">المضيفات</string>
+    <string name="settings_verified_link_handler__title_details">التفاصيل</string>
+    <string name="generic__button_text_settings">اﻹعدادات</string>
+    <string name="settings_profile_switcher__title_no_profile">لا يوجد ملف/ات تعريف متاحة</string>
+    <string name="settings_remote_config__title_dialog">تفعيل الإعدادات عن بُعد؟</string>
+    <string name="settings_remote_config__text_content">يمكن لـ LinkSheet تحديث التضبيطات الداخلية ومصادر التوثيق تلقائيًا عن طريق الاتصال بخادم التكوين الخاص به. لمعرفة المزيد، انقر <annotation url-id="github.linksheet.wiki.privacy.remote-config">هنا</annotation>.</string>
+    <string name="generic__button_text_enable">فعِّل</string>
+    <string name="generic__button_text_disable">عطِّل</string>
+    <string name="settings_language__dialog_title">لغة التطبيق</string>
+    <string name="settings_language__text_system_language">لغة النظام</string>
+    <string name="bottom_sheet__text_launch_illegal">محاولة إطلاق غير قانونية!</string>
+    <string name="bottom_sheet__text_launch_not_allowed">الإطلاق غير مسموح به!</string>
+    <string name="bottom_sheet__text_launch_failure_other">فشل الإطلاق!</string>
+    <string name="settings_language__text_system_language_with_language">%s (لغة النظام)</string>
+    <string name="settings_profile_switcher__text_no_profile">هذه الميزة متاحة فقط إذا تم إعداد ملف تعريف (عمل) على جهازك.</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">فشل إطلاق مجهول!</string>
+    <string name="settings__title_sql">استعلام Sql</string>
+    <string name="settings_sql__text_query">استعلام</string>
 </resources>

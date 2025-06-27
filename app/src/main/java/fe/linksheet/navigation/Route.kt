@@ -8,7 +8,7 @@ import fe.android.compose.route.util.*
 import fe.linksheet.util.WikiPage
 import kotlinx.serialization.Serializable
 import fe.composekit.route.Route
-import fe.linksheet.module.app.DomainVerificationAppInfo
+import fe.linksheet.feature.app.DomainVerificationAppInfo
 
 
 const val mainRoute = "main_route"

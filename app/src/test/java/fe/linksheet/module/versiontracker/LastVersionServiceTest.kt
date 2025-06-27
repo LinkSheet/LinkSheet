@@ -6,7 +6,7 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isNull
 import com.google.gson.GsonBuilder
 import fe.gson.typeadapter.ExtendedTypeAdapter
-import fe.linksheet.module.systeminfo.BuildInfo
+import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.testlib.core.BaseUnitTest
 import kotlin.test.Test
 

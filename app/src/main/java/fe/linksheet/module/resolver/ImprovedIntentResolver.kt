@@ -13,8 +13,8 @@ import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.std.toStdUrl
-import fe.linksheet.module.app.PackageService
-import fe.linksheet.module.app.labelSorted
+import fe.linksheet.feature.app.PackageService
+import fe.linksheet.feature.app.labelSorted
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault

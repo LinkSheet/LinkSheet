@@ -2,7 +2,7 @@ package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.activityDescriptor
-import fe.linksheet.extension.android.componentName
+import fe.linksheet.util.extension.android.componentName
 
 class ImprovedBrowserHandler(
     private val autoLaunchSingleBrowserExperiment: () -> Boolean

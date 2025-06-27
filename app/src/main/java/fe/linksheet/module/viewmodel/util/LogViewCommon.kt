@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Parcelable
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
-import fe.linksheet.extension.android.getCurrentLanguageTag
+import fe.linksheet.util.extension.android.getCurrentLanguageTag
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.SensitivePreference
@@ -13,7 +13,7 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.redactor.Redactor
-import fe.linksheet.module.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.util.buildconfig.LinkSheetInfo
 import kotlinx.parcelize.Parcelize
 

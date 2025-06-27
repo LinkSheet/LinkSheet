@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
 
 @Composable

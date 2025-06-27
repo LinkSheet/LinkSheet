@@ -161,7 +161,8 @@ fun NewAboutSettingsRoute(
                     )
 
                     if (LinkSheetInfo.buildInfo.workflowId != null) {
-                        appendBuildInfo(id = R.string.github_workflow_run_id, LinkSheetInfo.buildInfo.workflowId, false)
+                        appendBuildInfo(id = R.string.github_workflow_run_id,
+                            LinkSheetInfo.buildInfo.workflowId!!, false)
                     }
                 },
                 icon = Icons.Outlined.Build.iconPainter,

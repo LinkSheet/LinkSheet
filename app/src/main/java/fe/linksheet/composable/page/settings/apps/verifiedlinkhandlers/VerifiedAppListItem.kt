@@ -30,8 +30,8 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import fe.linksheet.module.app.DomainVerificationAppInfo
-import fe.linksheet.module.app.LinkHandling
+import fe.linksheet.feature.app.DomainVerificationAppInfo
+import fe.linksheet.feature.app.LinkHandling
 
 @Composable
 fun VerifiedAppListItem(

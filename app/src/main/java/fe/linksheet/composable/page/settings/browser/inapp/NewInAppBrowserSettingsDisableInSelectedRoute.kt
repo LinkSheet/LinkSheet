@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
+import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.appbar.SearchTopAppBar
@@ -71,7 +72,7 @@ fun NewInAppBrowserSettingsDisableInSelectedRoute(
                     },
                     otherContent = {
                         AppIconImage(
-                            bitmap = item.loadIcon(context),
+                            icon = BitmapIconPainter.bitmap(item.loadIcon(context)),
                             label = item.label
                         )
                     }

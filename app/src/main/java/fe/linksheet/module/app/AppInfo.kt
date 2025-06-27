@@ -1,55 +1,12 @@
 package fe.linksheet.module.app
 
-import android.content.pm.ComponentInfo
-import android.os.Parcelable
-import androidx.compose.runtime.Stable
-import androidx.compose.ui.graphics.ImageBitmap
-import fe.kotlin.util.applyIf
-import fe.linksheet.extension.android.componentName
+import fe.linksheet.extension.android.toImageBitmap
+import fe.linksheet.feature.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfoStatus
+import fe.linksheet.feature.app.AppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.util.RefactorGlue
-import kotlinx.parcelize.IgnoredOnParcel
-import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
-
-enum class LinkHandling {
-    Browser,
-    Allowed,
-    Disallowed,
-    Unsupported
-}
-
-@Parcelize
-@Stable
-class DomainVerificationAppInfo(
-    packageName: String,
-    label: CharSequence,
-    icon: Lazy<ImageBitmap>? = null,
-    val flags: Int,
-    val linkHandling: LinkHandling,
-    val stateNone: MutableList<String>,
-    val stateSelected: MutableList<String>,
-    val stateVerified: MutableList<String>,
-) : AppInfo(packageName, label.toString(), icon) {
-
-    @IgnoredOnParcel
-    val enabled by lazy {
-        linkHandling == LinkHandling.Allowed && (stateVerified.isNotEmpty() || stateSelected.isNotEmpty())
-    }
-
-    @IgnoredOnParcel
-    val hostSum by lazy {
-        stateNone.size + stateSelected.size + stateVerified.size
-    }
-
-    @IgnoredOnParcel
-    val hostSet by lazy {
-        (stateNone + stateSelected + stateVerified).toSet()
-    }
-}
-
-typealias ActivityAppInfoStatus = Pair<ActivityAppInfo, Boolean>
 
 @RefactorGlue(reason = "Ensure compatibility of (new) PackageService with old UI")
 object ActivityAppInfoSortGlue {
@@ -78,25 +35,6 @@ object ActivityAppInfoGlue {
     }
 }
 
-@Parcelize
-@Stable
-open class ActivityAppInfo(
-    val componentInfo: @RawValue ComponentInfo,
-    label: String,
-    icon: Lazy<ImageBitmap>? = null,
-) : AppInfo(componentInfo.packageName, label, icon) {
-
-    @IgnoredOnParcel
-    val componentName by lazy { componentInfo.componentName }
-
-    @IgnoredOnParcel
-    val flatComponentName by lazy { componentName.flattenToString() }
-
-    companion object {
-        val labelComparator = compareBy<ActivityAppInfo> { it.compareLabel }
-    }
-}
-
 fun ActivityAppInfo.toPreferredApp(host: String, alwaysPreferred: Boolean): PreferredApp {
     return PreferredApp.new(
         host = host,
@@ -104,33 +42,6 @@ fun ActivityAppInfo.toPreferredApp(host: String, alwaysPreferred: Boolean): Pref
         cmp = componentName,
         always = alwaysPreferred
     )
-}
-
-@Parcelize
-@Stable
-open class AppInfo(
-    val packageName: String,
-    val label: String,
-    @IgnoredOnParcel val icon: Lazy<ImageBitmap>? = null,
-) : Parcelable {
-
-    @IgnoredOnParcel
-    val compareLabel = label.lowercase()
-
-    fun matches(query: String): Boolean {
-        return compareLabel.contains(query, ignoreCase = true) || packageName.contains(
-            query,
-            ignoreCase = true
-        )
-    }
-
-    companion object {
-        val labelComparator = compareBy<AppInfo> { it.compareLabel }
-    }
-}
-
-fun <T : AppInfo> List<T>.labelSorted(sorted: Boolean = true): List<T> {
-    return applyIf(sorted) { sortedWith(AppInfo.labelComparator) }
 }
 
 fun AppInfo.toPreferredApp(host: String, alwaysPreferred: Boolean): PreferredApp {

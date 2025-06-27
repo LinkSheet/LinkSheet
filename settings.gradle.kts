@@ -74,10 +74,15 @@ extra.properties["gradle.build.dir"]
 include(":app", ":config")
 includeProject(":test-instrument", "test-lib/instrument")
 includeProject(":test-core", "test-lib/core")
+includeProject(":test-fake", "test-lib/fake")
 includeProject(":scaffold", "lib/scaffold")
 includeProject(":bottom-sheet", "lib/bottom-sheet")
 includeProject(":bottom-sheet-new", "lib/bottom-sheet-new")
 includeProject(":hidden-api", "lib/hidden-api")
+includeProject(":util", "lib/util")
+includeProject(":feature-app", "features/app")
+includeProject(":feature-profile", "features/profile")
+includeProject(":feature-systeminfo", "features/systeminfo")
 
 buildSettings {
     substitutes {

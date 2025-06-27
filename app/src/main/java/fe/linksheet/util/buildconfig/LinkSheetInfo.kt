@@ -1,7 +1,7 @@
 package fe.linksheet.util.buildconfig
 
 import fe.linksheet.BuildConfig
-import fe.linksheet.module.systeminfo.BuildInfo
+import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 

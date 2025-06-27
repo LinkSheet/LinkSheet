@@ -2,12 +2,11 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Activity
 import android.app.Application
-import androidx.lifecycle.viewModelScope
+import fe.linksheet.feature.profile.CrossProfile
+import fe.linksheet.feature.profile.ProfileStatus
+import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.profile.CrossProfile
-import fe.linksheet.module.profile.ProfileStatus
-import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.filterIsInstance

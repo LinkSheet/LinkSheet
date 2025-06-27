@@ -260,12 +260,18 @@ junitPlatform {
 }
 
 dependencies {
+    implementation(project(":feature-profile"))
+    implementation(project(":feature-systeminfo"))
+    implementation(project(":feature-app"))
+
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
+    implementation(project(":util"))
 
     implementation(project(":bottom-sheet"))
     implementation(project(":bottom-sheet-new"))
     implementation(project(":scaffold"))
+    implementation(project(":test-fake"))
 
     testImplementation(project(":test-core"))
     androidTestImplementation(project(":test-instrument"))

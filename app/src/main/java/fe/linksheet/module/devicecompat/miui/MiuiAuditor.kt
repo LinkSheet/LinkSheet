@@ -7,9 +7,9 @@ import android.os.Process
 import androidx.annotation.Keep
 import androidx.core.content.getSystemService
 import dev.rikka.tools.refine.Refine
-import fe.linksheet.module.systeminfo.BuildInfo
-import fe.linksheet.module.systeminfo.SystemInfoService
-import fe.linksheet.module.systeminfo.DeviceInfo
+import fe.linksheet.feature.systeminfo.BuildInfo
+import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.DeviceInfo
 
 class MiuiAuditor(
     val service: SystemInfoService,

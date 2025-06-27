@@ -4,7 +4,6 @@ package fe.linksheet.module.viewmodel
 
 
 import android.app.Application
-import androidx.lifecycle.viewModelScope
 import fe.linksheet.extension.android.launchIO
 import fe.linksheet.module.app.ActivityAppInfoSortGlue
 import fe.linksheet.module.preference.SensitivePreference

@@ -9,7 +9,7 @@ import fe.gson.extension.json.array.elementsFilterNull
 import fe.gson.extension.json.element.arrayOrNull
 import fe.gson.extension.json.`object`.asIntOrNull
 import fe.gson.extension.json.`object`.asStringOrNull
-import fe.linksheet.module.systeminfo.BuildInfo
+import fe.linksheet.feature.systeminfo.BuildInfo
 
 // TODO: Find a better way to do this
 class LastVersionService(

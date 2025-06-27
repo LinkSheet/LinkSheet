@@ -4,14 +4,11 @@ import android.content.Context
 import android.content.pm.ComponentInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.app.PackageService
-import fe.linksheet.module.app.labelSorted
+import fe.linksheet.feature.app.ActivityAppInfo
+import fe.linksheet.feature.app.PackageService
+import fe.linksheet.feature.app.labelSorted
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-
-val ResolveInfo.info: ComponentInfo
-    get() = activityInfo ?: providerInfo ?: serviceInfo
 
 @Deprecated(message = "Use PackageDisplayInfoHelper")
 fun ResolveInfo.toAppInfo(context: Context, browser: Boolean = false): ActivityAppInfo {
@@ -48,5 +45,3 @@ fun Map<String, ResolveInfo>.toDisplayActivityInfos(
 ): List<ActivityAppInfo> {
     return map { (_, it) -> ResolveInfoCompat.toAppInfo(packageManager, it, browser) }.labelSorted(sorted)
 }
-
-fun Iterable<ResolveInfo>.toPackageKeyedMap() = associateBy { it.activityInfo.packageName }

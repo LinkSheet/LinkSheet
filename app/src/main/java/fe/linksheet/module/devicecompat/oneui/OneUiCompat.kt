@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
-import fe.linksheet.module.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.util.AndroidUriHelper
 import fe.linksheet.util.create
 import fe.linksheet.util.intent.buildIntent

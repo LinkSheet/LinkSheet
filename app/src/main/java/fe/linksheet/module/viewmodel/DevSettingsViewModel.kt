@@ -13,7 +13,7 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuHandler
-import fe.linksheet.module.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

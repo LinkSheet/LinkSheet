@@ -22,7 +22,7 @@ import app.linksheet.testing.util.toActivityAppInfo
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 
 object AppListItemRowDefaults {
     val RowHeight = 60.dp

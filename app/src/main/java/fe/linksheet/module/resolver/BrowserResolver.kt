@@ -5,10 +5,10 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import fe.linksheet.extension.android.queryResolveInfosByIntent
-import fe.linksheet.extension.android.toPackageKeyedMap
-import fe.linksheet.module.app.ActivityAppInfo
-import fe.linksheet.module.app.PackageService
-import fe.linksheet.module.app.labelSorted
+import fe.linksheet.util.extension.android.toPackageKeyedMap
+import fe.linksheet.feature.app.ActivityAppInfo
+import fe.linksheet.feature.app.PackageService
+import fe.linksheet.feature.app.labelSorted
 
 @Deprecated(message = "Switch to PackageService")
 class BrowserResolver(

@@ -31,9 +31,10 @@ import fe.composekit.layout.column.group
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.module.profile.CrossProfile
-import fe.linksheet.module.profile.ProfileStatus
-import fe.linksheet.module.profile.UserProfileInfo
+import fe.linksheet.extension.android.toImageBitmap
+import fe.linksheet.feature.profile.CrossProfile
+import fe.linksheet.feature.profile.ProfileStatus
+import fe.linksheet.feature.profile.UserProfileInfo
 import fe.linksheet.module.viewmodel.ProfileSwitchingSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -193,7 +194,7 @@ private fun OtherProfiles(
             padding = padding,
             headlineContent = textContent(textId),
             supportingContent = textContent(R.string.settings_profile_switcher__text_other_profile),
-            icon = bitmap(crossProfile.bitmap),
+            icon = bitmap(crossProfile.drawable.toImageBitmap()),
             onClick = {
                 startOther(crossProfile, activity)
             }

@@ -41,9 +41,9 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
 import fe.linksheet.composable.ui.DialogTitleStyle
-import fe.linksheet.module.app.AppInfo
-import fe.linksheet.module.app.DomainVerificationAppInfo
-import fe.linksheet.module.app.LinkHandling
+import fe.linksheet.feature.app.AppInfo
+import fe.linksheet.feature.app.DomainVerificationAppInfo
+import fe.linksheet.feature.app.LinkHandling
 import kotlinx.parcelize.Parcelize
 
 @Composable

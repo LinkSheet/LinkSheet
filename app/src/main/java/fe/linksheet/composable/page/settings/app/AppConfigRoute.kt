@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -38,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import fe.android.compose.extension.atElevation
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -213,7 +215,7 @@ private fun ReorderableCollectionItemScope.ItemCard2(
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (item is AppItem) {
-                AppIconImage(bitmap = item.icon, label = item.label.toString())
+                AppIconImage(icon = BitmapIconPainter.bitmap(item.icon), label = item.label.toString())
             } else if (item is IconItem) {
                 FilledIconWrapper(item = item, parentContainerColor = cardContainerColor)
             }

@@ -1,8 +1,8 @@
 package fe.linksheet.module.resolver
 
 import android.content.pm.ComponentInfo
-import androidx.compose.ui.graphics.ImageBitmap
-import fe.linksheet.extension.android.componentName
+import fe.android.compose.icon.IconPainter
+import fe.linksheet.util.extension.android.componentName
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.redactor.ProtectedStringBuilder
 import fe.linksheet.module.redactor.Redactable
@@ -18,7 +18,7 @@ data class DisplayActivityInfo(
     val componentInfo: ComponentInfo,
     val label: String,
     val browser: Boolean = false,
-    var icon: Lazy<ImageBitmap>,
+    var icon: IconPainter,
 ) : Redactable<DisplayActivityInfo> {
 
     companion object {

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import fe.linksheet.interconnect.LinkSheetConnector
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.util.AndroidUriHelper
 

@@ -3,11 +3,10 @@ package fe.linksheet.module.network
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import androidx.core.content.getSystemService
 import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
-import fe.linksheet.extension.android.getSystemServiceOrThrow
+import fe.linksheet.util.extension.android.getSystemServiceOrThrow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first

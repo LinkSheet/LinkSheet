@@ -19,7 +19,7 @@ import fe.linksheet.composable.util.mapState
 import fe.linksheet.extension.compose.mapHelper
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 
 @Composable

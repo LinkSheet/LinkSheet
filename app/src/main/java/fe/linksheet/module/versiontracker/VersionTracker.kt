@@ -13,7 +13,7 @@ import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.preferenceRepositoryModule
-import fe.linksheet.module.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.util.buildconfig.Build
 import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier

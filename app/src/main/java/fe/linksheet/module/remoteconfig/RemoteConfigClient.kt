@@ -5,9 +5,9 @@ import androidx.work.*
 import fe.droidkit.koin.getResources
 import fe.linksheet.BuildConfig
 import fe.linksheet.R.string
+import fe.linksheet.feature.systeminfo.BuildInfo
+import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.module.http.HttpModule
-import fe.linksheet.module.systeminfo.BuildInfo
-import fe.linksheet.module.systeminfo.SystemInfoService
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.util.LinkAssets
 import fe.linksheet.util.maybePrependProtocol

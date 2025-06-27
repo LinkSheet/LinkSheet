@@ -30,7 +30,7 @@ import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.KnownBrowser

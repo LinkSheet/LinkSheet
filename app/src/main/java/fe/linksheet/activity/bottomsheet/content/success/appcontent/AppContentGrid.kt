@@ -31,7 +31,7 @@ import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.util.defaultRoundedCornerShape
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.resolver.KnownBrowser
 
 

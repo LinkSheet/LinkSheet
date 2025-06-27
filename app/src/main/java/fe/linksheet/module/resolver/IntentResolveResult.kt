@@ -3,7 +3,7 @@ package fe.linksheet.module.resolver
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.util.intent.parser.UriException
 import me.saket.unfurl.UnfurlResult

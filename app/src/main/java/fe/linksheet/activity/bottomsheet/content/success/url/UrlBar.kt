@@ -41,10 +41,11 @@ import fe.linksheet.activity.TextEditorActivity
 import fe.linksheet.activity.bottomsheet.BottomSheetStateController
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
+import fe.linksheet.extension.android.toImageBitmap
+import fe.linksheet.feature.profile.CrossProfile
+import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.downloader.DownloadCheckResult
-import fe.linksheet.module.profile.CrossProfile
-import fe.linksheet.module.profile.ProfileSwitcher
 import fe.linksheet.module.resolver.ImprovedIntentResolver
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.LibRedirectResult
@@ -248,7 +249,7 @@ fun UrlBar(
                     item {
                         UrlActionButton(
                             text = text(target.switchLabel),
-                            icon = bitmap(target.bitmap),
+                            icon = bitmap(target.drawable.toImageBitmap()),
                             onClick = { switchProfile(target, uri) }
                         )
                     }

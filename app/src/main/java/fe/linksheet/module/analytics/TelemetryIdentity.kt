@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 import fe.android.preference.helper.OptionTypeMapper
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
-import fe.linksheet.extension.android.getCurrentLanguageTag
+import fe.linksheet.util.extension.android.getCurrentLanguageTag
 import fe.linksheet.util.buildconfig.BuildType
 
 @JvmInline

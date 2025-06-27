@@ -5,13 +5,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.TurretPackageInfoFake
 import app.linksheet.testing.fake.YatsePackageInfoFake
-import fake.asDescriptors
+import app.linksheet.testing.fake.asDescriptors
 import app.linksheet.testing.util.flatResolveInfos
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isNotNull
-import fe.linksheet.testlib.core.RobolectricTest
 import fe.linksheet.testlib.core.JunitTest
+import fe.linksheet.testlib.core.RobolectricTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)

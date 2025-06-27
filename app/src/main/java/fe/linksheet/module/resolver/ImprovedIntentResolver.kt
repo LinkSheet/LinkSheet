@@ -19,6 +19,7 @@ import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
@@ -123,7 +124,7 @@ class ImprovedIntentResolver(
 
         logger.debug("Referrer=$referrer")
         val referringPackage = AndroidUriHelper.get(AndroidUriHelper.Type.Package, referrer)
-        val isReferrerBrowser = KnownBrowser.isKnownBrowser(referringPackage) != null
+        val isReferrerBrowser = KnownBrowser.isKnownBrowser(referringPackage?.packageName) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
         if (searchIntentResult != null) {
@@ -270,7 +271,7 @@ class ImprovedIntentResolver(
             packageInfoService = packageInfoService,
             uri = uri
         )
-        val resolveList = packageInfoService.findHandlers(uri, referringPackage)
+        val resolveList = packageInfoService.findHandlers(uri, referringPackage?.packageName)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
@@ -316,7 +317,7 @@ class ImprovedIntentResolver(
             newIntent,
             uri,
             unfurl,
-            referringPackage,
+            referringPackage?.packageName,
             sorted,
             filtered,
             app?.alwaysPreferred,
@@ -442,9 +443,9 @@ class ImprovedIntentResolver(
     ): LibRedirectResult? = withContext(dispatcher) {
         if (!enabled) return@withContext null
 
-        val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.libRedirectIgnore, false)
+        val ignoreLibRedirectExtra = intent.getBooleanExtra(LibRedirectDefault.IgnoreIntentKey, false)
         if (ignoreLibRedirectExtra) {
-            intent.extras?.remove(LibRedirectDefault.libRedirectIgnore)
+            intent.extras?.remove(LibRedirectDefault.IgnoreIntentKey)
         }
 
         if (ignoreLibRedirectExtra && ignoreLibRedirectButton) return@withContext null
@@ -532,7 +533,8 @@ class ImprovedIntentResolver(
                 followRedirectsExternalService,
                 requestTimeout,
                 canAccessInternet,
-                followRedirectsAllowDarknets
+                followRedirectsAllowDarknets,
+                ResolveType.FollowRedirects
             )
         }
     }
@@ -562,6 +564,7 @@ class ImprovedIntentResolver(
                 requestTimeout,
                 canAccessInternet,
                 amp2HtmlAllowDarknets,
+                ResolveType.Amp2Html
             )
         }
     }

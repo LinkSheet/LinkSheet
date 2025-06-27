@@ -27,4 +27,7 @@ val repositoryModule = module {
     singleOf(::ResolvedRedirectRepository)
     singleOf(::Amp2HtmlRepository)
     singleOf(::WikiCacheRepository)
+    single {
+        CacheRepository(get(), get(), get(), get(), get())
+    }
 }

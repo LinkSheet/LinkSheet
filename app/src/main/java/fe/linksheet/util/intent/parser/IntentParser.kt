@@ -135,9 +135,12 @@ private val NoUriFoundFailure = Failure<Uri>(NoUriFoundException)
 
 sealed class UriException : Exception()
 
-
 data object NoUriFoundException : UriException() {
     private fun readResolve(): Any = NoUriFoundException
+}
+
+data object UriParseException : UriException() {
+    private fun readResolve(): Any = UriParseException
 }
 
 data class NoUriFoundRecoverableException(val recoverable: String, val wrappedEx: Throwable? = null) : UriException() {

@@ -3,11 +3,12 @@ package fe.linksheet.module.preference
 import assertk.assertThat
 import assertk.assertions.isCloseTo
 import fe.linksheet.testlib.core.BaseUnitTest
+import fe.linksheet.testlib.core.JunitTest
 import fe.linksheet.util.percent
-import kotlin.test.Test
+
 
 internal class BucketTest : BaseUnitTest {
-    @Test
+    @JunitTest
     fun test() {
         if (System.getenv("CI")?.toBooleanStrictOrNull() == true) {
             // Skip on CI since there is a chance it will fail

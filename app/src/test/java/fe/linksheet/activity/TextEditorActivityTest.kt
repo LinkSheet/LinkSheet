@@ -1,27 +1,15 @@
 package fe.linksheet.activity
 
-import android.app.Activity
 import android.app.Instrumentation
 import android.os.Build
-import android.widget.EditText
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.assertIsEnabled
-import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performClick
-import androidx.test.core.app.launchActivityForResult
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import fe.composekit.core.putEnumExtra
-import fe.linksheet.composable.page.edit.EDITOR_APP_BAR_CANCEL_TEST_TAG
-import fe.linksheet.composable.page.edit.EDITOR_APP_BAR_DONE_TEST_TAG
 import fe.linksheet.testlib.core.ActivityInvoker
 import fe.linksheet.testlib.core.BaseUnitTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -48,7 +36,7 @@ internal class TextEditorActivityTest : BaseUnitTest {
     }
 
     @OptIn(ExperimentalTestApi::class)
-    @Test
+    @JunitTest
     fun testValidEdit() {
 //        runAndroidComposeUiTest(activityLauncher = { launchActivityForResult<TextEditorActivity>(intent) }) { scenario ->
 //            waitForIdle()
@@ -66,7 +54,7 @@ internal class TextEditorActivityTest : BaseUnitTest {
     }
 
     @OptIn(ExperimentalTestApi::class)
-    @Test
+    @JunitTest
     fun testCancel() {
 //        runAndroidComposeUiTest(activityLauncher = { launchActivityForResult<TextEditorActivity>(intent) }) { scenario ->
 //            waitForIdle()

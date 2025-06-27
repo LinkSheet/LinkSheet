@@ -8,7 +8,8 @@ import com.google.gson.GsonBuilder
 import fe.gson.typeadapter.ExtendedTypeAdapter
 import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.testlib.core.BaseUnitTest
-import kotlin.test.Test
+import fe.linksheet.testlib.core.JunitTest
+
 
 internal class LastVersionServiceTest : BaseUnitTest {
 
@@ -30,7 +31,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         private val buildInfoV2 = BuildInfo("2", 2, "2024-10-30 12:00:00", "foss")
     }
 
-    @Test
+    @JunitTest
     fun `empty input`() {
         val service = LastVersionService(gson, buildInfoV1)
         val expected = "[${buildInfoV1Json}]"
@@ -42,7 +43,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun `same version`() {
         val service = LastVersionService(gson, buildInfoV1)
         val input = "[${buildInfoV1Json}]"
@@ -50,7 +51,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         assertThat(service.handleVersions(input)).isNull()
     }
 
-    @Test
+    @JunitTest
     fun `new version`() {
         val service = LastVersionService(gson, buildInfoV2)
         val input = "[${buildInfoV1Json}]"
@@ -59,7 +60,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         assertThat(service.handleVersions(input)).isEqualTo(expected)
     }
 
-    @Test
+    @JunitTest
     fun `migrate to shorter format`() {
         val service = LastVersionService(gson, buildInfoV2)
         val input = "[${buildInfoV1Json}]"

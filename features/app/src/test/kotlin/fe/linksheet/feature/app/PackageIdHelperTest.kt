@@ -7,14 +7,14 @@ import app.linksheet.testing.fake.asDescriptors
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class PackageIdHelperTest : RobolectricTest {
-    @Test
+    @JunitTest
     fun `test activity descriptors`() {
         val result = YatsePackageInfoFake.resolveInfos.asDescriptors()
 

@@ -6,7 +6,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.intArrayOf
@@ -15,7 +15,7 @@ import kotlin.intArrayOf
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class WebUriTextValidatorTest : RobolectricTest {
 
-    @Test
+    @JunitTest
     fun `test web uri text validator`() {
         tableOf("text", "expected")
             .row("https://google.com", true)

@@ -10,7 +10,7 @@ import app.linksheet.testing.util.buildIntentFilter
 import fe.linksheet.feature.app.`package`.DefaultPackageIntentHandler
 import fe.linksheet.feature.app.`package`.PackageIntentHandler
 import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.test.assertFalse
@@ -46,7 +46,7 @@ internal class PackageHandlerIntentFilterTest : RobolectricTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun test() {
         assertFalse(isLinkHandler("https://google.com", IntentFilter()))
 

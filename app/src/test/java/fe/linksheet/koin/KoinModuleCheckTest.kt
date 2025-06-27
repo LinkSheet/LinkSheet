@@ -33,6 +33,7 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.remoteconfig.RemoteConfigRepository
+import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.repository.LibRedirectDefaultRepository
 import fe.linksheet.module.repository.LibRedirectStateRepository
@@ -63,7 +64,7 @@ import io.ktor.client.*
 import io.ktor.client.engine.*
 import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.test.verify.definition
 import org.koin.test.verify.injectedParameters
@@ -89,7 +90,9 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         Duration::class,
         List::class,
         Clock::class,
-        ZoneId::class
+        ZoneId::class,
+        // TODO: Hook up CacheRepository to DI, then remove here
+        CacheRepository::class
     )
 
     private val injections = injectedParameters(
@@ -116,7 +119,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<Amp2HtmlResolveRequest>(
             Request::class,
             CachedRequest::class,
-            OkHttpClient::class
+            OkHttpClient::class,
         ),
         definition<AllRemoteResolveRequest>(Request::class),
         definition<BrowserResolver>(PackageService::class),
@@ -181,7 +184,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<VerifiedLinkHandlerViewModel>(PackageService::class, OneUiCompat::class),
     )
 
-    @Test
+    @JunitTest
     fun test() {
         LinkSheetApp().provideKoinModules().verifyAll(
             extraTypes = extraTypes,

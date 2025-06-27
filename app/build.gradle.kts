@@ -8,14 +8,14 @@ import fe.build.dependencies.LinkSheet
 import fe.build.dependencies.MozillaComponents
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.PluginOption
 import fe.buildlogic.common.extension.addCompilerOptions
 import fe.buildlogic.common.extension.addPluginOptions
 import fe.buildlogic.extension.buildConfig
 import fe.buildlogic.extension.buildStringConfigField
 import fe.buildlogic.extension.getOrSystemEnv
 import fe.buildlogic.extension.readPropertiesOrNull
+import fe.buildlogic.common.CompilerOption
+import fe.buildlogic.common.PluginOption
 import fe.buildlogic.version.AndroidVersionStrategy
 import java.time.Instant
 import java.time.LocalDateTime
@@ -401,13 +401,7 @@ dependencies {
     implementation("app.cash.zipline:zipline-loader-android:_")
 
     implementation("me.saket.unfurl:unfurl:_")
-//    implementation(libs.unfurl.social)
     implementation("com.github.nanihadesuka:LazyColumnScrollbar:_")
-//    "proImplementation"(platform("io.github.jan-tennert.supabase:bom:_"))
-//    "proImplementation"("io.github.jan-tennert.supabase:storage-kt:_")
-//    "proImplementation"("io.github.jan-tennert.supabase:compose-auth-ui:_")
-//    "proImplementation"("io.github.jan-tennert.supabase:gotrue-kt:_")
-//    "proImplementation"(Ktor.client.android)
 
     implementation("org.jsoup:jsoup:_")
 
@@ -415,7 +409,6 @@ dependencies {
     implementation("dev.rikka.shizuku:provider:_")
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
     implementation("dev.rikka.tools.refine:runtime:_")
-//    compileOnly("dev.rikka.hidden:stub:_")
 
     implementation(MozillaComponents.support.utils)
     implementation(MozillaComponents.lib.publicSuffixList)
@@ -446,7 +439,6 @@ dependencies {
 
     testImplementation(CashApp.turbine)
     testImplementation("org.mock-server:mockserver-client-java:_")
-    implementation(platform("org.testcontainers:testcontainers-bom:_"))
     testImplementation("org.testcontainers:mockserver:_")
     testImplementation("org.testcontainers:toxiproxy:_")
 

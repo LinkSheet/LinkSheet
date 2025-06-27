@@ -13,12 +13,12 @@ import fe.std.result.getOrNull
 import fe.std.test.TestFunction
 import fe.std.test.tableTest
 import mozilla.components.support.utils.toSafeIntent
-import org.junit.Test
+import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class IntentParserTest : RobolectricTest {
-    @Test
+    @JunitTest
     fun `test nfc intent correctly handled`() {
         val uri = Uri.parse("https://linksheet.app")
         val intent = Intent(NfcAdapter.ACTION_NDEF_DISCOVERED, uri).toSafeIntent()
@@ -26,7 +26,7 @@ internal class IntentParserTest : RobolectricTest {
         assertSuccess(IntentParser.getUriFromIntent(intent)).isEqualTo(uri)
     }
 
-    @Test
+    @JunitTest
     fun `test view intent parsing`() {
         fun buildTestIntent(url: String, extra: String?): Intent {
             val uri = if (extra == null) Uri.parse(url) else null
@@ -51,13 +51,13 @@ internal class IntentParserTest : RobolectricTest {
             }
     }
 
-    @Test
+    @JunitTest
     fun `test text parsing`() {
         val result = IntentParser.parseText("foo bar google.com hello world").getOrNull()?.toString()
         assertThat(result).isEqualTo("http://google.com")
     }
 
-    @Test
+    @JunitTest
     fun `test send intent parsing`() {
         // TODO
     }

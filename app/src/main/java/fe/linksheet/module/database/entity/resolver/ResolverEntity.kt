@@ -4,5 +4,5 @@ import androidx.room.Ignore
 
 interface ResolverEntity<T> {
     @get:Ignore
-    val url: String
+    val url: String?
 }

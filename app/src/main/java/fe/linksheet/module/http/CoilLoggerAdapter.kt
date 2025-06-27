@@ -1,20 +1,6 @@
 package fe.linksheet.module.http
 
-import android.content.Context
-import coil3.ImageLoader
-import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.util.Logger
-import okhttp3.OkHttpClient
-
-internal fun provideCoilImageLoader(context: Context, okhttp: OkHttpClient, logger: Logger?): ImageLoader {
-    return ImageLoader.Builder(context)
-        .components {
-            add(OkHttpNetworkFetcherFactory(callFactory = okhttp))
-        }
-        .logger(logger)
-        .build()
-}
-
 
 class CoilLoggerAdapter(
     val logger: fe.linksheet.module.log.Logger,

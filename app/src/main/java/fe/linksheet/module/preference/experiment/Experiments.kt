@@ -60,7 +60,9 @@ object Experiments : PreferenceDefinition(
     val expressiveLoadingSheet = boolean(
         key = "experiment_expressive_loading_sheet"
     )
-
+    val linkEngine = boolean(
+        key = "experiment_link_engine"
+    )
     val disableLogging = boolean(
         key = "experiment_disable_log_persistence"
     )
@@ -94,6 +96,11 @@ object Experiments : PreferenceDefinition(
             name = "logging",
             displayName = "Logging",
             experiment("Disable log persistence", disableLogging)
+        ),
+        group(
+            name = "link_engine",
+            displayName = "Link engine",
+            experiment("Use LinkEngine", linkEngine)
         ),
         group(
             name = "new_vlh",

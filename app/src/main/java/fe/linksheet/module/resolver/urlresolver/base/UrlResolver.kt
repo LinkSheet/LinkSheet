@@ -5,9 +5,11 @@ import android.net.Uri
 import android.net.compatHost
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.unwrapOrNull
+import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.redactor.HashProcessor
+import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.util.web.Darknet
@@ -22,6 +24,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
     clazz: KClass<R>,
     private val redirectResolver: ResolveRequest,
     private val resolverRepository: ResolverRepository<T>,
+    private val cacheRepository: CacheRepository,
 ) : KoinComponent {
     private val logger by injectLogger(clazz)
 
@@ -33,6 +36,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         connectTimeout: Int,
         canAccessInternet: Boolean,
         allowDarknets: Boolean,
+        resolveType: ResolveType? = null
     ): Result<ResolveResultType>? {
         if (resolvePredicate?.invoke(uri) == false) {
             return null
@@ -48,10 +52,22 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         }
 
         if (localCache) {
-            val cached = resolverRepository.getForInputUrl(uriString)?.url
-            if (cached != null) {
-                logger.info(cached, HashProcessor.UrlProcessor) { "From local cache: $it" }
-                return ResolveResultType.Resolved.LocalCache(cached).success()
+            if (resolveType != null) {
+                val cacheData = cacheRepository.checkCache(uriString, resolveType)
+                if (cacheData != null) {
+                    val resolved = cacheData.resolved ?: uriString
+
+                    logger.info(resolved, HashProcessor.UrlProcessor) { "From local cache: $it" }
+                    return ResolveResultType.Resolved.LocalCache(resolved).success()
+                }
+            }
+
+            val entry = resolverRepository.getForInputUrl(uriString)
+            if (entry != null) {
+                val cachedUrl = entry.url ?: return null
+
+                logger.info(cachedUrl, HashProcessor.UrlProcessor) { "From local cache: $it" }
+                return ResolveResultType.Resolved.LocalCache(cachedUrl).success()
             }
         }
 
@@ -62,6 +78,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         val resolveResult = resolve(uriString, uriLogContext, externalService, uri.compatHost, darknet, connectTimeout)
 
         if (localCache) {
+            // TODO: Insert skip
             val url = resolveResult.unwrapOrNull<ResolveResultType, ResolveResultType.Resolved>()?.url
             if (url != null) {
                 resolverRepository.insert(uriString, url)

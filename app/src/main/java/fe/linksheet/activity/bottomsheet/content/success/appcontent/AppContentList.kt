@@ -24,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.util.toActivityAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
@@ -38,6 +37,7 @@ import fe.linksheet.module.debug.LocalUiDebug
 import fe.linksheet.module.resolver.KnownBrowser
 import androidx.core.net.toUri
 import app.linksheet.preview.PreviewDebugProvider
+import app.linksheet.testing.fake.toActivityAppInfo
 
 @Composable
 fun AppContentList(

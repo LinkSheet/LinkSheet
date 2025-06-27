@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.linksheet.testing.fake.PackageInfoFakes
+import app.linksheet.testing.fake.toActivityAppInfo
 import app.linksheet.testing.util.PackageInfoFake
-import app.linksheet.testing.util.toActivityAppInfo
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.ui.HkGroteskFontFamily

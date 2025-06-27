@@ -3,7 +3,7 @@ package fe.linksheet.feature.app
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.YatsePackageInfoFake
-import app.linksheet.testing.fake.asDescriptors
+import fake.asDescriptors
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import fe.linksheet.testlib.core.RobolectricTest

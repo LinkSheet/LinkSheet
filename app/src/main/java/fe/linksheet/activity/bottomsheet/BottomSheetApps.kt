@@ -22,6 +22,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import app.linksheet.preview.PreviewContainer
+import app.linksheet.testing.asPreferredApp
+import app.linksheet.testing.fake.PackageInfoFakes
+import app.linksheet.testing.fake.toActivityAppInfo
+import app.linksheet.testing.util.listOfFirstActivityResolveInfo
+import app.linksheet.testing.util.packageName
 import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot

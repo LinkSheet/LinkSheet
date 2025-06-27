@@ -106,17 +106,7 @@ val PackageInfoFake.firstActivityResolveInfo: ResolveInfo?
 
 
 
-//fun PackageInfoFake.asPreferredApp(host: String, alwaysPreferred: Boolean = false): PreferredApp {
-//    val resolveInfo = firstActivityResolveInfo
-//    val componentName = resolveInfo?.activityInfo?.componentName
-//
-//    return PreferredApp(
-//        _packageName = componentName?.packageName,
-//        _component = componentName?.flattenToString(),
-//        host = host,
-//        alwaysPreferred = alwaysPreferred
-//    )
-//}
+
 //
 fun Iterable<PackageInfoFake>.toKeyedMap(): Map<String, ResolveInfo> {
     return associate { it.packageName to it.firstActivityResolveInfo!! }

@@ -2,18 +2,12 @@ package fe.linksheet.composable.component.appinfo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.util.toActivityAppInfo
 import fe.composekit.component.icon.AppIconImage
 import fe.linksheet.composable.component.appinfo.AppInfoIconDefaults.DefaultIconSize
-import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.feature.app.AppInfo
-import fe.linksheet.util.drawBitmap
 
 object AppInfoIconDefaults {
     val DefaultIconSize = 32.dp

@@ -5,7 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.TurretPackageInfoFake
 import app.linksheet.testing.fake.YatsePackageInfoFake
-import app.linksheet.testing.fake.asDescriptors
+import fake.asDescriptors
 import app.linksheet.testing.util.flatResolveInfos
 import assertk.assertThat
 import assertk.assertions.containsExactly

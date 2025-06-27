@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.preview.PreviewContainer
 import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.util.toActivityAppInfo
+import app.linksheet.testing.fake.toActivityAppInfo
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppListItem

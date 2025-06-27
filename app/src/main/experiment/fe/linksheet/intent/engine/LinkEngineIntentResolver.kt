@@ -17,7 +17,7 @@ import fe.linksheet.experiment.engine.fetcher.preview.toUnfurlResult
 import fe.linksheet.experiment.engine.fetcher.toFetchResult
 import fe.linksheet.extension.std.toAndroidUri
 import fe.linksheet.extension.std.toStdUrl
-import fe.linksheet.module.app.PackageService
+import fe.linksheet.feature.app.PackageService
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.LibRedirectDefault

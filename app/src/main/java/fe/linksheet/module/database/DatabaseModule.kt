@@ -42,7 +42,7 @@ val databaseModule = module {
         CachedHtml::class, PreviewCache::class, ResolvedUrl::class, ResolveType::class, UrlEntry::class ,
         WikiCache::class
     ],
-    version = 18,
+    version = 19,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),

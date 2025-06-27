@@ -1,7 +1,7 @@
 package fe.linksheet.experiment.engine.widget
 
 import fe.linksheet.experiment.engine.slot.AppRoleId
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 
 
 typealias ActivityAppInfoWithDefaults = Map<ActivityAppInfo, Set<AppRoleId>>

@@ -19,7 +19,7 @@ import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLo
 import fe.linksheet.experiment.engine.rule.std.IntentPostprocessorRule
 import fe.linksheet.experiment.engine.rule.std.IntentRuleDefinition
 import fe.linksheet.experiment.engine.rule.std.RegexUrlMatcher
-import fe.linksheet.module.app.PackageService
+import fe.linksheet.feature.app.PackageService
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.network.NetworkStateService

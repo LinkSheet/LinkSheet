@@ -1,6 +1,6 @@
 package fe.linksheet.experiment.engine.widget
 
-import fe.linksheet.module.app.ActivityAppInfo
+import fe.linksheet.feature.app.ActivityAppInfo
 
 sealed interface Widget {
 }

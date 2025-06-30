@@ -19,8 +19,6 @@ import kotlinx.coroutines.flow.flow
 import kotlin.collections.iterator
 
 
-
-
 class PackageService(
     private val domainVerificationManager: DomainVerificationManagerCompat,
     private val packageLabelService: PackageLabelService,
@@ -73,18 +71,27 @@ class PackageService(
         }
     }
 
+    fun getDomainVerificationAppInfoListFlow(): Flow<List<DomainVerificationAppInfo>> = flow {
+        val packages = getInstalledPackages().mapNotNull { packageInfo ->
+            createDomainVerificationAppInfo(packageInfo)
+        }
+
+        emit(packages)
+    }
+
     fun createDomainVerificationAppInfo(packageName: String): DomainVerificationAppInfo? {
         return getApplicationInfoOrNull(packageName, ApplicationInfoFlags.EMPTY)
-            ?.let { createDomainVerificationAppInfo(it) }
+            ?.let { createDomainVerificationAppInfo(it, null) }
     }
 
     fun createDomainVerificationAppInfo(packageInfo: PackageInfo): DomainVerificationAppInfo? {
         val applicationInfo = packageInfo.applicationInfo ?: return null
-        return createDomainVerificationAppInfo(applicationInfo)
+        val installTime = packageInfo.firstInstallTime
+        return createDomainVerificationAppInfo(applicationInfo, installTime)
     }
 
     @VisibleForTesting
-    fun createDomainVerificationAppInfo(applicationInfo: ApplicationInfo): DomainVerificationAppInfo? {
+    fun createDomainVerificationAppInfo(applicationInfo: ApplicationInfo, installTime: Long?): DomainVerificationAppInfo? {
         val verificationState = getVerificationState(applicationInfo) ?: return null
         val launcher = getLauncherOrNull(applicationInfo.packageName)
         val label = findBestLabel(applicationInfo, launcher)
@@ -110,11 +117,13 @@ class PackageService(
             else -> LinkHandling.Unsupported
         }
 
+        val icon = loadApplicationIcon(applicationInfo)
         val status = DomainVerificationAppInfo(
             applicationInfo.packageName,
             label,
-            BitmapIconPainter.drawable(loadApplicationIcon(applicationInfo)),
+            BitmapIconPainter.drawable(icon),
             applicationInfo.flags,
+            installTime,
             linkHandling,
             stateNone,
             stateSelected,

@@ -38,6 +38,7 @@ fun PackageInfoFake.toDomainVerificationAppInfo(
         packageInfo.applicationInfo!!.name,
         BitmapIconPainter.bitmap(icon.value),
         0,
+        null,
         linkHandling,
         stateNone,
         stateSelected,

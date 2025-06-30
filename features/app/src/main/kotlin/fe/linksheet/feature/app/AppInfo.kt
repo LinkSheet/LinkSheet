@@ -22,6 +22,7 @@ class DomainVerificationAppInfo(
     label: CharSequence,
     icon: IconPainter? = null,
     val flags: Int,
+    val installTime: Long? = null,
     val linkHandling: LinkHandling,
     val stateNone: MutableList<String>,
     val stateSelected: MutableList<String>,

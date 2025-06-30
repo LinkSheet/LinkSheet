@@ -2,7 +2,6 @@ package fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Settings
@@ -50,7 +49,7 @@ import fe.linksheet.feature.app.LinkHandling
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
 import fe.linksheet.util.drawBitmap
-import fe.linksheet.util.tryStartActivity
+import fe.linksheet.util.extension.android.tryStartActivity
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 

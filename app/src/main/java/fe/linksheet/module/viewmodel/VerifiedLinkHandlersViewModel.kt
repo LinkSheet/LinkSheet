@@ -3,18 +3,16 @@ package fe.linksheet.module.viewmodel
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.FilterAltOff
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.viewModelScope
 import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.filterIf
 import fe.kotlin.extension.iterable.groupByNoNullKeys
-import fe.linksheet.R
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.FilterState
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.HostState
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.SortByState
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhSort
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhStateModeFilter
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhTypeFilter
 import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
@@ -36,6 +34,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Comparator
+import kotlin.collections.filter
 
 class VerifiedLinkHandlersViewModel(
     private val shizukuHandler: ShizukuHandler,
@@ -51,10 +51,9 @@ class VerifiedLinkHandlersViewModel(
 
     val filterDisabledOnly = MutableStateFlow(true)
 
-    val userAppFilter = MutableStateFlow(true)
-    val filterMode = MutableStateFlow<FilterMode>(FilterMode.ShowAll)
+    val sortState = MutableStateFlow(SortByState(VlhSort.AZ, true))
+    val filterState = MutableStateFlow(FilterState(VlhStateModeFilter.ShowAll, VlhTypeFilter.All, true))
     val searchQuery = MutableStateFlow("")
-    private val sorting = MutableStateFlow(AppInfo.labelComparator)
 
     private fun groupHosts(
         preferredApps: List<PreferredApp>,
@@ -91,32 +90,50 @@ class VerifiedLinkHandlersViewModel(
 //        return flowOfLazy {
 //            packageInfoService.getDomainVerificationAppInfos()
 //        }
-//    }
-    val appsFiltered = packageInfoService.getDomainVerificationAppInfoFlow()
-        .scan(emptyList<DomainVerificationAppInfo>()) { acc, elem -> acc + elem }
-        .flowOn(Dispatchers.IO)
-//    val appsFiltered = test()
-//        .flowOn(Dispatchers.IO)
-        .combine(userAppFilter) { apps, userAppFilter ->
-            apps.filter { !userAppFilter || it.flags !in SYSTEM_APP_FLAGS }
-        }
-        .combine(filterMode) { apps, filterMode ->
-            if (filterMode == FilterMode.ShowAll) return@combine apps
 
-            val enabledMode = filterMode == FilterMode.EnabledOnly
-            apps.filter { if (enabledMode) it.enabled else !it.enabled }
+
+    //        val appsFiltered = packageInfoService.getDomainVerificationAppInfoFlow()
+//        .scan(emptyList<DomainVerificationAppInfo>()) { acc, elem -> acc + elem }
+    val appsFiltered = packageInfoService.getDomainVerificationAppInfoListFlow()
+        .flowOn(Dispatchers.IO)
+//        .flowOn(Dispatchers.IO)
+        .combine(filterState) { apps, state ->
+            apps.filter { state.matches(it) }
         }
         .combine(searchQuery) { apps, searchQuery ->
             apps.filterIf(searchQuery.isNotEmpty()) { it.matches(searchQuery) }
         }
-        .combine(sorting) { apps, sorting ->
-            apps.sortedWith(sorting)
+        .combine(sortState) { apps, state ->
+            apps.sortedWith(state.toComparator())
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(0),
-            initialValue = emptyList()
+            initialValue = null
+//            initialValue = emptyList()
         )
+
+    private val installTime = compareBy<DomainVerificationAppInfo> { it.installTime }
+    private val sortComparators = mapOf(
+        VlhSort.InstallTime to (installTime to installTime.reversed()),
+        VlhSort.AZ to (AppInfo.labelComparator to AppInfo.labelComparator.reversed()),
+    )
+
+    private fun SortByState.toComparator(): Comparator<DomainVerificationAppInfo> {
+        val (asc, desc) = sortComparators[sort]!!
+        @Suppress("UNCHECKED_CAST")
+        return (if (ascending) asc else desc) as Comparator<DomainVerificationAppInfo>
+    }
+
+    private fun FilterState.matches(info: DomainVerificationAppInfo): Boolean {
+        val system = systemApps || info.flags !in SYSTEM_APP_FLAGS
+        return when {
+            mode == VlhStateModeFilter.ShowAll -> system
+            !system -> false
+            else -> if (mode == VlhStateModeFilter.EnabledOnly) info.enabled else !info.enabled
+        }
+    }
+
 
     fun emitLatest() {
         lastEmitted.value = System.currentTimeMillis()
@@ -160,31 +177,4 @@ class VerifiedLinkHandlersViewModel(
     }
 }
 
-sealed class FilterMode(
-    @StringRes val shortStringRes: Int,
-    @StringRes val stringRes: Int,
-    val icon: ImageVector,
-) {
 
-    data object ShowAll : FilterMode(
-        R.string.settings_verified_link_handlers__text_handling_filter_all_short,
-        R.string.settings_verified_link_handlers__text_handling_filter_all_short,
-        Icons.Outlined.FilterAltOff
-    )
-
-    data object EnabledOnly : FilterMode(
-        R.string.settings_verified_link_handlers__text_handling_filter_enabled_short,
-        R.string.settings_verified_link_handlers__text_handling_filter_enabled_short,
-        Icons.Outlined.Visibility
-    )
-
-    data object DisabledOnly : FilterMode(
-        R.string.settings_verified_link_handlers__text_handling_filter_disabled_short,
-        R.string.settings_verified_link_handlers__text_handling_filter_disabled_short,
-        Icons.Outlined.VisibilityOff
-    )
-
-    companion object {
-        val Modes by lazy { arrayOf(ShowAll, EnabledOnly, DisabledOnly) }
-    }
-}

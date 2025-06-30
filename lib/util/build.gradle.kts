@@ -1,4 +1,5 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 
@@ -22,8 +23,12 @@ android {
 }
 
 dependencies {
-    implementation(AndroidX.core.ktx)
+    implementation(platform(Grrfe.std.bom))
     implementation(platform(_1fexd.composeKit.bom))
+
+    implementation(Grrfe.std.result.core)
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.compose.core)
+
+    implementation(AndroidX.core.ktx)
 }

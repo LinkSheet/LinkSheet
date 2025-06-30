@@ -12,6 +12,10 @@ import fe.linksheet.module.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+@Deprecated(
+    "Use tryStartActivity",
+    replaceWith = ReplaceWith("this.tryStartActivity(intent)", "fe.linksheet.util.extension.android.tryStartActivity")
+)
 fun Activity.startActivityWithConfirmation(intent: Intent) = kotlin.runCatching {
     this.startActivity(intent)
     true

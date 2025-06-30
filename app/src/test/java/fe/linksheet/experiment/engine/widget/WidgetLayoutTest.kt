@@ -2,7 +2,7 @@ package fe.linksheet.experiment.engine.widget
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.util.toActivityAppInfo
+import app.linksheet.testing.fake.toActivityAppInfo
 import fe.linksheet.experiment.engine.slot.AppRoleId
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.testlib.core.JunitTest

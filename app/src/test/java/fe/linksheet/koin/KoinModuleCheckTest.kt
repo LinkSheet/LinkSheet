@@ -55,6 +55,7 @@ import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.statistic.StatisticsService
 import fe.linksheet.feature.systeminfo.BuildConstants
 import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.SystemProperties
 import fe.linksheet.module.versiontracker.VersionTracker
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon

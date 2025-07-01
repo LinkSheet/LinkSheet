@@ -30,32 +30,32 @@ internal class MigrationTest : InstrumentationTest {
         }
     }
 
-    @Test
+    @JunitTest
     fun testMigrateFull() {
         runTest(2)
     }
 
-    @Test
+    @JunitTest
     fun testMigrate12to17() {
         runTest(12)
     }
 
-    @Test
+    @JunitTest
     fun testMigrate13to17() {
         runTest(13)
     }
 
-    @Test
+    @JunitTest
     fun testMigrate14to17() {
         runTest(14)
     }
 
-    @Test
+    @JunitTest
     fun testMigrate15to17() {
         runTest(15)
     }
 
-    @Test
+    @JunitTest
     fun testMigrate16to17() {
         runTest(16)
     }

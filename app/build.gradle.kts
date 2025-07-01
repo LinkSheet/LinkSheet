@@ -48,12 +48,12 @@ val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss"
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = 36
+    compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
         applicationId = "fe.linksheet"
         minSdk = AndroidSdk.MIN_SDK
-        targetSdk = 36
+        targetSdk = AndroidSdk.COMPILE_SDK
 
         val now = System.currentTimeMillis()
         val provider = AndroidVersionStrategy(now)

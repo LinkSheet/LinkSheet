@@ -15,7 +15,6 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven { url = uri("https://jitpack.io") }
-        maven { url = uri("https://storage.googleapis.com/r8-releases/raw") }
     }
 
     plugins {
@@ -25,12 +24,6 @@ pluginManagement {
         id("org.jetbrains.kotlin.android")
         id("net.nemerosa.versioning")
         id("androidx.navigation.safeargs") version "2.8.2"
-    }
-
-    buildscript {
-        dependencies {
-            classpath("com.android.tools:r8:8.10.21")
-        }
     }
 
     when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {

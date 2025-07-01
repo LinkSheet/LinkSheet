@@ -2,10 +2,11 @@ package app.linksheet.testing.fake
 
 import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
-import androidx.compose.ui.graphics.ImageBitmap
+import android.graphics.drawable.Drawable
 import app.linksheet.testing.util.PackageInfoFake
 import app.linksheet.testing.util.firstActivityResolveInfo
 import fe.android.compose.icon.BitmapIconPainter
+import fe.android.compose.icon.IconPainter
 import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.feature.app.DomainVerificationAppInfo
 import fe.linksheet.feature.app.LinkHandling
@@ -13,30 +14,48 @@ import fe.linksheet.feature.app.PackageIdHelper
 
 fun PackageInfoFake.toActivityAppInfo(
     label: String,
-    icon: Lazy<ImageBitmap> = ImageFakes.ImageBitmap,
+    icon: Drawable = ImageFakes.EmptyDrawable,
 ): ActivityAppInfo {
-    return ActivityAppInfo(firstActivityResolveInfo?.activityInfo!!, label, BitmapIconPainter.bitmap(icon.value))
+    return ActivityAppInfo(firstActivityResolveInfo?.activityInfo!!, label, BitmapIconPainter.drawable(icon))
 }
 
-fun PackageInfoFake.toActivityAppInfo(icon: Lazy<ImageBitmap> = ImageFakes.ImageBitmap): ActivityAppInfo {
+fun PackageInfoFake.toActivityAppInfo(icon: Drawable = ImageFakes.EmptyDrawable): ActivityAppInfo {
     return toActivityAppInfo(packageInfo.applicationInfo!!.name, icon)
 }
 
-fun ResolveInfo.toActivityAppInfo(icon: Lazy<ImageBitmap> = ImageFakes.ImageBitmap): ActivityAppInfo {
-    return ActivityAppInfo(activityInfo, activityInfo.name, BitmapIconPainter.bitmap(icon.value))
+fun ResolveInfo.toActivityAppInfo(icon: Drawable = ImageFakes.EmptyDrawable): ActivityAppInfo {
+    return ActivityAppInfo(activityInfo, activityInfo.name, BitmapIconPainter.drawable(icon))
 }
-
 fun PackageInfoFake.toDomainVerificationAppInfo(
     linkHandling: LinkHandling,
     stateNone: MutableList<String>,
     stateSelected: MutableList<String>,
     stateVerified: MutableList<String>,
-    icon: Lazy<ImageBitmap> = ImageFakes.ImageBitmap,
+    icon: IconPainter
 ): DomainVerificationAppInfo {
     return DomainVerificationAppInfo(
         packageInfo.applicationInfo!!.packageName,
         packageInfo.applicationInfo!!.name,
-        BitmapIconPainter.bitmap(icon.value),
+        icon,
+        0,
+        null,
+        linkHandling,
+        stateNone,
+        stateSelected,
+        stateVerified
+    )
+}
+fun PackageInfoFake.toDomainVerificationAppInfo(
+    linkHandling: LinkHandling,
+    stateNone: MutableList<String>,
+    stateSelected: MutableList<String>,
+    stateVerified: MutableList<String>,
+    icon: Drawable = ImageFakes.EmptyDrawable,
+): DomainVerificationAppInfo {
+    return DomainVerificationAppInfo(
+        packageInfo.applicationInfo!!.packageName,
+        packageInfo.applicationInfo!!.name,
+        BitmapIconPainter.drawable(icon),
         0,
         null,
         linkHandling,

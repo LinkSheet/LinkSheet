@@ -16,9 +16,8 @@ import assertk.assertions.isNull
 import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.browser.BrowserMode
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.testlib.core.JunitTest
-import fe.linksheet.testlib.core.RobolectricTest
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.time.Clock
@@ -26,7 +25,7 @@ import kotlin.time.ExperimentalTime
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-class AppSorterTest : RobolectricTest {
+class AppSorterTest : BaseUnitTest {
     companion object {
         private val sorter = AppSorter(
             queryAndAggregateUsageStats = { _, _ -> emptyMap() },

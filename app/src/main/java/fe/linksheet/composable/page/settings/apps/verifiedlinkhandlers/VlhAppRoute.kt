@@ -27,6 +27,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.preview.PreviewContainer
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toDomainVerificationAppInfo
+import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.icon.IconPainter
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -210,7 +211,7 @@ private fun VlhAppRouteInternalPreview() {
             stateNone = mutableListOf(),
             stateSelected = mutableListOf(),
             stateVerified = mutableListOf(),
-            icon = lazy { icon }
+            icon = BitmapIconPainter.bitmap(icon)
         )
     )
 }

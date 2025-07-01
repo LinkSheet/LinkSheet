@@ -4,11 +4,11 @@ package fe.linksheet.module.resolver.util
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.testing.asPreferredApp
 import app.linksheet.testing.fake.PackageInfoFakes
-import app.linksheet.testing.util.asDescriptor
-import app.linksheet.testing.util.asPreferredApp
+import app.linksheet.testing.fake.asDescriptor
+import app.linksheet.testing.fake.toActivityAppInfo
 import app.linksheet.testing.util.listOfFirstActivityResolveInfo
-import app.linksheet.testing.util.toActivityAppInfo
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull

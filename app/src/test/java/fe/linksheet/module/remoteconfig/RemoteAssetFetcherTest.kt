@@ -49,7 +49,7 @@ internal class RemoteAssetFetcherTest : BaseUnitTest {
         )
     }
 
-    @Test
+    @JunitTest
     fun `test bad path`() = runTest {
         val assetsJson = """
         |"{
@@ -65,7 +65,7 @@ internal class RemoteAssetFetcherTest : BaseUnitTest {
         assertFailure(assets)
     }
 
-    @Test
+    @JunitTest
     fun `test bad path 2`() = runTest {
         val client = createClient { respondError(HttpStatusCode.BadRequest) }
         val fetcher = RemoteConfigClient("https://linksheet.app", "Client", client)

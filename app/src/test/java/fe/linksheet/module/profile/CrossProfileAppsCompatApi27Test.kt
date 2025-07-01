@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEmpty
+import fe.linksheet.feature.profile.CrossProfileAppsCompat
 import fe.linksheet.testlib.core.RobolectricTest
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith

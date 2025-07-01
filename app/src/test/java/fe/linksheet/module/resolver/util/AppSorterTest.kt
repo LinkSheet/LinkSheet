@@ -16,6 +16,7 @@ import assertk.assertions.isNull
 import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.browser.BrowserMode
+import fe.linksheet.testlib.core.JunitTest
 import fe.linksheet.testlib.core.RobolectricTest
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -45,13 +46,13 @@ class AppSorterTest : RobolectricTest {
         private val app = PackageInfoFakes.MiBrowser.asPreferredApp("google.com", false)
     }
 
-    @Test
+    @JunitTest
     fun `returnLastChosen true, alwaysPreferred false`() {
         val (_, filtered) = sorter.sort(appList, app, emptyMap(), false)
         assertThat(filtered).isNull()
     }
 
-    @Test
+    @JunitTest
     fun `alwaysPreferred true`() {
         fun runTest(returnLastChosen: Boolean): ActivityAppInfo? {
             val (_, filtered) = sorter.sort(appList, appAlwaysPreferred, emptyMap(), returnLastChosen)

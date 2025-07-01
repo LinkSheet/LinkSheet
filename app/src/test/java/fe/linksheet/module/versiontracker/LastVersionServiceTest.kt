@@ -69,7 +69,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         assertThat(service.handleVersions(input, true)).isEqualTo(expected)
     }
 
-    @Test
+    @JunitTest
     fun `fix broken array`() {
         val service = LastVersionService(gson, buildInfoV2)
         val input = """[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{"v":2025061001,"f":"Foss-nightly"}]"""

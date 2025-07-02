@@ -13,7 +13,9 @@ class UsageStatsPermission(private val context: Context) : PermissionBoundPrefer
     R.string.usage_stats_sorting, R.string.usage_stats_sorting_explainer
 ) {
 
-    private val appOpsManager = context.getSystemService<AppOpsManager>()!!
+    private val appOpsManager by lazy {
+        context.getSystemService<AppOpsManager>()!!
+    }
 
     override fun check(): Boolean {
         val mode = appOpsManager.checkOpNoThrow(

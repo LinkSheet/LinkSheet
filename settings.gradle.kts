@@ -75,7 +75,6 @@ includeProject(":bottom-sheet-new", "lib/bottom-sheet-new")
 includeProject(":hidden-api", "lib/hidden-api")
 includeProject(":util", "lib/util")
 includeProject(":feature-app", "features/app")
-includeProject(":feature-profile", "features/profile")
 includeProject(":feature-systeminfo", "features/systeminfo")
 
 buildSettings {

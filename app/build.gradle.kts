@@ -260,7 +260,6 @@ junitPlatform {
 }
 
 dependencies {
-    implementation(project(":feature-profile"))
     implementation(project(":feature-systeminfo"))
     implementation(project(":feature-app"))
 

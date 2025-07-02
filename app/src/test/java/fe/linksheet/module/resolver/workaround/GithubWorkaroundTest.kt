@@ -14,7 +14,7 @@ import kotlin.test.assertNull
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class GithubWorkaroundTest : BaseUnitTest {
-    @JunitTest
+    @org.junit.Test
     fun test() {
         val notFixedUri = GithubWorkaround.tryFixUri(
             ComponentName("not.github", "not.github"),

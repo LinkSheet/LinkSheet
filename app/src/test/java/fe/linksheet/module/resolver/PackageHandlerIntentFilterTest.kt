@@ -9,7 +9,7 @@ import app.linksheet.testing.util.addDataPaths
 import app.linksheet.testing.util.buildIntentFilter
 import fe.linksheet.feature.app.`package`.DefaultPackageIntentHandler
 import fe.linksheet.feature.app.`package`.PackageIntentHandler
-import fe.linksheet.testlib.core.RobolectricTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -18,7 +18,7 @@ import kotlin.test.assertTrue
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class PackageHandlerIntentFilterTest : RobolectricTest {
+internal class PackageHandlerIntentFilterTest : BaseUnitTest  {
     companion object {
         private val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> listOf() },
@@ -46,7 +46,7 @@ internal class PackageHandlerIntentFilterTest : RobolectricTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun test() {
         assertFalse(isLinkHandler("https://google.com", IntentFilter()))
 

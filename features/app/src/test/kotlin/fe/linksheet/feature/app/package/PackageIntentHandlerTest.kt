@@ -1,6 +1,7 @@
 package fe.linksheet.feature.app.`package`
 
 import android.net.Uri
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.TurretPackageInfoFake
@@ -11,13 +12,16 @@ import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isNotNull
 import fe.linksheet.testlib.core.JunitTest
-import fe.linksheet.testlib.core.RobolectricTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-internal class PackageIntentHandlerTest : RobolectricTest {
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+internal class PackageIntentHandlerTest : BaseUnitTest  {
 
-    @JunitTest
+    @org.junit.Test
     fun `test trampoline activity correctly handled`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> YatsePackageInfoFake.resolveInfos },
@@ -35,7 +39,7 @@ internal class PackageIntentHandlerTest : RobolectricTest {
         )
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test non-exported activities are ignored`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> TurretPackageInfoFake.resolveInfos },
@@ -51,7 +55,7 @@ internal class PackageIntentHandlerTest : RobolectricTest {
         )
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test find all http browsable`() {
         val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> PackageInfoFakes.allBrowsers.flatResolveInfos() },

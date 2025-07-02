@@ -22,7 +22,7 @@ internal class LogEntryMergerTest : BaseUnitTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun test() {
         val entries = listOf(
             LogEntry.DefaultLogEntry(
@@ -58,7 +58,7 @@ internal class LogEntryMergerTest : BaseUnitTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun test2() {
         val entries = listOf(
             LogEntry.DefaultLogEntry(

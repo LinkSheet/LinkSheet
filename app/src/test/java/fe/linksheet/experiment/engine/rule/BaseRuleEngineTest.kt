@@ -2,7 +2,6 @@ package fe.linksheet.experiment.engine.rule
 
 import assertk.Assert
 import assertk.assertThat
-import fe.linksheet.DatabaseTest
 import fe.linksheet.experiment.engine.ContextualEngineResult
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.LinkEngine
@@ -19,24 +18,26 @@ import fe.linksheet.experiment.engine.step.StepResult
 import fe.linksheet.util.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import fe.std.uri.StdUrl
-import org.junit.After
 import java.util.*
 
-abstract class BaseRuleEngineTest : DatabaseTest() {
-    fun assertResult(result: ContextualEngineResult): Assert<EngineResult> {
-        return assertThat(result.second)
-    }
+//abstract class BaseRuleEngineTest(closeDb: Boolean = true) : DatabaseTest(closeDb) {
 
-    fun assertContext(result: ContextualEngineResult): Assert<SealedRunContext> {
-        return assertThat(result.first)
-    }
+//    @After
+//    override fun stop() {
+//        println("[BaseLinkEngineTest] stop")
+//        super.stop()
+//    }
+//}
 
-    @After
-    override fun stop() {
-        println("[BaseLinkEngineTest] stop")
-        super.stop()
-    }
+
+fun assertResult(result: ContextualEngineResult): Assert<EngineResult> {
+    return assertThat(result.second)
 }
+
+fun assertContext(result: ContextualEngineResult): Assert<SealedRunContext> {
+    return assertThat(result.first)
+}
+
 
 @Suppress("TestFunctionName")
 fun TestLinkModifier(

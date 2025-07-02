@@ -2,6 +2,7 @@ package fe.linksheet.experiment.engine.rule
 
 import android.content.ComponentName
 import android.content.Intent
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
@@ -13,15 +14,19 @@ import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.extension.std.toAndroidUri
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.intent.buildIntent
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-internal class IntentAppOpenRuleTest : BaseRuleEngineTest() {
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+internal class IntentAppOpenRuleTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/428
@@ -48,7 +53,7 @@ internal class IntentAppOpenRuleTest : BaseRuleEngineTest() {
         dispatcher = dispatcher,
     )
 
-    @JunitTest
+    @org.junit.Test
     fun `test rule not matched`() = runTest(dispatcher) {
         val result = engine.process("https://linksheet.app".toStdUrlOrThrow())
         assertResult(result)
@@ -58,7 +63,7 @@ internal class IntentAppOpenRuleTest : BaseRuleEngineTest() {
             .isEqualTo("https://linksheet.app")
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test rule matched`() = runTest(dispatcher) {
         val result = engine.process("https://linksheet.app/fakevideo.mp4".toStdUrlOrThrow())
 

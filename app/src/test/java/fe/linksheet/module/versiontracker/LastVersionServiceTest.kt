@@ -31,7 +31,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         private val buildInfoV2 = BuildInfo("2", 2, "2024-10-30 12:00:00", "foss")
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `empty input`() {
         val service = LastVersionService(gson, buildInfoV1)
         val expected = "[${buildInfoV1Json}]"
@@ -43,7 +43,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `same version`() {
         val service = LastVersionService(gson, buildInfoV1)
         val input = "[${buildInfoV1Json}]"
@@ -51,7 +51,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         assertThat(service.handleVersions(input)).isNull()
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `new version`() {
         val service = LastVersionService(gson, buildInfoV2)
         val input = "[${buildInfoV1Json}]"
@@ -60,7 +60,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         assertThat(service.handleVersions(input)).isEqualTo(expected)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `migrate to shorter format`() {
         val service = LastVersionService(gson, buildInfoV2)
         val input = "[${buildInfoV1Json}]"
@@ -69,7 +69,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
         assertThat(service.handleVersions(input, true)).isEqualTo(expected)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `fix broken array`() {
         val service = LastVersionService(gson, buildInfoV2)
         val input = """[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{"v":2025061001,"f":"Foss-nightly"}]"""

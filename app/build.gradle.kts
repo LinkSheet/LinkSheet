@@ -382,6 +382,7 @@ dependencies {
     implementation(_1fexd.composeKit.compose.dialog)
     implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.core)
+    testImplementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)
     implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.lifecycle.core)
@@ -428,8 +429,7 @@ dependencies {
         AndroidX.compose.ui.test,
         AndroidX.compose.ui.testJunit4,
         "com.willowtreeapps.assertk:assertk:_",
-        kotlin("test"),
-        AndroidX.test.espresso.core
+        AndroidX.test.espresso.core,
     )
 
     for (notation in commonTestDependencies) {

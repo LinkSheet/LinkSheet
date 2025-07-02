@@ -16,7 +16,7 @@ import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
-import fe.linksheet.testlib.core.RobolectricTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import okhttp3.OkHttpClient
 import okhttp3.mock.MockInterceptor
 import okhttp3.mock.head
@@ -27,7 +27,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class RedirectResolveRequestTest : RobolectricTest {
+internal class RedirectResolveRequestTest : BaseUnitTest  {
     companion object {
         private val loggerDelegate = DefaultLoggerDelegate(
             true,
@@ -40,7 +40,7 @@ internal class RedirectResolveRequestTest : RobolectricTest {
         private val cachedRequest = CachedRequest(request, logger)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test refresh header is redirect`() {
         val interceptor = MockInterceptor().apply {
             rule(head) {
@@ -65,7 +65,7 @@ internal class RedirectResolveRequestTest : RobolectricTest {
             .isEqualTo("https://linkin.bio/google")
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test parse valid refresh header`() {
         tableOf("header", "expected")
             .row("0,https://linkin.bio/google", 0 to "https://linkin.bio/google")
@@ -83,7 +83,7 @@ internal class RedirectResolveRequestTest : RobolectricTest {
             }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test parse invalid refresh header`() {
         tableOf("header", "expected")
             .row<String, Pair<Int?, String?>?>("1.1", null)

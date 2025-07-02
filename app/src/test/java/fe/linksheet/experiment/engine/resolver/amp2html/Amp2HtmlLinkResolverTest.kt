@@ -1,12 +1,13 @@
 package fe.linksheet.experiment.engine.resolver.amp2html
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import assertk.assertions.isNull
 import assertk.assertions.prop
-import fe.linksheet.DatabaseTest
+import fe.linksheet.DatabaseTestRule
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.experiment.engine.rule.withTestRunContext
 import fe.linksheet.module.database.entity.cache.CachedHtml
@@ -15,6 +16,7 @@ import fe.linksheet.module.database.entity.cache.ResolvedUrl
 import fe.linksheet.module.database.entity.cache.UrlEntry
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.testlib.core.JunitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.IResult
 import fe.std.result.success
 import fe.std.time.unixMillisOf
@@ -22,11 +24,15 @@ import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
+import org.junit.Rule
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 
 @RunWith(AndroidJUnit4::class)
-internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
     companion object {
         private val URL = "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html".toStdUrlOrThrow()
         private val RESOLVED_URL = "https://www.cnn.com/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html".toStdUrlOrThrow()
@@ -34,13 +40,15 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
 
     private val dispatcher = StandardTestDispatcher()
 
+    @get:Rule
+    private val rule = DatabaseTestRule(applicationContext)
     private val cacheRepository by lazy {
         CacheRepository(
-            database.htmlCacheDao(),
-            database.previewCacheDao(),
-            database.resolvedUrlCacheDao(),
-            database.resolveTypeDao(),
-            database.urlEntryDao(),
+            rule.database.htmlCacheDao(),
+            rule.database.previewCacheDao(),
+            rule.database.resolvedUrlCacheDao(),
+            rule.database.resolveTypeDao(),
+            rule.database.urlEntryDao(),
             now = { unixMillisOf(2025) }
         )
     }
@@ -62,7 +70,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `skip cache if disabled`() = runTest(dispatcher) {
         val resolver = Amp2HtmlLinkResolver(
             ioDispatcher = dispatcher,
@@ -77,14 +85,14 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
             .prop(ResolveOutput::url)
             .isEqualTo(RESOLVED_URL)
 
-        val entry = database.urlEntryDao().getUrlEntry(URL.toString())
+        val entry = rule.database.urlEntryDao().getUrlEntry(URL.toString())
         assertThat(entry).isNotNull()
 
-        val resolved = database.resolvedUrlCacheDao().getResolved(entry!!.id, ResolveType.Amp2Html.id)
+        val resolved = rule.database.resolvedUrlCacheDao().getResolved(entry!!.id, ResolveType.Amp2Html.id)
         assertThat(resolved).isNull()
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `return cached url if present`() = runTest(dispatcher) {
         val resolver = Amp2HtmlLinkResolver(
             ioDispatcher = dispatcher,
@@ -97,8 +105,8 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         val entry = UrlEntry(1, url = URL.toString())
         val resolved = ResolvedUrl(entry.id, ResolveType.Amp2Html.id, testResolvedUrl)
 
-        database.urlEntryDao().insertReturningId(entry)
-        database.resolvedUrlCacheDao().insertReturningId(resolved)
+        rule.database.urlEntryDao().insertReturningId(entry)
+        rule.database.resolvedUrlCacheDao().insertReturningId(resolved)
 
         val result = withTestRunContext(resolver) { it.runStep(entry.url.toStdUrlOrThrow()) }
         assertThat(result)
@@ -108,7 +116,7 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
             .isEqualTo(testResolvedUrl)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `use cached html if present`() = runTest(dispatcher) {
         val cachedHtml = "<html><body><h1>Cached html</h1></body></html>"
         val resolver = Amp2HtmlLinkResolver(
@@ -136,8 +144,8 @@ internal class Amp2HtmlLinkResolverTest : DatabaseTest() {
         val entry = UrlEntry(1, url = URL.toString())
         val htmlCache = CachedHtml(entry.id, cachedHtml)
 
-        database.urlEntryDao().insertReturningId(entry)
-        database.htmlCacheDao().insertReturningId(htmlCache)
+        rule.database.urlEntryDao().insertReturningId(entry)
+        rule.database.htmlCacheDao().insertReturningId(htmlCache)
 
         val result = withTestRunContext(resolver) { it.runStep(entry.url.toStdUrlOrThrow()) }
         assertThat(result)

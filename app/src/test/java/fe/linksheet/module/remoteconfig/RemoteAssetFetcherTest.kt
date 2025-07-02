@@ -1,5 +1,6 @@
 package fe.linksheet.module.remoteconfig
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import fe.linksheet.testlib.core.BaseUnitTest
@@ -15,8 +16,11 @@ import io.ktor.serialization.gson.*
 import kotlinx.coroutines.test.runTest
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
 internal class RemoteAssetFetcherTest : BaseUnitTest {
     private fun MockRequestHandleScope.respondJson(json: String): HttpResponseData {
         return respond(json, HttpStatusCode.OK, headersOf(HttpHeaders.ContentType, "application/json"))
@@ -29,7 +33,7 @@ internal class RemoteAssetFetcherTest : BaseUnitTest {
     }
 
 
-    @JunitTest
+    @org.junit.Test
     fun test() = runTest {
         val assetsJson = """{
         |  "github.linksheet.wiki.privacy.logs": "https://github.com/LinkSheet/LinkSheet/wiki/Privacy#logs",
@@ -49,7 +53,7 @@ internal class RemoteAssetFetcherTest : BaseUnitTest {
         )
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test bad path`() = runTest {
         val assetsJson = """
         |"{
@@ -65,7 +69,7 @@ internal class RemoteAssetFetcherTest : BaseUnitTest {
         assertFailure(assets)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test bad path 2`() = runTest {
         val client = createClient { respondError(HttpStatusCode.BadRequest) }
         val fetcher = RemoteConfigClient("https://linksheet.app", "Client", client)

@@ -45,13 +45,13 @@ class AppSorterTest : BaseUnitTest {
         private val app = PackageInfoFakes.MiBrowser.asPreferredApp("google.com", false)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `returnLastChosen true, alwaysPreferred false`() {
         val (_, filtered) = sorter.sort(appList, app, emptyMap(), false)
         assertThat(filtered).isNull()
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `alwaysPreferred true`() {
         fun runTest(returnLastChosen: Boolean): ActivityAppInfo? {
             val (_, filtered) = sorter.sort(appList, appAlwaysPreferred, emptyMap(), returnLastChosen)

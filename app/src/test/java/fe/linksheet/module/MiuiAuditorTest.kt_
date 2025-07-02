@@ -6,12 +6,12 @@ import assertk.assertions.isEqualTo
 import assertk.tableOf
 import fe.linksheet.feature.systeminfo.DeviceInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.testlib.core.RobolectricTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-internal class MiuiAuditorTest : RobolectricTest {
+internal class MiuiAuditorTest : BaseUnitTest  {
     private val table = tableOf("device", "expectedDeviceInfo", "expectedMiui", "expectedFingerprint")
         .row<Device, DeviceInfo, MiuiAuditor.MiuiVersion, String>(
             XiaomiRedmi2a,
@@ -56,7 +56,7 @@ internal class MiuiAuditorTest : RobolectricTest {
             "Xiaomi/aurora/miproduct:15/AQ3A.240627.003/OS2.0.2.0.VNAEUXM:user/release-keys"
         )
 
-    @JunitTest
+    @org.junit.Test
     fun test() = table.forAll { device, expectedDeviceInfo, expectedMiui, expectedFingerprint ->
         val infoService = SystemInfoService(device)
 

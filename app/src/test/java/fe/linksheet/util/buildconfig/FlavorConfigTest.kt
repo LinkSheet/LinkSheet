@@ -10,7 +10,7 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 
 internal class FlavorConfigTest : BaseUnitTest {
     @OptIn(ExperimentalEncodingApi::class)
-    @JunitTest
+    @org.junit.Test
     fun test() {
         tableOf("config", "expected")
             .row<String?, FlavorConfig>(null, FlavorConfig.Default)

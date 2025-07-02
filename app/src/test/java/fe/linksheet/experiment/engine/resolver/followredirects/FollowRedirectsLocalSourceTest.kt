@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.engine.resolver.followredirects
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
@@ -16,15 +17,18 @@ import io.ktor.http.*
 import kotlinx.coroutines.test.runTest
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
 internal class FollowRedirectsLocalSourceTest : BaseUnitTest {
     companion object {
         private const val INPUT = "https://linksheet.app/redirect-me"
         private const val TARGET = "https://linksheet.app/target"
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `redirect on head request`(): Unit = runTest {
         val mockEngine = MockEngine { request ->
             when (request.url.toString()) {
@@ -60,7 +64,7 @@ internal class FollowRedirectsLocalSourceTest : BaseUnitTest {
             .isEqualTo(TARGET)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `return 400 on head, redirect on get`(): Unit = runTest {
         val mockEngine = MockEngine { request ->
             when (request.method) {
@@ -83,7 +87,7 @@ internal class FollowRedirectsLocalSourceTest : BaseUnitTest {
             .isEqualTo(TARGET)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `redirect loop`(): Unit = runTest {
         val mockEngine = MockEngine { _ ->
             respondRedirect(TARGET)

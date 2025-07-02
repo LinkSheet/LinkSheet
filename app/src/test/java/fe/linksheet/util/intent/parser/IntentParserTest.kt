@@ -3,10 +3,11 @@ package fe.linksheet.util.intent.parser
 import android.content.Intent
 import android.net.Uri
 import android.nfc.NfcAdapter
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import fe.linksheet.testlib.core.RobolectricTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.intent.buildIntent
 import fe.std.result.assert.assertSuccess
 import fe.std.result.getOrNull
@@ -15,10 +16,13 @@ import fe.std.test.tableTest
 import mozilla.components.support.utils.toSafeIntent
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-internal class IntentParserTest : RobolectricTest {
-    @JunitTest
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+internal class IntentParserTest : BaseUnitTest {
+    @org.junit.Test
     fun `test nfc intent correctly handled`() {
         val uri = Uri.parse("https://linksheet.app")
         val intent = Intent(NfcAdapter.ACTION_NDEF_DISCOVERED, uri).toSafeIntent()
@@ -26,7 +30,7 @@ internal class IntentParserTest : RobolectricTest {
         assertSuccess(IntentParser.getUriFromIntent(intent)).isEqualTo(uri)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test view intent parsing`() {
         fun buildTestIntent(url: String, extra: String?): Intent {
             val uri = if (extra == null) Uri.parse(url) else null
@@ -51,16 +55,16 @@ internal class IntentParserTest : RobolectricTest {
             }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test text parsing`() {
         val result = IntentParser.parseText("foo bar google.com hello world").getOrNull()?.toString()
         assertThat(result).isEqualTo("http://google.com")
     }
 
-    @JunitTest
-    fun `test send intent parsing`() {
-        // TODO
-    }
+//    @org.junit.Test
+//    fun `test send intent parsing`() {
+//        // TODO
+//    }
 }
 
 

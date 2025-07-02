@@ -5,17 +5,15 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.testlib.core.RobolectricTest
-import fe.linksheet.testlib.core.JunitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class WebUriTextValidatorTest : RobolectricTest {
+internal class WebUriTextValidatorTest : BaseUnitTest {
 
-    @JunitTest
+    @org.junit.Test
     fun `test web uri text validator`() {
         tableOf("text", "expected")
             .row("https://google.com", true)

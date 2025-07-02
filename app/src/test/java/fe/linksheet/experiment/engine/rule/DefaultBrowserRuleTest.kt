@@ -1,5 +1,6 @@
 package fe.linksheet.experiment.engine.rule
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
@@ -12,16 +13,19 @@ import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.slot.AppRoleId
 import fe.linksheet.experiment.engine.step.EngineStepId
-import fe.linksheet.testlib.core.JunitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.AndroidAppPackage
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-internal class DefaultBrowserRuleTest : BaseRuleEngineTest() {
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+internal class DefaultBrowserRuleTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/415
@@ -62,7 +66,7 @@ internal class DefaultBrowserRuleTest : BaseRuleEngineTest() {
         return result
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test default browser 1`() = runTest(dispatcher) {
         val result = baseTest("https://github.com/LinkSheet/LinkSheet".toStdUrlOrThrow())
 
@@ -71,7 +75,7 @@ internal class DefaultBrowserRuleTest : BaseRuleEngineTest() {
             .isEqualTo("org.mozilla.fennec_fdroid")
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test default browser 2`() = runTest(dispatcher) {
         val result = baseTest("https://google.com/hello".toStdUrlOrThrow())
 
@@ -80,7 +84,7 @@ internal class DefaultBrowserRuleTest : BaseRuleEngineTest() {
             .isEqualTo("com.google.chrome")
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test no default browser`() = runTest(dispatcher) {
         val result = baseTest("https://linksheet.app".toStdUrlOrThrow())
 

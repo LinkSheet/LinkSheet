@@ -2,26 +2,28 @@
 
 package fe.linksheet.experiment.engine
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import assertk.assertions.prop
-import fe.linksheet.experiment.engine.rule.BaseRuleEngineTest
 import fe.linksheet.experiment.engine.rule.EmptyLinkEngine
-import fe.linksheet.testlib.core.JunitTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-@RunWith(AndroidJUnit4::class)
-internal class EngineTrackTest : BaseRuleEngineTest() {
+//@RunWith(AndroidJUnit4::class)
+//@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+internal class EngineTrackTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
-    @JunitTest
+    @org.junit.Test
     fun test() = runTest(dispatcher) {
         val track1 = EngineTrack(
             id = Uuid.random(),

@@ -1,32 +1,39 @@
 package fe.linksheet.experiment.engine.fetcher.preview
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isInstanceOf
 import assertk.assertions.isNotNull
-import fe.linksheet.DatabaseTest
+import fe.linksheet.DatabaseTestRule
 import fe.linksheet.module.repository.CacheRepository
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.IResult
 import fe.std.result.success
 import fe.std.time.unixMillisOf
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.runTest
-import fe.linksheet.testlib.core.JunitTest
+import org.junit.Rule
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-internal class PreviewLinkFetcherTest : DatabaseTest() {
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+internal class PreviewLinkFetcherTest : BaseUnitTest {
     companion object {
         private const val PREVIEW_URL = "https://linksheet.app"
     }
 
+    @get:Rule
+    private val rule = DatabaseTestRule(applicationContext)
+
     private val cacheRepository by lazy {
         CacheRepository(
-            database.htmlCacheDao(),
-            database.previewCacheDao(),
-            database.resolvedUrlCacheDao(),
-            database.resolveTypeDao(),
-            database.urlEntryDao(),
+            rule.database.htmlCacheDao(),
+            rule.database.previewCacheDao(),
+            rule.database.resolvedUrlCacheDao(),
+            rule.database.resolveTypeDao(),
+            rule.database.urlEntryDao(),
             now = { unixMillisOf(2025) }
         )
     }
@@ -41,7 +48,7 @@ internal class PreviewLinkFetcherTest : DatabaseTest() {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun test() = runTest {
         val fetcher = PreviewLinkFetcher(
             source = source,

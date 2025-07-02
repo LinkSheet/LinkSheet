@@ -1,5 +1,6 @@
 package fe.linksheet.module.downloader
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.httpkt.Request
 import fe.linksheet.module.log.Logger
@@ -8,15 +9,18 @@ import fe.linksheet.module.log.internal.DefaultLoggerDelegate
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.CachedRequest
-import fe.linksheet.testlib.core.RobolectricTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.uri.toStdUrlOrThrow
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 @RunWith(AndroidJUnit4::class)
-internal class DownloaderTest : RobolectricTest {
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+internal class DownloaderTest : BaseUnitTest {
     companion object {
         private val loggerDelegate = DefaultLoggerDelegate(
             true,
@@ -31,7 +35,7 @@ internal class DownloaderTest : RobolectricTest {
         )
     }
 
-    @JunitTest
+    @org.junit.Test
     fun testCheckIsNonHtmlFileEnding() {
         mapOf(
             DownloadCheckResult.MimeTypeDetectionFailed to "https://test.com",
@@ -53,7 +57,7 @@ internal class DownloaderTest : RobolectricTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun testIsNonHtmlContentUri() {
         val downloadable = downloader.isNonHtmlContentUri(
             "https://pbs.twimg.com/media/FyWt0wvWAAAxgYk?format=jpg&name=medium".toStdUrlOrThrow(),

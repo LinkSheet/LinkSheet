@@ -11,13 +11,13 @@ internal class RemoteConfigPreferencesTest : BaseUnitTest {
     private val linkAssets: LinkAssets = mapOf("hello" to "world", "foo" to "bar")
     private val serialized = """{"hello":"world","foo":"bar"}"""
 
-    @JunitTest
+    @org.junit.Test
     fun `test unmap`() {
         val pref = RemoteConfigPreferences.linkAssets
         assertThat(pref.unmap(serialized)).isEqualTo(linkAssets)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test map`() {
         val pref = RemoteConfigPreferences.linkAssets
         assertThat(pref.map(linkAssets)).isEqualTo(serialized)

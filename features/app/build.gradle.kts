@@ -54,6 +54,5 @@ dependencies {
     testImplementation(project(":test-core"))
     testImplementation(Grrfe.std.test)
     testImplementation(Grrfe.std.result.assert)
-    testImplementation(kotlin("test"))
     testImplementation("com.willowtreeapps.assertk:assertk:_")
 }

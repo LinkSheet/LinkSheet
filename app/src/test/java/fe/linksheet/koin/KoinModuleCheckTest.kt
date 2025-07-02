@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
+import android.os.Build
 import androidx.lifecycle.SavedStateHandle
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
@@ -54,6 +55,7 @@ import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.statistic.StatisticsService
 import fe.linksheet.feature.systeminfo.BuildConstants
+import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.feature.systeminfo.SystemProperties
 import fe.linksheet.module.versiontracker.VersionTracker
@@ -66,16 +68,20 @@ import io.ktor.client.engine.*
 import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
 import fe.linksheet.testlib.core.JunitTest
+import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.test.verify.definition
 import org.koin.test.verify.injectedParameters
 import org.koin.test.verify.verifyAll
+import org.robolectric.annotation.Config
 import java.time.ZoneId
+import kotlin.intArrayOf
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
 @OptIn(KoinExperimentalAPI::class, ExperimentalTime::class)
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
 internal class KoinModuleCheckTest : BaseUnitTest {
     private val extraTypes = listOf(
         Context::class,
@@ -101,7 +107,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<HttpClient>(HttpClientEngine::class, HttpClientConfig::class),
         definition<SystemInfoService>(
             SystemProperties::class,
-            BuildConstants::class
+            BuildConstants::class,
+            BuildInfo::class
         ),
         definition<PackageService>(
             DomainVerificationManagerCompat::class,
@@ -185,7 +192,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<VerifiedLinkHandlerViewModel>(PackageService::class, OneUiCompat::class),
     )
 
-    @JunitTest
+    @Test
     fun test() {
         LinkSheetApp().provideKoinModules().verifyAll(
             extraTypes = extraTypes,

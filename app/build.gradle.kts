@@ -48,12 +48,12 @@ val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss"
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = 36
+    compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
         applicationId = "fe.linksheet"
         minSdk = AndroidSdk.MIN_SDK
-        targetSdk = 36
+        targetSdk = AndroidSdk.COMPILE_SDK
 
         val now = System.currentTimeMillis()
         val provider = AndroidVersionStrategy(now)
@@ -382,6 +382,7 @@ dependencies {
     implementation(_1fexd.composeKit.compose.dialog)
     implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.core)
+    testImplementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)
     implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.lifecycle.core)
@@ -428,8 +429,7 @@ dependencies {
         AndroidX.compose.ui.test,
         AndroidX.compose.ui.testJunit4,
         "com.willowtreeapps.assertk:assertk:_",
-        kotlin("test"),
-        AndroidX.test.espresso.core
+        AndroidX.test.espresso.core,
     )
 
     for (notation in commonTestDependencies) {

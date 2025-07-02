@@ -13,14 +13,14 @@ import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.*
 import fe.linksheet.module.resolver.browser.BrowserMode
-import fe.linksheet.testlib.core.RobolectricTest
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
+internal class ExperimentAutoLaunchSingleBrowserTest : BaseUnitTest  {
     companion object {
         private val whitelistedNull = BrowserModeConfigHelper.Whitelisted(null)
         private val whitelistedEmpty = BrowserModeConfigHelper.Whitelisted(emptySet())
@@ -76,7 +76,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `no browsers, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(config, emptyList(), emptyMap())
@@ -87,7 +87,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `single browser, single app`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(
@@ -102,7 +102,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `single browser, many apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(
@@ -117,7 +117,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `single browser, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(
@@ -132,7 +132,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : RobolectricTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `many browsers, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
             AutoLaunchSingleBrowserExperiment.handle(config, emptyList(), PackageInfoFakes.allBrowsers.toKeyedMap())

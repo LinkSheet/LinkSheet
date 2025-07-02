@@ -6,7 +6,6 @@ import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.testlib.instrument.InstrumentationTest
 import org.junit.Rule
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -30,32 +29,32 @@ internal class MigrationTest : InstrumentationTest {
         }
     }
 
-    @Test
+    @org.junit.Test
     fun testMigrateFull() {
         runTest(2)
     }
 
-    @Test
+    @org.junit.Test
     fun testMigrate12to17() {
         runTest(12)
     }
 
-    @Test
+    @org.junit.Test
     fun testMigrate13to17() {
         runTest(13)
     }
 
-    @Test
+    @org.junit.Test
     fun testMigrate14to17() {
         runTest(14)
     }
 
-    @Test
+    @org.junit.Test
     fun testMigrate15to17() {
         runTest(15)
     }
 
-    @Test
+    @org.junit.Test
     fun testMigrate16to17() {
         runTest(16)
     }

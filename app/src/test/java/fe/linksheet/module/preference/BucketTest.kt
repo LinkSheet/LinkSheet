@@ -1,14 +1,20 @@
 package fe.linksheet.module.preference
 
+import android.os.Build
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isCloseTo
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.testlib.core.JunitTest
 import fe.linksheet.util.percent
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import kotlin.intArrayOf
 
-
+@RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class BucketTest : BaseUnitTest {
-    @JunitTest
+    @org.junit.Test
     fun test() {
         if (System.getenv("CI")?.toBooleanStrictOrNull() == true) {
             // Skip on CI since there is a chance it will fail

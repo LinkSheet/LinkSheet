@@ -1,15 +1,24 @@
 package fe.linksheet.composable.page.settings.debug
 
+import android.os.Build
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import fe.linksheet.feature.sql.Column
 import fe.linksheet.feature.sql.MarkdownTable
 import fe.linksheet.feature.sql.SqlRow
 import fe.linksheet.testlib.core.BaseUnitTest
-import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import java.nio.file.spi.FileSystemProvider
+import java.util.HashMap
+import kotlin.intArrayOf
 
+@RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
 internal class MarkdownTableTest : BaseUnitTest {
-    @Test
+
+    @org.junit.Test
     fun test() {
         val rows = listOf(
             SqlRow(
@@ -29,5 +38,17 @@ internal class MarkdownTableTest : BaseUnitTest {
 |-------|------|-------|
 | bar   |    0 |       |
 | world | 1337 |   1.5 |""")
+
+
+        val providers = FileSystemProvider.installedProviders()
+        val provider = providers.firstOrNull { it::class.simpleName == "ZipFileSystemProvider" }
+        if(provider != null) {
+//            val clazz = provider::class.java
+//            val fileSystems = clazz.getDeclaredField("filesystems")
+////                .apply { isAccessible = true }
+//                .get(provider)
+//            (fileSystems as HashMap<*, *>).clear()
+        }
     }
 }
+

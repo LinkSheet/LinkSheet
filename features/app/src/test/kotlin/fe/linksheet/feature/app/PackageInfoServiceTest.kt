@@ -1,10 +1,11 @@
-package fe.linksheet.module.app
+package fe.linksheet.feature.app
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.ImageFakes
 import app.linksheet.testing.fake.PackageInfoFakes
-import fe.linksheet.feature.app.PackageService
+import assertk.assertThat
+import assertk.assertions.isNotNull
 import fe.linksheet.feature.app.`package`.DefaultPackageIconLoader
 import fe.linksheet.feature.app.`package`.DefaultPackageIntentHandler
 import fe.linksheet.feature.app.`package`.DefaultPackageLabelService
@@ -12,7 +13,6 @@ import fe.linksheet.feature.app.`package`.DefaultPackageLauncherService
 import fe.linksheet.feature.app.`package`.domain.DomainVerificationManagerCompat
 import fe.linksheet.feature.app.`package`.domain.VerificationBrowserState
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -20,7 +20,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class PackageInfoServiceTest : BaseUnitTest {
 
-    @JunitTest
+    @org.junit.Test
     fun test() {
         val domainVerificationManager = DomainVerificationManagerCompat {
             VerificationBrowserState
@@ -47,5 +47,6 @@ internal class PackageInfoServiceTest : BaseUnitTest {
         )
 
         val info = pkgInfoService.createDomainVerificationAppInfo(PackageInfoFakes.MiBrowser.packageInfo)
+        assertThat(info).isNotNull()
     }
 }

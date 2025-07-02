@@ -1,40 +1,47 @@
 package fe.linksheet.experiment.engine.fetcher.preview
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
-import fe.linksheet.DatabaseTest
+import fe.linksheet.DatabaseTestRule
 import fe.linksheet.module.repository.CacheRepository
+import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.assert.assertSuccess
 import fe.std.time.unixMillisOf
 import fe.std.uri.toStdUrlOrThrow
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
-import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.engine.okhttp.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
-import fe.linksheet.testlib.core.JunitTest
+import org.junit.Rule
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-internal class PreviewLocalSourceTest : DatabaseTest() {
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+internal class PreviewLocalSourceTest : BaseUnitTest  {
     companion object {
         private const val URL = "https://linksheet.app"
     }
 
+    @get:Rule
+    private val rule = DatabaseTestRule(applicationContext)
+
     private val cacheRepository by lazy {
         CacheRepository(
-            database.htmlCacheDao(),
-            database.previewCacheDao(),
-            database.resolvedUrlCacheDao(),
-            database.resolveTypeDao(),
-            database.urlEntryDao(),
+            rule.database.htmlCacheDao(),
+            rule.database.previewCacheDao(),
+            rule.database.resolvedUrlCacheDao(),
+            rule.database.resolveTypeDao(),
+            rule.database.urlEntryDao(),
             now = { unixMillisOf(2025) }
         )
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `bad request`() = runTest {
         val mockEngine = MockEngine {
             respondBadRequest()
@@ -49,7 +56,7 @@ internal class PreviewLocalSourceTest : DatabaseTest() {
             .isEqualTo(URL)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun test() = runTest {
         val client = HttpClient(OkHttp)
         val fetcher = PreviewLinkFetcher(

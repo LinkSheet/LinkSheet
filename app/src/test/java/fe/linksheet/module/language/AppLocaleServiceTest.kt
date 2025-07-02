@@ -26,7 +26,7 @@ internal class AppLocaleServiceTest : BaseUnitTest {
         private val IT_IT = createLocale("it", "IT").build()
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test locale changing`() {
         val systemLocales = LocaleListCompat.create(EN_US, ZH_CN_HANS, IT_IT)
         var perAppLocales = LocaleListCompat.getEmptyLocaleList()
@@ -48,13 +48,13 @@ internal class AppLocaleServiceTest : BaseUnitTest {
         assertThat(service.hasPerAppLocale()).isTrue()
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test isEquivalent`() {
         val result = AppLocaleService.isEquivalent(EN_US, Locale.ENGLISH)
         assertThat(result).isTrue()
     }
 
-    @JunitTest
+    @org.junit.Test
     fun test() = runTest {
         val service = AppLocaleService(
             getDefaultLocaleList = { LocaleListCompat.create(Locale.ENGLISH, Locale.FRENCH, Locale.JAPANESE) },
@@ -77,7 +77,7 @@ internal class AppLocaleServiceTest : BaseUnitTest {
         }
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test locale fixing`() = tableTest<String, String>("locale", "expected")
         .row("en", "en")
         .row("de", "de")
@@ -92,13 +92,13 @@ internal class AppLocaleServiceTest : BaseUnitTest {
             assertThat(runTest(input)).isEqualTo(expected)
         }
 
-    @JunitTest
+    @org.junit.Test
     fun `test locale parsing`() {
         val result = AppLocaleService.parseLocale("zh-Hans-CN-u-fw-mon-mu-celsius")
         assertSuccess(result).isEqualTo(ZH_CN_HANS)
     }
 
-    @JunitTest
+    @org.junit.Test
     fun `test isDeviceLocale`() = tableTest<Locale, Locale>("system locale", "app locale")
         .row(Locale.ENGLISH, Locale.ENGLISH)
         .row(EN_US, Locale.ENGLISH)

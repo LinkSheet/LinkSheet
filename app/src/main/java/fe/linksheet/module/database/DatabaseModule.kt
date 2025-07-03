@@ -24,6 +24,7 @@ import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
 import fe.linksheet.module.database.migrations.Migration12to17
+import fe.linksheet.module.database.migrations.Migration18to19
 import fe.linksheet.module.database.migrations.Migration1to2
 import fe.linksheet.module.log.Logger
 import org.koin.dsl.module
@@ -56,7 +57,6 @@ val databaseModule = module {
         AutoMigration(from = 11, to = 12),
         AutoMigration(from = 12, to = 13),
         AutoMigration(from = 17, to = 18),
-        AutoMigration(from = 18, to = 19)
     ],
     exportSchema = true
 )
@@ -80,7 +80,9 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     companion object {
         private fun buildMigrations(logger: Logger): Array<Migration> {
             return arrayOf(
-                Migration1to2, *Migration12to17(logger).create()
+                Migration1to2,
+                *Migration12to17(logger).create(),
+                Migration18to19
             )
         }
 

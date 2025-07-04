@@ -562,4 +562,14 @@
     <string name="settings_sql__text_query">Requête</string>
     <string name="generic__button_text_settings">Paramètres</string>
     <string name="settings__title_sql">Requête SQL</string>
+    <string name="generic__title_sort_by">Trier par</string>
+    <string name="generic__title_filter">Filtre</string>
+    <string name="settings_verified_link_handlers__text_sort_by_a_z">A-Z</string>
+    <string name="settings_verified_link_handlers__text_ascending">Ascendant</string>
+    <string name="generic__label_arrow_rotation">Rotation de la flèche</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"><![CDATA[All apps]]></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_browser">Navigateurs</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_native">Applications natives</string>
+    <string name="settings_verified_link_handlers__text_system_apps">Applications système</string>
+    <string name="settings_verified_link_handlers__text_sort_by_installation_time">Temps d\'installation</string>
 </resources>

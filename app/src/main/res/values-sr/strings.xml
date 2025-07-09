@@ -565,4 +565,14 @@
     <string name="generic__button_text_settings">Подешавања</string>
     <string name="settings__title_sql">Sql упит</string>
     <string name="settings_sql__text_query">Упит</string>
+    <string name="generic__title_sort_by">Сортирање по</string>
+    <string name="generic__title_filter">Филтрирање</string>
+    <string name="settings_verified_link_handlers__text_sort_by_a_z">A-Z</string>
+    <string name="settings_verified_link_handlers__text_sort_by_installation_time">Време инсталације</string>
+    <string name="settings_verified_link_handlers__text_ascending">Растуће</string>
+    <string name="generic__label_arrow_rotation">Ротација стрелице</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"><![CDATA[Све апликације]]></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_browser">Прегледачи</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_native">Изворне апликације</string>
+    <string name="settings_verified_link_handlers__text_system_apps">Системске апликације</string>
 </resources>

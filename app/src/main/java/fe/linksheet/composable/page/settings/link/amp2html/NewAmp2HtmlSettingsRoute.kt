@@ -14,6 +14,7 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.composable.util.groupSize
 import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.util.web.Darknet
@@ -44,7 +45,7 @@ fun NewAmp2HtmlSettingsRoute(
 
         divider(id =  R.string.options)
 
-        group(size = 4 + if (LinkSheetAppConfig.isPro()) 1 else 0) {
+        group(size = groupSize(5, LinkSheetAppConfig.isPro())) {
             item(key = R.string.amp2html_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
                     enabled = contentSet,
@@ -64,6 +65,17 @@ fun NewAmp2HtmlSettingsRoute(
                     statePreference = viewModel.amp2HtmlAllowDarknets,
                     headlineContent = textContent(R.string.allow_darknets),
                     supportingContent = textContent(id = R.string.amp2html_allow_darknets_explainer, darknets),
+                )
+            }
+
+            item(key = R.string.settings_links_amp2html__title_local_network) { padding, shape ->
+                PreferenceSwitchListItem(
+                    enabled = contentSet,
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.amp2HtmlAllowLocalNetwork,
+                    headlineContent = textContent(R.string.settings_links_amp2html__title_local_network),
+                    supportingContent = textContent(R.string.settings_links_amp2html__text_local_network),
                 )
             }
 

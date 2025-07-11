@@ -1,6 +1,5 @@
 package fe.linksheet.module.resolver.urlresolver.base
 
-import android.net.CompatUriHost
 import android.net.Uri
 import android.net.compatHost
 import fe.linksheet.extension.koin.injectLogger
@@ -36,6 +35,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         connectTimeout: Int,
         canAccessInternet: Boolean,
         allowDarknets: Boolean,
+        allowLocalNetwork: Boolean,
         resolveType: ResolveType? = null
     ): Result<ResolveResultType>? {
         if (resolvePredicate?.invoke(uri) == false) {
@@ -43,11 +43,18 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         }
 
         val darknet = Darknet.getOrNull(uri)
+        val isPublicHost = HostUtil.isAccessiblePublicly(uri.compatHost)
+
         val uriString = uri.toString()
         val uriLogContext = logger.createContext(uriString, HashProcessor.UrlProcessor)
 
         if (!allowDarknets && darknet != null) {
             logger.info(uriLogContext) { "$it is a darknet url, but darknets are not allowed, skipping" }
+            return null
+        }
+
+        if (!allowLocalNetwork && !isPublicHost) {
+            logger.info(uriLogContext) { "$it is not a public url, but local networks are not allowed, skipping" }
             return null
         }
 
@@ -75,7 +82,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
             return ResolveResultType.NoInternetConnection.success()
         }
 
-        val resolveResult = resolve(uriString, uriLogContext, externalService, uri.compatHost, darknet, connectTimeout)
+        val resolveResult = resolve(uriString, uriLogContext, externalService, darknet, isPublicHost, connectTimeout)
 
         if (localCache) {
             // TODO: Insert skip
@@ -90,15 +97,15 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
 
     private fun canResolveExternally(
         logContext: LoggerDelegate.RedactedParameter,
-        host: CompatUriHost?,
         darknet: Darknet?,
+        isPublicHost: Boolean,
     ): Boolean {
         if (darknet != null) {
             logger.info(logContext) { "$it is a darknet url, but external services are enabled, skipping" }
             return false
         }
 
-        if (!HostUtil.isAccessiblePublicly(host)) {
+        if (!isPublicHost) {
             logger.info(logContext) { "$it is not publicly accessible, falling back to local resolving" }
             return false
         }
@@ -110,11 +117,11 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         uriString: String,
         logContext: LoggerDelegate.RedactedParameter,
         externalService: Boolean,
-        host: CompatUriHost?,
         darknet: Darknet?,
+        isPublicHost: Boolean,
         timeout: Int,
     ): Result<ResolveResultType> {
-        if (externalService && canResolveExternally(logContext, host, darknet)) {
+        if (externalService && canResolveExternally(logContext, darknet, isPublicHost)) {
             logger.info(logContext) { "Attempting to resolve $it via external service.." }
             val result = redirectResolver.resolveRemote(uriString, timeout, resolverRepository.remoteResolveUrlField)
             if (result.isFailure) logger.error("External resolve failed", result.exceptionOrNull())

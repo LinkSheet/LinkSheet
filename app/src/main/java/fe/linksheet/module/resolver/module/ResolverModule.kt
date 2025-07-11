@@ -134,6 +134,7 @@ data class FollowRedirectsSettings(
     val followRedirectsLocalCache: () -> Boolean,
     val followRedirectsExternalService: () -> Boolean,
     val followRedirectsAllowDarknets: () -> Boolean,
+    val followRedirectsAllowLocalNetwork: () -> Boolean,
 )
 
 data class Amp2HtmlSettings(
@@ -141,6 +142,7 @@ data class Amp2HtmlSettings(
     val amp2HtmlLocalCache: () -> Boolean,
     val amp2HtmlExternalService: () -> Boolean,
     val amp2HtmlAllowDarknets: () -> Boolean,
+    val amp2HtmlAllowLocalNetwork: () -> Boolean,
     val amp2HtmlSkipBrowser: () -> Boolean,
 )
 
@@ -191,6 +193,7 @@ fun createSettings(
             amp2HtmlLocalCache = prefRepo.asFunction(AppPreferences.amp2HtmlLocalCache),
             amp2HtmlExternalService = prefRepo.asFunction(AppPreferences.amp2HtmlExternalService),
             amp2HtmlAllowDarknets = prefRepo.asFunction(AppPreferences.amp2HtmlAllowDarknets),
+            amp2HtmlAllowLocalNetwork = prefRepo.asFunction(AppPreferences.amp2HtmlAllowLocalNetwork),
             amp2HtmlSkipBrowser = prefRepo.asFunction(AppPreferences.amp2HtmlSkipBrowser),
         ),
         followRedirectsSettings = FollowRedirectsSettings(
@@ -200,6 +203,7 @@ fun createSettings(
             followRedirectsLocalCache = prefRepo.asFunction(AppPreferences.followRedirectsLocalCache),
             followRedirectsExternalService = prefRepo.asFunction(AppPreferences.followRedirectsExternalService),
             followRedirectsAllowDarknets = prefRepo.asFunction(AppPreferences.followRedirectsAllowDarknets),
+            followRedirectsAllowLocalNetwork = prefRepo.asFunction(AppPreferences.followRedirectsAllowLocalNetwork),
         ),
         downloaderSettings = DownloaderSettings(
             enableDownloader = prefRepo.asFunction(AppPreferences.enableDownloader),

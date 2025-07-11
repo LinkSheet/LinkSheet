@@ -14,6 +14,7 @@ import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import fe.linksheet.composable.util.groupSize
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.util.web.Darknet
 import org.koin.androidx.compose.koinViewModel
@@ -49,7 +50,7 @@ fun NewFollowRedirectsSettingsRoute(
 
         divider(id =  R.string.options)
 
-        group(size = 5 + if(LinkSheetAppConfig.isPro()) 1 else 0) {
+        group(size = groupSize(6, LinkSheetAppConfig.isPro())) {
             item(key = R.string.follow_redirects_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
                     enabled = contentSet,
@@ -83,6 +84,17 @@ fun NewFollowRedirectsSettingsRoute(
                     statePreference = viewModel.followRedirectsAllowsDarknets,
                     headlineContent = textContent(R.string.allow_darknets),
                     supportingContent = textContent(id = R.string.follow_redirects_allow_darknets_explainer, darknets),
+                )
+            }
+
+            item(key = R.string.settings_links_follow_redirects__title_local_network) { padding, shape ->
+                PreferenceSwitchListItem(
+                    enabled = contentSet,
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.followRedirectsAllowLocalNetwork,
+                    headlineContent = textContent(R.string.settings_links_follow_redirects__title_local_network),
+                    supportingContent = textContent(R.string.settings_links_follow_redirects__text_local_network),
                 )
             }
 

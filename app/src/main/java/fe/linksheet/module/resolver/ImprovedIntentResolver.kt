@@ -191,6 +191,7 @@ class ImprovedIntentResolver(
                 followOnlyKnownTrackers = followRedirectsSettings.followOnlyKnownTrackers(),
                 followRedirectsLocalCache = followRedirectsSettings.followRedirectsLocalCache(),
                 followRedirectsAllowDarknets = followRedirectsSettings.followRedirectsAllowDarknets(),
+                followRedirectsAllowLocalNetwork = followRedirectsSettings.followRedirectsAllowLocalNetwork()
             )
         }
 
@@ -207,6 +208,7 @@ class ImprovedIntentResolver(
                 requestTimeout = settings.requestTimeout(),
                 enableAmp2Html = true,
                 amp2HtmlAllowDarknets = amp2HtmlSettings.amp2HtmlAllowDarknets(),
+                amp2HtmlAllowLocalNetwork = amp2HtmlSettings.amp2HtmlAllowLocalNetwork(),
                 amp2HtmlExternalService = amp2HtmlSettings.amp2HtmlExternalService(),
                 amp2HtmlLocalCache = amp2HtmlSettings.amp2HtmlLocalCache()
             )
@@ -516,6 +518,7 @@ class ImprovedIntentResolver(
         followOnlyKnownTrackers: Boolean,
         followRedirectsLocalCache: Boolean,
         followRedirectsAllowDarknets: Boolean,
+        followRedirectsAllowLocalNetwork: Boolean
     ): Uri? = withContext(dispatcher) {
         logger.debug("Executing runRedirectResolver on ${Thread.currentThread().name}")
 
@@ -534,6 +537,7 @@ class ImprovedIntentResolver(
                 requestTimeout,
                 canAccessInternet,
                 followRedirectsAllowDarknets,
+                followRedirectsAllowLocalNetwork,
                 ResolveType.FollowRedirects
             )
         }
@@ -550,6 +554,7 @@ class ImprovedIntentResolver(
         amp2HtmlLocalCache: Boolean,
         amp2HtmlExternalService: Boolean,
         amp2HtmlAllowDarknets: Boolean,
+        amp2HtmlAllowLocalNetwork: Boolean
     ): Uri? = withContext(dispatcher) {
         logger.debug("Executing runAmp2HtmlResolver on ${Thread.currentThread().name}")
 
@@ -564,6 +569,7 @@ class ImprovedIntentResolver(
                 requestTimeout,
                 canAccessInternet,
                 amp2HtmlAllowDarknets,
+                amp2HtmlAllowLocalNetwork,
                 ResolveType.Amp2Html
             )
         }

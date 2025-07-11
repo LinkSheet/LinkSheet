@@ -15,6 +15,7 @@ class FollowRedirectsSettingsViewModel(
     val followRedirectsExternalService = preferenceRepository.asViewModelState(AppPreferences.followRedirectsExternalService)
     val followOnlyKnownTrackers = preferenceRepository.asViewModelState(AppPreferences.followOnlyKnownTrackers)
     val followRedirectsAllowsDarknets = preferenceRepository.asViewModelState(AppPreferences.followRedirectsAllowDarknets)
+    val followRedirectsAllowLocalNetwork = preferenceRepository.asViewModelState(AppPreferences.followRedirectsAllowLocalNetwork)
     val followRedirectsSkipBrowser = preferenceRepository.asViewModelState(AppPreferences.followRedirectsSkipBrowser)
     val requestTimeout = preferenceRepository.asViewModelState(AppPreferences.requestTimeout)
 }

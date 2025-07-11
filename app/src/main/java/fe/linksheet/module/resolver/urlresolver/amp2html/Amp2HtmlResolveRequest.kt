@@ -1,6 +1,5 @@
 package fe.linksheet.module.resolver.urlresolver.amp2html
 
-import android.util.Log
 import fe.amp2htmlkt.Amp2Html
 import fe.droidkit.koin.single
 import fe.httpkt.Request
@@ -12,6 +11,7 @@ import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequestException
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import org.koin.dsl.module
 
 val amp2HtmlResolveRequestModule = module {
@@ -38,7 +38,12 @@ class Amp2HtmlResolveRequest(
     override fun resolveLocal(url: String, timeout: Int): Result<ResolveResultType> {
         val req = okhttp3.Request.Builder().url(url).build()
 
-        val response = okHttpClient.newCall(req).execute()
+        val result = sendRequest(req)
+        if (result.isFailure) {
+            return Result.failure(result.exceptionOrNull()!!)
+        }
+
+        val response = result.getOrNull()!!
         val statusCode = response.code
         response.body.use {
             val contentType = it.contentType() ?: return Result.failure(ResolveRequestException(statusCode))
@@ -47,7 +52,6 @@ class Amp2HtmlResolveRequest(
                 return Result.failure(ResolveRequestException(statusCode))
             }
 
-            Log.d("Mime", "$contentType ${contentType.isHtml()}")
             if (!contentType.isHtml()) {
                 return Result.success(ResolveResultType.NothingToResolve)
             }
@@ -56,7 +60,6 @@ class Amp2HtmlResolveRequest(
 
             val nonAmpLink = parseHtml(html, req.url.host)
             if (nonAmpLink != null) {
-                Log.d("Amp2Html", "$nonAmpLink")
                 return nonAmpLink
             }
 
@@ -71,5 +74,9 @@ class Amp2HtmlResolveRequest(
         }
 
         return Result.success(ResolveResultType.NothingToResolve)
+    }
+
+    private fun sendRequest(request: okhttp3.Request): Result<Response> {
+        return runCatching { okHttpClient.newCall(request).execute() }
     }
 }

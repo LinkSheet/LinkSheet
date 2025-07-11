@@ -113,14 +113,13 @@ fun PreferredBrowserSettingsRoute(
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
             }
         } else {
-
             items(
                 items = browserState,
                 key = { it.flatComponentName },
                 contentType = { it.flatComponentName }
             ) { app ->
-                val selected = browserMode == BrowserMode.SelectedBrowser && selectedBrowser?.value == app.packageName
-//
+                val selected = browserMode?.value == BrowserMode.SelectedBrowser && selectedBrowser?.value == app.packageName
+
                 RadioButtonRow(
                     selected = selected,
                     onClick = { viewModel.updateSelectedBrowser(app.packageName) },

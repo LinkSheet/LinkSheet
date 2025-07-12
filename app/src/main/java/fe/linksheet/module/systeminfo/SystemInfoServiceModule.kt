@@ -12,14 +12,17 @@ import org.koin.dsl.module
 
 val SystemInfoServiceModule = module {
     single {
+        val buildInfo = BuildInfo(
+            BuildConfig.VERSION_NAME,
+            BuildConfig.VERSION_CODE,
+            BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat),
+            "${BuildConfig.FLAVOR}-${BuildConfig.BUILD_TYPE}",
+            BuildConfig.GITHUB_WORKFLOW_RUN_ID
+        )
         SystemInfoService(
-            RealSystemProperties, StaticBuildConstants, BuildInfo(
-                BuildConfig.VERSION_NAME,
-                BuildConfig.VERSION_CODE,
-                BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat),
-                "${BuildConfig.FLAVOR}-${BuildConfig.BUILD_TYPE}",
-                BuildConfig.GITHUB_WORKFLOW_RUN_ID
-            )
+            properties = RealSystemProperties,
+            build = StaticBuildConstants,
+            buildInfo = buildInfo
         )
     }
 }

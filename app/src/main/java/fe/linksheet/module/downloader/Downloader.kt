@@ -17,9 +17,9 @@ import org.koin.dsl.module
 import java.io.IOException
 
 
-val downloaderModule = module {
+val DownloaderModule = module {
     single<Downloader> {
-        Downloader(get(), createLogger<Downloader>())
+        Downloader(cachedRequest = get(), logger = createLogger<Downloader>())
     }
 }
 

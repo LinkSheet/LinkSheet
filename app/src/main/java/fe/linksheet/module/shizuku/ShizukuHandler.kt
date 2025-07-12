@@ -14,7 +14,7 @@ import rikka.shizuku.Shizuku
 import java.util.*
 
 
-val shizukuHandlerModule = module {
+val ShizukuHandlerModule = module {
     singleOf(::ShizukuHandler)
 }
 

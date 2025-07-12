@@ -5,23 +5,20 @@ import androidx.work.*
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
 import fe.composekit.preference.asFunction
+import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.remoteconfig.RemoteAssetFetcherWorker
 import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
-import org.koin.core.module.Module
 import org.koin.dsl.module
 
-@Suppress("FunctionName")
-fun WorkDelegatorServiceModule(): Module {
-    return module {
-        includes(RemoteConfigClientModule)
-        service<WorkDelegatorService> {
-            WorkDelegatorService(
-                workManager = WorkManager.getInstance(applicationContext),
-                remoteConfig = scope.get<AppPreferenceRepository>().asFunction(AppPreferences.remoteConfig)
-            )
-        }
+val WorkDelegatorServiceModule = module {
+    includes(PreferenceRepositoryModule, RemoteConfigClientModule)
+    service<WorkDelegatorService> {
+        WorkDelegatorService(
+            workManager = WorkManager.getInstance(applicationContext),
+            remoteConfig = scope.get<AppPreferenceRepository>().asFunction(AppPreferences.remoteConfig)
+        )
     }
 }
 

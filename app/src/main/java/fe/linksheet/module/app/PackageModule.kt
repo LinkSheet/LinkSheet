@@ -27,18 +27,21 @@ import org.koin.dsl.module
 
 val PackageModule = module {
     single {
-        AndroidPackageIconLoaderModule(getPackageManager(), getSystemServiceOrThrow())
+        AndroidPackageIconLoaderModule(
+            packageManager = getPackageManager(),
+            activityManager = getSystemServiceOrThrow()
+        )
     }
     single {
         val experimentRepository = get<ExperimentRepository>()
 
         AndroidPackageIntentHandler(
-            getPackageManager(),
-            experimentRepository.asFunction(Experiments.hideReferrerFromSheet)
+            packageManager = getPackageManager(),
+            checkReferrerExperiment = experimentRepository.asFunction(Experiments.hideReferrerFromSheet)
         )
     }
     single {
-        AndroidPackageServiceModule(get(), get(), get())
+        AndroidPackageServiceModule(context = get(), packageIconLoader = get(), packageIntentHandler = get())
     }
 }
 

@@ -2,9 +2,9 @@
 
 package fe.linksheet.module.repository.module
 
-import fe.linksheet.module.clock.clockModule
-import fe.linksheet.module.database.dao.module.daoModule
-import fe.linksheet.module.database.databaseModule
+import fe.linksheet.module.clock.ClockModule
+import fe.linksheet.module.database.dao.module.DaoModule
+import fe.linksheet.module.database.DatabaseModule
 import fe.linksheet.module.repository.*
 import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
 import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
@@ -14,8 +14,8 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 
-val repositoryModule = module {
-    includes(clockModule, databaseModule, daoModule)
+val RepositoryModule = module {
+    includes(ClockModule, DatabaseModule, DaoModule)
 
     singleOf(::PreferredAppRepository)
     singleOf(::DisableInAppBrowserInSelectedRepository)

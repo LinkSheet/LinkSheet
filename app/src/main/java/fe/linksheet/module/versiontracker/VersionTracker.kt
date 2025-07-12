@@ -4,25 +4,23 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.gson.Gson
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
+import fe.gson.GlobalGsonModule
 import fe.gson.GsonQualifier
-import fe.gson.globalGsonModule
 import fe.linksheet.BuildConfig
+import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.AppStart
 import fe.linksheet.module.analytics.BaseAnalyticsService
+import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.preference.preferenceRepositoryModule
-import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.util.buildconfig.Build
-import org.koin.core.module.Module
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
-val VersionTrackerModule = VersionTrackerModule()
-
-private fun VersionTrackerModule(): Module = module {
-    includes(globalGsonModule, preferenceRepositoryModule)
+val VersionTrackerModule = module {
+    includes(GlobalGsonModule, SystemInfoServiceModule, PreferenceRepositoryModule)
 
     service<VersionTracker, BaseAnalyticsService, AppPreferenceRepository> { _, analyticsService, preferences ->
         VersionTracker(

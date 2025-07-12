@@ -12,15 +12,15 @@ import fe.android.lifecycle.ProcessServiceRegistry
 import fe.android.lifecycle.koin.extension.applicationLifecycle
 import fe.composekit.core.AndroidVersion
 import fe.droidkit.koin.androidApplicationContext
+import fe.gson.GlobalGsonModule
 import fe.gson.context.GlobalGsonContext
-import fe.gson.globalGsonModule
 import fe.linksheet.activity.CrashHandlerActivity
-import fe.linksheet.module.analytics.analyticsServiceModule
+import fe.linksheet.module.analytics.AnalyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.app.PackageModule
-import fe.linksheet.module.clock.clockModule
-import fe.linksheet.module.database.dao.module.daoModule
-import fe.linksheet.module.database.databaseModule
+import fe.linksheet.module.clock.ClockModule
+import fe.linksheet.module.database.dao.module.DaoModule
+import fe.linksheet.module.database.DatabaseModule
 import fe.linksheet.module.debug.DebugMenuSlotProvider
 import fe.linksheet.module.debug.DebugPreferenceProvider
 import fe.linksheet.module.debug.NoOpDebugMenuSlotProvider
@@ -30,28 +30,26 @@ import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
-import fe.linksheet.module.downloader.downloaderModule
+import fe.linksheet.module.downloader.DownloaderModule
 import fe.linksheet.module.language.AppLocaleModule
 import fe.linksheet.module.http.HttpModule
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
-import fe.linksheet.module.network.networkStateServiceModule
-import fe.linksheet.module.paste.pasteServiceModule
-import fe.linksheet.module.preference.preferenceRepositoryModule
+import fe.linksheet.module.network.NetworkStateServiceModule
+import fe.linksheet.module.paste.PasteServiceModule
+import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
 import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
-import fe.linksheet.module.repository.module.repositoryModule
-import fe.linksheet.module.resolver.module.resolverModule
-import fe.linksheet.module.resolver.urlresolver.amp2html.amp2HtmlResolveRequestModule
-import fe.linksheet.module.resolver.urlresolver.base.allRemoteResolveRequest
-import fe.linksheet.module.resolver.urlresolver.redirect.redirectResolveRequestModule
-import fe.linksheet.module.shizuku.shizukuHandlerModule
-import fe.linksheet.module.statistic.statisticsModule
+import fe.linksheet.module.repository.module.RepositoryModule
+import fe.linksheet.module.resolver.module.ResolverModule
+import fe.linksheet.module.resolver.urlresolver.UrlResolverModule
+import fe.linksheet.module.shizuku.ShizukuHandlerModule
+import fe.linksheet.module.statistic.StatisticsModule
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
-import fe.linksheet.module.viewmodel.module.viewModelModule
+import fe.linksheet.module.viewmodel.module.ViewModelModule
 import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
@@ -115,37 +113,35 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideKoinModules(): List<Module> {
         return listOf(
-            clockModule,
+            ClockModule,
             SystemInfoServiceModule,
             PackageModule,
             AppLocaleModule,
-            networkStateServiceModule,
-            shizukuHandlerModule,
-            globalGsonModule,
-            preferenceRepositoryModule,
+            NetworkStateServiceModule,
+            ShizukuHandlerModule,
+            GlobalGsonModule,
+            PreferenceRepositoryModule,
             DefaultLogModule,
             provideCompatProvider(),
             CompatModule,
-            databaseModule,
-            daoModule,
+            DatabaseModule,
+            DaoModule,
+            RepositoryModule,
             HttpModule,
             RemoteConfigClientModule,
-            redirectResolveRequestModule,
-            amp2HtmlResolveRequestModule,
-            allRemoteResolveRequest,
-            resolverModule,
-            repositoryModule,
-            viewModelModule,
-            downloaderModule,
+            UrlResolverModule,
+            ResolverModule,
+            ViewModelModule,
+            DownloaderModule,
             provideAnalyticsClient(),
-            analyticsServiceModule,
-            statisticsModule,
+            AnalyticsServiceModule,
+            StatisticsModule,
             VersionTrackerModule,
-            pasteServiceModule,
+            PasteServiceModule,
             ProfileSwitcherModule,
             AppStateServiceModule,
             provideDebugModule(),
-            WorkDelegatorServiceModule()
+            WorkDelegatorServiceModule
         )
     }
 

@@ -1,7 +1,6 @@
 package fe.linksheet.module.resolver.urlresolver.amp2html
 
 import fe.amp2htmlkt.Amp2Html
-import fe.droidkit.koin.single
 import fe.httpkt.Request
 import fe.linksheet.extension.okhttp.isHtml
 import fe.linksheet.module.repository.CacheRepository
@@ -9,23 +8,8 @@ import fe.linksheet.module.resolver.urlresolver.CachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequestException
-import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import org.koin.dsl.module
-
-val amp2HtmlResolveRequestModule = module {
-    single<Amp2HtmlResolveRequest, Request, CachedRequest> { _, request, cachedRequest ->
-        Amp2HtmlResolveRequest(
-            "${LinkSheetAppConfig.supabaseHost()}/amp2html",
-            LinkSheetAppConfig.supabaseApiKey(),
-            request,
-            scope.get<CacheRepository>(),
-            cachedRequest,
-            scope.get<OkHttpClient>()
-        )
-    }
-}
 
 class Amp2HtmlResolveRequest(
     apiUrl: String,

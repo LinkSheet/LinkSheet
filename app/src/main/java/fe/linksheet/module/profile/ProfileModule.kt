@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 val ProfileSwitcherModule = module {
     single {
-        CrossProfileAppsCompat(get())
+        CrossProfileAppsCompat(context = get())
     }
     single {
         AndroidProfileSwitcher(

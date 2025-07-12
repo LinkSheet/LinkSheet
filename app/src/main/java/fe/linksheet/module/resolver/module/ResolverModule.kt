@@ -27,7 +27,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 
-val resolverModule = module {
+val ResolverModule = module {
     single { BrowserResolver(getPackageManager(), get()) }
     single {
         val experimentRepository = get<ExperimentRepository>()

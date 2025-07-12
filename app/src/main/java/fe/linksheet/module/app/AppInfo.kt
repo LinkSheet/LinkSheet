@@ -1,6 +1,5 @@
 package fe.linksheet.module.app
 
-import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.feature.app.ActivityAppInfoStatus
 import fe.linksheet.feature.app.AppInfo

@@ -1,12 +1,12 @@
 package fe.linksheet.module.database.dao.module
 
 import fe.linksheet.module.database.LinkSheetDatabase
-import fe.linksheet.module.database.databaseModule
+import fe.linksheet.module.database.DatabaseModule
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val daoModule = module {
-    includes(databaseModule)
+val DaoModule = module {
+    includes(DatabaseModule)
 
     singleOf(LinkSheetDatabase::preferredAppDao)
     singleOf(LinkSheetDatabase::disableInAppBrowserInSelectedDao)

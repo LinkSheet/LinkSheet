@@ -3,9 +3,9 @@ package fe.linksheet.module.viewmodel.module
 
 import fe.gson.GsonQualifier
 import fe.linksheet.module.log.DefaultLogModule
-import fe.linksheet.module.preference.preferenceRepositoryModule
+import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
-import fe.linksheet.module.repository.module.repositoryModule
+import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import kotlinx.coroutines.Dispatchers
@@ -16,10 +16,10 @@ import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
-val viewModelModule = module {
+val ViewModelModule = module {
     includes(
-        preferenceRepositoryModule,
-        repositoryModule,
+        PreferenceRepositoryModule,
+        RepositoryModule,
         DefaultLogModule,
         ProfileSwitcherModule
     )

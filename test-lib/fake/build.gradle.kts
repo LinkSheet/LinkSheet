@@ -33,5 +33,6 @@ dependencies {
     api(Testing.junit.jupiter.api)
     api(Koin.test)
 
+    implementation(platform("androidx.compose:compose-bom-alpha:_"))
     implementation(AndroidX.compose.ui)
 }

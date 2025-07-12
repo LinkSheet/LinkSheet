@@ -5,18 +5,23 @@ import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
 import fe.linksheet.extension.koin.logger
 import fe.linksheet.module.log.Logger
+import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.preference.preferenceRepositoryModule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.dsl.module
 
 val AppStateServiceModule = module {
-    includes(preferenceRepositoryModule)
+    includes(PreferenceRepositoryModule)
     service<AppStateService> {
-        AppStateService(logger, scope.get(), scope.get(), scope.get())
+        AppStateService(
+            logger = logger,
+            preferenceRepository = scope.get(),
+            appStateRepository = scope.get(),
+            experimentsRepository = scope.get()
+        )
     }
 }
 

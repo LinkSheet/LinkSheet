@@ -13,7 +13,7 @@ import fe.linksheet.module.preference.app.AppPreferences
 import org.koin.dsl.module
 
 @OptIn(SensitivePreference::class)
-val analyticsServiceModule = module {
+val AnalyticsServiceModule = module {
     service<BaseAnalyticsService, AppPreferenceRepository, NetworkStateService> { _, preferences, networkState ->
         val client = scope.get<AnalyticsClient>()
 
@@ -21,12 +21,12 @@ val analyticsServiceModule = module {
         val hasMadeChoice = !preferences.get(AppPreferences.telemetryShowInfoDialog)
 
         AnalyticsService(
-            BuildConfig.ANALYTICS_SUPPORTED,
-            client,
-            applicationLifecycle.lifecycleCoroutineScope,
-            if (hasMadeChoice) level else null,
-            networkState,
-            logger
+            analyticsSupported = BuildConfig.ANALYTICS_SUPPORTED,
+            client = client,
+            coroutineScope = applicationLifecycle.lifecycleCoroutineScope,
+            initialLevel = if (hasMadeChoice) level else null,
+            networkState = networkState,
+            logger = logger
         )
     }
 }

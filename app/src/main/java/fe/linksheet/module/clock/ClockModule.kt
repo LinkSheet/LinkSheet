@@ -9,7 +9,7 @@ import java.time.ZoneId
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
-val clockModule = module {
+val ClockModule = module {
     single<Clock> { Clock.System }
     single<ZoneId> { Timezone.SystemDefault }
 }

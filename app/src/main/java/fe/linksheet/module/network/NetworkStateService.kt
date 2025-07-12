@@ -14,10 +14,11 @@ import kotlinx.coroutines.flow.update
 import org.koin.dsl.module
 
 
-val networkStateServiceModule = module {
+val NetworkStateServiceModule = module {
     service<NetworkStateService> {
-        val connectivityManager = applicationContext.getSystemServiceOrThrow<ConnectivityManager>()
-        NetworkStateService(connectivityManager)
+        NetworkStateService(
+            connectivityManager = applicationContext.getSystemServiceOrThrow<ConnectivityManager>()
+        )
     }
 }
 

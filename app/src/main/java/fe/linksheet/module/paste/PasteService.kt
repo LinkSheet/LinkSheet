@@ -10,6 +10,6 @@ interface PasteService<T : Paste> {
 
 abstract class Paste(val url: String)
 
-val pasteServiceModule = module {
+val PasteServiceModule = module {
     single<PasteService<*>> { PrivateBinPasteService(PrivateBinConfig.Default) }
 }

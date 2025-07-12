@@ -29,9 +29,9 @@ import fe.linksheet.module.database.migrations.Migration1to2
 import fe.linksheet.module.log.Logger
 import org.koin.dsl.module
 
-val databaseModule = module {
+val DatabaseModule = module {
     single<LinkSheetDatabase> {
-        LinkSheetDatabase.create(get(), createLogger<LinkSheetDatabase>(), "linksheet")
+        LinkSheetDatabase.create(context = get(), logger = createLogger<LinkSheetDatabase>(), name = "linksheet")
     }
 }
 
@@ -40,7 +40,7 @@ val databaseModule = module {
         PreferredApp::class, AppSelectionHistory::class, WhitelistedNormalBrowser::class,
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
-        CachedHtml::class, PreviewCache::class, ResolvedUrl::class, ResolveType::class, UrlEntry::class ,
+        CachedHtml::class, PreviewCache::class, ResolvedUrl::class, ResolveType::class, UrlEntry::class,
         WikiCache::class
     ],
     version = 19,

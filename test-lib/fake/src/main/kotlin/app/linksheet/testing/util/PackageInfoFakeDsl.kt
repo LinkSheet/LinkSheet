@@ -104,10 +104,6 @@ val PackageInfoFake.packageName: String
 val PackageInfoFake.firstActivityResolveInfo: ResolveInfo?
     get() = resolveInfos.firstOrNull()
 
-
-
-
-//
 fun Iterable<PackageInfoFake>.toKeyedMap(): Map<String, ResolveInfo> {
     return associate { it.packageName to it.firstActivityResolveInfo!! }
 }

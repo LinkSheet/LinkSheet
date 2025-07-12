@@ -55,6 +55,7 @@ internal class FollowRedirectsLinkResolverTest : BaseUnitTest  {
             source = source,
             cacheRepository = cacheRepository,
             allowDarknets = { false },
+            allowNonPublic = { false },
             followOnlyKnownTrackers = { false },
             useLocalCache = { true }
         )

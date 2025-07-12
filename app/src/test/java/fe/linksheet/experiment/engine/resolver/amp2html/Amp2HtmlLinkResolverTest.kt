@@ -76,6 +76,8 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
             ioDispatcher = dispatcher,
             source = source,
             cacheRepository = cacheRepository,
+            allowNonPublic = { false },
+            allowDarknets = { false },
             useLocalCache = { false },
         )
 
@@ -98,6 +100,8 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
             ioDispatcher = dispatcher,
             source = createSource("https://not-from-cache.com".toStdUrlOrThrow(), "<html></html>"),
             cacheRepository = cacheRepository,
+            allowNonPublic = { false },
+            allowDarknets = { false },
             useLocalCache = { true },
         )
 
@@ -138,6 +142,8 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
                 }
             },
             cacheRepository = cacheRepository,
+            allowNonPublic = { false },
+            allowDarknets = { false },
             useLocalCache = { true },
         )
 

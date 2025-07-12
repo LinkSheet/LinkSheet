@@ -59,6 +59,7 @@ internal class LinkEngineTest : BaseUnitTest {
                     source = FollowRedirectsLocalSource(client = client),
                     cacheRepository = cacheRepository,
                     allowDarknets = { false },
+                    allowNonPublic = { false },
                     followOnlyKnownTrackers = { true },
                     useLocalCache = { true }
                 ),
@@ -66,6 +67,8 @@ internal class LinkEngineTest : BaseUnitTest {
                     ioDispatcher = dispatcher,
                     source = Amp2HtmlLocalSource(client = client),
                     cacheRepository = cacheRepository,
+                    allowDarknets = { false },
+                    allowNonPublic = { false },
                     useLocalCache = { true }
                 )
             ),

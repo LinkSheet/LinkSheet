@@ -1,15 +1,13 @@
 package fe.linksheet.experiment.engine.resolver.followredirects
 
-import android.net.Uri
 import fe.fastforwardkt.FastForward
 import fe.linksheet.experiment.engine.context.EngineRunContext
-import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
-import fe.linksheet.extension.std.toAndroidUri
+import fe.linksheet.experiment.engine.resolver.UriChecker
+import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
-import fe.linksheet.util.web.Darknet
 import fe.std.result.isFailure
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
@@ -22,9 +20,10 @@ data class FollowRedirectsLinkResolver(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val source: FollowRedirectsSource,
     private val cacheRepository: CacheRepository,
-    private val isDarknet: (Uri) -> Boolean = { Darknet.getOrNull(it) != null },
     private val isTracker: (String) -> Boolean = { FastForward.isTracker(it) },
     private val allowDarknets: () -> Boolean,
+    private val allowNonPublic: () -> Boolean,
+    private val uriChecker: UriChecker = UriChecker(allowDarknets, allowNonPublic),
     private val followOnlyKnownTrackers: () -> Boolean,
     private val useLocalCache: () -> Boolean,
 ) : LinkResolver {
@@ -45,11 +44,7 @@ data class FollowRedirectsLinkResolver(
             return@withContext ResolveOutput(url)
         }
 
-        val uri = url.toAndroidUri()
-        val isDarknet = isDarknet(uri)
-        if (!allowDarknets() && isDarknet) {
-            return@withContext ResolveOutput(url)
-        }
+        uriChecker.check(url)?.let { return@withContext it }
 
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(urlString)

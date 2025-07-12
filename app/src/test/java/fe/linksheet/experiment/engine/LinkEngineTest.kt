@@ -6,8 +6,6 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
 import fe.linksheet.DatabaseTestRule
-import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
-import fe.linksheet.experiment.engine.context.SourceAppExtra
 import fe.linksheet.experiment.engine.modifier.ClearURLsLinkModifier
 import fe.linksheet.experiment.engine.modifier.EmbedLinkModifier
 import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLinkResolver

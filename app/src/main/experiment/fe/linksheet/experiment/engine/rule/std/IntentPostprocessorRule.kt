@@ -15,13 +15,15 @@ class IntentPostprocessorRule(
     private val definition: IntentRuleDefinition,
 ) : PostprocessorRule {
     override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
-        if (!matcher.matches(input.resultUrl)) return empty()
-        return IntentEngineResult(
-            intent = buildIntent(definition.action, input.resultUrl.toAndroidUri()) {
-                if (definition.cls != null) component = ComponentName(definition.packageName, definition.cls)
-                else `package` = definition.packageName
-            }
-        )
+        return when {
+            !matcher.matches(input.resultUrl) -> empty()
+            else -> IntentEngineResult(
+                intent = buildIntent(definition.action, input.resultUrl.toAndroidUri()) {
+                    if (definition.cls != null) component = ComponentName(definition.packageName, definition.cls)
+                    else `package` = definition.packageName
+                }
+            )
+        }
     }
 }
 

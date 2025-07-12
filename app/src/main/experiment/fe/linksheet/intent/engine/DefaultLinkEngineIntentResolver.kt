@@ -76,6 +76,7 @@ fun DefaultLinkEngineIntentResolver(
                 source = FollowRedirectsLocalSource(client = client),
                 cacheRepository = cacheRepository,
                 allowDarknets = settings.followRedirectsSettings.followRedirectsAllowDarknets,
+                allowNonPublic = settings.followRedirectsSettings.followRedirectsAllowLocalNetwork,
                 followOnlyKnownTrackers = settings.followRedirectsSettings.followOnlyKnownTrackers,
                 useLocalCache = settings.followRedirectsSettings.followRedirectsLocalCache
             ),
@@ -83,19 +84,21 @@ fun DefaultLinkEngineIntentResolver(
                 ioDispatcher = dispatcher,
                 source = Amp2HtmlLocalSource(client = client),
                 cacheRepository = cacheRepository,
+                allowDarknets = settings.amp2HtmlSettings.amp2HtmlAllowDarknets,
+                allowNonPublic = settings.amp2HtmlSettings.amp2HtmlAllowLocalNetwork,
                 useLocalCache = settings.amp2HtmlSettings.amp2HtmlLocalCache
             )
         ),
-        rules = listOf(
-            IntentPostprocessorRule(
-                matcher = RegexUrlMatcher("""https://t\.me/(.+)""".toRegex()),
-                definition = IntentRuleDefinition(
-                    packageName = "org.telegram.messenger",
-                    cls = null,
-                    action = Intent.ACTION_VIEW,
-                )
-            )
-        ),
+//        rules = listOf(
+//            IntentPostprocessorRule(
+//                matcher = RegexUrlMatcher("""https://t\.me/(.+)""".toRegex()),
+//                definition = IntentRuleDefinition(
+//                    packageName = "org.telegram.messenger",
+//                    cls = null,
+//                    action = Intent.ACTION_VIEW,
+//                )
+//            )
+//        ),
         fetchers = listOf(
             DownloadLinkFetcher(
                 ioDispatcher = dispatcher,

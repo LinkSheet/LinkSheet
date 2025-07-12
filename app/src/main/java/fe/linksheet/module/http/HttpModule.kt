@@ -10,7 +10,6 @@ import fe.linksheet.util.buildconfig.Build
 import fe.linksheet.util.withStatsTag
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
-import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.gson.gson
 import me.saket.unfurl.Unfurler
@@ -34,18 +33,15 @@ val HttpModule = module {
                 withStatsTag(0xF00D) { chain.proceed(chain.request()) }
             })
             .cache(cache)
-            .followRedirects(true)
-            .followSslRedirects(true)
+            // Default
+//            .followRedirects(true)
+//            .followSslRedirects(true)
             .build()
     }
     single<HttpClient> {
         HttpClient(OkHttp) {
             engine { preconfigured = get<OkHttpClient>() }
             install(ContentNegotiation) { gson() }
-            install(ContentEncoding) {
-                deflate(1.0F)
-                gzip(0.9F)
-            }
         }
     }
     single<ImageLoader> {

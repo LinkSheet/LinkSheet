@@ -60,12 +60,12 @@ data class Amp2HtmlLinkResolver(
 
             val cachedHtml = cacheRepository.getCachedHtml(entry.id)
             if (cachedHtml != null) {
-                val parsedUrlResult = source.parseHtml(cachedHtml.content, url.toString())
+                val parsedUrlResult = source.parseHtml(cachedHtml.content, url)
                 return@withContext handleResult(entry.id, url, true, parsedUrlResult)
             }
         }
 
-        val result = source.resolve(url.toString())
+        val result = source.resolve(url)
         handleResult(entry.id, url, localCache, result)
     }
 }

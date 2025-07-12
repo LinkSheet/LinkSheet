@@ -15,10 +15,10 @@ import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.database.entity.cache.ResolvedUrl
 import fe.linksheet.module.database.entity.cache.UrlEntry
 import fe.linksheet.module.repository.CacheRepository
-import fe.linksheet.testlib.core.JunitTest
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.IResult
 import fe.std.result.success
+import fe.std.result.unaryPlus
 import fe.std.time.unixMillisOf
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
@@ -57,13 +57,13 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
 
     private fun createSource(resolvedUrl: StdUrl, fakeHtmlText: String): Amp2HtmlSource {
         return object : Amp2HtmlSource {
-            override suspend fun resolve(urlString: String): IResult<Amp2HtmlResult> {
+            override suspend fun resolve(url: StdUrl): IResult<Amp2HtmlResult> {
                 return Amp2HtmlResult.NonAmpLink(RESOLVED_URL, fakeHtmlText).success
             }
 
             override suspend fun parseHtml(
                 htmlText: String,
-                urlString: String
+                url: StdUrl
             ): IResult<Amp2HtmlResult> {
                 return Amp2HtmlResult.NonAmpLink(resolvedUrl, htmlText).success
             }
@@ -122,19 +122,19 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
         val resolver = Amp2HtmlLinkResolver(
             ioDispatcher = dispatcher,
             source = object : Amp2HtmlSource {
-                override suspend fun resolve(urlString: String): IResult<Amp2HtmlResult> {
-                    return Amp2HtmlResult.NonAmpLink(urlString.toStdUrlOrThrow(), "<html><body><h1>Html not from cache</h1></body></html>").success
+                override suspend fun resolve(url: StdUrl): IResult<Amp2HtmlResult> {
+                    return +Amp2HtmlResult.NonAmpLink(url, "<html><body><h1>Html not from cache</h1></body></html>")
                 }
 
                 override suspend fun parseHtml(
                     htmlText: String,
-                    urlString: String
+                    url: StdUrl
                 ): IResult<Amp2HtmlResult> {
                     if (htmlText == cachedHtml) {
-                        return Amp2HtmlResult.NonAmpLink("https://linksheet.app".toStdUrlOrThrow(), htmlText).success
+                        return +Amp2HtmlResult.NonAmpLink("https://linksheet.app".toStdUrlOrThrow(), htmlText)
                     }
 
-                    return Amp2HtmlResult.NonAmpLink("https://not-from-cache.com".toStdUrlOrThrow(), htmlText).success
+                    return +Amp2HtmlResult.NonAmpLink("https://not-from-cache.com".toStdUrlOrThrow(), htmlText)
                 }
             },
             cacheRepository = cacheRepository,

@@ -7,10 +7,12 @@ import me.saket.unfurl.extension.HtmlMetadataUnfurlerExtension
 
 fun HttpMessageBuilder.configureHeaders(
     httpUserAgent: String = HtmlMetadataUnfurlerExtension.SlackBotUserAgent,
-    htmlByteLimit: Long = 32_768
+    htmlByteLimit: Long? = 32_768
 ) {
     header(HttpHeaders.UserAgent, httpUserAgent)
     header(HttpHeaders.Accept, "text/html")
     header(HttpHeaders.AcceptLanguage, "en-US,en;q=0.5")
-    header(HttpHeaders.Range, "bytes=0-$htmlByteLimit")
+    htmlByteLimit?.let {
+        header(HttpHeaders.Range, "bytes=0-$it")
+    }
 }

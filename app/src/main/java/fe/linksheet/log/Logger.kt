@@ -6,19 +6,19 @@ class Logger(
     private val tag: String? = null,
 ) {
     fun debug(message: String, throwable: Throwable? = null) {
-        Log.log(Log.Level.Debug, tag = tag, message = message, throwable = throwable)
+        LLog.log(LLog.Level.Debug, tag = tag, message = message, throwable = throwable)
     }
 
     fun info(message: String, throwable: Throwable? = null) {
-        Log.log(Log.Level.Info, tag = tag, message = message, throwable = throwable)
+        LLog.log(LLog.Level.Info, tag = tag, message = message, throwable = throwable)
     }
 
     fun warn(message: String, throwable: Throwable? = null) {
-        Log.log(Log.Level.Warn, tag = tag, message = message, throwable = throwable)
+        LLog.log(LLog.Level.Warn, tag = tag, message = message, throwable = throwable)
     }
 
     fun error(message: String, throwable: Throwable? = null) {
-        Log.log(Log.Level.Error, tag = tag, message = message, throwable = throwable)
+        LLog.log(LLog.Level.Error, tag = tag, message = message, throwable = throwable)
     }
 
     /**

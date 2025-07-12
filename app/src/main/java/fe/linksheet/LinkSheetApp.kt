@@ -15,6 +15,8 @@ import fe.droidkit.koin.androidApplicationContext
 import fe.gson.GlobalGsonModule
 import fe.gson.context.GlobalGsonContext
 import fe.linksheet.activity.CrashHandlerActivity
+import fe.linksheet.log.AndroidLogSink
+import fe.linksheet.log.LLog
 import fe.linksheet.module.analytics.AnalyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.app.PackageModule
@@ -73,6 +75,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(currentActivityObserver)
+        LLog.addSink(AndroidLogSink())
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             val crashIntent = Intent(this, CrashHandlerActivity::class.java)

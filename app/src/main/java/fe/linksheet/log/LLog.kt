@@ -2,7 +2,7 @@ package fe.linksheet.log
 
 import android.util.Log
 
-object Log {
+object LLog {
     var logLevel: Level = Level.Debug
     private val sinks = mutableListOf<LogSink>()
 

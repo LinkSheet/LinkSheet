@@ -2,7 +2,7 @@ package fe.linksheet.log
 
 class PrintLogSink : LogSink {
     override fun log(
-        level: Log.Level,
+        level: LLog.Level,
         tag: String?,
         throwable: Throwable?,
         message: String

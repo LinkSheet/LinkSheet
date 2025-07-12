@@ -577,5 +577,6 @@
     <string name="settings_verified_link_handlers__text_system_apps">Системске апликације</string>
     <string name="settings_links_amp2html__title_local_network">Дозволи локалну мрежу</string>
     <string name="settings_links_amp2html__text_local_network">Дозволите покретање A2mpHtml-а за приватне хостове</string>
-    <string name="settings_links_follow_redirects__title_local_network">Дозволи локљлну мрежу</string>
+    <string name="settings_links_follow_redirects__title_local_network">Дозволи локалну мрежу</string>
+    <string name="settings_links_follow_redirects__text_local_network">Дозволите праћење преусмеравања за приватне хостове</string>
 </resources>

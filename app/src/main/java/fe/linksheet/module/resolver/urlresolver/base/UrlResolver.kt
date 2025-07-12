@@ -12,6 +12,7 @@ import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.util.web.Darknet
+import fe.linksheet.util.web.HostType
 import fe.linksheet.util.web.HostUtil
 import org.koin.core.component.KoinComponent
 import kotlin.reflect.KClass
@@ -43,7 +44,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         }
 
         val darknet = Darknet.getOrNull(uri)
-        val isPublicHost = HostUtil.isAccessiblePublicly(uri.compatHost)
+        val isPublicHost = HostUtil.getHostType(uri.compatHost) == HostType.Host
 
         val uriString = uri.toString()
         val uriLogContext = logger.createContext(uriString, HashProcessor.UrlProcessor)

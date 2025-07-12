@@ -3,6 +3,8 @@ package fe.linksheet.util.web
 import android.net.CompatUriHost
 import android.net.Uri
 import android.net.compatHost
+import fe.std.result.isFailure
+import fe.std.result.tryCatch
 import inet.ipaddr.HostName
 
 object HostUtil {
@@ -33,33 +35,50 @@ object HostUtil {
         ) else hostWithoutScheme
     }
 
-    fun isAccessiblePublicly(uri: Uri): Boolean {
-        return isAccessiblePublicly(uri.compatHost)
+    fun getHostType(uri: Uri): HostType? {
+        return getHostType(uri.compatHost)
     }
 
-    fun isAccessiblePublicly(compatUriHost: CompatUriHost?): Boolean {
-        if (compatUriHost == null || compatUriHost.value.isEmpty()) return false
-        if (compatUriHost.value in local) return false
+    fun getHostType(compatUriHost: CompatUriHost?): HostType? {
+        if (compatUriHost == null || compatUriHost.value.isEmpty()) return null
+        val hostStr = compatUriHost.value
+        if (hostStr in local) return HostType.Local
 
-        val idx = compatUriHost.value.lastIndexOf(".")
-        if (idx == 0) return false
+        val idx = hostStr.lastIndexOf(".")
+        // e.g. ".local" -> Invalid host
+        if (idx == 0 && hostStr.length > 1) return null
 
         if (idx > 0) {
-            val tld = compatUriHost.value.substring(idx)
-            if (tld in mDnsTlds) return false
+            val tld = hostStr.substring(idx)
+            if (tld in mDnsTlds) return HostType.Mdns
         }
 
-        val host = HostName(compatUriHost.value)
-        val address = try {
-            host.asAddress()
-        } catch (e: Exception) {
-            null
+        val hostName = HostName(hostStr)
+        if (!hostName.isAddress) {
+            return HostType.Host
         }
 
-        if(address == null){
-            return false
+        val result = tryCatch { hostName.asAddress() }
+        if (result.isFailure()) {
+            return null
         }
 
-        return !(address.isLocal || address.isLoopback)
+        val address = result.value
+        if(address.isLocal) {
+            return HostType.Local
+        }
+
+        if(address.isLoopback) {
+            return HostType.Loopback
+        }
+
+        return HostType.Host
     }
+}
+
+sealed interface HostType {
+    data object Local : HostType
+    data object Mdns : HostType
+    data object Loopback : HostType
+    data object Host : HostType
 }

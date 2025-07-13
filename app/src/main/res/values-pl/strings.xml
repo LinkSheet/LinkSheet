@@ -583,4 +583,8 @@
     <string name="settings_verified_link_handlers__text_vlh_type_filter_browser">Przeglądarki</string>
     <string name="settings_verified_link_handlers__text_vlh_type_filter_native">Natywne aplikacje</string>
     <string name="settings_verified_link_handlers__text_system_apps">Aplikacje systemowe</string>
+    <string name="settings_links_amp2html__title_local_network">Zezwalaj na sieć lokalną</string>
+    <string name="settings_links_amp2html__text_local_network">Zezwól na uruchamianie Amp2Html dla niepublicznych hostów</string>
+    <string name="settings_links_follow_redirects__title_local_network">Zezwalaj na sieć lokalną</string>
+    <string name="settings_links_follow_redirects__text_local_network">Zezwalaj na następujące przekierowania dla niepublicznych hostów</string>
 </resources>

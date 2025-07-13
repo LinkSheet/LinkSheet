@@ -571,7 +571,7 @@
     <string name="settings_verified_link_handlers__text_vlh_type_filter_native">Native apps</string>
     <string name="settings_verified_link_handlers__text_system_apps">System apps</string>
     <string name="settings_links_amp2html__title_local_network">Allow local network</string>
-    <string name="settings_links_amp2html__text_local_network">Allow running A2mpHtml for non-public hosts</string>
+    <string name="settings_links_amp2html__text_local_network">Allow running Amp2Html for non-public hosts</string>
     <string name="settings_links_follow_redirects__title_local_network">Allow local network</string>
     <string name="settings_links_follow_redirects__text_local_network">Allow following redirects for non-public hosts</string>
 </resources>

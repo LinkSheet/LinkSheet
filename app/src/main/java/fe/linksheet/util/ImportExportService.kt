@@ -9,12 +9,12 @@ import android.os.ParcelFileDescriptor
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import fe.composekit.intent.buildIntent
 import fe.gson.extension.json.`object`.asArray
 import fe.gson.extension.json.`object`.asStringOrNull
 import fe.linksheet.R
 import fe.linksheet.extension.android.bufferedReader
 import fe.linksheet.extension.android.bufferedWriter
-import fe.linksheet.util.intent.buildIntent
 import fe.std.result.StdResult
 import fe.std.result.isFailure
 import fe.std.result.tryCatch

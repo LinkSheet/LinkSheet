@@ -5,10 +5,10 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
+import fe.composekit.intent.buildIntent
 import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.util.AndroidUriHelper
 import fe.linksheet.util.create
-import fe.linksheet.util.intent.buildIntent
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import fe.composekit.intent.buildIntent
 import fe.linksheet.BuildConfig
 import fe.linksheet.util.AndroidUriHelper
 import fe.linksheet.util.create

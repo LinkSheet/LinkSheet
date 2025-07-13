@@ -1,13 +1,13 @@
 package fe.linksheet.experiment.engine.rule.std
 
 import android.content.ComponentName
+import fe.composekit.intent.buildIntent
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.IntentEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
 import fe.linksheet.experiment.engine.rule.PostprocessorRule
 import fe.linksheet.extension.std.toAndroidUri
-import fe.linksheet.util.intent.buildIntent
 import fe.std.uri.StdUrl
 
 class IntentPostprocessorRule(

@@ -7,8 +7,8 @@ import android.content.Context
 import android.os.Process
 import androidx.core.content.getSystemService
 import dev.rikka.tools.refine.Refine
+import fe.composekit.intent.buildIntent
 import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.util.intent.buildIntent
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
 

@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
+import fe.composekit.intent.buildIntent
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.IntentEngineResult
@@ -15,11 +16,9 @@ import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.extension.std.toAndroidUri
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.util.intent.buildIntent
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.intArrayOf

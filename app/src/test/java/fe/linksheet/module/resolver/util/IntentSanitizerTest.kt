@@ -5,9 +5,9 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isTrue
+import fe.composekit.intent.buildIntent
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.IntentFlags
-import fe.linksheet.util.intent.buildIntent
 import mozilla.components.support.utils.toSafeIntent
 import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith

@@ -7,8 +7,8 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import fe.composekit.intent.buildIntent
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.util.intent.buildIntent
 import fe.std.result.assert.assertSuccess
 import fe.std.result.getOrNull
 import fe.std.test.TestFunction

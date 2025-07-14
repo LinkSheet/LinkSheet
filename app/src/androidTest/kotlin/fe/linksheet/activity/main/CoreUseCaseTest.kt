@@ -5,14 +5,10 @@ import android.content.pm.PackageManager
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.test.uiautomator.By
-import assertk.assertThat
-import assertk.assertions.isEqualTo
-import assertk.assertions.isNotNull
-import assertk.assertions.prop
+import fe.composekit.intent.buildIntent
 import fe.linksheet.testlib.instrument.extension.findObjectWithTimeoutOrNull
 import fe.linksheet.testlib.instrument.ui.AppInteractor
 import fe.linksheet.testlib.instrument.ui.UiAutomatorTest
-import fe.linksheet.util.intent.buildIntent
 import org.junit.jupiter.api.Test
 
 

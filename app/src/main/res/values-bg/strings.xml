@@ -567,4 +567,8 @@
     <string name="settings_verified_link_handlers__text_sort_by_installation_time">Дата на инсталиране</string>
     <string name="generic__label_arrow_rotation">Обръщане на стрелката</string>
     <string name="settings_verified_link_handlers__text_ascending">Възходящо</string>
+    <string name="settings_links_amp2html__title_local_network">Разрешаване на местната мрежа</string>
+    <string name="settings_links_amp2html__text_local_network">Разрешаване на работа на Amp2Html за не публични хостове</string>
+    <string name="settings_links_follow_redirects__title_local_network">Разрешаване на местната мрежа</string>
+    <string name="settings_links_follow_redirects__text_local_network">Последване на препращанията към не публични хостове</string>
 </resources>

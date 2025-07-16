@@ -18,6 +18,7 @@ import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.feature.app.AppInfo
 import fe.linksheet.feature.app.DomainVerificationAppInfo
+import fe.linksheet.feature.app.LinkHandling
 import fe.linksheet.feature.app.PackageService
 import fe.linksheet.module.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
@@ -125,15 +126,28 @@ class VerifiedLinkHandlersViewModel(
         return (if (ascending) asc else desc) as Comparator<DomainVerificationAppInfo>
     }
 
-    private fun FilterState.matches(info: DomainVerificationAppInfo): Boolean {
-        val system = systemApps || info.flags !in SYSTEM_APP_FLAGS
-        return when {
-            mode == VlhStateModeFilter.ShowAll -> system
-            !system -> false
-            else -> if (mode == VlhStateModeFilter.EnabledOnly) info.enabled else !info.enabled
+    private fun VlhStateModeFilter.matches(info: DomainVerificationAppInfo): Boolean {
+        return when (this) {
+            VlhStateModeFilter.ShowAll -> true
+            VlhStateModeFilter.EnabledOnly -> info.enabled
+            VlhStateModeFilter.DisabledOnly -> !info.enabled
         }
     }
 
+    private fun VlhTypeFilter.matches(info: DomainVerificationAppInfo): Boolean {
+        return when (this) {
+            VlhTypeFilter.All -> true
+            VlhTypeFilter.Browser -> info.linkHandling == LinkHandling.Browser
+            VlhTypeFilter.Native -> info.linkHandling != LinkHandling.Browser
+        }
+    }
+
+    private fun FilterState.matches(info: DomainVerificationAppInfo): Boolean {
+        if (!systemApps && info.flags in SYSTEM_APP_FLAGS) return false
+        if (!mode.matches(info)) return false
+        if (!type.matches(info)) return false
+        return true
+    }
 
     fun emitLatest() {
         lastEmitted.value = System.currentTimeMillis()

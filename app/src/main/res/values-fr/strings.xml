@@ -572,4 +572,8 @@
     <string name="settings_verified_link_handlers__text_vlh_type_filter_native">Applications natives</string>
     <string name="settings_verified_link_handlers__text_system_apps">Applications système</string>
     <string name="settings_verified_link_handlers__text_sort_by_installation_time">Temps d\'installation</string>
+    <string name="settings_links_amp2html__title_local_network">Autoriser le réseau local</string>
+    <string name="settings_links_amp2html__text_local_network">Autoriser l\'exécution d\'Amp2Html pour les hôtes non publics</string>
+    <string name="settings_links_follow_redirects__title_local_network">Autoriser le réseau local</string>
+    <string name="settings_links_follow_redirects__text_local_network">Autoriser le suivis des redirections pour les hôtes non publics</string>
 </resources>

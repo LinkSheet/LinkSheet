@@ -12,8 +12,8 @@ object AppSignature {
     private lateinit var buildType: SignatureBuildType
 
     enum class SignatureBuildType(val signature: Signature?, @StringRes val stringRes: Int) {
-        Manual(LinkSheetApp.Signature, R.string.manual_build),
-        CI(LinkSheetApp.SignatureCI, R.string.github_pipeline_build),
+        Manual(Signature._1fexd, R.string.manual_build),
+        CI(Signature._1fexdCI, R.string.github_pipeline_build),
         Unofficial(null, R.string.built_by_error),
         Debug(null, R.string.debug_build)
     }

@@ -331,7 +331,7 @@ dependencies {
     implementation("io.github.fornewid:placeholder-material3:_")
     implementation("io.viascom.nanoid:nanoid:_")
 
-    implementation(LinkSheet.flavors)
+    implementation(LinkSheet.flavors.core)
     implementation(LinkSheet.interconnect)
 
     implementation(JetBrains.ktor.client.core)

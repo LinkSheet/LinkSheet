@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import fe.build.dependencies.Grrfe
+import fe.build.dependencies.LinkSheet
 import fe.build.dependencies._1fexd
 import fe.buildsettings.config.GradlePluginPortalRepository
 import fe.buildsettings.config.MavenRepository
@@ -83,6 +84,7 @@ buildSettings {
         trySubstitute(Grrfe.httpkt, properties["httpkt.dir"])
         trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
         trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
+        trySubstitute(LinkSheet.flavors, properties["flavors.dir"])
     }
 }
 

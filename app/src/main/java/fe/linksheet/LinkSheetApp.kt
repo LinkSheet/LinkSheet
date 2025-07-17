@@ -38,7 +38,6 @@ import fe.linksheet.module.http.HttpModule
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
-import fe.linksheet.module.network.NetworkStateServiceModule
 import fe.linksheet.module.paste.PasteServiceModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
@@ -55,6 +54,7 @@ import fe.linksheet.module.viewmodel.module.ViewModelModule
 import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
+import fe.composekit.lifecycle.network.koin.NetworkStateServiceModule
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory

@@ -386,6 +386,8 @@ dependencies {
     implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.lifecycle.core)
     implementation(_1fexd.composeKit.lifecycle.koin)
+    implementation(_1fexd.composeKit.lifecycle.network.core)
+    implementation(_1fexd.composeKit.lifecycle.network.koin)
     implementation(_1fexd.composeKit.preference.core)
     implementation(_1fexd.composeKit.preference.compose.core)
     implementation(_1fexd.composeKit.preference.compose.core2)

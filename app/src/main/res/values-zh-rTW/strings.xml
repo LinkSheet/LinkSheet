@@ -378,5 +378,6 @@
     <string name="export_settings__text_failure">無法匯出設定！</string>
     <string name="import_settings__text_failure">無法匯入設定！</string>
     <string name="export_import_settings">匯入或匯出設定</string>
-    <string name="import_settings">匯出設定</string>
+    <string name="import_settings">匯入設定</string>
+    <string name="export_settings">匯出設定</string>
 </resources>

@@ -198,7 +198,7 @@
     <string name="settings_links_amp2html__title_skip_browser">略過來自瀏覽器的連結</string>
     <string name="libredirect_via">透過 %s</string>
     <string name="amp2html_external_service_explainer">使用部署在 supabase.com 上的 API 來嘗試獲取非 AMP 版網頁 (<annotation url-id="supabase-privacy">隱私權政策</annotation>)</string>
-    <string name="settings_home__text_clipboard_card">當剪貼簿的內容為網址時，將其顯示在首頁</string>
+    <string name="settings_home__text_clipboard_card">當剪貼簿的內容為網址時，將其顯示在首頁以便存取</string>
     <string name="settings_home__title_clipboard_card">剪貼簿資訊卡</string>
     <string name="use_unified_preferred_browser_explainer">如要分別設定一般連結和程式內瀏覽連結的模式，請停用此選項並從下方的按鈕切換兩者。</string>
     <string name="allow_darknets">允許暗網</string>
@@ -319,4 +319,64 @@
     <string name="bottom_sheet__text_launch_failure_other">啟動失敗！</string>
     <string name="bottom_sheet__text_launch_failure_unknown">啟動時發生未知錯誤！</string>
     <string name="bottom_sheet__text_launch_not_allowed">啟動遭拒！</string>
+    <string name="expand_on_app_select">選取時展開</string>
+    <string name="expand_on_app_select_explainer">當選取了應用程式時自動展開底部功能表</string>
+    <string name="switch_profile">啟用個人或工作資料夾切換鈕</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">在底部功能表顯示一個使網址在另個資料夾中開啟的按鈕</string>
+    <string name="settings_profile_switcher__title_profile_switcher">資料夾切換鈕</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">啟用跨資料夾連結</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">輕觸以將 LinkSheet 與同時安裝在另個資料夾中的 LinkSheet 建立連結</string>
+    <string name="settings_profile_switcher__divider_current_profile">目前資料夾</string>
+    <string name="settings_profile_switcher__divider_other_profiles">其他資料夾</string>
+    <string name="generic__label_personal_profile">個人資料夾</string>
+    <string name="generic__label_work_profile">工作資料夾</string>
+    <string name="generic__label_unknown_profile">不明資料夾</string>
+    <string name="settings_profile_switcher__text_not_installed">無法連結此資料夾</string>
+    <string name="settings_profile_switcher__text_current_profile">目前運作於此資料夾</string>
+    <string name="settings_profile_switcher__text_other_profile">其他資料夾</string>
+    <string name="settings_profile_switcher__title_no_profile">沒有可用的資料夾</string>
+    <string name="settings_profile_switcher__text_no_profile">此功能僅適用於設有資料夾 (例如工作資料夾) 的裝置。</string>
+    <string name="tap_customization">自訂輕觸動作</string>
+    <string name="tap_customization_single_tap">輕觸一下時執行</string>
+    <string name="tap_customization_double_tap">輕觸兩下時執行</string>
+    <string name="tap_customization_long_tap">長按時執行</string>
+    <string name="tap_customization_dialog_title">配置「%s」</string>
+    <string name="tap_customization_dialog_title_single_tap">輕觸一下</string>
+    <string name="tap_customization_dialog_title_double_tap">輕觸兩下</string>
+    <string name="tap_customization_dialog_title_long_tap">長按</string>
+    <string name="experiments_explainer_3">實驗功能正如火如荼地開發中，在未臻完善前可能無法正常運作，甚至根本不起作用！請別在 GitHub 上回報這些功能的錯誤。如欲提供意見回饋，歡迎前往 Discord 討論。</string>
+    <string name="generic__title_sort_by">排序依據</string>
+    <string name="generic__title_filter">篩選</string>
+    <string name="settings_verified_link_handlers__text_sort_by_a_z">名稱</string>
+    <string name="settings_verified_link_handlers__text_sort_by_installation_time">安裝時間</string>
+    <string name="settings_verified_link_handlers__text_ascending">遞增</string>
+    <string name="generic__label_arrow_rotation">旋轉箭頭</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"><![CDATA[所有應用程式]]></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_browser">瀏覽器應用程式</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_native">專門應用程式</string>
+    <string name="settings_verified_link_handlers__text_system_apps">系統應用程式</string>
+    <string name="settings_links_amp2html__title_local_network">允許本機網路</string>
+    <string name="settings_links_amp2html__text_local_network">允許對私有主機執行 Amp2Html</string>
+    <string name="settings_links_follow_redirects__title_local_network">允許本機網路</string>
+    <string name="settings_links_follow_redirects__text_local_network">允許對私有主機跟進重新導向</string>
+    <string name="export_log_dialog__subtitle_include_fingerprint">建議的選項</string>
+    <string name="export_log_dialog__subtitle_include_settings">建議的選項</string>
+    <string name="export_log_dialog__title_include_settings">附上設定</string>
+    <string name="export_log_dialog__title_include_fingerprint">附上建構指紋</string>
+    <string name="export_log_dialog__title_redact_log">去識別化</string>
+    <string name="export_log_dialog__subtitle_redact_log">建議的選項，遮蓋應用程式名稱和網址</string>
+    <string name="export_log_dialog__title_include_throwable">附上錯誤報告</string>
+    <string name="export_log_dialog__subtitle_include_throwable">建議的選項，惟無法去識別化</string>
+    <string name="export_log_dialog__text_log_info">針對擷取於 <font face="monospace">%s</font> 的記錄檔配置分享選項</string>
+    <string name="export_log_dialog__text_log_privacy">如欲瞭解分享記錄檔時可能包含的私密資料，請參見<annotation url-id="privacy-logs">隱私權政策</annotation>。</string>
+    <string name="general">其他</string>
+    <string name="misc_settings">其他</string>
+    <string name="settings_remote_config__text_content">LinkSheet 能夠藉由連線至遠端設定伺服器來自動更新內部設定和文件資源。如欲瞭解詳情，請參見<annotation url-id="github.linksheet.wiki.privacy.remote-config">隱私權政策</annotation>。</string>
+    <string name="settings_remote_config__title_dialog">啟用遠端設定？</string>
+    <string name="export_settings__text_success">已匯出！</string>
+    <string name="import_settings__text_success">已匯入！</string>
+    <string name="export_settings__text_failure">無法匯出設定！</string>
+    <string name="import_settings__text_failure">無法匯入設定！</string>
+    <string name="export_import_settings">匯入或匯出設定</string>
+    <string name="import_settings">匯出設定</string>
 </resources>

@@ -48,7 +48,7 @@
     <string name="whitelisted_explainer">僅列出已釘選的瀏覽器</string>
     <string name="save">儲存</string>
     <string name="whitelisted_browsers">已釘選的瀏覽器</string>
-    <string name="bottom_sheet_explainer">組態與客製化</string>
+    <string name="bottom_sheet_explainer">組態與自訂</string>
     <string name="about">關於</string>
     <string name="about_explainer">鳴謝、授權、連結、版本</string>
     <string name="credits">鳴謝</string>
@@ -132,7 +132,7 @@
     <string name="reset">重設</string>
     <string name="follow_redirects_short">重新導向</string>
     <string name="experiments_explainer_2">活躍開發中</string>
-    <string name="settings__subtitle_advanced"><![CDATA[實驗功能、匯入與匯出]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[實驗功能、匯出或匯入]]></string>
     <string name="apps_which_can_open_links">已驗證的連結處理常式</string>
     <string name="debug">偵錯</string>
     <string name="download_started">已開始下載</string>
@@ -377,7 +377,27 @@
     <string name="import_settings__text_success">已匯入！</string>
     <string name="export_settings__text_failure">無法匯出設定！</string>
     <string name="import_settings__text_failure">無法匯入設定！</string>
-    <string name="export_import_settings">匯入或匯出設定</string>
+    <string name="export_import_settings">匯出或匯入</string>
     <string name="import_settings">匯入設定</string>
     <string name="export_settings">匯出設定</string>
+    <string name="import_settings_override_preferences">這將會覆寫現有的偏好設定，確定要繼續嗎？</string>
+    <string name="export_import_settings_explainer">匯出目前的設定或匯入先前的設定</string>
+    <string name="settings_main_experiment_changelog__title_changelog">實驗功能更新日誌</string>
+    <string name="export_to_file">匯出為檔案</string>
+    <string name="import_explainer">從檔案匯入先前的設定</string>
+    <string name="export_explainer">匯出目前的設定為檔案</string>
+    <string name="export_include_recommendation">建議僅當你不會將匯出的檔案與他人分享時再勾選下列選項！</string>
+    <string name="export_privacy">如欲瞭解與匯出相關的隱私權資訊，請參見<annotation url-id="privacy-exports">隱私權政策</annotation>。</string>
+    <string name="no_handlers_found_explainer">LinkSheet 無法開啟此連結。</string>
+    <string name="privacy_settings_explainer">參照隱私、遙測</string>
+    <string name="show_linksheet_referrer">表明參照為 LinkSheet</string>
+    <string name="customization">自訂</string>
+    <string name="notifications">訊息與通知</string>
+    <string name="base_config">其他配置</string>
+    <string name="url_copied_toast_explainer">當使用者複製了網址時顯示浮動式訊息</string>
+    <string name="download_started_toast_explainer">當下載作業開始時顯示浮動式訊息</string>
+    <string name="opening_with_app_toast_explainer">當自動啟動預設應用程式時顯示浮動式訊息</string>
+    <string name="resolve_via_toast_explainer">當網址成功透過外部服務解析時顯示浮動式訊息</string>
+    <string name="resolve_via_failed_toast_explainer">當網址無法透過外部服務解析時顯示浮動式訊息</string>
+    <string name="settings_notifications__divider_toasts">浮動式訊息</string>
 </resources>

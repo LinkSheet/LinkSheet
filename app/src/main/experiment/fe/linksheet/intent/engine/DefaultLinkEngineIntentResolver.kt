@@ -1,8 +1,7 @@
 package fe.linksheet.intent.engine
 
-import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
+import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.linksheet.experiment.engine.EngineTrack
 import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.TrackSelector
@@ -16,13 +15,9 @@ import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLinkResolver
 import fe.linksheet.experiment.engine.resolver.amp2html.Amp2HtmlLocalSource
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLinkResolver
 import fe.linksheet.experiment.engine.resolver.followredirects.FollowRedirectsLocalSource
-import fe.linksheet.experiment.engine.rule.std.IntentPostprocessorRule
-import fe.linksheet.experiment.engine.rule.std.IntentRuleDefinition
-import fe.linksheet.experiment.engine.rule.std.RegexUrlMatcher
 import fe.linksheet.feature.app.PackageService
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -34,7 +29,7 @@ import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.LibRedirectResolver
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import kotlinx.coroutines.Dispatchers
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

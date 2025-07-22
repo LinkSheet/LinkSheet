@@ -3,6 +3,7 @@ package fe.linksheet.intent.engine
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.experiment.engine.EngineTrackInput
 import fe.linksheet.experiment.engine.ForwardOtherProfileResult
@@ -24,7 +25,6 @@ import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository

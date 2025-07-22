@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.compose.runtime.Stable
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
+import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
@@ -24,7 +25,6 @@ import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.network.NetworkStateService
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository

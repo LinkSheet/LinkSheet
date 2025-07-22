@@ -1,8 +1,8 @@
 package fe.linksheet.module.analytics
 
 import androidx.lifecycle.LifecycleCoroutineScope
+import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.linksheet.module.log.Logger
-import fe.linksheet.module.network.NetworkStateService
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED

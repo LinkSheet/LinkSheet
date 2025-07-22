@@ -12,14 +12,23 @@ interface StepRule<in Input : RuleInput, out Result : StepRuleResult> : Rule<Inp
 
 sealed interface StepRuleInput : RuleInput
 
-data class StepStart<T : StepResult>(val depth: Int, val step: EngineStep<T>, val url: StdUrl) : StepRuleInput
+data class StepStart<T : StepResult>(val depth: Int, val step: EngineStep<T>, val url: StdUrl) : StepRuleInput {
+    override fun toString(): String {
+        return "StepStart(depth=$depth, step=${step.id}, url=$url)"
+    }
+}
+
 data class StepEnd<T : StepResult>(
     val depth: Int,
     val step: EngineStep<T>,
     val url: StdUrl,
     val hasNewUrl: Boolean,
     val resultUrl: StdUrl,
-) : StepRuleInput
+) : StepRuleInput {
+    override fun toString(): String {
+        return "StepEnd(depth=$depth, step=${step.id}, url=$url, hasNewUrl=$hasNewUrl, resultUrl=$resultUrl)"
+    }
+}
 
 interface BeforeStepRule : StepRule<StepStart<*>, StepRuleResult>
 interface AfterStepRule : StepRule<StepEnd<*>, StepRuleResult>

@@ -24,7 +24,6 @@ class PreviewLocalSource(
         }
 
         val response = result.value
-        logger.debug("Response: $response")
         if (!response.isHtml()) {
             return PreviewFetchResult.NonHtmlPage(urlString).success
         }

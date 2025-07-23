@@ -8,4 +8,13 @@ interface LinkFetcher<out Result : FetchResult> {
     suspend fun fetch(url: StdUrl): Result?
 }
 
+abstract class AbstractLinkFetcher<out Result : FetchResult>(
+    override val id: ContextResultId<Result>
+) : LinkFetcher<Result> {
+
+    override fun toString(): String {
+        return id.toString()
+    }
+}
+
 interface FetchResult : ContextResult

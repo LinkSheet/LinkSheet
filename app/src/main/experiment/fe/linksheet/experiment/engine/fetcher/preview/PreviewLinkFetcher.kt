@@ -1,6 +1,6 @@
 package fe.linksheet.experiment.engine.fetcher.preview
 
-import fe.linksheet.experiment.engine.fetcher.LinkFetcher
+import fe.linksheet.experiment.engine.fetcher.AbstractLinkFetcher
 import fe.linksheet.experiment.engine.fetcher.ContextResultId
 import fe.linksheet.module.database.entity.cache.PreviewCache
 import fe.linksheet.module.repository.CacheRepository
@@ -14,8 +14,7 @@ data class PreviewLinkFetcher(
     private val cacheRepository: CacheRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val useLocalCache: () -> Boolean,
-) : LinkFetcher<PreviewFetchResult> {
-    override val id = ContextResultId.Preview
+) : AbstractLinkFetcher<PreviewFetchResult>(ContextResultId.Preview) {
 
     private suspend fun insertCache(entryId: Long, result: PreviewFetchResult) {
         cacheRepository.insertPreview(entryId, result)

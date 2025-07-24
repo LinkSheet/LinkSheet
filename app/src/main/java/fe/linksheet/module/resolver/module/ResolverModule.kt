@@ -135,6 +135,7 @@ data class FollowRedirectsSettings(
     val followRedirectsExternalService: () -> Boolean,
     val followRedirectsAllowDarknets: () -> Boolean,
     val followRedirectsAllowLocalNetwork: () -> Boolean,
+    val manualFollowRedirects: () -> Boolean,
 )
 
 data class Amp2HtmlSettings(
@@ -160,6 +161,7 @@ data class LibRedirectSettings(
 data class PreviewSettings(
     val previewUrl: () -> Boolean,
     val previewUrlSkipBrowser: () -> Boolean,
+    val useLocalCache: () -> Boolean = { true }
 )
 
 
@@ -199,6 +201,7 @@ fun createSettings(
         followRedirectsSettings = FollowRedirectsSettings(
             followRedirects = prefRepo.asFunction(AppPreferences.followRedirects),
             followRedirectsSkipBrowser = prefRepo.asFunction(AppPreferences.followRedirectsSkipBrowser),
+            manualFollowRedirects = prefRepo.asFunction(Experiments.manualFollowRedirects),
             followOnlyKnownTrackers = prefRepo.asFunction(AppPreferences.followOnlyKnownTrackers),
             followRedirectsLocalCache = prefRepo.asFunction(AppPreferences.followRedirectsLocalCache),
             followRedirectsExternalService = prefRepo.asFunction(AppPreferences.followRedirectsExternalService),

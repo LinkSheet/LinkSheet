@@ -3,16 +3,17 @@ package fe.linksheet.experiment.engine.context
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.fetcher.ContextResult
 import fe.linksheet.experiment.engine.fetcher.ContextResultId
-import fe.linksheet.experiment.engine.slot.AppRoleId
 import fe.linksheet.util.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
-import java.util.EnumSet
+import java.util.*
 
 interface EngineRunContext {
     val extras: Set<EngineExtra>
     val flags: EnumSet<EngineFlag>
-    val roles: MutableMap<AppRoleId, AndroidAppPackage>
+    val roles: MutableSet<AppRole>
+    var allowCustomTab: Boolean?
 
+    fun put(id: AppRoleId, appPackage: AndroidAppPackage): Boolean
     fun <Result : ContextResult> put(id: ContextResultId<Result>, result: Result?)
     fun <Result : ContextResult> confirm(fetcher: ContextResultId<Result>): Boolean
     fun seal(): SealedRunContext
@@ -22,8 +23,13 @@ interface EngineRunContext {
 
 class DefaultEngineRunContext(override val extras: Set<EngineExtra>) : EngineRunContext {
     override val flags: EnumSet<EngineFlag> = emptyEnumSet()
-    override val roles: MutableMap<AppRoleId, AndroidAppPackage> = mutableMapOf()
+    override val roles: MutableSet<AppRole> = mutableSetOf()
+    override var allowCustomTab: Boolean? = null
     private val results = mutableMapOf<ContextResultId<*>, ContextResult?>()
+
+    override fun put(id: AppRoleId, appPackage: AndroidAppPackage): Boolean {
+        return roles.add(AppRole(id, appPackage))
+    }
 
     // TODO: Consider splitting into input data class, runtime context and SealedRunContext to avoid allowing mutations of [results]
     // from outside a LinkEngine run
@@ -43,16 +49,16 @@ class DefaultEngineRunContext(override val extras: Set<EngineExtra>) : EngineRun
     }
 
     override fun seal(): SealedRunContext {
-        return SealedRunContext(flags, roles, results)
+        return SealedRunContext(flags, roles, allowCustomTab, results)
     }
 }
 
 data class SealedRunContext(
     val flags: Set<EngineFlag>,
-    val roles: Map<AppRoleId, AndroidAppPackage>,
+    val roles: Set<AppRole>,
+    val allowCustomTab: Boolean?,
     private val results: Map<ContextResultId<*>, ContextResult?>
 ) {
-
     operator fun <Result : ContextResult> get(id: ContextResultId<Result>): Result? {
         @Suppress("UNCHECKED_CAST")
         return results[id] as Result?
@@ -67,24 +73,4 @@ fun DefaultEngineRunContext(vararg extras: EngineExtra?): EngineRunContext {
 @Suppress("FunctionName")
 fun DefaultEngineRunContext(builderAction: MutableSet<EngineExtra>.() -> Unit): EngineRunContext {
     return DefaultEngineRunContext(buildSet(builderAction))
-}
-
-inline fun <reified E : EngineExtra> EngineRunContext.findExtraOrNull(): E? {
-    return extras.filterIsInstance<E>().firstOrNull()
-}
-
-inline fun <reified E : EngineExtra> EngineRunContext.hasExtra(): Boolean {
-    return findExtraOrNull<E>() != null
-}
-
-enum class EngineFlag {
-    DisablePreview
-}
-
-sealed interface EngineExtra
-data class SourceAppExtra(val appPackage: String) : EngineExtra
-data object IgnoreLibRedirectExtra : EngineExtra
-
-fun AndroidAppPackage.toSourceAppExtra(): SourceAppExtra {
-    return SourceAppExtra(packageName)
 }

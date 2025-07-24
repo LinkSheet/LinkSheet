@@ -39,7 +39,8 @@ import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
-import fe.linksheet.util.AndroidUriHelper
+import fe.linksheet.util.AndroidUri
+import fe.linksheet.util.Scheme
 import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.cloneIntent
 import fe.linksheet.util.intent.parser.UriException
@@ -123,7 +124,7 @@ class ImprovedIntentResolver(
         val canAccessInternet = networkStateService.isNetworkConnected
 
         logger.debug("Referrer=$referrer")
-        val referringPackage = AndroidUriHelper.get(AndroidUriHelper.Type.Package, referrer)
+        val referringPackage = AndroidUri.get(Scheme.Package, referrer)
         val isReferrerBrowser = KnownBrowser.isKnownBrowser(referringPackage?.packageName) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)

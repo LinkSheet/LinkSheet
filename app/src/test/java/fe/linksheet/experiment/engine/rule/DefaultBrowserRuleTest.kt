@@ -10,8 +10,10 @@ import fe.linksheet.experiment.engine.ContextualEngineResult
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.UrlEngineResult
+import fe.linksheet.experiment.engine.context.AppRoleId
 import fe.linksheet.experiment.engine.context.EngineRunContext
-import fe.linksheet.experiment.engine.slot.AppRoleId
+import fe.linksheet.experiment.engine.context.SealedRunContext
+import fe.linksheet.experiment.engine.context.findRoleOrNull
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.AndroidAppPackage
@@ -40,7 +42,7 @@ internal class DefaultBrowserRuleTest : BaseUnitTest {
             val url = input.resultUrl
             val appPackage = defaultBrowsers[url.host]
             if (appPackage != null) {
-                roles[AppRoleId.Browser] = appPackage
+                put(AppRoleId.Browser, appPackage)
             }
 
             return empty()
@@ -66,12 +68,16 @@ internal class DefaultBrowserRuleTest : BaseUnitTest {
         return result
     }
 
+    private fun SealedRunContext.findSingleRole(id: AppRoleId = AppRoleId.Browser): String? {
+        return roles.findRoleOrNull(id).singleOrNull()?.packageName
+    }
+
     @org.junit.Test
     fun `test default browser 1`() = runTest(dispatcher) {
         val result = baseTest("https://github.com/LinkSheet/LinkSheet".toStdUrlOrThrow())
 
         assertContext(result)
-            .transform { it.roles[AppRoleId.Browser]?.packageName }
+            .transform { it.findSingleRole() }
             .isEqualTo("org.mozilla.fennec_fdroid")
     }
 
@@ -80,7 +86,7 @@ internal class DefaultBrowserRuleTest : BaseUnitTest {
         val result = baseTest("https://google.com/hello".toStdUrlOrThrow())
 
         assertContext(result)
-            .transform { it.roles[AppRoleId.Browser]?.packageName }
+            .transform { it.findSingleRole() }
             .isEqualTo("com.google.chrome")
     }
 
@@ -89,7 +95,7 @@ internal class DefaultBrowserRuleTest : BaseUnitTest {
         val result = baseTest("https://linksheet.app".toStdUrlOrThrow())
 
         assertContext(result)
-            .transform { it.roles[AppRoleId.Browser]?.packageName }
+            .transform { it.findSingleRole() }
             .isNull()
     }
 }

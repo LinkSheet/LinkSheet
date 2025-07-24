@@ -1,6 +1,6 @@
 package fe.linksheet.experiment.engine.widget
 
-import fe.linksheet.experiment.engine.slot.AppRoleId
+import fe.linksheet.experiment.engine.context.AppRoleId
 import fe.linksheet.feature.app.ActivityAppInfo
 
 

@@ -105,7 +105,7 @@ fun DefaultLinkEngineIntentResolver(
                 ioDispatcher = dispatcher,
                 source = PreviewLocalSource(client = client),
                 cacheRepository = cacheRepository,
-                useLocalCache = { true }
+                useLocalCache = settings.previewSettings.useLocalCache
             )
         ),
         dispatcher = dispatcher

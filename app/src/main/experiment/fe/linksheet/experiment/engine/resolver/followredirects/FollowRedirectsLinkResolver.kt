@@ -2,6 +2,8 @@ package fe.linksheet.experiment.engine.resolver.followredirects
 
 import fe.fastforwardkt.FastForward
 import fe.linksheet.experiment.engine.context.EngineRunContext
+import fe.linksheet.experiment.engine.context.SkipFollowRedirectsExtra
+import fe.linksheet.experiment.engine.context.hasExtra
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
 import fe.linksheet.experiment.engine.resolver.UriChecker
@@ -39,6 +41,10 @@ data class FollowRedirectsLinkResolver(
 
     override suspend fun EngineRunContext.runStep(url: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
         val urlString = url.toString()
+        if (hasExtra<SkipFollowRedirectsExtra>()) {
+            return@withContext ResolveOutput(url)
+        }
+
         val isTracker = isTracker(urlString)
         if (followOnlyKnownTrackers() && !isTracker) {
             return@withContext ResolveOutput(url)

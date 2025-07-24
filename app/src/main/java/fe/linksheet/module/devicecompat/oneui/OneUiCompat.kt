@@ -7,7 +7,7 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import fe.composekit.intent.buildIntent
 import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.util.AndroidUriHelper
+import fe.linksheet.util.Scheme
 import fe.linksheet.util.create
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
@@ -55,7 +55,7 @@ object DefaultOneUiIntentCompat : OneUiCompat {
     override fun createAppOpenByDefaultSettingsIntent(packageName: String): Intent {
         return buildIntent(
             Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-            AndroidUriHelper.Type.Package.create(packageName)
+            Scheme.Package.create(packageName)
         )
     }
 }

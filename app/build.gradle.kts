@@ -332,7 +332,9 @@ dependencies {
     implementation("io.viascom.nanoid:nanoid:_")
 
     implementation(platform(LinkSheet.flavors.bom))
-    implementation(LinkSheet.flavors.core)
+//    implementation(LinkSheet.flavors.core)
+    implementation("com.github.LinkSheet.flavors:core:_")
+
     implementation(LinkSheet.interconnect)
 
     implementation(JetBrains.ktor.client.core)

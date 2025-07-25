@@ -1,5 +1,6 @@
 package fe.linksheet.feature.libredirect
 
+import fe.libredirectkt.LibRedirectInstance
 import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectService
 import fe.linksheet.module.database.entity.LibRedirectDefault
@@ -7,19 +8,23 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LibRedirectSettingsFeature(private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) {
+class LibRedirectSettingsFeature(
+    private val loadBuiltInServices: () -> List<LibRedirectService> = LibRedirectLoader::loadBuiltInServices,
+    private val loadBuiltInInstances: () -> List<LibRedirectInstance> = LibRedirectLoader::loadBuiltInInstances,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) {
     suspend fun loadSettings(serviceKey: String) = withContext(ioDispatcher) {
-        val builtInInstances = LibRedirectLoader.loadBuiltInInstances().associate { it.frontendKey to it.hosts.toSet() }
+        val builtInInstances = loadBuiltInInstances().associate { it.frontendKey to it.hosts.toSet() }
 
         val service = createService(serviceKey) ?: return@withContext null
-        val (states, defaultFrontend) = loadInstances(service, builtInInstances)
-        val fallback = createFallback(service, builtInInstances)
+        val (states, defaultFrontendState) = loadInstances(service, builtInInstances)
+        val fallback = defaultFrontendState?.let { createDefault(it) }
 
-        ServiceSettings(service, fallback, states, defaultFrontend)
+        ServiceSettings(service, fallback, states, defaultFrontendState)
     }
 
     private fun createService(serviceKey: String): LibRedirectService? {
-        val builtInServices = LibRedirectLoader.loadBuiltInServices().associateBy { it.key }
+        val builtInServices = loadBuiltInServices().associateBy { it.key }
 
         val service = builtInServices[serviceKey]
         if (service == null) return null
@@ -36,32 +41,30 @@ class LibRedirectSettingsFeature(private val ioDispatcher: CoroutineDispatcher =
 
         val states = mutableListOf<FrontendState>()
         for (frontend in service.frontends) {
-            val instances = builtInFrontendInstances[frontend.key]
+            val frontendKey = frontend.key
+            val instances = builtInFrontendInstances[frontendKey]
             if (instances.isNullOrEmpty()) continue
 
-            val state = FrontendState(service.key, frontend.key, frontend.name, instances, instances.first())
-            if (frontend.key == defaultFrontendKey) {
+            val state = FrontendState(service.key, frontendKey, frontend.name, instances, instances.first())
+            if (frontendKey == defaultFrontendKey) {
                 fallback = state
             }
 
             states.add(state)
         }
 
+        if (fallback == null) {
+            return states to states.firstOrNull()
+        }
+
         return states to fallback
     }
 
-    private fun createFallback(
-        service: LibRedirectService,
-        builtInFrontendInstances: Map<String, Set<String>>,
-    ): LibRedirectDefault? {
-        val defaultFrontendKey = service.defaultFrontend.key
-        val instances = builtInFrontendInstances[defaultFrontendKey]
-        if (instances.isNullOrEmpty()) return null
-
+    private fun createDefault(fallback: FrontendState): LibRedirectDefault {
         return LibRedirectDefault(
-            service.key,
-            defaultFrontendKey,
-            instances.first()
+            fallback.serviceKey,
+            fallback.frontendKey,
+            fallback.defaultInstance
         )
     }
 }

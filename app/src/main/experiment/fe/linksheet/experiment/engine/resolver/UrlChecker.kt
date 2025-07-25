@@ -7,7 +7,7 @@ import fe.linksheet.util.web.HostType
 import fe.linksheet.util.web.HostUtil
 import fe.std.uri.StdUrl
 
-class UriChecker(
+class UrlChecker(
     private val allowDarknets: () -> Boolean,
     private val allowNonPublic: () -> Boolean
 ) {

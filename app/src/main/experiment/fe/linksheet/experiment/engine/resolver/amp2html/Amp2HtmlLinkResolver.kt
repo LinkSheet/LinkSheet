@@ -4,7 +4,7 @@ import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
-import fe.linksheet.experiment.engine.resolver.UriChecker
+import fe.linksheet.experiment.engine.resolver.UrlChecker
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
 import fe.std.result.IResult
@@ -21,7 +21,7 @@ data class Amp2HtmlLinkResolver(
     private val cacheRepository: CacheRepository,
     private val allowDarknets: () -> Boolean,
     private val allowNonPublic: () -> Boolean,
-    private val uriChecker: UriChecker = UriChecker(allowDarknets, allowNonPublic),
+    private val urlChecker: UrlChecker = UrlChecker(allowDarknets, allowNonPublic),
     private val useLocalCache: () -> Boolean,
 ) : LinkResolver {
     override val id = EngineStepId.Amp2Html
@@ -53,7 +53,7 @@ data class Amp2HtmlLinkResolver(
     }
 
     override suspend fun EngineRunContext.runStep(url: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
-        uriChecker.check(url)?.let { return@withContext it }
+        urlChecker.check(url)?.let { return@withContext it }
 
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(url.toString())

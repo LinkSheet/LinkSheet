@@ -6,7 +6,7 @@ import fe.linksheet.experiment.engine.context.SkipFollowRedirectsExtra
 import fe.linksheet.experiment.engine.context.hasExtra
 import fe.linksheet.experiment.engine.resolver.LinkResolver
 import fe.linksheet.experiment.engine.resolver.ResolveOutput
-import fe.linksheet.experiment.engine.resolver.UriChecker
+import fe.linksheet.experiment.engine.resolver.UrlChecker
 import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.linksheet.module.database.entity.cache.ResolveType
 import fe.linksheet.module.repository.CacheRepository
@@ -25,7 +25,7 @@ data class FollowRedirectsLinkResolver(
     private val isTracker: (String) -> Boolean = { FastForward.isTracker(it) },
     private val allowDarknets: () -> Boolean,
     private val allowNonPublic: () -> Boolean,
-    private val uriChecker: UriChecker = UriChecker(allowDarknets, allowNonPublic),
+    private val urlChecker: UrlChecker = UrlChecker(allowDarknets, allowNonPublic),
     private val followOnlyKnownTrackers: () -> Boolean,
     private val useLocalCache: () -> Boolean,
 ) : LinkResolver {
@@ -50,7 +50,7 @@ data class FollowRedirectsLinkResolver(
             return@withContext ResolveOutput(url)
         }
 
-        uriChecker.check(url)?.let { return@withContext it }
+        urlChecker.check(url)?.let { return@withContext it }
 
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(urlString)

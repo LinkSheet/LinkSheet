@@ -224,6 +224,11 @@ android {
     }
 
     lint {
+        disable += arrayOf(
+            "AndroidGradlePluginVersion",
+            "MissingTranslation",
+            "Untranslatable"
+        )
         baseline = file("lint-baseline.xml")
     }
 

@@ -5,7 +5,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("plugin.compose")
-    id("com.gitlab.grrfe.build-logic-plugin")
+    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
 group = "fe.linksheet.bottom.sheet.next"

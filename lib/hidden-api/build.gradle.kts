@@ -2,7 +2,7 @@ import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 
 plugins {
     id("com.android.library")
-    id("com.gitlab.grrfe.build-logic-plugin")
+    id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 group = "fe.linksheet.hiddenapi"
 

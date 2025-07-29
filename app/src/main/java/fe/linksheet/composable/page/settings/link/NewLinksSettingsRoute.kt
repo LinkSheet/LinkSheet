@@ -18,6 +18,7 @@ import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.navigation.LibRedirectRoute
+import fe.linksheet.navigation.PreviewUrlRoute
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.downloaderSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
@@ -34,7 +35,7 @@ fun NewLinksSettingsRoute(
     val writeExternalStoragePermissionState = downloaderPermissionState()
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.links), onBackPressed = onBackPressed) {
-        group(size = 7) {
+        group(size = 8) {
             item(key = R.string.use_clear_urls) { padding, shape ->
                 PreferenceSwitchListItem(
                     shape = shape,
@@ -106,6 +107,17 @@ fun NewLinksSettingsRoute(
                     position = ContentPosition.Trailing,
                     headlineContent = textContent(R.string.enable_downloader),
                     supportingContent = annotatedStringResource(R.string.enable_downloader_explainer)
+                )
+            }
+
+            item(key = R.string.settings_links_preview__title_preview) { padding, shape ->
+                PreferenceDividedSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.urlPreview,
+                    onContentClick = { navigateNew(PreviewUrlRoute) },
+                    headlineContent = textContent(R.string.settings_links_preview__title_preview),
+                    supportingContent = textContent(R.string.settings_links_preview__subtitle_preview),
                 )
             }
 

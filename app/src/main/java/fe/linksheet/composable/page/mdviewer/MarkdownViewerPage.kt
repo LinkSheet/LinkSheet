@@ -32,7 +32,7 @@ import fe.linksheet.module.viewmodel.MarkdownViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun <T, R> rememberSaveableWithInit(key1: T, block: suspend (T) -> R?): R? {
+fun <T, R> rememberSavableWithInit(key1: T, block: suspend (T) -> R?): R? {
     var state by rememberSaveable(key1) { mutableStateOf<R?>(null) }
 
     LaunchedEffect(key1 = key1) {
@@ -52,7 +52,7 @@ fun MarkdownViewerWrapper(
     onBackPressed: () -> Unit,
     viewModel: MarkdownViewModel = koinViewModel(),
 ) {
-    val markdown = rememberSaveableWithInit(rawUrl) { viewModel.getWikiText(it) }
+    val markdown = rememberSavableWithInit(rawUrl) { viewModel.getWikiText(it) }
     val handler = LocalUriHandler.current
     MarkdownViewer(
         title = title,
@@ -118,7 +118,10 @@ private fun MarkdownViewer(
                         markdown = markdown,
                         linkColor = LocalLinkAnnotationStyle.current.style.color,
                         style = MaterialTheme.typography.bodyMedium,
-                        isTextSelectable = true
+                        isTextSelectable = true,
+//                        onLinkClicked = {
+//                            Log.d("MarkdownViewer", "$it")
+//                        }
                     )
                 }
             }

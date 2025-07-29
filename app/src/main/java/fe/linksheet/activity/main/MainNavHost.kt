@@ -49,6 +49,7 @@ import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
 import fe.linksheet.composable.page.settings.debug.SqlRoute
+import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
 import fe.linksheet.navigation.AdvancedRoute
 import fe.linksheet.navigation.DebugRoute
 import fe.linksheet.navigation.ExperimentRoute
@@ -57,6 +58,7 @@ import fe.linksheet.navigation.LibRedirectRoute
 import fe.linksheet.navigation.LibRedirectServiceRoute
 import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.navigation.MarkdownViewerRoute
+import fe.linksheet.navigation.PreviewUrlRoute
 import fe.linksheet.navigation.Routes
 import fe.linksheet.navigation.SqlRoute
 import fe.linksheet.navigation.VlhAppRoute
@@ -148,6 +150,10 @@ fun MainNavHost(
 
         animatedComposable<SqlRoute> { _, route ->
             SqlRoute(onBackPressed = onBackPressed)
+        }
+
+        animatedComposable<PreviewUrlRoute> { _, route ->
+            PreviewSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = Routes.AboutVersion) {

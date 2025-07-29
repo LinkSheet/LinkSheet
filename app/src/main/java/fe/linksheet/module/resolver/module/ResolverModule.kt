@@ -213,8 +213,8 @@ fun createSettings(
             downloaderCheckUrlMimeType = prefRepo.asFunction(AppPreferences.downloaderCheckUrlMimeType),
         ),
         previewSettings = PreviewSettings(
-            previewUrl = experimentRepository.asFunction(Experiments.urlPreview),
-            previewUrlSkipBrowser = experimentRepository.asFunction(Experiments.urlPreviewSkipBrowser),
+            previewUrl = prefRepo.asFunction(AppPreferences.urlPreview),
+            previewUrlSkipBrowser = prefRepo.asFunction(AppPreferences.urlPreviewSkipBrowser),
         ),
     )
 }

@@ -10,6 +10,8 @@ object AppStatePreferences : PreferenceDefinition() {
     val newDefaults_2024_12_16_InfoDismissed = boolean("has_new_defaults_2024_12_16_info_dismissed")
 
     val newDefaults_2024_12_29_InfoDismissed = boolean("has_new_defaults_2024_12_29_info_dismissed", true)
+    val newDefaults_2025_07_29 = long("has_new_defaults_2025_07_29")
+
     val remoteConfigDialogDismissed = boolean("remote_config_dialog_dismissed", false)
 
     init {

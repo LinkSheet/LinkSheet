@@ -139,6 +139,10 @@ data object LibRedirectRoute : Route
 
 @Keep
 @Serializable
+data object PreviewUrlRoute : Route
+
+@Keep
+@Serializable
 data object LanguageRoute : Route
 
 @Keep

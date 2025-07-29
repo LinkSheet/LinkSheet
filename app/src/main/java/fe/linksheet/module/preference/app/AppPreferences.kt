@@ -155,6 +155,13 @@ object AppPreferences : PreferenceDefinition(
     val homeClipboardCard = boolean("home_clipboard_card", true)
     val remoteConfig = boolean("remote_config", false)
 
+    val urlPreview = boolean(
+        key = "url_bar_preview"
+    )
+    val urlPreviewSkipBrowser = boolean(
+        key = "url_bar_preview_skip_browser"
+    )
+
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->
             if (!repository.hasStoredValue(themeV2)) {

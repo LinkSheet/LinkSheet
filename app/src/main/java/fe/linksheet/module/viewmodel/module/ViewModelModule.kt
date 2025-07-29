@@ -118,4 +118,5 @@ val ViewModelModule = module {
     viewModelOf(::ProfileSwitchingSettingsViewModel)
     viewModelOf(::MarkdownViewModel)
     viewModelOf(::SqlViewModel)
+    viewModelOf(::PreviewSettingsViewModel)
 }

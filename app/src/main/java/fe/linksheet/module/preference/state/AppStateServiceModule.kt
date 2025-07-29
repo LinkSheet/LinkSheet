@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package fe.linksheet.module.preference.state
 
 import androidx.lifecycle.LifecycleOwner
@@ -12,11 +14,14 @@ import fe.linksheet.module.preference.experiment.Experiments
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.dsl.module
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 val AppStateServiceModule = module {
     includes(PreferenceRepositoryModule)
     service<AppStateService> {
         AppStateService(
+            clock = scope.get(),
             logger = logger,
             preferenceRepository = scope.get(),
             appStateRepository = scope.get(),
@@ -26,6 +31,7 @@ val AppStateServiceModule = module {
 }
 
 internal class AppStateService(
+    val clock: Clock,
     val logger: Logger,
     val preferenceRepository: AppPreferenceRepository,
     val appStateRepository: AppStateRepository,
@@ -33,12 +39,14 @@ internal class AppStateService(
 ) : LifecycleAwareService {
 
     private val updates = mapOf(
-        AppStatePreferences.newDefaults_2024_12_16 to NewDefaults2024_12_16,
+        AppStatePreferences.newDefaults_2024_12_16 to NewDefaults20241216,
+        AppStatePreferences.newDefaults_2025_07_29 to NewDefaults20250729(preferenceRepository)
     )
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
         runMigrations()
-        init(System.currentTimeMillis())
+        val now = clock.now().toEpochMilliseconds()
+        init(now)
     }
 
     suspend fun runMigrations() = withContext(Dispatchers.IO) {

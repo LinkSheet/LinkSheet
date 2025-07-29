@@ -12,15 +12,10 @@ object Experiments : PreferenceDefinition(
     "experiment_url_bar",
     "experiment_url_bar_switch_profile",
     "experiment_ui_overhaul",
-    "experiment_edit_clipboard"
+    "experiment_edit_clipboard",
+    "experiment_url_bar_preview",
+    "experiment_url_bar_preview_skip_browser"
 ) {
-    val urlPreview = boolean(
-        key = "experiment_url_bar_preview"
-    )
-    val urlPreviewSkipBrowser = boolean(
-        key = "experiment_url_bar_preview_skip_browser"
-    )
-
     val improvedBottomSheetExpandFully = boolean(
         key = "experiment_impr_btm_sheet_expand_fully"
     )
@@ -72,12 +67,6 @@ object Experiments : PreferenceDefinition(
     )
 
     val experiments = listOf(
-        group(
-            name = "enhanced_url_bar",
-            displayName = "Enhanced url bar",
-            experiment("Open Graph preview", urlPreview),
-            experiment("Disable preview if referrer is browser", urlPreviewSkipBrowser)
-        ),
         group(
             name = "improved_bottom_sheet",
             displayName = "Improved bottom sheet",

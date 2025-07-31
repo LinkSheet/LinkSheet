@@ -1,7 +1,6 @@
 package fe.linksheet.composable.page.settings.about
 
 import LibRedirectMetadata
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
@@ -31,7 +30,6 @@ import fe.fastforwardkt.FastForwardRules
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.navigation.creditsSettingsRoute
 import fe.linksheet.util.LinkSheet
@@ -39,11 +37,10 @@ import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.util.buildconfig.LinkSheetInfo
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 
-object NewAboutSettingsRouteData {
+object AboutSettingsRouteData {
     val externalVersions = arrayOf(
         ListItemData(
             Icons.Outlined.ClearAll.iconPainter,
@@ -64,7 +61,7 @@ object NewAboutSettingsRouteData {
 }
 
 @Composable
-fun NewAboutSettingsRoute(
+fun AboutSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
     viewModel: AboutSettingsViewModel = koinViewModel(),
@@ -187,7 +184,7 @@ fun NewAboutSettingsRoute(
 
         divider(id = R.string.settings_about__divider_external_versions)
 
-        group(array = NewAboutSettingsRouteData.externalVersions) { data, padding, shape ->
+        group(array = AboutSettingsRouteData.externalVersions) { data, padding, shape ->
             ExternalVersionListItem(
                 shape = shape,
                 padding = padding,

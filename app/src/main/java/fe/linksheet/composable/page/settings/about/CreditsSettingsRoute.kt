@@ -23,7 +23,7 @@ import fe.linksheet.*
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.openUri
 
-internal object NewCreditsSettingsRouteData {
+internal object CreditsSettingsRouteData {
     val apps = arrayOf(
         ListItemData(
             drawable(R.drawable.app_openlinkwith),
@@ -53,12 +53,12 @@ internal object NewCreditsSettingsRouteData {
 }
 
 @Composable
-fun NewCreditsSettingsRoute(onBackPressed: () -> Unit) {
+fun CreditsSettingsRoute(onBackPressed: () -> Unit) {
     val interaction = LocalHapticFeedbackInteraction.current
     val linkTags = LocalLinkTags.current
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.credits), onBackPressed = onBackPressed) {
-        group(array = NewCreditsSettingsRouteData.apps) { app, padding, shape ->
+        group(array = CreditsSettingsRouteData.apps) { app, padding, shape ->
             ClickableShapeListItem(
                 shape = shape,
                 padding = padding,

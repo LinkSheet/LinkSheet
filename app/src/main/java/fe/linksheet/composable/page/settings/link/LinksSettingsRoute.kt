@@ -26,7 +26,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun NewLinksSettingsRoute(
+fun LinksSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
     navigateNew: (Route) -> Unit,

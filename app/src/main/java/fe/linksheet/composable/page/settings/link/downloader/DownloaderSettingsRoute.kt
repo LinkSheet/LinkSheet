@@ -28,7 +28,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun NewDownloaderSettingsRoute(
+fun DownloaderSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: DownloaderSettingsViewModel = koinViewModel(),
 ) {

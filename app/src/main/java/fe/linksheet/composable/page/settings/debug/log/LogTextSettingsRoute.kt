@@ -19,14 +19,13 @@ import fe.linksheet.composable.util.listState
 import fe.linksheet.composable.component.dialog.rememberExportLogDialog
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
-import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 
 @Composable
-fun NewLogTextSettingsRoute(
+fun LogTextSettingsRoute(
     onBackPressed: () -> Unit,
     sessionId: String?,
     sessionName: String,

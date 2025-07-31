@@ -26,7 +26,7 @@ import org.koin.core.parameter.parametersOf
 
 
 @Composable
-fun NewLibRedirectServiceSettingsRoute(
+fun LibRedirectServiceSettingsRoute(
     onBackPressed: () -> Unit,
     serviceKey: String?,
     viewModel: LibRedirectServiceSettingsViewModel = koinViewModel(parameters = {

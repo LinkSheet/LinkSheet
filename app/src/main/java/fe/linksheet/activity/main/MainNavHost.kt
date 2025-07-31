@@ -8,37 +8,37 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import fe.linksheet.composable.page.home.HomePageRoute
-import fe.linksheet.composable.page.settings.NewSettingsRoute
+import fe.linksheet.composable.page.settings.SettingsRoute
 import fe.linksheet.composable.page.settings.about.DonateSettingsRoute
-import fe.linksheet.composable.page.settings.about.NewAboutSettingsRoute
-import fe.linksheet.composable.page.settings.about.NewCreditsSettingsRoute
+import fe.linksheet.composable.page.settings.about.AboutSettingsRoute
+import fe.linksheet.composable.page.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.page.settings.about.VersionSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.*
-import fe.linksheet.composable.page.settings.app.NewRuleRoute
+import fe.linksheet.composable.page.settings.app.RuleRoute
 import fe.linksheet.composable.page.settings.app.RuleOverviewRoute
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VerifiedLinkHandlersRoute
 import fe.linksheet.composable.page.settings.apps.AppsSettingsRoute
 import fe.linksheet.composable.page.settings.apps.PretendToBeAppSettingsRoute
 import fe.linksheet.composable.page.settings.bottomsheet.BottomSheetSettingsRoute
 import fe.linksheet.composable.page.settings.bottomsheet.ProfileSwitchingSettingsRoute
-import fe.linksheet.composable.page.settings.browser.NewBrowserSettingsRoute
-import fe.linksheet.composable.page.settings.browser.inapp.NewInAppBrowserSettingsDisableInSelectedRoute
-import fe.linksheet.composable.page.settings.browser.inapp.NewInAppBrowserSettingsRoute
+import fe.linksheet.composable.page.settings.browser.BrowserSettingsRoute
+import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsDisableInSelectedRoute
+import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.mode.PreferredBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.mode.WhitelistedBrowsersSettingsRoute
-import fe.linksheet.composable.page.settings.debug.NewDebugSettingsRoute
+import fe.linksheet.composable.page.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.page.settings.debug.loadpreferences.LoadDumpedPreferences
-import fe.linksheet.composable.page.settings.debug.log.NewLogSettingsRoute
-import fe.linksheet.composable.page.settings.debug.log.NewLogTextSettingsRoute
+import fe.linksheet.composable.page.settings.debug.log.LogSettingsRoute
+import fe.linksheet.composable.page.settings.debug.log.LogTextSettingsRoute
 import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
-import fe.linksheet.composable.page.settings.link.NewLinksSettingsRoute
-import fe.linksheet.composable.page.settings.link.amp2html.NewAmp2HtmlSettingsRoute
-import fe.linksheet.composable.page.settings.link.downloader.NewDownloaderSettingsRoute
-import fe.linksheet.composable.page.settings.link.libredirect.NewLibRedirectServiceSettingsRoute
-import fe.linksheet.composable.page.settings.link.libredirect.NewLibRedirectSettingsRoute
-import fe.linksheet.composable.page.settings.link.redirect.NewFollowRedirectsSettingsRoute
+import fe.linksheet.composable.page.settings.link.LinksSettingsRoute
+import fe.linksheet.composable.page.settings.link.amp2html.Amp2HtmlSettingsRoute
+import fe.linksheet.composable.page.settings.link.downloader.DownloaderSettingsRoute
+import fe.linksheet.composable.page.settings.link.libredirect.LibRedirectServiceSettingsRoute
+import fe.linksheet.composable.page.settings.link.libredirect.LibRedirectSettingsRoute
+import fe.linksheet.composable.page.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
-import fe.linksheet.composable.page.settings.notification.NewNotificationSettingsRoute
+import fe.linksheet.composable.page.settings.notification.NotificationSettingsRoute
 import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
@@ -114,7 +114,7 @@ fun MainNavHost(
         }
 
         animatedComposable<ExperimentRoute> { _, route ->
-            NewExperimentsSettingsRoute(onBackPressed = onBackPressed, experiment = route.experiment)
+            ExperimentsSettingsRoute(onBackPressed = onBackPressed, experiment = route.experiment)
         }
 
         animatedComposable<ExportImportRoute> { _, _ ->
@@ -122,26 +122,26 @@ fun MainNavHost(
         }
 
         animatedComposable<AdvancedRoute> { _, _ ->
-            NewAdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
+            AdvancedSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
         }
 
         animatedComposable<DebugRoute> { _, _ ->
-            NewDebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            DebugSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable<LogTextViewerRoute> { _, route ->
-            NewLogTextSettingsRoute(onBackPressed = onBackPressed, sessionId = route.id, sessionName = route.name)
+            LogTextSettingsRoute(onBackPressed = onBackPressed, sessionId = route.id, sessionName = route.name)
         }
 
         animatedComposable<LibRedirectRoute> { _, route ->
-            NewLibRedirectSettingsRoute(
+            LibRedirectSettingsRoute(
                 onBackPressed = onBackPressed,
                 navigate = navigateNew,
             )
         }
 
         animatedComposable<LibRedirectServiceRoute> { _, route ->
-            NewLibRedirectServiceSettingsRoute(onBackPressed = onBackPressed, serviceKey = route.serviceKey)
+            LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed, serviceKey = route.serviceKey)
         }
 
         animatedComposable<VlhAppRoute> { _, route ->
@@ -165,11 +165,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = Routes.RuleNew) {
-            NewRuleRoute(onBackPressed = onBackPressed)
+            RuleRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = settingsRoute) {
-            NewSettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navigateNew = navigateNew)
+            SettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navigateNew = navigateNew)
         }
 
         animatedComposable(route = appsSettingsRoute) {
@@ -179,7 +179,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = browserSettingsRoute) {
-            NewBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            BrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = generalSettingsRoute) {
@@ -187,7 +187,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = notificationSettingsRoute) {
-            NewNotificationSettingsRoute(onBackPressed = onBackPressed)
+            NotificationSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = privacySettingsRoute) {
@@ -205,7 +205,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = linksSettingsRoute) {
-            NewLinksSettingsRoute(
+            LinksSettingsRoute(
                 onBackPressed = onBackPressed,
                 navigate = navigate,
                 navigateNew = navigateNew
@@ -213,15 +213,15 @@ fun MainNavHost(
         }
 
         animatedComposable(route = followRedirectsSettingsRoute) {
-            NewFollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
+            FollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = downloaderSettingsRoute) {
-            NewDownloaderSettingsRoute(onBackPressed = onBackPressed)
+            DownloaderSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = amp2HtmlSettingsRoute) {
-            NewAmp2HtmlSettingsRoute(onBackPressed = onBackPressed)
+            Amp2HtmlSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = themeSettingsRoute) {
@@ -235,7 +235,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = logViewerSettingsRoute) {
-            NewLogSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
+            LogSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
         }
 
         animatedComposable(route = loadDumpedPreferences) {
@@ -243,7 +243,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = aboutSettingsRoute) {
-            NewAboutSettingsRoute(
+            AboutSettingsRoute(
                 navigate = navigate, onBackPressed = onBackPressed
             )
         }
@@ -255,7 +255,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = creditsSettingsRoute) {
-            NewCreditsSettingsRoute(onBackPressed = onBackPressed)
+            CreditsSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = preferredBrowserSettingsRoute) {
@@ -269,11 +269,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = inAppBrowserSettingsRoute) {
-            NewInAppBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            InAppBrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
         }
 
         animatedComposable(route = inAppBrowserSettingsDisableInSelectedRoute) {
-            NewInAppBrowserSettingsDisableInSelectedRoute(onBackPressed = onBackPressed)
+            InAppBrowserSettingsDisableInSelectedRoute(onBackPressed = onBackPressed)
         }
 
 //        animatedComposable(route = preferredAppsSettingsRoute) {

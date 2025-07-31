@@ -10,7 +10,7 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NewRuleRoute(
+fun RuleRoute(
     onBackPressed: () -> Unit,
 //    viewModel: AppConfigViewModel = koinViewModel(),
 ) {

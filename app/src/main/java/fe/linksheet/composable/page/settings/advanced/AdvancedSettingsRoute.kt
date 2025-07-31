@@ -16,7 +16,7 @@ import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.navigation.ExperimentRoute
 import fe.linksheet.navigation.ExportImportRoute
 
-private object NewAdvancedSettingsRouteData {
+private object AdvancedSettingsRouteData {
     val items = arrayOf(
         RouteNavItemNew(
             ExperimentRoute.Empty,
@@ -34,12 +34,12 @@ private object NewAdvancedSettingsRouteData {
 }
 
 @Composable
-fun NewAdvancedSettingsRoute(onBackPressed: () -> Unit, navigate: (Route) -> Unit) {
+fun AdvancedSettingsRoute(onBackPressed: () -> Unit, navigate: (Route) -> Unit) {
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.advanced),
         onBackPressed = onBackPressed
     ) {
-        group(array = NewAdvancedSettingsRouteData.items) { data, padding, shape ->
+        group(array = AdvancedSettingsRouteData.items) { data, padding, shape ->
             RouteNavigateListItemNew(
                 data = data,
                 shape = shape,

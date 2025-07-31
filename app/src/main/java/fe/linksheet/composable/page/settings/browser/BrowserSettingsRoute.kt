@@ -15,7 +15,7 @@ import fe.linksheet.navigation.preferredBrowserSettingsRoute
 
 
 @Composable
-fun NewBrowserSettingsRoute(
+fun BrowserSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
 ) {

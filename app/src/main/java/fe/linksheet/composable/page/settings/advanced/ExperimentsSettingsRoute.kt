@@ -22,7 +22,6 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.card.AlertCard
 import fe.composekit.component.icon.IconOffset
-import fe.composekit.component.list.item.ContentPosition
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
@@ -30,7 +29,7 @@ import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NewExperimentsSettingsRoute(
+fun ExperimentsSettingsRoute(
     onBackPressed: () -> Unit,
     experiment: String?,
     viewModel: ExperimentsViewModel = koinViewModel(),

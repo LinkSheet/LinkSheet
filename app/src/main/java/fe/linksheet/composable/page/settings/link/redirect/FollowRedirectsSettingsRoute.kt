@@ -21,7 +21,7 @@ import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun NewFollowRedirectsSettingsRoute(
+fun FollowRedirectsSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: FollowRedirectsSettingsViewModel = koinViewModel()
 ) {

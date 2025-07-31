@@ -22,7 +22,7 @@ import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun NewAmp2HtmlSettingsRoute(
+fun Amp2HtmlSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: Amp2HtmlSettingsViewModel = koinViewModel()
 ) {

@@ -28,7 +28,7 @@ import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.navigation.*
 import org.koin.androidx.compose.koinViewModel
 
-internal object NewSettingsRouteData {
+internal object SettingsRouteData {
     val verifiedApps = RouteNavItem(
         appsWhichCanOpenLinksSettingsRoute,
         Icons.Outlined.DomainVerification.iconPainter,
@@ -143,7 +143,7 @@ internal object NewSettingsRouteData {
 }
 
 @Composable
-fun NewSettingsRoute(
+fun SettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
     navigateNew: (Route) -> Unit,
@@ -157,23 +157,23 @@ fun NewSettingsRoute(
         onBackPressed = onBackPressed
     ) {
         item(key = R.string.verified_link_handlers, contentType = ContentType.SingleGroupItem) {
-            RouteNavigateListItem(data = NewSettingsRouteData.verifiedApps, navigate = navigate)
+            RouteNavigateListItem(data = SettingsRouteData.verifiedApps, navigate = navigate)
         }
 
         divider(id = R.string.customization)
 
-        group(array = NewSettingsRouteData.customization) { data, padding, shape ->
+        group(array = SettingsRouteData.customization) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
 
         divider(id = R.string.misc_settings)
 
-        group(size = NewSettingsRouteData.miscellaneous.size + 2) {
-            items(array = NewSettingsRouteData.miscellaneous) { data, padding, shape ->
+        group(size = SettingsRouteData.miscellaneous.size + 2) {
+            items(array = SettingsRouteData.miscellaneous) { data, padding, shape ->
                 RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
             }
 
-            item(key = NewSettingsRouteData.languageRoute.key) { padding, shape ->
+            item(key = SettingsRouteData.languageRoute.key) { padding, shape ->
                 val appLocale by viewModel.currentLocale.collectAsStateWithLifecycle(
                     minActiveState = Lifecycle.State.RESUMED,
                     initialValue = null
@@ -189,7 +189,7 @@ fun NewSettingsRoute(
 
             item(key = privacySettingsRoute) { padding, shape ->
                 RouteNavigateListItem(
-                    data = NewSettingsRouteData.privacyRoute,
+                    data = SettingsRouteData.privacyRoute,
                     padding = padding,
                     shape = shape,
                     navigate = navigate
@@ -199,8 +199,8 @@ fun NewSettingsRoute(
 
         divider(id = R.string.advanced)
 
-        group(size = NewSettingsRouteData.advanced.size + if (devMode) 1 else 0) {
-            items(array = NewSettingsRouteData.advanced) { data, padding, shape ->
+        group(size = SettingsRouteData.advanced.size + if (devMode) 1 else 0) {
+            items(array = SettingsRouteData.advanced) { data, padding, shape ->
                 fe.composekit.route.RouteNavigateListItemNew(
                     data = data,
                     padding = padding,
@@ -210,9 +210,9 @@ fun NewSettingsRoute(
             }
 
             if (devMode) {
-                item(key = NewSettingsRouteData.dev.route) { padding, shape ->
+                item(key = SettingsRouteData.dev.route) { padding, shape ->
                     RouteNavigateListItem(
-                        data = NewSettingsRouteData.dev,
+                        data = SettingsRouteData.dev,
                         padding = padding,
                         shape = shape,
                         navigate = navigate
@@ -223,7 +223,7 @@ fun NewSettingsRoute(
 
         divider(id = R.string.about)
 
-        group(array = NewSettingsRouteData.about) { data, padding, shape ->
+        group(array = SettingsRouteData.about) { data, padding, shape ->
             RouteNavigateListItem(data = data, padding = padding, shape = shape, navigate = navigate)
         }
     }

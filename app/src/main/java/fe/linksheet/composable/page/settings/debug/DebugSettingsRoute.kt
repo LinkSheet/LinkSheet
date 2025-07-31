@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NewDebugSettingsRoute(
+fun DebugSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
     viewModel: DevSettingsViewModel = koinViewModel(),

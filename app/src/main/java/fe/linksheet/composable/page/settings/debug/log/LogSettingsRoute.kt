@@ -36,7 +36,7 @@ import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NewLogSettingsRoute(
+fun LogSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (Route) -> Unit,
     viewModel: LogSettingsViewModel = koinViewModel(),

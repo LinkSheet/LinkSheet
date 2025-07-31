@@ -7,7 +7,6 @@ import fe.composekit.layout.column.group
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
-import fe.linksheet.composable.component.page.twoline.SwitchPreferenceItem
 import fe.linksheet.composable.component.page.twoline.SwitchPreferenceItemNew
 import fe.linksheet.composable.component.page.twoline.rememberTwoLinePreferenceGroup
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
@@ -46,7 +45,7 @@ private object NewNotificationSettingsRouteData {
 }
 
 @Composable
-fun NewNotificationSettingsRoute(
+fun NotificationSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: NotificationSettingsViewModel = koinViewModel(),
 ) {

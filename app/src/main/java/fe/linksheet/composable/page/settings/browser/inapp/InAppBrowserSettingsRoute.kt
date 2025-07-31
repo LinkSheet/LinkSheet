@@ -20,7 +20,7 @@ import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NewInAppBrowserSettingsRoute(
+fun InAppBrowserSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
     viewModel: InAppBrowserSettingsViewModel = koinViewModel(),

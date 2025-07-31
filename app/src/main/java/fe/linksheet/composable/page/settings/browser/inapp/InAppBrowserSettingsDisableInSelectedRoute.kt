@@ -23,7 +23,7 @@ import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NewInAppBrowserSettingsDisableInSelectedRoute(
+fun InAppBrowserSettingsDisableInSelectedRoute(
     onBackPressed: () -> Unit,
     viewModel: InAppBrowserSettingsViewModel = koinViewModel(),
 ) {

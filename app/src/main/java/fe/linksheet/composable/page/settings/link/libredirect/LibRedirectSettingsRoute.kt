@@ -30,7 +30,7 @@ import fe.linksheet.util.web.HostUtil
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NewLibRedirectSettingsRoute(
+fun LibRedirectSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (Route) -> Unit,
     viewModel: LibRedirectSettingsViewModel = koinViewModel(),

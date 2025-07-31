@@ -574,8 +574,8 @@
     <string name="settings_links_amp2html__text_local_network">Allow running Amp2Html for non-public hosts</string>
     <string name="settings_links_follow_redirects__title_local_network">Allow local network</string>
     <string name="settings_links_follow_redirects__text_local_network">Allow following redirects for non-public hosts</string>
-    <string name="settings_links_preview__title_preview">Show Url preview</string>
-    <string name="settings_links_preview__subtitle_preview">Attempt to load and show OpenGraph preview in bottom sheet</string>
+    <string name="settings_links_preview__title_preview">Show url preview</string>
+    <string name="settings_links_preview__subtitle_preview">Attempt to load and show OpenGraph preview in bottom sheet. This may have <annotation url-id="github.linksheet.wiki.privacy.preview">privacy-related implications</annotation></string>
     <string name="settings_links_preview__title_preview_skip_browser">Disable browser preview</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">Disable preview if referrer is browser</string>
 </resources>

@@ -117,7 +117,7 @@ fun NewLinksSettingsRoute(
                     statePreference = viewModel.urlPreview,
                     onContentClick = { navigateNew(PreviewUrlRoute) },
                     headlineContent = textContent(R.string.settings_links_preview__title_preview),
-                    supportingContent = textContent(R.string.settings_links_preview__subtitle_preview),
+                    supportingContent = annotatedStringResource(R.string.settings_links_preview__subtitle_preview),
                 )
             }
 

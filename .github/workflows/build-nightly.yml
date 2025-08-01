@@ -151,7 +151,7 @@ jobs:
           app/build/outputs/apk/foss/nightly/${{ steps.step-8.outputs.OUTPUT_FILE }}
           app/build/outputs/mapping/${{ env.BUILD_FLAVOR_TYPE }}/*.txt
     - id: 'step-11'
-      uses: '1fexd/gh-create-release-notes@0.0.14'
+      uses: '1fexd/gh-create-release-notes@0.0.15'
       with:
         github-token: '${{ secrets.GITHUB_TOKEN }}'
         stable-repo: '${{ github.repository }}'

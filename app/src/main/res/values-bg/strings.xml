@@ -571,4 +571,8 @@
     <string name="settings_links_amp2html__text_local_network">Разрешаване на работа на Amp2Html за не публични хостове</string>
     <string name="settings_links_follow_redirects__title_local_network">Разрешаване на местната мрежа</string>
     <string name="settings_links_follow_redirects__text_local_network">Последване на препращанията към не публични хостове</string>
+    <string name="settings_links_preview__title_preview">Преглед на адреса</string>
+    <string name="settings_links_preview__subtitle_preview">Опит за зареждане и показване на преглед на OpenGraph в долното меню. Възможно е да има <annotation url-id="github.linksheet.wiki.privacy.preview">последствия, свързани с поверителността</annotation></string>
+    <string name="settings_links_preview__title_preview_skip_browser">Без преглед от мрежов четец</string>
+    <string name="settings_links_preview__subtitle_preview_skip_browser">Без преглед ако изпращач е мрежов четец</string>
 </resources>

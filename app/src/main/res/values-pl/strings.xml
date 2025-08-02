@@ -587,4 +587,8 @@
     <string name="settings_links_amp2html__text_local_network">Zezwól na uruchamianie Amp2Html dla niepublicznych hostów</string>
     <string name="settings_links_follow_redirects__title_local_network">Zezwalaj na sieć lokalną</string>
     <string name="settings_links_follow_redirects__text_local_network">Zezwalaj na następujące przekierowania dla niepublicznych hostów</string>
+    <string name="settings_links_preview__title_preview">Pokaż podgląd linku</string>
+    <string name="settings_links_preview__subtitle_preview">Próbuj załadować i wyświetlić podgląd OpenGraph w dolnym panelu. Może to mieć <annotation url-id="github.linksheet.wiki.privacy.preview">komplikacje związane z prywatnością</annotation></string>
+    <string name="settings_links_preview__title_preview_skip_browser">Wyłącz podgląd przeglądarki</string>
+    <string name="settings_links_preview__subtitle_preview_skip_browser">Wyłącz podgląd, jeśli odsyłaczem jest przeglądarka</string>
 </resources>

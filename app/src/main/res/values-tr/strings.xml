@@ -552,4 +552,27 @@
     <string name="bottom_sheet__text_launch_failure_other">Başlatma başarısız!</string>
     <string name="bottom_sheet__text_launch_illegal">İzin verilmeyen başlatma girişimi!</string>
     <string name="bottom_sheet__text_launch_failure_unknown">Bilinmeyen başlatma hatası!</string>
+    <string name="settings_verified_link_handler__text_hosts">Sunucular</string>
+    <string name="settings_verified_link_handler__title_details">Detaylar</string>
+    <string name="generic__button_text_settings">Ayarlar</string>
+    <string name="settings__title_sql">Sql sorgusu</string>
+    <string name="settings_sql__text_query">Sorgu</string>
+    <string name="generic__title_sort_by">Sırala</string>
+    <string name="generic__title_filter">Filtrele</string>
+    <string name="settings_verified_link_handlers__text_sort_by_a_z">A-Z</string>
+    <string name="settings_verified_link_handlers__text_sort_by_installation_time">Kurulum zamanı</string>
+    <string name="settings_verified_link_handlers__text_ascending">Artan</string>
+    <string name="generic__label_arrow_rotation">Ok yönü</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"><![CDATA[Tüm uygulamalar]]></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_browser">Tarayıcılar</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_native">Yerel uygulamalar</string>
+    <string name="settings_verified_link_handlers__text_system_apps">Sistem uygulamaları</string>
+    <string name="settings_links_amp2html__title_local_network">Yerel ağa izin ver</string>
+    <string name="settings_links_amp2html__text_local_network">Herkese açık olmayan sunucular için Amp2Html çalıştırılmasına izin ver</string>
+    <string name="settings_links_follow_redirects__title_local_network">Yerel ağa izin ver</string>
+    <string name="settings_links_follow_redirects__text_local_network">Herkese açık olmayan sunucular için yönlendirmeleri takip etmeye izin ver</string>
+    <string name="settings_links_preview__title_preview">Url ön izlemesinş göster</string>
+    <string name="settings_links_preview__subtitle_preview">OpenGraph ön izlemesini yüklemeyi ve göstermeyi dene. Bunun <annotation url-id="github.linksheet.wiki.privacy.preview">gizlilikle ilgili etkileri</annotation> olabilir</string>
+    <string name="settings_links_preview__title_preview_skip_browser">Tarayıcı ön izlemesini devre dışı bırak</string>
+    <string name="settings_links_preview__subtitle_preview_skip_browser">Eğer yönlendiren bir tarayıcıysa ön izlemeyi devre dışı bırak</string>
 </resources>

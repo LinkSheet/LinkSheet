@@ -70,7 +70,7 @@ val base64ToFile = CustomAction(
 val nightlyReleaseNotes = CustomAction(
     actionOwner = "1fexd",
     actionName = "gh-create-release-notes",
-    actionVersion = "0.0.15",
+    actionVersion = "0.0.16",
     inputs = mapOf(
         "github-token" to expr { secrets.GITHUB_TOKEN },
         "stable-repo" to expr { github.repository },

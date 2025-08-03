@@ -36,3 +36,9 @@ class NewDefaults20250729(private val preferenceRepository: AppPreferenceReposit
         }
     }
 }
+
+object NewDefaults20250803 : AppStateUpdate {
+    override fun execute(experimentsRepository: ExperimentRepository) {
+        experimentsRepository.put(Experiments.expressiveLoadingSheet, true)
+    }
+}

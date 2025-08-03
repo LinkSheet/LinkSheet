@@ -53,7 +53,8 @@ object Experiments : PreferenceDefinition(
         key = "experiment_aggressive_follow_redirects"
     )
     val expressiveLoadingSheet = boolean(
-        key = "experiment_expressive_loading_sheet"
+        key = "experiment_expressive_loading_sheet",
+        default = true
     )
     val linkEngine = boolean(
         key = "experiment_link_engine"

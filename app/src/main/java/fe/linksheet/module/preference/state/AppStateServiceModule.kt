@@ -39,8 +39,9 @@ internal class AppStateService(
 ) : LifecycleAwareService {
 
     private val updates = mapOf(
-        AppStatePreferences.newDefaults_2024_12_16 to NewDefaults20241216,
-        AppStatePreferences.newDefaults_2025_07_29 to NewDefaults20250729(preferenceRepository)
+        AppStatePreferences.newDefaults.`2024-12-16` to NewDefaults20241216,
+        AppStatePreferences.newDefaults.`2025-07-29` to NewDefaults20250729(preferenceRepository),
+        AppStatePreferences.newDefaults.`2025-08-03` to NewDefaults20250803
     )
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {

@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-data class LibRedirectLinkModifier(
+class LibRedirectLinkModifier(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val resolver: LibRedirectResolver,
     private val useJsEngine: () -> Boolean = { false }

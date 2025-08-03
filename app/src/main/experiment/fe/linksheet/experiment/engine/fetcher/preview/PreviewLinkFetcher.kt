@@ -9,7 +9,7 @@ import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-data class PreviewLinkFetcher(
+class PreviewLinkFetcher(
     private val source: PreviewSource,
     private val cacheRepository: CacheRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,

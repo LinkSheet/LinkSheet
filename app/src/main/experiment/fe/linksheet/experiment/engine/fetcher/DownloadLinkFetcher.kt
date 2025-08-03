@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-data class DownloadLinkFetcher(
+class DownloadLinkFetcher(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val downloader: Downloader,
     private val checkUrlMimeType: () -> Boolean = { false },

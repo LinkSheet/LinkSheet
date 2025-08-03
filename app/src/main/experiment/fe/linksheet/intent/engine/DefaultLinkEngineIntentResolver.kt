@@ -2,9 +2,9 @@ package fe.linksheet.intent.engine
 
 import android.content.Context
 import fe.composekit.lifecycle.network.core.NetworkStateService
-import fe.linksheet.experiment.engine.EngineTrack
+import fe.linksheet.experiment.engine.EngineScenario
 import fe.linksheet.experiment.engine.LinkEngine
-import fe.linksheet.experiment.engine.TrackSelector
+import fe.linksheet.experiment.engine.ScenarioSelector
 import fe.linksheet.experiment.engine.fetcher.DownloadLinkFetcher
 import fe.linksheet.experiment.engine.fetcher.preview.PreviewLinkFetcher
 import fe.linksheet.experiment.engine.fetcher.preview.PreviewLocalSource
@@ -111,13 +111,13 @@ fun DefaultLinkEngineIntentResolver(
         dispatcher = dispatcher
     )
 
-    val track = EngineTrack(
+    val scenario = EngineScenario(
         id = Uuid.NIL,
         position = 0,
         predicate = { true },
         engine = pipeline
     )
-    val selector = TrackSelector(tracks = listOf(track))
+    val selector = ScenarioSelector(scenarios = listOf(scenario))
 
     return LinkEngineIntentResolver(
         context = context,

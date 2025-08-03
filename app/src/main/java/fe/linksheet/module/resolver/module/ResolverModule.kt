@@ -164,7 +164,6 @@ data class PreviewSettings(
     val useLocalCache: () -> Boolean = { true }
 )
 
-
 @OptIn(SensitivePreference::class)
 fun createSettings(
     prefRepo: AppPreferenceRepository,
@@ -186,35 +185,35 @@ fun createSettings(
             unifiedPreferredBrowser = prefRepo.asFunction(AppPreferences.unifiedPreferredBrowser),
         ),
         libRedirectSettings = LibRedirectSettings(
-            enableIgnoreLibRedirectButton = prefRepo.asFunction(AppPreferences.enableIgnoreLibRedirectButton),
-            enableLibRedirect = prefRepo.asFunction(AppPreferences.enableLibRedirect),
+            enableIgnoreLibRedirectButton = prefRepo.asFunction(AppPreferences.libRedirect.enableIgnoreLibRedirectButton),
+            enableLibRedirect = prefRepo.asFunction(AppPreferences.libRedirect.enable),
             libRedirectJsEngine = experimentRepository.asFunction(Experiments.libRedirectJsEngine)
         ),
         amp2HtmlSettings = Amp2HtmlSettings(
-            enableAmp2Html = prefRepo.asFunction(AppPreferences.enableAmp2Html),
-            amp2HtmlLocalCache = prefRepo.asFunction(AppPreferences.amp2HtmlLocalCache),
-            amp2HtmlExternalService = prefRepo.asFunction(AppPreferences.amp2HtmlExternalService),
-            amp2HtmlAllowDarknets = prefRepo.asFunction(AppPreferences.amp2HtmlAllowDarknets),
-            amp2HtmlAllowLocalNetwork = prefRepo.asFunction(AppPreferences.amp2HtmlAllowLocalNetwork),
-            amp2HtmlSkipBrowser = prefRepo.asFunction(AppPreferences.amp2HtmlSkipBrowser),
+            enableAmp2Html = prefRepo.asFunction(AppPreferences.amp2Html.enable),
+            amp2HtmlLocalCache = prefRepo.asFunction(AppPreferences.amp2Html.localCache),
+            amp2HtmlExternalService = prefRepo.asFunction(AppPreferences.amp2Html.externalService),
+            amp2HtmlAllowDarknets = prefRepo.asFunction(AppPreferences.amp2Html.allowDarknets),
+            amp2HtmlAllowLocalNetwork = prefRepo.asFunction(AppPreferences.amp2Html.allowLocalNetwork),
+            amp2HtmlSkipBrowser = prefRepo.asFunction(AppPreferences.amp2Html.skipBrowser),
         ),
         followRedirectsSettings = FollowRedirectsSettings(
-            followRedirects = prefRepo.asFunction(AppPreferences.followRedirects),
-            followRedirectsSkipBrowser = prefRepo.asFunction(AppPreferences.followRedirectsSkipBrowser),
+            followRedirects = prefRepo.asFunction(AppPreferences.followRedirects.enable),
+            followRedirectsSkipBrowser = prefRepo.asFunction(AppPreferences.followRedirects.skipBrowser),
             manualFollowRedirects = prefRepo.asFunction(Experiments.manualFollowRedirects),
-            followOnlyKnownTrackers = prefRepo.asFunction(AppPreferences.followOnlyKnownTrackers),
-            followRedirectsLocalCache = prefRepo.asFunction(AppPreferences.followRedirectsLocalCache),
-            followRedirectsExternalService = prefRepo.asFunction(AppPreferences.followRedirectsExternalService),
-            followRedirectsAllowDarknets = prefRepo.asFunction(AppPreferences.followRedirectsAllowDarknets),
-            followRedirectsAllowLocalNetwork = prefRepo.asFunction(AppPreferences.followRedirectsAllowLocalNetwork),
+            followOnlyKnownTrackers = prefRepo.asFunction(AppPreferences.followRedirects.onlyKnownTrackers),
+            followRedirectsLocalCache = prefRepo.asFunction(AppPreferences.followRedirects.localCache),
+            followRedirectsExternalService = prefRepo.asFunction(AppPreferences.followRedirects.externalService),
+            followRedirectsAllowDarknets = prefRepo.asFunction(AppPreferences.followRedirects.allowDarknets),
+            followRedirectsAllowLocalNetwork = prefRepo.asFunction(AppPreferences.followRedirects.allowLocalNetwork),
         ),
         downloaderSettings = DownloaderSettings(
-            enableDownloader = prefRepo.asFunction(AppPreferences.enableDownloader),
-            downloaderCheckUrlMimeType = prefRepo.asFunction(AppPreferences.downloaderCheckUrlMimeType),
+            enableDownloader = prefRepo.asFunction(AppPreferences.downloader.enable),
+            downloaderCheckUrlMimeType = prefRepo.asFunction(AppPreferences.downloader.checkUrlMimeType),
         ),
         previewSettings = PreviewSettings(
-            previewUrl = prefRepo.asFunction(AppPreferences.urlPreview),
-            previewUrlSkipBrowser = prefRepo.asFunction(AppPreferences.urlPreviewSkipBrowser),
+            previewUrl = prefRepo.asFunction(AppPreferences.openGraphPreview.enable),
+            previewUrlSkipBrowser = prefRepo.asFunction(AppPreferences.openGraphPreview.skipBrowser),
         ),
     )
 }

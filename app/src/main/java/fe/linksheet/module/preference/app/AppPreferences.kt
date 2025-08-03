@@ -58,43 +58,63 @@ object AppPreferences : PreferenceDefinition(
         InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
         InAppBrowserHandler.InAppBrowserMode
     )
+
+    object Notifications {
+        val urlCopiedToast = boolean("url_copied_toast", true)
+        val downloadStartedToast = boolean("download_started_toast", true)
+        val openingWithAppToast = boolean("opening_with_app_toast", true)
+        val resolveViaToast = boolean("resolve_via_toast", true)
+        val resolveViaFailedToast = boolean("resolve_via_failed_toast", true)
+    }
+
+    val notifications = Notifications
+
     val alwaysShowPackageName = boolean("always_show_package_name")
-    val urlCopiedToast = boolean("url_copied_toast", true)
-    val downloadStartedToast = boolean("download_started_toast", true)
-    val openingWithAppToast = boolean("opening_with_app_toast", true)
-    val resolveViaToast = boolean("resolve_via_toast", true)
-    val resolveViaFailedToast = boolean("resolve_via_failed_toast", true)
 
     val gridLayout = boolean("grid_layout")
     val useClearUrls = boolean("use_clear_urls")
     val useFastForwardRules = boolean("fast_forward_rules")
-    val enableLibRedirect = boolean("enable_lib_redirect")
 
-    val followRedirects = boolean("follow_redirects")
-    val followRedirectsLocalCache = boolean("follow_redirects_local_cache", true)
-    val followRedirectsExternalService = boolean("follow_redirects_external_service")
-    val followOnlyKnownTrackers = boolean("follow_only_known_trackers")
-    val followRedirectsAllowDarknets = boolean("follow_redirects_allow_darknets", false)
-    val followRedirectsAllowLocalNetwork = boolean("follow_redirects_allow_local_network", false)
-    val followRedirectsSkipBrowser = boolean("follow_redirects_skip_browser", true)
+    object FollowRedirects {
+        val enable = boolean("follow_redirects")
+        val localCache = boolean("follow_redirects_local_cache", true)
+        val externalService = boolean("follow_redirects_external_service")
+        val onlyKnownTrackers = boolean("follow_only_known_trackers")
+        val allowDarknets = boolean("follow_redirects_allow_darknets", false)
+        val allowLocalNetwork = boolean("follow_redirects_allow_local_network", false)
+        val skipBrowser = boolean("follow_redirects_skip_browser", true)
+    }
+
+    val followRedirects = FollowRedirects
 
     val dontShowFilteredItem = boolean("dont_show_filtered_item")
 
-    val previewUrl = boolean("preview_url", true)
-    val enableDownloader = boolean("enable_downloader")
-    val downloaderCheckUrlMimeType = boolean("downloaderCheckUrlMimeType")
+    object Downloader {
+        val enable = boolean("enable_downloader")
+        val checkUrlMimeType = boolean("downloaderCheckUrlMimeType")
+    }
 
-    val enableIgnoreLibRedirectButton = boolean("enable_ignore_lib_redirect_button")
+    val downloader = Downloader
+
+    object LibRedirect {
+        val enableIgnoreLibRedirectButton = boolean("enable_ignore_lib_redirect_button")
+        val enable = boolean("enable_lib_redirect")
+    }
+
+    val libRedirect = LibRedirect
 
     val requestTimeout = int("follow_redirects_timeout", 15)
 
-    val enableAmp2Html = boolean("enable_amp2html")
-    val amp2HtmlLocalCache = boolean("amp2html_local_cache", true)
-    val amp2HtmlExternalService = boolean("amp2html_external_service")
-    val amp2HtmlAllowDarknets = boolean("amp2html_allow_darknets", false)
-    val amp2HtmlAllowLocalNetwork = boolean("amp2html_allow_local_network", false)
-    val amp2HtmlSkipBrowser = boolean("amp2html_skip_browser", true)
+    object Amp2Html {
+        val enable = boolean("enable_amp2html")
+        val localCache = boolean("amp2html_local_cache", true)
+        val externalService = boolean("amp2html_external_service")
+        val allowDarknets = boolean("amp2html_allow_darknets", false)
+        val allowLocalNetwork = boolean("amp2html_allow_local_network", false)
+        val skipBrowser = boolean("amp2html_skip_browser", true)
+    }
 
+    val amp2Html = Amp2Html
 
     val enableRequestPrivateBrowsingButton = boolean(
         "enable_request_private_browsing_button"
@@ -131,14 +151,21 @@ object AppPreferences : PreferenceDefinition(
 
     val lastVersion = int("last_version", -1)
 
-    val themeV2 = mapped("theme_v2", ThemeV2.System, ThemeV2)
+    object ThemeV2Pref {
+        val themeV2 = mapped("theme_v2", ThemeV2.System, ThemeV2)
+        val materialYou = boolean("theme_material_you", true)
+        val amoled = boolean("theme_amoled_enabled")
+    }
 
-    val themeMaterialYou = boolean("theme_material_you", true)
-    val themeAmoled = boolean("theme_amoled_enabled")
+    val themeV2 = ThemeV2Pref
 
-    val tapConfigSingle = mapped("tap_config_single", TapConfig.SelectItem, TapConfig)
-    val tapConfigDouble = mapped("tap_config_double", TapConfig.OpenApp, TapConfig)
-    val tapConfigLong = mapped("tap_config_long", TapConfig.OpenSettings, TapConfig)
+    object TapConfigPref {
+        val single = mapped("tap_config_single", TapConfig.SelectItem, TapConfig)
+        val double = mapped("tap_config_double", TapConfig.OpenApp, TapConfig)
+        val long = mapped("tap_config_long", TapConfig.OpenSettings, TapConfig)
+    }
+
+    val tapConfig = TapConfigPref
 
     val expandOnAppSelect = boolean("expand_on_app_select", true)
     val bottomSheetNativeLabel = boolean("bottom_sheet_native_label", true)
@@ -154,22 +181,23 @@ object AppPreferences : PreferenceDefinition(
 
     val homeClipboardCard = boolean("home_clipboard_card", true)
     val remoteConfig = boolean("remote_config", false)
+    val previewUrl = boolean("preview_url", true)
 
-    val urlPreview = boolean(
-        key = "url_bar_preview"
-    )
-    val urlPreviewSkipBrowser = boolean(
-        key = "url_bar_preview_skip_browser"
-    )
+    object OpenGraphPreview {
+        val enable = boolean(key = "url_bar_preview")
+        val skipBrowser = boolean(key = "url_bar_preview_skip_browser")
+    }
+
+    val openGraphPreview = OpenGraphPreview
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->
-            if (!repository.hasStoredValue(themeV2)) {
+            if (!repository.hasStoredValue(themeV2.themeV2)) {
                 if (theme == Theme.AmoledBlack) {
-                    repository.put(themeAmoled, true)
+                    repository.put(themeV2.amoled, true)
                 }
 
-                repository.put(themeV2, theme.toV2())
+                repository.put(themeV2.themeV2, theme.toV2())
             }
         }
 

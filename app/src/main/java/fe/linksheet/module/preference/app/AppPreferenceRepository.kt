@@ -22,8 +22,8 @@ class AppPreferenceRepository(val context: Context) : FlowPreferenceRepository(c
     suspend fun init(dispatcher: CoroutineDispatcher = Dispatchers.IO) = withContext(dispatcher) {
         // Ensure backwards compatibility as this feature was previously included in non-pro versions
         if (!LinkSheetAppConfig.isPro()) {
-            put(AppPreferences.followRedirectsExternalService, false)
-            put(AppPreferences.amp2HtmlExternalService, false)
+            put(AppPreferences.followRedirects.externalService, false)
+            put(AppPreferences.amp2Html.externalService, false)
         }
 
         AppPreferences.runMigrations(this@AppPreferenceRepository)

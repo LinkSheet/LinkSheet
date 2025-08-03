@@ -8,6 +8,7 @@
 @file:DependsOn("actions:cache:v4")
 @file:DependsOn("actions:upload-artifact:v4")
 @file:DependsOn("gradle:actions__setup-gradle:v3")
+@file:Suppress("PropertyName")
 
 import io.github.typesafegithub.workflows.actions.actions.Checkout
 import io.github.typesafegithub.workflows.actions.actions.SetupJava
@@ -70,7 +71,7 @@ val base64ToFile = CustomAction(
 val nightlyReleaseNotes = CustomAction(
     actionOwner = "1fexd",
     actionName = "gh-create-release-notes",
-    actionVersion = "0.0.16",
+    actionVersion = "0.0.17",
     inputs = mapOf(
         "github-token" to expr { secrets.GITHUB_TOKEN },
         "stable-repo" to expr { github.repository },

@@ -167,13 +167,13 @@ class LinkEngineIntentResolver(
         }
 
         val input = EngineScenarioInput(startUrl, referringPackage)
-        val track = selector.findScenario(input)
-        if (track == null) {
+        val scenario = selector.findScenario(input)
+        if (scenario == null) {
             // TODO: What do we do in this situation?
-            return@scope IntentResolveResult.NoTrackFound
+            return@scope IntentResolveResult.NoScenarioFound
         }
 
-        val (sealedContext, result) = track.run(startUrl, context)
+        val (sealedContext, result) = scenario.run(startUrl, context)
         if (result is IntentEngineResult) {
             return@scope IntentResolveResult.IntentResult(result.intent)
         }

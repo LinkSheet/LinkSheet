@@ -46,6 +46,7 @@ fun TestLinkModifier(
     block: suspend EngineRunContext.(StdUrl) -> StepTestResult? = { null },
 ): LinkModifier<StepTestResult> {
     return object : LinkModifier<StepTestResult> {
+        override val enabled: () -> Boolean = { true }
         override val id = id
         override suspend fun warmup() {}
         override suspend fun EngineRunContext.runStep(url: StdUrl) = block(url)

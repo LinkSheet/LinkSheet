@@ -62,7 +62,7 @@ class LinkEngine(
         _events.tryEmit(event)
     }
 
-    private suspend fun <R : StepResult> processStep(
+    private suspend fun <R : StepResult> runStep(
         context: EngineRunContext,
         step: EngineStep<R>,
         url: StdUrl,
@@ -74,7 +74,7 @@ class LinkEngine(
         return true to result.url
     }
 
-    private suspend fun process(
+    private suspend fun processSteps(
         context: EngineRunContext,
         url: StdUrl,
         depth: Int = 0,
@@ -82,6 +82,7 @@ class LinkEngine(
         var mutUrl = url
         for (step in steps) {
             if (!isActive) break
+            if (!step.enabled()) continue
             val stepStart = StepStart(depth, step, mutUrl)
             val beforeStepResult = findStepRule<StepStart<*>, StepRuleResult, BeforeStepRule>(
                 context, step.id, stepStart
@@ -89,7 +90,7 @@ class LinkEngine(
             if (beforeStepResult is SkipStep) continue
 
             emitEvent(stepStart)
-            val (hasNewUrl, resultUrl) = processStep(context, step, mutUrl)
+            val (hasNewUrl, resultUrl) = runStep(context, step, mutUrl)
 
             val stepEnd = StepEnd(depth, step, url, hasNewUrl, resultUrl)
             val afterStepResult = findStepRule<StepEnd<*>, StepRuleResult, AfterStepRule>(
@@ -100,7 +101,7 @@ class LinkEngine(
             emitEvent(stepEnd)
             if (!hasNewUrl) continue
 
-            if (step !is InPlaceStep) return@scope process(context, resultUrl, depth + 1)
+            if (step !is InPlaceStep) return@scope processSteps(context, resultUrl, depth + 1)
             mutUrl = resultUrl
         }
 
@@ -114,7 +115,7 @@ class LinkEngine(
         val preResult = processRules(context, preProcessorRules, PreProcessorInput(url))
         if (preResult != null) return@scope preResult
 
-        val result = process(context, url, 0)
+        val result = processSteps(context, url, 0)
         val resultUrl = (result as? UrlEngineResult)?.url ?: url
 
         val postResult = processRules(context, postProcessorRules, PostProcessorInput(resultUrl, url))
@@ -128,6 +129,7 @@ class LinkEngine(
     ) = coroutineScope scope@{
         for (fetcher in fetchers) {
             if (!isActive) break
+            if (!fetcher.enabled()) continue
             logger.debug("Fetching $fetcher")
             if (!context.confirm(fetcher.id)) continue
             launch {

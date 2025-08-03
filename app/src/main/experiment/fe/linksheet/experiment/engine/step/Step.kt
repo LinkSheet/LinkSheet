@@ -4,6 +4,8 @@ import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.std.uri.StdUrl
 
 interface EngineStep<out R : StepResult> {
+    val enabled: () -> Boolean
+
     val id: EngineStepId
 
     suspend fun EngineRunContext.runStep(url: StdUrl): R?

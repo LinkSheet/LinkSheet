@@ -28,6 +28,7 @@ class FollowRedirectsLinkResolver(
     private val urlChecker: UrlChecker = UrlChecker(allowDarknets, allowNonPublic),
     private val followOnlyKnownTrackers: () -> Boolean,
     private val useLocalCache: () -> Boolean,
+    override val enabled: () -> Boolean,
 ) : LinkResolver {
     override val id = EngineStepId.FollowRedirects
 

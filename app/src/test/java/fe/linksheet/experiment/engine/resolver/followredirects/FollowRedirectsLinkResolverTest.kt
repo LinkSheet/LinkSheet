@@ -16,7 +16,6 @@ import fe.std.result.success
 import fe.std.time.unixMillisOf
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.runTest
-import fe.linksheet.testlib.core.JunitTest
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -57,7 +56,8 @@ internal class FollowRedirectsLinkResolverTest : BaseUnitTest  {
             allowDarknets = { false },
             allowNonPublic = { false },
             followOnlyKnownTrackers = { false },
-            useLocalCache = { true }
+            useLocalCache = { true },
+            enabled = { true }
         )
 
         val result = withTestRunContext(resolver) { it.runStep(SHORT_URL) }

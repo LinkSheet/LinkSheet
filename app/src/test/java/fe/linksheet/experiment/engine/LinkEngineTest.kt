@@ -52,9 +52,16 @@ internal class LinkEngineTest : BaseUnitTest {
 
         val engine = LinkEngine(
             steps = listOf(
-                EmbedLinkModifier(ioDispatcher = dispatcher),
-                ClearURLsLinkModifier(ioDispatcher = dispatcher),
+                EmbedLinkModifier(
+                    enabled = { true },
+                    ioDispatcher = dispatcher
+                ),
+                ClearURLsLinkModifier(
+                    enabled = { true },
+                    ioDispatcher = dispatcher
+                ),
                 FollowRedirectsLinkResolver(
+                    enabled = { true },
                     ioDispatcher = dispatcher,
                     source = FollowRedirectsLocalSource(client = client),
                     cacheRepository = cacheRepository,
@@ -64,6 +71,7 @@ internal class LinkEngineTest : BaseUnitTest {
                     useLocalCache = { true }
                 ),
                 Amp2HtmlLinkResolver(
+                    enabled = { true },
                     ioDispatcher = dispatcher,
                     source = Amp2HtmlLocalSource(client = client),
                     cacheRepository = cacheRepository,

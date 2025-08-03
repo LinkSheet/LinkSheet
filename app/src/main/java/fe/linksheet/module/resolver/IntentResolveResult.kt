@@ -46,5 +46,5 @@ sealed interface IntentResolveResult {
     data class IntentParseFailed(val exception: UriException) : IntentResolveResult
     data object UrlModificationFailed : IntentResolveResult
     data object ResolveUrlFailed : IntentResolveResult
-    data object NoTrackFound : IntentResolveResult
+    data object NoScenarioFound : IntentResolveResult
 }

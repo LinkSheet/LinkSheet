@@ -18,7 +18,8 @@ import kotlinx.coroutines.withContext
 class LibRedirectLinkModifier(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val resolver: LibRedirectResolver,
-    private val useJsEngine: () -> Boolean = { false }
+    private val useJsEngine: () -> Boolean = { false },
+    override val enabled: () -> Boolean
 ) : LinkModifier<LibRedirectModifyOutput> {
     override val id = EngineStepId.LibRedirect
 

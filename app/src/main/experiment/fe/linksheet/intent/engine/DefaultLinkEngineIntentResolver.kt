@@ -58,15 +58,21 @@ fun DefaultLinkEngineIntentResolver(
     val pipeline = LinkEngine(
         steps = listOf(
             EmbedLinkModifier(
+                enabled = settings.resolveEmbeds,
                 ioDispatcher = dispatcher
             ),
             LibRedirectLinkModifier(
+                enabled = settings.libRedirectSettings.enableLibRedirect,
                 ioDispatcher = dispatcher,
                 resolver = libRedirectResolver,
                 useJsEngine = settings.libRedirectSettings.libRedirectJsEngine
             ),
-            ClearURLsLinkModifier(ioDispatcher = dispatcher),
+            ClearURLsLinkModifier(
+                enabled = settings.useClearUrls,
+                ioDispatcher = dispatcher
+            ),
             FollowRedirectsLinkResolver(
+                enabled = settings.followRedirectsSettings.followRedirects,
                 ioDispatcher = dispatcher,
                 source = FollowRedirectsLocalSource(client = client),
                 cacheRepository = cacheRepository,
@@ -76,6 +82,7 @@ fun DefaultLinkEngineIntentResolver(
                 useLocalCache = settings.followRedirectsSettings.followRedirectsLocalCache
             ),
             Amp2HtmlLinkResolver(
+                enabled = settings.amp2HtmlSettings.enableAmp2Html,
                 ioDispatcher = dispatcher,
                 source = Amp2HtmlLocalSource(client = client),
                 cacheRepository = cacheRepository,
@@ -96,12 +103,14 @@ fun DefaultLinkEngineIntentResolver(
 //        ),
         fetchers = listOf(
             DownloadLinkFetcher(
+                enabled = settings.downloaderSettings.enableDownloader,
                 ioDispatcher = dispatcher,
                 downloader = downloader,
                 checkUrlMimeType = settings.downloaderSettings.downloaderCheckUrlMimeType,
                 requestTimeout = settings.requestTimeout,
             ),
             PreviewLinkFetcher(
+                enabled = settings.previewSettings.previewUrl,
                 ioDispatcher = dispatcher,
                 source = PreviewLocalSource(client = client),
                 cacheRepository = cacheRepository,

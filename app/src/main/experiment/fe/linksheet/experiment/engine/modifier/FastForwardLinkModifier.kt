@@ -7,7 +7,7 @@ import fe.linksheet.experiment.engine.step.StepResult
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 
-class FastForwardLinkModifier : LinkModifier<FastForwardModifyOutput> {
+class FastForwardLinkModifier(override val enabled: () -> Boolean) : LinkModifier<FastForwardModifyOutput> {
     override val id = EngineStepId.FastForward
     override suspend fun warmup() {
     }

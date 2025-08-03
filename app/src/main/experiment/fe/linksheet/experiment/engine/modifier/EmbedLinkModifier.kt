@@ -12,7 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class EmbedLinkModifier(
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    override val enabled: () -> Boolean
 ) : LinkModifier<EmbedLinkModifyOutput> {
     override val id = EngineStepId.Embed
 

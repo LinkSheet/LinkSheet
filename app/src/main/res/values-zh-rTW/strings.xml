@@ -400,4 +400,49 @@
     <string name="resolve_via_toast_explainer">當網址成功透過外部服務解析時顯示浮動式訊息</string>
     <string name="resolve_via_failed_toast_explainer">當網址無法透過外部服務解析時顯示浮動式訊息</string>
     <string name="settings_notifications__divider_toasts">浮動式訊息</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="other">共 %d 部主機：%s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="other">已停用 %d 部</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="other">已驗證 %d 部</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="other">已驗證 %d 部主機</item>
+    </plurals>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_true">允許處理連結</string>
+    <string name="settings_verified_link_handlers__text_link_handling_allowed_false">禁止處理連結</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="other">已停用 %d 部主機</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="other">預設處理 %d 部主機</item>
+    </plurals>
+    <string name="app_host_dialog__title_hosts">預設處理的主機</string>
+    <string name="app_host_dialog__text_no_hosts">沒有任何主機可預設在此應用程式中開啟！</string>
+    <string name="settings_links_preview__subtitle_preview_skip_browser">不要預覽來自瀏覽器的連結</string>
+    <string name="settings_links_preview__title_preview_skip_browser">停用瀏覽器連結預覽</string>
+    <string name="settings_links_preview__subtitle_preview">嘗試載入開放社交關係圖並將其顯示在底部功能表。這可能引發<annotation url-id="github.linksheet.wiki.privacy.preview">隱私顧慮</annotation></string>
+    <string name="settings_links_preview__title_preview">顯示網址預覽畫面</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="other">已啟用 %d 部主機</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="other">已啟用 %d 部</item>
+    </plurals>
+    <string name="resolve_activity_failure">活動解析失敗！</string>
+    <string name="bottom_sheet__event_app_refusal">目標應用程式拒絕處理連結！</string>
+    <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">尚須額外設定</string>
+    <string name="settings_main_miui_compat__text_linksheet_auto_start_info">眾所周知，「小米」限制處理程序的作風極其嚴格且難以捉摸，這使得 LinkSheet 無法正確運作。\n請輕觸下方的按鈕，並選擇始終允許「後台彈出介面」之權限</string>
+    <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">要求權限</string>
+    <string name="settings_main_miui_compat__text_request_failed">權限要求失敗！</string>
+    <string name="reset_app_link_verification_status">重設應用程式連結驗證狀態</string>
+    <string name="reset_app_link_verification_status_subtitle">輕觸以重設所有應用程式的連結驗證狀態。輕觸後 Android 將重新驗證連結，這將花上幾分鐘，並且在完成時不會發出確認訊息。這項作業需要 Shizuku。</string>
+    <string name="reset_app_link_verification_status_toast">已要求重新驗證</string>
+    <string name="generic__button_dismiss">關閉</string>
+    <string name="no_libredirect_services">沒有任何 LibRedirect 服務！</string>
+    <string name="unknown_host">「%s」已遭封鎖或不存在</string>
+    <string name="no_internet_connection">沒有網際網路連線</string>
 </resources>

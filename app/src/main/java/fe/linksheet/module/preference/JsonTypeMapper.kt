@@ -6,6 +6,7 @@ import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.TypeMapper
 import fe.android.preference.helper.Unmapper
+import fe.gson.context.GlobalGsonContext
 import fe.gson.util.Json
 
 @Suppress("FunctionName")
@@ -19,7 +20,7 @@ inline fun <reified T> JsonTypeMapper(gson: Gson): TypeMapper<T, String> {
 inline fun <reified T : Any> PreferenceDefinition.jsonMapped(
     key: String,
     default: T,
-    gson: Gson = Gson()
+    gson: Gson = GlobalGsonContext.compactGson
 ): Preference.Mapped<T, String> {
     val mapper = JsonTypeMapper<T>(gson)
     return mapped(key, default, mapper)

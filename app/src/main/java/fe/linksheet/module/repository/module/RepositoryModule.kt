@@ -2,9 +2,10 @@
 
 package fe.linksheet.module.repository.module
 
+import fe.linksheet.feature.wiki.WikiCacheRepository
 import fe.linksheet.module.clock.ClockModule
-import fe.linksheet.module.database.dao.module.DaoModule
 import fe.linksheet.module.database.DatabaseModule
+import fe.linksheet.module.database.dao.module.DaoModule
 import fe.linksheet.module.repository.*
 import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
 import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository

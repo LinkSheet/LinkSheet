@@ -267,10 +267,12 @@ junitPlatform {
 dependencies {
     implementation(project(":feature-systeminfo"))
     implementation(project(":feature-app"))
+    implementation(project(":feature-wiki"))
 
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
     implementation(project(":util"))
+    implementation(project(":common"))
 
     implementation(project(":bottom-sheet"))
     implementation(project(":bottom-sheet-new"))

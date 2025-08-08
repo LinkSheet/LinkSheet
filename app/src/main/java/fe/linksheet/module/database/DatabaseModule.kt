@@ -7,6 +7,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.feature.wiki.WikiCache
+import fe.linksheet.feature.wiki.WikiCacheDao
 import fe.linksheet.module.database.dao.*
 import fe.linksheet.module.database.dao.cache.HtmlCacheDao
 import fe.linksheet.module.database.dao.cache.PreviewCacheDao

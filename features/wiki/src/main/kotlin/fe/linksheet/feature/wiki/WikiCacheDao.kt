@@ -1,10 +1,8 @@
-package fe.linksheet.module.database.dao
+package fe.linksheet.feature.wiki
 
 import androidx.room.Dao
 import androidx.room.Query
-import fe.linksheet.module.database.dao.base.BaseDao
-import fe.linksheet.module.database.entity.WikiCache
-
+import fe.linksheet.common.dao.base.BaseDao
 @Dao
 interface WikiCacheDao : BaseDao<WikiCache> {
     @Query("SELECT * FROM wiki_cache WHERE url = :url AND timestamp")

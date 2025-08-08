@@ -1,4 +1,4 @@
-package fe.linksheet.module.database.dao.base
+package fe.linksheet.common.dao.base
 
 import androidx.room.Delete
 import androidx.room.Insert

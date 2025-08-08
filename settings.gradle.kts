@@ -75,8 +75,10 @@ includeProject(":bottom-sheet", "lib/bottom-sheet")
 includeProject(":bottom-sheet-new", "lib/bottom-sheet-new")
 includeProject(":hidden-api", "lib/hidden-api")
 includeProject(":util", "lib/util")
+includeProject(":common", "lib/common")
 includeProject(":feature-app", "features/app")
 includeProject(":feature-systeminfo", "features/systeminfo")
+includeProject(":feature-wiki", "features/wiki")
 
 buildSettings {
     substitutes {

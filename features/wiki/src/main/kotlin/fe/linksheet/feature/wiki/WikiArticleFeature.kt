@@ -3,7 +3,6 @@ package fe.linksheet.feature.wiki
 import fe.httpkt.Request
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString
-import fe.linksheet.module.repository.WikiCacheRepository
 import fe.linksheet.util.CacheResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

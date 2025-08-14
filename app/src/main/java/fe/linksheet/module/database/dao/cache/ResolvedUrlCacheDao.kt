@@ -2,8 +2,7 @@ package fe.linksheet.module.database.dao.cache
 
 import androidx.room.Dao
 import androidx.room.Query
-import fe.linksheet.module.database.dao.base.BaseDao
-import fe.linksheet.module.database.entity.cache.ResolveType
+import fe.linksheet.common.dao.base.BaseDao
 import fe.linksheet.module.database.entity.cache.ResolvedUrl
 
 @Dao

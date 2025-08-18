@@ -4,12 +4,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
 
-interface PageRoute {
+interface NavSubGraph {
     val startDestination: Any
     val graph: NavGraphBuilder.(NavHostController) -> Unit
 }
 
-inline fun <reified T : PageRoute> NavGraphBuilder.addPageRoute(
+inline fun <reified T : NavSubGraph> NavGraphBuilder.attachSubGraph(
     page: T,
     navController: NavHostController,
 ) {

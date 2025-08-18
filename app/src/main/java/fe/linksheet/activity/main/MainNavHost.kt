@@ -43,13 +43,14 @@ import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.*
-import fe.linksheet.navigation.addPageRoute
+import fe.linksheet.navigation.attachSubGraph
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
 import fe.linksheet.composable.page.settings.debug.SqlRoute
 import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
+import fe.linksheet.composable.page.settings.scenario.ScenarioNavSubGraph
 import fe.linksheet.navigation.AdvancedRoute
 import fe.linksheet.navigation.DebugRoute
 import fe.linksheet.navigation.ExperimentRoute
@@ -101,7 +102,8 @@ fun MainNavHost(
         navController = navController,
         startDestination = HomePageRoute
     ) {
-        addPageRoute(HomePageRoute, navController)
+        attachSubGraph(HomePageRoute, navController)
+        attachSubGraph(ScenarioNavSubGraph, navController)
 
         animatedComposable<MarkdownViewerRoute> { _, route ->
             val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title

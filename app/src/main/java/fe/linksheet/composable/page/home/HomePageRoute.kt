@@ -6,11 +6,11 @@ import fe.linksheet.navigation.MainOverviewRoute
 import fe.linksheet.navigation.TextEditorRoute
 import fe.linksheet.composable.page.home.edit.TextEditorPageWrapper
 import fe.linksheet.composable.util.animatedComposable
-import fe.linksheet.navigation.PageRoute
+import fe.linksheet.navigation.NavSubGraph
 import kotlinx.serialization.Serializable
 
 @Serializable
-object HomePageRoute : PageRoute {
+object HomePageRoute : NavSubGraph {
 
     override val startDestination: Any = MainOverviewRoute
 

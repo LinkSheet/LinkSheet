@@ -7,7 +7,6 @@ import app.linksheet.testing.fake.asDescriptors
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 

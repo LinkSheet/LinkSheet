@@ -6,7 +6,8 @@ import fe.linksheet.util.LinkAssets
 
 object RemoteConfigPreferences : PreferenceDefinition() {
     val linkAssets = jsonMapped<LinkAssets>(
-        "link_assets", mapOf(
+        key = "link_assets",
+        default = mapOf(
             "github.linksheet.wiki.device-issues.xiaomi" to "https://github.com/LinkSheet/LinkSheet/wiki/Device‐specific-issues#xiaomimiui",
             "github.linksheet.wiki.privacy.amp2html" to "https://github.com/LinkSheet/LinkSheet/wiki/Privacy#amp2html",
             "github.linksheet.wiki.privacy.downloader" to "https://github.com/LinkSheet/LinkSheet/wiki/Privacy#downloader",

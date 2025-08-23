@@ -2,7 +2,6 @@ package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.activityDescriptor
-import fe.linksheet.util.extension.android.componentName
 
 class ImprovedBrowserHandler(
     private val autoLaunchSingleBrowserExperiment: () -> Boolean
@@ -39,19 +38,19 @@ class ImprovedBrowserHandler(
 
             is BrowserModeConfigHelper.SelectedBrowser -> {
                 val browserResolveInfo = browsers[config.selectedBrowser]
-                val list = if (browserResolveInfo == null) emptyList() else listOf(browserResolveInfo)
+                val hasInfo = browserResolveInfo != null
+                val list = if (hasInfo) listOf(browserResolveInfo) else emptyList()
 
-                // TODO: Need to use merged here since resolvedList might contain ResolveInfos also present in browsers
-                // TODO: Do we really need to use the component?
-                val isSingleOption = nonBrowsers.isEmpty()
-                        && browsers.size == 1
-                        && browsers.values.singleOrNull()?.activityInfo?.componentName == browserResolveInfo?.activityInfo?.componentName
-
+//                // TODO: Need to use merged here since resolvedList might contain ResolveInfos also present in browsers
+//                // TODO: Do we really need to use the component?
+//                val isSingleOption = nonBrowsers.isEmpty()
+//                        && browsers.size == 1
+//                        && browsers.values.singleOrNull()?.activityInfo?.componentName == browserResolveInfo?.activityInfo?.componentName
                 FilteredBrowserList(
                     config.mode,
                     list,
                     nonBrowsers,
-                    isSingleOption = isSingleOption
+                    isSingleOption = hasInfo
                 )
             }
 

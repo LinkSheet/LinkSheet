@@ -133,7 +133,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
                 browserMode = BrowserMode.SelectedBrowser,
                 browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
                 apps = allAppsInfoList,
-                isSingleOption = false,
+                isSingleOption = true,
                 noBrowsersOnlySingleApp = false
             )
         )

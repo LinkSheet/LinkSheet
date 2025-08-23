@@ -579,4 +579,8 @@
     <string name="settings_links_amp2html__text_local_network">Дозволите покретање Amp2Html-а за приватне хостове</string>
     <string name="settings_links_follow_redirects__title_local_network">Дозволи локалну мрежу</string>
     <string name="settings_links_follow_redirects__text_local_network">Дозволите праћење преусмеравања за приватне хостове</string>
+    <string name="settings_links_preview__title_preview">Прикажи преглед URL-а</string>
+    <string name="settings_links_preview__subtitle_preview">Покушај учитавања и приказивања прегледа OpenGraph-а у доњем листу. Ово може имати <annotation url-id="github.linksheet.wiki.privacy.preview">последице по приватност</annotation></string>
+    <string name="settings_links_preview__title_preview_skip_browser">Онемогући преглед прегледача</string>
+    <string name="settings_links_preview__subtitle_preview_skip_browser">Онемогући преглед ако је референт прегледач</string>
 </resources>

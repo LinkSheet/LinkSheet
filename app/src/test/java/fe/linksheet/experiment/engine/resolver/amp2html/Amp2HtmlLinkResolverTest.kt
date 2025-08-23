@@ -32,7 +32,7 @@ import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
-internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
+internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
     companion object {
         private val URL = "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html".toStdUrlOrThrow()
         private val RESOLVED_URL = "https://www.cnn.com/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html".toStdUrlOrThrow()
@@ -76,8 +76,6 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
             ioDispatcher = dispatcher,
             source = source,
             cacheRepository = cacheRepository,
-            allowNonPublic = { false },
-            allowDarknets = { false },
             useLocalCache = { false },
         )
 
@@ -100,8 +98,6 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
             ioDispatcher = dispatcher,
             source = createSource("https://not-from-cache.com".toStdUrlOrThrow(), "<html></html>"),
             cacheRepository = cacheRepository,
-            allowNonPublic = { false },
-            allowDarknets = { false },
             useLocalCache = { true },
         )
 
@@ -142,8 +138,6 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest  {
                 }
             },
             cacheRepository = cacheRepository,
-            allowNonPublic = { false },
-            allowDarknets = { false },
             useLocalCache = { true },
         )
 

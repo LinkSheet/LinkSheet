@@ -14,7 +14,7 @@ class PreviewLinkFetcher(
     private val cacheRepository: CacheRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val useLocalCache: () -> Boolean,
-    override val enabled: () -> Boolean,
+    override val enabled: () -> Boolean = { true },
 ) : AbstractLinkFetcher<PreviewFetchResult>(ContextResultId.Preview) {
 
     private suspend fun insertCache(entryId: Long, result: PreviewFetchResult) {

@@ -19,11 +19,11 @@ class Amp2HtmlLinkResolver(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val source: Amp2HtmlSource,
     private val cacheRepository: CacheRepository,
-    private val allowDarknets: () -> Boolean,
-    private val allowNonPublic: () -> Boolean,
+    private val allowDarknets: () -> Boolean = { false },
+    private val allowNonPublic: () -> Boolean = { false },
     private val urlChecker: UrlChecker = UrlChecker(allowDarknets, allowNonPublic),
     private val useLocalCache: () -> Boolean,
-    override val enabled: () -> Boolean,
+    override val enabled: () -> Boolean = { true },
 ) : LinkResolver {
     override val id = EngineStepId.Amp2Html
 

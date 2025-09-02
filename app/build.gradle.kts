@@ -373,9 +373,10 @@ dependencies {
 
     implementation(platform(Grrfe.gsonExt.bom))
     implementation(Grrfe.gsonExt.core)
+    implementation(Grrfe.gsonExt.koin)
 
     implementation(_1fexd.clearUrl)
-    implementation(_1fexd.signify)
+    implementation(Grrfe.signify)
     implementation(_1fexd.fastForward)
     implementation("com.github.1fexd.libredirectkt:lib:_")
     implementation(_1fexd.amp2html)

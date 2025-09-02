@@ -85,6 +85,9 @@ const val pretendToBeAppRoute = "pretend_to_be_app"
 const val devModeRoute = "dev_mode"
 
 @Keep
+data object AppsWhichCanOpenLinksSettingsRoute : Route
+
+@Keep
 @Serializable
 data class TextEditorRoute(val text: String) : Route
 

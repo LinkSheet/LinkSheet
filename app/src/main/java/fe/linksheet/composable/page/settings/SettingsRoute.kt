@@ -12,7 +12,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.RouteNavItem
 import fe.composekit.component.list.item.RouteNavigateListItem
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
@@ -20,20 +19,30 @@ import fe.composekit.layout.column.group
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
+import fe.composekit.route.RouteNavigateListItemNew
 import fe.linksheet.R
 import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.page.settings.language.rememberLanguageDialog
+import fe.linksheet.composable.page.settings.scenario.ScenarioRoute
 import fe.linksheet.module.language.LocaleItem
 import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.navigation.*
 import org.koin.androidx.compose.koinViewModel
 
 internal object SettingsRouteData {
-    val verifiedApps = RouteNavItem(
-        appsWhichCanOpenLinksSettingsRoute,
-        Icons.Outlined.DomainVerification.iconPainter,
-        textContent(R.string.verified_link_handlers),
-        textContent(R.string.verified_link_handlers_subtitle)
+    val verifiedApps = arrayOf(
+        RouteNavItemNew(
+            AppsWhichCanOpenLinksSettingsRoute,
+            Icons.Outlined.DomainVerification.iconPainter,
+            textContent(R.string.verified_link_handlers),
+            textContent(R.string.verified_link_handlers_subtitle)
+        ),
+//        RouteNavItemNew(
+//            ScenarioRoute,
+//            Icons.Outlined.Widgets.iconPainter,
+//            textContent(R.string.settings_scenario__title_scenarios),
+//            textContent(R.string.settings_scenario__text_scenarios),
+//        )
     )
 
     val customization = arrayOf(
@@ -156,8 +165,8 @@ fun SettingsRoute(
         headline = stringResource(id = R.string.settings),
         onBackPressed = onBackPressed
     ) {
-        item(key = R.string.verified_link_handlers, contentType = ContentType.SingleGroupItem) {
-            RouteNavigateListItem(data = SettingsRouteData.verifiedApps, navigate = navigate)
+        group(array = SettingsRouteData.verifiedApps) { data, padding, shape ->
+            RouteNavigateListItemNew(data = data, padding = padding, shape = shape, navigate = navigateNew)
         }
 
         divider(id = R.string.customization)

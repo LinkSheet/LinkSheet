@@ -52,6 +52,7 @@ import fe.linksheet.composable.page.settings.debug.SqlRoute
 import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
 import fe.linksheet.composable.page.settings.scenario.ScenarioNavSubGraph
 import fe.linksheet.navigation.AdvancedRoute
+import fe.linksheet.navigation.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.DebugRoute
 import fe.linksheet.navigation.ExperimentRoute
 import fe.linksheet.navigation.ExportImportRoute
@@ -66,7 +67,6 @@ import fe.linksheet.navigation.VlhAppRoute
 import fe.linksheet.navigation.aboutSettingsRoute
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.appsSettingsRoute
-import fe.linksheet.navigation.appsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.bottomSheetSettingsRoute
 import fe.linksheet.navigation.browserSettingsRoute
 import fe.linksheet.navigation.creditsSettingsRoute
@@ -175,9 +175,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = appsSettingsRoute) {
-            AppsSettingsRoute(
-                navController = navController, onBackPressed = onBackPressed
-            )
+            AppsSettingsRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
         }
 
         animatedComposable(route = browserSettingsRoute) {
@@ -282,7 +280,7 @@ fun MainNavHost(
 //            PreferredAppSettingsRoute(onBackPressed = onBackPressed)
 //        }
 
-        animatedComposable(route = appsWhichCanOpenLinksSettingsRoute) {
+        animatedComposable<AppsWhichCanOpenLinksSettingsRoute> { _, _ ->
             VerifiedLinkHandlersRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
         }
 

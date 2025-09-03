@@ -80,7 +80,6 @@ const val notificationSettingsRoute = "notification_settings_route"
 const val bottomSheetSettingsRoute = "bottom_sheet_settings_route"
 const val preferredBrowserSettingsRoute = "preferred_browser_settings_route"
 const val inAppBrowserSettingsRoute = "in_app_browser_settings_route"
-const val appsWhichCanOpenLinksSettingsRoute = "apps_which_can_open_links_settings_route"
 const val pretendToBeAppRoute = "pretend_to_be_app"
 const val devModeRoute = "dev_mode"
 

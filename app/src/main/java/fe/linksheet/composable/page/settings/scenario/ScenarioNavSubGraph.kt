@@ -13,6 +13,7 @@ object ScenarioNavSubGraph : NavSubGraph {
     override val startDestination: Any = ScenarioRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<ScenarioRoute> { _, route ->
+            ScenarioRoute(navigate = navController::navigate)
         }
     }
 }

@@ -7,6 +7,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.feature.scenario.ScenarioDao
+import fe.linksheet.feature.scenario.ScenarioEntity
 import fe.linksheet.feature.wiki.WikiCache
 import fe.linksheet.feature.wiki.WikiCacheDao
 import fe.linksheet.module.database.dao.*
@@ -43,9 +45,10 @@ val DatabaseModule = module {
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
         CachedHtml::class, PreviewCache::class, ResolvedUrl::class, ResolveType::class, UrlEntry::class,
-        WikiCache::class
+        WikiCache::class,
+        ScenarioEntity::class
     ],
-    version = 19,
+    version = 20,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -59,7 +62,8 @@ val DatabaseModule = module {
         AutoMigration(from = 11, to = 12),
         AutoMigration(from = 12, to = 13),
         AutoMigration(from = 17, to = 18),
-        AutoMigration(from = 18, to = 19)
+        AutoMigration(from = 18, to = 19),
+        AutoMigration(from = 19, to = 20),
     ],
     exportSchema = true
 )
@@ -79,6 +83,7 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun resolveTypeDao(): ResolveTypeDao
     abstract fun urlEntryDao(): UrlEntryDao
     abstract fun wikiCacheDao(): WikiCacheDao
+    abstract fun scenarioDao(): ScenarioDao
 
     companion object {
         private fun buildMigrations(logger: Logger): Array<Migration> {

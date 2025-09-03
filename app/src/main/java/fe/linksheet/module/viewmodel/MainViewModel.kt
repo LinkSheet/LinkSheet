@@ -20,6 +20,7 @@ import app.linksheet.compose.debug.DebugMenuSlotProvider
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getFirstText
 import fe.composekit.extension.setText
+import app.linksheet.compose.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.preference.SensitivePreference

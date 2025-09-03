@@ -86,6 +86,7 @@ includeProject(":feature-browser", "features/browser")
 includeProject(":feature-shizuku", "features/shizuku")
 includeProject(":feature-systeminfo", "features/systeminfo")
 includeProject(":feature-wiki", "features/wiki")
+includeProject(":feature-scenario", "features/scenario")
 
 buildSettings {
     substitutes {

@@ -268,6 +268,7 @@ dependencies {
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
     implementation(project(":feature-shizuku"))
+    implementation(project(":feature-scenario"))
     implementation(project(":feature-wiki"))
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))

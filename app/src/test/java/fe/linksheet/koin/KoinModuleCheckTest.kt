@@ -25,6 +25,7 @@ import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.ShizukuService
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
+import app.linksheet.compose.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat

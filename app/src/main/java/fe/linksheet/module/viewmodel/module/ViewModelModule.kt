@@ -2,6 +2,7 @@ package fe.linksheet.module.viewmodel.module
 
 
 import fe.gson.GsonQualifier
+import fe.linksheet.feature.scenario.ScenarioViewModel
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
@@ -119,4 +120,5 @@ val ViewModelModule = module {
     viewModelOf(::MarkdownViewModel)
     viewModelOf(::SqlViewModel)
     viewModelOf(::PreviewSettingsViewModel)
+    viewModelOf(::ScenarioViewModel)
 }

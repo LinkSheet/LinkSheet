@@ -1,5 +1,6 @@
 package fe.linksheet.composable.page.settings
 
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*

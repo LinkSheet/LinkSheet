@@ -575,4 +575,6 @@
     <string name="settings_links_preview__subtitle_preview">Опит за зареждане и показване на преглед на OpenGraph в долното меню. Възможно е да има <annotation url-id="github.linksheet.wiki.privacy.preview">последствия, свързани с поверителността</annotation></string>
     <string name="settings_links_preview__title_preview_skip_browser">Без преглед от мрежов четец</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">Без преглед ако изпращач е мрежов четец</string>
+    <string name="settings_scenario__title_scenarios">Сценарии</string>
+    <string name="settings_scenario__text_scenarios">Настройки на сценарии</string>
 </resources>

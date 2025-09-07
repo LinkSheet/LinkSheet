@@ -1,40 +1,39 @@
-# LinkSheet [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/) [![Build status](https://img.shields.io/github/actions/workflow/status/LinkSheet/LinkSheet/build-nightly.yml)](https://github.com/LinkSheet/LinkSheet/actions/workflows/build-nightly.yml) ![Discord](https://img.shields.io/discord/1137845851344081038?label=discord) [![Latest Github nightly release](https://img.shields.io/github/v/release/LinkSheet/nightly?label=download&color=orange)](https://github.com/LinkSheet/nightly/releases/latest)
+# LinkSheet (Diganta743251 Fork) [![Translations](https://img.shields.io/weblate/progress/linksheet)](https://hosted.weblate.org/projects/linksheet/) [![Latest Github nightly release](https://img.shields.io/github/v/release/LinkSheet/nightly?label=download&color=orange)](https://github.com/LinkSheet/nightly/releases/latest) ![Discord](https://img.shields.io/discord/1137845851344081038?label=discord)
 
 
 
 **LinkSheet** reimplements the Pre-Android 12 system link handling behavior in a standalone app, allowing users to choose which app to open links in.
 
-
+This is a fork of the original LinkSheet repository, customized by Diganta743251 for personal development and enhancements.
 
 > [!IMPORTANT]
 > LinkSheet is rapidly evolving and has not had a "stable" release in over a year - please use the [nightly builds](#nightly-builds) for the time being
 
 <!-- ---------- Badges ---------- -->
-<div align="">
+<div align="center">
+
+[![GitHub version](https://img.shields.io/github/v/release/Diganta743251/LinkSheet)](https://github.com/Diganta743251/LinkSheet/releases/latest)
 
 <!--
-[![GitHub version](https://img.shields.io/github/v/release/LinkSheet/LinkSheet)](https://github.com/LinkSheet/LinkSheet/releases/latest)
-
 ~~[![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/fe.linksheet)](https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet)~~
 -->
 
 <!--
-// [![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/LinkSheet/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
+// [![Nightly (via nightly.link)](https://img.shields.io/badge/nightly-latest-orange?label=nightly.link&color=orange)](https://nightly.link/Diganta743251/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
 -->
-
 
 
 </div>
 
 <!-- ---------- Download ---------- -->
-<div align="">
+<div align="center">
 <!--  
   <a href="https://apt.izzysoft.de/fdroid/index/apk/fe.linksheet" target="_blank"><img
             src="readme/IzzyOnDroid.png"
             alt="Get it on IzzySoft" height="80" /></a>
 -->
   
-   <a href="https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://app/%7B%22id%22%3A%22fe.linksheet.nightly%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2FLinkSheet%2Fnightly%22%2C%22author%22%3A%221fexd%22%2C%22name%22%3A%22LinkSheet%20Nightly%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Atrue%2C%5C%22fallbackToOlderReleases%5C%22%3Atrue%2C%5C%22filterReleaseTitlesByRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22filterReleaseNotesByRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22dontSortReleasesList%5C%22%3Afalse%2C%5C%22useLatestAssetDateAsReleaseDate%5C%22%3Afalse%2C%5C%22trackOnly%5C%22%3Afalse%2C%5C%22versionExtractionRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22matchGroupToUse%5C%22%3A%5C%22%5C%22%2C%5C%22versionDetection%5C%22%3Afalse%2C%5C%22releaseDateAsVersion%5C%22%3Afalse%2C%5C%22useVersionCodeAsOSVersion%5C%22%3Afalse%2C%5C%22apkFilterRegEx%5C%22%3A%5C%22LinkSheet.Nightly%5C%22%2C%5C%22invertAPKFilter%5C%22%3Atrue%2C%5C%22autoApkFilterByArch%5C%22%3Atrue%2C%5C%22appName%5C%22%3A%5C%22%5C%22%2C%5C%22shizukuPretendToBeGooglePlay%5C%22%3Afalse%2C%5C%22exemptFromBackgroundUpdates%5C%22%3Afalse%2C%5C%22skipUpdateNotifications%5C%22%3Afalse%2C%5C%22about%5C%22%3A%5C%22Restore%20link%20control%20on%20Android%2012%2B%5C%22%7D%22%7D" target="_blank"><img
+   <a href="https://apps.obtainium.imranr.dev/redirect.html?r=obtainium://app%2F%7B%22id%22%3A%22fe.linksheet.nightly%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2FLinkSheet%2Fnightly%22%2C%22author%22%3A%221fexd%22%2C%22name%22%3A%22LinkSheet%20Nightly%22%2C%22preferredApkIndex%22%3A0%2C%22additionalSettings%22%3A%22%7B%5C%22includePrereleases%5C%22%3Atrue%2C%5C%22fallbackToOlderReleases%5C%22%3Atrue%2C%5C%22filterReleaseTitlesByRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22filterReleaseNotesByRegEx%5C%22%3A%5C%22%5C%22%2C%5C%22verifyLatestTag%5C%22%3Afalse%2C%5C%22dontSortReleasesList%5C%22%3Afalse%2C%5C%22useLatestAssetDateAsReleaseDate%5C%22%3Afalse%2C%5C%22trackOnly%5C%22%3Afalse%2C%5C%22skipUpdateNotifications%5C%22%3Afalse%2C%5C%22about%5C%22%3A%5C%22Restore%20link%20control%20on%20Android%2012%2B%5C%22%7D%22%2C%22shizukuPretendToBeGooglePlay%5C%22%3Afalse%2C%5C%22exemptFromBackgroundUpdates%5C%22%3Afalse%2C%5C%22skipUpdateNotifications%5C%22%3Afalse%2C%5C%22about%5C%22%3A%5C%22%5C%22%2C%5C%22shizukuPretendToBeGooglePlay%5C%22%3Afalse%2C%5C%22exemptFromBackgroundUpdates%5C%22%3Afalse%2C%5C%22skipUpdateNotifications%5C%22%3Afalse%2C%5C%22about%5C%22%3A%5C%22Restore%20link%20control%20on%20Android%2012%2B%5C%22%7D%22%7D" target="_blank"><img
             src="readme/badge_obtainium.png"
             alt="Get it on Obtainium" height="80" /></a>
 
@@ -42,9 +41,8 @@
 
 
 
-
 <!-- ---------- Screenshots ---------- -->
-<div align="">
+<div align="center">
   <div style="display: flex;">
     <img src="readme/screenshots.webp">
   </div>
@@ -76,12 +74,16 @@
   <li><strong>Pro:</strong> Sustain LinkSheet's development - a small donation keeps me motivated to work on the app - thank you!</li>
 </ul>
 
+## About This Fork
+
+This repository is a fork of the original [LinkSheet](https://github.com/LinkSheet/LinkSheet) project. It includes personal customizations and potential enhancements by Diganta743251. Contributions are welcome, but please note that this fork may diverge from the upstream.
+
 ## Nightly builds
 
 Currently, LinkSheet uses a "nightly" "rolling release" model which allows for fast development iteration at the cost of stability; However, since this has proven to work quite well, there usually aren't any issues to be expected.
 
 <!--
-* Latest build is always available via [nightly.link](https://nightly.link/LinkSheet/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
+* Latest build is always available via [nightly.link](https://nightly.link/Diganta743251/LinkSheet/workflows/build-nightly/master/linksheet-nightly.zip)
 -->
 
 * Use [Obtainium](https://github.com/ImranR98/Obtainium) with the [nightly](https://github.com/LinkSheet/nightly) repository to auto-download builds
@@ -98,7 +100,7 @@ Currently, LinkSheet uses a "nightly" "rolling release" model which allows for f
 
 ## Discord
 
-<div align="">
+<div align="center">
   <a href="https://discord.gg/XndZet2pWF"><img src="https://discordapp.com/api/guilds/1137845851344081038/widget.png?style=banner2" alt="Discord Banner 2"/></a>
 </div>
 
@@ -106,7 +108,7 @@ Currently, LinkSheet uses a "nightly" "rolling release" model which allows for f
 
 All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨
 
-<div align="">
+<div align="center">
     <a href="https://www.buymeacoffee.com/1fexd" target="_blank"><img
             src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png"
             alt="Buy Me A Coffee"
@@ -121,3 +123,11 @@ All donations of 5€+ are eligible for ✨ LinkSheet Pro ✨
 * LinkSheet was initially based on [OpenLinkWith](https://github.com/tasomaniac/OpenLinkWith)
 * [MastodonRedirect](https://github.com/zacharee/MastodonRedirect): Reference for the Shizuku implementation
 * Design inspired by [Seal](https://github.com/JunkFood02/Seal) and [GMS-Flags](https://github.com/polodarb/GMS-Flags)
+
+## Contributing
+
+Contributions to this fork are welcome! Please fork the repository, make your changes, and submit a pull request.
+
+## Contact
+
+For questions or issues specific to this fork, contact Diganta743251 via GitHub.

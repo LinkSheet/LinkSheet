@@ -427,7 +427,10 @@ dependencies {
 
     implementation(MozillaComponents.support.utils)
     implementation(MozillaComponents.lib.publicSuffixList)
+    implementation(platform(KotlinX.serialization.bom))
     implementation(KotlinX.serialization.json)
+    implementation(KotlinX.serialization.protobuf)
+    implementation(KotlinX.serialization.cbor)
 
     val commonTestDependencies = arrayOf(
         Koin.test,

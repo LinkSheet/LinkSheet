@@ -10,7 +10,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
+import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.util.listState
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -18,14 +20,12 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.route.Route
-import fe.linksheet.navigation.LibRedirectServiceRoute
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectSettingsViewModel
+import fe.linksheet.navigation.LibRedirectServiceRoute
 import fe.linksheet.util.web.HostUtil
 import org.koin.androidx.compose.koinViewModel
 

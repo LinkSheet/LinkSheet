@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    namespace = "fe.linksheet.lib.compose"
+    namespace = "app.linksheet.compose"
     compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {

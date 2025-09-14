@@ -15,8 +15,8 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
 import fe.linksheet.composable.util.CheckboxRow
-import fe.linksheet.composable.util.mapState
-import fe.linksheet.extension.compose.mapHelper
+import app.linksheet.compose.extension.mapHelper
+import app.linksheet.compose.util.mapState
 import fe.linksheet.extension.compose.searchHeader
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.feature.app.ActivityAppInfo

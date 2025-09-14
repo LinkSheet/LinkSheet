@@ -6,6 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
+import app.linksheet.compose.extension.listHelper
+import app.linksheet.compose.util.listState
 import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -16,8 +18,6 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import org.koin.androidx.compose.koinViewModel

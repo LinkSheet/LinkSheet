@@ -1,3 +1,5 @@
+@file:Suppress("TestFunctionName")
+
 package fe.linksheet.experiment.engine.rule
 
 import assertk.Assert
@@ -19,6 +21,7 @@ import fe.linksheet.experiment.engine.step.StepResult
 import fe.linksheet.util.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import fe.std.uri.StdUrl
+import kotlinx.coroutines.CoroutineDispatcher
 import java.util.*
 
 //abstract class BaseRuleEngineTest(closeDb: Boolean = true) : DatabaseTest(closeDb) {
@@ -29,7 +32,20 @@ import java.util.*
 //        super.stop()
 //    }
 //}
+fun LazyTestLinkEngine(dispatcher: CoroutineDispatcher, vararg rules: Rule<*, *>): Lazy<LinkEngine> {
+    return lazy { TestLinkEngine(dispatcher, *rules) }
+}
 
+fun TestLinkEngine(dispatcher: CoroutineDispatcher, vararg rules: Rule<*, *>): LinkEngine {
+    return LinkEngine(
+        steps = listOf(
+            TestLinkModifier(EngineStepId.Embed),
+            TestLinkModifier(EngineStepId.ClearURLs) { StepTestResult(it) }
+        ),
+        rules = rules.toList(),
+        dispatcher = dispatcher,
+    )
+}
 
 fun assertResult(result: ContextualEngineResult): Assert<EngineResult> {
     return assertThat(result.second)
@@ -40,7 +56,6 @@ fun assertContext(result: ContextualEngineResult): Assert<SealedRunContext> {
 }
 
 
-@Suppress("TestFunctionName")
 fun TestLinkModifier(
     id: EngineStepId,
     block: suspend EngineRunContext.(StdUrl) -> StepTestResult? = { null },

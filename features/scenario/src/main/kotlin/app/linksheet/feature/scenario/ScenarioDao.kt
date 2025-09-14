@@ -1,4 +1,4 @@
-package fe.linksheet.feature.scenario
+package app.linksheet.feature.scenario
 
 import androidx.room.Dao
 import fe.linksheet.common.dao.base.BaseDao

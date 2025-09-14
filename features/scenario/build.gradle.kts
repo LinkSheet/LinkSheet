@@ -13,7 +13,7 @@ plugins {
 }
 
 android {
-    namespace = "fe.linksheet.feature.scenario"
+    namespace = "app.linksheet.feature.scenario"
     compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
@@ -42,9 +42,11 @@ dependencies {
     implementation(project(":compose"))
     compileOnly(project(":hidden-api"))
 
+    implementation("sh.calvin.reorderable:reorderable:_")
     implementation(AndroidX.lifecycle.viewModel)
     implementation(AndroidX.room.common)
     implementation(AndroidX.compose.ui)
+    implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)
 
     implementation(platform(_1fexd.composeKit.bom))
@@ -64,10 +66,13 @@ dependencies {
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)
     implementation(Grrfe.std.process.core)
+    implementation(Grrfe.std.uri)
 
     implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
 
+    implementation(platform(Grrfe.gsonExt.bom))
+    implementation(Grrfe.gsonExt.core)
 
     implementation(AndroidX.core.ktx)
 

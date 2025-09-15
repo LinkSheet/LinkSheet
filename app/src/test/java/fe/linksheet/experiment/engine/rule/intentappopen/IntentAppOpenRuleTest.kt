@@ -9,7 +9,7 @@ import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.IntentEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PostProcessorRule
 import fe.linksheet.extension.std.toAndroidUri
 import fe.linksheet.testlib.core.BaseUnitTest
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -23,7 +23,7 @@ internal class IntentAppOpenRuleTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/428
-    private val rule = object : PostprocessorRule {
+    private val rule = object : PostProcessorRule {
         private val regex = """https?://.*\.(mp3|wav|flac|m4a|aac|oog|mp4)(/.*|\?.*)?$""".toRegex()
         private val cmp = ComponentName("com.dv.adm", "com.dv.adm.AEditor")
 

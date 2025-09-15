@@ -7,9 +7,9 @@ import fe.linksheet.eval.expression.toInput
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PostProcessorRule
 
-class ExpressionPostProcessorRule(val expression: Expression<*>) : PostprocessorRule {
+class ExpressionPostProcessorRule(val expression: Expression<*>) : PostProcessorRule {
     override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
         val ctx = EvalContextImpl(
             KnownTokens.EngineRunContext.toInput(this),

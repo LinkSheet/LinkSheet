@@ -5,12 +5,12 @@ import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.rule.LazyTestLinkEngine
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PostProcessorRule
 import fe.linksheet.experiment.engine.rule.assertResult
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
 
-class UrlRewriteTestBase(dispatcher: CoroutineDispatcher, rule: PostprocessorRule) {
+class UrlRewriteTestBase(dispatcher: CoroutineDispatcher, rule: PostProcessorRule) {
     private val engine by LazyTestLinkEngine(dispatcher, rule)
 
     suspend fun `test rule not matched`() {

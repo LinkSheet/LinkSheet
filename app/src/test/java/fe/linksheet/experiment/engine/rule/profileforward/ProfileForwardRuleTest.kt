@@ -5,8 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.experiment.engine.*
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PreProcessorInput
-import fe.linksheet.experiment.engine.rule.PreprocessorRule
-import fe.linksheet.experiment.engine.rule.profileforward.ProfileForwardTestBase
+import fe.linksheet.experiment.engine.rule.PreProcessorRule
 import fe.linksheet.testlib.core.BaseUnitTest
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -20,7 +19,7 @@ import kotlin.intArrayOf
 internal class ProfileForwardRuleTest : BaseUnitTest  {
     private val dispatcher = StandardTestDispatcher()
 
-    private val rule = object : PreprocessorRule {
+    private val rule = object : PreProcessorRule {
         private val workRelatedHost = "sso.mycompany.com"
         override suspend fun EngineRunContext.checkRule(input: PreProcessorInput): EngineResult? {
             if (input.url.host == workRelatedHost) {

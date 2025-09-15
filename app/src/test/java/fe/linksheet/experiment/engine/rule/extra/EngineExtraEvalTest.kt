@@ -4,7 +4,7 @@ import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.context.EngineFlag
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PreProcessorInput
-import fe.linksheet.experiment.engine.rule.PreprocessorRule
+import fe.linksheet.experiment.engine.rule.PreProcessorRule
 import fe.linksheet.eval.expression.AddFlagExpression
 import fe.linksheet.eval.expression.GetSourceAppExtraExpression
 import fe.linksheet.testlib.core.BaseUnitTest
@@ -22,7 +22,7 @@ import org.junit.Test
 internal class EngineExtraEvalTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
-    class ExpressionPreprocessorRule(val expression: Expression<*>) : PreprocessorRule {
+    class ExpressionPreprocessorRule(val expression: Expression<*>) : PreProcessorRule {
         override suspend fun EngineRunContext.checkRule(input: PreProcessorInput): EngineResult? {
             val ctx = EvalContextImpl(
                 KnownTokens.EngineRunContext.toInput(this),

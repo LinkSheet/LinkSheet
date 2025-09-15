@@ -6,14 +6,14 @@ import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.IntentEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PostProcessorRule
 import fe.linksheet.extension.std.toAndroidUri
 import fe.std.uri.StdUrl
 
 class IntentPostprocessorRule(
     private val matcher: UrlMatcher,
     private val definition: IntentRuleDefinition,
-) : PostprocessorRule {
+) : PostProcessorRule {
     override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
         return when {
             !matcher.matches(input.resultUrl) -> empty()

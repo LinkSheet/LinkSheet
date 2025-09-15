@@ -5,7 +5,7 @@ package fe.linksheet.experiment.engine.rule.urlrewrite
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PostProcessorRule
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.eval.EvalContextImpl
 import fe.linksheet.eval.BundleSerializer
@@ -19,7 +19,7 @@ import org.junit.Test
 internal class UrlRewriteRuleEvalTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
-    class ExpressionPostprocessorRule(val expression: Expression<*>) : PostprocessorRule {
+    class ExpressionPostprocessorRule(val expression: Expression<*>) : PostProcessorRule {
         override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
             val ctx = EvalContextImpl(
                 KnownTokens.EngineRunContext.toInput(this),

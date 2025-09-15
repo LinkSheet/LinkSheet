@@ -6,7 +6,7 @@ import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PostProcessorRule
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.uri.extension.new
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -21,7 +21,7 @@ internal class UrlRewriteRuleTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/407
-    private val rule = object : PostprocessorRule {
+    private val rule = object : PostProcessorRule {
         private val hosts = setOf("reddit.com", "www.reddit.com")
         private val newHost = "old.reddit.com"
 

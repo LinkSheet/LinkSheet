@@ -10,14 +10,14 @@ import fe.linksheet.experiment.engine.context.AppRoleId
 import fe.linksheet.experiment.engine.context.SealedRunContext
 import fe.linksheet.experiment.engine.context.findRoleOrNull
 import fe.linksheet.experiment.engine.rule.LazyTestLinkEngine
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PostProcessorRule
 import fe.linksheet.experiment.engine.rule.assertContext
 import fe.linksheet.experiment.engine.rule.assertResult
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
 
-class DefaultBrowserTestBase(dispatcher: CoroutineDispatcher, rule: PostprocessorRule) {
+class DefaultBrowserTestBase(dispatcher: CoroutineDispatcher, rule: PostProcessorRule) {
     private val engine by LazyTestLinkEngine(dispatcher, rule)
 
     suspend fun `test default browser 1`() {

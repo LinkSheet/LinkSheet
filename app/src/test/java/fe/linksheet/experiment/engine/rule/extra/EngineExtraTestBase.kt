@@ -8,12 +8,12 @@ import fe.linksheet.experiment.engine.context.DefaultEngineRunContext
 import fe.linksheet.experiment.engine.context.EngineFlag
 import fe.linksheet.experiment.engine.context.SourceAppExtra
 import fe.linksheet.experiment.engine.rule.LazyTestLinkEngine
-import fe.linksheet.experiment.engine.rule.PreprocessorRule
+import fe.linksheet.experiment.engine.rule.PreProcessorRule
 import fe.linksheet.experiment.engine.rule.assertResult
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
 
-class EngineExtraTestBase(dispatcher: CoroutineDispatcher, rule: PreprocessorRule) {
+class EngineExtraTestBase(dispatcher: CoroutineDispatcher, rule: PreProcessorRule) {
     private val engine by  LazyTestLinkEngine(dispatcher, rule)
 
     suspend fun test() {

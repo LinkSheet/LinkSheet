@@ -21,8 +21,8 @@ class LinkEngine(
     private val scope = CoroutineScope(dispatcher) + CoroutineName("LinkEngine") + CoroutineExceptionHandler { _, e ->
         println(e)
     }
-    private val preProcessorRules = rules.filterIsInstance<PreprocessorRule>()
-    private val postProcessorRules = rules.filterIsInstance<PostprocessorRule>()
+    private val preProcessorRules = rules.filterIsInstance<PreProcessorRule>()
+    private val postProcessorRules = rules.filterIsInstance<PostProcessorRule>()
 
     private suspend inline fun <I : StepRuleInput, R : StepRuleResult, reified SR : StepRule<I, R>> findStepRule(
         context: EngineRunContext,

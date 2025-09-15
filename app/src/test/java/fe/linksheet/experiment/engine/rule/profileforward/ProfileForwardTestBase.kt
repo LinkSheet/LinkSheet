@@ -2,18 +2,14 @@ package fe.linksheet.experiment.engine.rule.profileforward
 
 import assertk.assertions.isInstanceOf
 import fe.linksheet.experiment.engine.ForwardOtherProfileResult
-import fe.linksheet.experiment.engine.LinkEngine
 import fe.linksheet.experiment.engine.rule.LazyTestLinkEngine
-import fe.linksheet.experiment.engine.rule.PreprocessorRule
-import fe.linksheet.experiment.engine.rule.StepTestResult
-import fe.linksheet.experiment.engine.rule.TestLinkModifier
+import fe.linksheet.experiment.engine.rule.PreProcessorRule
 import fe.linksheet.experiment.engine.rule.assertResult
-import fe.linksheet.experiment.engine.step.EngineStepId
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlin.getValue
 
-class ProfileForwardTestBase(dispatcher: CoroutineDispatcher, rule: PreprocessorRule) {
+class ProfileForwardTestBase(dispatcher: CoroutineDispatcher, rule: PreProcessorRule) {
     private val engine by LazyTestLinkEngine(dispatcher, rule)
 
     suspend fun `test rule matched`() {

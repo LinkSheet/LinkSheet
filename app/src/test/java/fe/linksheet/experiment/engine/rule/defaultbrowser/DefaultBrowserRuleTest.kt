@@ -6,7 +6,7 @@ import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.context.AppRoleId
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
-import fe.linksheet.experiment.engine.rule.PostprocessorRule
+import fe.linksheet.experiment.engine.rule.PostProcessorRule
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.AndroidAppPackage
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -23,7 +23,7 @@ internal class DefaultBrowserRuleTest : BaseUnitTest {
 
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/415
     // Use case/FR: https://github.com/LinkSheet/LinkSheet/issues/591
-    private val rule = object : PostprocessorRule {
+    private val rule = object : PostProcessorRule {
         private val defaultBrowsers = mapOf(
             "google.com" to AndroidAppPackage("com.google.chrome"),
             "github.com" to AndroidAppPackage("org.mozilla.fennec_fdroid")

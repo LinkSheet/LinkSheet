@@ -10,7 +10,6 @@ import fe.linksheet.experiment.engine.IntentEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
 import fe.linksheet.experiment.engine.rule.PostprocessorRule
-import fe.linksheet.experiment.engine.rule.intentappopen.IntentAppOpenTestBase
 import fe.linksheet.extension.std.toAndroidUri
 import fe.linksheet.testlib.core.BaseUnitTest
 import kotlinx.coroutines.test.StandardTestDispatcher

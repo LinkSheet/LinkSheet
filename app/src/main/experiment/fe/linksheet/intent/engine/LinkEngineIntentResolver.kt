@@ -124,11 +124,7 @@ class LinkEngineIntentResolver(
             return +uriResult
         }
 
-        val url = uriResult.value.toStdUrl()
-        if (url == null) {
-            return +UriParseException
-        }
-
+        val url = uriResult.value.toStdUrl() ?: return +UriParseException
         return +url
     }
 

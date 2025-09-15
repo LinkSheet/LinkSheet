@@ -30,8 +30,8 @@ class ComponentNameExpression(
 
 @Keep
 @Serializable
-@SerialName(OpCodes.INTENT)
-class IntentExpression(
+@SerialName(OpCodes.COMPONENT_NAME_TO_INTENT)
+class IntentComponentNameExpression(
     @ProtoNumber(1)
     val action: Expression<String>,
     @ProtoNumber(2)
@@ -44,3 +44,20 @@ class IntentExpression(
     }
 }
 
+@Keep
+@Serializable
+@SerialName(OpCodes.PACKAGE_TO_INTENT)
+class IntentPackageExpression(
+    @ProtoNumber(1)
+    val action: Expression<String>,
+    @ProtoNumber(2)
+    val data: Expression<@Contextual Uri>,
+    @ProtoNumber(3)
+    val packageName: Expression<String>
+) : Expression<Intent> {
+    override fun eval(ctx: EvalContext): Intent {
+        return buildIntent(action.eval(ctx), data.eval(ctx)) {
+            `package` = packageName.eval(ctx)
+        }
+    }
+}

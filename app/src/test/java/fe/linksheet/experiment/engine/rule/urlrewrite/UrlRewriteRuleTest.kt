@@ -7,7 +7,6 @@ import fe.linksheet.experiment.engine.UrlEngineResult
 import fe.linksheet.experiment.engine.context.EngineRunContext
 import fe.linksheet.experiment.engine.rule.PostProcessorInput
 import fe.linksheet.experiment.engine.rule.PostprocessorRule
-import fe.linksheet.experiment.engine.rule.urlrewrite.UrlRewriteTestBase
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.uri.extension.new
 import kotlinx.coroutines.test.StandardTestDispatcher

@@ -2,7 +2,6 @@ package fe.linksheet.experiment.engine.rule.defaultbrowser
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.experiment.engine.rule.defaultbrowser.DefaultBrowserTestBase
 import fe.linksheet.experiment.engine.EngineResult
 import fe.linksheet.experiment.engine.context.AppRoleId
 import fe.linksheet.experiment.engine.context.EngineRunContext

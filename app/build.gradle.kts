@@ -1,4 +1,5 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import com.gitlab.grrfe.gradlebuild.android.ArchiveBaseName
 import com.gitlab.grrfe.gradlebuild.common.version.CurrentTagMode
 import com.gitlab.grrfe.gradlebuild.common.version.TagReleaseParser
 import com.gitlab.grrfe.gradlebuild.common.version.asProvider
@@ -17,10 +18,6 @@ import fe.buildlogic.extension.readPropertiesOrNull
 import fe.buildlogic.common.CompilerOption
 import fe.buildlogic.common.PluginOption
 import fe.buildlogic.version.AndroidVersionStrategy
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 plugins {
     kotlin("android")
@@ -44,7 +41,6 @@ versioning {
 }
 
 val appName = "LinkSheet"
-val dtf: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH_mm_ss")
 
 android {
     namespace = "fe.linksheet"
@@ -61,12 +57,10 @@ android {
         val versionProvider = versioning.asProvider(project, provider)
         val (name, code, commit, branch) = versionProvider.get()
 
-        val localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.of("UTC"))
-
         versionCode = code
         versionName = name
 
-        setProperty("archivesBaseName", "$appName-${dtf.format(localDateTime)}-$versionName")
+        with(ArchiveBaseName) { project.setArchivesBaseName(appName, name, now) }
 
         val localProperties = rootProject.file("local.properties").readPropertiesOrNull()
         val publicLocalProperties = rootProject.file("public.local.properties").readPropertiesOrNull()

@@ -43,7 +43,7 @@ import fe.linksheet.navigation.Routes
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel

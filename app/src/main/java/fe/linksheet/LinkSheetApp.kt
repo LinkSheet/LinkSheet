@@ -23,10 +23,10 @@ import fe.linksheet.module.app.PackageModule
 import fe.linksheet.module.clock.ClockModule
 import fe.linksheet.module.database.dao.module.DaoModule
 import fe.linksheet.module.database.DatabaseModule
-import fe.linksheet.module.debug.DebugMenuSlotProvider
-import fe.linksheet.module.debug.DebugPreferenceProvider
-import fe.linksheet.module.debug.NoOpDebugMenuSlotProvider
-import fe.linksheet.module.debug.NoOpDebugPreferenceProvider
+import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.compose.debug.DebugPreferenceProvider
+import app.linksheet.compose.debug.NoOpDebugMenuSlotProvider
+import app.linksheet.compose.debug.NoOpDebugPreferenceProvider
 import fe.linksheet.module.devicecompat.CompatModule
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider

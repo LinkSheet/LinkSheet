@@ -273,6 +273,7 @@ dependencies {
     implementation(project(":config"))
     implementation(project(":util"))
     implementation(project(":common"))
+    implementation(project(":compose"))
 
     implementation(project(":bottom-sheet"))
     implementation(project(":bottom-sheet-new"))

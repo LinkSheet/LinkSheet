@@ -1,6 +1,6 @@
 package app.linksheet.preview
 
-import fe.linksheet.module.debug.DebugPreferenceProvider
+import app.linksheet.compose.debug.DebugPreferenceProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @Suppress("FunctionName")

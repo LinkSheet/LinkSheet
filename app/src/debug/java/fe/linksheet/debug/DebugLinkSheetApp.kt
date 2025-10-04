@@ -10,8 +10,8 @@ import fe.linksheet.debug.module.preference.DebugPreferenceRepository
 import fe.linksheet.debug.module.viewmodel.module.DebugViewModelModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
-import fe.linksheet.module.debug.DebugMenuSlotProvider
-import fe.linksheet.module.debug.DebugPreferenceProvider
+import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.compose.debug.DebugPreferenceProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider

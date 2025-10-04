@@ -5,7 +5,7 @@ import androidx.compose.ui.res.stringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 
 
 internal object NewSettingsRouteData {

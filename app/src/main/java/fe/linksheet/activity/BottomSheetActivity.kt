@@ -25,13 +25,13 @@ import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
 import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
 import fe.linksheet.composable.ui.AppTheme
-import fe.linksheet.composable.util.debugBorder
+import app.linksheet.compose.debugBorder
 import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.module.debug.LocalUiDebug
+import app.linksheet.compose.debug.LocalUiDebug
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.ResolveEvent

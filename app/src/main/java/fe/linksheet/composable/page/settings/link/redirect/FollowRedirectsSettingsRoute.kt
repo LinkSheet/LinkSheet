@@ -13,7 +13,7 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.util.groupSize
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.util.web.Darknet

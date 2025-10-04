@@ -6,7 +6,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

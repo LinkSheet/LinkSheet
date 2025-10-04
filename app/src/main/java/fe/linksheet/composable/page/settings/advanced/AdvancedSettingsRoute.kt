@@ -12,7 +12,7 @@ import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
 import fe.composekit.route.RouteNavigateListItemNew
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.navigation.ExperimentRoute
 import fe.linksheet.navigation.ExportImportRoute
 

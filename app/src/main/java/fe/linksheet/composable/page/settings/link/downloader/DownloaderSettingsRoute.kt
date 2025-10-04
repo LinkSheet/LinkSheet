@@ -19,7 +19,7 @@ import fe.composekit.component.list.item.type.SliderListItem
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle

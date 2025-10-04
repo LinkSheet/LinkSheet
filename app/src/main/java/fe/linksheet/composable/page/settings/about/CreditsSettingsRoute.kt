@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.icon.DrawableIconPainter.Companion.drawable
@@ -20,7 +21,6 @@ import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.layout.column.group
 import fe.linksheet.*
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.openUri
 
 internal object CreditsSettingsRouteData {

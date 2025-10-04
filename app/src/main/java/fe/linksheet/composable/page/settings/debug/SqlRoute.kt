@@ -18,7 +18,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import fe.linksheet.R
 import fe.linksheet.feature.sql.Column
 import fe.linksheet.feature.sql.SqlRow
 import fe.linksheet.module.viewmodel.SqlViewModel
@@ -48,7 +49,7 @@ private fun SqlRouteInternal(
     val scrollState = rememberScrollState()
 
     SaneScaffoldSettingsPage(
-        headline = stringResource(id = fe.linksheet.R.string.settings__title_sql),
+        headline = stringResource(id = R.string.settings__title_sql),
         onBackPressed = onBackPressed,
         floatingActionButton = {
             FloatingActionButton(
@@ -64,7 +65,7 @@ private fun SqlRouteInternal(
                 state = textState,
                 lineLimits = TextFieldLineLimits.MultiLine(),
                 label = {
-                    Text(text = stringResource(id = fe.linksheet.R.string.settings_sql__text_query))
+                    Text(text = stringResource(id = R.string.settings_sql__text_query))
                 }
             )
         }

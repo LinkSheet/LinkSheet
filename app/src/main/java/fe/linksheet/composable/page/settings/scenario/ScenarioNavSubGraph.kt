@@ -11,9 +11,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 object ScenarioNavSubGraph : NavSubGraph {
     override val startDestination: Any = ScenarioRoute
-    override val graph: NavGraphBuilder.(NavHostController) -> Unit = {
+    override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<ScenarioRoute> { _, route ->
-            ScenarioRoute()
+            ScenarioRoute(navigate = navController::navigate)
         }
     }
 }

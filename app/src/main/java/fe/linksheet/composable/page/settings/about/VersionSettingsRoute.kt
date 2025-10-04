@@ -36,7 +36,7 @@ import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.composable.ui.HkGroteskFontFamily
 import fe.linksheet.util.buildconfig.LinkSheetInfo

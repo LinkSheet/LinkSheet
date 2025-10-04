@@ -20,7 +20,7 @@ import fe.linksheet.feature.app.`package`.PackageIntentHandler
 import fe.linksheet.feature.app.`package`.PackageLabelService
 import fe.linksheet.feature.app.`package`.PackageLauncherService
 import fe.linksheet.feature.app.`package`.domain.DomainVerificationManagerCompat
-import fe.linksheet.module.debug.DebugMenuSlotProvider
+import app.linksheet.compose.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
@@ -67,7 +67,6 @@ import io.ktor.client.*
 import io.ktor.client.engine.*
 import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.test.verify.definition

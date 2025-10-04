@@ -8,7 +8,7 @@ import fe.android.compose.text.DefaultContent.Companion.text
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

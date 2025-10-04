@@ -15,9 +15,8 @@ class WikiCacheRepository(
     suspend fun getCached(url: String, maxAge: Duration = 24.hours): CacheResult<WikiCache> {
         val now = clock.now()
         val after = now.minus(maxAge).toEpochMilliseconds()
-        val cached = dao.getCachedText(url)
+        val cached = dao.getCachedText(url) ?: return CacheResult.Miss
 
-        if (cached == null) return CacheResult.Miss
         return when {
             cached.timestamp > after -> CacheResult.Hit(cached)
             else -> CacheResult.Stale(cached)

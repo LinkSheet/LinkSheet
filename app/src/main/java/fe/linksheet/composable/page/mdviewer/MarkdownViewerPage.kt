@@ -24,10 +24,10 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import fe.linksheet.composable.component.appbar.SaneSmallTopAppBar
+import app.linksheet.compose.appbar.SaneSmallTopAppBar
 import fe.linksheet.composable.ui.PreviewTheme
-import fe.linksheet.composable.util.debugBorder
-import fe.linksheet.module.debug.LocalUiDebug
+import app.linksheet.compose.debugBorder
+import app.linksheet.compose.debug.LocalUiDebug
 import fe.linksheet.module.viewmodel.MarkdownViewModel
 import org.koin.androidx.compose.koinViewModel
 

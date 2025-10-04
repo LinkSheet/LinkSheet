@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
 import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
 import fe.android.compose.feedback.FeedbackType
@@ -29,7 +30,6 @@ import fe.composekit.layout.column.group
 import fe.fastforwardkt.FastForwardRules
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.navigation.creditsSettingsRoute
 import fe.linksheet.util.LinkSheet

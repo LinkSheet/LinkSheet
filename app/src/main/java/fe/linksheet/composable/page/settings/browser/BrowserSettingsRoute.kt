@@ -9,7 +9,7 @@ import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.navigation.inAppBrowserSettingsRoute
 import fe.linksheet.navigation.preferredBrowserSettingsRoute
 

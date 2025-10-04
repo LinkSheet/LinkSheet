@@ -23,7 +23,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.util.groupSize
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.navigation.logViewerSettingsRoute

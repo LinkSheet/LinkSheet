@@ -24,7 +24,7 @@ import fe.composekit.component.card.AlertCard
 import fe.composekit.component.icon.IconOffset
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import org.koin.androidx.compose.koinViewModel
 

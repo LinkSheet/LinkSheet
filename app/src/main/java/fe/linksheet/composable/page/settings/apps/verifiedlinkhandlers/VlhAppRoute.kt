@@ -44,7 +44,7 @@ import fe.composekit.layout.column.group
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.feature.app.DomainVerificationAppInfo
 import fe.linksheet.feature.app.LinkHandling
 import fe.linksheet.module.database.entity.PreferredApp

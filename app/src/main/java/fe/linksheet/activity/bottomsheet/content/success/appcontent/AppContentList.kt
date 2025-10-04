@@ -31,9 +31,9 @@ import fe.linksheet.activity.bottomsheet.AppClickInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.Interaction
-import fe.linksheet.composable.util.debugBorder
+import app.linksheet.compose.debugBorder
 import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.module.debug.LocalUiDebug
+import app.linksheet.compose.debug.LocalUiDebug
 import fe.linksheet.module.resolver.KnownBrowser
 import androidx.core.net.toUri
 import app.linksheet.preview.PreviewDebugProvider

@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import fe.linksheet.composable.util.debugBorder
+import app.linksheet.compose.debugBorder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

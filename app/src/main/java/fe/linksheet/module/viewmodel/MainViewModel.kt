@@ -18,7 +18,7 @@ import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.feature.app.`package`.PackageIntentHandler
-import fe.linksheet.module.debug.DebugMenuSlotProvider
+import app.linksheet.compose.debug.DebugMenuSlotProvider
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.preference.SensitivePreference

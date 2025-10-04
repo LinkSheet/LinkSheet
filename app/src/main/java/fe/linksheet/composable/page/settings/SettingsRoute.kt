@@ -1,5 +1,6 @@
 package fe.linksheet.composable.page.settings
 
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -21,9 +22,7 @@ import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
 import fe.composekit.route.RouteNavigateListItemNew
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.page.settings.language.rememberLanguageDialog
-import fe.linksheet.composable.page.settings.scenario.ScenarioRoute
 import fe.linksheet.module.language.LocaleItem
 import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.navigation.*
@@ -210,7 +209,7 @@ fun SettingsRoute(
 
         group(size = SettingsRouteData.advanced.size + if (devMode) 1 else 0) {
             items(array = SettingsRouteData.advanced) { data, padding, shape ->
-                fe.composekit.route.RouteNavigateListItemNew(
+                RouteNavigateListItemNew(
                     data = data,
                     padding = padding,
                     shape = shape,

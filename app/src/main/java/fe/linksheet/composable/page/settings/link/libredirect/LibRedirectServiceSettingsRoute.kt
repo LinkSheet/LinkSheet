@@ -15,7 +15,7 @@ import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.feature.libredirect.FrontendState
 import fe.linksheet.module.database.entity.LibRedirectDefault

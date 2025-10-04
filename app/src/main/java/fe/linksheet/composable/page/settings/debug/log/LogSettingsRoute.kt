@@ -29,7 +29,7 @@ import fe.std.javatime.time.localizedString
 import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.R
 import fe.linksheet.composable.util.listState
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.viewmodel.LogSettingsViewModel

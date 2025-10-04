@@ -24,8 +24,8 @@ import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.android.span.helper.LocalLinkTags
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
-import fe.linksheet.module.debug.DebugPreferenceProvider
-import fe.linksheet.module.debug.LocalUiDebug
+import app.linksheet.compose.debug.DebugPreferenceProvider
+import app.linksheet.compose.debug.LocalUiDebug
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.LinkSheetLinkTags
 import org.koin.androidx.compose.KoinAndroidContext

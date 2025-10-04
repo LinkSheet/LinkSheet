@@ -15,7 +15,7 @@ import fe.linksheet.composable.page.settings.link.downloader.downloaderPermissio
 import fe.linksheet.composable.page.settings.link.downloader.requestDownloadPermission
 import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.navigation.LibRedirectRoute
 import fe.linksheet.navigation.PreviewUrlRoute

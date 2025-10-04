@@ -30,7 +30,7 @@ import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.group
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import fe.linksheet.composable.component.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.feature.profile.CrossProfile
 import fe.linksheet.feature.profile.ProfileStatus

@@ -2,7 +2,7 @@ package fe.linksheet.module.resolver
 
 import android.content.pm.ComponentInfo
 import fe.android.compose.icon.IconPainter
-import fe.linksheet.util.extension.android.componentName
+import fe.composekit.extension.componentName
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.redactor.ProtectedStringBuilder
 import fe.linksheet.module.redactor.Redactable

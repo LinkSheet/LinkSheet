@@ -2,7 +2,7 @@ package fe.linksheet.feature.app
 
 import android.content.ComponentName
 import android.content.pm.ActivityInfo
-import fe.linksheet.util.extension.android.componentName
+import fe.composekit.extension.componentName
 
 object PackageIdHelper {
     private fun getShortClassName(appPackage: String, clazz: String): String {

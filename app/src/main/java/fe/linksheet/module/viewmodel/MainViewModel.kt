@@ -10,8 +10,6 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.core.content.getSystemService
 import androidx.navigation.NavDestination
-import fe.linksheet.extension.android.getFirstText
-import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.kotlinx.RefreshableStateFlow
 import fe.linksheet.module.analytics.AnalyticsEvent
@@ -19,6 +17,8 @@ import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.feature.app.`package`.PackageIntentHandler
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import fe.composekit.extension.getFirstText
+import fe.composekit.extension.setText
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.preference.SensitivePreference

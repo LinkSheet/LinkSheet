@@ -26,7 +26,6 @@ import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrap
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
 import fe.linksheet.composable.ui.AppTheme
 import app.linksheet.compose.debugBorder
-import fe.linksheet.extension.android.setText
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.collectOnIO
@@ -48,6 +47,7 @@ import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import androidx.core.net.toUri
+import fe.composekit.extension.setText
 import fe.linksheet.activity.bottomsheet.LaunchFailure
 import fe.linksheet.activity.bottomsheet.LaunchHandler
 import fe.linksheet.activity.bottomsheet.LaunchResult

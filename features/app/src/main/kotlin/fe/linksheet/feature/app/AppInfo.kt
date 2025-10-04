@@ -3,8 +3,8 @@ package fe.linksheet.feature.app
 import android.content.pm.ComponentInfo
 import android.os.Parcelable
 import fe.android.compose.icon.IconPainter
+import fe.composekit.extension.componentName
 import fe.kotlin.util.applyIf
-import fe.linksheet.util.extension.android.componentName
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue

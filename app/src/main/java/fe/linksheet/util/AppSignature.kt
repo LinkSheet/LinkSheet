@@ -3,10 +3,10 @@ package fe.linksheet.util
 import android.content.Context
 import android.content.pm.getSignature
 import androidx.annotation.StringRes
+import app.linksheet.lib.flavors.LinkSheet
+import app.linksheet.lib.flavors.Signature
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
-import fe.linksheet.lib.flavors.LinkSheetApp
-import fe.linksheet.lib.flavors.Signature
 
 object AppSignature {
     private lateinit var buildType: SignatureBuildType
@@ -23,7 +23,7 @@ object AppSignature {
         if (this::buildType.isInitialized) return buildType
 
         val signature = context.packageManager.getSignature(context.packageName)
-        val knownSignature = LinkSheetApp.LinkSheet.isValidSignature(CryptoUtil.sha256Hex(signature!!.toByteArray()))
+        val knownSignature = LinkSheet.isValidSignature(CryptoUtil.sha256Hex(signature!!.toByteArray()))
         buildType = SignatureBuildType.entries.first { it.signature == knownSignature }
 
         return buildType

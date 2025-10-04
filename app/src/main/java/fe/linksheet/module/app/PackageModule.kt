@@ -7,6 +7,7 @@ import android.content.pm.getApplicationInfoCompatOrNull
 import android.content.pm.getInstalledPackagesCompat
 import android.content.pm.queryIntentActivitiesCompat
 import android.content.pm.resolveActivityCompat
+import app.linksheet.lib.flavors.LinkSheetApp
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
@@ -18,7 +19,6 @@ import fe.linksheet.feature.app.`package`.DefaultPackageLabelService
 import fe.linksheet.feature.app.`package`.DefaultPackageLauncherService
 import fe.linksheet.feature.app.`package`.PackageIconLoader
 import fe.linksheet.feature.app.`package`.PackageIntentHandler
-import fe.linksheet.lib.flavors.LinkSheetApp
 import fe.linksheet.feature.app.`package`.domain.DomainVerificationManagerCompat
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments

@@ -34,8 +34,8 @@ import fe.linksheet.activity.bottomsheet.Interaction
 import app.linksheet.compose.debugBorder
 import fe.linksheet.feature.app.ActivityAppInfo
 import app.linksheet.compose.debug.LocalUiDebug
-import fe.linksheet.module.resolver.KnownBrowser
 import androidx.core.net.toUri
+import app.linksheet.feature.browser.Browser
 import app.linksheet.preview.PreviewDebugProvider
 import app.linksheet.testing.fake.toActivityAppInfo
 
@@ -49,7 +49,7 @@ fun AppContentList(
     showNativeLabel: Boolean,
     showPackage: Boolean,
     dispatch: (Interaction) -> Unit,
-    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
+    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
@@ -93,7 +93,7 @@ fun AppListItem(
     selected: Boolean?,
     onClick: (ClickType, ClickModifier) -> Unit,
     preferred: Boolean,
-    privateBrowser: KnownBrowser?,
+    privateBrowser: Browser?,
     showPackage: Boolean,
     showNativeLabel: Boolean = false,
 ) {

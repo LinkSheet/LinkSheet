@@ -55,6 +55,7 @@ import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import fe.composekit.lifecycle.network.koin.NetworkStateServiceModule
+import fe.linksheet.module.browser.PrivateBrowsingModule
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
@@ -118,6 +119,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
         return listOf(
             ClockModule,
             SystemInfoServiceModule,
+            PrivateBrowsingModule,
             PackageModule,
             AppLocaleModule,
             NetworkStateServiceModule,

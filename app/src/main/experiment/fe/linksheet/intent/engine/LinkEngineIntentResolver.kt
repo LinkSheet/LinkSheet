@@ -3,6 +3,7 @@ package fe.linksheet.intent.engine
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import app.linksheet.feature.browser.PrivateBrowsingService
 import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.experiment.engine.EngineScenarioInput
@@ -73,6 +74,7 @@ class LinkEngineIntentResolver(
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val networkStateService: NetworkStateService,
     private val selector: ScenarioSelector,
+    private val privateBrowsingService: PrivateBrowsingService,
     private val settings: IntentResolverSettings,
 ) : IntentResolver {
     private val browserSettings = settings.browserSettings
@@ -142,7 +144,7 @@ class LinkEngineIntentResolver(
 
         val startUrl = urlParseResult.value
         val referringPackage = referrer?.getAndroidAppPackage(Scheme.Package)
-        val knownBrowser = KnownBrowser.isKnownBrowser(referringPackage?.packageName)
+        val knownBrowser = privateBrowsingService.isKnownBrowser(referringPackage?.packageName)
         val isReferrerBrowser = knownBrowser != null
 
         emitEvent(ResolveEvent.QueryingBrowsers)

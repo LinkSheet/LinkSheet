@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.linksheet.feature.browser.Browser
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.AppClickInteraction
@@ -32,10 +33,9 @@ import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.module.resolver.KnownBrowser
 
 
-data class GridItem(val info: ActivityAppInfo, val privateBrowsingBrowser: KnownBrowser? = null) {
+data class GridItem(val info: ActivityAppInfo, val privateBrowsingBrowser: Browser? = null) {
     override fun toString(): String {
         return info.flatComponentName + (privateBrowsingBrowser?.hashCode() ?: -1)
     }
@@ -44,7 +44,7 @@ data class GridItem(val info: ActivityAppInfo, val privateBrowsingBrowser: Known
 private fun createGridItems(
     apps: List<ActivityAppInfo>,
     uri: Uri?,
-    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
+    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
 ): List<GridItem> {
     val items = mutableListOf<GridItem>()
 
@@ -70,7 +70,7 @@ fun AppContentGrid(
     hideChoiceButtons: Boolean,
     showPackage: Boolean,
     dispatch: (Interaction) -> Unit,
-    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
+    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     val items = remember(apps, uri) {
@@ -114,7 +114,7 @@ private fun AppGridItem(
     appInfo: ActivityAppInfo,
     selected: Boolean?,
     onClick: (ClickType, ClickModifier) -> Unit,
-    privateBrowser: KnownBrowser?,
+    privateBrowser: Browser?,
     showPackage: Boolean,
 ) {
     val context = LocalContext.current

@@ -2,11 +2,11 @@ package fe.linksheet.activity.bottomsheet.content.success
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
+import app.linksheet.feature.browser.Browser
 import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
 import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.module.resolver.KnownBrowser
 
 @Composable
 fun AppContentRoot(
@@ -19,7 +19,7 @@ fun AppContentRoot(
     showNativeLabel: Boolean,
     showPackage: Boolean,
     dispatch: (Interaction) -> Unit,
-    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> KnownBrowser?,
+    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     if (gridLayout) {

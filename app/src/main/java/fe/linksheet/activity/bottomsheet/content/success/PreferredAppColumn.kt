@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.feature.browser.Browser
 import app.linksheet.preview.PreviewContainer
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toActivityAppInfo
@@ -15,13 +16,12 @@ import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppListItem
 import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.module.resolver.KnownBrowser
 
 
 @Composable
 fun PreferredAppColumn(
     appInfo: ActivityAppInfo,
-    privateBrowser: KnownBrowser?,
+    privateBrowser: Browser?,
     preferred: Boolean,
     showPackage: Boolean,
     hideBottomSheetChoiceButtons: Boolean,

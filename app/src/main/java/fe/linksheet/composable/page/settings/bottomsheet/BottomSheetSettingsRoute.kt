@@ -45,7 +45,6 @@ import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchL
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -124,7 +123,7 @@ fun BottomSheetSettingsRoute(
 
             item(key = R.string.enable_request_private_browsing_button) { padding, shape ->
                 val browsers = remember {
-                    KnownBrowser.browsers.filter { it.privateBrowser }.joinToString(separator = ", ") { it.displayName }
+                    "Firefox"
                 }
 
                 PreferenceSwitchListItem(

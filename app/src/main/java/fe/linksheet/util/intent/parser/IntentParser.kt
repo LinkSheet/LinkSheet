@@ -17,11 +17,15 @@ import androidx.core.net.toUri
 
 
 open class IntentParser internal constructor(
-    private val textExtras: Array<String> = arrayOf(Intent.EXTRA_TEXT, Intent.EXTRA_PROCESS_TEXT),
-    private val queryExtras: Array<String> = arrayOf(SearchManager.QUERY, SearchManager.USER_QUERY),
-    private val customExtras: Array<String> = arrayOf("url"),
+    private val textExtras: Array<String>,
+    private val queryExtras: Array<String>,
+    private val customExtras: Array<String>,
 ) {
-    companion object Default : IntentParser()
+    companion object Default : IntentParser(
+        textExtras = arrayOf(Intent.EXTRA_TEXT, Intent.EXTRA_PROCESS_TEXT),
+        queryExtras = arrayOf(SearchManager.QUERY, SearchManager.USER_QUERY),
+        customExtras = arrayOf("url"),
+    )
 
     fun parseSearchIntent(intent: SafeIntent): String? {
         for (extra in queryExtras) {
@@ -86,7 +90,7 @@ open class IntentParser internal constructor(
         if (tryParseAllExtras && intent.extras != null) {
             val keys = intent.extras!!.keySet() - extras.keys
             for (key in keys) {
-                val uri = readExtra(intent, extras, key)?: continue
+                val uri = readExtra(intent, extras, key) ?: continue
                 if (uri.isSuccess()) return uri
             }
         }

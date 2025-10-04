@@ -580,4 +580,6 @@
     <string name="settings_links_preview__subtitle_preview_skip_browser">Disable preview if referrer is browser</string>
     <string name="settings_scenario__title_scenarios">Scenarios</string>
     <string name="settings_scenario__text_scenarios">Configure scenarios</string>
+    <string name="settings_scenario__text_data_type">Data type</string>
+    <string name="settings_scenario__text_value">Value</string>
 </resources>

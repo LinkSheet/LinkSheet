@@ -1,5 +1,21 @@
 package fe.linksheet.eval.expression
 
+sealed interface OpCode {
+    val code: String
+
+    data object Block : OpCode {
+        override val code = "{"
+    }
+
+    data object If : OpCode {
+        override val code = "if"
+    }
+
+    data object Const : OpCode {
+        override val code = "c"
+    }
+}
+
 object OpCodes {
     const val BLOCK = "{"
     const val IF = "if"

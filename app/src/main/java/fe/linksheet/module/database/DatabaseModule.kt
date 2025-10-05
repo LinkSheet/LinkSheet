@@ -45,7 +45,7 @@ val DatabaseModule = module {
         CachedHtml::class, PreviewCache::class, ResolvedUrl::class, ResolveType::class, UrlEntry::class,
         WikiCache::class
     ],
-    version = 20,
+    version = 19,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -59,8 +59,7 @@ val DatabaseModule = module {
         AutoMigration(from = 11, to = 12),
         AutoMigration(from = 12, to = 13),
         AutoMigration(from = 17, to = 18),
-        AutoMigration(from = 18, to = 19),
-        AutoMigration(from = 19, to = 20),
+        AutoMigration(from = 18, to = 19)
     ],
     exportSchema = true
 )

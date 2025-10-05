@@ -21,6 +21,7 @@ import fe.linksheet.feature.app.`package`.PackageLabelService
 import fe.linksheet.feature.app.`package`.PackageLauncherService
 import fe.linksheet.feature.app.`package`.domain.DomainVerificationManagerCompat
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.feature.browser.PrivateBrowsingService
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
@@ -179,7 +180,12 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<LogTextSettingsViewModel>(),
         definition<MarkdownViewModel>(Request::class),
         definition<LibRedirectServiceSettingsViewModel>(),
-        definition<BottomSheetViewModel>(ImageLoader::class, IntentResolver::class, IntentLauncher::class),
+        definition<BottomSheetViewModel>(
+            ImageLoader::class,
+            IntentResolver::class,
+            IntentLauncher::class,
+            PrivateBrowsingService::class
+        ),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
         definition<Downloader>(CachedRequest::class),
         definition<StatisticsService>(AppPreferenceRepository::class),

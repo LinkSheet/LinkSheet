@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="firefox">
+        <item>org.mozilla.fennec_fdroid</item>
+        <item>us.spotco.fennec_dos</item>
+        <item>io.github.forkmaintainers.iceraven</item>
+        <item>org.mozilla.fenix.debug</item>
+        <item>org.mozilla.fenix</item>
+        <item>org.mozilla.firefox_beta</item>
+        <item>org.mozilla.firefox</item>
+        <item>org.mozilla.fennec_aurora</item>
+        <item>org.mozilla.fennec</item>
+        <item>org.mozilla.rocket</item>
+        <item>org.torproject.torbrowser</item>
+        <item>org.torproject.torbrowser_alpha</item>
+        <item>org.mozilla.reference.browser</item>
+        <item>info.guardianproject.orfox</item>
+        <item>org.ironfoxoss.ironfox</item>
+    </string-array>
+    <string-array name="chromium">
+        <item>com.android.chrome</item>
+        <item>com.chrome.canary</item>
+        <item>com.chrome.beta</item>
+        <item>com.chrome.dev</item>
+        <item>com.sec.android.app.sbrowser</item>
+        <item>com.opera.browser</item>
+        <item>com.opera.browser.beta</item>
+        <item>com.opera.cryptobrowser</item>
+        <item>com.opera.gx</item>
+        <item>com.brave.browser</item>
+        <item>com.brave.browser_beta</item>
+        <item>com.brave.browser_nightly</item>
+        <item>com.microsoft.emmx</item>
+        <item>com.ucmobile.intl</item>
+        <item>com.uc.browser.en</item>
+        <item>com.kiwibrowser.browser</item>
+        <item>com.kiwibrowser.browser.dev</item>
+        <item>com.vivaldi.browser</item>
+        <item>com.vivaldi.browser.snapshot</item>
+        <item>org.cromite.cromite</item>
+        <item>us.spotco.mulch</item>
+        <item>org.chromium.thorium</item>
+        <item>com.sec.android.app.sbrowser</item>
+        <item>com.sec.android.app.sbrowser.beta</item>
+        <item>com.google.android.apps.chrome</item>
+        <item>org.chromium.chrome</item>
+        <item>app.vanadium.browser</item>
+    </string-array>
+    <string-array name="other">
+        <item>org.mozilla.focus</item>
+        <item>org.mozilla.focus.debug</item>
+        <item>org.mozilla.focus.nightly</item>
+        <item>org.mozilla.focus.beta</item>
+        <item>com.opera.browser</item>
+        <item>com.opera.browser.beta</item>
+        <item>com.opera.mini.native</item>
+        <item>com.opera.mini.native.beta</item>
+        <item>com.stoutner.privacybrowser.standard</item>
+        <item>com.duckduckgo.mobile.android</item>
+    </string-array>
+</resources>

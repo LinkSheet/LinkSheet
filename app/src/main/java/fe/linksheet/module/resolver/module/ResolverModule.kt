@@ -74,6 +74,7 @@ val ResolverModule = module {
             libRedirectResolver = get(),
             cacheRepository = get(),
             networkStateService = get(),
+            privateBrowsingService = get(),
             settings = settings
         )
 
@@ -95,6 +96,7 @@ val ResolverModule = module {
                 libRedirectResolver = get(),
                 unfurler = get(),
                 networkStateService = get(),
+                privateBrowsingService = get(),
                 settings = settings
             ),
             linkEngineIntentResolver = linkEngineIntentResolver,

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.Stable
+import app.linksheet.feature.browser.PrivateBrowsingService
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
 import fe.composekit.lifecycle.network.core.NetworkStateService
@@ -73,6 +74,7 @@ class ImprovedIntentResolver(
     private val libRedirectResolver: LibRedirectResolver,
     private val unfurler: Unfurler,
     private val networkStateService: NetworkStateService,
+    private val privateBrowsingService: PrivateBrowsingService,
     private val settings: IntentResolverSettings,
 ) : IntentResolver {
     private val browserSettings = settings.browserSettings
@@ -125,7 +127,7 @@ class ImprovedIntentResolver(
 
         logger.debug("Referrer=$referrer")
         val referringPackage = AndroidUri.get(Scheme.Package, referrer)
-        val isReferrerBrowser = KnownBrowser.isKnownBrowser(referringPackage?.packageName) != null
+        val isReferrerBrowser = privateBrowsingService.isKnownBrowser(referringPackage?.packageName) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
         if (searchIntentResult != null) {

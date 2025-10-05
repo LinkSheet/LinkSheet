@@ -13,6 +13,8 @@ import android.os.Environment
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.net.toUri
 import androidx.lifecycle.viewModelScope
+import app.linksheet.feature.browser.Browser
+import app.linksheet.feature.browser.PrivateBrowsingService
 import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
@@ -34,7 +36,6 @@ import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.IntentResolver
-import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.resolver.util.LaunchMainIntent
@@ -61,6 +62,7 @@ class BottomSheetViewModel(
     val intentResolver: IntentResolver,
     val imageLoader: ImageLoader,
     val intentLauncher: IntentLauncher,
+    private val privateBrowsingService: PrivateBrowsingService,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
     val clipboardManager = context.getSystemServiceOrThrow<ClipboardManager>()
@@ -175,7 +177,7 @@ class BottomSheetViewModel(
         intent: Intent,
         referrer: Uri?,
         always: Boolean,
-        privateBrowsingBrowser: KnownBrowser?,
+        privateBrowsingBrowser: Browser?,
         persist: Boolean,
     ): LaunchIntent {
         // (Hopefully) temporary workaround since Github Mobile doesn't support the releases/latest route (https://github.com/orgs/community/discussions/136120)
@@ -281,5 +283,9 @@ class BottomSheetViewModel(
         }
 
         return null
+    }
+
+    fun isKnownBrowser(packageName: String, privateOnly: Boolean): Browser? {
+        return privateBrowsingService.isKnownBrowser(packageName, privateOnly)
     }
 }

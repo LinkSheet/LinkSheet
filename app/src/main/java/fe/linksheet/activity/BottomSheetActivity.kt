@@ -11,31 +11,33 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import app.linksheet.compose.debug.LocalUiDebug
+import app.linksheet.compose.debugBorder
+import app.linksheet.feature.browser.Browser
+import fe.composekit.extension.setText
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.BottomSheetApps
-import fe.linksheet.activity.bottomsheet.BottomSheetStateController
-import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
-import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheet
+import fe.linksheet.activity.bottomsheet.*
 import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
-import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
+import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheet
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
+import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
+import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
 import fe.linksheet.composable.ui.AppTheme
-import app.linksheet.compose.debugBorder
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.feature.app.ActivityAppInfo
-import app.linksheet.compose.debug.LocalUiDebug
 import fe.linksheet.module.resolver.IntentResolveResult
-import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction
 import fe.linksheet.module.resolver.util.LaunchIntent
+import fe.linksheet.module.resolver.util.LaunchRawIntent
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.util.intent.Intents
 import kotlinx.coroutines.CoroutineScope
@@ -46,13 +48,6 @@ import kotlinx.coroutines.withContext
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-import androidx.core.net.toUri
-import fe.composekit.extension.setText
-import fe.linksheet.activity.bottomsheet.LaunchFailure
-import fe.linksheet.activity.bottomsheet.LaunchHandler
-import fe.linksheet.activity.bottomsheet.LaunchResult
-import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
-import fe.linksheet.module.resolver.util.LaunchRawIntent
 
 //import relocated.androidx.compose.material3.SheetValue
 //import relocated.androidx.compose.material3.rememberModalBottomSheetState
@@ -292,9 +287,9 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
     }
 
-    private fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): KnownBrowser? {
+    private fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): Browser? {
         if (!viewModel.enableRequestPrivateBrowsingButton.value || !hasUri) return null
-        return KnownBrowser.isKnownBrowser(info.packageName, privateOnly = true)
+        return viewModel.isKnownBrowser(info.packageName, privateOnly = true)
     }
 
     private suspend fun maybeHandleResult(result: IntentResolveResult?): LaunchIntent? {

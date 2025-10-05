@@ -1,12 +1,12 @@
 package fe.linksheet.experiment.engine.context
 
-import fe.linksheet.module.resolver.KnownBrowser
+import app.linksheet.feature.browser.Browser
 import fe.linksheet.util.AndroidAppPackage
 import kotlin.reflect.KClass
 
 sealed interface EngineExtra
 data class SourceAppExtra(val appPackage: String) : EngineExtra
-data class KnownBrowserExtra(val knownBrowser: KnownBrowser) : EngineExtra
+data class KnownBrowserExtra(val knownBrowser: Browser) : EngineExtra
 data object IgnoreLibRedirectExtra : EngineExtra
 data object SkipFollowRedirectsExtra : EngineExtra
 
@@ -14,7 +14,7 @@ fun AndroidAppPackage.toExtra(): SourceAppExtra {
     return SourceAppExtra(packageName)
 }
 
-fun KnownBrowser.toExtra(): KnownBrowserExtra {
+fun Browser.toExtra(): KnownBrowserExtra {
     return KnownBrowserExtra(this)
 }
 

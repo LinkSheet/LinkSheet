@@ -1,6 +1,7 @@
 package fe.linksheet.intent.engine
 
 import android.content.Context
+import app.linksheet.feature.browser.PrivateBrowsingService
 import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.linksheet.experiment.engine.EngineScenario
 import fe.linksheet.experiment.engine.LinkEngine
@@ -52,6 +53,7 @@ fun DefaultLinkEngineIntentResolver(
     libRedirectResolver: LibRedirectResolver,
     cacheRepository: CacheRepository,
     networkStateService: NetworkStateService,
+    privateBrowsingService: PrivateBrowsingService,
     settings: IntentResolverSettings,
 ): IntentResolver {
     val dispatcher = Dispatchers.IO
@@ -142,6 +144,7 @@ fun DefaultLinkEngineIntentResolver(
         inAppBrowserHandler = inAppBrowserHandler,
         networkStateService = networkStateService,
         selector = selector,
+        privateBrowsingService = privateBrowsingService,
         settings = settings
     )
 }

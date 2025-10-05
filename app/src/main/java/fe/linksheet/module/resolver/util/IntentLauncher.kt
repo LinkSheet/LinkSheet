@@ -4,14 +4,14 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import app.linksheet.feature.browser.Browser
 import fe.linksheet.interconnect.LinkSheetConnector
 import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.module.resolver.KnownBrowser
 import fe.linksheet.util.AndroidUri
 import fe.linksheet.util.Scheme
 
 interface IntentLauncher {
-    fun launch(info: ActivityAppInfo, intent: Intent, referrer: Uri?, browser: KnownBrowser?): LaunchIntent
+    fun launch(info: ActivityAppInfo, intent: Intent, referrer: Uri?, browser: Browser?): LaunchIntent
 }
 
 class DefaultIntentLauncher(
@@ -20,7 +20,7 @@ class DefaultIntentLauncher(
     val selfPackage: String,
 ) : IntentLauncher {
 
-    override fun launch(info: ActivityAppInfo, intent: Intent, referrer: Uri?, browser: KnownBrowser?): LaunchIntent {
+    override fun launch(info: ActivityAppInfo, intent: Intent, referrer: Uri?, browser: Browser?): LaunchIntent {
         if (isComponentDisabled(info)) {
             return LaunchMainIntent(createMainIntent(intent, info.packageName))
         }

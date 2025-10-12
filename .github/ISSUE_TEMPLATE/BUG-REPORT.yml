@@ -12,7 +12,7 @@ body:
       placeholder: What happened?
     validations:
       required: true
-  - type: input
+  - type: textarea
     id: version
     attributes:
       label: Version

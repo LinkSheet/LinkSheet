@@ -53,12 +53,12 @@ import fe.linksheet.module.resolver.urlresolver.redirect.RedirectResolveRequest
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.IntentLauncher
-import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.module.statistic.StatisticsService
 import fe.linksheet.feature.systeminfo.BuildConstants
 import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.feature.systeminfo.SystemProperties
+import fe.linksheet.module.shizuku.ShizukuServiceConnection
 import fe.linksheet.module.versiontracker.VersionTracker
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
@@ -160,7 +160,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             WorkDelegatorService::class
         ),
         definition<VerifiedLinkHandlersViewModel>(
-            ShizukuHandler::class,
+            ShizukuServiceConnection::class,
             PackageService::class,
             OneUiCompat::class
         ),
@@ -170,7 +170,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<ExportSettingsViewModel>(Gson::class, Clock::class, ZoneId::class),
         definition<AboutSettingsViewModel>(Gson::class),
         definition<DevSettingsViewModel>(
-            ShizukuHandler::class,
+            ShizukuServiceConnection::class,
             MiuiCompatProvider::class,
             Gson::class,
             SystemInfoService::class,

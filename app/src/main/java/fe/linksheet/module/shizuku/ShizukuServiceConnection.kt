@@ -17,11 +17,7 @@ import java.util.*
 
 val ShizukuServiceModule = module {
     single {
-        val args = ShizukuServiceArgs(get())
-        ShizukuServiceConnection(
-            context = get(),
-            serviceArgs = args
-        )
+        ShizukuServiceConnection(context = get())
     }
 }
 
@@ -30,22 +26,19 @@ data class ShizukuCommand<T>(
     val resultHandler: (T) -> Unit
 )
 
-private fun ShizukuServiceArgs(context: Context): Shizuku.UserServiceArgs {
-    val packageName = BuildConfig.APPLICATION_ID
-    return Shizuku.UserServiceArgs(ComponentName(context, ShizukuService::class.java))
+
+class ShizukuServiceConnection(
+    context: Context,
+) : ServiceConnection, Shizuku.OnRequestPermissionResultListener {
+    private val queuedCommands: Queue<ShizukuCommand<*>> = LinkedList()
+    private var userService: IShizukuService? = null
+
+    private val serviceArgs = Shizuku.UserServiceArgs(ComponentName(context, ShizukuService::class.java))
         .version(BuildConfig.VERSION_CODE + (if (BuildConfig.DEBUG) 9999 else 0))
         .processNameSuffix("shizuku")
         .debuggable(BuildConfig.DEBUG)
         .daemon(false)
-        .tag("${packageName}_shizuku")
-}
-
-class ShizukuServiceConnection(
-    private val context: Context,
-    private val serviceArgs: Shizuku.UserServiceArgs
-) : ServiceConnection, Shizuku.OnRequestPermissionResultListener {
-    private val queuedCommands: Queue<ShizukuCommand<*>> = LinkedList()
-    private var userService: IShizukuService? = null
+        .tag("${BuildConfig.APPLICATION_ID}_shizuku")
 
     init {
         addBinderReceivedListener()

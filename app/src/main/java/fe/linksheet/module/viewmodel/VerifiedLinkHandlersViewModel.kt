@@ -28,7 +28,7 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
-import fe.linksheet.module.shizuku.ShizukuHandler
+import fe.linksheet.module.shizuku.ShizukuServiceConnection
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -39,7 +39,7 @@ import java.util.Comparator
 import kotlin.collections.filter
 
 class VerifiedLinkHandlersViewModel(
-    private val shizukuHandler: ShizukuHandler,
+    private val shizukuHandler: ShizukuServiceConnection,
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
     private val preferredAppRepository: PreferredAppRepository,

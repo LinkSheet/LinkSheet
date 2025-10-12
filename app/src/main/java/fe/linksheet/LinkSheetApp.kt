@@ -46,7 +46,6 @@ import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.resolver.module.ResolverModule
 import fe.linksheet.module.resolver.urlresolver.UrlResolverModule
-import fe.linksheet.module.shizuku.ShizukuHandlerModule
 import fe.linksheet.module.statistic.StatisticsModule
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
@@ -56,6 +55,7 @@ import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import fe.composekit.lifecycle.network.koin.NetworkStateServiceModule
 import fe.linksheet.module.browser.PrivateBrowsingModule
+import fe.linksheet.module.shizuku.ShizukuServiceModule
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
@@ -123,7 +123,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             PackageModule,
             AppLocaleModule,
             NetworkStateServiceModule,
-            ShizukuHandlerModule,
+            ShizukuServiceModule,
             GlobalGsonModule,
             PreferenceRepositoryModule,
             DefaultLogModule,

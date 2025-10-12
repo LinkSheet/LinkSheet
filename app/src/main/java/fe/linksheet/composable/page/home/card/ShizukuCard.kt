@@ -2,8 +2,8 @@ package fe.linksheet.composable.page.home.card
 
 import android.app.Activity
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CrueltyFree
-import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -12,6 +12,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.res.stringResource
 import dev.zwander.shared.ShizukuUtil
+import fe.android.compose.icon.DrawableIconPainter
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.card.AlertCard
@@ -42,6 +43,7 @@ fun ShizukuCard(
     val statusStringId = statusMap[status]!!
 
     val scope = rememberCoroutineScope()
+//    val icon = DrawableIconPainter.drawable(R.drawable.app_shizuku)
 
     AlertCard(
         onClick = {
@@ -60,7 +62,7 @@ fun ShizukuCard(
             containerColor = if (status == ShizukuStatus.Enabled) MaterialTheme.colorScheme.primaryContainer
             else MaterialTheme.colorScheme.tertiaryContainer
         ),
-        icon = if (status == ShizukuStatus.Enabled) Icons.Default.CrueltyFree.iconPainter else Icons.Default.Warning.iconPainter,
+        icon = if (status == ShizukuStatus.Enabled) Icons.Rounded.Check.iconPainter else Icons.Outlined.Warning.iconPainter,
         iconContentDescription = stringResource(if (status == ShizukuStatus.Enabled) R.string.checkmark else R.string.error),
         headline = textContent(R.string.shizuku_integration),
         subtitle = textContent(statusStringId)

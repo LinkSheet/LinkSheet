@@ -2,6 +2,7 @@ package fe.linksheet.debug.composable
 
 import android.app.Activity
 import android.content.Intent
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,12 +33,13 @@ import fe.linksheet.debug.activity.LocaleDebugActivity
 import fe.linksheet.debug.activity.WorkManagerActivity
 import fe.linksheet.debug.module.viewmodel.DebugViewModel
 import fe.linksheet.extension.compose.dashedBorder
+import fe.linksheet.module.shizuku.ShizukuDomainVerification
 import fe.linksheet.navigation.Routes
 import kotlin.reflect.KClass
 
 @Composable
 fun DebugMenuSlot(viewModel: DebugViewModel, navigate: (String) -> Unit) {
-    val activity = androidx.activity.compose.LocalActivity.current
+    val activity = LocalActivity.current
 
     Column(
         modifier = Modifier
@@ -46,6 +48,20 @@ fun DebugMenuSlot(viewModel: DebugViewModel, navigate: (String) -> Unit) {
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+            item(key = "shizuku-test") {
+                val verification = ShizukuDomainVerification()
+                DebugMenuButton(
+                    text = "Shizuku",
+                    onClick = {
+                        verification.setDomainVerificationLinkHandlingAllowed("com.looker.droidify", false)
+//                            val intent = Intent(activity, SocketService::class.java)
+//                            if (AndroidVersion.isAtLeastApi26O()) {
+//                                activity.startForegroundService(intent)
+//                            }
+                    }
+                )
+            }
+
             if (activity != null) {
                 item(key = "start-service") {
                     DebugMenuButton(

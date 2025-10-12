@@ -12,8 +12,8 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.shizuku.ShizukuCommand
-import fe.linksheet.module.shizuku.ShizukuHandler
 import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.module.shizuku.ShizukuServiceConnection
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -22,7 +22,7 @@ class DevSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
-    private val shizukuHandler: ShizukuHandler,
+    private val shizukuHandler: ShizukuServiceConnection,
     miuiCompatProvider: MiuiCompatProvider,
     val gson: Gson,
     val systemInfoService: SystemInfoService,

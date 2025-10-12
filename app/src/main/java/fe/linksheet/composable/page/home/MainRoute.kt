@@ -9,12 +9,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -29,6 +28,7 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
+import fe.linksheet.composable.page.home.card.ShizukuCard
 import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
@@ -66,6 +66,16 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
         initialValue = true
     )
 
+    val shizukuInstalled by viewModel.shizukuInstalled.collectRefreshableAsStateWithLifecycle(
+        minActiveState = Lifecycle.State.RESUMED,
+        initialValue = false
+    )
+
+    val shizukuRunning by viewModel.shizukuRunning.collectRefreshableAsStateWithLifecycle(
+        minActiveState = Lifecycle.State.RESUMED,
+        initialValue = false
+    )
+
     clipboardManager.ObserveClipboard {
         viewModel.tryReadClipboard()
     }
@@ -74,12 +84,6 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
         viewModel.tryReadClipboard()
     }
 
-//    var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
-//    var shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
-//    LocalLifecycleOwner.current.lifecycle.ObserveStateChange(observeEvents = focusGainedEvents) {
-//        shizukuInstalled = ShizukuUtil.isShizukuInstalled(context)
-//        shizukuRunning = ShizukuUtil.isShizukuRunning()
-//    }
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
 
@@ -157,6 +161,17 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
+            if (BuildType.current == BuildType.Debug) {
+                item {
+                    ShizukuCard(
+                        activity = activity!!,
+                        uriHandler = LocalUriHandler.current,
+                        shizukuInstalled = shizukuInstalled,
+                        shizukuRunning = shizukuRunning
+                    )
+                }
+            }
+
             if (!newDefaultsDismissed) {
                 item(
                     key = R.string.settings_main_experiment_news__title_experiment_state_updated,
@@ -181,9 +196,6 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                     )
                 }
             }
-
-//            divider(id = R.string.settings_main_news__text_header)
         }
     }
 }
-

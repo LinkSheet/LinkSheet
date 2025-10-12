@@ -17,6 +17,7 @@ import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.feature.app.`package`.PackageIntentHandler
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getFirstText
 import fe.composekit.extension.setText
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
@@ -80,6 +81,18 @@ class MainViewModel(
             clipboardManager.setText(label, uri.toString())
         }
     }
+
+    private val _shizukuRunning = RefreshableStateFlow(false) {
+        ShizukuUtil.isShizukuRunning()
+    }
+
+    val shizukuRunning = _shizukuRunning
+
+    private val _shizukuInstalled = RefreshableStateFlow(false) {
+        ShizukuUtil.isShizukuInstalled(context)
+    }
+
+    val shizukuInstalled = _shizukuInstalled
 
     private val _showMiuiAlert = RefreshableStateFlow(false) {
         if (miuiCompatProvider.isRequired.value) miuiCompat.showAlert(context) else false

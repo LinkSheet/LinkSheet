@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers
 
 import android.content.res.Resources
@@ -7,6 +9,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -14,7 +17,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -147,7 +150,7 @@ data class DefaultAltStringRes(
 
 @Composable
 private fun buildHostStateText(sum: Int, vararg states: Pair<DefaultAltStringRes, List<String>>): String {
-    val resources = LocalContext.current.resources
+    val resources = LocalResources.current
 
     var hasSingleState: Boolean
     val strings = states
@@ -167,8 +170,10 @@ private fun buildHostStateText(sum: Int, vararg states: Pair<DefaultAltStringRes
 }
 
 private class DomainVerificationAppInfoProvider() : PreviewParameterProvider<List<DomainVerificationAppInfo>> {
-    private val icon by lazy {
-       BitmapIconPainter.bitmap(drawBitmap(Size(24f, 24f), Density(1f), LayoutDirection.Ltr) { drawCircle(Color.Red) })
+    companion object {
+        val icon by lazy {
+            BitmapIconPainter.bitmap(drawBitmap(Size(24f, 24f), Density(1f), LayoutDirection.Ltr) { drawCircle(Color.Red) })
+        }
     }
 
     override val values: Sequence<List<DomainVerificationAppInfo>> = sequenceOf(
@@ -311,4 +316,26 @@ private fun VerifiedAppListItemPreviewPreApi31(
     @PreviewParameter(DomainVerificationAppInfoProvider::class) items: List<DomainVerificationAppInfo>,
 ) {
     VerifiedAppListItemPreviewContainer(items)
+}
+
+@Composable
+@Preview
+private fun VerifiedAppListItemSinglePreview() {
+    VerifiedAppListItem(
+        item = DomainVerificationAppInfo(
+            packageName = "fe.linksheet",
+            label = "LinkSheet",
+            icon = DomainVerificationAppInfoProvider.icon,
+            flags = 0,
+            linkHandling = LinkHandling.Allowed,
+            stateNone = mutableListOf(),
+            stateSelected = mutableListOf("google.com"),
+            stateVerified = mutableListOf("google.com"),
+        ),
+        padding = PaddingValues(),
+        shape = RoundedCornerShape(0),
+        preferredHosts = 0,
+        onClick = {},
+        onOtherClick = {}
+    )
 }

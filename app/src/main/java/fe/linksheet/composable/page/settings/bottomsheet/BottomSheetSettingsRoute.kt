@@ -36,7 +36,6 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.GroupValueProvider
-import fe.composekit.preference.ViewModelStatePreference
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.navigation.Routes
@@ -44,6 +43,7 @@ import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import fe.composekit.preference.ViewModelStatePreference
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -252,14 +252,18 @@ private fun TapConfigGroupItem(
     val state = rememberResultDialogState<TapConfig>()
     val rotation by animateFloatAsState(targetValue = if (state.isOpen) 180f else 0f, label = "Arrow rotation")
 
+    val value by preference.collectAsStateWithLifecycle()
+
     ResultDialog(
-        state = state, onClose = { newConfig ->
-            preference.update(newConfig)
+        state = state,
+        onClose = { newConfig ->
+            preference(newConfig)
             interaction.perform(FeedbackType.Confirm)
-        }) {
+        }
+    ) {
         TapConfigDialog(
             type = type,
-            currentConfig = preference.value,
+            currentConfig = value,
             onDismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
             state::close
         )
@@ -271,7 +275,7 @@ private fun TapConfigGroupItem(
         onClick = state::open,
         role = Role.Button,
         headlineContent = textContent(type.headline),
-        supportingContent = textContent(preference.value.id),
+        supportingContent = textContent(value.id),
         trailingContent = {
             FilledIcon(
                 modifier = Modifier.rotate(rotation),

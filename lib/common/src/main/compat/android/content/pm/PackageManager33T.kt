@@ -28,7 +28,7 @@ fun PackageManager.queryIntentActivitiesCompat(
     return queryIntentActivitiesCompat(intent, flags.value)
 }
 
-fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int = 0): List<ResolveInfo> {
+private fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int = 0): List<ResolveInfo> {
     return when {
         AndroidVersion.isAtLeastApi33T() -> queryIntentActivities(
             intent, PackageManager.ResolveInfoFlags.of(flags.toLong())

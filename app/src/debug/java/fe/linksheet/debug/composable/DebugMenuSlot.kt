@@ -20,7 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog

@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation(project(":util"))
     implementation(project(":test-fake"))
     implementation(AndroidX.compose.ui.graphics)

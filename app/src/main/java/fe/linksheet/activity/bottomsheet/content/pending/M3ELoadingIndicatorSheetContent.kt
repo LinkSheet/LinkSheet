@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.linksheet.preview.PreviewContainer
-import app.linksheet.preview.rememberInfiniteEnumTransition
+import app.linksheet.compose.preview.PreviewContainer
+import app.linksheet.compose.preview.rememberInfiniteEnumTransition
 import fe.linksheet.R
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction

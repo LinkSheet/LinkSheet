@@ -21,7 +21,7 @@ import app.linksheet.testing.fake.toActivityAppInfo
 import app.linksheet.testing.util.PackageInfoFake
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import fe.linksheet.composable.ui.HkGroteskFontFamily
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.feature.app.ActivityAppInfo
 
 object AppListItemRowDefaults {

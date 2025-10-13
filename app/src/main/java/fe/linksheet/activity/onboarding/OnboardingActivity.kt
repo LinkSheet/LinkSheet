@@ -22,8 +22,9 @@ import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.activity.main.MainActivity
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.composable.ui.AppTheme
-import fe.linksheet.composable.ui.NewTypography
-import fe.linksheet.composable.ui.PoppinsFontFamily
+import app.linksheet.compose.theme.NewTypography
+import app.linksheet.compose.theme.PoppinsFontFamily
+import fe.linksheet.extension.compose.LargeTopAppBar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -67,7 +68,7 @@ class OnboardingActivity : BaseComponentActivity() {
                     )
                 } else {
                     Scaffold(topBar = {
-                        fe.linksheet.extension.compose.LargeTopAppBar(
+                        LargeTopAppBar(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 15.dp),

@@ -1,4 +1,4 @@
-package fe.linksheet.composable.ui
+package app.linksheet.compose.theme
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.sp
-import fe.linksheet.R
+import app.linksheet.compose.R
 import kotlin.reflect.KProperty0
 
 //

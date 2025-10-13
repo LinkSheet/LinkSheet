@@ -36,7 +36,7 @@ import fe.linksheet.feature.app.ActivityAppInfo
 import app.linksheet.compose.debug.LocalUiDebug
 import androidx.core.net.toUri
 import app.linksheet.feature.browser.Browser
-import app.linksheet.preview.PreviewDebugProvider
+import app.linksheet.compose.preview.PreviewDebugProvider
 import app.linksheet.testing.fake.toActivityAppInfo
 
 @Composable

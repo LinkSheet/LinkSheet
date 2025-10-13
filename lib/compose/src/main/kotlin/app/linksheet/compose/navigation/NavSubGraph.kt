@@ -1,4 +1,4 @@
-package fe.linksheet.navigation
+package app.linksheet.compose.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController

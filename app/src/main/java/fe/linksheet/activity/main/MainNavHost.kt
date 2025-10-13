@@ -43,7 +43,9 @@ import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import fe.linksheet.composable.util.*
-import fe.linksheet.navigation.attachSubGraph
+import app.linksheet.compose.navigation.attachSubGraph
+import app.linksheet.compose.util.animatedComposable
+import app.linksheet.feature.shizuku.navigation.ShizukuNavSubGraph
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.Route
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper

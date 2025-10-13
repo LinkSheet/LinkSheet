@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.linksheet.preview.TestImageLoader
+import app.linksheet.compose.preview.TestImageLoader
 import coil3.ColorImage
 import coil3.ImageLoader
 import coil3.SingletonImageLoader
@@ -33,7 +33,7 @@ import coil3.compose.AsyncImagePainter
 import coil3.compose.LocalPlatformContext
 import coil3.compose.SubcomposeAsyncImage
 import coil3.compose.SubcomposeAsyncImageContent
-import fe.linksheet.composable.ui.HkGroteskFontFamily
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
 import io.github.fornewid.placeholder.material3.placeholder
 import io.github.fornewid.placeholder.material3.shimmer

@@ -26,7 +26,7 @@ import fe.android.compose.text.TextContentWrapper
 import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.dialog.SaneIconAlertDialog
 import fe.linksheet.R
-import fe.linksheet.composable.ui.DialogTitleStyle
+import app.linksheet.compose.theme.DialogTitleStyle
 import my.nanihadesuka.compose.ScrollbarSettings
 
 

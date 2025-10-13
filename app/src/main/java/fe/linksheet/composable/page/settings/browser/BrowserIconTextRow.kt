@@ -1,9 +1,7 @@
 package fe.linksheet.composable.page.settings.browser
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import fe.linksheet.composable.ui.HkGroteskFontFamily
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.feature.app.ActivityAppInfo
 
 @Composable

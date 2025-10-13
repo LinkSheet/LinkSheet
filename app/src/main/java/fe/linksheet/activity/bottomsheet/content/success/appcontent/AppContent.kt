@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.linksheet.preview.PreviewDebugProvider
+import app.linksheet.compose.preview.PreviewDebugProvider
 import fe.linksheet.activity.bottomsheet.Interaction
 import app.linksheet.compose.debugBorder
 import fe.linksheet.feature.app.ActivityAppInfo

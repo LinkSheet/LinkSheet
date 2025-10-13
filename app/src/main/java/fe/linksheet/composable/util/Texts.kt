@@ -14,8 +14,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import fe.linksheet.composable.ui.HkGroteskFontFamily
-import fe.linksheet.composable.ui.LegacyTypography
+import app.linksheet.compose.theme.HkGroteskFontFamily
+import app.linksheet.compose.theme.LegacyTypography
 
 @Composable
 fun SettingSpacerText(modifier: Modifier = Modifier, contentTitle: String) {

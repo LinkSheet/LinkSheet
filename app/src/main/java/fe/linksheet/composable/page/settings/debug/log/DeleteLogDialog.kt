@@ -16,7 +16,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContentWrapper
 import fe.composekit.component.dialog.DialogDefaults
 import fe.linksheet.R
-import fe.linksheet.composable.ui.HkGroteskFontFamily
+import app.linksheet.compose.theme.HkGroteskFontFamily
 
 
 @Composable

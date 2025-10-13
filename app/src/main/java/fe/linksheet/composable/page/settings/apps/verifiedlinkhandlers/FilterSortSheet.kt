@@ -11,7 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.linksheet.preview.PreviewContainer
+import app.linksheet.compose.preview.PreviewContainer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

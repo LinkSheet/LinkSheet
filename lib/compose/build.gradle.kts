@@ -7,6 +7,7 @@ plugins {
     kotlin("android")
     kotlin("plugin.compose")
     id("com.android.library")
+    id("androidx.navigation.safeargs.kotlin")
     id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
@@ -45,6 +46,7 @@ dependencies {
 
     implementation(AndroidX.core.ktx)
 
+    implementation(AndroidX.navigation.compose)
     implementation(platform("androidx.compose:compose-bom-alpha:_"))
     implementation(AndroidX.compose.runtime)
     implementation(AndroidX.compose.foundation)
@@ -52,6 +54,9 @@ dependencies {
     implementation(AndroidX.compose.ui.text)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)
+
+    implementation("io.coil-kt.coil3:coil-compose:_")
+    implementation("io.coil-kt.coil3:coil-test:_")
 
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)

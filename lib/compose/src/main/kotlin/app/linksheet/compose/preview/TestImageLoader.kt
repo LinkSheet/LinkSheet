@@ -1,4 +1,6 @@
-package app.linksheet.preview
+@file:Suppress("FunctionName")
+
+package app.linksheet.compose.preview
 
 import android.content.Context
 import coil3.ImageLoader

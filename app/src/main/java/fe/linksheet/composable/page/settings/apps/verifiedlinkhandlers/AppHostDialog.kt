@@ -40,7 +40,7 @@ import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
-import fe.linksheet.composable.ui.DialogTitleStyle
+import app.linksheet.compose.theme.DialogTitleStyle
 import fe.linksheet.feature.app.AppInfo
 import fe.linksheet.feature.app.DomainVerificationAppInfo
 import fe.linksheet.feature.app.LinkHandling

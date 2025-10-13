@@ -30,7 +30,7 @@ import fe.composekit.component.dialog.DialogDefaults
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
-import fe.linksheet.composable.ui.HkGroteskFontFamily
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 

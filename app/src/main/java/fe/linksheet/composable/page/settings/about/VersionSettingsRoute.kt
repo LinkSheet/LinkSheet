@@ -38,7 +38,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
-import fe.linksheet.composable.ui.HkGroteskFontFamily
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.util.buildconfig.LinkSheetInfo
 import org.koin.androidx.compose.koinViewModel
 

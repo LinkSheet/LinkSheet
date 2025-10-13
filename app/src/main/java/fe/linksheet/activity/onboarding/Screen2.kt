@@ -21,7 +21,7 @@ import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.focusGainedEvents
 import fe.linksheet.module.shizuku.ShizukuStatus
-import fe.linksheet.composable.ui.HkGroteskFontFamily
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.util.ShizukuDownload
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

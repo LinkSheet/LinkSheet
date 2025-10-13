@@ -1,4 +1,4 @@
-package app.linksheet.preview
+package app.linksheet.compose.preview
 
 import androidx.compose.animation.core.*
 import androidx.compose.runtime.Composable

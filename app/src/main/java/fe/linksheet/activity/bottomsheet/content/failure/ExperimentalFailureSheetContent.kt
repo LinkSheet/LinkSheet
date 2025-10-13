@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import app.linksheet.preview.PreviewContainer
+import app.linksheet.compose.preview.PreviewContainer
 import fe.android.compose.dialog.helper.DialogMaxWidth
 import fe.android.compose.dialog.helper.DialogMinWidth
 import fe.android.compose.icon.iconPainter

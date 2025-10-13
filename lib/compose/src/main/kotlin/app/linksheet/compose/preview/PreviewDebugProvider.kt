@@ -1,4 +1,4 @@
-package app.linksheet.preview
+package app.linksheet.compose.preview
 
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import kotlinx.coroutines.flow.MutableStateFlow

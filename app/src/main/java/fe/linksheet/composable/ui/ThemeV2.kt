@@ -6,6 +6,8 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.ui.graphics.Color
+import app.linksheet.compose.theme.DarkColors
+import app.linksheet.compose.theme.LightColors
 import fe.android.preference.helper.OptionTypeMapper
 import fe.composekit.layout.column.GroupValueProvider
 import fe.linksheet.R

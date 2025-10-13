@@ -29,7 +29,7 @@ import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
-import fe.linksheet.composable.ui.DialogTitleStyle
+import app.linksheet.compose.theme.DialogTitleStyle
 import fe.linksheet.module.language.DisplayLocaleItem
 import fe.linksheet.module.language.LocaleItem
 import fe.linksheet.module.viewmodel.LanguageSettingsViewModel

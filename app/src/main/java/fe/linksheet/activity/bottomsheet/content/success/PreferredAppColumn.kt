@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.feature.browser.Browser
-import app.linksheet.preview.PreviewContainer
+import app.linksheet.compose.preview.PreviewContainer
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toActivityAppInfo
 import fe.linksheet.activity.bottomsheet.ClickModifier

@@ -1,6 +1,5 @@
 package fe.linksheet.composable.page.settings
 
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -10,6 +9,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.shizuku.navigation.ShizukuRoute
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent

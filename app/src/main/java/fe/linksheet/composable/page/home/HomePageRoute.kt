@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import fe.linksheet.navigation.MainOverviewRoute
 import fe.linksheet.navigation.TextEditorRoute
 import fe.linksheet.composable.page.home.edit.TextEditorPageWrapper
-import fe.linksheet.composable.util.animatedComposable
-import fe.linksheet.navigation.NavSubGraph
+import app.linksheet.compose.util.animatedComposable
+import app.linksheet.compose.navigation.NavSubGraph
 import kotlinx.serialization.Serializable
 
 @Serializable

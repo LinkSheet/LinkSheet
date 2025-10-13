@@ -4,8 +4,8 @@ import androidx.annotation.Keep
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import fe.composekit.route.Route
-import fe.linksheet.composable.util.animatedComposable
-import fe.linksheet.navigation.NavSubGraph
+import app.linksheet.compose.util.animatedComposable
+import app.linksheet.compose.navigation.NavSubGraph
 import kotlinx.serialization.Serializable
 
 @Serializable

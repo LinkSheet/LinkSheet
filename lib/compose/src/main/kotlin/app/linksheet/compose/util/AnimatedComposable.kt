@@ -1,4 +1,4 @@
-package fe.linksheet.composable.util
+package app.linksheet.compose.util
 
 
 import android.graphics.Path
@@ -11,9 +11,6 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.toRoute
-import fe.android.compose.route.util.ArgumentRoute
-import fe.android.compose.route.util.Route
-import fe.android.compose.route.util.RouteData
 import androidx.navigation.compose.composable as navigationComposable
 
 val easing = Easing { f ->
@@ -48,26 +45,6 @@ val popEnterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> 
 
 val popExitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition? = {
     slideOutHorizontally(exitTween, slidePositiveOffset) + fadeOut(fadeTween)
-}
-
-fun <T : RouteData, A : Route.Arguments<T, U>, U> NavGraphBuilder.animatedArgumentRouteComposable(
-    route: ArgumentRoute<T, A, U>,
-    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry, T) -> Unit,
-) {
-    navigationComposable(
-        route.route,
-        route.navArguments,
-        route.navDeepLinks,
-        enterTransition,
-        exitTransition,
-        popEnterTransition,
-        popExitTransition,
-    ) { stack ->
-        val bundle = stack.arguments ?: throw IllegalArgumentException("No bundle provided!")
-        val data = route.instance(bundle)
-
-        content(stack, data)
-    }
 }
 
 fun NavGraphBuilder.animatedComposable(

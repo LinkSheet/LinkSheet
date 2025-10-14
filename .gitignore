@@ -6,3 +6,4 @@ app/release
 .ignored
 app/*.txt
 .kotlin/
+/.idea2/

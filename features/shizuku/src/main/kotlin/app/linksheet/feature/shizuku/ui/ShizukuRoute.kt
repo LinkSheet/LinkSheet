@@ -5,18 +5,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.InstallMobile
 import androidx.compose.material.icons.rounded.NotStarted
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -25,9 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewTheme
 import app.linksheet.feature.shizuku.R
@@ -47,25 +41,8 @@ import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.SaneLazyListScope
 import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
 import fe.composekit.preference.collectAsStateWithLifecycle
-import fe.std.coroutines.BaseRefreshableFlow
 import org.koin.androidx.compose.koinViewModel
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 
-@Composable
-public fun <T> BaseRefreshableFlow<T>.collectRefreshableAsStateWithLifecycle2(
-    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
-    minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-    context: CoroutineContext = EmptyCoroutineContext,
-): State<T> {
-    val initialValue = remember { value }
-    return collectRefreshableAsStateWithLifecycle(
-        initialValue = initialValue,
-        lifecycle = lifecycleOwner.lifecycle,
-        minActiveState = minActiveState,
-        context = context
-    )
-}
 @Composable
 fun ShizukuRoute(
     onBackPressed: () -> Unit,
@@ -73,8 +50,9 @@ fun ShizukuRoute(
 ) {
     val activity = LocalActivity.current
 
-    val status by viewModel.status.collectRefreshableAsStateWithLifecycle2(
+    val status by viewModel.status.collectRefreshableAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED,
+        initialValue = remember { viewModel.status.value },
     )
 
     val enableShizuku by viewModel.enableShizuku.collectAsStateWithLifecycle()
@@ -152,8 +130,6 @@ private fun SaneLazyListScope.notInstalled() {
             }
         )
     }
-
-
 }
 
 private fun SaneLazyListScope.notRunning(openManager: () -> Unit) {

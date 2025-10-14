@@ -334,7 +334,6 @@ dependencies {
     implementation("io.github.fornewid:placeholder-material3:_")
     implementation("io.viascom.nanoid:nanoid:_")
 
-    implementation(platform(LinkSheet.flavors.bom))
 //    implementation(LinkSheet.flavors.core)
     implementation("com.github.LinkSheet.flavors:core:_")
 
@@ -352,8 +351,6 @@ dependencies {
     implementation("io.ktor:ktor-client-okhttp-jvm:_")
     testImplementation(JetBrains.ktor.client.mock)
 
-    implementation(platform(Grrfe.std.bom))
-    androidTestImplementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.core)
     implementation(Grrfe.std.time.java)
@@ -363,11 +360,10 @@ dependencies {
     implementation(Grrfe.std.test)
     implementation(Grrfe.std.process.core)
 
-    implementation(platform(Grrfe.httpkt.bom))
+
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.serialization.gson)
 
-    implementation(platform(Grrfe.gsonExt.bom))
     implementation(Grrfe.gsonExt.core)
     implementation(Grrfe.gsonExt.koin)
 
@@ -378,7 +374,6 @@ dependencies {
     implementation(_1fexd.amp2html)
     implementation(_1fexd.embedResolve)
 
-    implementation(platform(_1fexd.composeKit.bom))
     implementation(_1fexd.composeKit.compose.core)
     implementation(_1fexd.composeKit.compose.layout)
     implementation(_1fexd.composeKit.compose.component)

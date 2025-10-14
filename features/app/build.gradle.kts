@@ -43,16 +43,13 @@ dependencies {
     testImplementation(Testing.robolectric)
     compileOnly(project(":hidden-api"))
 
-    implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
 
-    implementation(platform(_1fexd.composeKit.bom))
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.compose.core)
 
-    implementation(platform(Grrfe.gsonExt.bom))
     implementation(Grrfe.gsonExt.core)
 
     implementation(AndroidX.core.ktx)

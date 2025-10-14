@@ -37,12 +37,10 @@ dependencies {
 
     implementation(AndroidX.room.common)
 
-    implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)
     implementation(Grrfe.std.process.core)
 
-    implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
 
 

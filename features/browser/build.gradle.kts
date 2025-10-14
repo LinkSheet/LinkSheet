@@ -28,9 +28,6 @@ android {
 }
 
 dependencies {
-    implementation(platform(Grrfe.std.bom))
-    implementation(platform(_1fexd.composeKit.bom))
-
     implementation(AndroidX.core.ktx)
 
     testImplementation(AndroidX.test.ext.junit.ktx)

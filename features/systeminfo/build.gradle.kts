@@ -36,7 +36,6 @@ dependencies {
     implementation(project(":util"))
     compileOnly(project(":hidden-api"))
 
-    implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)
     implementation(Grrfe.std.process.core)
@@ -45,7 +44,6 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.process)
 
-    implementation(platform(Grrfe.gsonExt.bom))
     implementation(Grrfe.gsonExt.core)
 
     implementation(AndroidX.core.ktx)

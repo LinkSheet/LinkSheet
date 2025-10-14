@@ -35,9 +35,6 @@ android {
 }
 
 dependencies {
-    implementation(platform(Grrfe.std.bom))
-    implementation(platform(_1fexd.composeKit.bom))
-
     implementation(Grrfe.std.result.core)
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.compose.core)

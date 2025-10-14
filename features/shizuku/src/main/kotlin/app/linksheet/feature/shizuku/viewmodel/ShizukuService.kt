@@ -58,7 +58,9 @@ class ShizukuService(
     private val pingBinder: () -> Boolean,
     private val checkSelfPermission: () -> Int?,
     private val requestPermission: (Int) -> Unit
-) : Shizuku.OnRequestPermissionResultListener, Shizuku.OnBinderReceivedListener, Shizuku.OnBinderDeadListener,
+) : Shizuku.OnRequestPermissionResultListener,
+    Shizuku.OnBinderReceivedListener,
+    Shizuku.OnBinderDeadListener,
     IntentEventHandler {
 
     companion object {

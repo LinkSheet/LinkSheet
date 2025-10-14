@@ -63,7 +63,6 @@ dependencies {
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
 
-
     implementation(Koin.android)
     implementation(Koin.compose)
     implementation(AndroidX.room.common)
@@ -71,10 +70,7 @@ dependencies {
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.coroutines)
     implementation(Grrfe.std.result.core)
-    implementation(Grrfe.std.time.java)
-    implementation(Grrfe.std.process.core)
 
-    implementation(Grrfe.httpkt.core)
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")

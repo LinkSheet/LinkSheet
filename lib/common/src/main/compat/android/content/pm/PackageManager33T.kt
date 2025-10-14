@@ -4,8 +4,6 @@ import android.content.Intent
 import fe.composekit.core.AndroidVersion
 import fe.linksheet.util.ApplicationInfoFlags
 import fe.linksheet.util.ResolveInfoFlags
-import fe.std.result.getOrNull
-import fe.std.result.tryCatch
 
 fun PackageManager.resolveActivityCompat(
     intent: Intent,
@@ -47,7 +45,7 @@ fun PackageManager.getApplicationInfoCompatOrNull(
     packageName: String,
     flags: ApplicationInfoFlags = ApplicationInfoFlags.EMPTY,
 ): ApplicationInfo? {
-    return tryCatch { getApplicationInfoCompat(packageName, flags) }.getOrNull()
+    return runCatching { getApplicationInfoCompat(packageName, flags) }.getOrNull()
 }
 
 fun PackageManager.getApplicationInfoCompat(

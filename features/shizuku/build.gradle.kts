@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":api"))
     implementation(project(":util"))
     implementation(project(":common"))
     implementation(project(":compose"))

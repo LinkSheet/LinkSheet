@@ -2,7 +2,7 @@ package fe.linksheet.module.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import fe.linksheet.common.dao.base.BaseDao
+import app.linksheet.api.database.BaseDao
 import fe.linksheet.module.database.entity.AppSelection
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import kotlinx.coroutines.flow.Flow

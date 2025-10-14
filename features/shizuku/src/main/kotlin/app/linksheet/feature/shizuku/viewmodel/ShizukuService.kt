@@ -6,10 +6,10 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.getApplicationInfoCompat
+import app.linksheet.api.eventbus.BroadcastEventBus
+import app.linksheet.api.eventbus.IntentEventHandler
 import fe.composekit.intent.buildIntent
 import fe.droidkit.koin.getPackageManager
-import fe.linksheet.BroadcastEventBus
-import fe.linksheet.IntentEventHandler
 import fe.linksheet.util.ApplicationInfoFlags
 import fe.linksheet.util.IntentFilters
 import fe.std.coroutines.RefreshableStateFlow

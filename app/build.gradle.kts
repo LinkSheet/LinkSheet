@@ -268,6 +268,7 @@ dependencies {
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
     implementation(project(":util"))
+    implementation(project(":api"))
     implementation(project(":common"))
     implementation(project(":compose"))
 

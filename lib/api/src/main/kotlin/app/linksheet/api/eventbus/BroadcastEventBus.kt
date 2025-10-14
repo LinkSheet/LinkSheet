@@ -1,4 +1,4 @@
-package fe.linksheet
+package app.linksheet.api.eventbus
 
 import android.content.Context
 import android.content.Intent

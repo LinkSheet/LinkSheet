@@ -1,7 +1,7 @@
 package fe.linksheet.module.database.dao.base
 
 import androidx.room.Query
-import fe.linksheet.common.dao.base.BaseDao
+import app.linksheet.api.database.BaseDao
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 
 abstract interface ResolverDao<T : ResolverEntity<T>> : BaseDao<T> {

@@ -1,7 +1,7 @@
 package fe.linksheet.module.database.dao.base
 
 import androidx.room.Query
-import fe.linksheet.common.dao.base.BaseDao
+import app.linksheet.api.database.BaseDao
 
 abstract class PackageEntityDao<T : PackageEntity<T>, C : PackageEntityCreator<T>>(
     private val creator: C

@@ -2,7 +2,7 @@ package fe.linksheet.module.database.dao.cache
 
 import androidx.room.Dao
 import androidx.room.Query
-import fe.linksheet.common.dao.base.BaseDao
+import app.linksheet.api.database.BaseDao
 import fe.linksheet.module.database.entity.cache.PreviewCache
 
 @Dao

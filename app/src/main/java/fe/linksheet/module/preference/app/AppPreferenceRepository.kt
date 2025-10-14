@@ -1,4 +1,6 @@
 package fe.linksheet.module.preference.app
 
-typealias AppPreferenceRepository = fe.linksheet.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
+
+typealias AppPreferenceRepository = AppPreferenceRepository
 

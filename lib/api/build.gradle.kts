@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "fe.linksheet.lib.common"
+    namespace = "app.linksheet.lib.api"
     compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
@@ -26,14 +26,10 @@ android {
             excludes += setOf("META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module", "META-INF/*.md")
         }
     }
-
-    val main by sourceSets
-    for (it in arrayOf("compat")) {
-        main.java.srcDir("src/main/$it")
-    }
 }
 
 dependencies {
-    implementation(_1fexd.composeKit.core)
+    implementation(_1fexd.composeKit.preference.compose.core2)
+    implementation(AndroidX.room.common)
     implementation(AndroidX.core.ktx)
 }

@@ -7,8 +7,8 @@ import android.content.IntentFilter
 import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
-import fe.linksheet.BroadcastEventBus
-import fe.linksheet.IntentEventHandler
+import app.linksheet.api.eventbus.BroadcastEventBus
+import app.linksheet.api.eventbus.IntentEventHandler
 import org.koin.dsl.bind
 import org.koin.dsl.module
 

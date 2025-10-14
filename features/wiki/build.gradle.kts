@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":api"))
     implementation(project(":util"))
     implementation(project(":common"))
     compileOnly(project(":hidden-api"))

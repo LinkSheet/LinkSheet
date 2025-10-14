@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
-import fe.linksheet.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.util.extension.android.tryStartActivity
 
 class ShizukuSettingsViewModel(

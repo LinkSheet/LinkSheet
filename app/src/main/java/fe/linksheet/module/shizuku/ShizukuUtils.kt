@@ -7,11 +7,11 @@ import fe.std.result.tryCatch
 import rikka.shizuku.ShizukuBinderWrapper
 
 
-fun IBinder.wrapShizuku(): IResult<ShizukuBinderWrapper> {
-    return tryCatch { ShizukuBinderWrapper(this) }
+fun IBinder.wrapShizuku(): ShizukuBinderWrapper {
+    return ShizukuBinderWrapper(this)
 }
 
-fun IInterface.asShizukuBinder(): IResult<ShizukuBinderWrapper> {
+fun IInterface.asShizukuBinder(): ShizukuBinderWrapper {
     return asBinder().wrapShizuku()
 }
 

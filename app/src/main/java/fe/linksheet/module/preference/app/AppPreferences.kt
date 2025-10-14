@@ -1,6 +1,7 @@
 package fe.linksheet.module.preference.app
 
 
+import app.linksheet.feature.shizuku.preference.shizukuPreferences
 import com.google.gson.JsonArray
 import fe.android.preference.helper.PreferenceDefinition
 import fe.gson.dsl.jsonObject
@@ -189,6 +190,8 @@ object AppPreferences : PreferenceDefinition(
     }
 
     val openGraphPreview = OpenGraphPreview
+
+    val shizuku = shizukuPreferences(this::boolean)
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->

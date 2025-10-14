@@ -262,6 +262,7 @@ dependencies {
     implementation(project(":feature-systeminfo"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
+    implementation(project(":feature-shizuku"))
     implementation(project(":feature-wiki"))
 
     compileOnly(project(":hidden-api"))

@@ -106,6 +106,7 @@ fun MainNavHost(
     ) {
         attachSubGraph(HomePageRoute, navController)
         attachSubGraph(ScenarioNavSubGraph, navController)
+        attachSubGraph(ShizukuNavSubGraph, navController)
 
         animatedComposable<MarkdownViewerRoute> { _, route ->
             val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title

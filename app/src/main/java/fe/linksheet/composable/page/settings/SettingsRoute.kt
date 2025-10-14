@@ -37,6 +37,7 @@ internal object SettingsRouteData {
             textContent(R.string.verified_link_handlers),
             textContent(R.string.verified_link_handlers_subtitle)
         ),
+        ShizukuRoute.NavItem
 //        RouteNavItemNew(
 //            ScenarioRoute,
 //            Icons.Outlined.Widgets.iconPainter,

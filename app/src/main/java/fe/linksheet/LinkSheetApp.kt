@@ -27,6 +27,7 @@ import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.compose.debug.NoOpDebugMenuSlotProvider
 import app.linksheet.compose.debug.NoOpDebugPreferenceProvider
+import app.linksheet.feature.shizuku.viewmodel.ShizukuModule
 import fe.linksheet.module.devicecompat.CompatModule
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
@@ -149,6 +150,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             provideDebugModule(),
             WorkDelegatorServiceModule,
             BroadcastEventBusModule,
+            ShizukuModule
         )
     }
 

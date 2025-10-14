@@ -79,6 +79,7 @@ includeProject(":common", "lib/common")
 includeProject(":compose", "lib/compose")
 includeProject(":feature-app", "features/app")
 includeProject(":feature-browser", "features/browser")
+includeProject(":feature-shizuku", "features/shizuku")
 includeProject(":feature-systeminfo", "features/systeminfo")
 includeProject(":feature-wiki", "features/wiki")
 

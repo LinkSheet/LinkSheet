@@ -9,10 +9,12 @@ import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.state.AppStateRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 
 val PreferenceRepositoryModule = module {
     singleOf(::DefaultAppPreferenceRepository).bind<AppPreferenceRepository>()
     singleOf(::FeatureFlagRepository)
     singleOf(::ExperimentRepository)
     singleOf(::AppStateRepository)
+    single<ShizukuPreferences> { AppPreferences.shizuku }
 }

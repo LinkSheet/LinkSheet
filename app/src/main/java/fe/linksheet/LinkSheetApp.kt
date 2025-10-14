@@ -56,6 +56,7 @@ import fe.linksheet.util.serialization.UriTypeAdapter
 import fe.composekit.lifecycle.network.koin.NetworkStateServiceModule
 import fe.linksheet.module.browser.PrivateBrowsingModule
 import fe.linksheet.module.shizuku.ShizukuServiceModule
+import fe.linksheet.module.receiver.BroadcastEventBusModule
 import kotlinx.coroutines.flow.StateFlow
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
@@ -146,7 +147,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             ProfileSwitcherModule,
             AppStateServiceModule,
             provideDebugModule(),
-            WorkDelegatorServiceModule
+            WorkDelegatorServiceModule,
+            BroadcastEventBusModule,
         )
     }
 

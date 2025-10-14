@@ -54,6 +54,20 @@ val DialogTitleStyle = TextStyle(
     fontSize = 18.sp,
 )
 
+val BodySmallStyle = TextStyle(
+    fontSize = 12.sp,
+    fontWeight = FontWeight.Normal,
+    letterSpacing = 0.sp,
+    lineHeight = 16.sp,
+)
+
+val BodyExtraSmallStyle = TextStyle(
+    fontSize = 10.sp,
+    fontWeight = FontWeight.Normal,
+    letterSpacing = 0.sp,
+    lineHeight = 12.sp,
+)
+
 // ListItem fonts
 // TypographyKeyTokens.BodyLarge
 // TypographyKeyTokens.BodyMedium
@@ -109,6 +123,9 @@ val NewTypography = Typography(
     bodyLarge = NewDefaultTypography.bodyLarge.copy(
 //        fontFamily = HkGroteskFontFamily,
 //        fontWeight = FontWeight.SemiBold
+    ),
+    labelSmall = NewDefaultTypography.labelSmall.copy(
+//        lineHeight = 14.sp
     )
 )
 
@@ -117,33 +134,36 @@ val LegacyTypography = Typography(
     titleLarge = DialogTitleStyle
 )
 
-private data class TypographyPreviewState(
-    val property: KProperty0<TextStyle>,
-    val style: TextStyle = property.get(),
-    val text: String = property.name,
-)
+open class TypographyPreviewState(val style: TextStyle, val text: String) {
+    class Property(property: KProperty0<TextStyle>) : TypographyPreviewState(property.get(), property.name)
+}
 
 private class SmallTypographyPreviewProvider() : PreviewParameterProvider<TypographyPreviewState> {
     override val values = sequenceOf(
-        TypographyPreviewState(NewTypography::headlineSmall),
-        TypographyPreviewState(NewTypography::titleSmall),
-        TypographyPreviewState(NewTypography::bodySmall),
+        TypographyPreviewState.Property(NewTypography::headlineSmall),
+        TypographyPreviewState.Property(NewTypography::titleSmall),
+        TypographyPreviewState.Property(NewTypography::bodySmall),
+        TypographyPreviewState.Property(NewTypography::labelSmall),
+        TypographyPreviewState(BodySmallStyle, "bodySmall Special"),
+        TypographyPreviewState(BodyExtraSmallStyle, "extraSmall")
     )
 }
 
 private class MediumTypographyPreviewProvider() : PreviewParameterProvider<TypographyPreviewState> {
     override val values = sequenceOf(
-        TypographyPreviewState(NewTypography::headlineMedium),
-        TypographyPreviewState(NewTypography::titleMedium),
-        TypographyPreviewState(NewTypography::bodyMedium),
+        TypographyPreviewState.Property(NewTypography::headlineMedium),
+        TypographyPreviewState.Property(NewTypography::titleMedium),
+        TypographyPreviewState.Property(NewTypography::bodyMedium),
+        TypographyPreviewState.Property(NewTypography::labelMedium),
     )
 }
 
 private class LargeTypographyPreviewProvider() : PreviewParameterProvider<TypographyPreviewState> {
     override val values = sequenceOf(
-        TypographyPreviewState(NewTypography::headlineLarge),
-        TypographyPreviewState(NewTypography::titleLarge),
-        TypographyPreviewState(NewTypography::bodyLarge),
+        TypographyPreviewState.Property(NewTypography::headlineLarge),
+        TypographyPreviewState.Property(NewTypography::titleLarge),
+        TypographyPreviewState.Property(NewTypography::bodyLarge),
+        TypographyPreviewState.Property(NewTypography::labelLarge)
     )
 }
 

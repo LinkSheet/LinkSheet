@@ -2,7 +2,6 @@ package fe.linksheet.module.preference.app
 
 import android.content.Context
 import fe.android.preference.helper.Preference
-import fe.linksheet.AppPreferenceRepository
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission

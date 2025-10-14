@@ -14,12 +14,13 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.util.buildconfig.LinkSheetInfo
 import kotlinx.parcelize.Parcelize
 
 
 class LogViewCommon(
-    val preferenceRepository: AppPreferenceRepository,
+    val preferenceRepository: DefaultAppPreferenceRepository,
     private val experimentRepository: ExperimentRepository,
     private val pasteService: PasteService<*>,
     val gson: Gson,

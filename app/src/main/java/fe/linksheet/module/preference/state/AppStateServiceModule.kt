@@ -8,7 +8,7 @@ import fe.android.lifecycle.koin.extension.service
 import fe.linksheet.extension.koin.logger
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.PreferenceRepositoryModule
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +33,7 @@ val AppStateServiceModule = module {
 internal class AppStateService(
     val clock: Clock,
     val logger: Logger,
-    val preferenceRepository: AppPreferenceRepository,
+    val preferenceRepository: DefaultAppPreferenceRepository,
     val appStateRepository: AppStateRepository,
     val experimentsRepository: ExperimentRepository,
 ) : LifecycleAwareService {

@@ -352,6 +352,7 @@ dependencies {
     testImplementation(JetBrains.ktor.client.mock)
 
     implementation(Grrfe.std.core)
+    implementation(Grrfe.std.coroutines)
     implementation(Grrfe.std.time.core)
     implementation(Grrfe.std.time.java)
     implementation(Grrfe.std.result.core)
@@ -386,6 +387,7 @@ dependencies {
     testImplementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)
     implementation(_1fexd.composeKit.process)
+    implementation(_1fexd.composeKit.lifecycle.compose)
     implementation(_1fexd.composeKit.lifecycle.core)
     implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(_1fexd.composeKit.lifecycle.network.core)

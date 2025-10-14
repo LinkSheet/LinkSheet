@@ -11,7 +11,7 @@ import android.provider.Settings
 import androidx.core.content.getSystemService
 import androidx.navigation.NavDestination
 import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.extension.kotlinx.RefreshableStateFlow
+import fe.std.coroutines.RefreshableStateFlow
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel

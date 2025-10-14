@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.util.DashedBorderBox
-import fe.linksheet.extension.kotlinx.RefreshableStateFlow
-import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
+import fe.std.coroutines.RefreshableStateFlow
+import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
 import kotlinx.coroutines.launch
 
 class ComponentStateActivity : BaseComponentActivity() {

@@ -8,6 +8,7 @@ import fe.linksheet.extension.kotlin.appendHashedTrim
 import fe.relocated.org.apache.hc.core5.core5.net.InetAddressUtils
 import fe.relocated.org.apache.hc.core5.core5.net.PercentCodec
 import fe.std.uri.ParserFailure
+import fe.std.uri.StdUrl
 import fe.std.uri.Url
 import javax.crypto.Mac
 
@@ -18,7 +19,7 @@ fun buildHashedUriString(uriString: String, mac: Mac): String {
         return "Something went very wrong. Parsing this url failed: ${url.exception.asString()}"
     }
 
-    val uri = url as Url
+    val uri = url as StdUrl
     return buildString {
         if (uri.scheme != null) {
             append(uri.scheme).append(":")
@@ -41,7 +42,7 @@ fun buildHashedUriString(uriString: String, mac: Mac): String {
     }
 }
 
-private fun StringBuilder.parse(url: Url, mac: Mac) {
+private fun StringBuilder.parse(url: StdUrl, mac: Mac) {
     val authoritySpecified: Boolean = if (url.encodedAuthority != null) {
         append("//")
         for ((element, _, _, last) in url.encodedAuthority!!.split(".").withElementInfo()) {

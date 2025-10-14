@@ -1,6 +1,6 @@
 package fe.linksheet.experiment.engine.fetcher.preview
 
-import fe.std.uri.Url
+import fe.std.uri.StdUrl
 import fe.std.uri.extension.buildUrl
 import fe.std.uri.toUrlOrThrow
 import org.jsoup.Jsoup
@@ -108,7 +108,7 @@ class HtmlMetadataParser {
         return findLargestIconOrNull(document.head(), linkRelTags)
     }
 
-    private fun fallbackFaviconUrl(url: Url): String {
+    private fun fallbackFaviconUrl(url: StdUrl): String {
         return buildUrl {
             scheme = url.scheme
             host = url.host

@@ -33,10 +33,10 @@ import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import app.linksheet.compose.theme.HkGroteskFontFamily
+import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.compose.ObserveClipboard
 import fe.linksheet.extension.compose.OnFocused
-import fe.linksheet.extension.kotlinx.collectRefreshableAsStateWithLifecycle
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.settingsRoute

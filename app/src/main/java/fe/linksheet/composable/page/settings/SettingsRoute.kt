@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
@@ -30,21 +31,21 @@ import fe.linksheet.navigation.*
 import org.koin.androidx.compose.koinViewModel
 
 internal object SettingsRouteData {
-    val verifiedApps = arrayOf(
-        RouteNavItemNew(
-            AppsWhichCanOpenLinksSettingsRoute,
-            Icons.Outlined.DomainVerification.iconPainter,
-            textContent(R.string.verified_link_handlers),
-            textContent(R.string.verified_link_handlers_subtitle)
-        ),
-        ShizukuRoute.NavItem
+    val vlhNavItem = RouteNavItemNew(
+        AppsWhichCanOpenLinksSettingsRoute,
+        Icons.Outlined.DomainVerification.iconPainter,
+        textContent(R.string.verified_link_handlers),
+        textContent(R.string.verified_link_handlers_subtitle)
+    )
+    fun verifiedApps(newShizuku: Boolean): List<RouteNavItemNew> {
+        return listOfNotNull(vlhNavItem, if(newShizuku) ShizukuRoute.NavItem else null)
 //        RouteNavItemNew(
 //            ScenarioRoute,
 //            Icons.Outlined.Widgets.iconPainter,
 //            textContent(R.string.settings_scenario__title_scenarios),
 //            textContent(R.string.settings_scenario__text_scenarios),
 //        )
-    )
+    }
 
     val customization = arrayOf(
         RouteNavItem(
@@ -160,13 +161,19 @@ fun SettingsRoute(
     viewModel: SettingsViewModel = koinViewModel(),
 ) {
     val devMode by viewModel.devModeEnabled.collectAsStateWithLifecycle()
+    val newShizuku by viewModel.newShizuku.collectAsStateWithLifecycle()
+    val vlh = remember(newShizuku) {
+        SettingsRouteData.verifiedApps(newShizuku)
+    }
+
     val languageDialog = rememberLanguageDialog()
+
 
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.settings),
         onBackPressed = onBackPressed
     ) {
-        group(array = SettingsRouteData.verifiedApps) { data, padding, shape ->
+        group(list = vlh) { data, padding, shape ->
             RouteNavigateListItemNew(data = data, padding = padding, shape = shape, navigate = navigateNew)
         }
 

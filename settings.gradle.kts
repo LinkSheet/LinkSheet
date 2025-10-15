@@ -94,6 +94,9 @@ buildSettings {
         trySubstitute("com.github.1fexd:clearurlkt", properties["clearurl.dir"]) {
             this[":"] = "core"
         }
+        trySubstitute("com.github.1fexd:embed-reoslve", properties["embed-resolve.dir"]) {
+            this[":"] = "core"
+        }
     }
 }
 

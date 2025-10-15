@@ -27,7 +27,7 @@ import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.compose.debug.NoOpDebugMenuSlotProvider
 import app.linksheet.compose.debug.NoOpDebugPreferenceProvider
-import app.linksheet.feature.shizuku.viewmodel.ShizukuModule
+import app.linksheet.feature.shizuku.ShizukuModule
 import fe.linksheet.module.devicecompat.CompatModule
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider

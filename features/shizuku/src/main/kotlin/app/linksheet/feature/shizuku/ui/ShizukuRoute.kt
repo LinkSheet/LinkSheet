@@ -27,7 +27,7 @@ import app.linksheet.compose.preview.PreviewTheme
 import app.linksheet.feature.shizuku.R
 import app.linksheet.feature.shizuku.ShizukuDownload
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
-import app.linksheet.feature.shizuku.viewmodel.ShizukuStatus
+import app.linksheet.feature.shizuku.ShizukuStatus
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent

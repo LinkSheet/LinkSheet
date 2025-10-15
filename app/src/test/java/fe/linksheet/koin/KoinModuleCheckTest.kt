@@ -22,6 +22,9 @@ import fe.linksheet.feature.app.`package`.PackageLauncherService
 import fe.linksheet.feature.app.`package`.domain.DomainVerificationManagerCompat
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.feature.browser.PrivateBrowsingService
+import app.linksheet.feature.shizuku.preference.ShizukuPreferences
+import app.linksheet.feature.shizuku.ShizukuService
+import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
@@ -195,6 +198,11 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<ThemeSettingsViewModel>(RemoteConfigRepository::class),
         definition<WorkDelegatorService>(WorkManager::class),
         definition<VerifiedLinkHandlerViewModel>(PackageService::class, OneUiCompat::class),
+        definition<ShizukuSettingsViewModel>(
+            ShizukuService::class,
+            AppPreferenceRepository::class,
+            ShizukuPreferences::class
+        ),
     )
 
     @Test

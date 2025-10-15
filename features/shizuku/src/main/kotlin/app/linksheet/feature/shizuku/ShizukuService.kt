@@ -1,4 +1,4 @@
-package app.linksheet.feature.shizuku.viewmodel
+package app.linksheet.feature.shizuku
 
 import android.content.ComponentName
 import android.content.Context
@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.content.pm.getApplicationInfoCompat
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.eventbus.IntentEventHandler
+import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import fe.composekit.intent.buildIntent
 import fe.droidkit.koin.getPackageManager
 import fe.linksheet.util.ApplicationInfoFlags

@@ -16,6 +16,7 @@
         <item>org.mozilla.reference.browser</item>
         <item>info.guardianproject.orfox</item>
         <item>org.ironfoxoss.ironfox</item>
+        <item>org.ironfoxoss.ironfox.nightly</item>
     </string-array>
     <string-array name="chromium">
         <item>com.android.chrome</item>

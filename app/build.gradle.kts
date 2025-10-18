@@ -242,7 +242,12 @@ android {
 
     packaging {
         resources {
-            excludes += setOf("META-INF/{AL2.0,LGPL2.1}", "META-INF/atomicfu.kotlin_module", "META-INF/*.md")
+            pickFirsts += setOf(
+                "META-INF/{AL2.0,LGPL2.1}",
+                "META-INF/atomicfu.kotlin_module",
+                "META-INF/*.md",
+                "META-INF/**.MF"
+            )
         }
     }
 
@@ -264,6 +269,9 @@ dependencies {
     implementation(project(":feature-browser"))
     implementation(project(":feature-shizuku"))
     implementation(project(":feature-wiki"))
+    implementation(project(":integration-clearurl"))
+    implementation(project(":integration-embed-resolve"))
+    implementation(project(":integration-amp2html"))
 
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
@@ -370,12 +378,9 @@ dependencies {
     implementation(Grrfe.gsonExt.core)
     implementation(Grrfe.gsonExt.koin)
 
-    implementation(_1fexd.clearUrl)
     implementation(Grrfe.signify)
     implementation(_1fexd.fastForward)
     implementation("com.github.1fexd.libredirectkt:lib:_")
-    implementation(_1fexd.amp2html)
-    implementation(_1fexd.embedResolve)
 
     implementation(_1fexd.composeKit.compose.core)
     implementation(_1fexd.composeKit.compose.layout)

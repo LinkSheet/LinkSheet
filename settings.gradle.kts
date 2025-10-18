@@ -78,6 +78,9 @@ includeProject(":util", "lib/util")
 includeProject(":api", "lib/api")
 includeProject(":common", "lib/common")
 includeProject(":compose", "lib/compose")
+includeProject(":integration-embed-resolve", "integration/embed-resolve")
+includeProject(":integration-clearurl", "integration/clearurl")
+includeProject(":integration-amp2html", "integration/amp2html")
 includeProject(":feature-app", "features/app")
 includeProject(":feature-browser", "features/browser")
 includeProject(":feature-shizuku", "features/shizuku")
@@ -91,12 +94,6 @@ buildSettings {
         trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
         trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
         trySubstitute(LinkSheet.flavors, properties["flavors.dir"])
-        trySubstitute("com.github.1fexd:clearurlkt", properties["clearurl.dir"]) {
-            this[":"] = "core"
-        }
-        trySubstitute("com.github.1fexd:embed-reoslve", properties["embed-resolve.dir"]) {
-            this[":"] = "core"
-        }
     }
 }
 

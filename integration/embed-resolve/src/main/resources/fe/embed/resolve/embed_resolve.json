@@ -1,0 +1,41 @@
+{
+  "services": [
+    {
+      "name": "Twitter",
+      "domain":  "twitter.com",
+      "pattern": "^(\\/\\w+\\/status\\/\\d+).*$",
+      "embed_domains": ["vxtwitter.com", "fxtwitter.com", "twittpr.com"]
+    },
+    {
+      "name": "X",
+      "domain": "x.com",
+      "pattern": "^(\\/\\w+\\/status\\/\\d+).*$",
+      "embed_domains": ["fixvx.com", "fixupx.com", "yiffx.com", "stupidpenisx.com"]
+    },
+    {
+      "name": "Instagram",
+      "domain": "instagram.com",
+      "pattern": "^(\\/p\\/\\w+).*$",
+      "embed_domains": ["ddinstagram.com"]
+    },
+    {
+      "name": "Reddit",
+      "domain": "reddit.com",
+      "pattern": "^(\\/.*)$",
+      "embed_domains": ["rxddit.com"]
+    },
+    {
+      "name": "Pixiv",
+      "domain": "pixiv.net",
+      "pattern": "^(\\/.*)$",
+      "ignore_pattern": "^(\\/api\\/info.*)$",
+      "embed_domains": ["phixiv.net", "www.phixiv.net"]
+    },
+    {
+      "name": "Bluesky",
+      "domain": "bsky.app",
+      "pattern": "^(\\/profile\\/((([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)|did:plc:\\w+)\\/post\\/\\w+).*$",
+      "embed_domains": ["boobsky.app", "bsyy.app", "bskyx.app", "fxbsky.app"]
+    }
+  ]
+}

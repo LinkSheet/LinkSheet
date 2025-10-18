@@ -93,12 +93,6 @@ buildSettings {
         trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
         trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
         trySubstitute(LinkSheet.flavors, properties["flavors.dir"])
-        trySubstitute("com.github.1fexd:clearurlkt", properties["clearurl.dir"]) {
-            this[":"] = "core"
-        }
-        trySubstitute("com.github.1fexd:embed-reoslve", properties["embed-resolve.dir"]) {
-            this[":"] = "core"
-        }
     }
 }
 

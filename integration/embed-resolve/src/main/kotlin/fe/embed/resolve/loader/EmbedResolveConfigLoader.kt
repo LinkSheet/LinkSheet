@@ -2,10 +2,10 @@ package fe.embed.resolve.loader
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import fe.embed.resolve.RegexTypeAdapter
 import fe.embed.resolve.Resource
 import fe.embed.resolve.config.ConfigSerializer
 import fe.embed.resolve.config.ConfigV1
+import fe.gson.typeadapter.RegexTypeAdapter
 import java.io.InputStream
 import java.net.URL
 

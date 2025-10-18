@@ -12,11 +12,8 @@ kotlin {
 }
 
 dependencies {
-    api("com.google.code.gson:gson:_")
-    api(platform(Grrfe.gsonExt.bom))
     api(Grrfe.gsonExt.core)
 
-    api(platform(Grrfe.std.bom))
     api(Grrfe.std.result.core)
     api(Grrfe.std.uri)
     api(Grrfe.signify)

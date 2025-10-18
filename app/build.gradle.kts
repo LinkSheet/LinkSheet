@@ -266,6 +266,7 @@ dependencies {
     implementation(project(":feature-wiki"))
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
+    implementation(project(":integration-amp2html"))
 
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
@@ -375,7 +376,6 @@ dependencies {
     implementation(Grrfe.signify)
     implementation(_1fexd.fastForward)
     implementation("com.github.1fexd.libredirectkt:lib:_")
-    implementation(_1fexd.amp2html)
 
     implementation(_1fexd.composeKit.compose.core)
     implementation(_1fexd.composeKit.compose.layout)

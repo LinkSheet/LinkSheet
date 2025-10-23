@@ -527,4 +527,14 @@ Seal</string>
     <string name="resolve_event__idle">アイドル</string>
     <string name="settings_profile_switcher__title_no_profile">利用可能なプロフィールはありません</string>
     <string name="settings_profile_switcher__text_no_profile">この機能は、デバイスに（仕事用）プロファイルが設定されている場合にのみ利用できます。</string>
+    <string name="settings_language__dialog_title">アプリの言語</string>
+    <string name="settings_language__text_system_language">システムの言語</string>
+    <string name="settings_language__text_system_language_with_language">%s （システムの言語）</string>
+    <string name="export_settings__text_success">エクスポートされました！</string>
+    <string name="export_settings__text_failure">設定のエクスポートに失敗しました！</string>
+    <string name="import_settings__text_success">インポートされました！</string>
+    <string name="import_settings__text_failure">設定のインポートに失敗しました！</string>
+    <string name="generic__button_text_enable">有効化</string>
+    <string name="generic__button_text_disable">無効化</string>
+    <string name="bottom_sheet__text_launch_not_allowed">起動は許可されませんでした！</string>
 </resources>

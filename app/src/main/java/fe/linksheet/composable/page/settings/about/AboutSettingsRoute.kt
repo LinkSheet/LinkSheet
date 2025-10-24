@@ -22,7 +22,6 @@ import fe.android.compose.text.AnnotatedStringContent.Companion.buildAnnotatedTe
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.span.helper.composable.fromStringRes
-import fe.clearurlskt.ClearURLsMetadata
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
@@ -42,11 +41,11 @@ import org.koin.androidx.compose.koinViewModel
 
 object AboutSettingsRouteData {
     val externalVersions = arrayOf(
-        ListItemData(
-            Icons.Outlined.ClearAll.iconPainter,
-            textContent(R.string.clear_urls_version),
-            additional = ClearURLsMetadata.FETCHED_AT
-        ),
+//        ListItemData(
+//            Icons.Outlined.ClearAll.iconPainter,
+//            textContent(R.string.clear_urls_version),
+//            additional = ClearURLsMetadata.FETCHED_AT
+//        ),
         ListItemData(
             Icons.Outlined.Bolt.iconPainter,
             textContent(R.string.fastforward_version),

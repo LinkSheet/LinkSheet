@@ -1,7 +1,7 @@
 package app.linksheet.feature.expression
 
 import androidx.room.Dao
-import fe.linksheet.common.dao.base.BaseDao
+import app.linksheet.api.database.BaseDao
 
 
 @Dao

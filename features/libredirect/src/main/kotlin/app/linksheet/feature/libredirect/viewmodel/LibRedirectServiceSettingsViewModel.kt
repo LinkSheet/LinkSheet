@@ -80,10 +80,9 @@ class LibRedirectServiceSettingsViewModel(
         .filterNotNull()
         .combine(defaultRepository.getByServiceKey(serviceKey)) { settings, stored -> settings to stored }
         .mapProducingSideEffect(
+            sideEffectContext = Dispatchers.IO,
             transform = ::transform,
-            handleSideEffect = { default ->
-                withContext(Dispatchers.IO) { defaultRepository.delete(default) }
-            }
+            handleSideEffect = { default -> defaultRepository.delete(default) }
         )
 
     val enabled = stateRepository.isEnabledFlow(serviceKey)

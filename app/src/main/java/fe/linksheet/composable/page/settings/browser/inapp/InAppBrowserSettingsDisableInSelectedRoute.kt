@@ -18,7 +18,7 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import fe.linksheet.extension.kotlin.collectOnIO
+import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -27,7 +27,7 @@ fun InAppBrowserSettingsDisableInSelectedRoute(
     onBackPressed: () -> Unit,
     viewModel: InAppBrowserSettingsViewModel = koinViewModel(),
 ) {
-    val items by viewModel._filteredItems.collectOnIO()
+    val items by viewModel._filteredItems.collectOnIO(null)
     val searchFilter by viewModel.searchFilter.collectOnIO()
 
     val listState = remember(items?.size, searchFilter) {

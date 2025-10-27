@@ -47,6 +47,7 @@ class PreferredAppSettingsViewModel(
     val searchFilter = MutableStateFlow("")
 
     private val preferredApps = repository.getAllAlwaysPreferred().mapProducingSideEffects(
+        sideEffectContext = Dispatchers.IO,
         transform = { app, sideEffect: ProduceSideEffect<String> ->
             app.groupByNoNullKeys(
                 keySelector = {
@@ -60,7 +61,7 @@ class PreferredAppSettingsViewModel(
             )
         },
         handleSideEffects = {
-            withContext(Dispatchers.IO) { repository.deleteByPackageNames(it.toSet()) }
+            repository.deleteByPackageNames(it.toSet())
         }
     ).shareIn(viewModelScope, started = SharingStarted.Lazily, replay = 1)
 

@@ -27,7 +27,7 @@ import fe.linksheet.R
 import fe.linksheet.extension.compose.ObserveStateChange
 import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.util.listState
-import fe.linksheet.extension.kotlin.collectOnIO
+import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.navigation.VlhAppRoute

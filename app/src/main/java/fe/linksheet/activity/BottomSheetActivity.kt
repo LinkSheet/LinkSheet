@@ -31,7 +31,7 @@ import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.extension.kotlin.collectOnIO
+import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.ResolveEvent

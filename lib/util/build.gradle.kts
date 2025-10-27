@@ -5,8 +5,8 @@ import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 
 plugins {
-    id("com.android.library")
     kotlin("android")
+    id("com.android.library")
     id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
@@ -33,7 +33,6 @@ dependencies {
     implementation(project(":api"))
     implementation(project(":common"))
 
-    api(AndroidX.lifecycle.runtime.compose)
     api(KotlinX.coroutines.android)
     implementation(Koin.android)
     implementation(Grrfe.std.result.core)

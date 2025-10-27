@@ -3,6 +3,7 @@ package fe.linksheet.module.viewmodel
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.DisposableEffect
 import androidx.lifecycle.viewModelScope
 import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.filterIf
@@ -76,10 +77,9 @@ class VerifiedLinkHandlersViewModel(
 
     val preferredApps = preferredAppRepository.getAllAlwaysPreferred()
         .mapProducingSideEffects(
+            sideEffectContext = Dispatchers.IO,
             transform = ::groupHosts,
-            handleSideEffects = { packageNames ->
-                withContext(Dispatchers.IO) { preferredAppRepository.deleteByPackageNames(packageNames.toSet()) }
-            }
+            handleSideEffects = { packageNames -> preferredAppRepository.deleteByPackageNames(packageNames.toSet()) }
         )
         .shareIn(
             scope = viewModelScope,

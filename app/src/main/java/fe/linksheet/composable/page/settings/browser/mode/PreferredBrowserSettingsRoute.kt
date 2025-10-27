@@ -25,7 +25,7 @@ import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.extension.compose.currentActivity
-import fe.linksheet.extension.kotlin.collectOnIO
+import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.navigation.whitelistedBrowsersSettingsRoute
@@ -39,10 +39,10 @@ fun PreferredBrowserSettingsRoute(
 ) {
     val activity = LocalContext.currentActivity()
 
-    val browsers by viewModel.browsers.collectOnIO()
+    val browsers by viewModel.browsers.collectOnIO(null)
     val type by viewModel.type.collectOnIO()
-    val browserModePreference by viewModel.browserModeState.collectOnIO()
-    val selectedBrowserPreference by viewModel.selectedBrowserState.collectOnIO()
+    val browserModePreference by viewModel.browserModeState.collectOnIO(null)
+    val selectedBrowserPreference by viewModel.selectedBrowserState.collectOnIO(null)
 
     val browserMode = browserModePreference?.collectAsStateWithLifecycle()
     val selectedBrowser = selectedBrowserPreference?.collectAsStateWithLifecycle()

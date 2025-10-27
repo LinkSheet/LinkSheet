@@ -31,8 +31,7 @@ import fe.linksheet.R
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.util.listState
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import fe.linksheet.extension.kotlin.collectOnIO
+import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 

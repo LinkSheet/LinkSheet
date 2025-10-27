@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import app.linksheet.compose.extension.collectOnIO
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
@@ -18,7 +19,6 @@ import fe.linksheet.composable.util.CheckboxRow
 import app.linksheet.compose.extension.mapHelper
 import app.linksheet.compose.util.mapState
 import fe.linksheet.extension.compose.searchHeader
-import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 
@@ -30,7 +30,7 @@ fun BrowserCommonPackageSelectorRoute(
     navController: NavHostController,
     viewModel: BrowserCommonViewModel,
 ) {
-    val items by viewModel.filteredItems.collectOnIO()
+    val items by viewModel.filteredItems.collectOnIO(null)
     val filter by viewModel.filter.collectOnIO()
     val mapState = remember(items?.size, filter) {
         mapState(items, filter)

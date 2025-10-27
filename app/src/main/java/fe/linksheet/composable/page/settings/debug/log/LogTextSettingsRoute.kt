@@ -18,7 +18,7 @@ import fe.linksheet.composable.component.dialog.rememberExportLogDialog
 import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.util.ListState
 import app.linksheet.compose.util.listState
-import fe.linksheet.extension.kotlin.collectOnIO
+import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -31,7 +31,7 @@ fun LogTextSettingsRoute(
     sessionName: String,
     viewModel: LogTextSettingsViewModel = koinViewModel(parameters = { parametersOf(sessionId) }),
 ) {
-    val logEntries by viewModel.logEntries.collectOnIO()
+    val logEntries by viewModel.logEntries.collectOnIO(null)
     val listState = remember(logEntries?.size) {
         listState(logEntries)
     }

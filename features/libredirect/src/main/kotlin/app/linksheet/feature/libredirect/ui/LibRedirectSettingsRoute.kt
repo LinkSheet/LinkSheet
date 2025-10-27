@@ -24,7 +24,7 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.composekit.route.Route
 import app.linksheet.feature.libredirect.R
 import app.linksheet.feature.libredirect.navigation.LibRedirectServiceRoute
-import fe.linksheet.extension.kotlin.collectOnIO
+import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.web.HostUtil
 import org.koin.androidx.compose.koinViewModel
 import androidx.compose.ui.platform.LocalResources
@@ -35,7 +35,7 @@ fun LibRedirectSettingsRoute(
     navigate: (Route) -> Unit,
     viewModel: LibRedirectSettingsViewModel = koinViewModel(),
 ) {
-    val services by viewModel.services.collectOnIO()
+    val services by viewModel.services.collectOnIO(null)
     val listState = remember(services?.size) {
         listState(services)
     }

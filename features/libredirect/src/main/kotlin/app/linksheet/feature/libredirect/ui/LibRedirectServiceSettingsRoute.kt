@@ -19,11 +19,10 @@ import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.libredirect.FrontendState
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
 import fe.linksheet.web.HostUtil
-import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import app.linksheet.feature.libredirect.R
-import fe.linksheet.extension.kotlin.collectOnIO
+import app.linksheet.compose.extension.collectOnIO
 
 @Composable
 fun LibRedirectServiceSettingsRoute(
@@ -39,7 +38,7 @@ fun LibRedirectServiceSettingsRoute(
 
     val settings by viewModel.settings.collectAsStateWithLifecycle()
 
-    val selectedFrontend by viewModel.selectedFrontend.collectOnIO()
+    val selectedFrontend by viewModel.selectedFrontend.collectOnIO(null)
     val enabled by viewModel.enabled.collectOnIO(false)
 
     val selected = remember(selectedFrontend) {

@@ -84,5 +84,5 @@ dependencies {
     testImplementation(Grrfe.std.test)
     testImplementation(Grrfe.std.result.assert)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.9.3")
+    debugImplementation(AndroidX.compose.ui.tooling)
 }

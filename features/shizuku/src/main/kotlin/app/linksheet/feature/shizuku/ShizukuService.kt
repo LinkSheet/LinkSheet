@@ -26,7 +26,7 @@ import rikka.shizuku.ShizukuProvider
 val ShizukuModule = module {
     single {
         AndroidShizukuService(
-            broadcastDistributor = get(),
+            eventBus = get(),
             packageManager = getPackageManager()
         )
     }
@@ -35,7 +35,7 @@ val ShizukuModule = module {
 
 @Suppress("FunctionName")
 internal fun AndroidShizukuService(
-    broadcastDistributor: BroadcastEventBus,
+    eventBus: BroadcastEventBus,
     packageManager: PackageManager,
 ): ShizukuService {
     val service = ShizukuService(
@@ -49,7 +49,7 @@ internal fun AndroidShizukuService(
         }
     )
     Shizuku.addRequestPermissionResultListener(service)
-    broadcastDistributor.register(service)
+    eventBus.register(service)
 
     return service
 }
@@ -65,7 +65,7 @@ class ShizukuService(
     IntentEventHandler {
 
     companion object {
-        private const val requestCode = 10000
+        private const val REQUEST_CODE = 10000
 
         val ManagerIntent = buildIntent(
             action = Intent.ACTION_VIEW,
@@ -86,18 +86,14 @@ class ShizukuService(
     }
     val statusFlow = _statusFlow.asStateFlow()
 
-    fun init() {
-
-    }
-
     override fun onRequestPermissionResult(requestCode: Int, grantResult: Int) {
-        if (requestCode == Companion.requestCode) {
+        if (requestCode == REQUEST_CODE) {
             _statusFlow.update { it.copy(permission = grantResult == PackageManager.PERMISSION_GRANTED) }
         }
     }
 
     fun requestPermission() {
-        requestPermission(requestCode)
+        requestPermission(REQUEST_CODE)
     }
 
     fun isShizukuRunning(): Boolean {

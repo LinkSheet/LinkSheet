@@ -26,8 +26,8 @@ import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewTheme
 import app.linksheet.feature.shizuku.R
 import app.linksheet.feature.shizuku.ShizukuDownload
-import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.shizuku.ShizukuStatus
+import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
@@ -35,12 +35,10 @@ import fe.android.compose.text.TextOptions
 import fe.composekit.component.ContentType
 import fe.composekit.component.PreviewThemeNew
 import fe.composekit.component.card.AlertCard
-import fe.composekit.component.icon.IconOffset
-import fe.composekit.component.list.item.ContentPosition
-import fe.composekit.component.list.item.type.SwitchListItem
+import fe.composekit.component.card.AlertCardDefaults
 import fe.composekit.layout.column.SaneLazyListScope
 import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
-import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.preference.FakePreferences
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -55,7 +53,6 @@ fun ShizukuRoute(
         initialValue = remember { viewModel.status.value },
     )
 
-    val enableShizuku by viewModel.enableShizuku.collectAsStateWithLifecycle()
     ShizukuRouteInternal(
         status = status,
         openManager = {
@@ -63,8 +60,12 @@ fun ShizukuRoute(
         },
         requestPermission = viewModel::requestPermission,
         onBackPressed = onBackPressed,
-        enabled = enableShizuku,
-        onEnabledChange = viewModel.enableShizuku
+        content = {
+            content(
+                enableShizukuPref = viewModel.enableShizuku,
+                autoDisableLinkHandlingPref = viewModel.autoDisableLinkHandling
+            )
+        }
     )
 }
 
@@ -74,8 +75,7 @@ private fun ShizukuRouteInternal(
     openManager: () -> Unit,
     requestPermission: () -> Unit,
     onBackPressed: () -> Unit,
-    enabled: Boolean,
-    onEnabledChange: (Boolean) -> Unit
+    content: SaneLazyListScope.() -> Unit,
 ) {
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.settings_shizuku__title_shizuku),
@@ -85,9 +85,7 @@ private fun ShizukuRouteInternal(
             !status.installed -> notInstalled()
             !status.running -> notRunning(openManager = openManager)
             !status.permission -> noPermission(requestPermission = requestPermission)
-            else -> {
-                toggle(enabled = enabled, onEnabledChange = onEnabledChange)
-            }
+            else -> content()
         }
 
         item {
@@ -100,18 +98,6 @@ private fun ShizukuRouteInternal(
     }
 }
 
-private fun SaneLazyListScope.toggle(enabled: Boolean, onEnabledChange: (Boolean) -> Unit) {
-    item(key = R.string.settings_shizuku__title_enable, contentType = ContentType.SingleGroupItem) {
-        SwitchListItem(
-            checked = enabled,
-            onCheckedChange = onEnabledChange,
-            position = ContentPosition.Trailing,
-            headlineContent = textContent(R.string.settings_shizuku__title_enable),
-//            supportingContent = textContent(R.string.settings_shizuku__text),
-        )
-    }
-}
-
 private fun SaneLazyListScope.notInstalled() {
     item(
         key = R.string.settings_shizuku__title_not_installed,
@@ -121,7 +107,7 @@ private fun SaneLazyListScope.notInstalled() {
         AlertCard(
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
             icon = Icons.Rounded.InstallMobile.iconPainter,
-            iconOffset = IconOffset(y = (-1).dp),
+            iconOffset = AlertCardDefaults.IconOffset,
             iconContentDescription = stringResource(id = R.string.settings_shizuku__title_not_installed),
             headline = textContent(R.string.settings_shizuku__title_not_installed),
             subtitle = textContent(R.string.settings_shizuku__text_not_installed),
@@ -140,7 +126,7 @@ private fun SaneLazyListScope.notRunning(openManager: () -> Unit) {
         AlertCard(
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
             icon = Icons.Rounded.NotStarted.iconPainter,
-            iconOffset = IconOffset(y = (-1).dp),
+            iconOffset = AlertCardDefaults.IconOffset,
             iconContentDescription = stringResource(id = R.string.settings_shizuku__title_not_running),
             headline = textContent(R.string.settings_shizuku__title_not_running),
             subtitle = textContent(R.string.settings_shizuku__text_not_running),
@@ -157,7 +143,7 @@ private fun SaneLazyListScope.noPermission(requestPermission: () -> Unit) {
         AlertCard(
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
             icon = Icons.Rounded.WarningAmber.iconPainter,
-            iconOffset = IconOffset(y = (-1).dp),
+            iconOffset = AlertCardDefaults.IconOffset,
             iconContentDescription = stringResource(id = R.string.settings_shizuku__title_missing_permission),
             headline = textContent(R.string.settings_shizuku__title_missing_permission),
             subtitle = textContent(R.string.settings_shizuku__text_missing_permission),
@@ -192,6 +178,12 @@ private fun ShizukuRouteNotRunningPreview() {
     ShizukuPreviewBase(status = ShizukuStatus(installed = true, permission = true, running = false))
 }
 
+@Preview
+@Composable
+private fun ShizukuRouteContentPreview() {
+    ShizukuPreviewBase(status = ShizukuStatus(installed = true, permission = true, running = true))
+}
+
 @Composable
 private fun ShizukuPreviewBase(status: ShizukuStatus) {
     PreviewTheme {
@@ -200,8 +192,12 @@ private fun ShizukuPreviewBase(status: ShizukuStatus) {
             openManager = {},
             requestPermission = {},
             onBackPressed = {},
-            enabled = true,
-            onEnabledChange = {}
+            content = {
+                content(
+                    enableShizukuPref = FakePreferences.boolean(true).vm,
+                    autoDisableLinkHandlingPref = FakePreferences.boolean(true).vm
+                )
+            }
         )
     }
 }

@@ -1,9 +1,7 @@
-package fe.linksheet.module.shizuku
+package app.linksheet.feature.shizuku
 
 import android.os.IBinder
 import android.os.IInterface
-import fe.std.result.IResult
-import fe.std.result.tryCatch
 import rikka.shizuku.ShizukuBinderWrapper
 
 

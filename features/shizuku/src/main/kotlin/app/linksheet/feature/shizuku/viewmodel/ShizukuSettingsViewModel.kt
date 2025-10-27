@@ -15,6 +15,7 @@ class ShizukuSettingsViewModel(
     shizukuPreferences: ShizukuPreferences,
 ) : ViewModel() {
     val enableShizuku = preferenceRepository.asViewModelState(shizukuPreferences.enable)
+    val autoDisableLinkHandling = preferenceRepository.asViewModelState(shizukuPreferences.autoDisableLinkHandling)
     val status = shizukuService.statusFlow
 
     fun requestPermission() {

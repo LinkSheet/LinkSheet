@@ -403,6 +403,7 @@ dependencies {
     implementation(_1fexd.composeKit.preference.compose.core)
     implementation(_1fexd.composeKit.preference.compose.core2)
     implementation(_1fexd.composeKit.preference.compose.mock)
+    implementation(_1fexd.composeKit.preference.compose.mock2)
     implementation(_1fexd.composeKit.span.core)
     implementation(_1fexd.composeKit.span.compose)
 

@@ -3,16 +3,16 @@
 package app.linksheet.feature.engine.eval.expression
 
 import androidx.annotation.Keep
-import app.linksheet.feature.engine.engine.context.AppRoleId
-import app.linksheet.feature.engine.engine.context.EngineExtra
-import app.linksheet.feature.engine.engine.context.EngineFlag
-import app.linksheet.feature.engine.engine.context.EngineRunContext
-import app.linksheet.feature.engine.engine.context.IgnoreLibRedirectExtra
-import app.linksheet.feature.engine.engine.context.KnownBrowserExtra
-import app.linksheet.feature.engine.engine.context.SkipFollowRedirectsExtra
-import app.linksheet.feature.engine.engine.context.SourceAppExtra
-import app.linksheet.feature.engine.engine.context.findExtraOrNull
-import app.linksheet.feature.engine.engine.context.hasExtra
+import app.linksheet.feature.engine.core.context.AppRoleId
+import app.linksheet.feature.engine.core.context.EngineExtra
+import app.linksheet.feature.engine.core.context.EngineFlag
+import app.linksheet.feature.engine.core.context.EngineRunContext
+import app.linksheet.feature.engine.core.context.IgnoreLibRedirectExtra
+import app.linksheet.feature.engine.core.context.KnownBrowserExtra
+import app.linksheet.feature.engine.core.context.SkipFollowRedirectsExtra
+import app.linksheet.feature.engine.core.context.SourceAppExtra
+import app.linksheet.feature.engine.core.context.findExtraOrNull
+import app.linksheet.feature.engine.core.context.hasExtra
 import app.linksheet.feature.engine.eval.EvalContext
 import fe.linksheet.util.AndroidAppPackage
 import kotlinx.serialization.ExperimentalSerializationApi

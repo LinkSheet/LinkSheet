@@ -1,12 +1,20 @@
 package app.linksheet.feature.engine.database.repository
 
-import app.linksheet.feature.engine.database.dao.cache.*
-import app.linksheet.feature.engine.database.entity.cache.*
-import app.linksheet.feature.engine.engine.fetcher.preview.HtmlPreviewResult
-import app.linksheet.feature.engine.engine.fetcher.preview.PreviewFetchResult
-import app.linksheet.feature.engine.engine.fetcher.preview.PreviewFetchResultId
+import app.linksheet.feature.engine.database.dao.PreviewCacheDao
+import app.linksheet.feature.engine.database.dao.ResolveTypeDao
+import app.linksheet.feature.engine.database.dao.ResolvedUrlCacheDao
+import app.linksheet.feature.engine.database.dao.UrlEntryDao
+import app.linksheet.feature.engine.database.entity.PreviewCache
+import app.linksheet.feature.engine.database.entity.ResolveType
+import app.linksheet.feature.engine.database.entity.ResolvedUrl
+import app.linksheet.feature.engine.database.entity.UrlEntry
+import app.linksheet.feature.engine.core.fetcher.preview.HtmlPreviewResult
+import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResult
+import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResultId
+import app.linksheet.feature.engine.database.dao.HtmlCacheDao
+import app.linksheet.feature.engine.database.entity.CachedHtml
 
-class CacheRepository(
+class CacheRepository internal constructor(
     val htmlCacheDao: HtmlCacheDao,
     val previewCacheDao: PreviewCacheDao,
     val resolvedUrlCacheDao: ResolvedUrlCacheDao,

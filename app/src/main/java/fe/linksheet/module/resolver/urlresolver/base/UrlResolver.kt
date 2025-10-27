@@ -4,7 +4,7 @@ import android.net.Uri
 import android.net.compatHost
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.unwrapOrNull
-import app.linksheet.feature.engine.database.entity.cache.ResolveType
+import app.linksheet.feature.engine.database.entity.ResolveType
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.redactor.HashProcessor

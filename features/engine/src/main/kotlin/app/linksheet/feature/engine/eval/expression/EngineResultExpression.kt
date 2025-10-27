@@ -4,10 +4,10 @@ package app.linksheet.feature.engine.eval.expression
 
 import android.content.Intent
 import androidx.annotation.Keep
-import app.linksheet.feature.engine.engine.EngineResult
-import app.linksheet.feature.engine.engine.ForwardOtherProfileResult
-import app.linksheet.feature.engine.engine.IntentEngineResult
-import app.linksheet.feature.engine.engine.UrlEngineResult
+import app.linksheet.feature.engine.core.EngineResult
+import app.linksheet.feature.engine.core.ForwardOtherProfileResult
+import app.linksheet.feature.engine.core.IntentEngineResult
+import app.linksheet.feature.engine.core.UrlEngineResult
 import app.linksheet.feature.engine.eval.EvalContext
 import fe.std.uri.StdUrl
 import kotlinx.serialization.Contextual

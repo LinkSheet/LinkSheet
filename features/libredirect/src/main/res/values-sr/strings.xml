@@ -12,44 +12,4 @@
     <string name="no_libredirect_services">Нису пронађене LibRedirect услуге!</string>
     <string name="enable_libredirect">Омогући LibRedirect</string>
     <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url-id="libredirect-github">LibRedirect</annotation> интеграцију</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info">
-        <item quantity="one">%d хост: %s</item>
-        <item quantity="few">%d хостови: %s</item>
-        <item quantity="other">%d хостови: %s</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
-        <item quantity="one">%d верификован хост</item>
-        <item quantity="few">%d верификована хоста</item>
-        <item quantity="other">%d верификованих хостова</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
-        <item quantity="one">%d омогућен хост</item>
-        <item quantity="few">%d омогућена хоста</item>
-        <item quantity="other">%d омогућених хостова</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
-        <item quantity="one">%d онемогућен хост</item>
-        <item quantity="few">%d онемогућена хоста</item>
-        <item quantity="other">%d онемогућених хостова</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
-        <item quantity="one">%d верификован</item>
-        <item quantity="few">%d верификована</item>
-        <item quantity="other">%d верификованих</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
-        <item quantity="one">%d омогућен</item>
-        <item quantity="few">%d омогућена</item>
-        <item quantity="other">%d омогућених</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
-        <item quantity="one">%d онемогућен</item>
-        <item quantity="few">%d онемогућена</item>
-        <item quantity="other">%d онемогућених</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
-        <item quantity="one">%d подразумевани хост</item>
-        <item quantity="few">%d подразумевана хоста</item>
-        <item quantity="other">%d подразумеваних хостова</item>
-    </plurals>
 </resources>

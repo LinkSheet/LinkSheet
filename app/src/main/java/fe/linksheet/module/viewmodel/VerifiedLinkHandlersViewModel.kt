@@ -3,7 +3,6 @@ package fe.linksheet.module.viewmodel
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.runtime.DisposableEffect
 import androidx.lifecycle.viewModelScope
 import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.filterIf
@@ -21,7 +20,7 @@ import fe.linksheet.feature.app.AppInfo
 import fe.linksheet.feature.app.DomainVerificationAppInfo
 import fe.linksheet.feature.app.LinkHandling
 import fe.linksheet.feature.app.PackageService
-import fe.linksheet.module.app.toPreferredApp
+import fe.linksheet.feature.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -35,7 +34,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Comparator
 import kotlin.collections.filter
 

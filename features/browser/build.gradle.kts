@@ -1,7 +1,7 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -29,6 +29,7 @@ android {
 
 dependencies {
     implementation(AndroidX.core.ktx)
+    implementation(Koin.android)
 
     testImplementation(AndroidX.test.ext.junit.ktx)
     testImplementation(project(":test-core"))

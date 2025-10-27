@@ -1,10 +1,10 @@
 package fe.linksheet.module.resolver.urlresolver.amp2html
 
+import app.linksheet.api.CachedRequest
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import fe.amp2htmlkt.Amp2Html
 import fe.httpkt.Request
 import fe.linksheet.extension.okhttp.isHtml
-import app.linksheet.feature.engine.database.repository.CacheRepository
-import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequestException
@@ -16,7 +16,7 @@ class Amp2HtmlResolveRequest(
     token: String,
     request: Request,
     private val cacheRepository: CacheRepository,
-    private val urlResolverCache: RealCachedRequest,
+    private val urlResolverCache: CachedRequest,
     private val okHttpClient: OkHttpClient,
 ) : ResolveRequest(apiUrl, token, request, "amp2html") {
     override fun resolveLocal(url: String, timeout: Int): Result<ResolveResultType> {

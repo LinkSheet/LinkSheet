@@ -12,28 +12,4 @@
     <string name="instance_not_available_anymore">实例已经不再可用！</string>
     <string name="libredirect_via">通过%s</string>
     <string name="no_libredirect_services">未找到LibRedirect服务！</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info">
-        <item quantity="other">%d 个主机：%s</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
-        <item quantity="other">%d 个已禁用主机</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
-        <item quantity="other">%d 个已验证主机</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
-        <item quantity="other">%d 个已启用主机</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
-        <item quantity="other">已启用 %d</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
-        <item quantity="other">已禁用 %d</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
-        <item quantity="other">已验证 %d</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
-        <item quantity="other">%d 个默认主机</item>
-    </plurals>
 </resources>

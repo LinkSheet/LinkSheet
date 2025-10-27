@@ -6,34 +6,4 @@
     <string name="enabled">有効</string>
     <string name="services">サービス</string>
     <string name="instance_not_available_anymore">インスタンスはもう利用できません！</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
-        <item quantity="other">%d 確認済み</item>
-    </plurals>
-    <string name="enable_libredirect_explainer">実験的な<annotation url-id="libredirect-github">LibRedirect</annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします</string>
-    <string name="random_instance">ランダムインスタンス</string>
-    <string name="no_libredirect_services">LibRedirectのサービスは見つかりませんでした！</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info">
-        <item quantity="other">%d ホスト: %s</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
-        <item quantity="other">%d ウェブリンクが無効です</item>
-    </plurals>
-    <string name="libredirect_via">%s経由</string>
-    <string name="enable_libredirect">LibRedirectを有効にする</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
-        <item quantity="other">%d 確認済みウェブリンク</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
-        <item quantity="other">%d が有効</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
-        <item quantity="other">%d 有効なウェブリンク</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
-        <item quantity="other">%d が無効</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
-        <item quantity="other">%d デフォルトのホスト</item>
-    </plurals>
 </resources>

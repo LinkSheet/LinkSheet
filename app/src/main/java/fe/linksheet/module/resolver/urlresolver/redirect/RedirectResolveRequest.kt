@@ -1,8 +1,8 @@
 package fe.linksheet.module.resolver.urlresolver.redirect
 
+import app.linksheet.api.CachedRequest
 import fe.httpkt.Request
 import fe.linksheet.RedirectResolver
-import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -13,7 +13,7 @@ class RedirectResolveRequest(
     apiUrl: String,
     token: String,
     request: Request,
-    private val urlResolverCache: RealCachedRequest,
+    private val urlResolverCache: CachedRequest,
     private val okHttpClient: OkHttpClient,
     private val aggressiveExperiment: () -> Boolean = { false },
 ) : ResolveRequest(apiUrl, token, request, "redirect") {

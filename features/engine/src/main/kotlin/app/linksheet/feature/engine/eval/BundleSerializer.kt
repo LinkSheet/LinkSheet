@@ -3,7 +3,7 @@
 package app.linksheet.feature.engine.eval
 
 import androidx.annotation.Keep
-import app.linksheet.feature.engine.engine.EngineResult
+import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.eval.expression.Expression
 import kotlinx.serialization.*
 import kotlinx.serialization.protobuf.ProtoBuf

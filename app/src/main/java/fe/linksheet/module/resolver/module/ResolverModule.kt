@@ -8,8 +8,8 @@ import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.intent.engine.DefaultLinkEngineIntentResolver
-import fe.linksheet.intent.engine.LinkEngineIntentResolver
+import fe.linksheet.feature.engine.DefaultLinkEngineIntentResolver
+import fe.linksheet.feature.engine.LinkEngineIntentResolver
 import fe.linksheet.feature.app.PackageService
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository

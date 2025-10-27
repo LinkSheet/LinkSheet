@@ -12,44 +12,4 @@
     <string name="no_libredirect_services">¡No se han encontrado servicios de LibRedirect!</string>
     <string name="enable_libredirect">Activar LibRedirect</string>
     <string name="enable_libredirect_explainer">Redirigir enlaces a frontends amigables para la privacidad utilizando la integración experimental <annotation url-id="libredirect-github">LibRedirect</annotation></string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info">
-        <item quantity="one">%d servidor: %s</item>
-        <item quantity="many">%d servidores: %s</item>
-        <item quantity="other">%d servidores: %s</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
-        <item quantity="one">%d servidor activado</item>
-        <item quantity="many">%d servidores activado</item>
-        <item quantity="other">%d servidores activado</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
-        <item quantity="one">%d servidor verificado</item>
-        <item quantity="many">%d servidores verificados</item>
-        <item quantity="other">%d servidores verificados</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
-        <item quantity="one">%d servidor desactivado</item>
-        <item quantity="many">%d servidores desactivados</item>
-        <item quantity="other">%d servidores desactivados</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
-        <item quantity="one">%d verificado</item>
-        <item quantity="many">%d verificados</item>
-        <item quantity="other">%d verificados</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
-        <item quantity="one">%d activado</item>
-        <item quantity="many">%d activados</item>
-        <item quantity="other">%d activados</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
-        <item quantity="one">%d desactivado</item>
-        <item quantity="many">%d desactivados</item>
-        <item quantity="other">%d desactivados</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
-        <item quantity="one">%d host predeterminado</item>
-        <item quantity="many">%d hosts predeterminados</item>
-        <item quantity="other">%d hosts predeterminados</item>
-    </plurals>
 </resources>

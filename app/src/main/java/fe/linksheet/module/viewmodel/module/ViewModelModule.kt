@@ -4,7 +4,7 @@ package fe.linksheet.module.viewmodel.module
 import fe.gson.GsonQualifier
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
-import fe.linksheet.module.profile.ProfileSwitcherModule
+import fe.linksheet.feature.profile.ProfileFeatureModule
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
@@ -21,7 +21,7 @@ val ViewModelModule = module {
         PreferenceRepositoryModule,
         RepositoryModule,
         DefaultLogModule,
-        ProfileSwitcherModule
+        ProfileFeatureModule
     )
     single {
         LogViewCommon(

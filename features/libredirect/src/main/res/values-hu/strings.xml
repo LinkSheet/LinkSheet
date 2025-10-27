@@ -12,32 +12,4 @@
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>
     <string name="instance">Példány</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
-        <item quantity="one">%d ellenőrzött gazdagép</item>
-        <item quantity="other">%d ellenőrzött gazdagép</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info">
-        <item quantity="one">%d gazdagép: %s</item>
-        <item quantity="other">%d gazdagép: %s</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
-        <item quantity="one">%d engedélyezett</item>
-        <item quantity="other">%d engedélyezett</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
-        <item quantity="one">%d letiltott</item>
-        <item quantity="other">%d letiltott</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
-        <item quantity="one">%d ellenőrizve</item>
-        <item quantity="other">%d ellenőrizve</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
-        <item quantity="one">%d engedélyezett gazdagép</item>
-        <item quantity="other">%d engedélyezett gazdagép</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
-        <item quantity="one">%d letiltott gazdagép</item>
-        <item quantity="other">%d letiltott gazdagép</item>
-    </plurals>
 </resources>

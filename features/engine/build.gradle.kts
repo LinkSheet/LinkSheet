@@ -10,6 +10,8 @@ plugins {
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
+    id("androidx.room")
+    id("com.google.devtools.ksp")
     id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
@@ -19,6 +21,11 @@ android {
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
+
+        room {
+            schemaDirectory("$projectDir/schemas")
+            generateKotlin = true
+        }
     }
 
     kotlin {
@@ -49,6 +56,10 @@ dependencies {
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
+    implementation(AndroidX.room.runtime)
+    implementation(AndroidX.room.ktx)
+    ksp(AndroidX.room.compiler)
+
 
     compileOnly(project(":hidden-api"))
 

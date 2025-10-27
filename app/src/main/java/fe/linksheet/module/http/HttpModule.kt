@@ -1,6 +1,7 @@
 package fe.linksheet.module.http
 
 import android.content.Context
+import app.linksheet.api.CachedRequest
 import coil3.ImageLoader
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import fe.httpkt.Request
@@ -57,5 +58,5 @@ val HttpModule = module {
             .build()
     }
     single<Unfurler> { Unfurler(httpClient = get()) }
-    single<RealCachedRequest> { RealCachedRequest(get(), createLogger<RealCachedRequest>()) }
+    single<CachedRequest> { RealCachedRequest(get(), createLogger<RealCachedRequest>()) }
 }

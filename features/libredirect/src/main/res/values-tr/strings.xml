@@ -12,36 +12,4 @@
     <string name="services">Hizmetler</string>
     <string name="no_libredirect_services">LibRedirect hizmeti bulunamadı!</string>
     <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_info">
-        <item quantity="one">%d sunucu: %s</item>
-        <item quantity="other">%d sunucu: %s</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
-        <item quantity="one">%d etkin sunucu</item>
-        <item quantity="other">%d etkin sunucu</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
-        <item quantity="one">%d onaylı sunucu</item>
-        <item quantity="other">%d onaylı sunucu</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
-        <item quantity="one">%d devre dışı sunucu</item>
-        <item quantity="other">%d devre dışı sunucu</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
-        <item quantity="one">%d devre dışı</item>
-        <item quantity="other">%d devre dışı</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
-        <item quantity="one">%d etkin</item>
-        <item quantity="other">%d etkin</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
-        <item quantity="one">%d onaylı</item>
-        <item quantity="other">%d onaylı</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
-        <item quantity="one">%d varsayılan sunucu</item>
-        <item quantity="other">%d varsayılan sunucu</item>
-    </plurals>
 </resources>

@@ -1,5 +1,6 @@
 package fe.linksheet.module.resolver.urlresolver
 
+import app.linksheet.api.CachedRequest
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.single
 import fe.httpkt.Request
@@ -16,7 +17,7 @@ import org.koin.dsl.module
 val UrlResolverModule = module {
     val host = LinkSheetAppConfig.supabaseHost()
     val token = LinkSheetAppConfig.supabaseApiKey()
-    single<RedirectResolveRequest, Request, RealCachedRequest> { _, request, cachedRequest ->
+    single<RedirectResolveRequest, Request, CachedRequest> { _, request, cachedRequest ->
         val experimentRepository = scope.get<ExperimentRepository>()
         RedirectResolveRequest(
             apiUrl = "${host}/redirector",
@@ -27,7 +28,7 @@ val UrlResolverModule = module {
             aggressiveExperiment = experimentRepository.asFunction(Experiments.aggressiveFollowRedirects)
         )
     }
-    single<Amp2HtmlResolveRequest, Request, RealCachedRequest> { _, request, cachedRequest ->
+    single<Amp2HtmlResolveRequest, Request, CachedRequest> { _, request, cachedRequest ->
         Amp2HtmlResolveRequest(
             apiUrl = "${host}/amp2html",
             token = token,

@@ -5,12 +5,15 @@ import android.app.Application
 import android.content.Intent
 import android.util.Log
 import androidx.work.WorkManager
+import app.linksheet.api.DependencyProvider
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.compose.debug.NoOpDebugMenuSlotProvider
 import app.linksheet.compose.debug.NoOpDebugPreferenceProvider
+import app.linksheet.feature.browser.PrivateBrowsingModule
 import app.linksheet.feature.downloader.DownloaderModule
-import app.linksheet.feature.libredirect.LibRedirectModule
+import app.linksheet.feature.engine.LinkEngineFeatureModule
+import app.linksheet.feature.libredirect.LibRedirectFeatureModule
 import app.linksheet.feature.scenario.ScenarioModule
 import app.linksheet.feature.shizuku.ShizukuModule
 import app.linksheet.lib.log.AndroidLogSink
@@ -28,8 +31,7 @@ import fe.gson.context.GlobalGsonContext
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.module.analytics.AnalyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
-import fe.linksheet.module.app.PackageModule
-import fe.linksheet.module.browser.PrivateBrowsingModule
+import fe.linksheet.feature.app.AppFeatureModule
 import fe.linksheet.module.clock.ClockModule
 import fe.linksheet.module.database.DatabaseModule
 import fe.linksheet.module.database.dao.module.DaoModule
@@ -46,7 +48,7 @@ import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.paste.PasteServiceModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
-import fe.linksheet.module.profile.ProfileSwitcherModule
+import fe.linksheet.feature.profile.ProfileFeatureModule
 import fe.linksheet.module.receiver.BroadcastEventBusModule
 import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
 import fe.linksheet.module.repository.module.RepositoryModule
@@ -124,7 +126,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             ClockModule,
             SystemInfoServiceModule,
             PrivateBrowsingModule,
-            PackageModule,
+            AppFeatureModule,
             AppLocaleModule,
             NetworkStateServiceModule,
             ShizukuServiceModule,
@@ -137,24 +139,25 @@ open class LinkSheetApp : Application(), DependencyProvider {
             DaoModule,
             RepositoryModule,
             HttpModule,
+            DownloaderModule,
             RemoteConfigClientModule,
             UrlResolverModule,
             ResolverModule,
             ViewModelModule,
-            DownloaderModule,
             provideAnalyticsClient(),
             AnalyticsServiceModule,
             StatisticsModule,
             VersionTrackerModule,
             PasteServiceModule,
-            ProfileSwitcherModule,
+            ProfileFeatureModule,
             AppStateServiceModule,
             provideDebugModule(),
             WorkDelegatorServiceModule,
             BroadcastEventBusModule,
             ShizukuModule,
             ScenarioModule,
-            LibRedirectModule,
+            LibRedirectFeatureModule,
+            LinkEngineFeatureModule
         )
     }
 

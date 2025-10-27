@@ -20,7 +20,7 @@ import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.feature.app.PackageService
-import fe.linksheet.module.app.ActivityAppInfoGlue
+import fe.linksheet.feature.app.ActivityAppInfoGlue
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.DisplayActivityInfo
@@ -29,7 +29,6 @@ import fe.linksheet.util.RefactorGlue
 import fe.linksheet.web.VerifiedDomainService.canHandleDomains
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
 
 class PreferredAppSettingsViewModel(
     val context: Application,

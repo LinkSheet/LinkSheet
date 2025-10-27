@@ -12,36 +12,4 @@
     <string name="libredirect_via">Via %s</string>
     <string name="random_instance">Willekeurige server</string>
     <string name="instance_not_available_anymore">Deze server is niet meer beschikbaar!</string>
-    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
-        <item quantity="one">%d standaardhost</item>
-        <item quantity="other">%d standaardhosts</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info">
-        <item quantity="one">%d host: %s</item>
-        <item quantity="other">%d hosts: %s</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
-        <item quantity="one">%d geverifieerde host</item>
-        <item quantity="other">%d geverifieerd hosts</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
-        <item quantity="one">%d ingeschakeld</item>
-        <item quantity="other">%d ingeschakeld</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
-        <item quantity="one">%d geverifieerd</item>
-        <item quantity="other">%d geverifieerd</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
-        <item quantity="one">%d ingeschakelde host</item>
-        <item quantity="other">%d ingeschakelde hosts</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
-        <item quantity="one">%d uitgeschakeld</item>
-        <item quantity="other">%d uitgeschakeld</item>
-    </plurals>
-    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
-        <item quantity="one">%d uitgeschakelde host</item>
-        <item quantity="other">%d uitgeschakelde hosts</item>
-    </plurals>
 </resources>

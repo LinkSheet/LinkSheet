@@ -1,9 +1,9 @@
 package app.linksheet.feature.engine.eval.rule
 
-import app.linksheet.feature.engine.engine.EngineResult
-import app.linksheet.feature.engine.engine.context.EngineRunContext
-import app.linksheet.feature.engine.engine.rule.PostProcessorInput
-import app.linksheet.feature.engine.engine.rule.PostProcessorRule
+import app.linksheet.feature.engine.core.EngineResult
+import app.linksheet.feature.engine.core.context.EngineRunContext
+import app.linksheet.feature.engine.core.rule.PostProcessorInput
+import app.linksheet.feature.engine.core.rule.PostProcessorRule
 import app.linksheet.feature.engine.eval.EvalContextImpl
 import app.linksheet.feature.engine.eval.expression.Expression
 import app.linksheet.feature.engine.eval.KnownTokens

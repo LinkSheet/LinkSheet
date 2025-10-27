@@ -124,18 +124,11 @@ data object DebugRoute : Route
 @Keep
 @Serializable
 data class LogTextViewerRoute(val id: String?, val name: String) : Route
-
-@Keep
-@Serializable
-data class LibRedirectServiceRoute(val serviceKey: String) : Route
-
 @Keep
 @Serializable
 data class VlhAppRoute(val packageName: String) : Route
 
-@Keep
-@Serializable
-data object LibRedirectRoute : Route
+
 
 @Keep
 @Serializable

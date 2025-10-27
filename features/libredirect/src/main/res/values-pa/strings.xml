@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">ਇਨੇਬਲ ਕੀਤੇ</string>
+    <string name="frontend">ਫਰੰਟਐਂਡ</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="instance">ਇੰਸਟੈਂਸ</string>
+    <string name="random_instance">ਰੈਨਡਮ ਇੰਸਟੈਂਸ</string>
+    <string name="services">ਸੇਵਾਵਾਂ</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="instance_not_available_anymore">ਇੰਸਟੈਂਸ ਹੁਣ ਉਪਲਬਧ ਨਹੀਂ ਹੈ!</string>
+    <string name="libredirect_via">ਵਾਇਆ %s</string>
+    <string name="no_libredirect_services">ਕੋਈ LibRedirect ਸੇਵਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ!</string>
+    <string name="enable_libredirect">LibRedirect ਇਨੇਬਲ ਕਰੋ</string>
+    <string name="enable_libredirect_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url-id="libredirect-github">LibRedirect</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਗੋਪਨੀਯਤਾ ਅਨੁਕੂਲ ਫਰੰਟਐਂਡਸ ਲਈ ਲਿੰਕ ਰੀਡਾਇਰੈਕਟ ਕਰੋ</string>
+</resources>

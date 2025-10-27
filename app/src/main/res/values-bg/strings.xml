@@ -13,7 +13,6 @@
     <string name="checkmark">Отметка</string>
     <string name="donate_subtitle">Надградете до <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
-    <string name="lib_redirect">LibRedirect</string>
     <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне от %s</string>
     <string name="default_apps">Предпочитани приложения</string>
@@ -23,7 +22,6 @@
     <string name="url_copied">Адресът е копиран в междинната памет</string>
     <string name="send_to">Споделяне</string>
     <string name="settings">Настройки</string>
-    <string name="enabled">Включен</string>
     <string name="disabled">Изключено</string>
     <string name="bottom_sheet">Долно меню</string>
     <string name="app_browsers">Приложения</string>
@@ -51,12 +49,9 @@
     <string name="always">Винаги</string>
     <string name="apps_which_can_open_links_explainer_2">Списък на приложенията, които биха могли да попречат на работата на LinkSheet</string>
     <string name="no_preferred_apps_set_yet">Не сте избрали предпочитани приложения.</string>
-    <string name="enable_libredirect">Използване на LibRedirect</string>
     <string name="apps_which_can_open_links_explainer">Докоснете приложение и ще се отвори менюто „Отваряне по подразбиране“, откъдето можете да забраните автоматичното отваряне на препратки</string>
     <string name="open_with_linksheet">Отваряне с LinkSheet</string>
     <string name="about_explainer">За приложението, лицензи</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="fastfoward_rules_explainer">Използване на експериментална интеграция с <annotation url-id="fastforward-github">FastForward</annotation> (заобикаля някои пренасочвания чрез извличане на пренасочвания от препратките)</string>
     <string name="follow_redirects_explainer">Преди отваряне на долното меню, автоматично се последват пренасочванията. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="redirect_resolve_type_local_cache">местна памет</string>
@@ -106,7 +101,6 @@
     <string name="dark">Тъмна</string>
     <string name="fastfoward_rules">Използване на правила на FastForward</string>
     <string name="resolved_via">%s получено от %s</string>
-    <string name="instance">Екземпляр</string>
     <string name="add">Добавяне</string>
     <string name="in_app_browser">Вграден в приложението браузър</string>
     <string name="use_app_settings_explainer">Всяко приложение решава дали да използва вградения си браузър</string>
@@ -114,10 +108,8 @@
     <string name="always_disable_explainer">Вграденият браузър не се използва от приложенията</string>
     <string name="disable_in_selected_explainer">В избраните приложения вграденият браузър не се използва</string>
     <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url-id="clearurls-github">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
-    <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
     <string name="use_unified_preferred_browser_explainer">Когато е отметнато следните настройки се прилагат както за обикновената, така и за вградената обработката на препратки. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
-    <string name="frontend">Интерфейс</string>
     <string name="close">Затваряне</string>
     <string name="dont_show_filtered_item">Да не се показват последно избраните приложения</string>
     <string name="select_an_app">Избиране на приложение</string>
@@ -125,10 +117,8 @@
     <string name="preview_url">Преглед на адреса</string>
     <string name="preview_url_explainer">Показва посещаваната препратка (след обработката)</string>
     <string name="linksheet_download">Изтегляне на LinkSheet</string>
-    <string name="random_instance">Произволен екземпляр</string>
     <string name="always_disable">Винаги изключено</string>
     <string name="use_app_settings">Подразбирани</string>
-    <string name="libredirect_via">От %s</string>
     <string name="disable_in_selected">Винаги изключено…</string>
     <string name="feature_flags_explainer">Включва или изключва експериментални възможности</string>
     <string name="request_timeout_explainer">Задава колко секунди LinkSheet да изчака за установяване на връзка. Стойност 0 изключва времето за изчакване, но не се препоръчва.</string>
@@ -146,8 +136,6 @@
     <string name="debug_explainer">Дневник, нулиране на проверени приложения</string>
     <string name="logs">Дневници</string>
     <string name="logs_explainer">Преглед на дневника на приложението</string>
-    <string name="services">Услуги</string>
-    <string name="no_libredirect_services">Не са намерени услуги на LibRedirect!</string>
     <string name="current_session">Текущ сеанс</string>
     <string name="log_viewer">Преглед на дневник</string>
     <string name="no_log_entries">Сеансът не съдържа дневници.</string>

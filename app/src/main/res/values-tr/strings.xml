@@ -38,7 +38,6 @@
     <string name="display_grid_layout">Izgara düzeni</string>
     <string name="app_browsers">Uygulamalar</string>
     <string name="bottom_sheet">Alt sayfa</string>
-    <string name="enabled">Etkinleştirilmiş</string>
     <string name="disabled">Devre dışı bırakıldı</string>
     <string name="open_with_linksheet">LinkSheet ile aç</string>
     <string name="whitelisted">Beyaz listeye alınmış</string>
@@ -86,12 +85,6 @@
     <string name="resolved_via">%s %s aracılığıyla çözüldü</string>
     <string name="redirect_resolve_type_remote">uzak sunucu</string>
     <string name="redirect_resolve_type_local">yerel çözücü</string>
-    <string name="enable_libredirect">LibRedirect\'i etkinleştir</string>
-    <string name="enable_libredirect_explainer">Deneysel <annotation url-id="libredirect-github">LibRedirect</annotation> entegrasyonunu kullanarak bağlantıları gizlilik dostu ön yüzlere yönlendirir</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">Önyüz</string>
-    <string name="instance">Oluşum</string>
     <string name="add">Ekle</string>
     <string name="select_an_app">Bir uygulama seçin</string>
     <string name="dont_show_filtered_item">\"Son seçilen uygulama\" bölümünü gösterme</string>
@@ -100,17 +93,13 @@
     <string name="download">İndir</string>
     <string name="enable_downloader">İndiriciyi etkinleştir</string>
     <string name="downloader_url_mime_type">URL\'den mime türünü kullan</string>
-    <string name="random_instance">Rastgele oluşum</string>
     <string name="always_disable_explainer">Uygulama içi tarayıcıyı bütün uygulamalar için devre dışı bırak</string>
     <string name="disable_in_selected_explainer">Uygulama içi tarayıcıyı seçilen uygulamalarda devre dışı bırak</string>
     <string name="use_unified_preferred_browser">Birleştirilmiş ayarları kullan</string>
-    <string name="libredirect_via">%s aracılığıyla</string>
     <string name="ignore_libredirect">LibRedirect\'i yoksay</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <string name="debug_explainer">Uygulama günlükleri, onaylanmış işleyicileri sıfırlama</string>
     <string name="options">Seçenekler</string>
-    <string name="services">Hizmetler</string>
-    <string name="no_libredirect_services">LibRedirect hizmeti bulunamadı!</string>
     <string name="current_session">Mevcut oturum</string>
     <string name="log_files">Geçmiş oturumlar</string>
     <string name="log_viewer">Günlük görüntüleyici</string>
@@ -131,7 +120,6 @@
     <string name="amp2html_local_cache_explainer">Web sayfalarının alınan AMP olmayan sürümlerini yerel olarak önbelleğe alır</string>
     <string name="amp2html">Amp2Html</string>
     <string name="use_unified_preferred_browser_explainer">Bunun etkinleştirilmesi, aşağıdaki ayarları hem normal hem de uygulama içi bağlantı işleme için uygular. Devre dışı bırakıldığında normal ve uygulama içi mod arasında geçiş yapmak için aşağıdaki düğmeleri kullanın.</string>
-    <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>
     <string name="in_app_browser_subtitle">Uygulama içi tarayıcı modunu ayarla</string>
     <string name="use_app_settings_explainer">Uygulama içi tarayıcının kullanılıp kullanılmayacağına uygulamalar karar verir</string>
     <string name="close">Kapat</string>

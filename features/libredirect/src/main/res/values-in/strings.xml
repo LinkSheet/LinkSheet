@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">Aktif</string>
+    <string name="enable_libredirect">Aktifkan LibRedirect</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Antarmuka</string>
+    <string name="instance">Instansi</string>
+    <string name="enable_libredirect_explainer">Alihkan tautan ke antarmuka yang ramah privasi menggunakan integrasi <annotation url-id="libredirect-github">LibRedirect</annotation> yang bersifat eksperimental</string>
+    <string name="random_instance">Instansi acak</string>
+    <string name="instance_not_available_anymore">Instansi tidak tersedia lagi!</string>
+    <string name="libredirect_via">Melalui %s</string>
+    <string name="services">Layanan</string>
+    <string name="no_libredirect_services">Tidak ditemukan layanan LibRedirect yang ada!</string>
+</resources>

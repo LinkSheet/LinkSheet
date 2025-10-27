@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">Включено</string>
+    <string name="frontend">Внешний интерфейс</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="instance">Пример</string>
+    <string name="random_instance">Случайный экземпляр</string>
+    <string name="services">Сервисы</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="instance_not_available_anymore">Экземпляр больше не доступен!</string>
+    <string name="libredirect_via">Через %s</string>
+    <string name="no_libredirect_services">Службы LibRedirect не найдены!</string>
+    <string name="enable_libredirect">Включить LibRedirect</string>
+    <string name="enable_libredirect_explainer">Перенаправление ссылки на интерфейсы, обеспечивающие конфиденциальность, с помощью экспериментальной интеграции <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+</resources>

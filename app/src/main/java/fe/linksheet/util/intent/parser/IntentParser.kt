@@ -4,7 +4,7 @@ import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
 import android.nfc.NfcAdapter
-import fe.linksheet.util.web.UriUtil
+import fe.linksheet.web.UriUtil
 import fe.std.result.Failure
 import fe.std.result.IResult
 import fe.std.result.isSuccess

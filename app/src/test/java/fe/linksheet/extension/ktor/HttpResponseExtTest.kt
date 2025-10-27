@@ -3,7 +3,6 @@ package fe.linksheet.extension.ktor
 import assertk.assertThat
 import assertk.assertions.isTrue
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.testlib.core.JunitTest
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.client.request.*

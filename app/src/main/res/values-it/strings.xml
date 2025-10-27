@@ -40,17 +40,12 @@
     <string name="system">Sistema</string>
     <string name="dark">Scuro</string>
     <string name="light">Chiaro</string>
-    <string name="frontend">Frontend</string>
     <string name="theme_explainer">Cambia il tema dell\'app</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="instance">Istanza</string>
     <string name="add">Aggiungi</string>
     <string name="close">Chiudi</string>
     <string name="remove_all">Rimuovi tutto</string>
     <string name="add_all">Aggiungi tutto</string>
     <string name="select_an_app">Seleziona un\'app</string>
-    <string name="random_instance">Istanza casuale</string>
     <string name="save">Salva</string>
     <string name="debug">Debug</string>
     <string name="no_such_app_found">Nessuna applicazione trovata!</string>
@@ -59,7 +54,6 @@
     <string name="hide_after_copying">Nascondi dopo la copia</string>
     <string name="set_as_browser_done">L\'app è stata impostata come browser predefinito!</string>
     <string name="selected_browser_explainer">Se nessuna app nativa è in grado di gestire un link, questo browser si avvierà per impostazione predefinita</string>
-    <string name="enabled">Attivato</string>
     <string name="disabled">Disattivato</string>
     <string name="whitelisted">Autorizzati</string>
     <string name="about_explainer">Contributi, licenze, link, versione</string>
@@ -87,8 +81,6 @@
     <string name="open_copied_link">Contenuto degli appunti</string>
     <string name="dont_show_filtered_item_explainer">Disabilita la sezione superiore che suggerisce l\'ultima app utilizzata per l\'host specifico</string>
     <string name="fastfoward_rules_explainer">Utilizza l\'integrazione sperimentale delle regole di <annotation url-id="fastforward-github">FastForward</annotation> (salta i reindirizzamenti di alcuni host estraendo il reindirizzamento dal link)</string>
-    <string name="enable_libredirect_explainer">Reindirizza i link a frontend rispettosi della privacy utilizzando l\'integrazione sperimentale di <annotation url-id="libredirect-github">LibRedirect</annotation></string>
-    <string name="enable_libredirect">Abilita LibRedirect</string>
     <string name="use_clear_urls_explainer">Utilizza l\'integrazione sperimentale di <annotation url-id="clearurls-github">ClearURLs</annotation> (cancella i parametri di tracciamento dagli URL)</string>
     <string name="follow_redirects">Segui reindirizzamenti</string>
     <string name="follow_redirects_external_service">Risolvi i reindirizzamenti tramite un servizio esterno</string>
@@ -112,7 +104,6 @@
     <string name="log_privacy">Per informazioni sulla privacy dei log, puoi visitare questo <annotation url-id="privacy-logs">link</annotation>.</string>
     <string name="enable_amp2html_explainer">Reindirizza le pagine AMP alla loro normale versione Web. Potrebbe avere <annotation url-id="privacy-amp2html">implicazioni relative alla privacy</annotation></string>
     <string name="redirect_resolve_type_local_cache">cache locale</string>
-    <string name="services">Servizi</string>
     <string name="current_session">Sessione in corso</string>
     <string name="enable_amp2html">Abilita Amp2Html</string>
     <string name="clear">Pulisci</string>
@@ -130,10 +121,8 @@
     <string name="no_apps_which_can_handle_links_found">Non è stata trovata alcuna app in grado di gestire i link.</string>
     <string name="in_app">In-app</string>
     <string name="use_unified_preferred_browser">Impostazioni unificate</string>
-    <string name="libredirect_via">Tramite %s</string>
     <string name="enable_ignore_libredirect_button">Abilita pulsante \'Ignora LibRedirect\'</string>
     <string name="enable_ignore_libredirect_button_explainer">Se l\'URL è reindirizzato tramite LibRedirect, mostra un tasto per aprire il link originale</string>
-    <string name="no_libredirect_services">Nessun servizio LibRedirect trovato!</string>
     <string name="download_started">Download avviato</string>
     <string name="no_browsers_found">Nessun browser trovato.</string>
     <string name="export">Esporta</string>
@@ -141,7 +130,6 @@
     <string name="enable_request_private_browsing_button_explainer">Visualizza accanto ai browser un tasto che apre l\'URL in modalità di navigazione privata ﹙o \'incognito\'﹚. Browser supportati: %s</string>
     <string name="use_unified_preferred_browser_explainer">L\'abilitazione di questa opzione applica le impostazioni seguenti sia ai link gestiti normalmente, sia a quelli aperti nel browser in-app. Usa i pulsanti qui sotto per passare dalla modalità normale a quella in-app quando è disabilitata.</string>
     <string name="enable_downloader_explainer">Aggiungi un pulsante \'Download\' nel foglio inferiore se l\'URL contiene un collegamento diretto a un file. Potrebbe avere <annotation url-id="privacy-downloader">implicazioni relative alla privacy</annotation></string>
-    <string name="instance_not_available_anymore">L\'istanza non è più disponibile!</string>
     <string name="disable_in_selected_explainer">Disabilita il browser in-app per le app selezionate</string>
     <string name="disable_in_selected">Disabilita per…</string>
     <string name="no_logs_found">Nessun log trovato!</string>

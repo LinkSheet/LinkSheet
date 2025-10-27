@@ -14,15 +14,16 @@ import fe.linksheet.*
 import fe.linksheet.composable.page.settings.link.downloader.downloaderPermissionState
 import fe.linksheet.composable.page.settings.link.downloader.requestDownloadPermission
 import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
-import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
+import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.libredirect.navigation.LibRedirectRoute
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
-import fe.linksheet.navigation.LibRedirectRoute
 import fe.linksheet.navigation.PreviewUrlRoute
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.downloaderSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import org.koin.androidx.compose.koinViewModel
+import app.linksheet.feature.libredirect.R as LibRedirectR
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -56,14 +57,14 @@ fun LinksSettingsRoute(
                 )
             }
 
-            item(key = R.string.enable_libredirect) { padding, shape ->
+            item(key = LibRedirectR.string.enable_libredirect) { padding, shape ->
                 PreferenceDividedSwitchListItem(
                     shape = shape,
                     padding = padding,
                     statePreference = viewModel.enableLibRedirect,
                     onContentClick = { navigateNew(LibRedirectRoute) },
-                    headlineContent = textContent(R.string.enable_libredirect),
-                    supportingContent = annotatedStringResource(R.string.enable_libredirect_explainer),
+                    headlineContent = textContent(LibRedirectR.string.enable_libredirect),
+                    supportingContent = annotatedStringResource(LibRedirectR.string.enable_libredirect_explainer),
                 )
             }
 

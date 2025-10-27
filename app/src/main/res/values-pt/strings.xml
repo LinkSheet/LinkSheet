@@ -45,7 +45,6 @@
     <string name="bottom_sheet">Folha inferior</string>
     <string name="settings">Configurações</string>
     <string name="selected_browser_explainer">Este navegador será aberto automaticamente se nenhuma app nativa puder lidar com a ligação clicada</string>
-    <string name="enabled">Ativado</string>
     <string name="disabled">Desativado</string>
     <string name="open_with_linksheet">Abrir com o LinkSheet</string>
     <string name="whitelisted">Lista permitida</string>
@@ -88,9 +87,6 @@
     <string name="redirect_resolve_type_local_cache">local cache</string>
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="redirect_resolve_type_local">resolvedor local</string>
-    <string name="enable_libredirect">Ativar LibRedirect</string>
-    <string name="frontend">Frontend</string>
-    <string name="instance">Instância</string>
     <string name="add">Adicionar</string>
     <string name="select_an_app">Selecione uma app</string>
     <string name="close">Fechar</string>
@@ -104,7 +100,6 @@
     <string name="enable_downloader_explainer">Adicione um botão \"Descarregar\" à folha inferior se o URL contiver uma ligação direta para o ficheiro. Isto pode ter <annotation url-id="privacy-downloader">implicações relacionadas à privacidade</annotation></string>
     <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
     <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de ficheiro (por exemplo, \".jpg\"); se terminar, este tipo será usado para o ficheiro descarregado.</string>
-    <string name="random_instance">Instância aleatória</string>
     <string name="in_app_browser">Navegador incorporado</string>
     <string name="in_app_browser_subtitle">Alterar configurações do navegador incorporado</string>
     <string name="use_app_settings">Padrão</string>
@@ -126,8 +121,6 @@
     <string name="logs">Registos</string>
     <string name="logs_explainer">Ver logs da app</string>
     <string name="options">Opções</string>
-    <string name="services">Serviços</string>
-    <string name="no_libredirect_services">Nenhum serviço LibRedirect encontrado!</string>
     <string name="current_session">Sessão atual</string>
     <string name="log_files">Sessões anteriores</string>
     <string name="log_viewer">Visualizador de logs</string>
@@ -156,7 +149,6 @@
     <string name="amp2html_external_service">Tentar obter uma versão de página não AMP por meio de um serviço externo</string>
     <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em supabase.com (<annotation url-id="supabase-privacy">Política de privacidade</annotation>)</string>
     <string name="use_unified_preferred_browser_explainer">A ativação dessa opção aplica as configurações abaixo ao tratamento de ligações Normal e Incorporado. Use os botões abaixo para alternar entre os modos Normal e Incorporado quando desativado.</string>
-    <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
     <string name="advanced">Avançado</string>
     <string name="shizuku">Integração com o Shizuku</string>
     <string name="shizuku_explainer_short">Interagir diretamente com as APIs do sistema</string>

@@ -1,6 +1,7 @@
 package fe.linksheet.module.preference.app
 
 
+import app.linksheet.feature.libredirect.preference.libRedirectPreferences
 import app.linksheet.feature.shizuku.preference.shizukuPreferences
 import com.google.gson.JsonArray
 import fe.android.preference.helper.PreferenceDefinition
@@ -96,13 +97,7 @@ object AppPreferences : PreferenceDefinition(
     }
 
     val downloader = Downloader
-
-    object LibRedirect {
-        val enableIgnoreLibRedirectButton = boolean("enable_ignore_lib_redirect_button")
-        val enable = boolean("enable_lib_redirect")
-    }
-
-    val libRedirect = LibRedirect
+    val libRedirect = libRedirectPreferences(this::boolean)
 
     val requestTimeout = int("follow_redirects_timeout", 15)
 

@@ -41,7 +41,6 @@
     <string name="bottom_sheet">底栏</string>
     <string name="settings">设置</string>
     <string name="selected_browser_explainer">如果没有原生应用能够处理所点击的链接，此浏览器将自动打开</string>
-    <string name="enabled">启用</string>
     <string name="disabled">禁用</string>
     <string name="open_with_linksheet">用 LinkSheet 打开</string>
     <string name="whitelisted">白名单</string>
@@ -85,12 +84,6 @@
     <string name="redirect_resolve_type_local_cache">本地缓存</string>
     <string name="redirect_resolve_type_remote">远程服务器</string>
     <string name="redirect_resolve_type_local">本地解析器</string>
-    <string name="enable_libredirect">启用 LibRedirect</string>
-    <string name="enable_libredirect_explainer">使用实验性 <annotation url-id="libredirect-github">LibRedirect</annotation> 集成，将链接重定向到隐私友好的前端</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">前端</string>
-    <string name="instance">实例</string>
     <string name="add">添加</string>
     <string name="select_an_app">选择一个应用</string>
     <string name="close">关闭</string>
@@ -104,7 +97,6 @@
     <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加“下载”按钮。这可能带来 <annotation url-id="privacy-downloader">隐私方面的影响</annotation></string>
     <string name="downloader_url_mime_type">使用来自链接的媒体类型</string>
     <string name="downloader_url_mime_type_explainer">检查链接是否以文件扩展名结尾（例如“.jpg”）；如果是，则此类型用于下载的文件。</string>
-    <string name="random_instance">随机实例</string>
     <string name="in_app_browser">应用内置的浏览器</string>
     <string name="always_disable">强制禁用</string>
     <string name="always_disable_explainer">禁用所有应用内浏览器</string>
@@ -180,24 +172,20 @@
     <string name="thanks_for_donating">感谢您的捐赠！</string>
     <string name="feature_flags_explainer">启用或禁用实验性功能</string>
     <string name="options">选项</string>
-    <string name="services">服务</string>
     <string name="confirm_import">确认</string>
     <string name="shizuku_not_running_explainer">Shizuku 未在运行。请点击此处打开 Shizuku，并按照指示将其启动。</string>
     <string name="dev">开发者</string>
     <string name="request_private_browsing">隐私</string>
     <string name="import_explainer">从文件导入以前的导出</string>
     <string name="resolved_via">%s 由%s 解析</string>
-    <string name="instance_not_available_anymore">实例已经不再可用！</string>
     <string name="shizuku_integration_not_setup_explainer">LinkSheet 可在不使用 Shizuku 的情况下工作，但仍然建议使用 Shizuku。点击此处安装。</string>
     <string name="export_import_settings_explainer">导出当前设置或导入以前导出的设置</string>
     <string name="log">日志</string>
     <string name="donate_card_headline">捐赠以支持LinkSheet</string>
     <string name="general">杂项</string>
-    <string name="libredirect_via">通过%s</string>
     <string name="pretend_to_be_app_explainer">使用 LinkSheetCompat 伪装成受支持域的原生应用</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="enable_request_private_browsing_button">启用“请求隐私浏览”按钮</string>
-    <string name="no_libredirect_services">未找到LibRedirect服务！</string>
     <string name="request_timeout">请求超时</string>
     <string name="current_session">当前会话</string>
     <string name="compat_installed">已安装 LinkSheetCompat</string>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">Aktiviert</string>
+    <string name="random_instance">Zufällige Instanz</string>
+    <string name="services">Dienste</string>
+    <string name="libredirect_via">Über %s</string>
+    <string name="no_libredirect_services">Keine LibRedirect-Dienste gefunden!</string>
+    <string name="frontend">Benutzeroberfläche</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="instance">Instanz</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="instance_not_available_anymore">Instanz ist nicht mehr verfügbar!</string>
+    <string name="enable_libredirect">LibRedirect aktivieren</string>
+    <string name="enable_libredirect_explainer">Leitet Links mittels experimenteller <annotation url-id="libredirect-github">LibRedirect</annotation>-Integration zu datenschutzfreundlichen Benutzeroberflächen um</string>
+</resources>

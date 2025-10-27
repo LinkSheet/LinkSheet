@@ -34,8 +34,8 @@ import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
 import fe.linksheet.composable.page.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.page.settings.link.amp2html.Amp2HtmlSettingsRoute
 import fe.linksheet.composable.page.settings.link.downloader.DownloaderSettingsRoute
-import fe.linksheet.composable.page.settings.link.libredirect.LibRedirectServiceSettingsRoute
-import fe.linksheet.composable.page.settings.link.libredirect.LibRedirectSettingsRoute
+import app.linksheet.feature.libredirect.ui.LibRedirectServiceSettingsRoute
+import app.linksheet.feature.libredirect.ui.LibRedirectSettingsRoute
 import fe.linksheet.composable.page.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.composable.page.settings.notification.NotificationSettingsRoute
@@ -44,6 +44,7 @@ import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import app.linksheet.compose.navigation.attachSubGraph
 import app.linksheet.compose.util.animatedComposable
+import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
 import app.linksheet.feature.scenario.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.shizuku.navigation.ShizukuNavSubGraph
 import fe.composekit.core.AndroidVersion
@@ -57,8 +58,6 @@ import fe.linksheet.navigation.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.DebugRoute
 import fe.linksheet.navigation.ExperimentRoute
 import fe.linksheet.navigation.ExportImportRoute
-import fe.linksheet.navigation.LibRedirectRoute
-import fe.linksheet.navigation.LibRedirectServiceRoute
 import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.PreviewUrlRoute
@@ -106,6 +105,7 @@ fun MainNavHost(
         attachSubGraph(HomePageRoute, navController)
         attachSubGraph(ScenarioNavSubGraph, navController)
         attachSubGraph(ShizukuNavSubGraph, navController)
+        attachSubGraph(LibRedirectNavSubGraph, navController)
 
         animatedComposable<MarkdownViewerRoute> { _, route ->
             val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title
@@ -137,16 +137,7 @@ fun MainNavHost(
             LogTextSettingsRoute(onBackPressed = onBackPressed, sessionId = route.id, sessionName = route.name)
         }
 
-        animatedComposable<LibRedirectRoute> { _, route ->
-            LibRedirectSettingsRoute(
-                onBackPressed = onBackPressed,
-                navigate = navigateNew,
-            )
-        }
 
-        animatedComposable<LibRedirectServiceRoute> { _, route ->
-            LibRedirectServiceSettingsRoute(onBackPressed = onBackPressed, serviceKey = route.serviceKey)
-        }
 
         animatedComposable<VlhAppRoute> { _, route ->
             VlhAppRoute(onBackPressed = onBackPressed, packageName = route.packageName)

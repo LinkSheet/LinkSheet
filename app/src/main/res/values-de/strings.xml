@@ -27,7 +27,6 @@
     <string name="no_such_app_found">Keine solche App gefunden!</string>
     <string name="save">Speichern</string>
     <string name="app_browsers">Apps</string>
-    <string name="enabled">Aktiviert</string>
     <string name="github">Github</string>
     <string name="hide_after_copying">Automatisches Ausblenden bei Aktion</string>
     <string name="follow_redirects">Weiterleitungen folgen</string>
@@ -75,12 +74,8 @@
     <string name="enable_downloader">Downloader aktivieren</string>
     <string name="download">Herunterladen</string>
     <string name="in_app_browser_subtitle">In-App-Browser-Modus setzen</string>
-    <string name="random_instance">Zufällige Instanz</string>
     <string name="options">Optionen</string>
-    <string name="services">Dienste</string>
     <string name="in_app_browser">In-App-Browser</string>
-    <string name="libredirect_via">Über %s</string>
-    <string name="no_libredirect_services">Keine LibRedirect-Dienste gefunden!</string>
     <string name="request_timeout">Zeitüberschreitung bei der Anfrage</string>
     <string name="current_session">Aktuelle Sitzung</string>
     <string name="always_disable_explainer">Immer den In-App-Browser deaktivieren, unabhängig davon, was die App nutzen will</string>
@@ -144,7 +139,6 @@
     <string name="whitelisted_browsers">Browser auf der Whitelist</string>
     <string name="bottom_sheet_explainer">Konfiguration &amp; Anpassung</string>
     <string name="yes">Ja</string>
-    <string name="frontend">Benutzeroberfläche</string>
     <string name="redirect_resolve_type_remote">Remote-Server</string>
     <string name="advanced">Erweitert</string>
     <string name="built_at">Build erstellt um (UTC):</string>
@@ -163,15 +157,12 @@
     <string name="debug">Fehlersuche</string>
     <string name="other">Anderes</string>
     <string name="credits_explainer">Danksagungen, Lizenzierung</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="instance">Instanz</string>
     <string name="amp2html_external_service">Versucht, die Nicht-AMP-Seitenversion über einen externen Dienst zu erhalten</string>
     <string name="no_handlers_found">Kein Browser oder native App gefunden!</string>
     <string name="thanks_for_donating">Danke, dass Sie gespendet haben!</string>
     <string name="app_setup">App-Setup</string>
     <string name="feature_flags_explainer">Experimentelle Funktionen aktivieren oder deaktivieren</string>
     <string name="about_explainer">Danksagungen, Lizenz, Links, Version</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="shizuku_not_running_explainer">Shizuku wird nicht ausgeführt. Tippen Sie hier, um Shizuku zu öffnen, und folgen Sie dann den Anweisungen, um es zu starten</string>
     <string name="browser_status">Browser-Status</string>
     <string name="request_private_browsing">Privat</string>
@@ -179,7 +170,6 @@
     <string name="select_an_app">App auswählen</string>
     <string name="github_workflow_run_id">Build-Workflow-ID:</string>
     <string name="resolved_via">%s aufgelöst über %s</string>
-    <string name="instance_not_available_anymore">Instanz ist nicht mehr verfügbar!</string>
     <string name="donate_crypto">Mit Krypto spenden</string>
     <string name="follow_redirects_explainer">Automatisch allen Weiterleitungen folgen, bevor das untere Fenster geöffnet wird. Dies kann <annotation url-id="privacy-follow-redirects">Auswirkungen auf die Privatsphäre</annotation> haben</string>
     <string name="shizuku_integration_not_setup_explainer">Shizuku ist zwar nicht unbedingt notwendig, um LinkSheet zu nutzen, wird aber empfohlen. Tippen Sie hier, um es zu installieren</string>
@@ -205,11 +195,9 @@
     <string name="general_settings_explainer">Einstellungen, die die gesamte App betreffen</string>
     <string name="built_by_error">Dieser Build wurde nicht von 1fexd signiert. Dies bedeutet nicht unbedingt etwas Schlechtes, da jeder den Quellcode modifizieren und seine eigene App erstellen kann, aber er könnte dies in böswilliger Absicht tun.</string>
     <string name="follow_only_known_trackers">Nur bekannten Trackern folgen</string>
-    <string name="enable_libredirect">LibRedirect aktivieren</string>
     <string name="no_browser_installed_explainer">LinkSheet war nicht in der Lage, mindestens eine Anwendung zu erkennen, die angibt, ein Browser zu sein. Installieren Sie einen Browser für die beste Erfahrung.</string>
     <string name="donate_card">Mit Karte spenden (über BuyMeACoffee)</string>
     <string name="no_logs_found">Keine vergangenen Protokolle gefunden!</string>
-    <string name="enable_libredirect_explainer">Leitet Links mittels experimenteller <annotation url-id="libredirect-github">LibRedirect</annotation>-Integration zu datenschutzfreundlichen Benutzeroberflächen um</string>
     <string name="at_least_one_known_browser_installed">Mindestens ein Browser installiert</string>
     <string name="shizuku_integration_no_permission_explainer">Tippe hier, um die Shizuku-Berechtigung anzufordern</string>
     <string name="add">Hinzufügen</string>

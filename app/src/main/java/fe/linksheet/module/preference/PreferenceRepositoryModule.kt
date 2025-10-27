@@ -1,5 +1,6 @@
 package fe.linksheet.module.preference
 
+import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
@@ -17,4 +18,5 @@ val PreferenceRepositoryModule = module {
     singleOf(::ExperimentRepository)
     singleOf(::AppStateRepository)
     single<ShizukuPreferences> { AppPreferences.shizuku }
+    single<LibRedirectPreferences> { AppPreferences.libRedirect }
 }

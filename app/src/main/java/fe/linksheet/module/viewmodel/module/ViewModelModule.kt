@@ -2,7 +2,6 @@ package fe.linksheet.module.viewmodel.module
 
 
 import fe.gson.GsonQualifier
-import app.linksheet.feature.scenario.viewmodel.ScenarioViewModel
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.profile.ProfileSwitcherModule
@@ -51,16 +50,6 @@ val ViewModelModule = module {
     viewModelOf(::PreferredBrowserViewModel)
     viewModelOf(::BottomSheetSettingsViewModel)
     viewModelOf(::LinksSettingsViewModel)
-    viewModelOf(::LibRedirectSettingsViewModel)
-    viewModel { parameters ->
-        LibRedirectServiceSettingsViewModel(
-            context = get(),
-            serviceKey = parameters.get(),
-            defaultRepository = get(),
-            stateRepository = get(),
-            preferenceRepository = get()
-        )
-    }
     viewModelOf(::BottomSheetViewModel)
     viewModelOf(::ThemeSettingsViewModel)
     viewModelOf(::LanguageSettingsViewModel)

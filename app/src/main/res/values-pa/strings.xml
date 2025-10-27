@@ -66,7 +66,6 @@
     <string name="clear">ਸਾਫ ਕਰੋ</string>
     <string name="import_and_override">ਇੰਪੋਰਟ ਕਰੋ ਅਤੇ ਓਵਰਰਾਈਡ ਕਰੋ</string>
     <string name="apps_which_can_open_links_explainer">\"ਡਿਫ਼ਾਲਟ ਤੌਰ \'ਤੇ ਖੋਲ੍ਹੋ\" ਮੀਨੂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਕ ਐਪ \'ਤੇ ਟੈਪ ਕਰੋ ਜਿਸ ਨਾਲ ਤੁਹਾਨੂੰ ਆਟੋਮੈਟਿਕ ਲਿੰਕ ਖੋਲ੍ਹਣ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਮਿਲਦੀ ਹੈ</string>
-    <string name="enabled">ਇਨੇਬਲ ਕੀਤੇ</string>
     <string name="success">ਸਫਲਤਾ</string>
     <string name="request_timeout_explainer">ਇਹ ਪਰਿਭਾਸ਼ਿਤ ਕਰਦਾ ਹੈ ਕਿ ਲਿੰਕਸ਼ੀਟ ਕਿੰਨੇ ਸਕਿੰਟਾਂ ਲਈ ਇੱਕ ਕਨੈਕਸ਼ਨ ਸਥਾਪਤ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰੇਗੀ। ਇਸਨੂੰ 0 \'ਤੇ ਸੈੱਟ ਕਰਨ ਨਾਲ ਟਾਈਮਆਊਟ ਡਿਸੇਬਲ ਹੋ ਜਾਂਦਾ ਹੈ, ਪਰ ਇਸਦੀ ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਜਾਂਦੀ।</string>
     <string name="github">ਗਿਟਹੱਬ</string>
@@ -88,7 +87,6 @@
     <string name="bottom_sheet_explainer">ਵਰਤੋਂ ਅਨੁਸਾਰ ਕ੍ਰਮਬੱਧ ਕਰੋ, ਕਾਪੀ ਬਟਨ ਇਨੇਬਲ ਕਰੋ, ਸ਼ੇਅਰ ਬਟਨ ਇਨੇਬਲ ਕਰੋ ਆਦਿ।</string>
     <string name="yes">ਠੀਕ ਹੈ</string>
     <string name="light">ਸਫ਼ੈਦ</string>
-    <string name="frontend">ਫਰੰਟਐਂਡ</string>
     <string name="redirect_resolve_type_remote">ਰਿਮੋਟ ਸਰਵਰ</string>
     <string name="donate_subtitle">ਜੇਕਰ ਤੁਸੀਂ ਦਾਨ ਕਰਨਾ ਅਤੇ<b>LinkSheet Pro</b>ਲੈਣਾ ਚਾਹੁੰਦੇ ਹੋ</string>
     <string name="advanced">ਉੱਨਤ</string>
@@ -112,10 +110,8 @@
     <string name="debug">ਡੀਬੱਗ</string>
     <string name="downloader_url_mime_type_explainer">ਜਾਂਚ ਕਰਦਾ ਹੈ ਕਿ ਕੀ URL ਇੱਕ ਫਾਈਲ ਐਕਸਟੈਂਸ਼ਨ ਨਾਲ ਖਤਮ ਹੁੰਦਾ ਹੈ (ਉਦਾਹਰਨ ਲਈ \".jpg\"); ਜੇਕਰ ਅਜਿਹਾ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਇਸ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀ ਫ਼ਾਈਲ ਲਈ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।</string>
     <string name="credits_explainer">ਓਪਨ ਸੋਰਸ ਲਾਈਸੈਂਸਿੰਗ</string>
-    <string name="lib_redirect">LibRedirect</string>
     <string name="remove_all">ਸਾਰੇ ਹਟਾਓ</string>
     <string name="use_unified_preferred_browser">ਯੂਨੀਫਾਈਡ ਸੈਟਿੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
-    <string name="instance">ਇੰਸਟੈਂਸ</string>
     <string name="always_ask_explainer">ਹਮੇਸ਼ਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੀ ਸੂਚੀ ਪੇਸ਼ ਕਰੋ</string>
     <string name="enable_downloader">ਡਾਉਨਲੋਡਰ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="paste">ਪੇਸਟ ਕਰੋ</string>
@@ -128,12 +124,9 @@
     <string name="in_app_browser_subtitle">ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਸੈੱਟ ਕਰੋ</string>
     <string name="about">ਦੇ ਬਾਰੇ ਵਿੱਚ</string>
     <string name="add_all">ਸਭ ਸ਼ਾਮਿਲ ਕਰੋ</string>
-    <string name="random_instance">ਰੈਨਡਮ ਇੰਸਟੈਂਸ</string>
     <string name="feature_flags_explainer">ਪ੍ਰਯੋਗਾਤਮਕ ਫੀਚਰਸ ਨੂੰ ਇਨੇਬਲ ਜਾਂ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="options">ਵਿਕਲਪ</string>
-    <string name="services">ਸੇਵਾਵਾਂ</string>
     <string name="about_explainer">ਇਸ ਐਪ ਬਾਰੇ, ਲਾਈਸੈਂਸ</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="shizuku_not_running_explainer">Shizuku ਨਹੀਂ ਚੱਲ ਰਿਹਾ ਹੈ। Shizuku ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ, ਫਿਰ ਇਸਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।</string>
     <string name="browser_status">ਬ੍ਰਾਊਜ਼ਰ ਸਥਿਤੀ</string>
     <string name="no_such_app_found">ਅਜਿਹਾ ਕੋਈ ਐਪ ਨਹੀਂ ਮਿਲਿਆ!</string>
@@ -143,7 +136,6 @@
     <string name="select_an_app">ਇੱਕ ਐਪ ਚੁਣੋ</string>
     <string name="github_workflow_run_id">ਬਿਲਡ ਵਰਕਫਲੋ ਆਈਡੀ:</string>
     <string name="resolved_via">%s ਨੂੰ %s ਰਾਹੀਂ ਰਿਜ਼ੌਲਵ ਕੀਤਾ</string>
-    <string name="instance_not_available_anymore">ਇੰਸਟੈਂਸ ਹੁਣ ਉਪਲਬਧ ਨਹੀਂ ਹੈ!</string>
     <string name="open_with_linksheet">ਲਿੰਕਸ਼ੀਟ ਨਾਲ ਖੋਲ੍ਹੋ</string>
     <string name="in_app_browser">ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="links">ਲਿੰਕ</string>
@@ -158,7 +150,6 @@
     <string name="loading_link">ਲਿੰਕ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…</string>
     <string name="donate_card_headline">ਲਿੰਕਸ਼ੀਟ ਦਾ ਸਮਰਥਨ ਕਰਨ ਲਈ ਦਾਨ ਕਰੋ</string>
     <string name="general">ਜਨਰਲ</string>
-    <string name="libredirect_via">ਵਾਇਆ %s</string>
     <string name="pretend_to_be_app_explainer">LinkSheetCompat ਨਾਲ ਸਮਰਥਿਤ ਡੋਮੇਨਾਂ ਲਈ ਇੱਕ ਮੂਲ ਐਪ ਹੋਣ ਦਾ ਦਿਖਾਵਾ ਕਰੋ</string>
     <string name="confirm">ਪੁਸ਼ਟੀ ਕਰੋ</string>
     <string name="disabled">ਡਿਸੇਬਲ ਕੀਤੇ</string>
@@ -168,7 +159,6 @@
     <string name="search">ਖੋਜ ਕਰੋ</string>
     <string name="at_least_one_unknown_browser_installer">ਘੱਟੋ-ਘੱਟ ਇੱਕ (ਅਣਜਾਣ) ਬ੍ਰਾਊਜ਼ਰ ਸਥਾਪਤ ਕੀਤਾ ਗਿਆ ਹੈ</string>
     <string name="always_show_package_name">ਹਮੇਸ਼ਾਂ ਪੈਕੇਜ ਨਾਮ ਵਿਖਾਓ</string>
-    <string name="no_libredirect_services">ਕੋਈ LibRedirect ਸੇਵਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ!</string>
     <string name="error">ਤਰੁੱਟੀ</string>
     <string name="checkmark">ਚੈੱਕਮਾਰਕ</string>
     <string name="request_timeout">ਰਿਕਵੈਸਟ ਟਾਈਮਆਊਟ</string>
@@ -191,11 +181,9 @@
     <string name="in_app">ਇਨ-ਐਪ</string>
     <string name="browser_mode_subtitle">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ ਮੋਡ ਸੈੱਟ ਕਰੋ</string>
     <string name="follow_only_known_trackers">ਸਿਰਫ਼ ਜਾਣੇ-ਪਛਾਣੇ ਟਰੈਕਰਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ</string>
-    <string name="enable_libredirect">LibRedirect ਇਨੇਬਲ ਕਰੋ</string>
     <string name="no_browser_installed_explainer">ਲਿੰਕਸ਼ੀਟ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਪਤਾ ਲਗਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ ਰਹੀ। ਸਭ ਤੋਂ ਵਧੀਆ ਅਨੁਭਵ ਲਈ, ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕਰੋ।</string>
     <string name="no_logs_found">ਕੋਈ ਪਿਛਲੇ ਲੌਗ ਨਹੀਂ ਮਿਲੇ!</string>
     <string name="downloader_url_mime_type">URL ਤੋਂ ਮਾਈਮ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
-    <string name="enable_libredirect_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url-id="libredirect-github">LibRedirect</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਗੋਪਨੀਯਤਾ ਅਨੁਕੂਲ ਫਰੰਟਐਂਡਸ ਲਈ ਲਿੰਕ ਰੀਡਾਇਰੈਕਟ ਕਰੋ</string>
     <string name="at_least_one_known_browser_installed">ਘੱਟੋ-ਘੱਟ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕੀਤਾ ਗਿਆ ਹੈ</string>
     <string name="shizuku_integration_no_permission_explainer">Shizuku ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
     <string name="system">ਸਿਸਟਮ</string>

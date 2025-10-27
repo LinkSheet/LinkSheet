@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">Ativado</string>
+    <string name="enable_libredirect">Ativar LibRedirect</string>
+    <string name="frontend">Frontend</string>
+    <string name="instance">Instância</string>
+    <string name="random_instance">Instância aleatória</string>
+    <string name="services">Serviços</string>
+    <string name="no_libredirect_services">Nenhum serviço LibRedirect encontrado!</string>
+    <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
+</resources>

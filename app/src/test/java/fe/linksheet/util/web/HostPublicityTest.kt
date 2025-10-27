@@ -5,6 +5,8 @@ import android.net.compatHost
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.linksheet.testlib.core.BaseUnitTest
+import fe.linksheet.web.HostType
+import fe.linksheet.web.HostUtil
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals

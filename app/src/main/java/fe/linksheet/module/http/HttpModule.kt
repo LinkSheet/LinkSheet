@@ -5,7 +5,7 @@ import coil3.ImageLoader
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import fe.httpkt.Request
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.module.resolver.urlresolver.CachedRequest
+import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
 import fe.linksheet.util.buildconfig.Build
 import fe.linksheet.util.withStatsTag
 import io.ktor.client.*
@@ -57,5 +57,5 @@ val HttpModule = module {
             .build()
     }
     single<Unfurler> { Unfurler(httpClient = get()) }
-    single<CachedRequest> { CachedRequest(get(), createLogger<CachedRequest>()) }
+    single<RealCachedRequest> { RealCachedRequest(get(), createLogger<RealCachedRequest>()) }
 }

@@ -66,7 +66,6 @@
     <string name="clear">Borrar</string>
     <string name="import_and_override">Importar e invalidar</string>
     <string name="apps_which_can_open_links_explainer">Toca una aplicación para abrir el menú \"Abrir de forma predeterminada\" que te permite desactivar la apertura automática de enlaces</string>
-    <string name="enabled">Activado</string>
     <string name="success">Éxito</string>
     <string name="request_timeout_explainer">Define cuántos segundos esperará LinkSheet hasta que se establezca una conexión. Establecer esto en 0 desactiva el tiempo de espera, pero no se recomienda.</string>
     <string name="github">Github</string>
@@ -88,7 +87,6 @@
     <string name="bottom_sheet_explainer">Configuración y personalización</string>
     <string name="yes">Sí</string>
     <string name="light">Claro</string>
-    <string name="frontend">Interfaz</string>
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="donate_subtitle">Actualiza a <b>LinkSheet Pro</b></string>
     <string name="advanced">Avanzado</string>
@@ -112,10 +110,8 @@
     <string name="debug">Depurar</string>
     <string name="downloader_url_mime_type_explainer">Comprueba si el enlace termina con una extensión de archivo (por ejemplo, \".jpg\"); Si es así, este tipo se utiliza para el archivo descargado.</string>
     <string name="credits_explainer">Agradecimientos, Licencias</string>
-    <string name="lib_redirect">LibRedirect</string>
     <string name="remove_all">Borrar todo</string>
     <string name="use_unified_preferred_browser">Usar ajustes indefinidos</string>
-    <string name="instance">Instancia</string>
     <string name="always_ask_explainer">Mostrar siempre todos los navegadores</string>
     <string name="enable_downloader">Activar descargador</string>
     <string name="paste">Pegar</string>
@@ -128,12 +124,9 @@
     <string name="in_app_browser_subtitle">Establecer el modo de Navegador en aplicación</string>
     <string name="about">Acerca de</string>
     <string name="add_all">Añadir todo</string>
-    <string name="random_instance">Instancia aleatoria</string>
     <string name="feature_flags_explainer">Activar o desactivar características experimentales</string>
     <string name="options">Opciones</string>
-    <string name="services">Servicios</string>
     <string name="about_explainer">Créditos, Licencia, Enlaces, Versión</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="shizuku_not_running_explainer">Shizuku no se está ejecutando. Pulse aquí para abrir Shizuku y siga las instrucciones para iniciarlo.</string>
     <string name="browser_status">Estado del navegador</string>
     <string name="no_such_app_found">¡No se encontró la aplicación!</string>
@@ -143,7 +136,6 @@
     <string name="select_an_app">Seleccionar una aplicación</string>
     <string name="github_workflow_run_id"><b>ID de flujo de trabajo:</b> <font face="monospace">%s</font></string>
     <string name="resolved_via">%s vía resuelta %s</string>
-    <string name="instance_not_available_anymore">¡Esta instancia ya no está disponible!</string>
     <string name="open_with_linksheet">Abrir con LinkSheet</string>
     <string name="in_app_browser">Navegador en aplicación</string>
     <string name="links">Enlaces</string>
@@ -158,7 +150,6 @@
     <string name="loading_link">Procesando enlace…</string>
     <string name="donate_card_headline">Dona para apoyar a LinkSheet</string>
     <string name="general">Misceláneo</string>
-    <string name="libredirect_via">Vía %s</string>
     <string name="pretend_to_be_app_explainer">Pretende ser una aplicación nativa para dominios compatibles con LinkSheetCompat</string>
     <string name="confirm">Confirmar</string>
     <string name="disabled">Desactivado</string>
@@ -168,7 +159,6 @@
     <string name="search">Buscar</string>
     <string name="at_least_one_unknown_browser_installer">Al menos un navegador (desconocido) instalado</string>
     <string name="always_show_package_name">Mostrar siempre el nombre del paquete</string>
-    <string name="no_libredirect_services">¡No se han encontrado servicios de LibRedirect!</string>
     <string name="error">Error</string>
     <string name="checkmark">Marca de verificación</string>
     <string name="request_timeout">Tiempo de respuesta expirado</string>
@@ -191,11 +181,9 @@
     <string name="in_app">En aplicación</string>
     <string name="browser_mode_subtitle">Establecer el modo de navegación predeterminado</string>
     <string name="follow_only_known_trackers">Seguir únicamente a rastreadores conocidos</string>
-    <string name="enable_libredirect">Activar LibRedirect</string>
     <string name="no_browser_installed_explainer">LinkSheet no pudo detectar ninguna una aplicación que afirme ser un navegador. Para obtener la mejor experiencia, instale un navegador.</string>
     <string name="no_logs_found">¡No se han encontrado registros pasados!</string>
     <string name="downloader_url_mime_type">Usar el tipo mime desde el enlace</string>
-    <string name="enable_libredirect_explainer">Redirigir enlaces a frontends amigables para la privacidad utilizando la integración experimental <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
     <string name="system">Seguir el sistema</string>

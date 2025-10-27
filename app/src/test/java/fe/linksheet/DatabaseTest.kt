@@ -2,13 +2,10 @@ package fe.linksheet
 
 import android.content.Context
 import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import fe.linksheet.module.database.LinkSheetDatabase
 import fe.linksheet.module.database.LinkSheetDatabase.Companion.configureAndBuild
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
-import fe.linksheet.testlib.core.BaseUnitTest
-import org.junit.After
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 

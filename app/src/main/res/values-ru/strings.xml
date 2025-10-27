@@ -53,7 +53,6 @@
     <string name="normal">Нормально</string>
     <string name="clear">Очистить</string>
     <string name="apps_which_can_open_links_explainer">Коснитесь приложения, чтобы открыть меню «Открыть по умолчанию», которое позволяет отключить автоматическое открытие ссылки</string>
-    <string name="enabled">Включено</string>
     <string name="request_timeout_explainer">Определяет, сколько секунд LinkSheet будет ждать установления соединения. Установка значения 0 отключает тайм-аут, но это не рекомендуется.</string>
     <string name="github">Github</string>
     <string name="url_copied">URL был скопирован в буфер обмена</string>
@@ -71,7 +70,6 @@
     <string name="export_log">Экспортировать лог</string>
     <string name="bottom_sheet_explainer">Сортировать по использованию, включить кнопку копирования, включить кнопку поделиться и т. д.</string>
     <string name="light">Светлая</string>
-    <string name="frontend">Внешний интерфейс</string>
     <string name="redirect_resolve_type_remote">удалённый сервер</string>
     <string name="donate_subtitle">Если вы хотите сделать пожертвование и получить <b>LinkSheet Pro</b></string>
     <string name="advanced">Расширенные настройки</string>
@@ -93,10 +91,8 @@
     <string name="debug">Дебаг</string>
     <string name="downloader_url_mime_type_explainer">Проверяет, заканчивается ли URL-адрес расширением файла (например, «.jpg»); Если да, то этот тип используется для загруженного файла.</string>
     <string name="credits_explainer">Лицензирование открытого исходного кода</string>
-    <string name="lib_redirect">LibRedirect</string>
     <string name="remove_all">Убрать всё</string>
     <string name="use_unified_preferred_browser">Использовать единые настройки</string>
-    <string name="instance">Пример</string>
     <string name="always_ask_explainer">Всегда перечислять все браузеры</string>
     <string name="enable_downloader">Включить загрузчик</string>
     <string name="paste">Вставить</string>
@@ -108,12 +104,9 @@
     <string name="in_app_browser_subtitle">Установить режим браузера в приложении</string>
     <string name="about">О</string>
     <string name="add_all">Добавить всё</string>
-    <string name="random_instance">Случайный экземпляр</string>
     <string name="feature_flags_explainer">Включить или отключить экспериментальные функции</string>
     <string name="options">Опции</string>
-    <string name="services">Сервисы</string>
     <string name="about_explainer">Об этом приложении, лицензии</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="shizuku_not_running_explainer">Shizuku не запущен. Нажмите здесь, чтобы открыть Shizuku, затем следуйте инструкциям, чтобы запустить его</string>
     <string name="browser_status">Статус браузера</string>
     <string name="no_such_app_found">Такого приложения не найдено!</string>
@@ -122,7 +115,6 @@
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="select_an_app">Выбрать приложение</string>
     <string name="resolved_via">%s решено через %s</string>
-    <string name="instance_not_available_anymore">Экземпляр больше не доступен!</string>
     <string name="open_with_linksheet">Открыть с помощью LinkSheet</string>
     <string name="in_app_browser">Браузер в приложении</string>
     <string name="links">Ссылки</string>
@@ -135,14 +127,12 @@
     <string name="whitelisted">В белом списке</string>
     <string name="log">Лог</string>
     <string name="loading_link">Загрузка ссылки…</string>
-    <string name="libredirect_via">Через %s</string>
     <string name="confirm">Подтвердить</string>
     <string name="disabled">Отключено</string>
     <string name="enable_request_private_browsing_button">Включить кнопку «Запросить приватный просмотр»</string>
     <string name="redact_log">Редактировать лог (рекомендуется, отключение может привести к утечке названия пакетов и имен хостов)</string>
     <string name="search">Поиск</string>
     <string name="always_show_package_name">Всегда показывать название пакета</string>
-    <string name="no_libredirect_services">Службы LibRedirect не найдены!</string>
     <string name="error">Ошибка</string>
     <string name="checkmark">Галочка</string>
     <string name="request_timeout">Запросить тайм-аут</string>
@@ -160,10 +150,8 @@
     <string name="in_app">В приложении</string>
     <string name="browser_mode_subtitle">Установить предпочтительный режим браузера</string>
     <string name="follow_only_known_trackers">Следовать только за известными трекерами</string>
-    <string name="enable_libredirect">Включить LibRedirect</string>
     <string name="no_logs_found">Прошлые логи не найдены!</string>
     <string name="downloader_url_mime_type">Использовать тип mime из URL</string>
-    <string name="enable_libredirect_explainer">Перенаправление ссылки на интерфейсы, обеспечивающие конфиденциальность, с помощью экспериментальной интеграции <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="shizuku_integration_no_permission_explainer">Нажмите здесь, чтобы запросить разрешение Shizuku</string>
     <string name="system">Системная</string>
     <string name="no_log_entries">Эта сессия не содержит логов.</string>

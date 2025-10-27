@@ -36,7 +36,6 @@
     <string name="display_grid_layout">Layout de grade</string>
     <string name="set_as_browser_done">O LinkSheet tem que ser definido como navegação padrão!</string>
     <string name="browser_status">Status do navegador</string>
-    <string name="enabled">Ativado</string>
     <string name="disabled">Desativado</string>
     <string name="whitelisted">Lista permitida</string>
     <string name="whitelisted_explainer">Mostrar apenas navegadores permitidos</string>
@@ -57,9 +56,6 @@
     <string name="fastfoward_rules">Usar regras do FastForward</string>
     <string name="redirect_resolve_type_remote">servidor remoto</string>
     <string name="redirect_resolve_type_local">resolvedor local</string>
-    <string name="enable_libredirect">Ativar LibRedirect</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="preview_url">Prever URL</string>
     <string name="download">Baixar</string>
     <string name="always_show_package_name_explainer">Sempre mostrar os nomes dos pacotes em vez de apenas os nomes dos aplicativos. Isso se aplica a todo o aplicativo.</string>
@@ -89,8 +85,6 @@
     <string name="theme_explainer">Material You, tema escuro, modo AMOLED</string>
     <string name="github">Github</string>
     <string name="follow_only_known_trackers_explainer">Somente tente seguir redirecionamentos quando o host for conhecido como rastreador/redirecionamento. Se a opção \"Seguir rastreadores via serviço externo\" estiver ativada, ela sempre será ativada.</string>
-    <string name="frontend">Frontend</string>
-    <string name="instance">Instância</string>
     <string name="add">Adicionar</string>
     <string name="select_an_app">Selecione um app</string>
     <string name="close">Fechar</string>
@@ -107,7 +101,6 @@
     <string name="linksheet_download">Download via LinkSheet</string>
     <string name="enable_downloader">Ativar baixador</string>
     <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
-    <string name="random_instance">Instância aleatória</string>
     <string name="in_app_browser">Navegador incorporado</string>
     <string name="in_app_browser_subtitle">Alterar configurações do navegador incorporado</string>
     <string name="use_app_settings">Padrão</string>
@@ -118,7 +111,6 @@
     <string name="disable_in_selected_explainer">Desativar o navegador incorporado nos apps selecionados</string>
     <string name="no_apps_which_can_handle_links_found">Não foram encontrados aplicativos que possam lidar com links.</string>
     <string name="use_unified_preferred_browser">Usar configurações unificadas</string>
-    <string name="libredirect_via">Via %s</string>
     <string name="enable_ignore_libredirect_button">Ativar o botão \"Ignorar LibRedirect\"</string>
     <string name="enable_ignore_libredirect_button_explainer">Mostra um botão na folha inferior se a URL tiver sido redirecionada por meio da LibRedirect, a qual abre a URL original</string>
     <string name="ignore_libredirect">Ignorar LibRedirect</string>
@@ -146,17 +138,14 @@
     <string name="amp2html_external_service">Tentar obter uma versão de página não AMP por meio de um serviço externo</string>
     <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em supabase.com (<annotation url-id="supabase-privacy">Política de privacidade</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="enable_libredirect_explainer">Redirecionar links para front-ends favoráveis à privacidade usando a integração experimental <annotation url-id="libredirect-github">LibRedirect</annotation>.</string>
     <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter <annotation url-id="privacy-downloader">implicações relacionadas à privacidade</annotation></string>
     <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de arquivo (por exemplo, \".jpg\"); se terminar, esse tipo será usado para o arquivo baixado.</string>
-    <string name="no_libredirect_services">Nenhum serviço LibRedirect encontrado!</string>
     <string name="in_app">Incorporado</string>
     <string name="normal">Normal</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>
     <string name="debug">Depurar</string>
     <string name="debug_explainer">Registros do app, redefinir manipuladores verificados</string>
     <string name="log_files">Sessões anteriores</string>
-    <string name="services">Serviços</string>
     <string name="current_session">Sessão atual</string>
     <string name="resolve_failed">%s falhou: %s</string>
     <string name="no_apps_found">Nenhum app foi encontrado.</string>
@@ -164,7 +153,6 @@
     <string name="enable_request_private_browsing_button_explainer">Exibe um botão ao lado dos navegadores que abre o URL clicado no modo de navegação privada. Navegadores compatíveis: %s</string>
     <string name="use_unified_preferred_browser_explainer">A ativação dessa opção aplica as configurações abaixo ao tratamento de links Normal e Incorporado. Use os botões abaixo para alternar entre os modos Normal e Incorporado quando desativado.</string>
     <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url-id="privacy-amp2html">implicações relacionadas à privacidade</annotation></string>
-    <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
     <string name="advanced">Avançado</string>
     <string name="shizuku">Integração com o Shizuku</string>
     <string name="shizuku_explainer_short">Interagir diretamente com as APIs do sistema</string>

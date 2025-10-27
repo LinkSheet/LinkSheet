@@ -53,7 +53,6 @@ val ResolverModule = module {
     singleOf(::InAppBrowserHandler)
     singleOf(::RedirectUrlResolver)
     singleOf(::Amp2HtmlUrlResolver)
-    singleOf(::LibRedirectResolver)
     single<IntentResolver> {
         val settings = createSettings(get(), get())
         val experimentRepository = get<ExperimentRepository>()

@@ -34,7 +34,6 @@
     <string name="open_with_linksheet">Atvērt ar LinkSheet</string>
     <string name="display_grid_layout_explainer">Rādīt režģi apakšējā lapā, nevis sarakstu</string>
     <string name="always_show_package_name_explainer">Vienmēr rādīt pakotņu nosaukumus, nevis tikai lietotņu nosaukumus. Tas attiecas uz visu lietotni.</string>
-    <string name="enabled">Iespējots</string>
     <string name="credits">Pateicības</string>
     <string name="selected_browser_explainer">Šīs pārlūks tiks automātiski atvērts, ja neviena vietējā lietotne nevarēs apstrādāt noklikšķināto saiti</string>
     <string name="always_show_package_name">Vienmēr rādīt pakotnes nosaukumu</string>
@@ -75,13 +74,10 @@
     <string name="theme_explainer">Material You, tumšais motīvs, tīri melns režīms</string>
     <string name="dark">Tumšs</string>
     <string name="light">Gaišs</string>
-    <string name="enable_libredirect">Iespējot LibRedirect</string>
     <string name="fastfoward_rules">Lietot FastForward noteikumus</string>
     <string name="version">LinkSheet Versija</string>
     <string name="links_explainer">ClearURLs, LibRedirect, Pāradresēšanas sekošana</string>
-    <string name="lib_redirect">LibRedirect</string>
     <string name="ignore_libredirect">Ignorēt LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="follow_redirects_local_cache_explainer">Saglabāt pāradresēšanas rezultātu lokāli kešatmiņā</string>
     <string name="app_browsers">Lietotnes un pārlūki</string>
     <string name="add">Pievienot</string>

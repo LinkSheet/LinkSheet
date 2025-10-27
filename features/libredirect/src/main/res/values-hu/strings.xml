@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">Engedélyezve</string>
+    <string name="random_instance">Véletlenszerű példány</string>
+    <string name="libredirect_via">Ezen keresztül: %s</string>
+    <string name="services">Szolgáltatások</string>
+    <string name="no_libredirect_services">Nem található LibRedirect szolgáltatás!</string>
+    <string name="instance_not_available_anymore">A példány már nem elérhető!</string>
+    <string name="enable_libredirect">LibRedirect engedélyezése</string>
+    <string name="enable_libredirect_explainer">Linkek átirányítása adatvédelmibarát frontendekre a kísérleti <annotation url-id="libredirect-github">LibRedirect</annotation> integráció segítségével.</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Frontend</string>
+    <string name="instance">Példány</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d ellenőrzött gazdagép</item>
+        <item quantity="other">%d ellenőrzött gazdagép</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d gazdagép: %s</item>
+        <item quantity="other">%d gazdagép: %s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d engedélyezett</item>
+        <item quantity="other">%d engedélyezett</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d letiltott</item>
+        <item quantity="other">%d letiltott</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d ellenőrizve</item>
+        <item quantity="other">%d ellenőrizve</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d engedélyezett gazdagép</item>
+        <item quantity="other">%d engedélyezett gazdagép</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d letiltott gazdagép</item>
+        <item quantity="other">%d letiltott gazdagép</item>
+    </plurals>
+</resources>

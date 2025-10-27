@@ -29,7 +29,7 @@ import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.workmanager.WorkDelegatorService
-import fe.linksheet.util.web.UriUtil
+import fe.linksheet.web.UriUtil
 import fe.std.coroutines.RefreshableStateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow

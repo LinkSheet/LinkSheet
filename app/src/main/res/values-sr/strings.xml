@@ -72,7 +72,6 @@
     <string name="clear">Очисти</string>
     <string name="import_and_override">Увоз и преписивање</string>
     <string name="apps_which_can_open_links_explainer">Додирните апликацију да бисте отворили мени „Отвори подразумевано“ који вам омогућава да онемогућите аутоматско отварање линка</string>
-    <string name="enabled">Омогућено</string>
     <string name="success">Успешно</string>
     <string name="request_timeout_explainer">Дефинише колико секунди ће LinkSheet чекати да се веза успостави. Подешавање на 0 онемогућава временско ограничење, али се то не препоручује.</string>
     <string name="discord_explainer">Ћаскајте о LinkSheet-у на нашем Discord серверу</string>
@@ -95,7 +94,6 @@
     <string name="bottom_sheet_explainer">Конфигурација и прилагођавање</string>
     <string name="yes">Да</string>
     <string name="light">Светла</string>
-    <string name="frontend">Фронтенд</string>
     <string name="redirect_resolve_type_remote">удаљени сервер</string>
     <string name="donate_subtitle">Надоградите на <b>LinkSheet Pro</b></string>
     <string name="flavor"><b>Варијанта:</b> <font face="monospace">%s</font></string>
@@ -122,10 +120,8 @@
     <string name="downloader_url_mime_type_explainer">Проверава да ли се URL адреса завршава екстензијом фајла (нпр. .jpg); Ако је тако, овај тип се користи за преузети фајл.</string>
     <string name="other">Остало</string>
     <string name="credits_explainer">Признања, лиценцирање</string>
-    <string name="lib_redirect">LibRedirect</string>
     <string name="remove_all">Уклони све</string>
     <string name="use_unified_preferred_browser">Користи обједињена подешавања</string>
-    <string name="instance">Инстанца</string>
     <string name="always_ask_explainer">Увек наведите све прегледаче</string>
     <string name="enable_downloader">Омогући програм за преузимање</string>
     <string name="paste">Налепи</string>
@@ -140,12 +136,9 @@
     <string name="app_setup">Подешавање апликације</string>
     <string name="about">О нама</string>
     <string name="add_all">Додај све</string>
-    <string name="random_instance">Насумична инстанца</string>
     <string name="feature_flags_explainer">Омогућите или онемогућите експерименталне функције</string>
     <string name="options">Опције</string>
-    <string name="services">Услуге</string>
     <string name="about_explainer">Заслуге, лиценце, линкови, верзија</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="shizuku_not_running_explainer">Shizuku није покренут. Додирните овде да бисте отворили Shizuku, а затим пратите упутства да бисте га покренули.</string>
     <string name="browser_status">Статус прегледача</string>
     <string name="no_such_app_found">Није пронађена таква апликација!</string>
@@ -155,7 +148,6 @@
     <string name="select_an_app">Изаберите апликацију</string>
     <string name="github_workflow_run_id"><b>ID радног тока:</b> <font face="monospace">%s</font></string>
     <string name="resolved_via">%s решено путем %s</string>
-    <string name="instance_not_available_anymore">Инстанца више није доступна!</string>
     <string name="open_with_linksheet">Отвори помоћу LinkSheet</string>
     <string name="donate_crypto">Донирање путем криптовалуте</string>
     <string name="in_app_browser">Прегледач у апликацији</string>
@@ -171,7 +163,6 @@
     <string name="loading_link">Обрада линка…</string>
     <string name="donate_card_headline">Донирајте да бисте подржали LinkSheet</string>
     <string name="general">Разно</string>
-    <string name="libredirect_via">Путем %s</string>
     <string name="pretend_to_be_app_explainer">Претварање да је ово изворна апликација за подржане домене са LinkSheetCompat</string>
     <string name="confirm">Потврди</string>
     <string name="disabled">Онемогућено</string>
@@ -181,7 +172,6 @@
     <string name="search">Претрага</string>
     <string name="at_least_one_unknown_browser_installer">Инсталиран је најмање један (непознати) прегледач</string>
     <string name="always_show_package_name">Увек приказуј назив пакета</string>
-    <string name="no_libredirect_services">Нису пронађене LibRedirect услуге!</string>
     <string name="error">Грешка</string>
     <string name="checkmark">Квачица</string>
     <string name="request_timeout">Време за истек захтева</string>
@@ -205,12 +195,10 @@
     <string name="browser_mode_subtitle">Подесите режим преферираног прегледача</string>
     <string name="built_by_error">Ову верзију није потписао 1fexd ни GitHub радни ток.</string>
     <string name="follow_only_known_trackers">Прати само познате програме за праћење</string>
-    <string name="enable_libredirect">Омогући LibRedirect</string>
     <string name="no_browser_installed_explainer">LinkSheet није успео да открије најмање једну апликацију која тврди да је прегледач. За најбоље искуство, инсталирајте прегледач.</string>
     <string name="donate_card">Донирање картицом (путем BuyMeACoffee)</string>
     <string name="no_logs_found">Нису пронађене прошле евиденције!</string>
     <string name="downloader_url_mime_type">Користите тип пантомиме из URL адресе</string>
-    <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url-id="libredirect-github">LibRedirect</annotation> интеграцију</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
     <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
     <string name="system">Прати систем</string>

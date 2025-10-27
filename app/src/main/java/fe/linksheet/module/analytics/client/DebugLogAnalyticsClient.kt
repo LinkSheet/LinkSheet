@@ -1,7 +1,6 @@
 package fe.linksheet.module.analytics.client
 
 import android.content.Context
-import androidx.compose.ui.util.fastJoinToString
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent

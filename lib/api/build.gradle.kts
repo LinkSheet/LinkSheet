@@ -31,5 +31,6 @@ android {
 dependencies {
     implementation(_1fexd.composeKit.preference.compose.core2)
     implementation(AndroidX.room.common)
+    implementation(AndroidX.sqlite.ktx)
     implementation(AndroidX.core.ktx)
 }

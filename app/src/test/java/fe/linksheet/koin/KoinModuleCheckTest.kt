@@ -8,28 +8,41 @@ import android.os.Build
 import androidx.lifecycle.SavedStateHandle
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import app.linksheet.api.CachedRequest
+import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.feature.browser.PrivateBrowsingService
+import app.linksheet.feature.downloader.Downloader
+import app.linksheet.feature.engine.database.repository.CacheRepository
+import app.linksheet.feature.libredirect.LibRedirectResolver
+import app.linksheet.feature.libredirect.database.dao.LibRedirectDefaultDao
+import app.linksheet.feature.libredirect.database.dao.LibRedirectServiceStateDao
+import app.linksheet.feature.libredirect.database.repository.LibRedirectDefaultRepository
+import app.linksheet.feature.libredirect.database.repository.LibRedirectStateRepository
+import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
+import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
+import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
+import app.linksheet.feature.shizuku.ShizukuService
+import app.linksheet.feature.shizuku.preference.ShizukuPreferences
+import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import coil3.ImageLoader
 import com.google.gson.Gson
 import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.feature.app.PackageService
 import fe.linksheet.feature.app.`package`.PackageIntentHandler
 import fe.linksheet.feature.app.`package`.PackageLabelService
 import fe.linksheet.feature.app.`package`.PackageLauncherService
 import fe.linksheet.feature.app.`package`.domain.DomainVerificationManagerCompat
-import app.linksheet.compose.debug.DebugMenuSlotProvider
-import app.linksheet.feature.browser.PrivateBrowsingService
-import app.linksheet.feature.shizuku.preference.ShizukuPreferences
-import app.linksheet.feature.shizuku.ShizukuService
-import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
-import app.linksheet.compose.debug.DebugMenuSlotProvider
+import fe.linksheet.feature.systeminfo.BuildConstants
+import fe.linksheet.feature.systeminfo.BuildInfo
+import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.SystemProperties
+import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
-import fe.linksheet.module.downloader.Downloader
 import fe.linksheet.module.language.AppLocaleService
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.file.LogPersistService
@@ -39,17 +52,13 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.remoteconfig.RemoteConfigRepository
-import fe.linksheet.module.repository.CacheRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
-import fe.linksheet.module.repository.LibRedirectDefaultRepository
-import fe.linksheet.module.repository.LibRedirectStateRepository
 import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
 import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolver
-import fe.linksheet.module.resolver.LibRedirectResolver
-import fe.linksheet.module.resolver.urlresolver.CachedRequest
+import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlResolveRequest
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
@@ -57,12 +66,8 @@ import fe.linksheet.module.resolver.urlresolver.redirect.RedirectResolveRequest
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.IntentLauncher
-import fe.linksheet.module.statistic.StatisticsService
-import fe.linksheet.feature.systeminfo.BuildConstants
-import fe.linksheet.feature.systeminfo.BuildInfo
-import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.feature.systeminfo.SystemProperties
 import fe.linksheet.module.shizuku.ShizukuServiceConnection
+import fe.linksheet.module.statistic.StatisticsService
 import fe.linksheet.module.versiontracker.VersionTracker
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
@@ -79,7 +84,6 @@ import org.koin.test.verify.injectedParameters
 import org.koin.test.verify.verifyAll
 import org.robolectric.annotation.Config
 import java.time.ZoneId
-import kotlin.intArrayOf
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
@@ -122,15 +126,15 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<Redactor>(LogHasher::class),
         definition<Logger>(LoggerDelegate::class),
-        definition<CachedRequest>(Request::class),
+        definition<RealCachedRequest>(Request::class),
         definition<RedirectResolveRequest>(
             Request::class,
-            CachedRequest::class,
+            RealCachedRequest::class,
             OkHttpClient::class
         ),
         definition<Amp2HtmlResolveRequest>(
             Request::class,
-            CachedRequest::class,
+            RealCachedRequest::class,
             OkHttpClient::class,
         ),
         definition<AllRemoteResolveRequest>(Request::class),
@@ -143,6 +147,9 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             Amp2HtmlResolveRequest::class,
             Amp2HtmlRepository::class
         ),
+        definition<LibRedirectDefaultRepository>(LibRedirectDefaultDao::class),
+        definition<LibRedirectStateRepository>(LibRedirectServiceStateDao::class),
+        definition<LibRedirectSettingsViewModel>(AppPreferenceRepository::class, LibRedirectPreferences::class),
         definition<LibRedirectResolver>(
             LibRedirectDefaultRepository::class,
             LibRedirectStateRepository::class

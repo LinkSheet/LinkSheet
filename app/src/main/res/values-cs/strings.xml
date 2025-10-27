@@ -40,8 +40,6 @@
     <string name="follow_redirects_local_cache_explainer">Lokálně ukládat výsledné adresy přesměrování</string>
     <string name="resolved_via">%s vyřešeno pomocí %s</string>
     <string name="redirect_resolve_type_local">místního překladače</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="instance">Instance</string>
     <string name="add">Přidat</string>
     <string name="preview_url_explainer">Zobrazí adresu URL, na kterou jste klepnuli (po jejím zpracování)</string>
     <string name="download">Stáhnout</string>
@@ -56,7 +54,6 @@
     <string name="browser_status">Stav prohlížeče</string>
     <string name="credits_explainer">Poděkování, licence</string>
     <string name="downloader_url_mime_type">Použít typ mime z adresy</string>
-    <string name="enable_libredirect">Povolit LibRedirect</string>
     <string name="donate_subtitle">Zakoupit <b>LinkSheet Pro</b></string>
     <string name="select_an_app">Vybrat aplikaci</string>
     <string name="whitelisted_explainer">Zobrazit pouze povolené prohlížeče</string>
@@ -71,7 +68,6 @@
     <string name="set_as_browser_done">Aplikace LinkSheet byla nastavena jako výchozí prohlížeč!</string>
     <string name="settings">Nastavení</string>
     <string name="selected_browser_explainer">Tento prohlížeč bude automaticky otevřen, pokud nebude nalezena žádná aplikace, která dokáže zpracovat daný odkaz</string>
-    <string name="enabled">Povoleno</string>
     <string name="disabled">Zakázáno</string>
     <string name="open_with_linksheet">Otevřít v aplikaci LinkSheet</string>
     <string name="whitelisted">Povolené</string>
@@ -92,14 +88,11 @@
     <string name="fastfoward_rules">Použít pravidla FastForward</string>
     <string name="redirect_resolve_type_local_cache">místní mezipaměti</string>
     <string name="redirect_resolve_type_remote">vzdáleného serveru</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">Frontend</string>
     <string name="close">Zavřít</string>
     <string name="dont_show_filtered_item">Nezobrazovat sekci „naposledy vybraná aplikace“</string>
     <string name="dont_show_filtered_item_explainer">Nezobrazovat horní sekci, která navrhuje naposledy použitou aplikaci pro daného hostitele</string>
     <string name="preview_url">Náhled adresy URL</string>
     <string name="downloader_url_mime_type_explainer">Zkontroluje, zda adresa URL končí typem souboru (např. „.jpg“); pokud ano, bude pro stažený soubor použit tento typ.</string>
-    <string name="random_instance">Náhodná instance</string>
     <string name="in_app_browser">Prohlížeč v aplikaci</string>
     <string name="use_app_settings">Výchozí</string>
     <string name="always_disable_explainer">Zakázat prohlížeč v aplikaci ve všech aplikacích</string>
@@ -116,7 +109,6 @@
     <string name="theme_explainer">Material You, tmavý motiv, čistě černý motiv</string>
     <string name="fastfoward_rules_explainer">Použít experimentální integraci pravidel <annotation url-id="fastforward-github">FastForward</annotation> (obejde přesměrování některých hostitelů extrahováním cílové adresy z odkazu)</string>
     <string name="enable_downloader_explainer">Přidá tlačítko „Stáhnout“ do spodního listu, pokud adresa URL obsahuje přímý odkaz na soubor. Tato funkce může mít <annotation url-id="privacy-downloader">následky na soukromí</annotation></string>
-    <string name="enable_libredirect_explainer">Přesměrovat odkazy na frontendy dbající na soukromí pomocí experimentální integrace <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="in_app">V aplikaci</string>
     <string name="export">Export</string>
     <string name="log_privacy">Pro více informací o soukromí navštivte tento <annotation url-id="privacy-logs">odkaz</annotation>.</string>
@@ -156,7 +148,6 @@
     <string name="disable_in_selected_explainer">Zakázat prohlížeč v aplikaci ve vybraných aplikacích</string>
     <string name="normal">Normální</string>
     <string name="use_unified_preferred_browser">Použít jednotná nastavení</string>
-    <string name="libredirect_via">Přes %s</string>
     <string name="ignore_libredirect">Ignorovat LibRedirect</string>
     <string name="copy_to_clipboard">Zkopírovat do schránky</string>
     <string name="debug">Ladění</string>
@@ -164,7 +155,6 @@
     <string name="logs">Protokoly</string>
     <string name="logs_explainer">Zobrazit protokoly aplikace</string>
     <string name="options">Možnosti</string>
-    <string name="no_libredirect_services">Nenalezeny žádné služby LibRedirect!</string>
     <string name="current_session">Aktuální relace</string>
     <string name="log_files">Minulé relace</string>
     <string name="log_viewer">Prohlížeč protokolů</string>
@@ -182,7 +172,6 @@
     <string name="amp2html_external_service_explainer">Pokusit se získat ne-AMP verzi stránky pomocí rozhraní API provozovaného na serveru supabase.com \'<annotation url-id="supabase-privacy">zásady ochrany soukromí</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="use_unified_preferred_browser_explainer">Povolením se níže uvedená nastavení použijí pro normální zpracování odkazů i pro zpracování odkazů v aplikaci. Pomocí níže uvedených tlačítek můžete přepínat mezi normálním režimem a režimem v aplikaci, pokud je zakázán.</string>
-    <string name="instance_not_available_anymore">Instance již není dostupná!</string>
     <string name="advanced">Pokročilé</string>
     <string name="shizuku">Integrace Shizuku</string>
     <string name="shizuku_explainer_short">Přímo interagovat se systémovými rozhraními API</string>
@@ -207,7 +196,6 @@
     <string name="app_setup">Nastavení aplikace</string>
     <string name="feature_flags_explainer">Povolit nebo zakázat experimentální funkce</string>
     <string name="no_apps_which_can_handle_links_found">Nebyly nalezeny žádné aplikace, které dokážou zpracovat odkazy.</string>
-    <string name="services">Služby</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="shizuku_integration_enabled_explainer">Integrace Shizuku byla úspěšně povolena!</string>
     <string name="shizuku_integration">Integrace Shizuku</string>

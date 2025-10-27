@@ -126,7 +126,7 @@ private fun ProfileSwitchingSettingsRouteInternal(
         }
 
         if (status is ProfileStatus.Available) {
-            item(key = R.string.enabled, contentType = ContentType.SingleGroupItem) {
+            item(key = R.string.switch_profile, contentType = ContentType.SingleGroupItem) {
                 SwitchListItem(
                     checked = enabled,
                     onCheckedChange = onEnable,

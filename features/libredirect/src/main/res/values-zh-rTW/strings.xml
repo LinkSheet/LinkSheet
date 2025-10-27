@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">已啟用</string>
+    <string name="enable_libredirect">啟用 LibRedirect</string>
+    <string name="enable_libredirect_explainer">使用實驗性的 <annotation url-id="libredirect-github">LibRedirect</annotation> 整合 (將連結重新導向至隱私友善的前端)</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">前端</string>
+    <string name="instance">實例</string>
+    <string name="random_instance">隨機實例</string>
+    <string name="services">服務</string>
+    <string name="libredirect_via">透過 %s</string>
+    <string name="instance_not_available_anymore">實例已不再可用！</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="other">共 %d 部主機：%s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="other">已停用 %d 部</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="other">已驗證 %d 部</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="other">已驗證 %d 部主機</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="other">已停用 %d 部主機</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="other">預設處理 %d 部主機</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="other">已啟用 %d 部主機</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="other">已啟用 %d 部</item>
+    </plurals>
+    <string name="no_libredirect_services">沒有任何 LibRedirect 服務！</string>
+</resources>

@@ -4,16 +4,16 @@ import android.net.Uri
 import android.net.compatHost
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.unwrapOrNull
-import fe.linksheet.module.database.entity.cache.ResolveType
+import app.linksheet.feature.engine.database.entity.cache.ResolveType
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.redactor.HashProcessor
-import fe.linksheet.module.repository.CacheRepository
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
-import fe.linksheet.util.web.Darknet
-import fe.linksheet.util.web.HostType
-import fe.linksheet.util.web.HostUtil
+import fe.linksheet.web.Darknet
+import fe.linksheet.web.HostType
+import fe.linksheet.web.HostUtil
 import org.koin.core.component.KoinComponent
 import kotlin.reflect.KClass
 

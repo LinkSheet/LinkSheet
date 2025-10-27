@@ -67,7 +67,6 @@
     <string name="bottom_sheet">Lembar bawah</string>
     <string name="selected_browser_explainer">Peramban ini akan otomatis terbuka jika tidak ada aplikasi asli yang bisa menangani tautan yang diklik</string>
     <string name="app_browsers_subtitle">Aplikasi pilihan, Setelan peramban</string>
-    <string name="enabled">Aktif</string>
     <string name="set_as_browser_done">LinkSheet telah disetel sebagai peramban asali!</string>
     <string name="hide_after_copying_explainer">Sembunyikan lembar bawah secara otomatis saat tombol tindakan seperti \"Salin tautan\" atau \"Unduh\" diketuk</string>
     <string name="open_link_with_subtitle_2">LinkSheet awalnya didasarkan pada OpenLinkWith</string>
@@ -90,18 +89,12 @@
     <string name="resolved_via">%s diselesaikan melalui %s</string>
     <string name="redirect_resolve_type_remote">peladen jarak jauh</string>
     <string name="redirect_resolve_type_local">penyelesai lokal</string>
-    <string name="enable_libredirect">Aktifkan LibRedirect</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">Antarmuka</string>
-    <string name="instance">Instansi</string>
     <string name="add">Tambahkan</string>
     <string name="select_an_app">Pilih apl</string>
     <string name="close">Tutup</string>
     <string name="preview_url">Pratinjau URL</string>
     <string name="fastfoward_rules_explainer">Gunakan integrasi aturan <annotation url-id="fastforward-github">FastForward</annotation> yang bersifat eksperimental (melewati pengalihan beberapa host dengan mengekstrak pengalihan dari tautan)</string>
     <string name="redirect_resolve_type_local_cache">singgahan (cache) lokal</string>
-    <string name="enable_libredirect_explainer">Alihkan tautan ke antarmuka yang ramah privasi menggunakan integrasi <annotation url-id="libredirect-github">LibRedirect</annotation> yang bersifat eksperimental</string>
     <string name="dont_show_filtered_item">Jangan perlihatkan bagian \"apl yang terakhir dipilih\"</string>
     <string name="dont_show_filtered_item_explainer">Jangan perlihatkan bagian atas yang menunjukkan apl yang terakhir digunakan untuk host yang diklik</string>
     <string name="preview_url_explainer">Memperlihatkan URL yang diklik (usai diproses)</string>
@@ -109,7 +102,6 @@
     <string name="linksheet_download">Unduhan LinkSheet</string>
     <string name="enable_downloader">Aktifkan pengunduh</string>
     <string name="downloader_url_mime_type">Gunakan jenis mime dari URL</string>
-    <string name="random_instance">Instansi acak</string>
     <string name="download_started">Unduhan dimulai</string>
     <string name="url_copied_toast">URL disalin</string>
     <string name="notifications_explainer">URL disalin, Unduhan dimulai</string>
@@ -119,7 +111,6 @@
     <string name="resolve_event__download_check">Memeriksa kemampuan untuk diunduh</string>
     <string name="settings_links_downloader__title_downloader">Pengunduh</string>
     <string name="download_started_toast_explainer">Perlihatkan toast ketika unduhan telah dimulai</string>
-    <string name="instance_not_available_anymore">Instansi tidak tersedia lagi!</string>
     <string name="in_app_browser">Peramban dalam Apl (In-App)</string>
     <string name="use_app_settings">Asali</string>
     <string name="use_app_settings_explainer">Para aplikasi yang memutuskan apakah Peramban dalam Apl (In-App) harus digunakan</string>
@@ -129,7 +120,6 @@
     <string name="normal">Normal</string>
     <string name="in_app">Dalam Apl (In-App)</string>
     <string name="use_unified_preferred_browser">Gunakan setelan terpadu</string>
-    <string name="libredirect_via">Melalui %s</string>
     <string name="enable_ignore_libredirect_button">Aktifkan tombol \"Abaikan LibRedirect\"</string>
     <string name="no_apps_which_can_handle_links_found">Tidak ditemukan aplikasi yang bisa menangani tautan.</string>
     <string name="always_disable_explainer">Nonaktifkan peramban dalam Apl (In-App) di semua aplikasi</string>
@@ -141,8 +131,6 @@
     <string name="debug_explainer">Log apl, penyetelan ulang penangan terverifikasi</string>
     <string name="logs">Log</string>
     <string name="options">Opsi</string>
-    <string name="services">Layanan</string>
-    <string name="no_libredirect_services">Tidak ditemukan layanan LibRedirect yang ada!</string>
     <string name="current_session">Sesi saat ini</string>
     <string name="log_files">Sesi yang lalu</string>
     <string name="log_viewer">Penampil log</string>

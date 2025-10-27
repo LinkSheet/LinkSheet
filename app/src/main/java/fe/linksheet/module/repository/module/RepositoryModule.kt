@@ -2,6 +2,7 @@
 
 package fe.linksheet.module.repository.module
 
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import fe.linksheet.feature.wiki.WikiCacheRepository
 import fe.linksheet.module.clock.ClockModule
 import fe.linksheet.module.database.DatabaseModule
@@ -23,8 +24,7 @@ val RepositoryModule = module {
     singleOf(::WhitelistedNormalBrowsersRepository)
     singleOf(::WhitelistedInAppBrowsersRepository)
     singleOf(::AppSelectionHistoryRepository)
-    singleOf(::LibRedirectDefaultRepository)
-    singleOf(::LibRedirectStateRepository)
+
     singleOf(::ResolvedRedirectRepository)
     singleOf(::Amp2HtmlRepository)
     singleOf(::WikiCacheRepository)

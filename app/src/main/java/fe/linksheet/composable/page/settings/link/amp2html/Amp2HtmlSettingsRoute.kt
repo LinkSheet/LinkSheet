@@ -12,12 +12,12 @@ import fe.composekit.component.list.item.type.SliderListItem
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
+import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.composable.util.groupSize
 import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
-import fe.linksheet.util.web.Darknet
+import fe.linksheet.web.Darknet
 import org.koin.androidx.compose.koinViewModel
 
 

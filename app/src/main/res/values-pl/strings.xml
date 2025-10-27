@@ -35,7 +35,6 @@
     <string name="app_browsers">Aplikacje</string>
     <string name="bottom_sheet">Dolny panel</string>
     <string name="settings">Ustawienia</string>
-    <string name="enabled">Włączone</string>
     <string name="disabled">Wyłączone</string>
     <string name="open_with_linksheet">Otwórz za pomocą LinkSheet</string>
     <string name="whitelisted">Na białej liście</string>
@@ -74,8 +73,6 @@
     <string name="follow_redirects_local_cache_explainer">Lokalnie buforuj wyniki przekierowań</string>
     <string name="redirect_resolve_type_local_cache">lokalny bufor</string>
     <string name="redirect_resolve_type_remote">zdalny serwer</string>
-    <string name="enable_libredirect">Włącz LibRedirect</string>
-    <string name="instance">Instancja</string>
     <string name="add">Dodaj</string>
     <string name="select_an_app">Wybierz aplikację</string>
     <string name="close">Zamknij</string>
@@ -86,7 +83,6 @@
     <string name="enable_downloader">Włącz program do pobierania</string>
     <string name="downloader_url_mime_type">Użyj typu MIME z adresu URL</string>
     <string name="downloader_url_mime_type_explainer">Sprawdza, czy adres URL kończy się rozszerzeniem pliku (np. \".jpg\"); jeśli tak, ten typ jest używany dla pobieranego pliku.</string>
-    <string name="random_instance">Losowa instancja</string>
     <string name="use_app_settings">Domyślnie</string>
     <string name="always_disable">Wymuś wyłączenie</string>
     <string name="disable_in_selected">Wymuś wyłączenie…</string>
@@ -108,11 +104,7 @@
     <string name="follow_redirects_external_service_explainer">Śledź przekierowania za pomocą interfejsu API wdrożonego na supabase.com (<annotation url-id="supabase-privacy">Polityka prywatności</annotation>)</string>
     <string name="fastfoward_rules_explainer">Używaj eksperymentalnej integracji reguł <annotation url-id="fastforward-github">FastForward</annotation> (omiń przekierowania niektórych stron internetowych, wyodrębniając przekierowanie z linku)</string>
     <string name="redirect_resolve_type_local">lokalny rozwiązywacz</string>
-    <string name="enable_libredirect_explainer">Przekieruj linki do przyjaznych dla prywatności frontendów przy użyciu eksperymentalnej integracji <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="use_app_settings_explainer">Aplikacje decydują, czy wewnętrzna przeglądarka powinna być używana</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">Frontend</string>
     <string name="no_apps_which_can_handle_links_found">Nie znaleziono aplikacji obsługujących linki.</string>
     <string name="normal">Zwykła</string>
     <string name="in_app">W aplikacji</string>
@@ -127,13 +119,10 @@
     <string name="logs_explainer">Wyświetl logi aplikacji</string>
     <string name="debug">Debugowanie</string>
     <string name="options">Opcje</string>
-    <string name="services">Usługi</string>
     <string name="current_session">Bieżąca sesja</string>
     <string name="log_files">Poprzednie sesje</string>
     <string name="log_viewer">Przeglądarka logów</string>
     <string name="no_log_entries">Ta sesja nie zawiera dzienników.</string>
-    <string name="no_libredirect_services">Nie znaleziono usług LibRedirect!</string>
-    <string name="libredirect_via">Przez %s</string>
     <string name="download_started">Rozpoczęto pobieranie</string>
     <string name="request_timeout">Limit czasu żądania</string>
     <string name="request_timeout_explainer">Określ ile sekund LinkSheet będzie oczekiwał na nawiązanie połączenia. Ustawienie tej wartości na 0 wyłącza limit czasu, ale nie jest to zalecane.</string>
@@ -162,7 +151,6 @@
     <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty adres URL w trybie przeglądania prywatnego. Obsługiwane przeglądarki: %s</string>
     <string name="usage_stats_sorting_explainer">Uwzględnij statystyki użycia systemu Android w algorytmie sortowania. Żądane jest uprawnienie przy pierwszym przełączeniu.</string>
     <string name="use_unified_preferred_browser_explainer">Po włączeniu zostaną zastosowane poniższe ustawienia do obsługi linków w trybach normalnym i w aplikacji. Jeśli opcja jest wyłączona, używaj poniższych przycisków, aby przełączać między tymi trybami.</string>
-    <string name="instance_not_available_anymore">Instancja nie jest już dostępna!</string>
     <string name="shizuku_explainer_short">Bezpośrednia interakcja z API systemu</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Tryb Shizuku aktywny, dotknij aplikację, aby przełączyć jej funkcję automatycznej obsługi linków. Przytrzymaj długo, aby otworzyć jej ustawienia „Otwieraj domyślnie”.</string>
     <string name="shizuku_not_running_explainer">Shizuku nie jest uruchomiony. Dotknij tutaj, aby go otworzyć, a następnie postępuj zgodnie z instrukcjami.</string>

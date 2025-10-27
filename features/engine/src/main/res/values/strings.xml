@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_scenario__text_data_type">Data type</string>
+    <string name="settings_scenario__text_value">Value</string>
+</resources>

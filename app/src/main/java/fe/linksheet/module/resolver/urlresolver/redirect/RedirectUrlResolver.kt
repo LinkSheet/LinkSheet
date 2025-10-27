@@ -1,7 +1,7 @@
 package fe.linksheet.module.resolver.urlresolver.redirect
 
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
-import fe.linksheet.module.repository.CacheRepository
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
 import fe.linksheet.module.resolver.urlresolver.base.UrlResolver
 

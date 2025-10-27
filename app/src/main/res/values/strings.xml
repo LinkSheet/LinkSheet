@@ -45,7 +45,6 @@
     <string name="bottom_sheet">Bottom sheet</string>
     <string name="settings">Settings</string>
     <string name="selected_browser_explainer">This browser will automatically be opened if no native app can handle the clicked link</string>
-    <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="open_with_linksheet">Open with LinkSheet</string>
     <string name="whitelisted">Whitelisted</string>
@@ -91,12 +90,7 @@
     <string name="redirect_resolve_type_local_cache">local cache</string>
     <string name="redirect_resolve_type_remote">remote server</string>
     <string name="redirect_resolve_type_local">local resolver</string>
-    <string name="enable_libredirect">Enable LibRedirect</string>
-    <string name="enable_libredirect_explainer">Redirect links to privacy friendly frontends using experimental <annotation url-id="libredirect-github">LibRedirect</annotation> integration</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">Frontend</string>
-    <string name="instance">Instance</string>
+
     <string name="add">Add</string>
     <string name="select_an_app">Select an app</string>
     <string name="close">Close</string>
@@ -110,7 +104,6 @@
     <string name="enable_downloader_explainer">Add a \"Download\" button to the bottom sheet if URL contains direct link to file. This may have <annotation url-id="privacy-downloader">privacy-related implications</annotation></string>
     <string name="downloader_url_mime_type">Use mime type from URL</string>
     <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If it does, this type is used for the downloaded file.</string>
-    <string name="random_instance">Random instance</string>
     <string name="app_name" translatable="false">LinkSheet</string>
     <string name="in_app_browser">In-App browser</string>
     <string name="in_app_browser_subtitle">Override In-App browser settings</string>
@@ -124,7 +117,6 @@
     <string name="normal">Normal</string>
     <string name="in_app">In-App</string>
     <string name="use_unified_preferred_browser">Use unified settings</string>
-    <string name="libredirect_via">Via %s</string>
     <string name="enable_ignore_libredirect_button">Enable \"Ignore LibRedirect\" button</string>
     <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the URL has been redirected via LibRedirect, which opens the original URL instead</string>
     <string name="ignore_libredirect">Ignore LibRedirect</string>
@@ -134,8 +126,6 @@
     <string name="logs">Logs</string>
     <string name="logs_explainer">View app logs</string>
     <string name="options">Options</string>
-    <string name="services">Services</string>
-    <string name="no_libredirect_services">No LibRedirect services found!</string>
     <string name="current_session">Current session</string>
     <string name="log_files">Past sessions</string>
     <string name="log_viewer">Log viewer</string>
@@ -165,7 +155,6 @@
     <string name="amp2html_external_service_explainer">Attempt to obtain non-AMP page version using an API deployed at supabase.com (<annotation url-id="supabase-privacy">Privacy policy</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="use_unified_preferred_browser_explainer">Enabling this applies the settings below to both Normal and In-App link handling. Use the buttons below to switch between Normal and In-App mode when disabled.</string>
-    <string name="instance_not_available_anymore">Instance is not available anymore!</string>
     <string name="advanced">Advanced</string>
     <string name="shizuku">Shizuku integration</string>
     <string name="shizuku_explainer_short">Interact with system APIs directly</string>

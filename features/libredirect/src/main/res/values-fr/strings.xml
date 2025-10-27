@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">Activé</string>
+    <string name="no_libredirect_services">Aucun service LibRedirect n\'a été trouvé !</string>
+    <string name="enable_libredirect">Activer LibRedirect</string>
+    <string name="enable_libredirect_explainer">Redirige les liens vers des interfaces respectueuses de la vie privée en utilisant l\'intégration expérimentale de <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="instance">Instance</string>
+    <string name="random_instance">Instance aléatoire</string>
+    <string name="libredirect_via">Via %s</string>
+    <string name="services">Services</string>
+    <string name="instance_not_available_anymore">L\'instance n\'est plus disponible !</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d vérifié</item>
+        <item quantity="many">%d vérifiés</item>
+        <item quantity="other">%d vérifiés</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d activé</item>
+        <item quantity="many">%d activés</item>
+        <item quantity="other">%d activés</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d hôte activé</item>
+        <item quantity="many">%d hôtes activés</item>
+        <item quantity="other">%d hôtes activés</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d désactivé</item>
+        <item quantity="many">%d désactivés</item>
+        <item quantity="other">%d désactivés</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d hôte désactivé</item>
+        <item quantity="many">%d hôtes désactivés</item>
+        <item quantity="other">%d hôtes désactivés</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d hôte : %s</item>
+        <item quantity="many">%d hôtes : %s</item>
+        <item quantity="other">%d hôtes : %s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d hôte vérifié</item>
+        <item quantity="many">%d hôtes vérifiés</item>
+        <item quantity="other">%d hôtes vérifiés</item>
+    </plurals>
+    <string name="frontend">Serveur frontal</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d hôte par défaut</item>
+        <item quantity="many">%d hôtes par défaut</item>
+        <item quantity="other">%d hôtes par défaut</item>
+    </plurals>
+</resources>

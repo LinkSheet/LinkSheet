@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">Włączone</string>
+    <string name="enable_libredirect">Włącz LibRedirect</string>
+    <string name="instance">Instancja</string>
+    <string name="random_instance">Losowa instancja</string>
+    <string name="enable_libredirect_explainer">Przekieruj linki do przyjaznych dla prywatności frontendów przy użyciu eksperymentalnej integracji <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Frontend</string>
+    <string name="services">Usługi</string>
+    <string name="no_libredirect_services">Nie znaleziono usług LibRedirect!</string>
+    <string name="libredirect_via">Przez %s</string>
+    <string name="instance_not_available_anymore">Instancja nie jest już dostępna!</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d link: %s</item>
+        <item quantity="few">%d linki: %s</item>
+        <item quantity="many">%d linków: %s</item>
+        <item quantity="other">%d linków: %s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d zweryfikowany link</item>
+        <item quantity="few">%d zweryfikowane linki</item>
+        <item quantity="many">%d zweryfikowanych linków</item>
+        <item quantity="other">%d zweryfikowanych linków</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d włączony link</item>
+        <item quantity="few">%d włączone linki</item>
+        <item quantity="many">%d włączonych linków</item>
+        <item quantity="other">%d włączonych linków</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d wyłączony link</item>
+        <item quantity="few">%d wyłączone linki</item>
+        <item quantity="many">%d wyłączonych linków</item>
+        <item quantity="other">%d wyłączonych linków</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d zweryfikowany</item>
+        <item quantity="few">%d zweryfikowane</item>
+        <item quantity="many">%d zweryfikowanych</item>
+        <item quantity="other">%d zweryfikowanych</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d włączony</item>
+        <item quantity="few">%d włączone</item>
+        <item quantity="many">%d włączonych</item>
+        <item quantity="other">%d włączonych</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d wyłączony</item>
+        <item quantity="few">%d wyłączone</item>
+        <item quantity="many">%d wyłączonych</item>
+        <item quantity="other">%d wyłączonych</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d domyślny host</item>
+        <item quantity="few">%d domyślne hosty</item>
+        <item quantity="many">%d domyślnych hostów</item>
+        <item quantity="other">%d domyślnych hostów</item>
+    </plurals>
+</resources>

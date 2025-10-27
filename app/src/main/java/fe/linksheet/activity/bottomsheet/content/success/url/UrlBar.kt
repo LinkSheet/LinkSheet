@@ -29,6 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import app.linksheet.feature.downloader.DownloadCheckResult
+import app.linksheet.feature.downloader.isDownloadable
+import app.linksheet.feature.libredirect.LibRedirectResult
+import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import coil3.ImageLoader
 import fe.android.compose.icon.BitmapIconPainter.Companion.bitmap
 import fe.android.compose.icon.IconPainter
@@ -44,11 +48,8 @@ import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
 import fe.linksheet.extension.android.toImageBitmap
 import fe.linksheet.feature.profile.CrossProfile
 import fe.linksheet.feature.profile.ProfileSwitcher
-import fe.linksheet.module.database.entity.LibRedirectDefault
-import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.module.resolver.ImprovedIntentResolver
 import fe.linksheet.module.resolver.IntentResolveResult
-import fe.linksheet.module.resolver.LibRedirectResult
 import fe.linksheet.util.intent.Intents
 import me.saket.unfurl.UnfurlResult
 

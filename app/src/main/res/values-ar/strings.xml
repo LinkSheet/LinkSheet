@@ -36,7 +36,6 @@
     <string name="default_apps_subtitle">التطبيقات المفضلة هي التطبيقات التي قمت بتعيينها على \"دائمًا\" لفتح مضيفين معينين</string>
     <string name="send_to">مشاركة الى</string>
     <string name="display_grid_layout_explainer">عرض شبكة بدلا من قائمة في الورقة السفلية</string>
-    <string name="enabled">ممكن</string>
     <string name="disabled">معطل</string>
     <string name="always_show_package_name_explainer">اعرض دائما أسماء الحزم بدلا من أسماء التطبيقات فقط. هذا ينطبق على التطبيق بأكمله.</string>
     <string name="whitelisted_browsers">المتصفحات المدرجة في القائمة البيضاء</string>
@@ -56,7 +55,6 @@
     <string name="bottom_sheet_explainer">التهيئة والتخصيص</string>
     <string name="about">حول التطبيق</string>
     <string name="credits">شكر</string>
-    <string name="random_instance">مثيل عشوائي</string>
     <string name="credits_explainer">الإقرارات والتراخيص</string>
     <string name="use_app_settings_explainer">تحدد التطبيقات ما إذا كان يجب استخدام المتصفح داخل التطبيق</string>
     <string name="donate_crypto">تبرّع عبر العملات الرقمية</string>
@@ -81,15 +79,11 @@
     <string name="dark">مظلم</string>
     <string name="redirect_resolve_type_local_cache">ذاكرة التخزين المؤقت المحلية</string>
     <string name="redirect_resolve_type_remote">خادم بعيد</string>
-    <string name="enable_libredirect">تمكين LibRedirect</string>
     <string name="fastfoward_rules">استخدم قواعد FastForward</string>
     <string name="fastfoward_rules_explainer">استخدم تكامل قاعدة <annotation url-id="fastforward-github"> FastForward</annotation> التجريبي (لتجاوز عمليات إعادة التوجيه لبعض المضيفات عن طريق استخراج إعادة التوجيه من الرابط)</string>
     <string name="follow_redirects_local_cache">تمكين ذاكرة التخزين المؤقت المحلية لإعادة التوجيه</string>
     <string name="redirect_resolve_type_local">محلل محلي</string>
     <string name="follow_redirects_local_cache_explainer">تخزين نتيجة عمليات إعادة التوجيه مؤقتا محليا</string>
-    <string name="instance">المثيل</string>
-    <string name="enable_libredirect_explainer">إعادة توجيه الروابط إلى واجهات أمامية صديقة للخصوصية باستخدام تكامل تجريبي <annotation url-id="libredirect-github"> LibRedirect</annotation></string>
-    <string name="frontend">الواجهة الأمامية</string>
     <string name="add">اضف</string>
     <string name="select_an_app">حدد تطبيقا</string>
     <string name="close">اغلاق</string>
@@ -110,15 +104,11 @@
     <string name="always_disable_explainer">تعطيل المتصفح داخل التطبيق في جميع التطبيقات</string>
     <string name="disable_in_selected">فرض التعطيل…</string>
     <string name="disable_in_selected_explainer">تعطيل المتصفح داخل التطبيق في التطبيقات المحددة</string>
-    <string name="lib_redirect">مكتبة اعادة التوجيه</string>
-    <string name="lib_redirect_service">مكتبة إعادة التوجيه - %s</string>
     <string name="github">جيتهب</string>
     <string name="normal">عادي</string>
     <string name="no_apps_which_can_handle_links_found">لم يتم العثور على تطبيقات يمكنها التعامل مع الروابط.</string>
     <string name="in_app">داخل التطبيق</string>
     <string name="use_unified_preferred_browser">استخدام الإعدادات الموحدة</string>
-    <string name="libredirect_via">عبر %s</string>
-    <string name="no_libredirect_services">لم يتم العثور على خدمات LibRedirect!</string>
     <string name="enable_ignore_libredirect_button">تمكين زر \"تجاهل LibRedirect\"</string>
     <string name="copy_to_clipboard">نسخ إلى الحافظة</string>
     <string name="logs">السجلات</string>
@@ -128,7 +118,6 @@
     <string name="debug_explainer">سجلات التطبيق، إعادة تعيين المعالج الذي تم التحقق منه</string>
     <string name="logs_explainer">عرض سجلات التطبيق</string>
     <string name="log_files">الجلسات السابقة</string>
-    <string name="services">الخدمات</string>
     <string name="current_session">الجلسة الحالية</string>
     <string name="no_log_entries">هذه الجلسة لا تحتوي على أي سجلات.</string>
     <string name="download_started">بدأ التنزيل</string>
@@ -162,7 +151,6 @@
     <string name="usage_stats_sorting_explainer">قم بتضمين إحصائيات استخدام نظام Android في خوارزمية الفرز. يتم طلب الإذن عند التبديل الأول.</string>
     <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
     <string name="use_unified_preferred_browser_explainer">يؤدي تمكين هذا إلى تطبيق الإعدادات أدناه على كل من التعامل مع الروابط العادية وداخل التطبيق. استخدم الأزرار أدناه للتبديل بين الوضع العادي والوضع داخل التطبيق عند تعطيله.</string>
-    <string name="instance_not_available_anymore">المثيل غير متوفر بعد الآن!</string>
     <string name="shizuku">دمج شيزوكو</string>
     <string name="shizuku_explainer_short">تفاعل مع واجهات برمجة تطبيقات النظام مباشرة</string>
     <string name="advanced">متقدم</string>

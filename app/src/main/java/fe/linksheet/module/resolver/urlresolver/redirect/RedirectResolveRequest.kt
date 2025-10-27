@@ -1,7 +1,8 @@
 package fe.linksheet.module.resolver.urlresolver.redirect
 
 import fe.httpkt.Request
-import fe.linksheet.module.resolver.urlresolver.CachedRequest
+import fe.linksheet.RedirectResolver
+import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.module.resolver.urlresolver.base.ResolveRequest
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -12,7 +13,7 @@ class RedirectResolveRequest(
     apiUrl: String,
     token: String,
     request: Request,
-    private val urlResolverCache: CachedRequest,
+    private val urlResolverCache: RealCachedRequest,
     private val okHttpClient: OkHttpClient,
     private val aggressiveExperiment: () -> Boolean = { false },
 ) : ResolveRequest(apiUrl, token, request, "redirect") {
@@ -69,7 +70,7 @@ class RedirectResolveRequest(
 
     private fun Response.handleRefreshHeader(): String? {
         val refreshHeader = header("refresh") ?: return null
-        val parsedHeader = parseRefreshHeader(refreshHeader) ?: return null
+        val parsedHeader = RedirectResolver.parseRefreshHeader(refreshHeader) ?: return null
 
         return parsedHeader
             .takeIf { it.first == 0 }
@@ -84,30 +85,4 @@ class RedirectResolveRequest(
     private fun sendRequest(request: okhttp3.Request): Result<Response> {
         return runCatching { okHttpClient.newCall(request).execute() }
     }
-
-    companion object {
-        private val refreshHeaderRegex = Regex("(\\d+)(?:\\.\\d*)?[;,](?:URL=)?(.+)", RegexOption.IGNORE_CASE)
-
-        internal fun parseRefreshHeader(refreshHeader: String): RefreshHeader? {
-            fun unquoteHeader(value: String): String {
-                if (value.length <= 2) return value
-
-                val firstChar = value[0]
-                val lastChar = value[value.length - 1]
-
-                if ((firstChar == '"' && lastChar == '"') || (firstChar == '\'' && lastChar == '\'')) {
-                    return value.substring(1, value.length - 1)
-                }
-
-                return value
-            }
-
-            val (_, time, url) = refreshHeaderRegex.matchEntire(refreshHeader)?.groupValues ?: return null
-            val intTime = time.toIntOrNull() ?: return null
-
-            return intTime to unquoteHeader(url)
-        }
-    }
 }
-
-typealias RefreshHeader = Pair<Int, String>

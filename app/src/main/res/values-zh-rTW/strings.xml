@@ -41,7 +41,6 @@
     <string name="bottom_sheet">底部功能表</string>
     <string name="settings">設定</string>
     <string name="selected_browser_explainer">若無專門的應用程式可處理所點擊的連結，將自動開啟此瀏覽器</string>
-    <string name="enabled">已啟用</string>
     <string name="disabled">已停用</string>
     <string name="open_with_linksheet">以 LinkSheet 開啟</string>
     <string name="whitelisted">已釘選</string>
@@ -85,12 +84,6 @@
     <string name="redirect_resolve_type_local_cache">本機快取</string>
     <string name="redirect_resolve_type_remote">遠端伺服器</string>
     <string name="redirect_resolve_type_local">本機解析器</string>
-    <string name="enable_libredirect">啟用 LibRedirect</string>
-    <string name="enable_libredirect_explainer">使用實驗性的 <annotation url-id="libredirect-github">LibRedirect</annotation> 整合 (將連結重新導向至隱私友善的前端)</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">前端</string>
-    <string name="instance">實例</string>
     <string name="add">新增</string>
     <string name="select_an_app">選擇一個應用程式</string>
     <string name="close">關閉</string>
@@ -104,7 +97,6 @@
     <string name="enable_downloader_explainer">當網址直接連結至檔案時，在底部功能表顯示一個「下載」按鈕。這可能引發<annotation url-id="privacy-downloader">隱私顧慮</annotation></string>
     <string name="downloader_url_mime_type">採用網址提供的 MIME 類型</string>
     <string name="downloader_url_mime_type_explainer">若網址結尾為副檔名 (例如「.jpg」)，則將該類型套用至下載的檔案。</string>
-    <string name="random_instance">隨機實例</string>
     <string name="app_name">LinkSheet</string>
     <string name="in_app_browser">程式內瀏覽</string>
     <string name="in_app_browser_subtitle">覆寫程式內瀏覽設定</string>
@@ -163,7 +155,6 @@
     <string name="libredirect_version">LibRedirect</string>
     <string name="no">否</string>
     <string name="options">選項</string>
-    <string name="services">服務</string>
     <string name="other">其他</string>
     <string name="url_copied_toast">已複製網址</string>
     <string name="generic__button_text_done">完成</string>
@@ -196,7 +187,6 @@
     <string name="open_app_settings_page">前往應用程式資訊</string>
     <string name="settings_about__divider_external_versions">外部版本資訊</string>
     <string name="settings_links_amp2html__title_skip_browser">略過來自瀏覽器的連結</string>
-    <string name="libredirect_via">透過 %s</string>
     <string name="amp2html_external_service_explainer">使用部署在 supabase.com 上的 API 來嘗試獲取非 AMP 版網頁 (<annotation url-id="supabase-privacy">隱私權政策</annotation>)</string>
     <string name="settings_home__text_clipboard_card">當剪貼簿的內容為網址時，將其顯示在首頁以便存取</string>
     <string name="settings_home__title_clipboard_card">剪貼簿資訊卡</string>
@@ -264,7 +254,6 @@
     <string name="settings_verified_link_handler__text_hosts">主機</string>
     <string name="settings_verified_link_handler__title_details">詳細資料</string>
     <string name="resolve_event__initialized">已初始化</string>
-    <string name="instance_not_available_anymore">實例已不再可用！</string>
     <string name="discord_explainer">在 Discord 上暢談 LinkSheet</string>
     <string name="settings_language__dialog_title">應用程式語言</string>
     <string name="settings_language__text_system_language_with_language">%s (系統語言)</string>
@@ -442,7 +431,6 @@
     <string name="reset_app_link_verification_status_subtitle">輕觸以重設所有應用程式的連結驗證狀態。輕觸後 Android 將重新驗證連結，這將花上幾分鐘，並且在完成時不會發出確認訊息。這項作業需要 Shizuku。</string>
     <string name="reset_app_link_verification_status_toast">已要求重新驗證</string>
     <string name="generic__button_dismiss">關閉</string>
-    <string name="no_libredirect_services">沒有任何 LibRedirect 服務！</string>
     <string name="unknown_host">「%s」已遭封鎖或不存在</string>
     <string name="no_internet_connection">沒有網際網路連線</string>
 </resources>

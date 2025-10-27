@@ -49,7 +49,6 @@
     <string name="clear">Dọn dẹp</string>
     <string name="import_and_override">Nhập và ghi đè</string>
     <string name="apps_which_can_open_links_explainer">Nhấn vào một ứng dụng để mở menu \"Mở theo mặc định\" cho phép bạn tắt tính năng mở liên kết tự động</string>
-    <string name="enabled">Đã bật</string>
     <string name="request_timeout_explainer">Xác định số giây LinkSheet sẽ đợi để thiết lập kết nối. Đặt giá trị này thành 0 sẽ tắt thời gian chờ nhưng điều này không được khuyến khích.</string>
     <string name="url_copied">URL đã được sao chép vào clipboard</string>
     <string name="copy_url">Sao chép liên kết</string>
@@ -66,7 +65,6 @@
     <string name="export_log">Xuất nhật ký</string>
     <string name="bottom_sheet_explainer">Cấu hình &amp; Tùy chỉnh</string>
     <string name="light">Sáng</string>
-    <string name="frontend">Giao diện người dùng</string>
     <string name="redirect_resolve_type_remote">máy chủ từ xa</string>
     <string name="donate_subtitle">Nâng cấp lên <b>LinkSheet Pro</b></string>
     <string name="built_at"><b>Được dựng lúc:</b> <font face="monospace">%s</font></string>
@@ -97,9 +95,7 @@
     <string name="in_app_browser_subtitle">Đặt chế độ trình duyệt trong ứng dụng</string>
     <string name="about">Giới thiệu</string>
     <string name="add_all">Thêm hết</string>
-    <string name="random_instance">Instance ngẫu nhiên</string>
     <string name="options">Tùy chọn</string>
-    <string name="services">Dịch vụ</string>
     <string name="about_explainer">Tín dụng, Giấy phép, Liên kết, Phiên bản</string>
     <string name="browser_status">Trạng thái trình duyệt</string>
     <string name="no_such_app_found">Không tìm thấy ứng dụng như vậy!</string>
@@ -125,7 +121,6 @@
     <string name="redact_log">Biên tập lại nhật ký (được khuyến nghị, việc tắt tính năng này có thể làm rò rỉ tên gói và tên máy chủ)</string>
     <string name="search">Tìm kiếm</string>
     <string name="always_show_package_name">Luôn hiển thị tên gói</string>
-    <string name="no_libredirect_services">Không tìm thấy dịch vụ LibRedirect nào!</string>
     <string name="error">Lỗi</string>
     <string name="checkmark">Đánh dấu</string>
     <string name="request_timeout">Hết thời gian yêu cầu</string>
@@ -140,7 +135,6 @@
     <string name="settings">Thiết đặt</string>
     <string name="browser_mode_subtitle">Đặt chế độ trình duyệt ưu tiên</string>
     <string name="follow_only_known_trackers">Theo dõi chỉ những người theo dõi đã biết</string>
-    <string name="enable_libredirect">Kích hoạt LibRedirect</string>
     <string name="no_logs_found">Không tìm thấy nhật ký trước đây!</string>
     <string name="downloader_url_mime_type">Sử dụng loại mime từ URL</string>
     <string name="system">Theo hệ thống</string>
@@ -179,9 +173,7 @@
     <string name="follow_redirects_external_service_explainer">Theo dõi các chuyển hướng bằng API được triển khai tại supabase.com (<annotation url-id="supabase-privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="disable_in_selected">Buộc tắt…</string>
     <string name="in_app">Trong ứng dụng</string>
-    <string name="libredirect_via">Qua %s</string>
     <string name="shizuku_explainer_short">Tương tác trực tiếp với API hệ thống</string>
-    <string name="instance_not_available_anymore">Phiên bản không còn khả dụng nữa!</string>
     <string name="advanced">Nâng cao</string>
     <string name="shizuku">Tích hợp Shizuku</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Đã bật chế độ Shizuku, nhấn vào một ứng dụng để chuyển đổi khả năng xử lý liên kết tự động. Nhấn và giữ một ứng dụng để mở thực đơn thiết đặt \"Mở theo mặc định\".</string>
@@ -240,13 +232,10 @@
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="app_browsers_subtitle">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
-    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url-id="libredirect-github">LibRedirect </annotation> thử nghiệm</string>
     <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. Điều này có thể có <annotation url-id="privacy-downloader">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. Điều này có thể có <annotation url-id="privacy-amp2html">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url-id="supabase-privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="github">Github</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="fastfoward_rules_explainer">Sử dụng tích hợp quy tắc <annotation url-id="fastforward-github">FastForward </annotation> thử nghiệm (bỏ qua chuyển hướng của một số máy chủ bằng cách trích xuất chuyển hướng từ liên kết)</string>
     <string name="amp2html">Amp2Html</string>
     <string name="mastodon_redirect">MastodonRedirect</string>

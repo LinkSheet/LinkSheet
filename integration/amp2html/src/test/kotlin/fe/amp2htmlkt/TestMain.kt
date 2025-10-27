@@ -11,11 +11,11 @@ class TestMain {
     @Test
     fun test() {
         val request = Request()
-        val map = mapOf(
+        val map = mapOf<String, String>(
 //            "https://www.bbc.com/portuguese/articles/c0jp9l8k8geo.amp" to "https://www.bbc.com/portuguese/articles/c0jp9l8k8geo",
 //            "https://historia.nationalgeographic.com.es/a/civilizacion-valle-indo-es-mas-antigua-que-egipcia-y-babilonica_6828/amp" to "https://historia.nationalgeographic.com.es/a/civilizacion-valle-indo-es-mas-antigua-que-egipcia-y-babilonica_6828",
 //            "https://google.com" to null,
-            "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html" to "https://www.cnn.com/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html"
+//            "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html" to "https://www.cnn.com/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html"
         )
 
         map.forEach { (ampUrl, expectedCanonical) ->

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">ممكن</string>
+    <string name="random_instance">مثيل عشوائي</string>
+    <string name="enable_libredirect">تمكين LibRedirect</string>
+    <string name="instance">المثيل</string>
+    <string name="enable_libredirect_explainer">إعادة توجيه الروابط إلى واجهات أمامية صديقة للخصوصية باستخدام تكامل تجريبي <annotation url-id="libredirect-github"> LibRedirect</annotation></string>
+    <string name="frontend">الواجهة الأمامية</string>
+    <string name="lib_redirect">مكتبة اعادة التوجيه</string>
+    <string name="lib_redirect_service">مكتبة إعادة التوجيه - %s</string>
+    <string name="libredirect_via">عبر %s</string>
+    <string name="no_libredirect_services">لم يتم العثور على خدمات LibRedirect!</string>
+    <string name="services">الخدمات</string>
+    <string name="instance_not_available_anymore">المثيل غير متوفر بعد الآن!</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="zero">%d مضيف مفعل</item>
+        <item quantity="one">%d مضيفين مفعل</item>
+        <item quantity="two">%d مضيفين مفعلين</item>
+        <item quantity="few"/>
+        <item quantity="many">%d مضيفين مفعلون</item>
+        <item quantity="other"/>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="zero">%d معطل</item>
+        <item quantity="one">%d معطل</item>
+        <item quantity="two">%d معطلين</item>
+        <item quantity="few"/>
+        <item quantity="many">%d معطلون</item>
+        <item quantity="other"/>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="zero">%d مضيف: %s</item>
+        <item quantity="one">%d مضيف: %s</item>
+        <item quantity="two">%d مضيفين: %s</item>
+        <item quantity="few"/>
+        <item quantity="many">%d مضيف: %s</item>
+        <item quantity="other"/>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="zero">%d مفعل</item>
+        <item quantity="one">%d مفعل</item>
+        <item quantity="two"/>
+        <item quantity="few"/>
+        <item quantity="many">%d مفعلون</item>
+        <item quantity="other"/>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="zero">%d مضيف تم التحقق منه</item>
+        <item quantity="one">%d مضيف تم التحقق منه</item>
+        <item quantity="two"/>
+        <item quantity="few"/>
+        <item quantity="many">%d مضيفين تم التحقق منهم</item>
+        <item quantity="other"/>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="zero">%d مضيف معطل</item>
+        <item quantity="one">%d مضيف معطل</item>
+        <item quantity="two">%d مضيفين معطلان</item>
+        <item quantity="few"/>
+        <item quantity="many">%d مضيفا معطلا</item>
+        <item quantity="other"/>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="zero">%d تم التحقق منه</item>
+        <item quantity="one">%d تم التحقق منه</item>
+        <item quantity="two"/>
+        <item quantity="few"/>
+        <item quantity="many">%d تم التحقق منهم</item>
+        <item quantity="other"/>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="zero">%d مضيف افتراضي</item>
+        <item quantity="one">%d مضيف افتراضي</item>
+        <item quantity="two">مضيفان افتراضيان</item>
+        <item quantity="few">%d مضيف افتراضي</item>
+        <item quantity="many">%d مضيف افتراضي</item>
+        <item quantity="other">%d مضيف افتراضي</item>
+    </plurals>
+</resources>

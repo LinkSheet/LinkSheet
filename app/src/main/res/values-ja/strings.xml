@@ -59,8 +59,6 @@
     <string name="system">システム設定に従う</string>
     <string name="light">ライト</string>
     <string name="dark">ダーク</string>
-    <string name="frontend">フロントエンド</string>
-    <string name="instance">インスタンス</string>
     <string name="add">追加</string>
     <string name="close">閉じる</string>
     <string name="download">ダウンロード</string>
@@ -68,11 +66,8 @@
     <string name="logs">ログ</string>
     <string name="options">オプション</string>
     <string name="in_app">アプリ内</string>
-    <string name="lib_redirect">LibRedirect</string>
     <string name="normal">通常</string>
     <string name="settings">設定</string>
-    <string name="enabled">有効</string>
-    <string name="services">サービス</string>
     <string name="export">エクスポート</string>
     <string name="request_private_browsing">プライベート</string>
     <string name="log">ログ</string>
@@ -178,7 +173,6 @@
     <string name="at_least_one_known_browser_installed">少なくとも 1 つのブラウザがインストールされている</string>
     <string name="enable_amp2html_explainer">AMPページを通常のウェブバージョンにリダイレクトします。これにより、 <annotation url-id="privacy-amp2html">プライバシーに悪影響</annotation>があるかもしれません</string>
     <string name="onboarding_5_card_title">セットアップ</string>
-    <string name="instance_not_available_anymore">インスタンスはもう利用できません！</string>
     <string name="experiments_explainer_3">実験は現在開発中であり、正しく動作しないか、まったく動作しない可能性があります。Github でバグを報告しないでください。フィードバックを提供したい場合は、Discord で行ってください。</string>
     <string name="theme_enable_material_you">ダイナミックカラー</string>
     <string name="theme_enable_material_you_explainer">Android 12以降のMaterial Youデバイステーマを使用する</string>
@@ -239,12 +233,9 @@
     <string name="reset_app_link_verification_status">「確認済みのリンク」設定をリセット</string>
     <string name="settings_app_config__button_add_item">アイテムを追加</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">推奨</string>
-    <string name="enable_libredirect_explainer">実験的な<annotation url-id="libredirect-github">LibRedirect</annotation>統合を使用して、プライバシー・フレンドリーなフロントエンドにリンクをリダイレクトします</string>
     <string name="enable_downloader_explainer">URLにファイルへの直接リンクが含まれている場合は、一番下のシートに「ダウンロード」ボタンを追加してください。 これは<annotation url-id="privacy-downloader">プライバシーに悪影響があるかもしれません</annotation></string>
-    <string name="random_instance">ランダムインスタンス</string>
     <string name="disable_in_selected_explainer">選択したアプリでアプリ内ブラウザを無効にする</string>
     <string name="debug_explainer">アプリログ、確認済みのリンクをリセット</string>
-    <string name="no_libredirect_services">LibRedirectのサービスは見つかりませんでした！</string>
     <string name="download_started">ダウンロードが開始されました</string>
     <string name="request_timeout">リクエストタイムアウト</string>
     <string name="resolve_failed">%s 失敗: %s</string>
@@ -351,7 +342,6 @@
     <string name="use_app_settings">デフォルト</string>
     <string name="always_disable">強制無効化</string>
     <string name="use_unified_preferred_browser">共通の設定を使用する</string>
-    <string name="libredirect_via">%s経由</string>
     <string name="enable_ignore_libredirect_button">「LibRedirectを無視」ボタンを有効にする</string>
     <string name="general_settings_explainer">パッケージ名を常に表示する</string>
     <string name="no_browser_installed_explainer">LinkSheetは、ブラウザだと主張するアプリを少なくとも1つ検出できませんでした。より良い体験のために、ブラウザをインストールしてください。</string>
@@ -387,8 +377,6 @@
     <string name="share">リンクを共有</string>
     <string name="always_disable_explainer">すべてのアプリでアプリ内ブラウザを無効にする</string>
     <string name="follow_redirects_local_cache_explainer">リダイレクト結果をローカルにキャッシュする</string>
-    <string name="enable_libredirect">LibRedirectを有効にする</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="linksheet_download">LinkSheet ダウンロード</string>
     <string name="enable_downloader">ダウンローダーを有効にする</string>
     <string name="downloader_url_mime_type">URLからMIMEタイプを使用する</string>

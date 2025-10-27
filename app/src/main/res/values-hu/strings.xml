@@ -66,7 +66,6 @@
     <string name="about">Névjegy</string>
     <string name="always_show_package_name_explainer">Mindig a csomagok neveit jelenítse meg az alkalmazások nevei helyett. Ez az egész alkalmazásra vonatkozik.</string>
     <string name="selected_browser_explainer">Ez a böngésző automatikusan megnyílik, ha egyetlen natív alkalmazás sem tudja kezelni a kattintott hivatkozást</string>
-    <string name="enabled">Engedélyezve</string>
     <string name="about_explainer">Kredit, Licenc, Linkek, Verzió</string>
     <string name="remove_all">Összes eltávolítása</string>
     <string name="display_grid_layout">Rácsos elrendezés</string>
@@ -76,17 +75,13 @@
     <string name="whitelisted">Engedőlistázva</string>
     <string name="whitelisted_explainer">Csak az engedélyezőlistán szereplő böngészők megjelenítése</string>
     <string name="enable_ignore_libredirect_button">\"LibRedirect figyelmen kívül hagyása\" gomb engedélyezése</string>
-    <string name="random_instance">Véletlenszerű példány</string>
     <string name="in_app_browser_subtitle">Alkalmazáson belüli böngésző beállításai</string>
     <string name="use_app_settings">Alapértelmezett</string>
     <string name="use_app_settings_explainer">Az alkalmazások döntik el, hogy az alkalmazáson belüli böngészőt kell-e használni</string>
     <string name="always_disable">Kényszerített tiltás</string>
     <string name="always_disable_explainer">Az alkalmazáson belüli böngésző letiltása az összes alkalmazásban</string>
     <string name="no_apps_which_can_handle_links_found">Nem található olyan alkalmazás, amely képes lenne kezelni a linkeket.</string>
-    <string name="libredirect_via">Ezen keresztül: %s</string>
     <string name="debug_explainer">Alkalmazásnaplók, ellenőrzött kezelő visszaállítása</string>
-    <string name="services">Szolgáltatások</string>
-    <string name="no_libredirect_services">Nem található LibRedirect szolgáltatás!</string>
     <string name="log_files">Korábbi munkamenetek</string>
     <string name="no_log_entries">Ez a munkamenet nem tartalmaz naplókat.</string>
     <string name="log_viewer">Napló megtekintő</string>
@@ -114,7 +109,6 @@
     <string name="enable_amp2html">Amp2Html engedélyezése</string>
     <string name="amp2html_local_cache">Helyi Amp2Html gyorsítótár engedélyezése</string>
     <string name="amp2html_local_cache_explainer">Gyorsítótárazza a weboldalak letöltött nem AMP-verzióit helyileg</string>
-    <string name="instance_not_available_anymore">A példány már nem elérhető!</string>
     <string name="advanced">Speciális</string>
     <string name="shizuku_explainer_short">Közvetlenül interakcióba léphet a rendszer API-kkal</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -133,12 +127,6 @@
     <string name="redirect_resolve_type_local_cache">helyi gyorsítótár</string>
     <string name="redirect_resolve_type_remote">távoli szerver</string>
     <string name="redirect_resolve_type_local">helyi feloldó</string>
-    <string name="enable_libredirect">LibRedirect engedélyezése</string>
-    <string name="enable_libredirect_explainer">Linkek átirányítása adatvédelmibarát frontendekre a kísérleti <annotation url-id="libredirect-github">LibRedirect</annotation> integráció segítségével.</string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">Frontend</string>
-    <string name="instance">Példány</string>
     <string name="add">Hozzáadás</string>
     <string name="select_an_app">Válasszon egy alkalmazást</string>
     <string name="close">Bezárás</string>

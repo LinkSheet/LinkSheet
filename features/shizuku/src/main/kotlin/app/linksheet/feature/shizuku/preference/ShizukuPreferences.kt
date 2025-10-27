@@ -8,7 +8,7 @@ interface ShizukuPreferences {
 }
 
 fun shizukuPreferences(boolean: (key: String, default: Boolean) -> Preference.Boolean): ShizukuPreferences {
-    return object  : ShizukuPreferences {
+    return object : ShizukuPreferences {
         override val enable = boolean("enable_shizuku", false)
         override val autoDisableLinkHandling = boolean("auto_disable_link_handling", false)
     }

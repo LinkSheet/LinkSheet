@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frontend">Frontend</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="instance">Istanza</string>
+    <string name="random_instance">Istanza casuale</string>
+    <string name="enabled">Attivato</string>
+    <string name="enable_libredirect_explainer">Reindirizza i link a frontend rispettosi della privacy utilizzando l\'integrazione sperimentale di <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="enable_libredirect">Abilita LibRedirect</string>
+    <string name="services">Servizi</string>
+    <string name="libredirect_via">Tramite %s</string>
+    <string name="no_libredirect_services">Nessun servizio LibRedirect trovato!</string>
+    <string name="instance_not_available_anymore">L\'istanza non è più disponibile!</string>
+</resources>

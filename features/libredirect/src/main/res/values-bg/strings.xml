@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="enabled">Включен</string>
+    <string name="enable_libredirect">Използване на LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="enable_libredirect_explainer">Пренасочване на препратките към поверителни услуги с помощта на експерименталната интеграция на <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="instance">Екземпляр</string>
+    <string name="instance_not_available_anymore">Екземплярът вече е недостъпен!</string>
+    <string name="frontend">Интерфейс</string>
+    <string name="random_instance">Произволен екземпляр</string>
+    <string name="libredirect_via">От %s</string>
+    <string name="services">Услуги</string>
+    <string name="no_libredirect_services">Не са намерени услуги на LibRedirect!</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d изключен хост</item>
+        <item quantity="other">%d изключени хоста</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d включен хост</item>
+        <item quantity="other">%d включени хоста</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d хост: %s</item>
+        <item quantity="other">%d хоста: %s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d проверен хост</item>
+        <item quantity="other">%d проверени хоста</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d изключено</item>
+        <item quantity="other">%d изключени</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d проверена</item>
+        <item quantity="other">%d проверени</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d включено</item>
+        <item quantity="other">%d включени</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d подразбиран хост</item>
+        <item quantity="other">%d подразбирани хоста</item>
+    </plurals>
+</resources>

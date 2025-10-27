@@ -45,7 +45,6 @@
     <string name="follow_redirects_local_cache_explainer">Sla de resultaten van omleidingen lokaal op</string>
     <string name="resolved_via">%s verwerkt via %s</string>
     <string name="redirect_resolve_type_local">lokale verwerker</string>
-    <string name="instance">Server</string>
     <string name="add">Toevoegen</string>
     <string name="close">Sluiten</string>
     <string name="linksheet_download">LinkSheet downloaden</string>
@@ -54,7 +53,6 @@
     <string name="enable_ignore_libredirect_button">Knop \"LibRedirect negeren\" tonen</string>
     <string name="debug">Debuggen</string>
     <string name="debug_explainer">App-logs, geverifieerde linkverwerkers resetten</string>
-    <string name="no_libredirect_services">Geen LibRedirect-diensten gevonden!</string>
     <string name="request_timeout">Time-out verbindingen</string>
     <string name="resolve_failed">%s mislukt: %s</string>
     <string name="redact_log">Gevoelige informatie afschermen (aanbevolen, uitschakelen kan pakketnamen en hostnamen lekken)</string>
@@ -93,7 +91,6 @@
     <string name="always_disable">Geforceerd uitschakelen</string>
     <string name="github_explainer">Broncode</string>
     <string name="paste">Plakken</string>
-    <string name="enable_libredirect">LibRedirect gebruiken</string>
     <string name="no_log_entries">Deze sessie bevat geen logs.</string>
     <string name="donate_subtitle">Upgrade naar <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">Van klembord</string>
@@ -109,7 +106,6 @@
     <string name="enable_amp2html_explainer">Stuur de gebruiker bij AMP-pagina\'s door naar de normale webversie. Dit kan <annotation url-id="privacy-amp2html">privacy-gerelateerde implicaties</annotation> hebben.</string>
     <string name="linksheet_donation_explainer_2">Een donatie van meer dan <b>5€</b> geeft je toegang tot <b>LinkSheet Pro</b> met <b>exclusieve functies</b>, zoals het extern volgen van omleidingen, het extern achterhalen van de normale webversies van AMP-links en nog meer!</string>
     <string name="selected_browser_explainer">Deze browser wordt automatisch geopend als er geen native app is die de aangeklikte link kan verwerken</string>
-    <string name="enabled">Ingeschakeld</string>
     <string name="whitelisted_explainer">Toon alleen de gekozen browsers</string>
     <string name="bottom_sheet_explainer">Configuratie &amp; aanpassingen</string>
     <string name="current_session">Huidige sessie</string>
@@ -148,16 +144,9 @@
     <string name="follow_redirects_short">Omleidingen</string>
     <string name="always_disable_explainer">Schakel in-app browsers uit voor alle apps</string>
     <string name="download_started">Download gestart</string>
-    <string name="enable_libredirect_explainer">Stuur links door naar privacyvriendelijke frontends met behulp van de experimentele integratie van <annotation url-id="libredirect-github">LibRedirect</annotation></string>
-    <string name="lib_redirect">LibRedirect</string>
-    <string name="lib_redirect_service">LibRedirect - %s</string>
-    <string name="frontend">Frontend</string>
-    <string name="services">Diensten</string>
     <string name="select_an_app">Kies een app</string>
-    <string name="libredirect_via">Via %s</string>
     <string name="dont_show_filtered_item_explainer">Verberg het bovenste gedeelte dat de laatst gebruikte app voor de gekozen host suggereert</string>
     <string name="preview_url_explainer">Toon de aangeklikte URL (nadat deze is verwerkt)</string>
-    <string name="random_instance">Willekeurige server</string>
     <string name="use_app_settings_explainer">Apps bepalen zelf of de in-app browser wordt gebruikt</string>
     <string name="options">Opties</string>
     <string name="enable_request_private_browsing_button_explainer">Toon een knop naast browsers die de gekozen URL opent in de privénavigatiemodus. Ondersteunde browsers: %s</string>
@@ -201,7 +190,6 @@
     <string name="privacy">Privacy</string>
     <string name="amp2html_local_cache">Lokale cache voor Amp2Html</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="instance_not_available_anymore">Deze server is niet meer beschikbaar!</string>
     <string name="shizuku">Integratie met Shizuku</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="enable_all">Alles inschakelen</string>

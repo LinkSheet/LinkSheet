@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="instance">Instance</string>
+    <string name="enable_libredirect">Povolit LibRedirect</string>
+    <string name="enabled">Povoleno</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Frontend</string>
+    <string name="random_instance">Náhodná instance</string>
+    <string name="enable_libredirect_explainer">Přesměrovat odkazy na frontendy dbající na soukromí pomocí experimentální integrace <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="libredirect_via">Přes %s</string>
+    <string name="no_libredirect_services">Nenalezeny žádné služby LibRedirect!</string>
+    <string name="instance_not_available_anymore">Instance již není dostupná!</string>
+    <string name="services">Služby</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
+        <item quantity="one">%d zakázaný hostitel</item>
+        <item quantity="few">%d zakázaní hostitelé</item>
+        <item quantity="other">%d zakázaných hostitelů</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_none">
+        <item quantity="one">%d zakázaný</item>
+        <item quantity="few">%d zakázané</item>
+        <item quantity="other">%d zakázaných</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="one">%d povolený</item>
+        <item quantity="few">%d povolené</item>
+        <item quantity="other">%d povolených</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="one">%d povolený hostitel</item>
+        <item quantity="few">%d povolení hostitelé</item>
+        <item quantity="other">%d povolených hostitelů</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info">
+        <item quantity="one">%d hostitel: %s</item>
+        <item quantity="few">%d hostitelé: %s</item>
+        <item quantity="other">%d hostitelů: %s</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
+        <item quantity="one">%d ověřený</item>
+        <item quantity="few">%d ověřené</item>
+        <item quantity="other">%d ověřených</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
+        <item quantity="one">%d ověřený hostitel</item>
+        <item quantity="few">%d ověření hostitelé</item>
+        <item quantity="other">%d ověřených hostitelů</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d výchozí hostitel</item>
+        <item quantity="few">%d výchozí hostitelé</item>
+        <item quantity="other">%d výchozích hostitelů</item>
+    </plurals>
+</resources>

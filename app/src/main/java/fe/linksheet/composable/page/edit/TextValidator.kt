@@ -1,6 +1,6 @@
 package fe.linksheet.composable.page.edit
 
-import fe.linksheet.util.web.UriUtil
+import fe.linksheet.web.UriUtil
 
 
 interface TextValidator {

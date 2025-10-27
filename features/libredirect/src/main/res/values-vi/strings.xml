@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enabled">Đã bật</string>
+    <string name="frontend">Giao diện người dùng</string>
+    <string name="random_instance">Instance ngẫu nhiên</string>
+    <string name="services">Dịch vụ</string>
+    <string name="no_libredirect_services">Không tìm thấy dịch vụ LibRedirect nào!</string>
+    <string name="enable_libredirect">Kích hoạt LibRedirect</string>
+    <string name="libredirect_via">Qua %s</string>
+    <string name="instance_not_available_anymore">Phiên bản không còn khả dụng nữa!</string>
+    <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url-id="libredirect-github">LibRedirect </annotation> thử nghiệm</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
+        <item quantity="other">%d đã bật</item>
+    </plurals>
+    <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
+        <item quantity="other">%d máy chủ được kích hoạt</item>
+    </plurals>
+</resources>

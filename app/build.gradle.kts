@@ -267,6 +267,9 @@ dependencies {
     implementation(project(":feature-systeminfo"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
+    implementation(project(":feature-engine"))
+    implementation(project(":feature-downloader"))
+    implementation(project(":feature-libredirect"))
     implementation(project(":feature-shizuku"))
     implementation(project(":feature-scenario"))
     implementation(project(":feature-wiki"))
@@ -276,6 +279,7 @@ dependencies {
 
     compileOnly(project(":hidden-api"))
     implementation(project(":config"))
+    implementation(project(":log"))
     implementation(project(":util"))
     implementation(project(":api"))
     implementation(project(":common"))

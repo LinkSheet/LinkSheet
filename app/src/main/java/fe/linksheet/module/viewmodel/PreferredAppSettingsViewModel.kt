@@ -26,7 +26,7 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.RefactorGlue
-import fe.linksheet.util.web.VerifiedDomainService.canHandleDomains
+import fe.linksheet.web.VerifiedDomainService.canHandleDomains
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext

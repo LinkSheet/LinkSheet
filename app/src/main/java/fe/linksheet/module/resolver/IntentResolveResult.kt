@@ -3,8 +3,9 @@ package fe.linksheet.module.resolver
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
+import app.linksheet.feature.downloader.DownloadCheckResult
+import app.linksheet.feature.libredirect.LibRedirectResult
 import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.module.downloader.DownloadCheckResult
 import fe.linksheet.util.intent.parser.UriException
 import fe.std.uri.StdUrl
 import me.saket.unfurl.UnfurlResult

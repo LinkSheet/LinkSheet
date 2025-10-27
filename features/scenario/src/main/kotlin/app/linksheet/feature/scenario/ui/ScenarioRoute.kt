@@ -1,13 +1,11 @@
 @file:OptIn(ExperimentalUuidApi::class, ExperimentalMaterial3Api::class)
 
-package app.linksheet.feature.scenario
+package app.linksheet.feature.scenario.ui
 
-import android.content.res.Resources
 import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -26,7 +24,6 @@ import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.CustomAccessibilityAction
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,6 +31,9 @@ import androidx.compose.ui.unit.dp
 import app.linksheet.compose.extension.loader
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.util.ListState
+import app.linksheet.feature.scenario.R
+import app.linksheet.feature.scenario.database.ScenarioEntity
+import app.linksheet.feature.scenario.viewmodel.ScenarioViewModel
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.HapticFeedbackInteraction
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
@@ -44,16 +44,24 @@ import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.composekit.layout.column.SaneLazyListScope
 import fe.composekit.route.Route
+import org.koin.androidx.compose.koinViewModel
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
-import kotlin.compareTo
-import kotlin.text.compareTo
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
+
 @Composable
 fun ScenarioRoute(
+    onBackPressed: () -> Unit,
+    viewModel: ScenarioViewModel = koinViewModel(),
+) {
+
+}
+
+@Composable
+private fun ScenarioRouteInternal(
     scenarios: List<ScenarioEntity>,
     navigate: (Route) -> Unit,
 ) {
@@ -321,7 +329,7 @@ private fun ScenarioListItemPreview() {
 private fun ScenarioRoutePreview() {
     PreviewProvider {
         PreviewThemeNew {
-            ScenarioRoute(
+            ScenarioRouteInternal(
                 scenarios = listOf(
                     ScenarioEntity(
                         id = Uuid.NIL,

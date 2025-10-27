@@ -26,6 +26,8 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.compose.debug.LocalUiDebug
+import app.linksheet.compose.theme.LightColors
+import app.linksheet.compose.theme.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.LinkSheetLinkTags
 import org.koin.androidx.compose.KoinAndroidContext

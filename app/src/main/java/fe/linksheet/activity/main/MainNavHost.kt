@@ -42,9 +42,9 @@ import fe.linksheet.composable.page.settings.notification.NotificationSettingsRo
 import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
-import fe.linksheet.composable.util.*
 import app.linksheet.compose.navigation.attachSubGraph
 import app.linksheet.compose.util.animatedComposable
+import app.linksheet.feature.scenario.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.shizuku.navigation.ShizukuNavSubGraph
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.Route
@@ -52,7 +52,6 @@ import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
 import fe.linksheet.composable.page.settings.debug.SqlRoute
 import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
-import fe.linksheet.composable.page.settings.scenario.ScenarioNavSubGraph
 import fe.linksheet.navigation.AdvancedRoute
 import fe.linksheet.navigation.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.DebugRoute

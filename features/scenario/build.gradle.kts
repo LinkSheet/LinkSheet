@@ -8,6 +8,7 @@ import fe.buildlogic.common.extension.addOptIn
 plugins {
     kotlin("android")
     kotlin("plugin.compose")
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("com.gitlab.grrfe.new-build-logic-plugin")
 }
@@ -48,8 +49,7 @@ dependencies {
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)
-
-    implementation(platform(_1fexd.composeKit.bom))
+    implementation(AndroidX.navigation.compose)
     implementation(_1fexd.composeKit.compose.core)
     implementation(_1fexd.composeKit.compose.layout)
     implementation(_1fexd.composeKit.compose.component)
@@ -61,18 +61,14 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
-
-    implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)
     implementation(Grrfe.std.process.core)
     implementation(Grrfe.std.uri)
-
-    implementation(platform(Grrfe.httpkt.bom))
     implementation(Grrfe.httpkt.core)
-
-    implementation(platform(Grrfe.gsonExt.bom))
     implementation(Grrfe.gsonExt.core)
+    implementation(Koin.android)
+    implementation(Koin.compose)
 
     implementation(AndroidX.core.ktx)
 

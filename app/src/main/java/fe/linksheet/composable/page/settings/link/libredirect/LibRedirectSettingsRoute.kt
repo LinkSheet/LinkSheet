@@ -13,7 +13,6 @@ import androidx.compose.ui.text.font.FontStyle
 import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.util.listState
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -23,8 +22,6 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceSwitchListItem
-import fe.linksheet.composable.util.listState
-import fe.linksheet.extension.compose.listHelper
 import fe.linksheet.extension.kotlin.collectOnIO
 import fe.linksheet.module.database.entity.LibRedirectDefault
 import fe.linksheet.module.viewmodel.LibRedirectSettingsViewModel

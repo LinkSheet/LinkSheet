@@ -6,9 +6,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
-import app.linksheet.feature.scenario.ScenarioDao
+import app.linksheet.feature.scenario.database.ScenarioDao
 import fe.linksheet.extension.koin.createLogger
-import app.linksheet.feature.scenario.ScenarioEntity
+import app.linksheet.feature.scenario.database.ScenarioEntity
 import fe.linksheet.feature.wiki.WikiCache
 import fe.linksheet.feature.wiki.WikiCacheDao
 import fe.linksheet.module.database.dao.*

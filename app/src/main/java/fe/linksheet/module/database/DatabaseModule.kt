@@ -46,9 +46,9 @@ val DatabaseModule = module {
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
         WikiCache::class,
-        ScenarioEntity::class
+//        ScenarioEntity::class
     ],
-    version = 21,
+    version = 19,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -63,7 +63,6 @@ val DatabaseModule = module {
         AutoMigration(from = 12, to = 13),
         AutoMigration(from = 17, to = 18),
         AutoMigration(from = 18, to = 19),
-        AutoMigration(from = 19, to = 20),
     ],
     exportSchema = true
 )
@@ -78,7 +77,7 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun libRedirectServiceStateDao(): LibRedirectServiceStateDao
     abstract fun amp2HtmlMappingDao(): Amp2HtmlMappingDao
     abstract fun wikiCacheDao(): WikiCacheDao
-    abstract fun scenarioDao(): ScenarioDao
+//    abstract fun scenarioDao(): ScenarioDao
 
     companion object {
         private fun buildMigrations(logger: Logger): Array<Migration> {

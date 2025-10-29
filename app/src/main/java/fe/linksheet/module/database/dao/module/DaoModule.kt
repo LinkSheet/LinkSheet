@@ -18,5 +18,5 @@ val DaoModule = module {
     singleOf(LinkSheetDatabase::appSelectionHistoryDao)
     singleOf(LinkSheetDatabase::amp2HtmlMappingDao)
     singleOf(LinkSheetDatabase::wikiCacheDao)
-    singleOf(LinkSheetDatabase::scenarioDao)
+//    singleOf(LinkSheetDatabase::scenarioDao)
 }

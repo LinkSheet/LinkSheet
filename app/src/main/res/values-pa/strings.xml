@@ -286,4 +286,5 @@
     <string name="onboarding_2_skip_button">ਛੱਡੋ</string>
     <string name="onboarding_3_card_title">ਲਿੰਕ ਹੈਂਡਲਰ</string>
     <string name="onboarding_setup">ਲਿੰਕਸ਼ੀਟ ਸੈੱਟਅੱਪ ਕਰੋ</string>
+    <string name="app_name" translatable="false"></string>
 </resources>

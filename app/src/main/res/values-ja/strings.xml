@@ -534,4 +534,29 @@
     <string name="settings_verified_link_handlers__text_sort_by_installation_time">インストール時間</string>
     <string name="settings_links_preview__title_preview">URL プレビューを表示する</string>
     <string name="settings_links_preview__subtitle_preview">下のシートに OpenGraph プレビューを読み込んで表示しようとします。<annotation url-id="github.linksheet.wiki.privacy.preview">プライバシーに悪影響</annotation>を及ぼす可能性があります</string>
+    <string name="settings_links_amp2html__text_local_network"></string>
+    <string name="settings_scenario__text_data_type"></string>
+    <string name="settings_links_follow_redirects__title_local_network"></string>
+    <string name="bottom_sheet__text_launch_failure_unknown"></string>
+    <string name="settings_scenario__text_value"></string>
+    <string name="generic__label_arrow_rotation"></string>
+    <string name="generic__title_filter"></string>
+    <string name="settings_links_preview__subtitle_preview_skip_browser"></string>
+    <string name="settings_links_preview__title_preview_skip_browser"></string>
+    <string name="generic__button_open_external"></string>
+    <string name="settings__title_sql"></string>
+    <string name="settings_remote_config__text_content"></string>
+    <string name="settings_verified_link_handlers__text_system_apps"></string>
+    <string name="settings_home__text_clipboard_card"></string>
+    <string name="generic__title_sort_by"></string>
+    <string name="settings_links_amp2html__title_local_network"></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"></string>
+    <string name="settings_remote_config__title_dialog"></string>
+    <string name="settings_links_follow_redirects__text_local_network"></string>
+    <string name="settings_home__title_clipboard_card"></string>
+    <string name="settings_scenario__text_scenarios"></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_native"></string>
+    <string name="settings_verified_link_handlers__text_ascending"></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_browser"></string>
+    <string name="settings_scenario__title_scenarios"></string>
 </resources>

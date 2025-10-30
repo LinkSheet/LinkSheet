@@ -559,4 +559,5 @@
     <string name="follow_redirects_short"></string>
     <string name="settings_scenario__title_scenarios"></string>
     <string name="experiments_explainer_2"></string>
+    <string name="app_name" translatable="false"></string>
 </resources>

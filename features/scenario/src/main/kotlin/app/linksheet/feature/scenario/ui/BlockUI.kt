@@ -1,4 +1,4 @@
-package app.linksheet.feature.engine.ui
+package app.linksheet.feature.scenario.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

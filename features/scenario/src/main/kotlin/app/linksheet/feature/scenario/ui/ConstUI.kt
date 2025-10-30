@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
 
-package app.linksheet.feature.engine.ui
+package app.linksheet.feature.scenario.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,7 +30,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.preview.PreviewContainer
-import app.linksheet.feature.engine.R
+import app.linksheet.feature.scenario.R
 
 @Composable
 fun ConstUI() {

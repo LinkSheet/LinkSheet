@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature-engine"))
     implementation(project(":util"))
     implementation(project(":api"))
     implementation(project(":compose"))

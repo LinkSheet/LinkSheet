@@ -240,17 +240,6 @@ android {
     val androidTest by sourceSets
     androidTest.assets.srcDir("$projectDir/schemas")
 
-    packaging {
-        resources {
-            pickFirsts += setOf(
-                "META-INF/{AL2.0,LGPL2.1}",
-                "META-INF/atomicfu.kotlin_module",
-                "META-INF/*.md",
-                "META-INF/**.MF"
-            )
-        }
-    }
-
     val main by sourceSets
     for (it in arrayOf("compat", "experiment", "testing")) {
         main.java.srcDir("src/main/$it")
@@ -291,6 +280,7 @@ dependencies {
     implementation(project(":test-fake"))
 
     testImplementation(project(":test-core"))
+    testImplementation(project(":test-koin"))
     androidTestImplementation(project(":test-instrument"))
 
 //    implementation(platform(Square.okHttp3.bom))

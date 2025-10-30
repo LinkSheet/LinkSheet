@@ -1,6 +1,4 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
-import fe.build.dependencies.Grrfe
-import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 
 plugins {
@@ -9,8 +7,10 @@ plugins {
     id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
+group = "app.linksheet.testlib.koin"
+
 android {
-    namespace = "fe.linksheet.lib.common"
+    namespace = group.toString()
     compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
@@ -21,13 +21,12 @@ android {
         jvmToolchain(Version.JVM)
     }
 
-    val main by sourceSets
-    for (it in arrayOf("compat")) {
-        main.java.srcDir("src/main/$it")
+    buildFeatures {
+        buildConfig = true
     }
 }
 
 dependencies {
-    implementation(_1fexd.composeKit.core)
-    implementation(AndroidX.core.ktx)
+    api(Koin.core)
+    api(Koin.test)
 }

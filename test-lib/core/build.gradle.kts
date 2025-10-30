@@ -19,26 +19,16 @@ android {
         minSdk = AndroidSdk.MIN_SDK
     }
 
+    kotlin {
+        jvmToolchain(Version.JVM)
+        addCompilerOptions(CompilerOption.AllowKotlinPackage)
+    }
+
     buildFeatures {
         buildConfig = true
     }
-
-    packaging {
-        resources {
-            pickFirsts += setOf(
-                "META-INF/{AL2.0,LGPL2.1}",
-                "META-INF/atomicfu.kotlin_module",
-                "META-INF/*.md",
-                "META-INF/**.MF"
-            )
-        }
-    }
 }
 
-kotlin {
-    jvmToolchain(Version.JVM)
-    addCompilerOptions(CompilerOption.AllowKotlinPackage)
-}
 
 dependencies {
     implementation(AndroidX.room.ktx)

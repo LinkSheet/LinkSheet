@@ -16,7 +16,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 
-
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
 internal class DownloaderTest : BaseUnitTest {
@@ -69,13 +68,13 @@ internal class DownloaderTest : BaseUnitTest {
     fun testIsNonHtmlContentUri() {
         val downloadable = downloader.isNonHtmlContentUri(
             "https://pbs.twimg.com/media/FyWt0wvWAAAxgYk?format=jpg&name=medium".toStdUrlOrThrow(),
-            15
+           0
         )
 
         assertIs<DownloadCheckResult.Downloadable>(downloadable)
         assertEquals("FyWt0wvWAAAxgYk.jpg", downloadable.toFileName())
 
-        val nonDownloadable = downloader.isNonHtmlContentUri("https://github.com".toStdUrlOrThrow(), 15)
+        val nonDownloadable = downloader.isNonHtmlContentUri("https://github.com".toStdUrlOrThrow(), 0)
         assertIs<DownloadCheckResult.NonDownloadable>(nonDownloadable)
     }
 }

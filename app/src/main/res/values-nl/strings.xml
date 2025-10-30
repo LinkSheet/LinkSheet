@@ -444,4 +444,5 @@
     <string name="settings_main_news__text_ui_overhaul">LinkSheet heeft een nieuw likje verf gekregen!</string>
     <string name="settings_main_news__button_read_more">Meer informatie</string>
     <string name="settings_shortcuts__title_default_browser">Standaardbrowser</string>
+    <string name="app_name" translatable="false"></string>
 </resources>

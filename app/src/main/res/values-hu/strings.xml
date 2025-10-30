@@ -567,4 +567,5 @@
     <string name="settings_verified_link_handlers__text_vlh_type_filter_browser"></string>
     <string name="resolve_event__idle"></string>
     <string name="settings_scenario__title_scenarios"></string>
+    <string name="app_name" translatable="false"></string>
 </resources>

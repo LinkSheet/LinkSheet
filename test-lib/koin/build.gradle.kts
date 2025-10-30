@@ -27,9 +27,6 @@ android {
 }
 
 dependencies {
-    implementation(AndroidX.room.ktx)
-    api(AndroidX.test.runner)
-    api(AndroidX.test.coreKtx)
-    api(Testing.junit.jupiter.api)
+    api(Koin.core)
     api(Koin.test)
 }

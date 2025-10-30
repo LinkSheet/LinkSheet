@@ -280,6 +280,7 @@ dependencies {
     implementation(project(":test-fake"))
 
     testImplementation(project(":test-core"))
+    testImplementation(project(":test-koin"))
     androidTestImplementation(project(":test-instrument"))
 
 //    implementation(platform(Square.okHttp3.bom))

@@ -24,6 +24,9 @@ import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
 import app.linksheet.feature.shizuku.ShizukuService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
+import app.linksheet.testlib.koin.definition
+import app.linksheet.testlib.koin.injectedParameters
+import app.linksheet.testlib.koin.verifyAll
 import coil3.ImageLoader
 import com.google.gson.Gson
 import fe.httpkt.HttpData
@@ -79,9 +82,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
-import org.koin.test.verify.definition
-import org.koin.test.verify.injectedParameters
-import org.koin.test.verify.verifyAll
 import org.robolectric.annotation.Config
 import java.time.ZoneId
 import kotlin.time.Clock
@@ -129,12 +129,12 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<RealCachedRequest>(Request::class),
         definition<RedirectResolveRequest>(
             Request::class,
-            RealCachedRequest::class,
+            CachedRequest::class,
             OkHttpClient::class
         ),
         definition<Amp2HtmlResolveRequest>(
             Request::class,
-            RealCachedRequest::class,
+            CachedRequest::class,
             OkHttpClient::class,
         ),
         definition<AllRemoteResolveRequest>(Request::class),

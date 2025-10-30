@@ -1,3 +1,6 @@
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.LibraryExtension
+import com.gitlab.grrfe.gradlebuild.android.extension.configurePickFirsts
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
 import fe.build.dependencies._1fexd
@@ -15,6 +18,13 @@ plugins {
 
 subprojects {
     afterEvaluate {
+        if (plugins.hasPlugin("com.android.application")) {
+            extensions.findByType<ApplicationExtension>()?.configurePickFirsts()
+        }
+        if (plugins.hasPlugin("com.android.library")) {
+            extensions.findByType<LibraryExtension>()?.configurePickFirsts()
+        }
+
         dependencies {
             configurations.findByName("implementation")?.let { implementation ->
                 implementation(platform(LinkSheet.flavors.bom))

@@ -566,4 +566,6 @@
     <string name="settings_scenario__title_scenarios">Senaryolar</string>
     <string name="settings_scenario__text_scenarios">Senaryoları yapılandır</string>
     <string name="app_name" translatable="false"></string>
+    <string name="settings_scenario__text_data_type"></string>
+    <string name="settings_scenario__text_value"></string>
 </resources>

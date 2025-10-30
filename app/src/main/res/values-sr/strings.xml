@@ -571,9 +571,4 @@
     <string name="settings_links_preview__subtitle_preview">Покушај учитавања и приказивања прегледа OpenGraph-а у доњем листу. Ово може имати <annotation url-id="github.linksheet.wiki.privacy.preview">последице по приватност</annotation></string>
     <string name="settings_links_preview__title_preview_skip_browser">Онемогући преглед прегледача</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">Онемогући преглед ако је референт прегледач</string>
-    <string name="app_name" translatable="false"></string>
-    <string name="settings_scenario__text_data_type"></string>
-    <string name="settings_scenario__text_value"></string>
-    <string name="settings_scenario__text_scenarios"></string>
-    <string name="settings_scenario__title_scenarios"></string>
 </resources>

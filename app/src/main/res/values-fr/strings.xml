@@ -564,16 +564,4 @@
     <string name="settings_links_amp2html__text_local_network">Autoriser l\'exécution d\'Amp2Html pour les hôtes non publics</string>
     <string name="settings_links_follow_redirects__title_local_network">Autoriser le réseau local</string>
     <string name="settings_links_follow_redirects__text_local_network">Autoriser le suivis des redirections pour les hôtes non publics</string>
-    <string name="app_name" translatable="false"></string>
-    <string name="settings_scenario__text_data_type"></string>
-    <string name="settings_scenario__text_value"></string>
-    <string name="settings_links_preview__subtitle_preview_skip_browser"></string>
-    <string name="settings_links_preview__title_preview_skip_browser"></string>
-    <string name="settings_credits__app_name_seal" translatable="false"></string>
-    <string name="settings_links_preview__subtitle_preview"></string>
-    <string name="telemetry_dialog_text_2" translatable="false"></string>
-    <string name="settings_credits__app_name_gmsflags" translatable="false"></string>
-    <string name="settings_scenario__text_scenarios"></string>
-    <string name="settings_links_preview__title_preview"></string>
-    <string name="settings_scenario__title_scenarios"></string>
 </resources>

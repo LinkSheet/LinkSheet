@@ -293,9 +293,9 @@
         <item quantity="zero">%d مضيف مفعل</item>
         <item quantity="one">%d مضيفين مفعل</item>
         <item quantity="two">%d مضيفين مفعلين</item>
-        <item quantity="few"></item>
+        <item quantity="few"/>
         <item quantity="many">%d مضيفين مفعلون</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="generic__button_text_done">تم</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">تغييرات في السلوك</string>
@@ -405,9 +405,9 @@
         <item quantity="zero">%d معطل</item>
         <item quantity="one">%d معطل</item>
         <item quantity="two">%d معطلين</item>
-        <item quantity="few"></item>
+        <item quantity="few"/>
         <item quantity="many">%d معطلون</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="settings_debug_log_viewer__title_log_captured_at">عرض السجل الذي تم التقاطه في: %s</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
@@ -422,9 +422,9 @@
         <item quantity="zero">%d مضيف: %s</item>
         <item quantity="one">%d مضيف: %s</item>
         <item quantity="two">%d مضيفين: %s</item>
-        <item quantity="few"></item>
+        <item quantity="few"/>
         <item quantity="many">%d مضيف: %s</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="resolve_embeds_explainer">حل المرايا المضمنة مثل fxtwitter.com إلى المضيف الحقيقي</string>
     <string name="settings_profile_switcher__title_profile_switcher">تبديل ملف التعريف</string>
@@ -451,10 +451,10 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
         <item quantity="zero">%d مفعل</item>
         <item quantity="one">%d مفعل</item>
-        <item quantity="two"></item>
-        <item quantity="few"></item>
+        <item quantity="two"/>
+        <item quantity="few"/>
         <item quantity="many">%d مفعلون</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="onboarding_1_title">تعيين LinkSheet كمتصفح افتراضي</string>
     <string name="onboarding_1_card_title">المتصفح الافتراضي</string>
@@ -462,18 +462,18 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="zero">%d مضيف تم التحقق منه</item>
         <item quantity="one">%d مضيف تم التحقق منه</item>
-        <item quantity="two"></item>
-        <item quantity="few"></item>
+        <item quantity="two"/>
+        <item quantity="few"/>
         <item quantity="many">%d مضيفين تم التحقق منهم</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
         <item quantity="zero">%d مضيف معطل</item>
         <item quantity="one">%d مضيف معطل</item>
         <item quantity="two">%d مضيفين معطلان</item>
-        <item quantity="few"></item>
+        <item quantity="few"/>
         <item quantity="many">%d مضيفا معطلا</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="bottom_sheet__button_manual_redirect">تتبع عمليات إعادة التوجيه</string>
     <string name="telemetry_dialog_text">اختر نوع مقاييس الاستخدام الذي ترتاح له أكثر.</string>
@@ -511,10 +511,10 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
         <item quantity="zero">%d تم التحقق منه</item>
         <item quantity="one">%d تم التحقق منه</item>
-        <item quantity="two"></item>
-        <item quantity="few"></item>
+        <item quantity="two"/>
+        <item quantity="few"/>
         <item quantity="many">%d تم التحقق منهم</item>
-        <item quantity="other"></item>
+        <item quantity="other"/>
     </plurals>
     <string name="settings__title_filter_apps">تصفية التطبيقات</string>
     <string name="telemetry_configure_type">نوع التحليلات</string>
@@ -574,30 +574,4 @@
     <string name="bottom_sheet__text_launch_failure_unknown">فشل إطلاق مجهول!</string>
     <string name="settings__title_sql">استعلام Sql</string>
     <string name="settings_sql__text_query">استعلام</string>
-    <string name="app_name" translatable="false"></string>
-    <string name="settings_links_amp2html__text_local_network"></string>
-    <string name="settings_scenario__text_data_type"></string>
-    <string name="settings_links_follow_redirects__title_local_network"></string>
-    <string name="settings_scenario__text_value"></string>
-    <string name="settings_verified_link_handlers__text_sort_by_installation_time"></string>
-    <string name="generic__label_arrow_rotation"></string>
-    <string name="generic__title_filter"></string>
-    <string name="settings_links_preview__subtitle_preview_skip_browser"></string>
-    <string name="settings_links_preview__title_preview_skip_browser"></string>
-    <string name="settings_credits__app_name_seal" translatable="false"></string>
-    <string name="settings_verified_link_handlers__text_system_apps"></string>
-    <string name="generic__title_sort_by"></string>
-    <string name="settings_links_amp2html__title_local_network"></string>
-    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"></string>
-    <string name="settings_links_follow_redirects__text_local_network"></string>
-    <string name="settings_links_preview__subtitle_preview"></string>
-    <string name="telemetry_dialog_text_2" translatable="false"></string>
-    <string name="settings_credits__app_name_gmsflags" translatable="false"></string>
-    <string name="settings_verified_link_handlers__text_sort_by_a_z"></string>
-    <string name="settings_scenario__text_scenarios"></string>
-    <string name="settings_verified_link_handlers__text_vlh_type_filter_native"></string>
-    <string name="settings_verified_link_handlers__text_ascending"></string>
-    <string name="settings_links_preview__title_preview"></string>
-    <string name="settings_verified_link_handlers__text_vlh_type_filter_browser"></string>
-    <string name="settings_scenario__title_scenarios"></string>
 </resources>

@@ -35,7 +35,7 @@ class FollowRedirectsLinkResolver(
     private suspend fun insertCache(entryId: Long, result: FollowRedirectsResult) {
         cacheRepository.insertResolved(entryId, ResolveType.FollowRedirects, result.url)
 
-        if (result is FollowRedirectsResult.GetRequest && result.body != null) {
+        if (result.body != null) {
             cacheRepository.insertHtml(entryId, result.body)
         }
     }

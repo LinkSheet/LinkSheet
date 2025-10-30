@@ -40,6 +40,7 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)
     implementation(_1fexd.composeKit.compose.core)
+    implementation(Square.okHttp3.android)
     implementation(JetBrains.ktor.client.core)
     implementation("org.jsoup:jsoup:_")
     implementation(MozillaComponents.support.utils)

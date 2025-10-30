@@ -1,28 +1,24 @@
 package fe.linksheet.extension.ktor
 
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsChannel
-import io.ktor.client.statement.request
-import io.ktor.http.ContentType
-import io.ktor.http.charset
-import io.ktor.http.contentType
-import io.ktor.utils.io.charsets.name
-import io.ktor.utils.io.jvm.javaio.toInputStream
-import org.jsoup.Jsoup
+import fe.linksheet.web.isHtml
+import fe.linksheet.web.parseHtmlBody
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import io.ktor.utils.io.jvm.javaio.*
 import org.jsoup.nodes.Document
 
 fun HttpResponse.isHtml(): Boolean {
-    return ContentType.Text.Html == contentType()?.withoutParameters()
+    return contentType().isHtml()
 }
 
 fun HttpResponse.urlString(): String {
     return request.url.toString()
 }
 
-suspend fun HttpResponse.parseHtmlBody(): Document {
-    val document = bodyAsChannel().toInputStream().use {
-        Jsoup.parse(it, charset()?.name ?: "utf-8", urlString())
-    }
+fun HttpResponse.refresh(): String? {
+    return headers["refresh"]
+}
 
-    return document
+suspend fun HttpResponse.parseHtmlBody(): Document {
+    return bodyAsChannel().toInputStream().use { it.parseHtmlBody(urlString(), charset()) }
 }

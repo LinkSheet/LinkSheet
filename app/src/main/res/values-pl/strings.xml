@@ -581,4 +581,7 @@
     <string name="settings_links_preview__subtitle_preview_skip_browser">Wyłącz podgląd, jeśli odsyłaczem jest przeglądarka</string>
     <string name="settings_scenario__title_scenarios">Scenariusze</string>
     <string name="settings_scenario__text_scenarios">Konfiguruj scenariusze</string>
+    <string name="settings_scenario__text_data_type"></string>
+    <string name="settings_scenario__text_value"></string>
+    <string name="app_name" translatable="false"></string>
 </resources>

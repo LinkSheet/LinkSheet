@@ -4,4 +4,12 @@
     <string name="enable_libredirect">Iespējot LibRedirect</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend"></string>
+    <string name="instance"></string>
+    <string name="random_instance"></string>
+    <string name="services"></string>
+    <string name="instance_not_available_anymore"></string>
+    <string name="libredirect_via"></string>
+    <string name="no_libredirect_services"></string>
+    <string name="enable_libredirect_explainer"></string>
 </resources>

@@ -6,10 +6,4 @@
     <string name="enabled">有効</string>
     <string name="services">サービス</string>
     <string name="instance_not_available_anymore">インスタンスはもう利用できません！</string>
-    <string name="random_instance"></string>
-    <string name="lib_redirect_service"></string>
-    <string name="libredirect_via"></string>
-    <string name="no_libredirect_services"></string>
-    <string name="enable_libredirect"></string>
-    <string name="enable_libredirect_explainer"></string>
 </resources>

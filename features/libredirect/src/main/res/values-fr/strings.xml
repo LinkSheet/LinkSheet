@@ -11,5 +11,4 @@
     <string name="libredirect_via">Via %s</string>
     <string name="services">Services</string>
     <string name="instance_not_available_anymore">L\'instance n\'est plus disponible !</string>
-    <string name="frontend"></string>
 </resources>

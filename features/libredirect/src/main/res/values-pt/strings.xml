@@ -8,8 +8,4 @@
     <string name="services">Serviços</string>
     <string name="no_libredirect_services">Nenhum serviço LibRedirect encontrado!</string>
     <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
-    <string name="lib_redirect"></string>
-    <string name="lib_redirect_service"></string>
-    <string name="libredirect_via"></string>
-    <string name="enable_libredirect_explainer"></string>
 </resources>

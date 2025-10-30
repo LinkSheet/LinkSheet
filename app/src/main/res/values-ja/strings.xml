@@ -525,4 +525,14 @@ Seal</string>
     <string name="generic__button_text_enable">有効化</string>
     <string name="generic__button_text_disable">無効化</string>
     <string name="bottom_sheet__text_launch_not_allowed">起動は許可されませんでした！</string>
+    <string name="bottom_sheet__text_launch_illegal">不正な起動試行です！</string>
+    <string name="bottom_sheet__text_launch_failure_other">起動に失敗しました！</string>
+    <string name="settings_verified_link_handler__text_hosts">ホスト</string>
+    <string name="settings_verified_link_handler__title_details">詳細</string>
+    <string name="generic__button_text_settings">設定</string>
+    <string name="settings_sql__text_query">クエリ</string>
+    <string name="settings_verified_link_handlers__text_sort_by_a_z">A-Z</string>
+    <string name="settings_verified_link_handlers__text_sort_by_installation_time">インストール時間</string>
+    <string name="settings_links_preview__title_preview">URL プレビューを表示する</string>
+    <string name="settings_links_preview__subtitle_preview">下のシートに OpenGraph プレビューを読み込んで表示しようとします。<annotation url-id="github.linksheet.wiki.privacy.preview">プライバシーに悪影響</annotation>を及ぼす可能性があります</string>
 </resources>

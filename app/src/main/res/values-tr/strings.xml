@@ -563,4 +563,6 @@
     <string name="settings_links_preview__subtitle_preview">OpenGraph ön izlemesini yüklemeyi ve göstermeyi dene. Bunun <annotation url-id="github.linksheet.wiki.privacy.preview">gizlilikle ilgili etkileri</annotation> olabilir</string>
     <string name="settings_links_preview__title_preview_skip_browser">Tarayıcı ön izlemesini devre dışı bırak</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">Eğer yönlendiren bir tarayıcıysa ön izlemeyi devre dışı bırak</string>
+    <string name="settings_scenario__title_scenarios">Senaryolar</string>
+    <string name="settings_scenario__text_scenarios">Senaryoları yapılandır</string>
 </resources>

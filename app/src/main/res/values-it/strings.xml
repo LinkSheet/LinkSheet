@@ -573,4 +573,7 @@
     <string name="settings_scenario__title_scenarios"></string>
     <string name="experiments_explainer_2"></string>
     <string name="app_name" translatable="false"></string>
+    <string name="download_started_toast"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
+    <string name="built_by_error"></string>
 </resources>

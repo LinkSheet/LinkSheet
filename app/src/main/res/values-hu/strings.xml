@@ -395,8 +395,7 @@
     <string name="verified_link_handlers_subtitle">Az alkalmazás domainellenőrzési állapotának szabályozása</string>
     <string name="settings_shortcuts__title_default_browser">Alapértelmezett böngésző</string>
     <string name="settings_shortcuts__title_link_handlers">Linkkezelők</string>
-    <string name="settings_credits__app_name_seal" translatable="false">
-Seal</string>
+    <string name="settings_credits__app_name_seal" translatable="false">Seal</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Linkkezelés nem engedélyezett</string>
     <string name="telemetry_level_disabled">Letiltva</string>
     <string name="telemetry_identity_full">Teljes</string>

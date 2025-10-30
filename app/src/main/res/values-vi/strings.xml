@@ -393,4 +393,5 @@
     <string name="export_log_dialog__subtitle_redact_log">Khuyến nghị, biên tập lại tên ứng dụng và url</string>
     <string name="settings_main_setup_success__button_change_browser">Trình duyệt mặc định</string>
     <string name="settings_main_setup_success__button_set_default_browser">Đặt làm trình duyệt mặc định</string>
+    <string name="app_name" translatable="false"></string>
 </resources>

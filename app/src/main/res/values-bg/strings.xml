@@ -565,4 +565,5 @@
     <string name="settings_links_preview__subtitle_preview_skip_browser">Без преглед ако изпращач е мрежов четец</string>
     <string name="settings_scenario__title_scenarios">Сценарии</string>
     <string name="settings_scenario__text_scenarios">Настройки на сценарии</string>
+    <string name="app_name" translatable="false"></string>
 </resources>

@@ -5,13 +5,15 @@ import fe.buildlogic.common.OptIn
 import fe.buildlogic.common.extension.addOptIn
 
 plugins {
-    id("com.android.library")
     kotlin("android")
+    id("com.android.library")
+    id("androidx.room")
+    id("com.google.devtools.ksp")
     id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
 android {
-    namespace = "fe.linksheet.feature.wiki"
+    namespace = "app.linksheet.feature.wiki"
     compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
@@ -22,22 +24,26 @@ android {
         jvmToolchain(Version.JVM)
         addOptIn(OptIn.ExperimentalTime)
     }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+        generateKotlin = true
+    }
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":util"))
     implementation(project(":common"))
-    compileOnly(project(":hidden-api"))
-
-    implementation(AndroidX.room.common)
+    implementation(project(":util"))
+    implementation(project(":api"))
+    implementation(AndroidX.room.runtime)
+    implementation(AndroidX.room.ktx)
+    ksp(AndroidX.room.compiler)
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)
-    implementation(Grrfe.std.process.core)
 
     implementation(Grrfe.httpkt.core)
-
+    implementation(Koin.android)
 
     implementation(AndroidX.core.ktx)
 

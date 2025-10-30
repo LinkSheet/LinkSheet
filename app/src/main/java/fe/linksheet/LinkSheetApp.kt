@@ -49,6 +49,7 @@ import fe.linksheet.module.paste.PasteServiceModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.feature.profile.ProfileFeatureModule
+import fe.linksheet.feature.wiki.WikiFeatureModule
 import fe.linksheet.module.receiver.BroadcastEventBusModule
 import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
 import fe.linksheet.module.repository.module.RepositoryModule
@@ -157,7 +158,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             ShizukuModule,
             ScenarioFeatureModule,
             LibRedirectFeatureModule,
-            LinkEngineFeatureModule
+            LinkEngineFeatureModule,
+            WikiFeatureModule
         )
     }
 

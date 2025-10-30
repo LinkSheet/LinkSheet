@@ -8,14 +8,12 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
 import fe.linksheet.module.database.dao.*
 
 import app.linksheet.feature.libredirect.database.dao.LibRedirectDefaultDao
 import app.linksheet.feature.libredirect.database.dao.LibRedirectServiceStateDao
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.libredirect.database.entity.LibRedirectServiceState
-import fe.linksheet.feature.wiki.database.entity.WikiCache
 import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
 import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
@@ -28,6 +26,7 @@ import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
 import fe.linksheet.module.database.migrations.Migration12to17
 import fe.linksheet.module.database.migrations.Migration18to19
 import fe.linksheet.module.database.migrations.Migration1to2
+import fe.linksheet.module.database.migrations.Migration19to20
 import fe.linksheet.module.database.migrations.Migration20to21
 import fe.linksheet.module.log.Logger
 import org.koin.dsl.module
@@ -43,10 +42,9 @@ val DatabaseModule = module {
         PreferredApp::class, AppSelectionHistory::class, WhitelistedNormalBrowser::class,
         WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
         LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
-        WikiCache::class,
 //        ScenarioEntity::class
     ],
-    version = 19,
+    version = 21,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -74,7 +72,6 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun libRedirectDefaultDao(): LibRedirectDefaultDao
     abstract fun libRedirectServiceStateDao(): LibRedirectServiceStateDao
     abstract fun amp2HtmlMappingDao(): Amp2HtmlMappingDao
-    abstract fun wikiCacheDao(): WikiCacheDao
 //    abstract fun scenarioDao(): ScenarioDao
 
     companion object {
@@ -83,6 +80,7 @@ abstract class LinkSheetDatabase : RoomDatabase() {
                 Migration1to2,
                 *Migration12to17(logger).create(),
                 Migration18to19,
+                Migration19to20,
                 Migration20to21
             )
         }

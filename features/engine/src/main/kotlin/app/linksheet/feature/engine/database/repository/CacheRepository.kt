@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package app.linksheet.feature.engine.database.repository
 
 import app.linksheet.feature.engine.database.dao.PreviewCacheDao
@@ -13,6 +15,8 @@ import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResult
 import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResultId
 import app.linksheet.feature.engine.database.dao.HtmlCacheDao
 import app.linksheet.feature.engine.database.entity.CachedHtml
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 class CacheRepository internal constructor(
     val htmlCacheDao: HtmlCacheDao,
@@ -20,7 +24,7 @@ class CacheRepository internal constructor(
     val resolvedUrlCacheDao: ResolvedUrlCacheDao,
     val resolveTypeDao: ResolveTypeDao,
     val urlEntryDao: UrlEntryDao,
-    private val now: () -> Long = { System.currentTimeMillis() }
+    val clock: Clock,
 ) {
 
     suspend fun getOrCreateCacheEntry(url: String): UrlEntry {
@@ -57,7 +61,8 @@ class CacheRepository internal constructor(
     }
 
     suspend fun createUrlEntry(url: String): UrlEntry {
-        val entry = UrlEntry(timestamp = now(), url = url)
+        val now = clock.now()
+        val entry = UrlEntry(timestamp = now.toEpochMilliseconds(), url = url)
         val id = urlEntryDao.insertReturningId(entry)
 
         entry.id = id

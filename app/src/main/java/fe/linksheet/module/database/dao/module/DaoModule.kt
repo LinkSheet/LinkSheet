@@ -17,6 +17,5 @@ val DaoModule = module {
     singleOf(LinkSheetDatabase::resolvedRedirectDao)
     singleOf(LinkSheetDatabase::appSelectionHistoryDao)
     singleOf(LinkSheetDatabase::amp2HtmlMappingDao)
-    singleOf(LinkSheetDatabase::wikiCacheDao)
 //    singleOf(LinkSheetDatabase::scenarioDao)
 }

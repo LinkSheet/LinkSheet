@@ -21,11 +21,6 @@ android {
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
-
-        room {
-            schemaDirectory("$projectDir/schemas")
-            generateKotlin = true
-        }
     }
 
     kotlin {
@@ -35,6 +30,11 @@ android {
 
     buildFeatures {
         compose = true
+    }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+        generateKotlin = true
     }
 }
 

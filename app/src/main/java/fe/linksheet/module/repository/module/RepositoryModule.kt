@@ -2,8 +2,6 @@
 
 package fe.linksheet.module.repository.module
 
-import app.linksheet.feature.engine.database.repository.CacheRepository
-import fe.linksheet.feature.wiki.WikiCacheRepository
 import fe.linksheet.module.clock.ClockModule
 import fe.linksheet.module.database.DatabaseModule
 import fe.linksheet.module.database.dao.module.DaoModule
@@ -27,6 +25,4 @@ val RepositoryModule = module {
 
     singleOf(::ResolvedRedirectRepository)
     singleOf(::Amp2HtmlRepository)
-    singleOf(::WikiCacheRepository)
-
 }

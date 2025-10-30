@@ -1,4 +1,4 @@
-package fe.linksheet.feature.wiki
+package fe.linksheet.feature.wiki.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

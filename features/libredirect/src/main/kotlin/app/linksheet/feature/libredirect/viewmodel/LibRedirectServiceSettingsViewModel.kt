@@ -3,13 +3,12 @@ package app.linksheet.feature.libredirect.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.libredirect.database.entity.LibRedirectServiceState
 import app.linksheet.feature.libredirect.database.repository.LibRedirectDefaultRepository
 import app.linksheet.feature.libredirect.database.repository.LibRedirectStateRepository
 import app.linksheet.feature.libredirect.FrontendState
-import app.linksheet.feature.libredirect.LibRedirectSettingsFeature
+import app.linksheet.feature.libredirect.SettingsController
 import app.linksheet.feature.libredirect.ServiceSettings
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffect
@@ -17,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LibRedirectServiceSettingsViewModel(
     val context: Application,
@@ -25,14 +23,14 @@ class LibRedirectServiceSettingsViewModel(
     private val defaultRepository: LibRedirectDefaultRepository,
     private val stateRepository: LibRedirectStateRepository,
 ) : ViewModel() {
-    private val feature = LibRedirectSettingsFeature()
+    private val controller = SettingsController()
 
     private val _settings = MutableStateFlow<ServiceSettings?>(null)
     val settings = _settings.asStateFlow()
 
     fun loadSettings() {
         viewModelScope.launch {
-            _settings.value = feature.loadSettings(serviceKey)
+            _settings.value = controller.loadSettings(serviceKey)
         }
     }
 

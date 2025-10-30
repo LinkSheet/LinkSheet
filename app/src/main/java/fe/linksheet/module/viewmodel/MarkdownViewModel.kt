@@ -3,14 +3,14 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import fe.httpkt.Request
-import fe.linksheet.feature.wiki.WikiArticleFeature
-import fe.linksheet.feature.wiki.WikiCacheRepository
+import fe.linksheet.feature.wiki.WikiArticleUseCase
+import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
 
 class MarkdownViewModel(
     val context: Application,
     val request: Request,
     val repository: WikiCacheRepository,
 ) : ViewModel() {
-    private val useCase = WikiArticleFeature(request, repository)
+    private val useCase = WikiArticleUseCase(request, repository)
     suspend fun getWikiText(url: String): String? = useCase.getWikiText(url)
 }

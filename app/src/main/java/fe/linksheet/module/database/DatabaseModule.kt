@@ -7,17 +7,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 
-import app.linksheet.feature.scenario.database.ScenarioDao
 import fe.linksheet.extension.koin.createLogger
-import app.linksheet.feature.scenario.database.ScenarioEntity
-import fe.linksheet.feature.wiki.WikiCache
-import fe.linksheet.feature.wiki.WikiCacheDao
+import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
 import fe.linksheet.module.database.dao.*
 
 import app.linksheet.feature.libredirect.database.dao.LibRedirectDefaultDao
 import app.linksheet.feature.libredirect.database.dao.LibRedirectServiceStateDao
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.libredirect.database.entity.LibRedirectServiceState
+import fe.linksheet.feature.wiki.database.entity.WikiCache
 import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
 import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao

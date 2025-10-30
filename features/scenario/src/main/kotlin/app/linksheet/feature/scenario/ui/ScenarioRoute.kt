@@ -32,7 +32,7 @@ import app.linksheet.compose.extension.loader
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.util.ListState
 import app.linksheet.feature.scenario.R
-import app.linksheet.feature.scenario.database.ScenarioEntity
+import app.linksheet.feature.scenario.database.entity.ScenarioEntity
 import app.linksheet.feature.scenario.viewmodel.ScenarioViewModel
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.HapticFeedbackInteraction

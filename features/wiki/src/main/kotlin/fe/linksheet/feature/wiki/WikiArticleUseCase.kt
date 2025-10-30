@@ -3,12 +3,13 @@ package fe.linksheet.feature.wiki
 import fe.httpkt.Request
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString
+import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import fe.linksheet.util.CacheResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class WikiArticleFeature(
+class WikiArticleUseCase(
     val request: Request,
     val repository: WikiCacheRepository,
     val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,

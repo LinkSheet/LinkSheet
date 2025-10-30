@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LibRedirectSettingsFeature(
+class SettingsController(
     private val loadBuiltInServices: () -> List<LibRedirectService> = LibRedirectLoader::loadBuiltInServices,
     private val loadBuiltInInstances: () -> List<LibRedirectInstance> = LibRedirectLoader::loadBuiltInInstances,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
@@ -26,8 +26,7 @@ class LibRedirectSettingsFeature(
     private fun createService(serviceKey: String): LibRedirectService? {
         val builtInServices = loadBuiltInServices().associateBy { it.key }
 
-        val service = builtInServices[serviceKey]
-        if (service == null) return null
+        val service = builtInServices[serviceKey] ?: return null
 
         return service
     }

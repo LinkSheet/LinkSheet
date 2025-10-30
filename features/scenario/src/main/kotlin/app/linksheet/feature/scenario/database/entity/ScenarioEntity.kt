@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalUuidApi::class)
 
-package app.linksheet.feature.scenario.database
+package app.linksheet.feature.scenario.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

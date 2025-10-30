@@ -14,7 +14,7 @@ import app.linksheet.feature.browser.PrivateBrowsingModule
 import app.linksheet.feature.downloader.DownloaderModule
 import app.linksheet.feature.engine.LinkEngineFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectFeatureModule
-import app.linksheet.feature.scenario.ScenarioModule
+import app.linksheet.feature.scenario.ScenarioFeatureModule
 import app.linksheet.feature.shizuku.ShizukuModule
 import app.linksheet.lib.log.AndroidLogSink
 import app.linksheet.lib.log.LLog
@@ -155,7 +155,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             WorkDelegatorServiceModule,
             BroadcastEventBusModule,
             ShizukuModule,
-            ScenarioModule,
+            ScenarioFeatureModule,
             LibRedirectFeatureModule,
             LinkEngineFeatureModule
         )

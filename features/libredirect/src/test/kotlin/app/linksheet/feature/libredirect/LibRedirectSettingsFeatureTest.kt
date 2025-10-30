@@ -87,7 +87,7 @@ internal class LibRedirectSettingsFeatureTest : BaseUnitTest {
 
     @Test
     fun test() = runTest(dispatcher) {
-        val feature = LibRedirectSettingsFeature(
+        val feature = SettingsController(
             loadBuiltInServices = { loadBuiltInServices },
             loadBuiltInInstances = { loadBuiltInInstances },
             ioDispatcher = dispatcher

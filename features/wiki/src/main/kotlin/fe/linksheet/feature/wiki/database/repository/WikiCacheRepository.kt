@@ -1,7 +1,9 @@
 @file:OptIn(ExperimentalTime::class)
 
-package fe.linksheet.feature.wiki
+package fe.linksheet.feature.wiki.database.repository
 
+import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
+import fe.linksheet.feature.wiki.database.entity.WikiCache
 import fe.linksheet.util.CacheResult
 import kotlin.time.Clock
 import kotlin.time.Duration

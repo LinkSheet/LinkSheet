@@ -563,4 +563,6 @@
     <string name="settings_scenario__title_scenarios"></string>
     <string name="experiments_explainer_2"></string>
     <string name="app_name" translatable="false"></string>
+    <string name="donate_subtitle"></string>
+    <string name="links_explainer"></string>
 </resources>

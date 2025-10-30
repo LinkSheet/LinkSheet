@@ -558,4 +558,6 @@
     <string name="apps_which_can_open_links_shizuku_explainer"></string>
     <string name="onboarding_0_subtitle"></string>
     <string name="settings_scenario__title_scenarios"></string>
+    <string name="enable_linksheet_compat_explainer"></string>
+    <string name="built_by_error"></string>
 </resources>

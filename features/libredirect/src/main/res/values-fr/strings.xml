@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="enabled">Activé</string>
-    <string name="no_libredirect_services">Aucun service LibRedirect n\'a été trouvé !</string>
+    <string name="no_libredirect_services">Aucun service LibRedirect n\'a été trouvé !</string>
     <string name="enable_libredirect">Activer LibRedirect</string>
     <string name="enable_libredirect_explainer">Redirige les liens vers des interfaces respectueuses de la vie privée en utilisant l\'intégration expérimentale de <annotation url-id="libredirect-github">LibRedirect</annotation></string>
     <string name="lib_redirect">LibRedirect</string>
@@ -10,5 +10,6 @@
     <string name="random_instance">Instance aléatoire</string>
     <string name="libredirect_via">Via %s</string>
     <string name="services">Services</string>
-    <string name="instance_not_available_anymore">L\'instance n\'est plus disponible !</string>
+    <string name="instance_not_available_anymore">L\'instance n\'est plus disponible !</string>
+    <string name="frontend"></string>
 </resources>

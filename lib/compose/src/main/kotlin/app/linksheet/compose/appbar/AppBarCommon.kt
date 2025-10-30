@@ -8,8 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import app.linksheet.compose.R
-import app.linksheet.compose.theme.HkGroteskSemiBold
+import app.linksheet.compose.theme.HkGroteskFontFamily
 
 @Composable
 fun SaneAppBarTitle(modifier: Modifier = Modifier, headline: String) {
@@ -17,7 +18,8 @@ fun SaneAppBarTitle(modifier: Modifier = Modifier, headline: String) {
         modifier = modifier,
 //        modifier = modifier.offset(y = (-1).dp),
         text = headline,
-        style = HkGroteskSemiBold,
+        fontFamily = HkGroteskFontFamily,
+        fontWeight = FontWeight.SemiBold
     )
 }
 

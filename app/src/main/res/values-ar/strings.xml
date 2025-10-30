@@ -574,4 +574,5 @@
     <string name="bottom_sheet__text_launch_failure_unknown">فشل إطلاق مجهول!</string>
     <string name="settings__title_sql">استعلام Sql</string>
     <string name="settings_sql__text_query">استعلام</string>
+    <string name="app_name" translatable="false"></string>
 </resources>

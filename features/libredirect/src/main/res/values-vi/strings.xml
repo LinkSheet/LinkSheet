@@ -11,4 +11,5 @@
     <string name="enable_libredirect_explainer">Chuyển hướng liên kết đến các giao diện người dùng thân thiện với quyền riêng tư bằng cách sử dụng tích hợp <annotation url-id="libredirect-github">LibRedirect </annotation> thử nghiệm</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="instance"></string>
 </resources>

@@ -390,11 +390,13 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
         <item quantity="one">%d zakázaný hostitel</item>
         <item quantity="few">%d zakázaní hostitelé</item>
+        <item quantity="many">%d zakázaných hostitelů</item>
         <item quantity="other">%d zakázaných hostitelů</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none">
         <item quantity="one">%d zakázaný</item>
         <item quantity="few">%d zakázané</item>
+        <item quantity="many">%d zakázaných</item>
         <item quantity="other">%d zakázaných</item>
     </plurals>
     <string name="settings__title_filter_apps">Filtrovat aplikace</string>
@@ -459,26 +461,31 @@
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected">
         <item quantity="one">%d povolený</item>
         <item quantity="few">%d povolené</item>
+        <item quantity="many">%d povolených</item>
         <item quantity="other">%d povolených</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
         <item quantity="one">%d povolený hostitel</item>
         <item quantity="few">%d povolení hostitelé</item>
+        <item quantity="many">%d povolených hostitelů</item>
         <item quantity="other">%d povolených hostitelů</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="one">%d hostitel: %s</item>
         <item quantity="few">%d hostitelé: %s</item>
+        <item quantity="many">%d hostitelů: %s</item>
         <item quantity="other">%d hostitelů: %s</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
         <item quantity="one">%d ověřený</item>
         <item quantity="few">%d ověřené</item>
+        <item quantity="many">%d ověřených</item>
         <item quantity="other">%d ověřených</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="one">%d ověřený hostitel</item>
         <item quantity="few">%d ověření hostitelé</item>
+        <item quantity="many">%d ověřených hostitelů</item>
         <item quantity="other">%d ověřených hostitelů</item>
     </plurals>
     <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -&gt; Zvláštní přístup aplikací -&gt;Propojení pracovních a osobních aplikací</string>
@@ -523,6 +530,7 @@
     <plurals name="settings_verified_link_handlers__text_app_host_default_host">
         <item quantity="one">%d výchozí hostitel</item>
         <item quantity="few">%d výchozí hostitelé</item>
+        <item quantity="many">%d výchozích hostitelů</item>
         <item quantity="other">%d výchozích hostitelů</item>
     </plurals>
     <string name="settings_verified_link_handlers__text_browser">Prohlížeč</string>
@@ -540,4 +548,5 @@
     <string name="import_settings__text_success">Importováno!</string>
     <string name="import_settings__text_failure">Nepodařilo se importovat nastavení!</string>
     <string name="export_settings__text_success">Exportováno!</string>
+    <string name="app_name" translatable="false"></string>
 </resources>

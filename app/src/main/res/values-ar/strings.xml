@@ -575,4 +575,29 @@
     <string name="settings__title_sql">استعلام Sql</string>
     <string name="settings_sql__text_query">استعلام</string>
     <string name="app_name" translatable="false"></string>
+    <string name="settings_links_amp2html__text_local_network"></string>
+    <string name="settings_scenario__text_data_type"></string>
+    <string name="settings_links_follow_redirects__title_local_network"></string>
+    <string name="settings_scenario__text_value"></string>
+    <string name="settings_verified_link_handlers__text_sort_by_installation_time"></string>
+    <string name="generic__label_arrow_rotation"></string>
+    <string name="generic__title_filter"></string>
+    <string name="settings_links_preview__subtitle_preview_skip_browser"></string>
+    <string name="settings_links_preview__title_preview_skip_browser"></string>
+    <string name="settings_credits__app_name_seal" translatable="false"></string>
+    <string name="settings_verified_link_handlers__text_system_apps"></string>
+    <string name="generic__title_sort_by"></string>
+    <string name="settings_links_amp2html__title_local_network"></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"></string>
+    <string name="settings_links_follow_redirects__text_local_network"></string>
+    <string name="settings_links_preview__subtitle_preview"></string>
+    <string name="telemetry_dialog_text_2" translatable="false"></string>
+    <string name="settings_credits__app_name_gmsflags" translatable="false"></string>
+    <string name="settings_verified_link_handlers__text_sort_by_a_z"></string>
+    <string name="settings_scenario__text_scenarios"></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_native"></string>
+    <string name="settings_verified_link_handlers__text_ascending"></string>
+    <string name="settings_links_preview__title_preview"></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_browser"></string>
+    <string name="settings_scenario__title_scenarios"></string>
 </resources>

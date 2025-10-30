@@ -23,7 +23,7 @@
     <string name="none">Aucun</string>
     <string name="none_explainer">Ne répertorier que les applications natives, supprimer tous les navigateurs. Si une seule application native est présente, elle sera automatiquement ouverte. Si aucune application native n\'est présente, tous les navigateurs sont listés.</string>
     <string name="always_ask_explainer">Toujours lister tous les navigateurs</string>
-    <string name="no_such_app_found">Aucune application de ce type n\'a été trouvée !</string>
+    <string name="no_such_app_found">Aucune application de ce type n\'a été trouvée !</string>
     <string name="send_to">Partager avec</string>
     <string name="default_apps_subtitle">Définir les applications par défaut pour les hôtes</string>
     <string name="remove_all">Supprimer tout</string>
@@ -32,7 +32,7 @@
     <string name="back">Retour</string>
     <string name="display_grid_layout">Disposition de la grille</string>
     <string name="display_grid_layout_explainer">Afficher une grille au lieu d\'une liste dans la feuille inférieure</string>
-    <string name="set_as_browser_done">LinkSheet a été défini comme navigateur par défaut !</string>
+    <string name="set_as_browser_done">LinkSheet a été défini comme navigateur par défaut !</string>
     <string name="browser_status">État du navigateur</string>
     <string name="app_browsers">Apps &amp; Navigateurs</string>
     <string name="bottom_sheet">Feuille inférieure</string>
@@ -73,7 +73,7 @@
     <string name="loading_link">Traitement du lien…</string>
     <string name="follow_redirects_external_service">Suivre les redirections via un service externe</string>
     <string name="apps_which_can_open_links_explainer">Appuyez sur une application pour ouvrir le menu \"Ouvrir par défaut\" qui vous permet de désactiver l\'ouverture automatique des liens</string>
-    <string name="enable_request_private_browsing_button_explainer">Affiche un bouton à côté des navigateurs qui ouvre l\'URL cliquée en mode de navigation privée. Navigateurs pris en charge : %s</string>
+    <string name="enable_request_private_browsing_button_explainer">Affiche un bouton à côté des navigateurs qui ouvre l\'URL cliquée en mode de navigation privée. Navigateurs pris en charge : %s</string>
     <string name="enable_downloader_explainer">Ajouter un bouton \"Télécharger\" au bas de l\'écran si l\'url contient un lien direct vers un fichier. Cela peut avoir des <annotation url-id="privacy-downloader"> implications liées à la protection de la vie privée</annotation></string>
     <string name="request_timeout_explainer">Définit le nombre de secondes pendant lesquelles LinkSheet attendra qu\'une connexion soit établie. La valeur 0 désactive le délai d\'attente, mais ce n\'est pas recommandé.</string>
     <string name="enable_ignore_libredirect_button_explainer">Affiche un bouton dans la feuille inférieure si l\'url a été redirigée via LibRedirect, qui ouvre l\'url d\'origine à la place</string>
@@ -89,7 +89,7 @@
     <string name="download">Télécharger</string>
     <string name="enable_downloader">Activer le téléchargeur</string>
     <string name="downloader_url_mime_type">Utiliser le type de mime de l\'url</string>
-    <string name="downloader_url_mime_type_explainer">Vérifie si l\'URL se termine par une extension de fichier (par exemple \".jpg\") ; si c\'est le cas, ce type est utilisé pour le fichier téléchargé.</string>
+    <string name="downloader_url_mime_type_explainer">Vérifie si l\'URL se termine par une extension de fichier (par exemple \".jpg\") ; si c\'est le cas, ce type est utilisé pour le fichier téléchargé.</string>
     <string name="in_app_browser">Navigateur intégré</string>
     <string name="in_app_browser_subtitle">Remplacer les paramètres du navigateur intégré</string>
     <string name="use_app_settings">Défaut</string>
@@ -115,7 +115,7 @@
     <string name="no_log_entries">Cette session ne contient aucun journal.</string>
     <string name="download_started">Téléchargement démarré</string>
     <string name="request_timeout">Délai de requête</string>
-    <string name="resolve_failed">%s échoué : %s</string>
+    <string name="resolve_failed">%s échoué : %s</string>
     <string name="no_browsers_found">Aucun navigateur n\'a été trouvé.</string>
     <string name="no_apps_found">Aucune application trouvée.</string>
     <string name="export">Exporter</string>
@@ -126,17 +126,17 @@
     <string name="redact_log">Rédiger le journal (recommandé, la désactivation de cette option peut entraîner des fuites de noms de paquets et de noms d\'hôtes)</string>
     <string name="include_settings">Inclure les paramètres (recommandé)</string>
     <string name="include_fingerprint">Inclure l\'empreinte digitale de l\'appareil (recommandé)</string>
-    <string name="no_logs_found">Aucun journaux antérieurs n\'a été trouvé !</string>
+    <string name="no_logs_found">Aucun journaux antérieurs n\'a été trouvé !</string>
     <string name="enable_amp2html">Activer Amp2Html</string>
     <string name="pretend_to_be_app_explainer_2">Certaines applications comme Google Chrome recherchent explicitement une application native pour gérer, par exemple, un lien YouTube lorsque celui-ci est sélectionné dans les résultats de recherche. LinkSheetCompat se fait passer pour une telle application native pour les hôtes pris en charge, puis transmet la demande à LinkSheet.</string>
     <string name="show_linksheet_referrer_explainer">Lorsqu\'une application est lancée, elle peut vérifier quelle application l\'a lancée, ou s\'y est \"référée\". Par défaut, lorsque LinkSheet lance une application, il se cache, indiquant que l\'application qui a lancé LinkSheet est la cible lancée. Activez cette option pour réinsérer LinkSheet en tant que référent pour les applications qu\'elle ouvre.</string>
-    <string name="donate_card_subtitle">Si vous aimez LinkSheet, pensez à laisser une étoile sur Github et/ou à faire un don.\nLes donateurs qui donnent plus de <b>5 €</b> sont éligibles à <b>LinkSheet Pro</b>, qui bénéficiera de fonctionnalités exclusives.</string>
+    <string name="donate_card_subtitle">Si vous aimez LinkSheet, pensez à laisser une étoile sur Github et/ou à faire un don.\nLes donateurs qui donnent plus de <b>5 €</b> sont éligibles à <b>LinkSheet Pro</b>, qui bénéficiera de fonctionnalités exclusives.</string>
     <string name="export_explainer">Exporter les paramètres actuels de l\'application dans un fichier</string>
     <string name="show_linksheet_referrer">Afficher le référent de LinkSheet</string>
     <string name="yes">Ouvrir</string>
     <string name="donate">Don</string>
-    <string name="linksheet_donation_explainer_2">Un don de plus de <b>5€</b> vous permet d\'accéder à <b>LinkSheet Pro</b>, qui comprend des <b>fonctionnalités Pro exclusives</b> telles que : suivre les redirections en externe, obtenir des pages non-AMP en externe et bien plus encore à venir !</string>
-    <string name="export_include_recommendation">Nous vous recommandons d\'activer les paramètres suivants uniquement si vous n\'avez pas l\'intention de partager votre exportation avec quelqu\'un d\'autre !</string>
+    <string name="linksheet_donation_explainer_2">Un don de plus de <b>5€</b> vous permet d\'accéder à <b>LinkSheet Pro</b>, qui comprend des <b>fonctionnalités Pro exclusives</b> telles que : suivre les redirections en externe, obtenir des pages non-AMP en externe et bien plus encore à venir !</string>
+    <string name="export_include_recommendation">Nous vous recommandons d\'activer les paramètres suivants uniquement si vous n\'avez pas l\'intention de partager votre exportation avec quelqu\'un d\'autre !</string>
     <string name="apps_which_can_open_links_explainer_2">Répertorie toutes les applications susceptibles d\'interférer avec le comportement de LinkSheet</string>
     <string name="follow_redirects_external_service_explainer">Suivez les redirections à l\'aide d\'une API déployée sur supabase.com (<annotation url-id="supabase-privacy">Politique de confidentialité</annotation>)</string>
     <string name="theme">Thème</string>
@@ -159,7 +159,7 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Mode Shizuku activé, appuyez sur une application pour activer/désactiver ses capacités de gestion automatique des liens. Appuyez longuement sur une application pour ouvrir son menu de paramètres \"Ouvrir par défaut\".</string>
     <string name="enable_all">Tout activer</string>
     <string name="disable_all">Tout désactiver</string>
-    <string name="shizuku_integration_enabled_explainer">L\'intégration de Shizuku a été activée avec succès !</string>
+    <string name="shizuku_integration_enabled_explainer">L\'intégration de Shizuku a été activée avec succès !</string>
     <string name="shizuku_not_running_explainer">Shizuku n\'est pas en cours d\'exécution. Touchez ici pour ouvrir Shizuku, puis suivez les instructions pour le démarrer.</string>
     <string name="shizuku_integration_no_permission_explainer">Appuyez ici pour demander la permission Shizuku.</string>
     <string name="shizuku_integration_not_setup_explainer">Bien qu\'il ne soit pas strictement nécessaire au fonctionnement de LinkSheet, Shizuku est recommandé. Appuyez ici pour l\'installer.</string>
@@ -177,7 +177,7 @@
     <string name="configure">Configuration</string>
     <string name="general">Divers</string>
     <string name="general_settings_explainer">Toujours afficher le noms des paquets</string>
-    <string name="no_handlers_found">Aucun navigateur ni application native trouvé !</string>
+    <string name="no_handlers_found">Aucun navigateur ni application native trouvé !</string>
     <string name="no_handlers_found_explainer">LinkSheet ne peut pas ouvrir ce lien.</string>
     <string name="success">Succès</string>
     <string name="warning">Avertissement</string>
@@ -188,15 +188,15 @@
     <string name="no_browser_installed">Aucun navigateur n\'est installé</string>
     <string name="no_browser_installed_explainer">LinkSheet n\'a pas pu détecter au moins une application se présentant comme un navigateur. Pour une expérience optimale, installez un navigateur.</string>
     <string name="no">Non</string>
-    <string name="domain_selection_confirmation_title">Sélectionner les domaines ?</string>
-    <string name="domain_selection_confirmation_subtitle">Êtes-vous sûr de vouloir définir %s comme application préférée pour les domaines suivants ?</string>
+    <string name="domain_selection_confirmation_title">Sélectionner les domaines ?</string>
+    <string name="domain_selection_confirmation_subtitle">Êtes-vous sûr de vouloir définir %s comme application préférée pour les domaines suivants ?</string>
     <string name="donate_card_headline">Faire un don pour soutenir LinkSheet</string>
     <string name="open_link_with_subtitle_2">LinkSheet était initialement basé sur OpenLinkWith</string>
     <string name="import_and_override">Importer et substituer</string>
     <string name="version_name"><b>Version:</b> <font face="monospace">%s</font></string>
     <string name="privacy">Confidentialité</string>
     <string name="privacy_settings_explainer">Confidentialité des référents, Télémétrie</string>
-    <string name="thanks_for_donating">Merci d\'avoir fait un don !</string>
+    <string name="thanks_for_donating">Merci d\'avoir fait un don !</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">Discussions sur LinkSheet via Discord</string>
     <string name="dismiss">Décliner</string>
@@ -224,11 +224,11 @@
     <string name="opening_with_app_toast_explainer">Afficher une infobulle lors du lancement d\'une application qui a été définie par défaut pour un domaine</string>
     <string name="last_updated"><b>Version:</b> <font face="monospace">%s</font></string>
     <string name="onboarding_4_button">Suivant</string>
-    <string name="shizuku_manager_start_failed">Impossible de démarrer Shizuku Manager, veuillez le démarrer manuellement !</string>
+    <string name="shizuku_manager_start_failed">Impossible de démarrer Shizuku Manager, veuillez le démarrer manuellement !</string>
     <string name="onboarding_2_card_title">Shizuku</string>
     <string name="onboarding_2_card_explainer">Shizuku permet à LinkSheet de désactiver le comportement de gestion des liens par défaut de toutes les applications à la fois, au lieu de devoir les désactiver manuellement pour chaque application individuellement (ce qui est l\'étape suivante).</string>
     <string name="permission_required_explainer">Certaines préférences importées requièrent des autorisations qui ne sont actuellement pas accordées à LinkSheet. Tapez ci-dessous pour les demander.</string>
-    <string name="onboarding_5_card_explainer">La configuration de base nécessaire au fonctionnement de LinkSheet a été effectuée - rendez-vous dans les paramètres pour découvrir tout ce qu\'il a à offrir !</string>
+    <string name="onboarding_5_card_explainer">La configuration de base nécessaire au fonctionnement de LinkSheet a été effectuée - rendez-vous dans les paramètres pour découvrir tout ce qu\'il a à offrir !</string>
     <string name="experiments_explainer_3">Ces fonctionnalités sont en cours de développement et peuvent ne pas fonctionner correctement, voire pas du tout. Veuillez ne pas signaler de bugs sur Github. Si vous souhaitez donner votre avis, faites-le sur Discord.</string>
     <string name="fastfoward_rules_explainer">Utiliser l\'intégration expérimentale des règles <annotation url-id="fastforward-github">FastForward</annotation> (contourner les redirections de certains hôtes en extrayant la redirection du lien)</string>
     <string name="misc_settings">Divers</string>
@@ -241,7 +241,7 @@
     <string name="export_privacy">Pour en savoir plus sur la confidentialité des exportations, vous pouvez visiter ce <annotation url-id="privacy-exports">lien</annotation>.</string>
     <string name="export_to_file">Exporter vers un fichier</string>
     <string name="import_settings">Paramètres d\'importation</string>
-    <string name="import_settings_override_preferences">Cela remplacera toutes les préférences existantes. Poursuivre ?</string>
+    <string name="import_settings_override_preferences">Cela remplacera toutes les préférences existantes. Poursuivre ?</string>
     <string name="confirm_import">Confirmer</string>
     <string name="clear_urls_version">Règles ClearURLs</string>
     <string name="dev_mode_enabled">Félicitations, vous avez activé le mode dev. Soyez prudent.</string>
@@ -261,7 +261,7 @@
     <string name="resolve_via_failed_toast">Échec de la résolution</string>
     <string name="resolve_via_failed_toast_explainer">Afficher une infobulle lorsqu\'une URL échoue à être résolue par un service externe</string>
     <string name="enable_linksheet_compat">Activer le menu expérimental LinkSheet Compat</string>
-    <string name="enable_linksheet_compat_explainer">Le menu se trouve dans le sous-menu « Applications » et une fois installé, il est capable d\'intercepter les requêtes vers certaines applications natives.</string>
+    <string name="enable_linksheet_compat_explainer">Le menu se trouve dans le sous-menu « Applications » et une fois installé, il est capable d\'intercepter les requêtes vers certaines applications natives.</string>
     <string name="no_internet_connection">Pas de connexion à internet</string>
     <string name="amp2html_short">Amp2Html</string>
     <string name="follow_redirects_short">Redirections</string>
@@ -274,7 +274,7 @@
     <string name="onboarding_1_subtitle">LinkSheet doit être défini comme navigateur par défaut pour gérer les liens cliquées</string>
     <string name="onboarding_1_card_title">Navigateur par défaut</string>
     <string name="onboarding_1_button">Définir comme navigateur par défaut</string>
-    <string name="onboarding_2_title">Voulez-vous utiliser Shizuku ?</string>
+    <string name="onboarding_2_title">Voulez-vous utiliser Shizuku ?</string>
     <string name="onboarding_2_subtitle">Si vous avez installé de nombreuses applications, Shizuku peut améliorer considérablement votre expérience</string>
     <string name="onboarding_2_install_shizuku">Installer Shizuku</string>
     <string name="onboarding_2_skip_button">Passer</string>
@@ -285,7 +285,7 @@
     <string name="onboarding_3_button">Désactiver les gestionnaires de liens</string>
     <string name="onboarding_4_card_explainer">Désactiver la gestion des liens pour tous les domaines qui devraient être gérés par LinkSheet.</string>
     <string name="onboarding_5_subtitle">LinkSheet a été activée avec succès</string>
-    <string name="onboarding_5_title">Tout est en place !</string>
+    <string name="onboarding_5_title">Tout est en place !</string>
     <string name="onboarding_5_button">Terminer</string>
     <string name="hide_bottom_sheet_choice_buttons">Masquer les boutons de sélection</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Masquer les boutons « Une fois » et « Toujours » dans la partie inférieure</string>
@@ -293,8 +293,8 @@
     <string name="urlbar_settings">Barre d\'url</string>
     <string name="permission_required">Autorisation requise</string>
     <string name="allow_darknets">Autoriser les darknets</string>
-    <string name="amp2html_allow_darknets_explainer">Autoriser l\'exécution d\'Amp2Html pour les darknets (supporté : %s)</string>
-    <string name="follow_redirects_allow_darknets_explainer">Autoriser les redirections suivantes pour les darknets (supporté : %s)</string>
+    <string name="amp2html_allow_darknets_explainer">Autoriser l\'exécution d\'Amp2Html pour les darknets (supporté : %s)</string>
+    <string name="follow_redirects_allow_darknets_explainer">Autoriser les redirections suivantes pour les darknets (supporté : %s)</string>
     <string name="share">Partager le lien</string>
     <string name="nightly_experiments_card_explainer">Touchez pour découvrir les fonctionnalités en cours de développement</string>
     <string name="experiments_explainer">Essayer les fonctionnalités en cours de développement</string>
@@ -340,9 +340,9 @@
     <string name="reset_app_link_verification_status_subtitle">Tapez ici pour réinitialiser le statut de vérification du lien avec l\'application pour toutes les applications, puis attendez quelques minutes pendant qu\'Android les revérifie. Vous ne recevrez pas de confirmation. Nécessite Shizuku.</string>
     <string name="settings_main_setup_success__button_change_browser">Navigateur par défaut</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
-        <item quantity="one">%d hôte : %s</item>
-        <item quantity="many">%d hôtes : %s</item>
-        <item quantity="other">%d hôtes : %s</item>
+        <item quantity="one">%d hôte : %s</item>
+        <item quantity="many">%d hôtes : %s</item>
+        <item quantity="other">%d hôtes : %s</item>
     </plurals>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="one">%d hôte vérifié</item>
@@ -354,7 +354,7 @@
     <string name="settings_main_setup_success__button_set_default_browser">Définir comme navigateur par défaut</string>
     <string name="resolve_event__resolving_redirects">Résoudre les redirections</string>
     <string name="settings_app_config__description_preferred_browser">Navigateur préféré choisi par l\'utilisateur</string>
-    <string name="delete_log_dialog__subtitle_delete_info">Voulez-vous supprimer cette session de journal ? Cette opération est irréversible !</string>
+    <string name="delete_log_dialog__subtitle_delete_info">Voulez-vous supprimer cette session de journal ? Cette opération est irréversible !</string>
     <string name="enable_amp2html_explainer">Redirige les pages AMP vers leur version Web normale. Cela peut avoir des <annotation url-id="privacy-amp2html">implications liées à la confidentialité</annotation></string>
     <string name="launch_onboarding">Lancer l\'intégration</string>
     <string name="resolve_via_toast">Résolu avec succès</string>
@@ -391,7 +391,7 @@
     <string name="link_handle_failed_text_field_label">Requête</string>
     <string name="retry">Réessayer</string>
     <string name="something_went_wrong">Un problème s\'est produit, veuillez réessayer.</string>
-    <string name="resolve_activity_failure">Impossible de résoudre l\'activité !</string>
+    <string name="resolve_activity_failure">Impossible de résoudre l\'activité !</string>
     <string name="reset_app_link_verification_status">Réinitialiser le statut de vérification du lien de l\'application</string>
     <string name="reset_app_link_verification_status_toast">Re-vérification demandée</string>
     <string name="switch_profile">Activer la commutation de profil</string>
@@ -422,7 +422,7 @@
     <string name="export_log_dialog__text_log_privacy">Pour en savoir plus sur les données potentiellement sensibles dans les fichiers journaux partagés, appuyez sur <annotation url-id="privacy-logs">ici</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Copier dans le presse-papier</string>
     <string name="generic__button_text_cancel">Annuler</string>
-    <string name="crash_viewer__subtitle_app_crashed">Oh mince, ça n’aurait pas dû arriver !</string>
+    <string name="crash_viewer__subtitle_app_crashed">Oh mince, ça n’aurait pas dû arriver !</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Téléchargeur</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet est configuré</string>
@@ -435,7 +435,7 @@
     <string name="export_log_dialog__title_include_throwable">Inclure les journaux de crash</string>
     <string name="export_log_dialog__subtitle_include_throwable">Recommandé, mais ne peut pas être rédigé</string>
     <string name="settings_main_news__title_ui_overhaul">Nouvelle interface utilisateur</string>
-    <string name="settings_main_news__text_ui_overhaul">LinkSheet a reçu une nouvelle couche de peinture !</string>
+    <string name="settings_main_news__text_ui_overhaul">LinkSheet a reçu une nouvelle couche de peinture !</string>
     <string name="settings_main_news__button_read_more">Lire la suite</string>
     <string name="resolve_event__initialized">Initialisé</string>
     <string name="resolve_event__download_check">Vérification de la possibilité de téléchargement</string>
@@ -462,7 +462,7 @@
     <string name="settings_app_config_rules__subtitle_default_rule">Cette règle est utilisée si aucune autre règle ne correspond</string>
     <string name="settings_edit_rule__title_edit_rule">Édition de la règle</string>
     <string name="settings_app_config_rules__text_custom_rules">Règles personnalisées</string>
-    <string name="delete_log_dialog__title_delete_log">Supprimer la session ?</string>
+    <string name="delete_log_dialog__title_delete_log">Supprimer la session ?</string>
     <string name="generic__button_text_delete">Supprimer</string>
     <string name="generic__text_url">Url</string>
     <string name="generic__text_edit">Éditer</string>
@@ -471,7 +471,7 @@
     <string name="settings_profile_switcher__title_profile_switcher">Commutation de profil</string>
     <string name="settings_profile_switcher__divider_configuration">Configuration</string>
     <string name="settings__hint_search">Rechercher</string>
-    <string name="bottom_sheet__event_app_refusal">L\'application cible a refusé de gérer le lien !</string>
+    <string name="bottom_sheet__event_app_refusal">L\'application cible a refusé de gérer le lien !</string>
     <string name="settings_profile_switcher__title_enable_cross_profile">Activer la connexion multiprofil</string>
     <string name="settings_profile_switcher__text_enable_cross_profile">Appuyez pour connecter LinkSheet à son homologue dans votre profil secondaire</string>
     <string name="settings_profile_switcher__divider_current_profile">Profil actuel</string>
@@ -485,9 +485,9 @@
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Configuration supplémentaire requise</string>
     <string name="app_host_dialog__title_hosts">Hôtes par défaut</string>
     <string name="generic__button_text_save">Sauvegarder</string>
-    <string name="app_host_dialog__text_no_hosts">Aucun hôte n\'a été défini pour s\'ouvrir par défaut dans cette application !</string>
+    <string name="app_host_dialog__text_no_hosts">Aucun hôte n\'a été défini pour s\'ouvrir par défaut dans cette application !</string>
     <string name="generic__button_text_close">Fermer</string>
-    <string name="follow_only_known_trackers_explainer">Essayez de suivre les redirections uniquement lorsque l\'hôte est connu pour être un tracker/une redirection. Si l\'option « Suivre les redirections via un service externe » est activée, cette option sera toujours activée</string>
+    <string name="follow_only_known_trackers_explainer">Essayez de suivre les redirections uniquement lorsque l\'hôte est connu pour être un tracker/une redirection. Si l\'option « Suivre les redirections via un service externe » est activée, cette option sera toujours activée</string>
     <string name="follow_only_known_trackers">Suivez uniquement les trackers connus</string>
     <string name="linksheet_download">Téléchargement via LinkSheet</string>
     <string name="feature_flags">Drapeaux de caractéristiques</string>
@@ -500,15 +500,15 @@
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Gestion des liens autorisée</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Traitement des liens non autorisé</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Inspiration de conception</string>
-    <string name="export_log_dialog__text_log_info">Configurer les paramètres de partage pour le journal capturé à : <font face="monospace">%s</font></string>
-    <string name="settings_debug_log_viewer__title_log_captured_at">Affichage du journal capturé à : %s</string>
+    <string name="export_log_dialog__text_log_info">Configurer les paramètres de partage pour le journal capturé à : <font face="monospace">%s</font></string>
+    <string name="settings_debug_log_viewer__title_log_captured_at">Affichage du journal capturé à : %s</string>
     <string name="export_log_dialog__title_redact_log">Rédiger le journal</string>
     <string name="settings_main_setup_success__button_link_handlers">Gestionnaires de liens</string>
     <string name="resolve_event__applying_link_modifiers">Application des modificateurs de lien</string>
     <string name="resolve_event__unamping_link">Dé-ampé le lien</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi est connu pour restreindre fortement les applications de manière imprévisible, ce qui fait que LinkSheet ne fonctionne pas correctement.\nAppuyez sur le bouton ci-dessous, puis autorisez la permission \"Ouvrir de nouvelles fenêtres en arrière-plan\"</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Demander des autorisations</string>
-    <string name="settings_main_miui_compat__text_request_failed">Échec de la demande d\'autorisation !</string>
+    <string name="settings_main_miui_compat__text_request_failed">Échec de la demande d\'autorisation !</string>
     <string name="generic__button_learn_more">En savoir plus</string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">Changements de comportements</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">Certaines fonctionnalités expérimentales ont été supprimées et sont désormais appliquées par défaut.</string>
@@ -529,13 +529,13 @@
     <string name="settings_profile_switcher__title_no_profile">Aucun profil(s) disponible</string>
     <string name="settings_home__title_clipboard_card">Carte du presse-papiers</string>
     <string name="settings_home__text_clipboard_card">Afficher le contenu actuel du presse-papiers sur la page d\'accueil s\'il s\'agit d\'une url</string>
-    <string name="export_settings__text_failure">Échec de l\'exportation des paramètres !</string>
-    <string name="import_settings__text_success">Importé !</string>
-    <string name="import_settings__text_failure">Échec de l\'importation des paramètres !</string>
-    <string name="settings_remote_config__title_dialog">Activer la configuration à distance ?</string>
-    <string name="bottom_sheet__text_launch_failure_other">Lancement échoué !</string>
-    <string name="export_settings__text_success">Exporté !</string>
-    <string name="bottom_sheet__text_launch_failure_unknown">Échec de lancement inconnu !</string>
+    <string name="export_settings__text_failure">Échec de l\'exportation des paramètres !</string>
+    <string name="import_settings__text_success">Importé !</string>
+    <string name="import_settings__text_failure">Échec de l\'importation des paramètres !</string>
+    <string name="settings_remote_config__title_dialog">Activer la configuration à distance ?</string>
+    <string name="bottom_sheet__text_launch_failure_other">Lancement échoué !</string>
+    <string name="export_settings__text_success">Exporté !</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">Échec de lancement inconnu !</string>
     <string name="generic__button_open_external">Ouverture externe</string>
     <string name="settings_remote_config__text_content">LinkSheet peut mettre à jour automatiquement les ressources de configuration et de documentation internes en se connectant à son serveur de configuration. Pour en savoir plus, cliquez <annotation url-id="github.linksheet.wiki.privacy.remote-config">ici</annotation>.</string>
     <string name="generic__button_text_enable">Activer</string>
@@ -543,8 +543,8 @@
     <string name="settings_language__dialog_title">Langue de l\'app</string>
     <string name="settings_language__text_system_language_with_language">%s (langue du système)</string>
     <string name="settings_language__text_system_language">Langue du système</string>
-    <string name="bottom_sheet__text_launch_illegal">Tentative de lancement illégale !</string>
-    <string name="bottom_sheet__text_launch_not_allowed">Lancement non autorisé !</string>
+    <string name="bottom_sheet__text_launch_illegal">Tentative de lancement illégale !</string>
+    <string name="bottom_sheet__text_launch_not_allowed">Lancement non autorisé !</string>
     <string name="settings_verified_link_handler__text_hosts">Hôtes</string>
     <string name="settings_verified_link_handler__title_details">Détails</string>
     <string name="settings_sql__text_query">Requête</string>

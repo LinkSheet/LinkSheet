@@ -4,11 +4,7 @@
     <string name="settings_shizuku__text_shizuku">Configure Shizuku-enabled features</string>
     <string name="settings_shizuku__title_not_installed">Shizuku is not installed</string>
     <string name="settings_shizuku__text_not_installed">Tap to open installation instructions</string>
-    <string name="settings_shizuku__text_info">Shizuku is a toolkit that leverages (wireless-) ADB/root to allow other
-        apps access to privileged system functionality only available via the privileged shell user.\n\nLinkSheet uses
-        Shizuku to be able to toggle link-handling for any given app without the user having to open settings and do it
-        themselves.
-    </string>
+    <string name="settings_shizuku__text_info">Shizuku is a toolkit that leverages (wireless-) ADB/root to allow other apps access to privileged system functionality only available via the privileged shell user.\n\nLinkSheet uses Shizuku to be able to toggle link-handling for any given app without the user having to open settings and do it themselves.</string>
     <string name="settings_shizuku__title_missing_permission">Missing permission</string>
     <string name="settings_shizuku__text_missing_permission">Tap to request Shizuku permission</string>
     <string name="settings_shizuku__title_not_running">Shizuku is not running</string>

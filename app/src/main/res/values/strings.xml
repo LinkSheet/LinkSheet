@@ -90,7 +90,6 @@
     <string name="redirect_resolve_type_local_cache">local cache</string>
     <string name="redirect_resolve_type_remote">remote server</string>
     <string name="redirect_resolve_type_local">local resolver</string>
-
     <string name="add">Add</string>
     <string name="select_an_app">Select an app</string>
     <string name="close">Close</string>
@@ -368,7 +367,7 @@
     <string name="reset_app_link_verification_status_subtitle">Tap here to reset the app-link verification status of all apps, then wait a few minutes while Android re-verifies them. You will not receive a confirmation. Requires Shizuku.</string>
     <string name="reset_app_link_verification_status_toast">Re-verification requested</string>
     <string name="switch_profile">Enable profile switching</string>
-    <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-) profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -> Special app access ->Connected work &amp; personal apps</string>
+    <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-) profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -&gt; Special app access -&gt;Connected work &amp; personal apps</string>
     <string name="settings_bottom_sheet__text_profile_switcher">Displays a button in the bottom sheet to open the url in another profile</string>
     <string name="customization">Customization</string>
     <string name="build_info">Build info</string>
@@ -521,9 +520,7 @@
     <string name="settings_profile_switcher__title_no_profile">No profile(s) available</string>
     <string name="settings_profile_switcher__text_no_profile">This feature is only available if a (work-) profile has been set up on your device.</string>
     <string name="settings_home__title_clipboard_card">Clipboard card</string>
-    <string name="settings_home__text_clipboard_card">Show the current clipboard content on the home page if it is a
-        url
-    </string>
+    <string name="settings_home__text_clipboard_card">Show the current clipboard content on the home page if it is a url</string>
     <plurals name="settings_verified_link_handlers__text_app_host_default_host">
         <item quantity="one">%d default host</item>
         <item quantity="other">%d default hosts</item>

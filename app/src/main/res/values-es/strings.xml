@@ -448,8 +448,7 @@
     <string name="generic__button_text_delete">Eliminar</string>
     <string name="settings_main_setup_success__button_set_default_browser">Establecer como navegador predeterminado</string>
     <string name="settings_about__divider_external_versions">Versiones externas</string>
-    <string name="settings_credits__app_name_seal" translatable="false">
-Seal</string>
+    <string name="settings_credits__app_name_seal" translatable="false">Seal</string>
     <string name="export_log_dialog__text_log_info">Configurar los ajustes para compartir del registro almacenado en: <font face="monospace">%s</font></string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Viendo el registro almacenado en: %s</string>
     <string name="export_log_dialog__subtitle_include_throwable">Recomendado, pero no puede ser editado</string>

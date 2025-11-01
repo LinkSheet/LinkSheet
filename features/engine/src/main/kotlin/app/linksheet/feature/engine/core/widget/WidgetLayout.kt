@@ -1,7 +1,7 @@
 package app.linksheet.feature.engine.core.widget
 
 import app.linksheet.feature.engine.core.context.AppRoleId
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import kotlin.collections.toMutableMap
 
 

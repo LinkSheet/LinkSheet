@@ -1,6 +1,6 @@
 package app.linksheet.feature.engine.core.widget
 
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 
 sealed interface Widget {
 }

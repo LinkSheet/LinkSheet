@@ -9,7 +9,7 @@ import fe.kotlin.extension.iterable.filterIfPredicateIsNotNull
 import fe.kotlin.`typealias`.KtPredicate
 import fe.linksheet.extension.android.queryAllResolveInfos
 import fe.linksheet.extension.android.toDisplayActivityInfos
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 
 @RequiresApi(Build.VERSION_CODES.S)
 fun DomainVerificationManager.getAppHosts(packageName: String) = getDomainVerificationUserState(

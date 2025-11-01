@@ -1,5 +1,8 @@
 package fe.linksheet.feature.app
 
+import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfoStatus
+import app.linksheet.feature.app.AppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.util.RefactorGlue

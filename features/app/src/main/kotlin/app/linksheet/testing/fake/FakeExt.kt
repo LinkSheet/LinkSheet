@@ -7,10 +7,10 @@ import app.linksheet.testing.util.PackageInfoFake
 import app.linksheet.testing.util.firstActivityResolveInfo
 import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.icon.IconPainter
-import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.feature.app.DomainVerificationAppInfo
-import fe.linksheet.feature.app.LinkHandling
-import fe.linksheet.feature.app.PackageIdHelper
+import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.LinkHandling
+import app.linksheet.feature.app.PackageIdHelper
 
 fun PackageInfoFake.toActivityAppInfo(
     label: String,

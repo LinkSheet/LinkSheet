@@ -18,8 +18,8 @@ import fe.linksheet.extension.compose.getAppHosts
 import fe.linksheet.extension.compose.getDisplayActivityInfos
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
-import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.PackageService
 import fe.linksheet.feature.app.ActivityAppInfoGlue
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository

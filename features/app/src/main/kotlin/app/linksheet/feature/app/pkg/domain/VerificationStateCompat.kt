@@ -1,4 +1,4 @@
-package fe.linksheet.feature.app.`package`.domain
+package app.linksheet.feature.app.pkg.domain
 
 interface VerificationStateCompat
 

@@ -3,7 +3,7 @@ package fe.linksheet.module.resolver.util
 import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
 import fe.linksheet.extension.android.activityDescriptor
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.FilteredBrowserList
 import kotlin.time.Clock

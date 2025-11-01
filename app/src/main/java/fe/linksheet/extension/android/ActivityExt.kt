@@ -7,7 +7,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.widget.Toast
 import androidx.annotation.StringRes
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.resolver.DisplayActivityInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

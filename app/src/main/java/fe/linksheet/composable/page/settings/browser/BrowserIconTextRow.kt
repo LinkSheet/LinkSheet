@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import app.linksheet.compose.theme.HkGroteskFontFamily
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 
 @Composable
 fun BrowserIconTextRow(

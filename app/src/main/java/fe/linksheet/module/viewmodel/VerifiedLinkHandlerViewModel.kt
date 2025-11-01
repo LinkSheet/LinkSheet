@@ -2,8 +2,8 @@ package fe.linksheet.module.viewmodel
 
 import android.content.Intent
 import fe.composekit.core.AndroidVersion
-import fe.linksheet.feature.app.DomainVerificationAppInfo
-import fe.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.PackageService
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository

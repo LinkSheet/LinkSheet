@@ -32,7 +32,7 @@ import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.composable.util.defaultRoundedCornerShape
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 
 
 data class GridItem(val info: ActivityAppInfo, val privateBrowsingBrowser: Browser? = null) {

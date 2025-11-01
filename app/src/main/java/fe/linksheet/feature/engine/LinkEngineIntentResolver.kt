@@ -21,7 +21,7 @@ import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.toAndroidUri
 import fe.linksheet.extension.toStdUrl
-import fe.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.PackageService
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.PreferredApp

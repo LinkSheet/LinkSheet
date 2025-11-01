@@ -38,8 +38,8 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import fe.linksheet.feature.app.DomainVerificationAppInfo
-import fe.linksheet.feature.app.LinkHandling
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.LinkHandling
 import fe.linksheet.util.drawBitmap
 
 @Composable

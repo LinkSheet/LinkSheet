@@ -35,7 +35,7 @@ import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
 import app.linksheet.compose.theme.HkGroteskFontFamily
 import app.linksheet.feature.downloader.DownloadCheckResult
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.feature.profile.CrossProfile
 import fe.linksheet.feature.profile.ProfileStatus

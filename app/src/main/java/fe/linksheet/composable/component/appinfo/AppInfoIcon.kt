@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import fe.composekit.component.icon.AppIconImage
 import fe.linksheet.composable.component.appinfo.AppInfoIconDefaults.DefaultIconSize
-import fe.linksheet.feature.app.AppInfo
+import app.linksheet.feature.app.AppInfo
 
 object AppInfoIconDefaults {
     val DefaultIconSize = 32.dp

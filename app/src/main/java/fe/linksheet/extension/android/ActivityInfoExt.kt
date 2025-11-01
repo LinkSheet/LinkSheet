@@ -2,7 +2,7 @@ package fe.linksheet.extension.android
 
 import android.content.ComponentName
 import android.content.pm.ActivityInfo
-import fe.linksheet.feature.app.PackageIdHelper
+import app.linksheet.feature.app.PackageIdHelper
 
 @Deprecated(
     message = "Use extension value",

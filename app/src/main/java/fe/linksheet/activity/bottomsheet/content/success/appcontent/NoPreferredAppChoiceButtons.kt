@@ -6,7 +6,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ChoiceButtonInteraction
 import fe.linksheet.activity.bottomsheet.content.success.ChoiceButtons
 import fe.linksheet.activity.bottomsheet.Interaction
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 
 @Composable
 fun NoPreferredAppChoiceButtons(

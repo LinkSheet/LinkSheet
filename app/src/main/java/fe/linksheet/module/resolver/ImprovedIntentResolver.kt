@@ -18,8 +18,8 @@ import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.toStdUrl
-import fe.linksheet.feature.app.PackageService
-import fe.linksheet.feature.app.labelSorted
+import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.labelSorted
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.PreferredApp

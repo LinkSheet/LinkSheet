@@ -17,7 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.preview.PreviewDebugProvider
 import fe.linksheet.activity.bottomsheet.Interaction
 import app.linksheet.compose.debugBorder
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import app.linksheet.compose.debug.LocalUiDebug
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)

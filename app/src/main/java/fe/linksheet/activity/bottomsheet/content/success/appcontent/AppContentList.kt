@@ -32,7 +32,7 @@ import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.Interaction
 import app.linksheet.compose.debugBorder
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import app.linksheet.compose.debug.LocalUiDebug
 import androidx.core.net.toUri
 import app.linksheet.feature.browser.Browser

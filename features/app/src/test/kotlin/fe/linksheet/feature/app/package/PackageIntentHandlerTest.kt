@@ -1,8 +1,10 @@
-package fe.linksheet.feature.app.`package`
+package app.linksheet.feature.app.pkg
 
 import android.net.Uri
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.feature.app.pkg.DefaultPackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageIntentHandler
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.TurretPackageInfoFake
 import app.linksheet.testing.fake.YatsePackageInfoFake
@@ -11,7 +13,6 @@ import app.linksheet.testing.util.flatResolveInfos
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isNotNull
-import fe.linksheet.testlib.core.JunitTest
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config

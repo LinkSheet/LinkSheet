@@ -45,8 +45,8 @@ import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import fe.linksheet.feature.app.DomainVerificationAppInfo
-import fe.linksheet.feature.app.LinkHandling
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.LinkHandling
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
 import fe.linksheet.util.drawBitmap

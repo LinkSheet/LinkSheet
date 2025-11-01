@@ -32,7 +32,7 @@ import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import app.linksheet.compose.extension.collectOnIO
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction

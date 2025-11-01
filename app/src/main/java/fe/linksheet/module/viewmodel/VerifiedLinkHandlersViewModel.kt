@@ -16,10 +16,10 @@ import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhTypeFi
 import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
-import fe.linksheet.feature.app.AppInfo
-import fe.linksheet.feature.app.DomainVerificationAppInfo
-import fe.linksheet.feature.app.LinkHandling
-import fe.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.AppInfo
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.LinkHandling
+import app.linksheet.feature.app.PackageService
 import fe.linksheet.feature.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat

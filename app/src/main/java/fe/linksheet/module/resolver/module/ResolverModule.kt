@@ -10,7 +10,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.feature.engine.DefaultLinkEngineIntentResolver
 import fe.linksheet.feature.engine.LinkEngineIntentResolver
-import fe.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.PackageService
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences

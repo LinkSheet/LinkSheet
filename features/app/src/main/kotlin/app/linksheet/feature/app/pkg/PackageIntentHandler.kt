@@ -1,4 +1,4 @@
-package fe.linksheet.feature.app.`package`
+package app.linksheet.feature.app.pkg
 
 import android.content.Intent
 import android.content.IntentFilter

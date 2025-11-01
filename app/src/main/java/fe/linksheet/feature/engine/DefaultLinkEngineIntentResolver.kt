@@ -19,7 +19,7 @@ import app.linksheet.feature.engine.core.resolver.followredirects.FollowRedirect
 import app.linksheet.feature.engine.core.resolver.followredirects.FollowRedirectsLocalSource
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import fe.composekit.lifecycle.network.core.NetworkStateService
-import fe.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.PackageService
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository

@@ -21,7 +21,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
 import fe.linksheet.composable.util.*
 import app.linksheet.compose.extension.items
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

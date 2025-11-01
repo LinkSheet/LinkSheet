@@ -2,7 +2,7 @@ package fe.linksheet.module.viewmodel.base
 
 import android.app.Application
 import fe.kotlin.extension.map.filterIf
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.Job

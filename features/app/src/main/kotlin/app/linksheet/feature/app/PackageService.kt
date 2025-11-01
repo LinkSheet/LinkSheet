@@ -1,18 +1,18 @@
-package fe.linksheet.feature.app
+package app.linksheet.feature.app
 
 import android.content.pm.*
 import android.content.pm.verify.domain.DomainVerificationUserState
 import androidx.annotation.VisibleForTesting
 import fe.android.compose.icon.BitmapIconPainter
 import fe.linksheet.util.extension.android.info
-import fe.linksheet.feature.app.`package`.PackageIconLoader
-import fe.linksheet.feature.app.`package`.PackageIntentHandler
-import fe.linksheet.feature.app.`package`.PackageLabelService
-import fe.linksheet.feature.app.`package`.PackageLauncherService
-import fe.linksheet.feature.app.`package`.domain.DomainVerificationManagerCompat
-import fe.linksheet.feature.app.`package`.domain.VerificationBrowserState
-import fe.linksheet.feature.app.`package`.domain.VerificationState
-import fe.linksheet.feature.app.`package`.domain.VerificationStateCompat
+import app.linksheet.feature.app.pkg.PackageIconLoader
+import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageLabelService
+import app.linksheet.feature.app.pkg.PackageLauncherService
+import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
+import app.linksheet.feature.app.pkg.domain.VerificationBrowserState
+import app.linksheet.feature.app.pkg.domain.VerificationState
+import app.linksheet.feature.app.pkg.domain.VerificationStateCompat
 import fe.linksheet.util.ApplicationInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

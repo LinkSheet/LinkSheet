@@ -16,7 +16,7 @@ import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.feature.app.`package`.PackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageIntentHandler
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getFirstText
 import fe.composekit.extension.setText

@@ -33,11 +33,11 @@ import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.feature.app.PackageService
-import fe.linksheet.feature.app.`package`.PackageIntentHandler
-import fe.linksheet.feature.app.`package`.PackageLabelService
-import fe.linksheet.feature.app.`package`.PackageLauncherService
-import fe.linksheet.feature.app.`package`.domain.DomainVerificationManagerCompat
+import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageLabelService
+import app.linksheet.feature.app.pkg.PackageLauncherService
+import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import fe.linksheet.feature.systeminfo.BuildConstants
 import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService

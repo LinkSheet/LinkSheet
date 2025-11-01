@@ -1,4 +1,4 @@
-package fe.linksheet.feature.app.`package`.domain
+package app.linksheet.feature.app.pkg.domain
 
 import android.content.Context
 import android.content.pm.verify.domain.DomainVerificationManager

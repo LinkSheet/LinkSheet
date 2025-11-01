@@ -6,7 +6,7 @@ import app.linksheet.feature.browser.Browser
 import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 
 @Composable
 fun AppContentRoot(

@@ -19,7 +19,7 @@ import fe.linksheet.composable.util.CheckboxRow
 import app.linksheet.compose.extension.mapHelper
 import app.linksheet.compose.util.mapState
 import fe.linksheet.extension.compose.searchHeader
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 
 @Composable

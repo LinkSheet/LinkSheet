@@ -15,7 +15,7 @@ plugins {
 }
 
 android {
-    namespace = "fe.linksheet.feature.app"
+    namespace = "app.linksheet.feature.app"
     compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {

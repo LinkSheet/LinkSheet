@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import app.linksheet.feature.browser.Browser
 import fe.linksheet.interconnect.LinkSheetConnector
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.util.AndroidUri
 import fe.linksheet.util.Scheme
 

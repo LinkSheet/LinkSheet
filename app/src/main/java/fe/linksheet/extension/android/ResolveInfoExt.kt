@@ -1,12 +1,11 @@
 package fe.linksheet.extension.android
 
 import android.content.Context
-import android.content.pm.ComponentInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import fe.linksheet.feature.app.ActivityAppInfo
-import fe.linksheet.feature.app.PackageService
-import fe.linksheet.feature.app.labelSorted
+import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.labelSorted
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

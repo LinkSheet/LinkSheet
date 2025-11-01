@@ -1,4 +1,4 @@
-package fe.linksheet.feature.app
+package app.linksheet.feature.app
 
 import android.content.ComponentName
 import android.content.pm.ActivityInfo

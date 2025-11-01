@@ -23,7 +23,7 @@ import fe.linksheet.activity.bottomsheet.*
 import fe.linksheet.util.extension.android.getSystemServiceOrThrow
 import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger
-import fe.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.preference.app.AppPreferenceRepository

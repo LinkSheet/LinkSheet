@@ -32,7 +32,7 @@
     <string name="display_grid_layout">Układ siatki</string>
     <string name="display_grid_layout_explainer">Pokazuj układ siatki zamiast listy</string>
     <string name="browser_status">Status przeglądarki</string>
-    <string name="app_browsers">Aplikacje</string>
+    <string name="app_browsers">Aplikacje i przeglądarki</string>
     <string name="bottom_sheet">Dolny panel</string>
     <string name="settings">Ustawienia</string>
     <string name="disabled">Wyłączone</string>
@@ -581,4 +581,6 @@
     <string name="settings_links_preview__subtitle_preview_skip_browser">Wyłącz podgląd, jeśli odsyłaczem jest przeglądarka</string>
     <string name="settings_scenario__title_scenarios">Scenariusze</string>
     <string name="settings_scenario__text_scenarios">Konfiguruj scenariusze</string>
+    <string name="settings_scenario__text_data_type">Typ danych</string>
+    <string name="settings_scenario__text_value">Wartość</string>
 </resources>

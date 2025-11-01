@@ -97,7 +97,7 @@
     <string name="enable_downloader_explainer">當網址直接連結至檔案時，在底部功能表顯示一個「下載」按鈕。這可能引發<annotation url-id="privacy-downloader">隱私顧慮</annotation></string>
     <string name="downloader_url_mime_type">採用網址提供的 MIME 類型</string>
     <string name="downloader_url_mime_type_explainer">若網址結尾為副檔名 (例如「.jpg」)，則將該類型套用至下載的檔案。</string>
-    <string name="app_name">LinkSheet</string>
+    <string name="app_name" translatable="false">LinkSheet</string>
     <string name="in_app_browser">程式內瀏覽</string>
     <string name="in_app_browser_subtitle">覆寫程式內瀏覽設定</string>
     <string name="use_app_settings">預設</string>

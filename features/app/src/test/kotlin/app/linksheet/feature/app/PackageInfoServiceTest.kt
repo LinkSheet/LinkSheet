@@ -1,17 +1,18 @@
-package fe.linksheet.feature.app
+package app.linksheet.feature.app
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.testing.fake.ImageFakes
-import app.linksheet.testing.fake.PackageInfoFakes
-import assertk.assertThat
-import assertk.assertions.isNotNull
+import app.linksheet.feature.app.PackageService
 import app.linksheet.feature.app.pkg.DefaultPackageIconLoader
 import app.linksheet.feature.app.pkg.DefaultPackageIntentHandler
 import app.linksheet.feature.app.pkg.DefaultPackageLabelService
 import app.linksheet.feature.app.pkg.DefaultPackageLauncherService
 import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.pkg.domain.VerificationBrowserState
+import app.linksheet.testing.fake.ImageFakes
+import app.linksheet.testing.fake.PackageInfoFakes
+import assertk.assertThat
+import assertk.assertions.isNotNull
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config

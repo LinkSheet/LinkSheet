@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package app.linksheet.feature.engine.core.resolver.followredirects
 
 import android.os.Build
@@ -23,6 +25,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
@@ -35,6 +40,7 @@ internal class FollowRedirectsLinkResolverTest : BaseUnitTest {
     @get:Rule
     private val rule = EngineDatabaseTestRule(applicationContext)
 
+    private val timestamp by lazy { unixMillisOf(2025) }
     private val cacheRepository by lazy {
         CacheRepository(
             rule.database.htmlCacheDao(),
@@ -42,7 +48,11 @@ internal class FollowRedirectsLinkResolverTest : BaseUnitTest {
             rule.database.resolvedUrlCacheDao(),
             rule.database.resolveTypeDao(),
             rule.database.urlEntryDao(),
-            now = { unixMillisOf(2025) }
+            clock = object : Clock {
+                override fun now(): Instant {
+                    return Instant.fromEpochMilliseconds(timestamp)
+                }
+            }
         )
     }
 
@@ -74,7 +84,7 @@ internal class FollowRedirectsLinkResolverTest : BaseUnitTest {
             .isNotNull()
             .all {
                 prop(UrlEntry::url).isEqualTo(SHORT_URL.toString())
-                prop(UrlEntry::timestamp).isEqualTo(unixMillisOf(2025))
+                prop(UrlEntry::timestamp).isEqualTo(timestamp)
             }
     }
 }

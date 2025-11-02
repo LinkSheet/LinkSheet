@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package app.linksheet.feature.engine.core.resolver.amp2html
 
 import android.os.Build
@@ -31,6 +33,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
@@ -52,7 +56,7 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
             rule.database.resolvedUrlCacheDao(),
             rule.database.resolveTypeDao(),
             rule.database.urlEntryDao(),
-            now = { unixMillisOf(2025) }
+            clock = Clock.System
         )
     }
 

@@ -1,4 +1,4 @@
-package fe.linksheet.feature.app
+package app.linksheet.feature.app
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4

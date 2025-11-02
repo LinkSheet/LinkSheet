@@ -42,6 +42,7 @@ import fe.linksheet.feature.systeminfo.BuildConstants
 import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.feature.systeminfo.SystemProperties
+import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
@@ -189,7 +190,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             CoroutineDispatcher::class
         ),
         definition<LogTextSettingsViewModel>(),
-        definition<MarkdownViewModel>(Request::class),
+        definition<MarkdownViewModel>(Request::class, WikiCacheRepository::class),
         definition<LibRedirectServiceSettingsViewModel>(),
         definition<BottomSheetViewModel>(
             ImageLoader::class,

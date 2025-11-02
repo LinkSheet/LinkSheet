@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTime::class)
+
 package app.linksheet.feature.engine.core.fetcher.preview
 
 import android.os.Build
@@ -17,6 +19,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 //TODO: Needs to be moved to [feature-engine] module, but has dependency on [DatabaseTestRule], which requires the application database
 @RunWith(AndroidJUnit4::class)
@@ -36,7 +40,7 @@ internal class PreviewLinkFetcherTest : BaseUnitTest {
             rule.database.resolvedUrlCacheDao(),
             rule.database.resolveTypeDao(),
             rule.database.urlEntryDao(),
-            now = { unixMillisOf(2025) }
+            clock = Clock.System
         )
     }
 

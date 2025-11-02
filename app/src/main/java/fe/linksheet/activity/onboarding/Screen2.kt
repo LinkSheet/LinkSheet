@@ -1,5 +1,6 @@
 package fe.linksheet.activity.onboarding
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -7,21 +8,19 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import dev.zwander.shared.ShizukuUtil
 import fe.linksheet.R
 import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.extension.compose.focusGainedEvents
 import fe.linksheet.module.shizuku.ShizukuStatus
-import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.util.ShizukuDownload
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,7 +34,7 @@ private val statusMap = mapOf(
 
 @Composable
 fun Screen2(padding: PaddingValues, onNextClick: () -> Unit) {
-    val activity = LocalContext.currentActivity()
+    val activity = LocalActivity.current!!
     val uriHandler = LocalUriHandler.current
 
     var shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(activity)) }

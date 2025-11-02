@@ -11,7 +11,7 @@ import fe.linksheet.R
 object AppSignature {
     private lateinit var buildType: SignatureBuildType
 
-    enum class SignatureBuildType(val signature: Signature?, @StringRes val stringRes: Int) {
+    enum class SignatureBuildType(val signature: Signature?, @param:StringRes val stringRes: Int) {
         Manual(Signature._1fexd, R.string.manual_build),
         CI(Signature._1fexdCI, R.string.github_pipeline_build),
         Unofficial(null, R.string.built_by_error),

@@ -15,7 +15,7 @@ import fe.android.span.helper.composable.createAnnotatedString
 
 @Deprecated(
     message = "Use new API",
-    replaceWith = ReplaceWith("createAnnotatedString(id, linkStyle)", "fe.android.span.helper.composable")
+    replaceWith = ReplaceWith("createAnnotatedString(id, style = linkStyle)", "fe.android.span.helper.composable")
 )
 @Composable
 fun rememberAnnotatedStringResource(

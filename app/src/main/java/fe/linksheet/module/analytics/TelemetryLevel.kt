@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import fe.android.preference.helper.OptionTypeMapper
 import fe.linksheet.R
 
-sealed class TelemetryLevel(@StringRes val titleId: Int, @StringRes val descriptionId: Int) {
+sealed class TelemetryLevel(@param:StringRes val titleId: Int, @param:StringRes val descriptionId: Int) {
     companion object : OptionTypeMapper<TelemetryLevel, String>({ it.titleId.toString() }, {
         arrayOf(Disabled, Minimal, Standard, Exhaustive)
     })

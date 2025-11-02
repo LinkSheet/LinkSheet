@@ -12,14 +12,13 @@ import androidx.core.content.getSystemService
 import androidx.navigation.NavDestination
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
-import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.module.analytics.AnalyticsEvent
-import fe.linksheet.module.analytics.BaseAnalyticsService
-import fe.linksheet.module.analytics.TelemetryLevel
 import app.linksheet.feature.app.pkg.PackageIntentHandler
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getFirstText
 import fe.composekit.extension.setText
+import fe.linksheet.module.analytics.AnalyticsEvent
+import fe.linksheet.module.analytics.BaseAnalyticsService
+import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.preference.SensitivePreference
@@ -29,8 +28,10 @@ import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.workmanager.WorkDelegatorService
+import fe.linksheet.util.extension.android.tryStartActivity
 import fe.linksheet.web.UriUtil
 import fe.std.coroutines.RefreshableStateFlow
+import fe.std.result.isSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -113,7 +114,7 @@ class MainViewModel(
 
     fun launchIntent(activity: Activity?, intent: SettingsIntent): Boolean {
         if (activity == null) return false
-        return activity.startActivityWithConfirmation(Intent(intent.action))
+        return activity.tryStartActivity(Intent(intent.action)).isSuccess()
     }
 
     private fun tryParseUriString(uriStr: String): Uri? {
@@ -125,8 +126,8 @@ class MainViewModel(
     }
 
     fun updateTelemetryLevel(level: TelemetryLevel) {
-        telemetryLevel.update(level)
-        telemetryShowInfoDialog.update(false)
+        telemetryLevel(level)
+        telemetryShowInfoDialog(false)
         analyticsService.changeLevel(level)
     }
 

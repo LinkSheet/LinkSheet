@@ -7,9 +7,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.compose.runtime.*
+import fe.composekit.intent.buildIntent
 import fe.linksheet.R
 import fe.linksheet.extension.android.getApplicationInfoCompat
-import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.util.extension.android.tryStartActivity
+import fe.std.result.isFailure
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
 import kotlin.coroutines.resume
@@ -62,11 +64,11 @@ object ShizukuUtil {
     }
 
     fun startManager(activity: Activity) {
-        val success = activity.startActivityWithConfirmation(Intent(Intent.ACTION_VIEW).apply {
+        val success = activity.tryStartActivity(buildIntent(Intent.ACTION_VIEW) {
             component = MANAGER_COMPONENT
         })
 
-        if (!success) {
+        if (success.isFailure()) {
             Toast.makeText(activity, R.string.shizuku_manager_start_failed, Toast.LENGTH_LONG).show()
         }
     }

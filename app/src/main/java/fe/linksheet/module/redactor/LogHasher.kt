@@ -126,14 +126,16 @@ sealed interface HashProcessor<T> {
             stringBuilder: StringBuilder,
             input: AppSelectionHistory,
             mac: Mac,
-        ) = stringBuilder.commaSeparated {
-            item {
-                append("host=")
-                UrlProcessor.process(stringBuilder, input.host, mac)
-            }
+        ): StringBuilder {
+            return stringBuilder.commaSeparated {
+                item {
+                    append("host=")
+                    UrlProcessor.process(stringBuilder, input.host, mac)
+                }
 
-            item {
-                append("lastUsed=", input.lastUsed)
+                item {
+                    append("lastUsed=", input.lastUsed)
+                }
             }
         }
     }
@@ -175,7 +177,7 @@ sealed interface HashProcessor<T> {
             return stringBuilder.wrapped(Bracket.Square) {
                 separated(Separator.Comma) {
                     input.forEach {
-                        item { DisplayActivityInfoProcessor.process(stringBuilder, it, mac) }
+//                        item { DisplayActivityInfoProcessor.process(stringBuilder, it, mac) }
                     }
                 }
             }

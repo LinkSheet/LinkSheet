@@ -68,8 +68,8 @@ private object CrossProfileAppsCompatImpl {
             return crossProfileApps.createRequestInteractAcrossProfilesIntent()
         }
 
-        override fun startActivity(intent: Intent, userHandle: UserHandle, activity: Activity): Boolean {
-            crossProfileApps.startActivity(intent, userHandle, activity)
+        override fun startActivity(switchIntent: Intent, userHandle: UserHandle, activity: Activity): Boolean {
+            crossProfileApps.startActivity(switchIntent, userHandle, activity)
             return true
         }
     }

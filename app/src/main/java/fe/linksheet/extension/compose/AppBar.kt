@@ -82,7 +82,7 @@ fun LargeTopAppBar(
         modifier = modifier,
         navigationIcon = navigationIcon,
         actions = actions,
-        colors = TopAppBarDefaults.largeTopAppBarColors(),
+        colors = TopAppBarDefaults.topAppBarColors(),
         containerColor = containerColor,
         windowInsets = windowInsets,
         maxHeight = 200.0.dp,

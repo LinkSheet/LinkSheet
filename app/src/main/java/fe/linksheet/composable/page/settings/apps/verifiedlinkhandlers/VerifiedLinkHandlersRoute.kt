@@ -12,8 +12,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.compose.extension.collectOnIO
+import app.linksheet.compose.extension.listHelper
+import app.linksheet.compose.util.listState
 import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -25,9 +28,6 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.extension.compose.ObserveStateChange
-import app.linksheet.compose.extension.listHelper
-import app.linksheet.compose.util.listState
-import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.navigation.VlhAppRoute

@@ -49,7 +49,7 @@ import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
-sealed class TapType(@StringRes val headline: Int, @StringRes val dialogTitle: Int) : GroupValueProvider<Int> {
+sealed class TapType(@param:StringRes val headline: Int, @param:StringRes val dialogTitle: Int) : GroupValueProvider<Int> {
     override val key: Int = headline
 
     data object Single :

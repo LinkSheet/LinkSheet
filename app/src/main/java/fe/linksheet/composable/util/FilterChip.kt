@@ -11,12 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import fe.kotlin.extension.iterator.forEachWithInfo
 import fe.kotlin.extension.iterator.withElementInfo
 
 data class FilterChipValue<T>(
     val value: T,
-    @StringRes val string: Int,
+    @param:StringRes val string: Int,
     val icon: ImageVector? = null
 )
 

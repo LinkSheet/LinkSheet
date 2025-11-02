@@ -10,17 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import fe.android.span.helper.DefaultHyperLinkStyle
+import fe.android.span.helper.composable.createAnnotatedString
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
 import fe.linksheet.composable.util.LinkableSubtitleText
-import fe.linksheet.composable.util.rememberAnnotatedStringResource
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -54,8 +50,9 @@ fun DonateSettingsRoute(
                             Spacer(modifier = Modifier.width(10.dp))
 
                             Text(
-                                text = rememberAnnotatedStringResource(
-                                    id = R.string.linksheet_donation_explainer_2
+                                text = createAnnotatedString(
+                                    id = R.string.linksheet_donation_explainer_2,
+                                    style = DefaultHyperLinkStyle
                                 ),
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )

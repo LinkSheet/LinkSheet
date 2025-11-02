@@ -1,6 +1,7 @@
 package fe.linksheet.composable.page.settings.apps
 
 import android.os.Build
+import androidx.activity.compose.LocalActivity
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -14,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -25,7 +25,6 @@ import fe.linksheet.composable.util.ClickableRow
 import fe.linksheet.composable.util.ColoredIcon
 import fe.linksheet.composable.util.HeadlineText
 import fe.linksheet.composable.util.PreferenceSubtitle
-import fe.linksheet.extension.compose.currentActivity
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.util.LinkSheet
 import org.koin.androidx.compose.koinViewModel
@@ -38,7 +37,7 @@ fun PretendToBeAppSettingsRoute(
     onBackPressed: () -> Unit,
     viewModel: PretendToBeAppSettingsViewModel = koinViewModel()
 ) {
-    val activity = LocalContext.currentActivity()
+    val activity = LocalActivity.current!!
     val installed = viewModel.checkIsCompatInstalled()
     val uriHandler = LocalUriHandler.current
 

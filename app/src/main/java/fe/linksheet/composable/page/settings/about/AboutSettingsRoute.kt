@@ -67,7 +67,7 @@ fun AboutSettingsRoute(
 ) {
     val activity = androidx.activity.compose.LocalActivity.current
     val uriHandler = LocalUriHandler.current
-    val buildDate = BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+    val buildDate = BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat)
 //    val buildType = AppSignature.checkSignature(activity)
 
     var devClicks by remember { mutableIntStateOf(0) }

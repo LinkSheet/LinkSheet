@@ -86,6 +86,7 @@ object TestPackageQueryManager : KoinComponent {
     }
 
     private fun PackageManager.getAllIntentFilters(packageName: String): List<IntentFilter> {
+        @Suppress("UNCHECKED_CAST")
         return getAllIntentFilters.invoke(this, packageName) as List<IntentFilter>
     }
 

@@ -33,13 +33,13 @@ import fe.composekit.component.card.AlertCard
 import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.std.javatime.extension.unixMillisUtc
-import fe.std.javatime.time.ISO8601DateTimeFormatter
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.util.buildconfig.LinkSheetInfo
+import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -70,7 +70,7 @@ fun VersionSettingsRoute(
     viewModel: AboutSettingsViewModel = koinViewModel(),
 ) {
     val uriHandler = LocalUriHandler.current
-    val buildDate = BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+    val buildDate = BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat)
     var devClicks by remember { mutableIntStateOf(0) }
 
 //    LaunchedEffect(Unit) {

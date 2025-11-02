@@ -107,15 +107,15 @@ fun <T : Any, M : Any> BrowserCommonScaffold(
 }
 
 data class BrowserCommonPackageSelectorData<T>(
-    @StringRes val headline: Int,
-    @StringRes val subtitle: Int? = null,
+    @param:StringRes val headline: Int,
+    @param:StringRes val subtitle: Int? = null,
     val value: T,
     val route: String,
 )
 
 data class BrowserCommonRadioButtonRowData(
-    @StringRes val headline: Int,
-    @StringRes val subtitle: Int? = null,
+    @param:StringRes val headline: Int,
+    @param:StringRes val subtitle: Int? = null,
     val clickHook: (() -> Unit)? = null
 )
 

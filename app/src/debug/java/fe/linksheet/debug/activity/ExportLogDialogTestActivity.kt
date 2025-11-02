@@ -24,7 +24,7 @@ class ExportLogDialogTestActivity : BaseComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val name = LocalDateTime.now().format(ISO8601DateTimeFormatter.DefaultFormat)
+        val name = LocalDateTime.now().format(ISO8601DateTimeFormatter.FriendlyFormat)
 
         setContent(edgeToEdge = true) {
             AppTheme {

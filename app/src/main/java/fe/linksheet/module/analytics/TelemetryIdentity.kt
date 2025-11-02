@@ -13,7 +13,7 @@ import fe.linksheet.util.buildconfig.BuildType
 value class TelemetryIdentityData(val data: Map<String, String>)
 
 sealed class TelemetryIdentity(
-    @StringRes val id: Int,
+    @param:StringRes val id: Int,
     val data: Map<String, String>,
     private vararg val mergeWith: TelemetryIdentity,
 ) {

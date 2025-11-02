@@ -41,7 +41,9 @@ import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.resolver.util.LaunchMainIntent
 import fe.linksheet.module.resolver.workaround.GithubWorkaround
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.util.extension.android.tryStartActivity
 import fe.linksheet.util.intent.StandardIntents
+import fe.std.result.isSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -110,7 +112,7 @@ class BottomSheetViewModel(
 
     fun startPackageInfoActivity(context: Activity, info: ActivityAppInfo): Boolean {
         val intent = StandardIntents.createAppSettingsIntent(info.packageName)
-        return context.startActivityWithConfirmation(intent)
+        return context.tryStartActivity(intent).isSuccess()
     }
 
     private val Intent.pkgCmp: Pair<String?, ComponentName?>

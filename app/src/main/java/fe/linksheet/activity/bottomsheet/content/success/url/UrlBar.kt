@@ -51,6 +51,7 @@ import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.module.resolver.ImprovedIntentResolver
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.util.intent.Intents
+import fe.linksheet.util.intent.StandardIntents
 import me.saket.unfurl.UnfurlResult
 
 
@@ -109,7 +110,7 @@ fun UrlBarWrapper(
 //            intent.addFlags(PendingIntent.FLAG_MUTABLE)
             intent.putExtra(TextEditorActivity.EXTRA_TEXT, text)
 
-            val receiver = Intents.createSelfIntent(null)
+            val receiver = StandardIntents.createSelfIntent(null)
 //            val chooser = Intent.createChooser(intent, "test", pendingIntent.intentSender)
 //            startActivity(chooser)
 
@@ -131,7 +132,7 @@ fun UrlBarWrapper(
         },
         ignoreLibRedirect = { redirectedResult ->
             controller.onNewIntent(
-                Intents.createSelfIntent(
+                StandardIntents.createSelfIntent(
                     redirectedResult.originalUri,
                     bundleOf(LibRedirectDefault.IgnoreIntentKey to true)
                 )
@@ -139,7 +140,7 @@ fun UrlBarWrapper(
         },
         manualRedirect = if (enableManualRedirect) { uri ->
             controller.onNewIntent(
-                Intents.createSelfIntent(
+                StandardIntents.createSelfIntent(
                     uri.toUri(),
                     bundleOf(ImprovedIntentResolver.IntentKeyResolveRedirects to true)
                 )

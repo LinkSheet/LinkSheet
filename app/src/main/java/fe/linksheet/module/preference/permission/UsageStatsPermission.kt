@@ -8,6 +8,8 @@ import android.provider.Settings
 import androidx.core.content.getSystemService
 import fe.linksheet.R
 import fe.linksheet.extension.android.startActivityWithConfirmation
+import fe.linksheet.util.extension.android.tryStartActivity
+import fe.std.result.isSuccess
 
 class UsageStatsPermission(private val context: Context) : PermissionBoundPreference(
     R.string.usage_stats_sorting, R.string.usage_stats_sorting_explainer
@@ -28,7 +30,7 @@ class UsageStatsPermission(private val context: Context) : PermissionBoundPrefer
     }
 
     override fun request(context: Activity): Boolean {
-        return context.startActivityWithConfirmation(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+        return context.tryStartActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)).isSuccess()
     }
 }
 

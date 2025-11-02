@@ -10,8 +10,8 @@ data class PreferredDisplayActivityInfo(
     val displayActivityInfo: DisplayActivityInfo
 ) : Redactable<PreferredDisplayActivityInfo> {
 
-    override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
-        return builder.commaSeparated {
+//    override fun process(builder: StringBuilder, redactor: Redactor): StringBuilder {
+//        return builder.commaSeparated {
 //            item {
 //                curlyWrapped { redactor.process(builder, app, "preferredApp=") }
 //            }
@@ -19,6 +19,6 @@ data class PreferredDisplayActivityInfo(
 //            item {
 //                curlyWrapped { redactor.process(builder, displayActivityInfo, "displayActivityInfo=") }
 //            }
-        }
-    }
+//        }
+//    }
 }

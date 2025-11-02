@@ -27,7 +27,7 @@ val DefaultLogModule = module {
         // TODO: Not optimal
         val logKey = runBlocking(Dispatchers.IO) {
             @OptIn(SensitivePreference::class)
-            preferences.getOrPutInit(AppPreferences.logKey).decodeHexOrThrow()
+            preferences.getOrPutInit(AppPreferences.logKey).hexToByteArray()
         }
 
         DefaultRedactor(logKey)

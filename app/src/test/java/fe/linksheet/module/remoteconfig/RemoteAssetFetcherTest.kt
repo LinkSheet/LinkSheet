@@ -14,13 +14,12 @@ import io.ktor.client.request.HttpResponseData
 import io.ktor.http.*
 import io.ktor.serialization.gson.*
 import kotlinx.coroutines.test.runTest
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class RemoteAssetFetcherTest : BaseUnitTest {
     private fun MockRequestHandleScope.respondJson(json: String): HttpResponseData {
         return respond(json, HttpStatusCode.OK, headersOf(HttpHeaders.ContentType, "application/json"))

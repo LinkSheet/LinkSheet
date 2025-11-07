@@ -86,10 +86,6 @@ data object AppsWhichCanOpenLinksSettingsRoute : Route
 
 @Keep
 @Serializable
-data class TextEditorRoute(val text: String) : Route
-
-@Keep
-@Serializable
 data class MarkdownViewerRoute(
     val title: String,
     val url: String,
@@ -128,8 +124,6 @@ data class LogTextViewerRoute(val id: String?, val name: String) : Route
 @Serializable
 data class VlhAppRoute(val packageName: String) : Route
 
-
-
 @Keep
 @Serializable
 data object PreviewUrlRoute : Route
@@ -150,11 +144,7 @@ data object SqlRoute : Route
 //    )
 //}
 
-@Serializable
-data object MainRoute : Route
 
-@Serializable
-data object MainOverviewRoute : Route
 
 object Routes {
     const val Help = "route__help"

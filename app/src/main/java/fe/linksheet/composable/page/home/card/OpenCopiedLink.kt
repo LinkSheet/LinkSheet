@@ -20,8 +20,8 @@ import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.composekit.route.Route
-import fe.linksheet.navigation.TextEditorRoute
 import androidx.core.net.toUri
+import fe.linksheet.composable.page.home.TextEditorRoute
 
 
 @Composable

@@ -24,7 +24,7 @@ import kotlin.reflect.KClass
 @Keep
 @Serializable
 @SerialName(OpCodes.HAS_EXTRA)
-class HasExtraExpression(
+internal class HasExtraExpression(
     @ProtoNumber(1)
     val op: Expression<EngineRunContext>,
     @ProtoNumber(2)
@@ -38,7 +38,7 @@ class HasExtraExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.GET_SOURCE_APP_EXTRA)
-class GetSourceAppExtraExpression(
+internal class GetSourceAppExtraExpression(
     @ProtoNumber(1)
     val expression: Expression<EngineRunContext>
 ) : Expression<String?> {
@@ -64,7 +64,7 @@ class AddFlagExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.PUT_APP_ROLE)
-class PutAppRoleExpression(
+internal class PutAppRoleExpression(
     @ProtoNumber(1)
     val expression: Expression<EngineRunContext>,
     @ProtoNumber(2)

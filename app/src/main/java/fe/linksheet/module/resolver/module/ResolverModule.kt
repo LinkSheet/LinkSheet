@@ -8,9 +8,8 @@ import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.feature.engine.DefaultLinkEngineIntentResolver
-import fe.linksheet.feature.engine.LinkEngineIntentResolver
 import app.linksheet.feature.app.PackageService
+import fe.linksheet.feature.engine.RealLinkEngine
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -57,9 +56,9 @@ val ResolverModule = module {
         val settings = createSettings(get(), get())
         val experimentRepository = get<ExperimentRepository>()
 
-        val linkEngineIntentResolver = DefaultLinkEngineIntentResolver(
+        val realLinkEngine = RealLinkEngine(
             context = get(),
-            logger = createLogger<LinkEngineIntentResolver>(),
+            logger = createLogger<RealLinkEngine>(),
             client = get(),
             appSelectionHistoryRepository = get(),
             preferredAppRepository = get(),
@@ -74,7 +73,7 @@ val ResolverModule = module {
             cacheRepository = get(),
             networkStateService = get(),
             privateBrowsingService = get(),
-            settings = settings
+            scenarioRepository = get(),
         )
 
         IntentResolverDelegate(
@@ -98,7 +97,7 @@ val ResolverModule = module {
                 privateBrowsingService = get(),
                 settings = settings
             ),
-            linkEngineIntentResolver = linkEngineIntentResolver,
+            linkEngineIntentResolver = realLinkEngine.createResolver(settings),
             useLinkEngine = experimentRepository.asFunction(Experiments.linkEngine)
         )
     }

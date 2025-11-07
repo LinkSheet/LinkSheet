@@ -36,8 +36,10 @@ dependencies {
     implementation(project(":util"))
     implementation(project(":api"))
     implementation(project(":compose"))
+    implementation("androidx.compose.runtime:runtime:1.9.4")
     compileOnly(project(":hidden-api"))
 
+    implementation("com.github.nanihadesuka:LazyColumnScrollbar:_")
     implementation("sh.calvin.reorderable:reorderable:_")
     implementation(AndroidX.lifecycle.viewModel)
     implementation(AndroidX.room.common)

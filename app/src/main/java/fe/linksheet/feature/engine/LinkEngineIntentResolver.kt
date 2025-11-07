@@ -166,6 +166,7 @@ class LinkEngineIntentResolver(
 
         val input = EngineScenarioInput(startUrl, referringPackage)
         val scenario = selector.findScenario(input)
+        logger.info("Found scenario $scenario")
         if (scenario == null) {
             // TODO: What do we do in this situation?
             return@scope IntentResolveResult.NoScenarioFound

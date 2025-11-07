@@ -3,6 +3,13 @@ package app.linksheet.feature.engine.core
 import app.linksheet.feature.engine.core.context.EngineRunContext
 import fe.linksheet.util.AndroidAppPackage
 import fe.std.uri.StdUrl
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.shareIn
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
@@ -28,11 +35,19 @@ fun interface EngineScenarioPredicate {
 
 data class EngineScenarioInput(val url: StdUrl, val referrer: AndroidAppPackage?)
 
-class ScenarioSelector(scenarios: List<EngineScenario>) {
-    private val scenarios = scenarios.sortedBy { it.position }
+class ScenarioSelector(
+    scenarioFlow: Flow<List<EngineScenario>>,
+    dispatcher: CoroutineDispatcher = Dispatchers.IO,
+) {
+    private val scope = CoroutineScope(dispatcher)
+    private val scenarioFlow = scenarioFlow.shareIn(
+        scope = scope,
+        started = SharingStarted.Eagerly,
+        replay = 1
+    )
 
-    fun findScenario(input: EngineScenarioInput): EngineScenario? {
-        val scenario = scenarios.firstOrNull { it.matches(input) }
+    suspend fun findScenario(input: EngineScenarioInput): EngineScenario? {
+        val scenario = scenarioFlow.first().firstOrNull { it.matches(input) }
         return scenario
     }
 }

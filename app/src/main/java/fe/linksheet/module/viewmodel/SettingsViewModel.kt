@@ -19,4 +19,5 @@ class SettingsViewModel(
     val currentLocale = localeService.currentLocaleFlow
     val devModeEnabled = preferenceRepository.asViewModelState(AppPreferences.devModeEnabled)
     val newShizuku = experimentRepository.asViewModelState(Experiments.newShizuku)
+    val scenario = experimentRepository.asViewModelState(Experiments.scenario)
 }

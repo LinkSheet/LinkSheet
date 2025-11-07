@@ -1,14 +1,14 @@
-package app.linksheet.feature.scenario.database.entity
+package app.linksheet.feature.engine.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 
-@Entity(tableName = "expression")
+@Entity(tableName = "expression_rule")
 @TypeConverters(value = [ExpressionRuleType.Converter::class])
-class ExpressionEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+class ExpressionRule(
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val bytes: ByteArray,
     val type: ExpressionRuleType
 ) {

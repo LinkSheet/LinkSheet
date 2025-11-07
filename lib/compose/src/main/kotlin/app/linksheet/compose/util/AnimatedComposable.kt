@@ -11,6 +11,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.toRoute
+import fe.composekit.route.NavTypes
+import fe.composekit.route.Route
 import androidx.navigation.compose.composable as navigationComposable
 
 val easing = Easing { f ->
@@ -59,15 +61,16 @@ fun NavGraphBuilder.animatedComposable(
     content = content
 )
 
-inline fun <reified T : Any> NavGraphBuilder.animatedComposable(
-    noinline content: @Composable AnimatedVisibilityScope.(NavBackStackEntry, T) -> Unit,
+inline fun <reified R : Route> NavGraphBuilder.animatedComposable(
+    noinline content: @Composable AnimatedVisibilityScope.(NavBackStackEntry, R) -> Unit,
 ) {
-    navigationComposable<T>(
+    navigationComposable<R>(
         enterTransition = enterTransition,
         exitTransition = exitTransition,
         popEnterTransition = popEnterTransition,
         popExitTransition = popExitTransition,
+        typeMap = NavTypes.Types,
     ) { stack ->
-        content(stack, stack.toRoute<T>())
+        content(stack, stack.toRoute<R>())
     }
 }

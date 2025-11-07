@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.scenario.navigation.ScenarioOverviewRoute
 import app.linksheet.feature.shizuku.navigation.ShizukuRoute
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -32,20 +32,19 @@ import fe.linksheet.navigation.*
 import org.koin.androidx.compose.koinViewModel
 
 internal object SettingsRouteData {
-    val vlhNavItem = RouteNavItemNew(
+    private val vlhNavItem = RouteNavItemNew(
         AppsWhichCanOpenLinksSettingsRoute,
         Icons.Outlined.DomainVerification.iconPainter,
         textContent(R.string.verified_link_handlers),
         textContent(R.string.verified_link_handlers_subtitle)
     )
-    fun verifiedApps(newShizuku: Boolean): List<RouteNavItemNew> {
-        return listOfNotNull(vlhNavItem, if(newShizuku) ShizukuRoute.NavItem else null)
-//        RouteNavItemNew(
-//            ScenarioRoute,
-//            Icons.Outlined.Widgets.iconPainter,
-//            textContent(R.string.settings_scenario__title_scenarios),
-//            textContent(R.string.settings_scenario__text_scenarios),
-//        )
+
+    fun section1(newShizuku: Boolean, scenario: Boolean): List<RouteNavItemNew> {
+        return listOfNotNull(
+            vlhNavItem,
+            if (newShizuku) ShizukuRoute.NavItem else null,
+            if (scenario) ScenarioOverviewRoute.NavItem else null
+        )
     }
 
     val customization = arrayOf(
@@ -163,8 +162,9 @@ fun SettingsRoute(
 ) {
     val devMode by viewModel.devModeEnabled.collectAsStateWithLifecycle()
     val newShizuku by viewModel.newShizuku.collectAsStateWithLifecycle()
-    val vlh = remember(newShizuku) {
-        SettingsRouteData.verifiedApps(newShizuku)
+    val scenario by viewModel.scenario.collectAsStateWithLifecycle()
+    val vlh = remember(newShizuku, scenario) {
+        SettingsRouteData.section1(newShizuku, scenario)
     }
 
     val languageDialog = rememberLanguageDialog()

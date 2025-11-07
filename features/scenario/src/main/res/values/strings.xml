@@ -3,7 +3,12 @@
     <string name="generic__button_add">Add</string>
     <string name="generic__action_move_up">Move up</string>
     <string name="generic__action_move_down">Move Down</string>
-    <string name="settings_scenarios__title_scenarios">Scenarios</string>
+    <string name="settings_scenario__title_scenarios">Scenarios</string>
+    <string name="settings_scenario__text_scenarios">Configure scenarios</string>
     <string name="settings_scenario__text_data_type">Data type</string>
     <string name="settings_scenario__text_value">Value</string>
+    <string name="settings_scenario__title_new_scenario_dialog">New scenario</string>
+    <string name="settings_scenario__text_placeholder_name">Scenario name</string>
+    <string name="generic__button_text_create">Create</string>
+    <string name="generic__button_text_cancel">Cancel</string>
 </resources>

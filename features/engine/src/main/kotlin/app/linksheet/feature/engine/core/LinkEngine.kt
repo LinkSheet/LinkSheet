@@ -21,6 +21,7 @@ import app.linksheet.feature.engine.core.step.StepRule
 import app.linksheet.feature.engine.core.step.StepRuleInput
 import app.linksheet.feature.engine.core.step.StepRuleResult
 import app.linksheet.feature.engine.core.step.StepStart
+import app.linksheet.lib.log.Logger
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -40,10 +41,10 @@ class LinkEngine(
     private val fetchers: List<LinkFetcher<*>> = emptyList(),
     dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
-//    private val logger = Logger("LinkEngine")
+    private val logger = Logger("LinkEngine")
     private val scope = CoroutineScope(dispatcher) + CoroutineName("LinkEngine") + CoroutineExceptionHandler { _, e ->
-    println(e)
-}
+        println(e)
+    }
     private val preProcessorRules = rules.filterIsInstance<PreProcessorRule>()
     private val postProcessorRules = rules.filterIsInstance<PostProcessorRule>()
 
@@ -67,9 +68,9 @@ class LinkEngine(
         input: I,
     ): R? {
         for (rule in filteredRules) {
-//            logger.debug("Checking rule $rule with input $input")
+            logger.debug("Checking rule $rule with input $input")
             val result = with(rule) { context.checkRule(input) }
-//            logger.debug("Rule result is $result")
+            logger.debug("Rule result is $result")
             if (result == null) continue
             return result
         }
@@ -81,7 +82,7 @@ class LinkEngine(
     val events = _events.asStateFlow()
 
     private fun emitEvent(event: StepRuleInput) {
-//        logger.debug("Emitting event $event")
+        logger.debug("Emitting event $event")
         _events.tryEmit(event)
     }
 
@@ -156,7 +157,7 @@ class LinkEngine(
         for (fetcher in fetchers) {
             if (!isActive) break
             if (!fetcher.enabled()) continue
-//            logger.debug("Fetching $fetcher")
+            logger.debug("Fetching $fetcher")
             if (!context.confirm(fetcher.id)) continue
             launch {
                 val result = fetcher.fetch(resultUrl)

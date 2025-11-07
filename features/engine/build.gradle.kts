@@ -42,6 +42,7 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":util"))
     implementation(project(":api"))
+    implementation(project(":log"))
     implementation(project(":compose"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
@@ -92,6 +93,7 @@ dependencies {
     implementation(JetBrains.ktor.client.encoding)
     implementation(JetBrains.ktor.plugins.serialization.gson)
     implementation("io.ktor:ktor-client-okhttp-jvm:_")
+    implementation(KotlinX.coroutines.android)
 
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.sqlite.ktx)

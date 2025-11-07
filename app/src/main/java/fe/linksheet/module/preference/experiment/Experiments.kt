@@ -71,6 +71,10 @@ object Experiments : PreferenceDefinition(
         key = "experiment_new_shizuku"
     )
 
+    val scenario = boolean(
+        key = "experiment_scenario"
+    )
+
     val experiments = listOf(
         group(
             name = "improved_bottom_sheet",

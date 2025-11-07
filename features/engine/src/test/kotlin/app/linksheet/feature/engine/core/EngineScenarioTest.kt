@@ -9,6 +9,7 @@ import assertk.assertions.prop
 import app.linksheet.feature.engine.core.rule.EmptyLinkEngine
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.uri.toStdUrlOrThrow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -36,7 +37,7 @@ internal class EngineScenarioTest : BaseUnitTest {
             engine = EmptyLinkEngine
         )
 
-        val selector = ScenarioSelector(listOf(scenario1, scenario2))
+        val selector = ScenarioSelector(flowOf(listOf(scenario1, scenario2)), dispatcher)
         val input = EngineScenarioInput("https://linksheet.app/test".toStdUrlOrThrow(), null)
         val scenario = selector.findScenario(input)
 

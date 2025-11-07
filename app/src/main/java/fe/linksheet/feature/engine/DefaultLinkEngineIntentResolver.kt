@@ -32,6 +32,7 @@ import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
 import io.ktor.client.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOf
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
@@ -97,10 +98,7 @@ fun DefaultLinkEngineIntentResolver(
 //            ExpressionPostProcessorRule(
 //                expression = BundleSerializer.decodeFromHexString(
 //                    """
-//                        |080112b0010a02696612a9010a3f0a055f722e6d6512360a210a025f72121b0a190a016312140a1268747470733a2
-//                        |f2f745c2e6d652f282e2b2912110a027573120b0a090a012412040a02727512660a023d6912600a5e0a04702d3e69
-//                        |12560a210a0163121c0a1a616e64726f69642e696e74656e742e616374696f6e2e5649455712120a035f6175120b0
-//                        |a090a012412040a0272751a1d0a016312180a166f72672e74656c656772616d2e6d657373656e676572
+//080112b0010a02696612a9010a3f0a055f722e6d6512360a210a025f72121b0a190a016312140a1268747470733a2f2f745c2e6d652f282e2b2912110a027573120b0a090a012412040a02727512660a023d6912600a5e0a04702d3e6912560a210a0163121c0a1a616e64726f69642e696e74656e742e616374696f6e2e5649455712120a035f6175120b0a090a012412040a0272751a1d0a016312180a166f72672e74656c656772616d2e6d657373656e676572
 //                        |""".trimMargin().replace("\n", "")
 //                ).expression
 //            )
@@ -138,7 +136,7 @@ fun DefaultLinkEngineIntentResolver(
         predicate = { true },
         engine = pipeline
     )
-    val selector = ScenarioSelector(scenarios = listOf(scenario))
+    val selector = ScenarioSelector(scenarioFlow = flowOf(listOf(scenario)), dispatcher = dispatcher)
 
     return LinkEngineIntentResolver(
         context = context,

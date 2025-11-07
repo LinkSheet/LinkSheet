@@ -26,7 +26,6 @@ class CacheRepository internal constructor(
     val urlEntryDao: UrlEntryDao,
     val clock: Clock,
 ) {
-
     suspend fun getOrCreateCacheEntry(url: String): UrlEntry {
         val entry = urlEntryDao.getUrlEntry(url)
         if (entry != null) return entry

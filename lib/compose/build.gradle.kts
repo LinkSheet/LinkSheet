@@ -29,12 +29,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":util"))
+    implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
 
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.compose.core)
     implementation(_1fexd.composeKit.compose.component)
     implementation(_1fexd.composeKit.compose.layout)
+    implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.preference.core)
     implementation(_1fexd.composeKit.preference.compose.core)
     implementation(_1fexd.composeKit.preference.compose.core2)

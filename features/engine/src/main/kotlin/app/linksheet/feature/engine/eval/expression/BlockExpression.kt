@@ -12,7 +12,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.BLOCK)
-class BlockExpression(
+internal class BlockExpression(
     @ProtoNumber(1)
     val expressions: List<Expression<*>> = emptyList(),
 ) : Expression<Unit> {

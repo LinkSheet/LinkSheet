@@ -20,9 +20,9 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.URL_ENGINE_RESULT)
-class UrlEngineResultExpression(
+internal class UrlEngineResultExpression(
     @ProtoNumber(1)
-    private val expression: Expression<@Contextual StdUrl>,
+    val expression: Expression<@Contextual StdUrl>,
 ) : Expression<EngineResult> {
     override fun eval(ctx: EvalContext): EngineResult {
         return UrlEngineResult(expression.eval(ctx))
@@ -32,9 +32,9 @@ class UrlEngineResultExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.INTENT_ENGINE_RESULT)
-class IntentEngineResultExpression(
+internal class IntentEngineResultExpression(
     @ProtoNumber(1)
-    private val expression: Expression<@Contextual Intent>,
+    val expression: Expression<@Contextual Intent>,
 ) : Expression<EngineResult> {
     override fun eval(ctx: EvalContext): EngineResult {
         return IntentEngineResult(expression.eval(ctx))
@@ -44,9 +44,9 @@ class IntentEngineResultExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.FORWARD_OTHER_PROFILE_RESULT)
-class ForwardOtherProfileResultExpression(
+internal class ForwardOtherProfileResultExpression(
     @ProtoNumber(1)
-    private val expression: Expression<@Contextual StdUrl>,
+    val expression: Expression<@Contextual StdUrl>,
 ) : Expression<EngineResult> {
     override fun eval(ctx: EvalContext): EngineResult {
         return ForwardOtherProfileResult(expression.eval(ctx))

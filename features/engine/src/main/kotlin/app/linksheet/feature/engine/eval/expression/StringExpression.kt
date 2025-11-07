@@ -12,13 +12,13 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.STRING_EQUALS)
-class StringEqualsExpression(
+internal class StringEqualsExpression(
     @ProtoNumber(1)
-    private val left: Expression<String?>,
+    val left: Expression<String?>,
     @ProtoNumber(2)
-    private val right: Expression<String?>,
+    val right: Expression<String?>,
     @ProtoNumber(3)
-    private val ignoreCase: Boolean
+    val ignoreCase: Boolean
 ) : Expression<Boolean> {
     override fun eval(ctx: EvalContext): Boolean {
         return left.eval(ctx)?.equals(right.eval(ctx), ignoreCase) == true
@@ -28,13 +28,13 @@ class StringEqualsExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.STRING_CONTAINS)
-class StringContainsExpression(
+internal class StringContainsExpression(
     @ProtoNumber(1)
-    private val left: Expression<String?>,
+    val left: Expression<String?>,
     @ProtoNumber(2)
-    private val right: Expression<String?>,
+    val right: Expression<String?>,
     @ProtoNumber(3)
-    private val ignoreCase: Boolean
+    val ignoreCase: Boolean
 ) : Expression<Boolean> {
     override fun eval(ctx: EvalContext): Boolean {
         val other = right.eval(ctx) ?: return false

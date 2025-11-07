@@ -12,7 +12,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.IF)
-class IfExpression<T>(
+internal class IfExpression<T>(
     @ProtoNumber(1)
     val condition: Expression<Boolean>,
     @ProtoNumber(2)

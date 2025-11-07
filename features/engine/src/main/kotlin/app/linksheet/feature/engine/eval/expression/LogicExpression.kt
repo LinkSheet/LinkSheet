@@ -12,12 +12,12 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.AND)
-class AndExpression(
+internal class AndExpression(
     @ProtoNumber(1)
-    private val left: Expression<Boolean>,
+    override val left: Expression<Boolean>,
     @ProtoNumber(2)
-    private val right: Expression<Boolean>
-) : Expression<Boolean> {
+    override val right: Expression<Boolean>
+) : LeftRightExpression<Boolean> {
     override fun eval(ctx: EvalContext): Boolean {
         return left.eval(ctx) && right.eval(ctx)
     }
@@ -26,12 +26,12 @@ class AndExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.OR)
-class OrExpression(
+internal class OrExpression(
     @ProtoNumber(1)
-    private val left: Expression<Boolean>,
+    override val left: Expression<Boolean>,
     @ProtoNumber(2)
-    private val right: Expression<Boolean>
-) : Expression<Boolean> {
+    override val right: Expression<Boolean>
+) : LeftRightExpression<Boolean> {
     override fun eval(ctx: EvalContext): Boolean {
         return left.eval(ctx) || right.eval(ctx)
     }
@@ -40,9 +40,9 @@ class OrExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.NOT)
-class NotExpression(
+internal class NotExpression(
     @ProtoNumber(1)
-    private val expression: Expression<Boolean>
+    val expression: Expression<Boolean>
 ) : Expression<Boolean> {
     override fun eval(ctx: EvalContext): Boolean {
         return !expression.eval(ctx)

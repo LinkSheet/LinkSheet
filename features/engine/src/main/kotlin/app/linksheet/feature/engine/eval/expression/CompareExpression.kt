@@ -12,12 +12,12 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.EQ)
-class EqualsExpression<T : Comparable<T>>(
+internal class EqualsExpression<T : Comparable<T>>(
     @ProtoNumber(1)
-    private val left: Expression<T>,
+    override val left: Expression<T>,
     @ProtoNumber(2)
-    private val right: Expression<T>,
-) : Expression<Boolean> {
+    override val right: Expression<T>,
+) : LeftRightExpression<T> {
 
     override fun eval(ctx: EvalContext): Boolean {
         return compareTo(left, right, ctx) == 0
@@ -27,12 +27,12 @@ class EqualsExpression<T : Comparable<T>>(
 @Keep
 @Serializable
 @SerialName(OpCodes.LT)
-class LessThanExpression<T : Comparable<T>>(
+internal class LessThanExpression<T : Comparable<T>>(
     @ProtoNumber(1)
-    private val left: Expression<T>,
+    override val left: Expression<T>,
     @ProtoNumber(2)
-    private val right: Expression<T>,
-) : Expression<Boolean> {
+    override val right: Expression<T>,
+) : LeftRightExpression<T> {
 
     override fun eval(ctx: EvalContext): Boolean {
         return compareTo(left, right, ctx) < 0
@@ -42,12 +42,12 @@ class LessThanExpression<T : Comparable<T>>(
 @Keep
 @Serializable
 @SerialName(OpCodes.LTE)
-class LessThanEqualExpression<T : Comparable<T>>(
+internal class LessThanEqualExpression<T : Comparable<T>>(
     @ProtoNumber(1)
-    private val left: Expression<T>,
+    override val left: Expression<T>,
     @ProtoNumber(2)
-    private val right: Expression<T>,
-) : Expression<Boolean> {
+    override val right: Expression<T>,
+) : LeftRightExpression<T> {
 
     override fun eval(ctx: EvalContext): Boolean {
         return compareTo(left, right, ctx) <= 0
@@ -57,12 +57,12 @@ class LessThanEqualExpression<T : Comparable<T>>(
 @Keep
 @Serializable
 @SerialName(OpCodes.GT)
-class GreaterThanExpression<T : Comparable<T>>(
+internal class GreaterThanExpression<T : Comparable<T>>(
     @ProtoNumber(1)
-    private val left: Expression<T>,
+    override val left: Expression<T>,
     @ProtoNumber(2)
-    private val right: Expression<T>,
-) : Expression<Boolean> {
+    override val right: Expression<T>,
+) : LeftRightExpression<T> {
 
     override fun eval(ctx: EvalContext): Boolean {
         return compareTo(left, right, ctx) > 0
@@ -72,12 +72,12 @@ class GreaterThanExpression<T : Comparable<T>>(
 @Keep
 @Serializable
 @SerialName(OpCodes.GTE)
-class GreaterThanEqualExpression<T : Comparable<T>>(
+internal class GreaterThanEqualExpression<T : Comparable<T>>(
     @ProtoNumber(1)
-    private val left: Expression<T>,
+    override val left: Expression<T>,
     @ProtoNumber(2)
-    private val right: Expression<T>,
-) : Expression<Boolean> {
+    override val right: Expression<T>,
+) : LeftRightExpression<T> {
 
     override fun eval(ctx: EvalContext): Boolean {
         return compareTo(left, right, ctx) >= 0

@@ -13,7 +13,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.REGEX)
-class RegexExpression(
+internal class RegexExpression(
     @ProtoNumber(1)
     val expression: Expression<String>
 ) : Expression<Regex> {
@@ -25,7 +25,7 @@ class RegexExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.REGEX_MATCH_ENTIRE)
-class RegexMatchEntireExpression(
+internal class RegexMatchEntireExpression(
     @ProtoNumber(1)
     val regex: Expression<@Contextual Regex>,
     @ProtoNumber(2)

@@ -1,19 +1,17 @@
 package fe.linksheet.composable.page.home
 
+import androidx.annotation.Keep
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import fe.linksheet.navigation.MainOverviewRoute
-import fe.linksheet.navigation.TextEditorRoute
-import fe.linksheet.composable.page.home.edit.TextEditorPageWrapper
 import app.linksheet.compose.util.animatedComposable
-import app.linksheet.compose.navigation.NavSubGraph
+import fe.composekit.route.NavSubGraph
+import fe.composekit.route.Route
+import fe.linksheet.composable.page.home.edit.TextEditorPageWrapper
 import kotlinx.serialization.Serializable
 
 @Serializable
-object HomePageRoute : NavSubGraph {
-
-    override val startDestination: Any = MainOverviewRoute
-
+object HomePageRoute : NavSubGraph<MainOverviewRoute> {
+    override val startDestination: MainOverviewRoute = MainOverviewRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<MainOverviewRoute> { _, route ->
             NewMainRoute(navController = navController)
@@ -27,3 +25,10 @@ object HomePageRoute : NavSubGraph {
         }
     }
 }
+
+@Serializable
+data object MainOverviewRoute : Route
+
+@Keep
+@Serializable
+data class TextEditorRoute(val text: String) : Route

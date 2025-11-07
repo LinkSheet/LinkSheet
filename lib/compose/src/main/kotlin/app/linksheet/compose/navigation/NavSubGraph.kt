@@ -9,11 +9,11 @@ interface NavSubGraph {
     val graph: NavGraphBuilder.(NavHostController) -> Unit
 }
 
-inline fun <reified T : NavSubGraph> NavGraphBuilder.attachSubGraph(
-    page: T,
+inline fun <reified G : NavSubGraph> NavGraphBuilder.attachSubGraph(
+    page: G,
     navController: NavHostController,
 ) {
-    navigation<T>(startDestination = page.startDestination) {
+    navigation<G>(startDestination = page.startDestination) {
         page.graph(this, navController)
     }
 }

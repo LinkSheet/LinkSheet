@@ -34,21 +34,20 @@ import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
 import fe.linksheet.composable.page.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.page.settings.link.amp2html.Amp2HtmlSettingsRoute
 import fe.linksheet.composable.page.settings.link.downloader.DownloaderSettingsRoute
-import app.linksheet.feature.libredirect.ui.LibRedirectServiceSettingsRoute
-import app.linksheet.feature.libredirect.ui.LibRedirectSettingsRoute
 import fe.linksheet.composable.page.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.composable.page.settings.notification.NotificationSettingsRoute
 import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
-import app.linksheet.compose.navigation.attachSubGraph
 import app.linksheet.compose.util.animatedComposable
 import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
 import app.linksheet.feature.scenario.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.shizuku.navigation.ShizukuNavSubGraph
 import fe.composekit.core.AndroidVersion
+import fe.composekit.route.NavTypes
 import fe.composekit.route.Route
+import fe.composekit.route.attachSubGraph
 import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
 import fe.linksheet.composable.page.settings.debug.SqlRoute
@@ -100,6 +99,7 @@ fun MainNavHost(
     NavHost(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         navController = navController,
+        typeMap = NavTypes.Types,
         startDestination = HomePageRoute
     ) {
         attachSubGraph(HomePageRoute, navController)

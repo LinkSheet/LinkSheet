@@ -1,34 +1,52 @@
+@file:OptIn(ExperimentalUuidApi::class)
+
 package app.linksheet.feature.scenario.navigation
 
 import androidx.annotation.Keep
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Widgets
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import app.linksheet.compose.navigation.NavSubGraph
 import app.linksheet.compose.util.animatedComposable
+import app.linksheet.feature.scenario.ui.ScenarioOverviewRoute
 import app.linksheet.feature.scenario.ui.ScenarioRoute
+import fe.android.compose.icon.iconPainter
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.route.NavSubGraph
 import fe.composekit.route.Route
+import fe.composekit.route.RouteNavItemNew
 import kotlinx.serialization.Serializable
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
+import app.linksheet.feature.scenario.R
 
 @Serializable
-object ScenarioNavSubGraph : NavSubGraph {
-    override val startDestination: Any = ScenarioRoute
+object ScenarioNavSubGraph : NavSubGraph<ScenarioOverviewRoute> {
+    override val startDestination: ScenarioOverviewRoute = ScenarioOverviewRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
+        animatedComposable<ScenarioOverviewRoute> { _, route ->
+            ScenarioOverviewRoute(onBackPressed = navController::popBackStack, navigate = navController::navigate)
+        }
+
         animatedComposable<ScenarioRoute> { _, route ->
-            ScenarioRoute(onBackPressed = navController::popBackStack)
+            ScenarioRoute(onBackPressed = navController::popBackStack, id = route.id)
         }
     }
 }
 
 @Keep
 @Serializable
-data object ScenarioRoute : Route {
-//    val NavItem by lazy {
-//        RouteNavItemNew(
-//            this,
-//            Icons.Outlined.Adb.iconPainter,
-//            textContent(R.string.settings_shizuku__title_shizuku),
-//            textContent(R.string.settings_shizuku__text_shizuku)
-//        )
-//    }
+data object ScenarioOverviewRoute : Route {
+    val NavItem by lazy {
+        RouteNavItemNew(
+            this,
+            Icons.Outlined.Widgets.iconPainter,
+            textContent(R.string.settings_scenario__title_scenarios),
+            textContent(R.string.settings_scenario__text_scenarios),
+        )
+    }
 }
 
+@Keep
+@Serializable
+data class ScenarioRoute(val id: Uuid) : Route

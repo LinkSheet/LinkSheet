@@ -112,7 +112,7 @@ class HtmlMetadataParser {
         return buildUrl {
             scheme = url.scheme
             host = url.host
-            setPath("/favicon.ico")
+            path = "/favicon.ico"
         }.toString()
     }
 
@@ -138,7 +138,7 @@ class HtmlMetadataParser {
             .takeIf { it.length >= 3 }
             ?.indexOf("x")
             ?.takeIf { it != -1 }
-            ?.let { sizes.substring(0, it).toIntOrNull() }
+            ?.let { sizes.take(it).toIntOrNull() }
     }
 
     internal fun parseSizeAndFindLargest(map: Map<String, String>): String? {

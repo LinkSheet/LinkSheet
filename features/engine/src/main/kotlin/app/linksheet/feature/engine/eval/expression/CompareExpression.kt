@@ -26,6 +26,21 @@ class EqualsExpression<T : Comparable<T>>(
 
 @Keep
 @Serializable
+@SerialName(OpCodes.NEQ)
+class NotEqualsExpression<T : Comparable<T>>(
+    @ProtoNumber(1)
+    override val left: Expression<T>,
+    @ProtoNumber(2)
+    override val right: Expression<T>,
+) : LeftRightExpression<T> {
+
+    override fun eval(ctx: EvalContext): Boolean {
+        return compareTo(left, right, ctx) != 0
+    }
+}
+
+@Keep
+@Serializable
 @SerialName(OpCodes.LT)
 class LessThanExpression<T : Comparable<T>>(
     @ProtoNumber(1)

@@ -20,7 +20,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.URL_ENGINE_RESULT)
-internal class UrlEngineResultExpression(
+class UrlEngineResultExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual StdUrl>,
 ) : Expression<EngineResult> {
@@ -32,7 +32,7 @@ internal class UrlEngineResultExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.INTENT_ENGINE_RESULT)
-internal class IntentEngineResultExpression(
+class IntentEngineResultExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual Intent>,
 ) : Expression<EngineResult> {
@@ -44,7 +44,7 @@ internal class IntentEngineResultExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.FORWARD_OTHER_PROFILE_RESULT)
-internal class ForwardOtherProfileResultExpression(
+class ForwardOtherProfileResultExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual StdUrl>,
 ) : Expression<EngineResult> {

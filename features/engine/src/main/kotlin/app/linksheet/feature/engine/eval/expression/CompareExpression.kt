@@ -12,7 +12,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.EQ)
-internal class EqualsExpression<T : Comparable<T>>(
+class EqualsExpression<T : Comparable<T>>(
     @ProtoNumber(1)
     override val left: Expression<T>,
     @ProtoNumber(2)
@@ -27,7 +27,7 @@ internal class EqualsExpression<T : Comparable<T>>(
 @Keep
 @Serializable
 @SerialName(OpCodes.LT)
-internal class LessThanExpression<T : Comparable<T>>(
+class LessThanExpression<T : Comparable<T>>(
     @ProtoNumber(1)
     override val left: Expression<T>,
     @ProtoNumber(2)
@@ -42,7 +42,7 @@ internal class LessThanExpression<T : Comparable<T>>(
 @Keep
 @Serializable
 @SerialName(OpCodes.LTE)
-internal class LessThanEqualExpression<T : Comparable<T>>(
+class LessThanEqualExpression<T : Comparable<T>>(
     @ProtoNumber(1)
     override val left: Expression<T>,
     @ProtoNumber(2)
@@ -57,7 +57,7 @@ internal class LessThanEqualExpression<T : Comparable<T>>(
 @Keep
 @Serializable
 @SerialName(OpCodes.GT)
-internal class GreaterThanExpression<T : Comparable<T>>(
+class GreaterThanExpression<T : Comparable<T>>(
     @ProtoNumber(1)
     override val left: Expression<T>,
     @ProtoNumber(2)
@@ -72,7 +72,7 @@ internal class GreaterThanExpression<T : Comparable<T>>(
 @Keep
 @Serializable
 @SerialName(OpCodes.GTE)
-internal class GreaterThanEqualExpression<T : Comparable<T>>(
+class GreaterThanEqualExpression<T : Comparable<T>>(
     @ProtoNumber(1)
     override val left: Expression<T>,
     @ProtoNumber(2)

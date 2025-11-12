@@ -12,7 +12,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.STRING_EQUALS)
-internal class StringEqualsExpression(
+class StringEqualsExpression(
     @ProtoNumber(1)
     val left: Expression<String?>,
     @ProtoNumber(2)
@@ -28,7 +28,7 @@ internal class StringEqualsExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.STRING_CONTAINS)
-internal class StringContainsExpression(
+class StringContainsExpression(
     @ProtoNumber(1)
     val left: Expression<String?>,
     @ProtoNumber(2)

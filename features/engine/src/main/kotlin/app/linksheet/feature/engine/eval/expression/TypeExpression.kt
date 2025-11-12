@@ -17,7 +17,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.COMPONENT_NAME)
-internal class ComponentNameExpression(
+class ComponentNameExpression(
     @ProtoNumber(1)
     val pkg: Expression<String>,
     @ProtoNumber(2)
@@ -31,7 +31,7 @@ internal class ComponentNameExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.COMPONENT_NAME_TO_INTENT)
-internal class IntentComponentNameExpression(
+class IntentComponentNameExpression(
     @ProtoNumber(1)
     val action: Expression<String>,
     @ProtoNumber(2)
@@ -47,7 +47,7 @@ internal class IntentComponentNameExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.PACKAGE_TO_INTENT)
-internal class IntentPackageExpression(
+class IntentPackageExpression(
     @ProtoNumber(1)
     val action: Expression<String>,
     @ProtoNumber(2)

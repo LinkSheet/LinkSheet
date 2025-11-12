@@ -12,7 +12,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.AND)
-internal class AndExpression(
+class AndExpression(
     @ProtoNumber(1)
     override val left: Expression<Boolean>,
     @ProtoNumber(2)
@@ -26,7 +26,7 @@ internal class AndExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.OR)
-internal class OrExpression(
+class OrExpression(
     @ProtoNumber(1)
     override val left: Expression<Boolean>,
     @ProtoNumber(2)
@@ -40,7 +40,7 @@ internal class OrExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.NOT)
-internal class NotExpression(
+class NotExpression(
     @ProtoNumber(1)
     val expression: Expression<Boolean>
 ) : Expression<Boolean> {

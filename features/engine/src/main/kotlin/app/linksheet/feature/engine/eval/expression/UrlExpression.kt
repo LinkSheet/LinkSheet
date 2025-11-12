@@ -17,7 +17,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 @Keep
 @Serializable
 @SerialName(OpCodes.URL_GET_COMPONENT)
-internal class UrlGetComponentExpression(
+class UrlGetComponentExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual StdUrl>,
     @ProtoNumber(2)
@@ -36,7 +36,7 @@ internal class UrlGetComponentExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.URL_SET_COMPONENT)
-internal class UrlSetComponentExpression(
+class UrlSetComponentExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual StdUrl>,
     @ProtoNumber(2)
@@ -67,7 +67,7 @@ enum class Component {
 @Keep
 @Serializable
 @SerialName(OpCodes.URL_QUERY_PARAM)
-internal class UrlQueryParamExpression(
+class UrlQueryParamExpression(
     @ProtoNumber(1)
     val op: Expression<@Contextual StdUrl>,
     @ProtoNumber(2)
@@ -81,7 +81,7 @@ internal class UrlQueryParamExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.URL_STRING)
-internal class UrlStringExpression(
+class UrlStringExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual StdUrl>,
 ) : Expression<String> {
@@ -93,7 +93,7 @@ internal class UrlStringExpression(
 @Keep
 @Serializable
 @SerialName(OpCodes.URL_TO_ANDROID_URI)
-internal class UrlToAndroidUriExpression(
+class UrlToAndroidUriExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual StdUrl>,
 ) : Expression<Uri> {

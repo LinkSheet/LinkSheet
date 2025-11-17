@@ -307,7 +307,7 @@
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">ダウンローダー</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheetが設定されました</string>
-    <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheert が設定されていません</string>
+    <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet が設定されていません</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet がシステムのデフォルトブラウザとして設定されていません</string>
     <string name="settings_main_setup_success__button_change_browser">デフォルトのブラウザ</string>
     <string name="settings_main_setup_success__button_set_default_browser">デフォルトのブラウザとして設定</string>

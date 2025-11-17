@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Functions
 import androidx.compose.material.icons.rounded.Webhook
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -61,7 +62,7 @@ private fun NewScenarioDialog(
             .padding(horizontal = 16.dp),
         icon = {
             Icon(
-                imageVector = Icons.Rounded.Webhook,
+                imageVector = Icons.Rounded.Functions,
                 contentDescription = null
             )
         },

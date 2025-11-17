@@ -11,4 +11,5 @@
     <string name="settings_scenario__text_placeholder_name">Scenario name</string>
     <string name="generic__button_text_create">Create</string>
     <string name="generic__button_text_cancel">Cancel</string>
+    <string name="settings_scenario__divider_rules">Rules</string>
 </resources>

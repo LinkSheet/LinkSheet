@@ -51,6 +51,7 @@ dependencies {
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
+    implementation(project(":sdk-common"))
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)
     ksp(AndroidX.room.compiler)

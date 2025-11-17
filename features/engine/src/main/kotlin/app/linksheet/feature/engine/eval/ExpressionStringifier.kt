@@ -2,7 +2,8 @@ package app.linksheet.feature.engine.eval
 
 import app.linksheet.feature.engine.eval.expression.*
 
-class ExpressionStringifier() {
+open class ExpressionStringifier() {
+    companion object : ExpressionStringifier()
     fun stringify(bundle: ExpressionBundle): String {
         return stringify(bundle.expression)
     }
@@ -130,6 +131,7 @@ class ExpressionStringifier() {
 
                 when(expression) {
                     is EqualsExpression<*> -> "$left == $right"
+                    is NotEqualsExpression<*> -> "$left != $right"
                     is GreaterThanEqualExpression<*> -> "$left >= $right"
                     is GreaterThanExpression<*> -> "$left > $right"
                     is LessThanEqualExpression<*> -> "$left <= $right"

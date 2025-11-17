@@ -24,6 +24,7 @@ object OpCodes {
     const val OR = "||"
     const val NOT = "!"
     const val EQ = "=="
+    const val NEQ = "!="
     const val LT = "<"
     const val LTE = "<="
     const val GT = ">"

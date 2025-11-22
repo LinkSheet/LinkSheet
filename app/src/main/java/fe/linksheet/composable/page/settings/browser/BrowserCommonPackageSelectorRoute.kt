@@ -12,14 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.linksheet.compose.extension.collectOnIO
+import app.linksheet.compose.extension.mapHelper
+import app.linksheet.compose.util.mapState
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
 import fe.linksheet.composable.util.CheckboxRow
-import app.linksheet.compose.extension.mapHelper
-import app.linksheet.compose.util.mapState
 import fe.linksheet.extension.compose.searchHeader
-import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 
 @Composable

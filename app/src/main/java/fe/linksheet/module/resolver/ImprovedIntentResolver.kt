@@ -6,10 +6,16 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.Stable
+import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.labelSorted
 import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.downloader.isDownloadable
+import app.linksheet.feature.engine.database.entity.ResolveType
+import app.linksheet.feature.libredirect.LibRedirectResolver
+import app.linksheet.feature.libredirect.LibRedirectResult
+import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
 import fe.composekit.lifecycle.network.core.NetworkStateService
@@ -17,16 +23,11 @@ import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
+import fe.linksheet.extension.android.activityDescriptor
 import fe.linksheet.extension.toStdUrl
-import app.linksheet.feature.app.PackageService
-import app.linksheet.feature.app.labelSorted
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.PreferredApp
-import app.linksheet.feature.engine.database.entity.ResolveType
-import app.linksheet.feature.libredirect.LibRedirectResolver
-import app.linksheet.feature.libredirect.LibRedirectResult
-import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
@@ -45,8 +46,8 @@ import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
 import fe.linksheet.util.AndroidUri
 import fe.linksheet.util.Scheme
-import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.cloneIntent
+import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.parser.UriException
 import fe.std.result.getOrNull
 import fe.std.result.isFailure
@@ -57,7 +58,6 @@ import kotlinx.coroutines.flow.firstOrNull
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
 import mozilla.components.support.utils.SafeIntent
-import kotlin.lazy
 
 @Stable
 class ImprovedIntentResolver(
@@ -149,8 +149,8 @@ class ImprovedIntentResolver(
         emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = packageInfoService.findHttpBrowsable(null)
 
-        // TODO: Refactor properly
-        val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()
+        val list = browsers.map { it.activityInfo.activityDescriptor }
+//        val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()
 
         val resolveEmbeds = settings.resolveEmbeds()
         val useClearUrls = settings.useClearUrls()
@@ -283,7 +283,7 @@ class ImprovedIntentResolver(
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
-        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browserPackageMap, resolveList)
+        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
 
         emitEvent(ResolveEvent.SortingApps)
         val (sorted, filtered) = appSorter.sort(

@@ -14,5 +14,5 @@ abstract class DisableInAppBrowserInSelectedDao : PackageEntityDao<DisableInAppB
     abstract fun getAll(): Flow<List<DisableInAppBrowserInSelected>>
 
     @Query("DELETE FROM disable_in_app_browser_in_selected WHERE packageName = :packageName")
-    abstract override suspend fun deleteByPackageName(packageName: String)
+    abstract override suspend fun deleteByFlatComponentName(packageName: String)
 }

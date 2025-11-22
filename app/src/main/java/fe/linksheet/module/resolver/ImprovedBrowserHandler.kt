@@ -1,14 +1,31 @@
 package fe.linksheet.module.resolver
 
+import android.content.ComponentName
 import android.content.pm.ResolveInfo
+import fe.composekit.extension.componentName
 import fe.linksheet.extension.android.activityDescriptor
+import fe.linksheet.module.repository.whitelisted.createWhitelistedBrowserInfo
 
 class ImprovedBrowserHandler(
     private val autoLaunchSingleBrowserExperiment: () -> Boolean
 ) {
+    companion object {
+        internal fun getBrowser(browsers: List<ResolveInfo>, selectedBrowser: String): ResolveInfo? {
+            // selectedBrowser used to store the package name only, but since a browser might expose multiple activities which
+            // can handle a url, we need to store the component as well -> gracefully handle either, migration is only done
+            // once the user changes the selected browser/component from within settings
+            val cmp = ComponentName.unflattenFromString(selectedBrowser)
+            if (cmp != null) {
+                return browsers.firstOrNull { it.activityInfo.componentName == cmp }
+            }
+
+            return browsers.firstOrNull { it.resolvePackageName == selectedBrowser }
+        }
+    }
+
     fun filterBrowsers(
         config: BrowserModeConfigHelper,
-        browsers: Map<String, ResolveInfo>,
+        browsers: List<ResolveInfo>,
         resolveList: List<ResolveInfo>,
     ): FilteredBrowserList {
         val nonBrowsers = getAllNonBrowsers(browsers, resolveList)
@@ -22,7 +39,7 @@ class ImprovedBrowserHandler(
         return when (config) {
             is BrowserModeConfigHelper.AlwaysAsk -> FilteredBrowserList(
                 config.mode,
-                browsers.values.toList(),
+                browsers,
                 nonBrowsers
             )
 
@@ -37,7 +54,7 @@ class ImprovedBrowserHandler(
             }
 
             is BrowserModeConfigHelper.SelectedBrowser -> {
-                val browserResolveInfo = browsers[config.selectedBrowser]
+                val browserResolveInfo = config.selectedBrowser?.let { getBrowser(browsers, it) }
                 val hasInfo = browserResolveInfo != null
                 val list = if (hasInfo) listOf(browserResolveInfo) else emptyList()
 
@@ -58,17 +75,25 @@ class ImprovedBrowserHandler(
                 val whitelistedPackages = config.whitelistedPackages
 
                 // TODO: If whitelisted empty, show all browsers; Does that make sense?
-                val whitelisted = if (!whitelistedPackages.isNullOrEmpty()) {
-                    browsers.filter { (pkg, _) -> pkg in whitelistedPackages }
-                } else browsers
+                val whitelisted = when {
+                    !whitelistedPackages.isNullOrEmpty() -> {
+                        val info = createWhitelistedBrowserInfo(whitelistedPackages)
+                        browsers.filter {
+                            it.activityInfo.componentName in info.cmps || it.resolvePackageName in info.pkgs
+                        }
+                    }
 
-                FilteredBrowserList(config.mode, whitelisted.values.toList(), nonBrowsers)
+                    else -> browsers
+                }
+
+                FilteredBrowserList(config.mode, whitelisted, nonBrowsers)
             }
         }
     }
 
+
     private fun getAllNonBrowsers(
-        browsers: Map<String, ResolveInfo>,
+        browsers: List<ResolveInfo>,
         resolveList: List<ResolveInfo>,
     ): List<ResolveInfo> {
         val map = mutableMapOf<String, ResolveInfo>()
@@ -76,10 +101,11 @@ class ImprovedBrowserHandler(
             map[uriViewActivity.activityInfo.activityDescriptor] = uriViewActivity
         }
 
-        for ((_, resolveInfo) in browsers) {
+        for (resolveInfo in browsers) {
             map.remove(resolveInfo.activityInfo.activityDescriptor)
         }
 
         return map.values.toList()
     }
 }
+

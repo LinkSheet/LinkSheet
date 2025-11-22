@@ -14,5 +14,5 @@ abstract class WhitelistedInAppBrowsersDao : WhitelistedBrowsersDao<WhitelistedI
     abstract override fun getAll(): Flow<List<WhitelistedInAppBrowser>>
 
     @Query("DELETE FROM whitelisted_in_app_browser WHERE packageName = :packageName")
-    abstract override suspend fun deleteByPackageName(packageName: String)
+    abstract override suspend fun deleteByFlatComponentName(packageName: String)
 }

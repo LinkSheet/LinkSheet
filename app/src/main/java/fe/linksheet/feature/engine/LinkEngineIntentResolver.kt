@@ -3,12 +3,9 @@ package fe.linksheet.feature.engine
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import app.linksheet.feature.app.PackageService
 import app.linksheet.feature.browser.PrivateBrowsingService
-import app.linksheet.feature.engine.core.EngineScenarioInput
-import app.linksheet.feature.engine.core.ForwardOtherProfileResult
-import app.linksheet.feature.engine.core.IntentEngineResult
-import app.linksheet.feature.engine.core.ScenarioSelector
-import app.linksheet.feature.engine.core.UrlEngineResult
+import app.linksheet.feature.engine.core.*
 import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
 import app.linksheet.feature.engine.core.context.IgnoreLibRedirectExtra
 import app.linksheet.feature.engine.core.context.SkipFollowRedirectsExtra
@@ -21,7 +18,6 @@ import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.toAndroidUri
 import fe.linksheet.extension.toStdUrl
-import app.linksheet.feature.app.PackageService
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.PreferredApp
@@ -146,8 +142,6 @@ class LinkEngineIntentResolver(
         emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = packageService.findHttpBrowsable(null)
 
-        val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()
-
         val manualResolveRedirects = checkIntentFlag(intent, IntentKeyResolveRedirects, followRedirectsSettings.manualFollowRedirects())
         val ignoreLibRedirect = checkIntentFlag(intent, LibRedirectDefault.IgnoreIntentKey, libRedirectSettings.enableIgnoreLibRedirectButton())
 
@@ -208,7 +202,7 @@ class LinkEngineIntentResolver(
         val browserModeConfigHelper = browserSettings.createBrowserModeConfig(customTab is CustomTabInfo2.Allowed)
         val appList = browserHandler.filterBrowsers(
             config = browserModeConfigHelper,
-            browsers = browserPackageMap,
+            browsers = browsers,
             resolveList = resolveList
         )
 

@@ -4,11 +4,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.net.Uri
-import fe.linksheet.extension.android.queryResolveInfosByIntent
-import fe.linksheet.util.extension.android.toPackageKeyedMap
 import app.linksheet.feature.app.ActivityAppInfo
 import app.linksheet.feature.app.PackageService
 import app.linksheet.feature.app.labelSorted
+import fe.linksheet.extension.android.queryResolveInfosByIntent
+import fe.linksheet.util.extension.android.toComponentNameKeyedMap
 
 @Deprecated(message = "Switch to PackageService")
 class BrowserResolver(
@@ -45,7 +45,7 @@ class BrowserResolver(
     }
 
     private fun queryBrowsers(intent: Intent): Map<String, ResolveInfo> {
-        return packageManager.queryResolveInfosByIntent(intent, true).toPackageKeyedMap()
+        return packageManager.queryResolveInfosByIntent(intent, true).toComponentNameKeyedMap()
     }
 }
 

@@ -7,7 +7,7 @@ abstract class PackageEntityDao<T : PackageEntity<T>, C : PackageEntityCreator<T
     private val creator: C
 ) : BaseDao<T> {
     @Query("")
-    abstract suspend fun deleteByPackageName(packageName: String)
+    abstract suspend fun deleteByFlatComponentName(packageName: String)
 
     enum class Mode(private val bool: Boolean) {
         Insert(true), Delete(false);
@@ -17,10 +17,10 @@ abstract class PackageEntityDao<T : PackageEntity<T>, C : PackageEntityCreator<T
         }
     }
 
-    suspend fun insertOrDelete(mode: Mode, packageName: String) {
+    suspend fun insertOrDelete(mode: Mode, flatComponentName: String) {
         when (mode) {
-            Mode.Insert -> insert(creator.createInstance(packageName))
-            Mode.Delete -> deleteByPackageName(packageName)
+            Mode.Insert -> insert(creator.createInstance(flatComponentName))
+            Mode.Delete -> deleteByFlatComponentName(flatComponentName)
         }
     }
 }

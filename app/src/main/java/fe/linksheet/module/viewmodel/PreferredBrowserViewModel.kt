@@ -4,11 +4,13 @@ package fe.linksheet.module.viewmodel
 
 
 import android.app.Application
+import app.linksheet.feature.app.ActivityAppInfo
 import fe.linksheet.extension.android.launchIO
 import fe.linksheet.feature.app.ActivityAppInfoSortGlue
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.repository.whitelisted.WhitelistedBrowserInfo
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.BrowserResolver
@@ -56,7 +58,7 @@ class PreferredBrowserViewModel(
     private val whitelistedInAppBrowsers = getWhitelistedBrowsers(whitelistedInAppBrowsersPackages)
 
     private fun getWhitelistedBrowsers(
-        packages: Flow<Set<String>>,
+        packages: Flow<WhitelistedBrowserInfo>,
     ) = browsers.combine(packages) { browsers, pkgs ->
         ActivityAppInfoSortGlue.mapBrowserState(browsers, pkgs)
     }
@@ -96,15 +98,15 @@ class PreferredBrowserViewModel(
     override fun save(selected: BrowserCommonSelected) = launchIO {
         val repo = repository.first()
         selected.forEach { (activityInfo, enabled) ->
-            repo.insertOrDelete(enabled, activityInfo.packageName)
+            repo.insertOrDelete(enabled, activityInfo.flatComponentName)
         }
     }
 
-    fun updateSelectedBrowser(selectedBrowserPackage: String) = launchIO {
+    fun updateSelectedBrowser(selectedBrowserPackage: ActivityAppInfo) = launchIO {
         val state = browserModeState.first()
         val selected = selectedBrowserState.first()
 
         state(BrowserMode.SelectedBrowser)
-        selected(selectedBrowserPackage)
+        selected(selectedBrowserPackage.flatComponentName)
     }
 }

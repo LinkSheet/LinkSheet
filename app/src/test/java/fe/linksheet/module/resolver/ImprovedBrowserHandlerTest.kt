@@ -3,14 +3,13 @@ package fe.linksheet.module.resolver
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.fake.PackageInfoFakes
+import app.linksheet.testing.util.firstActivityResolveInfo
 import app.linksheet.testing.util.listOfFirstActivityResolveInfo
 import app.linksheet.testing.util.packageSetOf
-import app.linksheet.testing.util.toKeyedMap
 import assertk.assertThat
 import assertk.assertions.isDataClassEqualTo
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -21,7 +20,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         private val handler = ImprovedBrowserHandler(
             autoLaunchSingleBrowserExperiment = { false },
         )
-        private val allBrowsersKeyed = PackageInfoFakes.allBrowsers.toKeyedMap()
+        internal val allBrowsersResolveInfos = PackageInfoFakes.allBrowsers.mapNotNull { it.firstActivityResolveInfo }
         private val allAppsInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allApps)
         private val allBrowsersInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allBrowsers)
         private val allResolvedInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allResolved)
@@ -34,7 +33,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         assertThat(
             handler.filterBrowsers(
                 config,
-                allBrowsersKeyed,
+                allBrowsersResolveInfos,
                 allResolvedInfoList
             )
         ).isDataClassEqualTo(
@@ -53,7 +52,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         val config = BrowserModeConfigHelper.None
 
         assertThat(
-            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+            handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
         ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.None,
@@ -71,7 +70,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
 
         val youtube = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube)
         assertThat(
-            handler.filterBrowsers(config, emptyMap(), youtube)
+            handler.filterBrowsers(config, emptyList(), youtube)
         ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.None,
@@ -91,7 +90,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         assertThat(
             handler.filterBrowsers(
                 config,
-                allBrowsersKeyed,
+                allBrowsersResolveInfos,
                 allResolvedInfoList
             )
         ).isDataClassEqualTo(
@@ -110,7 +109,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         val config = BrowserModeConfigHelper.SelectedBrowser(null)
 
         assertThat(
-            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+            handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
         ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.SelectedBrowser,
@@ -127,7 +126,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         val config = BrowserModeConfigHelper.SelectedBrowser(PackageInfoFakes.MiBrowser.packageInfo.packageName)
 
         assertThat(
-            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+            handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
         ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.SelectedBrowser,
@@ -144,7 +143,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         val config = BrowserModeConfigHelper.Whitelisted(null)
 
         assertThat(
-            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+            handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
         ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.Whitelisted,
@@ -163,7 +162,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(PackageInfoFakes.MiBrowser))
 
         assertThat(
-            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+            handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
         ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.Whitelisted,
@@ -185,7 +184,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         )
 
         assertThat(
-            handler.filterBrowsers(config, allBrowsersKeyed, allResolvedInfoList)
+            handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
         ).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = BrowserMode.Whitelisted,

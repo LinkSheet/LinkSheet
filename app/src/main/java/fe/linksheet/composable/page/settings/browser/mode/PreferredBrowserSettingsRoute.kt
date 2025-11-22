@@ -1,5 +1,6 @@
 package fe.linksheet.composable.page.settings.browser.mode
 
+import android.content.ComponentName
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
@@ -13,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import app.linksheet.compose.extension.collectOnIO
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.browser.BrowserCommonPackageSelectorData
@@ -25,7 +27,6 @@ import fe.linksheet.composable.util.RadioButtonRow
 import fe.linksheet.composable.util.SettingEnabledCardColumn
 import fe.linksheet.extension.android.startPackageInfoActivity
 import fe.linksheet.extension.compose.currentActivity
-import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.navigation.whitelistedBrowsersSettingsRoute
@@ -46,6 +47,9 @@ fun PreferredBrowserSettingsRoute(
 
     val browserMode = browserModePreference?.collectAsStateWithLifecycle()
     val selectedBrowser = selectedBrowserPreference?.collectAsStateWithLifecycle()
+    val selectedCmp = remember(selectedBrowser?.value) {
+        selectedBrowser?.value?.let { ComponentName.unflattenFromString(it) }
+    }
 
     val rows = remember {
         listOf(
@@ -118,11 +122,12 @@ fun PreferredBrowserSettingsRoute(
                 key = { it.flatComponentName },
                 contentType = { it.flatComponentName }
             ) { app ->
-                val selected = browserMode?.value == BrowserMode.SelectedBrowser && selectedBrowser?.value == app.packageName
+                val selected = browserMode?.value == BrowserMode.SelectedBrowser
+                        && ((selectedCmp != null && selectedCmp == app.componentName) || (selectedBrowser?.value == app.packageName))
 
                 RadioButtonRow(
                     selected = selected,
-                    onClick = { viewModel.updateSelectedBrowser(app.packageName) },
+                    onClick = { viewModel.updateSelectedBrowser(app) },
                     onLongClick = { activity.startPackageInfoActivity(app) }
                 ) {
                     val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()

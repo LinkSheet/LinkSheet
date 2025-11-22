@@ -4,6 +4,7 @@ import app.linksheet.feature.app.ActivityAppInfo
 import app.linksheet.feature.app.ActivityAppInfoStatus
 import app.linksheet.feature.app.AppInfo
 import fe.linksheet.module.database.entity.PreferredApp
+import fe.linksheet.module.repository.whitelisted.WhitelistedBrowserInfo
 import fe.linksheet.module.resolver.DisplayActivityInfo
 import fe.linksheet.util.RefactorGlue
 
@@ -13,11 +14,12 @@ object ActivityAppInfoSortGlue {
         status
     }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
 
-    private fun mapBrowserState(appInfo: ActivityAppInfo, pkgs: Set<String>): ActivityAppInfoStatus {
-        return appInfo to (appInfo.packageName in pkgs)
+    private fun mapBrowserState(appInfo: ActivityAppInfo, helper: WhitelistedBrowserInfo): ActivityAppInfoStatus {
+        val flag = (appInfo.packageName in helper.pkgs) || (appInfo.componentName in helper.cmps)
+        return appInfo to flag
     }
 
-    fun mapBrowserState(browsers: List<ActivityAppInfo>, pkgs: Set<String>): Map<ActivityAppInfo, Boolean> {
+    fun mapBrowserState(browsers: List<ActivityAppInfo>, pkgs: WhitelistedBrowserInfo): Map<ActivityAppInfo, Boolean> {
         return browsers.map { mapBrowserState(it, pkgs) }.sortedWith(valueAndLabelComparator).toMap()
     }
 }

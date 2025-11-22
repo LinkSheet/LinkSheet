@@ -1,0 +1,67 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "b1b6dba95028b371578b66a5a48f233d",
+    "entities": [
+      {
+        "tableName": "lib_redirect_default",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`serviceKey` TEXT NOT NULL, `frontendKey` TEXT NOT NULL, `instanceUrl` TEXT NOT NULL, PRIMARY KEY(`serviceKey`))",
+        "fields": [
+          {
+            "fieldPath": "serviceKey",
+            "columnName": "serviceKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "frontendKey",
+            "columnName": "frontendKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "instanceUrl",
+            "columnName": "instanceUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "serviceKey"
+          ]
+        }
+      },
+      {
+        "tableName": "lib_redirect_service_state",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`serviceKey` TEXT NOT NULL, `enabled` INTEGER NOT NULL, PRIMARY KEY(`serviceKey`))",
+        "fields": [
+          {
+            "fieldPath": "serviceKey",
+            "columnName": "serviceKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "enabled",
+            "columnName": "enabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "serviceKey"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b1b6dba95028b371578b66a5a48f233d')"
+    ]
+  }
+}

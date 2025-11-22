@@ -2,6 +2,7 @@ package fe.linksheet
 
 import android.content.Context
 import androidx.room.Room
+import app.linksheet.api.database.DefaultCrossDatabaseMigration
 import fe.linksheet.module.database.LinkSheetDatabase
 import fe.linksheet.module.database.LinkSheetDatabase.Companion.configureAndBuild
 import fe.linksheet.module.log.Logger
@@ -41,7 +42,7 @@ class DatabaseTestRule(private val applicationContext: Context) : TestWatcher() 
         val logger = Logger(DebugLoggerDelegate(true, DatabaseTestRule::class))
         val database = Room
             .inMemoryDatabaseBuilder(context, LinkSheetDatabase::class.java)
-            .configureAndBuild(logger)
+            .configureAndBuild(logger, DefaultCrossDatabaseMigration())
 
         return database
     }

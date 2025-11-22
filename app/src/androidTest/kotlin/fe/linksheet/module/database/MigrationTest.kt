@@ -2,6 +2,8 @@ package fe.linksheet.module.database
 
 import androidx.room.testing.MigrationTestHelper
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.api.database.CrossDatabaseMigration
+import app.linksheet.api.database.DefaultCrossDatabaseMigration
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.testlib.instrument.InstrumentationTest
@@ -17,14 +19,14 @@ internal class MigrationTest : InstrumentationTest {
         instrumentation, LinkSheetDatabase::class.java
     )
 
-    private fun runTest(version: Int) {
+    private fun runTest(version: Int, migration: CrossDatabaseMigration = DefaultCrossDatabaseMigration()) {
         helper.createDatabase(testDb, version).apply {
             close()
         }
 
         val logger = Logger(DebugLoggerDelegate(true, MigrationTest::class))
 
-        LinkSheetDatabase.create(targetContext, logger, testDb).apply {
+        LinkSheetDatabase.create(targetContext, logger, testDb, migration).apply {
             openHelper.writableDatabase.close()
         }
     }
@@ -35,27 +37,32 @@ internal class MigrationTest : InstrumentationTest {
     }
 
     @org.junit.Test
-    fun testMigrate12to17() {
+    fun migrate12ToLatest() {
         runTest(12)
     }
 
     @org.junit.Test
-    fun testMigrate13to17() {
+    fun migrate13ToLatest() {
         runTest(13)
     }
 
     @org.junit.Test
-    fun testMigrate14to17() {
+    fun migrate14ToLatest() {
         runTest(14)
     }
 
     @org.junit.Test
-    fun testMigrate15to17() {
+    fun migrate15ToLatest() {
         runTest(15)
     }
 
     @org.junit.Test
-    fun testMigrate16to17() {
+    fun testMigrate16toLatest() {
         runTest(16)
+    }
+
+    @org.junit.Test
+    fun testMigrate21to22() {
+        runTest(21)
     }
 }

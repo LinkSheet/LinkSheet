@@ -9,7 +9,7 @@ import fe.linksheet.util.ResolveInfoFlags
 
 interface PackageIntentHandler {
     fun isSelfDefaultBrowser(): Boolean
-    fun findHttpBrowsable(packageName: String?): List<ResolveInfo>?
+    fun findHttpBrowsable(packageName: String?): List<ResolveInfo>
     fun findHandlers(intent: Intent): List<ResolveInfo>
     fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo>
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean
@@ -48,7 +48,7 @@ class DefaultPackageIntentHandler(
         return filter { it.activityInfo.exported && it.activityInfo.applicationInfo.enabled }
     }
 
-    override fun findHttpBrowsable(packageName: String?): List<ResolveInfo>? {
+    override fun findHttpBrowsable(packageName: String?): List<ResolveInfo> {
         val httpIntent = Intent(Intent.ACTION_VIEW, httpSchemeUri)
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .setPackage(packageName)

@@ -167,6 +167,22 @@ internal class UrlClearTest {
             |#/2/doc/view/JHBAaIWBxeAJxjCkRsfc9teDgekmZRTy3NpYr5jIioM/embed/
             |""".trimTestMargin()
         )
+        .row(
+            """https://sso.willhaben.at/auth/realms/willhaben/protocol/openid-connect/auth
+            |?response_type=code
+            |&client_id=CLIENT1
+            |&scope=openid
+            |&state=STATE_ABC1
+            |&redirect_uri=https://www.willhaben.at/webapi/oauth2/code/sso&nonce=NONCE_ABC1
+            |""".trimTestMargin(),
+            """https://sso.willhaben.at/auth/realms/willhaben/protocol/openid-connect/auth
+            |?response_type=code
+            |&client_id=CLIENT1
+            |&scope=openid
+            |&state=STATE_ABC1
+            |&redirect_uri=https://www.willhaben.at/webapi/oauth2/code/sso&nonce=NONCE_ABC1
+            |""".trimTestMargin(),
+        )
 
 
     private val providers = BundledClearURLConfigLoader.load().getOrNull()!!

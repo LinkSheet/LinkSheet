@@ -9,14 +9,14 @@ import fe.build.dependencies.LinkSheet
 import fe.build.dependencies.MozillaComponents
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
+import fe.buildlogic.common.CompilerOption
+import fe.buildlogic.common.PluginOption
 import fe.buildlogic.common.extension.addCompilerOptions
 import fe.buildlogic.common.extension.addPluginOptions
 import fe.buildlogic.extension.buildConfig
 import fe.buildlogic.extension.buildStringConfigField
 import fe.buildlogic.extension.getOrSystemEnv
 import fe.buildlogic.extension.readPropertiesOrNull
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.PluginOption
 import fe.buildlogic.version.AndroidVersionStrategy
 
 plugins {
@@ -239,6 +239,9 @@ android {
 
     val androidTest by sourceSets
     androidTest.assets.srcDir("$projectDir/schemas")
+    rootProject.findProject(":feature-libredirect")?.projectDir?.resolve("schemas")?.let {
+        androidTest.assets.srcDir(it)
+    }
 
     val main by sourceSets
     for (it in arrayOf("compat", "experiment", "testing")) {

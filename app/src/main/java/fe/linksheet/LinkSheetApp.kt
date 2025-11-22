@@ -29,12 +29,13 @@ import fe.droidkit.koin.androidApplicationContext
 import fe.gson.GlobalGsonModule
 import fe.gson.context.GlobalGsonContext
 import fe.linksheet.activity.CrashHandlerActivity
+import fe.linksheet.feature.app.AppFeatureModule
+import fe.linksheet.feature.profile.ProfileFeatureModule
+import fe.linksheet.feature.wiki.WikiFeatureModule
 import fe.linksheet.module.analytics.AnalyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
-import fe.linksheet.feature.app.AppFeatureModule
 import fe.linksheet.module.clock.ClockModule
 import fe.linksheet.module.database.DatabaseModule
-import fe.linksheet.module.database.dao.module.DaoModule
 import fe.linksheet.module.devicecompat.CompatModule
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
@@ -48,8 +49,6 @@ import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.paste.PasteServiceModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
-import fe.linksheet.feature.profile.ProfileFeatureModule
-import fe.linksheet.feature.wiki.WikiFeatureModule
 import fe.linksheet.module.receiver.BroadcastEventBusModule
 import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
 import fe.linksheet.module.repository.module.RepositoryModule
@@ -136,8 +135,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             DefaultLogModule,
             provideCompatProvider(),
             CompatModule,
+            LibRedirectMigratorModule,
             DatabaseModule,
-            DaoModule,
             RepositoryModule,
             HttpModule,
             DownloaderModule,

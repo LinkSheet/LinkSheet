@@ -10,6 +10,8 @@ plugins {
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
+    id("androidx.room")
+    id("com.google.devtools.ksp")
     id("com.gitlab.grrfe.new-build-logic-plugin")
 }
 
@@ -29,6 +31,11 @@ android {
     buildFeatures {
         compose = true
     }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+        generateKotlin = true
+    }
 }
 
 dependencies {
@@ -36,12 +43,14 @@ dependencies {
     implementation(project(":util"))
     implementation(project(":api"))
     implementation(project(":compose"))
-
     compileOnly(project(":hidden-api"))
+    implementation(AndroidX.room.common)
+    implementation(AndroidX.room.runtime)
+    implementation(AndroidX.room.ktx)
+    ksp(AndroidX.room.compiler)
 
     implementation("com.github.1fexd.libredirectkt:lib:_")
     implementation(AndroidX.lifecycle.viewModel)
-    implementation(AndroidX.room.common)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)
@@ -68,9 +77,6 @@ dependencies {
     implementation(Grrfe.gsonExt.core)
     implementation(Koin.android)
     implementation(Koin.compose)
-
-    implementation(AndroidX.room.common)
-    implementation(AndroidX.core.ktx)
 
     testImplementation(Testing.robolectric)
     testImplementation(KotlinX.coroutines.test)

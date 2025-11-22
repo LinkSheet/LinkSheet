@@ -41,7 +41,6 @@ public class DomainSet implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         HiddenStub.throwException();
     }
-
     @Override
     public int describeContents() {
         return HiddenStub.throwException();

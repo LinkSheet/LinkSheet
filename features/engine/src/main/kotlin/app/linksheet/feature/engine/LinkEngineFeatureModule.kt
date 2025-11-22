@@ -5,22 +5,42 @@ package app.linksheet.feature.engine
 import app.linksheet.feature.engine.database.EngineDatabase
 import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.engine.database.repository.ScenarioRepository
-import org.koin.core.module.dsl.singleOf
+import app.linksheet.feature.engine.viewmodel.ScenarioOverviewViewModel
+import app.linksheet.feature.engine.viewmodel.ScenarioViewModel
+import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
+import kotlin.uuid.ExperimentalUuidApi
 
+@OptIn(ExperimentalUuidApi::class)
 val LinkEngineFeatureModule = module {
     single<EngineDatabase> { EngineDatabase.create(context = get(), name = "engine") }
-    singleOf(EngineDatabase::htmlCacheDao)
-    singleOf(EngineDatabase::previewCacheDao)
-    singleOf(EngineDatabase::resolvedUrlCacheDao)
-    singleOf(EngineDatabase::resolveTypeDao)
-    singleOf(EngineDatabase::urlEntryDao)
-    singleOf(EngineDatabase::expressionRuleDao)
-    singleOf(EngineDatabase::scenarioDao)
-    singleOf(EngineDatabase::scenarioExpressionDao)
-    singleOf(::CacheRepository)
-    single {
-        ScenarioRepository(scenarioDao = get(), expressionRuleDao = get(), scenarioExpressionDao = get())
+    factory {
+        val db = get<EngineDatabase>()
+        CacheRepository(
+            htmlCacheDao = db.htmlCacheDao(),
+            previewCacheDao = db.previewCacheDao(),
+            resolvedUrlCacheDao = db.resolvedUrlCacheDao(),
+            resolveTypeDao = db.resolveTypeDao(),
+            urlEntryDao = db.urlEntryDao(),
+            clock = get()
+        )
+    }
+    factory {
+        val db = get<EngineDatabase>()
+        ScenarioRepository(
+            scenarioDao = db.scenarioDao(),
+            expressionRuleDao = db.expressionRuleDao(),
+            scenarioExpressionDao = db.scenarioExpressionDao(),
+        )
+    }
+    viewModelOf(::ScenarioOverviewViewModel)
+    viewModel { parameters ->
+        ScenarioViewModel(
+            context = get(),
+            scenarioRepository = get(),
+            id = parameters.get(),
+        )
     }
 }

@@ -6,45 +6,57 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
-
-import fe.linksheet.extension.koin.createLogger
-import fe.linksheet.module.database.dao.*
-
-import app.linksheet.feature.libredirect.database.dao.LibRedirectDefaultDao
-import app.linksheet.feature.libredirect.database.dao.LibRedirectServiceStateDao
+import app.linksheet.api.database.CrossDatabaseMigration
+import app.linksheet.feature.libredirect.LibRedirectMigratorModule
+import app.linksheet.feature.libredirect.database.LibRedirectDatabase
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.libredirect.database.entity.LibRedirectServiceState
+import fe.linksheet.extension.koin.createLogger
+import fe.linksheet.module.database.dao.AppSelectionHistoryDao
+import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
+import fe.linksheet.module.database.dao.PreferredAppDao
 import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
 import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
-import fe.linksheet.module.database.entity.*
+import fe.linksheet.module.database.entity.AppSelectionHistory
+import fe.linksheet.module.database.entity.DisableInAppBrowserInSelected
+import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
-import fe.linksheet.module.database.migrations.Migration12to17
-import fe.linksheet.module.database.migrations.Migration18to19
-import fe.linksheet.module.database.migrations.Migration1to2
-import fe.linksheet.module.database.migrations.Migration19to20
-import fe.linksheet.module.database.migrations.Migration20to21
+import fe.linksheet.module.database.migrations.*
 import fe.linksheet.module.log.Logger
+import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
 val DatabaseModule = module {
+    includes(LibRedirectMigratorModule)
     single<LinkSheetDatabase> {
-        LinkSheetDatabase.create(context = get(), logger = createLogger<LinkSheetDatabase>(), name = "linksheet")
+        LinkSheetDatabase.create(
+            context = get(),
+            logger = createLogger<LinkSheetDatabase>(),
+            name = "linksheet",
+            migrator = get(qualifier<LibRedirectDatabase>())
+        )
     }
 }
 
 @Database(
     entities = [
-        PreferredApp::class, AppSelectionHistory::class, WhitelistedNormalBrowser::class,
-        WhitelistedInAppBrowser::class, ResolvedRedirect::class, LibRedirectDefault::class,
-        LibRedirectServiceState::class, DisableInAppBrowserInSelected::class, Amp2HtmlMapping::class,
+        PreferredApp::class,
+        AppSelectionHistory::class,
+        WhitelistedNormalBrowser::class,
+        WhitelistedInAppBrowser::class,
+        ResolvedRedirect::class,
+        LibRedirectDefault::class,
+        LibRedirectServiceState::class,
+        DisableInAppBrowserInSelected::class,
+        Amp2HtmlMapping::class,
 //        ScenarioEntity::class
     ],
-    version = 21,
+    version = 22,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -69,10 +81,7 @@ abstract class LinkSheetDatabase : RoomDatabase() {
     abstract fun whitelistedInAppBrowsersDao(): WhitelistedInAppBrowsersDao
     abstract fun disableInAppBrowserInSelectedDao(): DisableInAppBrowserInSelectedDao
     abstract fun resolvedRedirectDao(): ResolvedRedirectDao
-    abstract fun libRedirectDefaultDao(): LibRedirectDefaultDao
-    abstract fun libRedirectServiceStateDao(): LibRedirectServiceStateDao
     abstract fun amp2HtmlMappingDao(): Amp2HtmlMappingDao
-//    abstract fun scenarioDao(): ScenarioDao
 
     companion object {
         private fun buildMigrations(logger: Logger): Array<Migration> {
@@ -85,14 +94,21 @@ abstract class LinkSheetDatabase : RoomDatabase() {
             )
         }
 
-        fun Builder<LinkSheetDatabase>.configureAndBuild(logger: Logger): LinkSheetDatabase {
-            return addMigrations(*buildMigrations(logger)).build()
+        fun Builder<LinkSheetDatabase>.configureAndBuild(
+            logger: Logger,
+            migrator: CrossDatabaseMigration
+        ): LinkSheetDatabase {
+            return addMigrations(*buildMigrations(logger)).addMigrations(Migration21to22(migrator)).build()
         }
 
-        fun create(context: Context, logger: Logger, name: String): LinkSheetDatabase {
-            return Room
-                .databaseBuilder(context, LinkSheetDatabase::class.java, name)
-                .configureAndBuild(logger)
+        fun create(
+            context: Context,
+            logger: Logger,
+            name: String,
+            migrator: CrossDatabaseMigration
+        ): LinkSheetDatabase {
+            val builder = Room.databaseBuilder(context, LinkSheetDatabase::class.java, name)
+            return builder.configureAndBuild(logger, migrator)
         }
     }
 }

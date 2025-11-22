@@ -1,4 +1,4 @@
-package app.linksheet.feature.scenario.ui
+package app.linksheet.feature.engine.ui
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

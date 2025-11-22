@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.linksheet.feature.scenario.navigation.ScenarioOverviewRoute
+import app.linksheet.feature.engine.navigation.ScenarioOverviewRoute
 import app.linksheet.feature.shizuku.navigation.ShizukuRoute
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text

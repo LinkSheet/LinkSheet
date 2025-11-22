@@ -1,10 +1,8 @@
 @file:OptIn(ExperimentalUuidApi::class)
 
-package app.linksheet.feature.scenario.ui
+package app.linksheet.feature.engine.ui
 
-import android.content.Intent
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,34 +15,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import app.linksheet.compose.extension.collectOnIO
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.engine.R
 import app.linksheet.feature.engine.database.entity.ExpressionRule
 import app.linksheet.feature.engine.database.entity.ExpressionRuleType
 import app.linksheet.feature.engine.database.entity.Scenario
 import app.linksheet.feature.engine.eval.BundleSerializer
 import app.linksheet.feature.engine.eval.ExpressionStringifier
-import app.linksheet.feature.engine.eval.KnownTokens
-import app.linksheet.feature.engine.eval.expression.ComponentNameExpression
-import app.linksheet.feature.engine.eval.expression.ConstantExpression
-import app.linksheet.feature.engine.eval.expression.IfExpression
-import app.linksheet.feature.engine.eval.expression.IntentComponentNameExpression
-import app.linksheet.feature.engine.eval.expression.IntentEngineResultExpression
-import app.linksheet.feature.engine.eval.expression.RegexExpression
-import app.linksheet.feature.engine.eval.expression.RegexMatchEntireExpression
-import app.linksheet.feature.engine.eval.expression.UrlStringExpression
-import app.linksheet.feature.engine.eval.expression.UrlToAndroidUriExpression
-import app.linksheet.feature.scenario.viewmodel.ScenarioViewModel
+import app.linksheet.feature.engine.viewmodel.ScenarioViewModel
+import fe.android.compose.text.ComposableTextContent.Companion.content
+import fe.android.compose.text.DefaultContent.Companion.text
 import fe.composekit.component.PreviewThemeNew
+import fe.composekit.component.list.column.shape.ClickableShapeListItem
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.layout.column.group
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
-import app.linksheet.feature.scenario.R
-import fe.android.compose.text.ComposableTextContent.Companion.content
-import fe.android.compose.text.DefaultContent.Companion.text
-import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.composekit.component.list.column.shape.ClickableShapeListItem
-import fe.composekit.component.list.item.ContentPosition
-import fe.composekit.layout.column.group
 
 @Composable
 fun ScenarioRoute(

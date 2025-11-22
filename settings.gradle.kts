@@ -91,7 +91,6 @@ includeProject(":feature-libredirect", "features/libredirect")
 includeProject(":feature-shizuku", "features/shizuku")
 includeProject(":feature-systeminfo", "features/systeminfo")
 includeProject(":feature-wiki", "features/wiki")
-includeProject(":feature-scenario", "features/scenario")
 includeProject(":sdk-rule-plugin", "sdk/rule-plugin")
 includeProject(":sdk-common", "sdk/common")
 

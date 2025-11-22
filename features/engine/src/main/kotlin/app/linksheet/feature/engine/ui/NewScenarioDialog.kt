@@ -1,4 +1,4 @@
-package app.linksheet.feature.scenario.ui
+package app.linksheet.feature.engine.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -27,7 +27,7 @@ import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.dialog.SaneIconAlertDialog
-import app.linksheet.feature.scenario.R
+import app.linksheet.feature.engine.R
 import my.nanihadesuka.compose.ScrollbarSettings
 
 @Composable

@@ -42,7 +42,6 @@ import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
 import app.linksheet.compose.util.animatedComposable
 import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
-import app.linksheet.feature.scenario.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.shizuku.navigation.ShizukuNavSubGraph
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.NavTypes

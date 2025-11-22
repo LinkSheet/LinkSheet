@@ -57,8 +57,6 @@ dependencies {
     ksp(AndroidX.room.compiler)
 
 
-    compileOnly(project(":hidden-api"))
-
     implementation("sh.calvin.reorderable:reorderable:_")
     implementation("org.jsoup:jsoup:_")
     implementation("me.saket.unfurl:unfurl:_")

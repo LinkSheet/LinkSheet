@@ -1,9 +1,9 @@
 package fe.linksheet.feature.engine
 
 import android.content.Context
+import app.linksheet.feature.app.PackageService
 import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.downloader.Downloader
-import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.engine.core.EngineScenario
 import app.linksheet.feature.engine.core.LinkEngine
 import app.linksheet.feature.engine.core.ScenarioSelector
@@ -17,9 +17,9 @@ import app.linksheet.feature.engine.core.resolver.amp2html.Amp2HtmlLinkResolver
 import app.linksheet.feature.engine.core.resolver.amp2html.Amp2HtmlLocalSource
 import app.linksheet.feature.engine.core.resolver.followredirects.FollowRedirectsLinkResolver
 import app.linksheet.feature.engine.core.resolver.followredirects.FollowRedirectsLocalSource
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import fe.composekit.lifecycle.network.core.NetworkStateService
-import app.linksheet.feature.app.PackageService
 import fe.linksheet.module.log.Logger
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -34,7 +34,6 @@ import io.ktor.client.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 @Suppress("FunctionName")
 @OptIn(ExperimentalUuidApi::class)
@@ -131,7 +130,6 @@ fun DefaultLinkEngineIntentResolver(
     )
 
     val scenario = EngineScenario(
-        id = Uuid.NIL,
         position = 0,
         predicate = { true },
         engine = pipeline

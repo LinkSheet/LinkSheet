@@ -164,7 +164,6 @@ class RealLinkEngine(
             dispatcher = dispatcher
         )
         val scenario = EngineScenario(
-            id = kotlinUuid,
             position = position,
             // TODO: Get from stored Scenario entity
             predicate = { true },

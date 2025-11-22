@@ -10,6 +10,11 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import app.linksheet.api.CachedRequest
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageLabelService
+import app.linksheet.feature.app.pkg.PackageLauncherService
+import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.engine.database.repository.CacheRepository
@@ -33,17 +38,20 @@ import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
-import app.linksheet.feature.app.PackageService
-import app.linksheet.feature.app.pkg.PackageIntentHandler
-import app.linksheet.feature.app.pkg.PackageLabelService
-import app.linksheet.feature.app.pkg.PackageLauncherService
-import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import fe.linksheet.feature.systeminfo.BuildConstants
 import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.feature.systeminfo.SystemProperties
+import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
 import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import fe.linksheet.module.analytics.BaseAnalyticsService
+import fe.linksheet.module.database.dao.AppSelectionHistoryDao
+import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
+import fe.linksheet.module.database.dao.PreferredAppDao
+import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
+import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
+import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
+import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
 import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
@@ -56,9 +64,13 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.redactor.LogHasher
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.remoteconfig.RemoteConfigRepository
+import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
+import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
 import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolver
@@ -150,6 +162,14 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<LibRedirectDefaultRepository>(LibRedirectDefaultDao::class),
         definition<LibRedirectStateRepository>(LibRedirectServiceStateDao::class),
+        definition<PreferredAppRepository>(PreferredAppDao::class),
+        definition<DisableInAppBrowserInSelectedRepository>(DisableInAppBrowserInSelectedDao::class),
+        definition<WhitelistedNormalBrowsersRepository>(WhitelistedNormalBrowsersDao::class),
+        definition<WhitelistedInAppBrowsersRepository>(WhitelistedInAppBrowsersDao::class),
+        definition<AppSelectionHistoryRepository>(AppSelectionHistoryDao::class),
+        definition<ResolvedRedirectRepository>(ResolvedRedirectDao::class),
+        definition<Amp2HtmlRepository>(Amp2HtmlMappingDao::class),
+        definition<WikiCacheRepository>(WikiCacheDao::class),
         definition<LibRedirectSettingsViewModel>(AppPreferenceRepository::class, LibRedirectPreferences::class),
         definition<LibRedirectResolver>(
             LibRedirectDefaultRepository::class,

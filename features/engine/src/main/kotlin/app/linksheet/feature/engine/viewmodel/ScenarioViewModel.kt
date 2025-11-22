@@ -14,16 +14,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
-import kotlin.uuid.toJavaUuid
 
 class ScenarioViewModel(
     private val context: Application,
     private val scenarioRepository: ScenarioRepository,
-    id: Uuid,
+    private val id: Long,
 ) : ViewModel() {
-    private val id = id.toJavaUuid()
-
     fun getScenario(): Flow<Scenario> {
         return scenarioRepository.getById(id)
     }

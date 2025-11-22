@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e72581edbe975ad6dc9ae14b04e783d2",
+    "identityHash": "631d2daf70c05ffd174f55aac6795f1f",
     "entities": [
       {
         "tableName": "html_cache",
@@ -258,12 +258,12 @@
       },
       {
         "tableName": "scenario",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` BLOB NOT NULL, `name` TEXT NOT NULL, `position` INTEGER NOT NULL, `referrerApp` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `position` INTEGER NOT NULL, `referrerApp` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
-            "affinity": "BLOB",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -285,7 +285,7 @@
           }
         ],
         "primaryKey": {
-          "autoGenerate": false,
+          "autoGenerate": true,
           "columnNames": [
             "id"
           ]
@@ -293,12 +293,12 @@
       },
       {
         "tableName": "scenario_expression",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`scenarioId` BLOB NOT NULL, `expressionId` INTEGER NOT NULL, PRIMARY KEY(`scenarioId`, `expressionId`), FOREIGN KEY(`scenarioId`) REFERENCES `scenario`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`expressionId`) REFERENCES `expression_rule`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`scenarioId` INTEGER NOT NULL, `expressionId` INTEGER NOT NULL, PRIMARY KEY(`scenarioId`, `expressionId`), FOREIGN KEY(`scenarioId`) REFERENCES `scenario`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`expressionId`) REFERENCES `expression_rule`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "scenarioId",
             "columnName": "scenarioId",
-            "affinity": "BLOB",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -363,7 +363,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e72581edbe975ad6dc9ae14b04e783d2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '631d2daf70c05ffd174f55aac6795f1f')"
     ]
   }
 }

@@ -17,7 +17,6 @@ import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import app.linksheet.feature.engine.R
 
 @Serializable
@@ -52,4 +51,4 @@ data object ScenarioOverviewRoute : Route {
 
 @Keep
 @Serializable
-data class ScenarioRoute(val id: Uuid) : Route
+data class ScenarioRoute(val id: Long) : Route

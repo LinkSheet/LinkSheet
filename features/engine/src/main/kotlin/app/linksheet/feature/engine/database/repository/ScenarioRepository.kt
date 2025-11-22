@@ -14,9 +14,7 @@ import app.linksheet.feature.engine.eval.ExpressionBundle
 import app.linksheet.feature.engine.eval.ExpressionStringifier
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.*
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 class ScenarioRepository internal constructor(
     private val scenarioDao: ScenarioDao,
@@ -26,9 +24,9 @@ class ScenarioRepository internal constructor(
 ) {
     suspend fun createScenario(name: String): Scenario {
         val count = scenarioDao.getCount()
-        val scenario = Scenario(id = Uuid.random(), name = name, position = count + 1, referrerApp = null)
-        scenarioDao.insert(scenario)
-
+        val scenario = Scenario(name = name, position = count + 1, referrerApp = null)
+        val id = scenarioDao.insertReturningId(scenario)
+        scenario.id = id
         return scenario
     }
 
@@ -46,14 +44,14 @@ class ScenarioRepository internal constructor(
         return true
     }
 
-    fun getScenarioExpressionsById(uuid: UUID): Flow<Pair<Scenario, List<ExpressionRule>>?> {
-        return scenarioExpressionDao.getScenarioExpressions(uuid).map {
+    fun getScenarioExpressionsById(id: Long): Flow<Pair<Scenario, List<ExpressionRule>>?> {
+        return scenarioExpressionDao.getScenarioExpressions(id).map {
             it.entries.firstOrNull()?.let {  entry -> entry.key to entry.value }
         }
     }
 
-    fun getById(uuid: UUID): Flow<Scenario> {
-        return scenarioDao.getById(uuid)
+    fun getById(id: Long): Flow<Scenario> {
+        return scenarioDao.getById(id)
     }
 
     fun toString(rule: ExpressionRule): String {
@@ -64,12 +62,11 @@ class ScenarioRepository internal constructor(
     suspend fun insertExpression(bundle: ExpressionBundle, type: ExpressionRuleType): ExpressionRule {
         val expression = ExpressionRule(bytes = serializer.encodeToByteArray(bundle), type = type)
         val id = expressionRuleDao.insertReturningId(expression)
-
         expression.id = id
         return expression
     }
 
-    suspend fun insertScenarioExpression(id: UUID, expression: ExpressionRule) {
+    suspend fun insertScenarioExpression(id: Long, expression: ExpressionRule) {
         scenarioExpressionDao.insert(ScenarioExpression(id, expression.id))
     }
 

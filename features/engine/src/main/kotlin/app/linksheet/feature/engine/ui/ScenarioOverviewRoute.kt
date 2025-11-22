@@ -54,7 +54,6 @@ import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 
 @Composable
@@ -70,7 +69,7 @@ fun ScenarioOverviewRoute(
             viewModel.createScenario(it)
         },
         navigateScenario = {
-            navigate(ScenarioRoute(it.kotlinUuid))
+            navigate(ScenarioRoute(it.id))
         },
         onBackPressed = onBackPressed,
         move = { from, to ->
@@ -334,19 +333,16 @@ private fun ScenarioRoutePreview() {
             ScenarioOverviewRouteInternal(
                 scenarios = listOf(
                     Scenario(
-                        id = Uuid.NIL,
                         name = "Test scenario",
                         position = 0,
                         referrerApp = null
                     ),
                     Scenario(
-                        id = Uuid.fromLongs(0, 2 shl 64),
                         name = "Test scenario 2",
                         position = 1,
                         referrerApp = null
                     ),
                     Scenario(
-                        id = Uuid.fromLongs(0, 3 shl 64),
                         name = "Test scenario 3",
                         position = 1,
                         referrerApp = null

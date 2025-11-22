@@ -31,11 +31,10 @@ import fe.composekit.layout.column.group
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 @Composable
 fun ScenarioRoute(
-    id: Uuid,
+    id: Long,
     onBackPressed: () -> Unit,
     viewModel: ScenarioViewModel = koinViewModel(
         parameters = { parametersOf(id) }
@@ -132,7 +131,6 @@ private fun ScenarioRoutePreview() {
     PreviewThemeNew {
         ScenarioRouteInternal(
             scenario = Scenario(
-                id = Uuid.fromLongs(0, 2 shl 64),
                 name = "Default scenario",
                 position = 1,
                 referrerApp = null

@@ -11,11 +11,9 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.shareIn
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
 data class EngineScenario(
-    val id: Uuid,
     val position: Int,
     private val predicate: EngineScenarioPredicate,
     private val engine: LinkEngine

@@ -7,7 +7,6 @@ import app.linksheet.feature.engine.database.entity.ExpressionRule
 import app.linksheet.feature.engine.database.entity.Scenario
 import app.linksheet.feature.engine.database.entity.ScenarioExpression
 import kotlinx.coroutines.flow.Flow
-import java.util.UUID
 
 @Dao
 interface ScenarioExpressionDao : BaseDao<ScenarioExpression> {
@@ -30,5 +29,5 @@ interface ScenarioExpressionDao : BaseDao<ScenarioExpression> {
         ORDER BY position ASC
     """
     )
-    fun getScenarioExpressions(id: UUID): Flow<Map<Scenario, List<ExpressionRule>>>
+    fun getScenarioExpressions(id: Long): Flow<Map<Scenario, List<ExpressionRule>>>
 }

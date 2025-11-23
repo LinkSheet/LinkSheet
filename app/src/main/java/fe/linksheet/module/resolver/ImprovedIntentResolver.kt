@@ -36,9 +36,8 @@ import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepos
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.module.BrowserSettings
 import fe.linksheet.module.resolver.module.IntentResolverSettings
-import fe.linksheet.module.resolver.urlresolver.base.Amp2HtmlUrlResolver
-import fe.linksheet.module.resolver.urlresolver.base.RedirectUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
+import fe.linksheet.module.resolver.urlresolver.base.UrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
@@ -68,8 +67,7 @@ class ImprovedIntentResolver(
     private val packageInfoService: PackageService,
     private val appSorter: AppSorter,
     private val downloader: Downloader,
-    private val redirectUrlResolver: RedirectUrlResolver,
-    private val amp2HtmlResolver: Amp2HtmlUrlResolver,
+    private val urlResolver: UrlResolver,
     private val browserHandler: ImprovedBrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
     private val libRedirectResolver: LibRedirectResolver,
@@ -182,7 +180,7 @@ class ImprovedIntentResolver(
             val redirectsUri = cancelable(ResolveEvent.ResolvingRedirects) {
                 runRedirectResolver(
                     resolveModuleStatus = resolveStatus,
-                    redirectResolver = redirectUrlResolver,
+                    resolver = urlResolver,
                     uri = resolvedUri,
                     canAccessInternet = canAccessInternet,
                     requestTimeout = settings.requestTimeout(),
@@ -205,7 +203,7 @@ class ImprovedIntentResolver(
             val amp2HtmlUri = cancelable(ResolveEvent.RunningAmp2Html) {
                 runAmp2HtmlResolver(
                     resolveModuleStatus = resolveStatus,
-                    amp2HtmlResolver = amp2HtmlResolver,
+                    resolver = urlResolver,
                     uri = resolvedUri,
                     canAccessInternet = canAccessInternet,
                     requestTimeout = settings.requestTimeout(),
@@ -521,7 +519,7 @@ class ImprovedIntentResolver(
     private suspend fun runRedirectResolver(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         resolveModuleStatus: ResolveModuleStatus,
-        redirectResolver: RedirectUrlResolver,
+        resolver: UrlResolver,
         uri: Uri?,
         canAccessInternet: Boolean = true,
         requestTimeout: Int,
@@ -541,7 +539,7 @@ class ImprovedIntentResolver(
                 (!followRedirectsExternalService && !followOnlyKnownTrackers) || FastForward.isTracker(uri.toString())
             }
 
-            redirectResolver.resolve(
+            resolver.resolve(
                 uriToResolve,
                 followRedirectsLocalCache,
                 resolvePredicate,
@@ -558,7 +556,7 @@ class ImprovedIntentResolver(
     private suspend fun runAmp2HtmlResolver(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         resolveModuleStatus: ResolveModuleStatus,
-        amp2HtmlResolver: Amp2HtmlUrlResolver,
+        resolver: UrlResolver,
         uri: Uri?,
         canAccessInternet: Boolean = true,
         requestTimeout: Int,
@@ -574,7 +572,7 @@ class ImprovedIntentResolver(
         resolveModuleStatus.resolveIfEnabled(enableAmp2Html, ResolveModule.Amp2Html, uri) { uriToResolve ->
             logger.debug("Inside amp2html func, on ${Thread.currentThread().name}")
 
-            amp2HtmlResolver.resolve(
+            resolver.resolve(
                 uriToResolve,
                 amp2HtmlLocalCache,
                 null,

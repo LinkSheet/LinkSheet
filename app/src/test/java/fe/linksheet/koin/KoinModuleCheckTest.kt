@@ -75,11 +75,11 @@ import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
+import fe.linksheet.module.resolver.urlresolver.RemoteResolver
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlResolveRequest
-import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
-import fe.linksheet.module.resolver.urlresolver.base.AllRemoteResolveRequest
+import fe.linksheet.module.resolver.urlresolver.base.LocalTask
+import fe.linksheet.module.resolver.urlresolver.base.UrlResolver
 import fe.linksheet.module.resolver.urlresolver.redirect.RedirectResolveRequest
-import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.shizuku.ShizukuServiceConnection
@@ -150,16 +150,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             CachedRequest::class,
             OkHttpClient::class,
         ),
-        definition<AllRemoteResolveRequest>(Request::class),
         definition<BrowserResolver>(PackageService::class),
         definition<InAppBrowserHandler>(DisableInAppBrowserInSelectedRepository::class),
-        definition<RedirectUrlResolver>(
-            RedirectResolveRequest::class, ResolvedRedirectRepository::class
-        ),
-        definition<Amp2HtmlUrlResolver>(
-            Amp2HtmlResolveRequest::class,
-            Amp2HtmlRepository::class
-        ),
         definition<LibRedirectDefaultRepository>(LibRedirectDefaultDao::class),
         definition<LibRedirectStateRepository>(LibRedirectServiceStateDao::class),
         definition<PreferredAppRepository>(PreferredAppDao::class),
@@ -181,6 +173,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             Redactor::class,
             SystemInfoService::class
         ),
+        definition<UrlResolver>(LocalTask.Redirector::class, LocalTask.Amp2Html::class, RemoteResolver::class),
         definition<VersionTracker>(BaseAnalyticsService::class, SystemInfoService::class),
         definition<MainViewModel>(
             BrowserResolver::class,
@@ -219,13 +212,15 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             PrivateBrowsingService::class
         ),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
-        definition<Downloader>(CachedRequest::class),
+        definition<Downloader>(HttpClient::class),
         definition<StatisticsService>(AppPreferenceRepository::class),
         definition<AppLocaleService>(List::class),
         definition<LanguageSettingsViewModel>(AppLocaleService::class),
         definition<SettingsViewModel>(AppLocaleService::class),
         definition<ThemeSettingsViewModel>(RemoteConfigRepository::class),
         definition<WorkDelegatorService>(WorkManager::class),
+        definition<RedirectResolveRequest>(HttpClient::class),
+        definition<Amp2HtmlResolveRequest>(HttpClient::class),
         definition<VerifiedLinkHandlerViewModel>(PackageService::class, OneUiCompat::class),
         definition<ShizukuSettingsViewModel>(
             ShizukuService::class,

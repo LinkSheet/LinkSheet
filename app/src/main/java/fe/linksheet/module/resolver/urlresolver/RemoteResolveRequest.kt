@@ -12,28 +12,28 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.utils.io.jvm.javaio.*
 
-enum class RemoteTask(val value: String) {
-    All("all"),
-    Redirector("redirector"),
-    Amp2Html("amp2html")
+enum class RemoteTask(val value: String, vararg operations: String) {
+    All("all", "redirect", "amp2html"),
+    Redirector("redirector", "redirect"),
+    Amp2Html("amp2html", "amp2html");
+
+    val operations = operations.toList()
 }
 
-class RemoteResolveRequest(
-    apiHost: String,
-    private val token: String,
-    task: RemoteTask,
-    private val httpClient: HttpClient,
-    vararg operations: String,
-) {
-    private val apiUrl = "$apiHost/${task.value}"
-    private val operations = operations.toList()
+data class RemoteResolveBody(val url: String, val operations: List<String>)
 
-    suspend fun resolveRemote(url: String, timeout: Int, remoteResolveUrlField: String): Result<ResolveResultType> {
+class RemoteResolver(
+    private val apiHost: String,
+    private val token: String,
+    private val httpClient: HttpClient
+) {
+    suspend fun resolveRemote(task: RemoteTask, url: String, timeout: Int, remoteResolveUrlField: String): Result<ResolveResultType> {
+        val apiUrl = "$apiHost/${task.value}"
         val result = tryCatch {
             httpClient.post(urlString = apiUrl) {
                 contentType(ContentType.Application.Json)
                 header("Authorization", "Bearer $token")
-                setBody(RemoteResolveBody(url, operations))
+                setBody(RemoteResolveBody(url, task.operations))
             }
         }
 
@@ -58,5 +58,3 @@ class RemoteResolveRequest(
         }
     }
 }
-
-data class RemoteResolveBody(val url: String, val operations: List<String>)

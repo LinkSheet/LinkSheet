@@ -1,6 +1,6 @@
+
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 import fe.buildlogic.common.OptIn
 import fe.buildlogic.common.extension.addOptIn
@@ -39,10 +39,13 @@ dependencies {
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.uri)
     implementation(Grrfe.httpkt.core)
+    implementation(Grrfe.httpkt.core2.core)
     implementation(Koin.android)
     implementation(Koin.compose)
     implementation(AndroidX.core.ktx)
 
+
+    testImplementation(Grrfe.httpkt.core2.test)
     testImplementation(Testing.robolectric)
     testImplementation(KotlinX.coroutines.test)
     testImplementation(AndroidX.test.ext.junit.ktx)

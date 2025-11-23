@@ -3,12 +3,12 @@
 package fe.linksheet.module.resolver.module
 
 import android.app.usage.UsageStatsManager
+import app.linksheet.feature.app.PackageService
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
 import fe.linksheet.extension.koin.createLogger
-import app.linksheet.feature.app.PackageService
 import fe.linksheet.feature.engine.RealLinkEngine
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -17,8 +17,6 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.browser.BrowserMode
-import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
-import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.DefaultIntentLauncher
 import fe.linksheet.module.resolver.util.IntentLauncher
@@ -50,8 +48,6 @@ val ResolverModule = module {
         )
     }
     singleOf(::InAppBrowserHandler)
-    singleOf(::RedirectUrlResolver)
-    singleOf(::Amp2HtmlUrlResolver)
     single<IntentResolver> {
         val settings = createSettings(get(), get())
         val experimentRepository = get<ExperimentRepository>()

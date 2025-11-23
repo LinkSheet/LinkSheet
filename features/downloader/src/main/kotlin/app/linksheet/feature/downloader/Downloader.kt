@@ -1,20 +1,20 @@
 package app.linksheet.feature.downloader
 
-import app.linksheet.api.CachedRequest
 import app.linksheet.feature.downloader.DownloadCheckResult.Downloadable
-import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.util.Extension
-import fe.linksheet.extension.java.normalizedContentType
 import fe.linksheet.util.mime.KnownMimeTypes
 import fe.linksheet.util.mime.MimeType
+import fe.std.result.isFailure
+import fe.std.result.tryCatch
 import fe.std.uri.StdUrl
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.http.*
 import org.koin.dsl.module
-import java.io.IOException
-
 
 val DownloaderModule = module {
     single<Downloader> {
-        Downloader(cachedRequest = get())
+        Downloader(client = get())
     }
 }
 
@@ -29,7 +29,9 @@ sealed interface DownloadCheckResult {
 
 fun DownloadCheckResult.isDownloadable() = this is Downloadable
 
-class Downloader(private val cachedRequest: CachedRequest) {
+class Downloader(
+    private val client: HttpClient
+) {
 
     companion object {
         private val mimeTypeToExtension = KnownMimeTypes.mimeTypeToExtensions
@@ -44,17 +46,17 @@ class Downloader(private val cachedRequest: CachedRequest) {
         return checkMimeType(mimeType, fileName, ext)
     }
 
-    fun isNonHtmlContentUri(url: StdUrl, timeout: Int): DownloadCheckResult {
-        val result = try {
-            cachedRequest.head(url.toString(), timeout, false)
-        } catch (e: IOException) {
-//            logger.error(e)
+    suspend fun isNonHtmlContentUri(url: StdUrl): DownloadCheckResult {
+        val result = tryCatch {
+            client.get(urlString = url.toString())
+        }
+        if (result.isFailure()) {
             return DownloadCheckResult.NonDownloadable
         }
+        if (!result.value.status.isSuccess()) return DownloadCheckResult.NonDownloadable
 
-        if (!result.isHttpSuccess()) return DownloadCheckResult.NonDownloadable
-
-        val contentType = result.normalizedContentType() ?: return DownloadCheckResult.NonDownloadable
+        val contentType =
+            result.value.contentType()?.withoutParameters()?.toString() ?: return DownloadCheckResult.NonDownloadable
         val (fileName, _) = Extension.getFileNameFromUrl(url.url)
 
         return checkMimeType(contentType, fileName ?: url.toString(), mimeTypeToExtension[contentType]?.firstOrNull())

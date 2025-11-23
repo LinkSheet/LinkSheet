@@ -11,8 +11,9 @@ import fe.linksheet.util.buildconfig.Build
 import fe.linksheet.util.withStatsTag
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
+import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.serialization.gson.gson
+import io.ktor.serialization.gson.*
 import me.saket.unfurl.Unfurler
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -43,6 +44,9 @@ val HttpModule = module {
         HttpClient(OkHttp) {
             engine { preconfigured = get<OkHttpClient>() }
             install(ContentNegotiation) { gson() }
+            install(HttpTimeout) {
+                requestTimeoutMillis = 1000
+            }
         }
     }
     single<ImageLoader> {

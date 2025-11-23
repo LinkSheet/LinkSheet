@@ -24,7 +24,8 @@ class DownloadLinkFetcher(
             }
         }
 
-        val result = downloader.isNonHtmlContentUri(url, requestTimeout())
+        val result = downloader.isNonHtmlContentUri(url)
+//        val result = downloader.isNonHtmlContentUri(url, requestTimeout())
         result.toFetchResult()
     }
 }

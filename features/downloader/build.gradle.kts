@@ -44,6 +44,17 @@ dependencies {
     implementation(Koin.compose)
     implementation(AndroidX.core.ktx)
 
+    implementation(JetBrains.ktor.client.core)
+    implementation(JetBrains.ktor.client.gson)
+    implementation(JetBrains.ktor.client.okHttp)
+    implementation(JetBrains.ktor.client.android)
+    implementation(JetBrains.ktor.client.logging)
+    implementation(JetBrains.ktor.client.contentNegotiation)
+    implementation(JetBrains.ktor.client.json)
+    implementation(JetBrains.ktor.client.encoding)
+    implementation(JetBrains.ktor.plugins.serialization.gson)
+    testImplementation(JetBrains.ktor.client.mock)
+
 
     testImplementation(Grrfe.httpkt.core2.test)
     testImplementation(Testing.robolectric)

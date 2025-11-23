@@ -4,7 +4,6 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.compose.runtime.Stable
 import app.linksheet.feature.app.PackageService
 import app.linksheet.feature.app.labelSorted
@@ -23,7 +22,6 @@ import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.extension.android.activityDescriptor
 import fe.linksheet.extension.toStdUrl
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
@@ -38,9 +36,9 @@ import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepos
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.module.BrowserSettings
 import fe.linksheet.module.resolver.module.IntentResolverSettings
-import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlUrlResolver
+import fe.linksheet.module.resolver.urlresolver.base.Amp2HtmlUrlResolver
+import fe.linksheet.module.resolver.urlresolver.base.RedirectUrlResolver
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
-import fe.linksheet.module.resolver.urlresolver.redirect.RedirectUrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
@@ -149,9 +147,6 @@ class ImprovedIntentResolver(
         emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = packageInfoService.findHttpBrowsable(null)
 
-        val list = browsers.map { it.activityInfo.activityDescriptor }
-//        val browserPackageMap = browsers?.associateBy { it.activityInfo.packageName } ?: emptyMap()
-
         val resolveEmbeds = settings.resolveEmbeds()
         val useClearUrls = settings.useClearUrls()
         val useFastForwardRules = settings.useFastForwardRules()
@@ -184,40 +179,46 @@ class ImprovedIntentResolver(
 
         var resolvedUri: Uri? = uri
         if (followRedirects && !skipFollowRedirects) {
-            emitEvent(ResolveEvent.ResolvingRedirects)
-
-            resolvedUri = runRedirectResolver(
-                resolveModuleStatus = resolveStatus,
-                redirectResolver = redirectUrlResolver,
-                uri = uri,
-                canAccessInternet = canAccessInternet,
-                requestTimeout = settings.requestTimeout(),
-                followRedirects = true,
-                followRedirectsExternalService = followRedirectsSettings.followRedirectsExternalService(),
-                followOnlyKnownTrackers = followRedirectsSettings.followOnlyKnownTrackers(),
-                followRedirectsLocalCache = followRedirectsSettings.followRedirectsLocalCache(),
-                followRedirectsAllowDarknets = followRedirectsSettings.followRedirectsAllowDarknets(),
-                followRedirectsAllowLocalNetwork = followRedirectsSettings.followRedirectsAllowLocalNetwork()
-            )
+            val redirectsUri = cancelable(ResolveEvent.ResolvingRedirects) {
+                runRedirectResolver(
+                    resolveModuleStatus = resolveStatus,
+                    redirectResolver = redirectUrlResolver,
+                    uri = resolvedUri,
+                    canAccessInternet = canAccessInternet,
+                    requestTimeout = settings.requestTimeout(),
+                    followRedirects = true,
+                    followRedirectsExternalService = followRedirectsSettings.followRedirectsExternalService(),
+                    followOnlyKnownTrackers = followRedirectsSettings.followOnlyKnownTrackers(),
+                    followRedirectsLocalCache = followRedirectsSettings.followRedirectsLocalCache(),
+                    followRedirectsAllowDarknets = followRedirectsSettings.followRedirectsAllowDarknets(),
+                    followRedirectsAllowLocalNetwork = followRedirectsSettings.followRedirectsAllowLocalNetwork()
+                )
+            }
+            if (redirectsUri != null) {
+                resolvedUri = redirectsUri
+            }
         }
 
         val amp2Html = amp2HtmlSettings.enableAmp2Html()
         val skipAmp2Html = amp2HtmlSettings.amp2HtmlSkipBrowser() && isReferrerBrowser
         if (amp2Html && !skipAmp2Html) {
-            emitEvent(ResolveEvent.RunningAmp2Html)
-
-            resolvedUri = runAmp2HtmlResolver(
-                resolveModuleStatus = resolveStatus,
-                amp2HtmlResolver = amp2HtmlResolver,
-                uri = resolvedUri,
-                canAccessInternet = canAccessInternet,
-                requestTimeout = settings.requestTimeout(),
-                enableAmp2Html = true,
-                amp2HtmlAllowDarknets = amp2HtmlSettings.amp2HtmlAllowDarknets(),
-                amp2HtmlAllowLocalNetwork = amp2HtmlSettings.amp2HtmlAllowLocalNetwork(),
-                amp2HtmlExternalService = amp2HtmlSettings.amp2HtmlExternalService(),
-                amp2HtmlLocalCache = amp2HtmlSettings.amp2HtmlLocalCache()
-            )
+            val amp2HtmlUri = cancelable(ResolveEvent.RunningAmp2Html) {
+                runAmp2HtmlResolver(
+                    resolveModuleStatus = resolveStatus,
+                    amp2HtmlResolver = amp2HtmlResolver,
+                    uri = resolvedUri,
+                    canAccessInternet = canAccessInternet,
+                    requestTimeout = settings.requestTimeout(),
+                    enableAmp2Html = true,
+                    amp2HtmlAllowDarknets = amp2HtmlSettings.amp2HtmlAllowDarknets(),
+                    amp2HtmlAllowLocalNetwork = amp2HtmlSettings.amp2HtmlAllowLocalNetwork(),
+                    amp2HtmlExternalService = amp2HtmlSettings.amp2HtmlExternalService(),
+                    amp2HtmlLocalCache = amp2HtmlSettings.amp2HtmlLocalCache()
+                )
+            }
+            if (amp2HtmlUri != null) {
+                resolvedUri = amp2HtmlUri
+            }
         }
 
         if (resolvedUri == null) {
@@ -254,15 +255,18 @@ class ImprovedIntentResolver(
         }
 
         val enabledDownloader = downloaderSettings.enableDownloader()
-        emitEventIf(enabledDownloader, ResolveEvent.CheckingDownloader)
-
-        val downloadable = checkDownloadable(
-            downloader = downloader,
-            enabled = enabledDownloader,
-            uri = uri,
-            checkUrlMimeType = downloaderSettings.downloaderCheckUrlMimeType(),
-            requestTimeout = settings.requestTimeout()
-        )
+        var downloadable: DownloadCheckResult = DownloadCheckResult.NonDownloadable
+        if (enabledDownloader) {
+            downloadable = cancelable(ResolveEvent.CheckingDownloader) {
+                checkDownloadable(
+                    downloader = downloader,
+                    enabled = enabledDownloader,
+                    uri = uri,
+                    checkUrlMimeType = downloaderSettings.downloaderCheckUrlMimeType(),
+                    requestTimeout = settings.requestTimeout()
+                )
+            } ?: DownloadCheckResult.NonDownloadable
+        }
 
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, browserSettings.inAppBrowserSettings())
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
@@ -297,28 +301,7 @@ class ImprovedIntentResolver(
         var unfurl: UnfurlResult? = null
         val shouldSkipPreviewUrl = previewSettings.previewUrlSkipBrowser() && isReferrerBrowser
         if (previewUrl && !shouldSkipPreviewUrl) {
-            emitEvent(ResolveEvent.GeneratingPreview)
-
-            val unfurlDeferred = async { tryUnfurl(uri = uri) }
-
-            val unfurlCancel = ResolverInteraction.Cancelable(ResolveEvent.GeneratingPreview) {
-                logger.debug("Cancelling $unfurlDeferred")
-                unfurlDeferred.cancel()
-//                unfurler.cancel()
-            }
-
-            emitInteraction(unfurlCancel)
-
-            Log.d("ImprovedIntentResolver", "Awaiting..")
-
-            try {
-                unfurl = unfurlDeferred.await()
-            } catch (e: CancellationException) {
-                currentCoroutineContext().ensureActive()
-                logger.error(e)
-            }
-
-            clearInteraction()
+            unfurl = cancelable(ResolveEvent.GeneratingPreview) { tryUnfurl(uri = uri) }
         }
 
         return@scope IntentResolveResult.Default(
@@ -334,6 +317,29 @@ class ImprovedIntentResolver(
             libRedirectResult,
             downloadable
         )
+    }
+
+    private suspend fun <R> CoroutineScope.cancelable(event: ResolveEvent, block: suspend () -> R): R? {
+        emitEvent(event)
+        val deferred = async { block() }
+
+        val cancelable = ResolverInteraction.Cancelable(event) {
+            logger.debug("Cancelling $deferred")
+            deferred.cancel()
+        }
+
+        emitInteraction(cancelable)
+
+        var result: R? = null
+        try {
+            result = deferred.await()
+        } catch (e: CancellationException) {
+            currentCoroutineContext().ensureActive()
+            logger.error(e)
+        }
+
+        clearInteraction()
+        return result
     }
 
     private suspend fun queryAppSelectionHistory(
@@ -437,7 +443,7 @@ class ImprovedIntentResolver(
             if (result.isDownloadable()) return@withContext result
         }
 
-        downloader.isNonHtmlContentUri(url, requestTimeout)
+        downloader.isNonHtmlContentUri(url)
     }
 
     private suspend fun tryRunLibRedirect(
@@ -516,7 +522,7 @@ class ImprovedIntentResolver(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         resolveModuleStatus: ResolveModuleStatus,
         redirectResolver: RedirectUrlResolver,
-        uri: Uri,
+        uri: Uri?,
         canAccessInternet: Boolean = true,
         requestTimeout: Int,
         followRedirects: Boolean,
@@ -527,7 +533,7 @@ class ImprovedIntentResolver(
         followRedirectsAllowLocalNetwork: Boolean
     ): Uri? = withContext(dispatcher) {
         logger.debug("Executing runRedirectResolver on ${Thread.currentThread().name}")
-
+        currentCoroutineContext().ensureActive()
         resolveModuleStatus.resolveIfEnabled(followRedirects, ResolveModule.Redirect, uri) { uriToResolve ->
             logger.debug("Inside redirect func, on ${Thread.currentThread().name}")
 
@@ -564,6 +570,7 @@ class ImprovedIntentResolver(
     ): Uri? = withContext(dispatcher) {
         logger.debug("Executing runAmp2HtmlResolver on ${Thread.currentThread().name}")
 
+        currentCoroutineContext().ensureActive()
         resolveModuleStatus.resolveIfEnabled(enableAmp2Html, ResolveModule.Amp2Html, uri) { uriToResolve ->
             logger.debug("Inside amp2html func, on ${Thread.currentThread().name}")
 

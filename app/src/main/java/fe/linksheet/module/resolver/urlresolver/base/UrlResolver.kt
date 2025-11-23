@@ -2,28 +2,39 @@ package fe.linksheet.module.resolver.urlresolver.base
 
 import android.net.Uri
 import android.net.compatHost
+import app.linksheet.feature.engine.database.entity.ResolveType
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.extension.kotlin.unwrapOrNull
-import app.linksheet.feature.engine.database.entity.ResolveType
+import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
+import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.redactor.HashProcessor
-import app.linksheet.feature.engine.database.repository.CacheRepository
+import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
+import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
 import fe.linksheet.module.repository.resolver.ResolverRepository
+import fe.linksheet.module.resolver.urlresolver.RemoteResolveRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
+import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlResolveRequest
+import fe.linksheet.module.resolver.urlresolver.redirect.RedirectResolveRequest
 import fe.linksheet.web.Darknet
 import fe.linksheet.web.HostType
 import fe.linksheet.web.HostUtil
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import org.koin.core.component.KoinComponent
 import kotlin.reflect.KClass
 
-
 typealias ResolvePredicate = (Uri) -> Boolean
+typealias RedirectUrlResolver = UrlResolver<ResolvedRedirect, RedirectResolveRequest, ResolvedRedirectRepository>
+typealias Amp2HtmlUrlResolver = UrlResolver<Amp2HtmlMapping, Amp2HtmlResolveRequest, Amp2HtmlRepository>
 
-abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
-    clazz: KClass<R>,
-    private val redirectResolver: ResolveRequest,
-    private val resolverRepository: ResolverRepository<T>,
+class UrlResolver<T : ResolverEntity<T>, L : LocalResolveRequest, R : ResolverRepository<T>>(
+    clazz: KClass<L>,
+    private val localRequest: L,
+    private val remoteRequest: RemoteResolveRequest,
+    private val resolverRepository: R,
     private val cacheRepository: CacheRepository,
 ) : KoinComponent {
     private val logger by injectLogger(clazz)
@@ -39,6 +50,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         allowLocalNetwork: Boolean,
         resolveType: ResolveType? = null
     ): Result<ResolveResultType>? {
+        currentCoroutineContext().ensureActive()
         if (resolvePredicate?.invoke(uri) == false) {
             return null
         }
@@ -114,7 +126,7 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
         return true
     }
 
-    private fun resolve(
+    private suspend fun resolve(
         uriString: String,
         logContext: LoggerDelegate.RedactedParameter,
         externalService: Boolean,
@@ -124,14 +136,14 @@ abstract class UrlResolver<T : ResolverEntity<T>, R : Any>(
     ): Result<ResolveResultType> {
         if (externalService && canResolveExternally(logContext, darknet, isPublicHost)) {
             logger.info(logContext) { "Attempting to resolve $it via external service.." }
-            val result = redirectResolver.resolveRemote(uriString, timeout, resolverRepository.remoteResolveUrlField)
+            val result = remoteRequest.resolveRemote(uriString, timeout, resolverRepository.remoteResolveUrlField)
             if (result.isFailure) logger.error("External resolve failed", result.exceptionOrNull())
 
             return result
         }
 
         logger.info(logContext) { "Using local service for $it" }
-        val result = redirectResolver.resolveLocal(uriString, timeout)
+        val result = localRequest.resolveLocal(uriString, timeout)
         if (result.isFailure) logger.error("Local service resolve failed", result.exceptionOrNull())
 
         return result

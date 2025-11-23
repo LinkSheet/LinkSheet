@@ -79,7 +79,7 @@ class ImprovedBrowserHandler(
                     !whitelistedPackages.isNullOrEmpty() -> {
                         val info = createWhitelistedBrowserInfo(whitelistedPackages)
                         browsers.filter {
-                            it.activityInfo.componentName in info.cmps || it.resolvePackageName in info.pkgs
+                            it.activityInfo.componentName in info.componentNames || it.resolvePackageName in info.packageNames
                         }
                     }
 

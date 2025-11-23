@@ -3,19 +3,22 @@ package fe.linksheet.module.repository.whitelisted
 import android.content.ComponentName
 
 
-data class WhitelistedBrowserInfo(val cmps: Set<ComponentName>, val pkgs: Set<String>)
+data class WhitelistedBrowserInfo(
+    val componentNames: Set<ComponentName>,
+    val packageNames: Set<String>
+)
 
 fun createWhitelistedBrowserInfo(list: Iterable<String>): WhitelistedBrowserInfo {
-    val cmps = mutableSetOf<ComponentName>()
-    val pkgs = mutableSetOf<String>()
+    val componentNames = mutableSetOf<ComponentName>()
+    val packages = mutableSetOf<String>()
     for (item in list) {
         val cmp = ComponentName.unflattenFromString(item)
         if (cmp != null) {
-            cmps.add(cmp)
+            componentNames.add(cmp)
         } else {
-            pkgs.add(item)
+            packages.add(item)
         }
     }
 
-    return WhitelistedBrowserInfo(cmps, pkgs)
+    return WhitelistedBrowserInfo(componentNames, packages)
 }

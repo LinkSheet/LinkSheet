@@ -5,20 +5,42 @@ import android.database.Cursor
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.linksheet.api.database.CrossDatabaseMigration
+import fe.linksheet.module.log.Logger
+import fe.std.result.isFailure
+import fe.std.result.tryCatch
 
-class Migration21to22(
+class Migration21to23(
+    private val logger: Logger,
     private val migrator: CrossDatabaseMigration,
-) : Migration(21, 22) {
-    override fun migrate(db: SupportSQLiteDatabase) {
-        db.use {
-            migrateTable(it, "lib_redirect_default")
-            migrateTable(it, "lib_redirect_service_state")
+) {
+    companion object {
+        private const val START = 21
+        private const val END = 23
+    }
+
+    fun create(): Array<Migration> {
+        return Array(END - START) { idx ->
+            createMigration(START + idx)
+        }
+    }
+
+    private fun createMigration(start: Int): Migration {
+        return Migration(start, start + 1) { db ->
+            logger.info("Running migration from $start to ${start + 1}")
+            val result = tryCatch {
+                migrateTable(db, "lib_redirect_default")
+                migrateTable(db, "lib_redirect_service_state")
+            }
+            if (result.isFailure()) {
+                logger.error(result.exception)
+            }
         }
     }
 
     private fun migrateTable(db: SupportSQLiteDatabase, table: String) {
-        val cursor = db.query("SELECT * FROM $table")
+        val cursor = db.query("SELECT * FROM `$table`")
         migrator.put(table, cursor.toContentValues())
+        db.execSQL("DROP TABLE IF EXISTS `$table`")
     }
 }
 

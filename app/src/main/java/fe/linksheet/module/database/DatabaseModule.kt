@@ -9,8 +9,6 @@ import androidx.room.migration.Migration
 import app.linksheet.api.database.CrossDatabaseMigration
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.libredirect.database.LibRedirectDatabase
-import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
-import app.linksheet.feature.libredirect.database.entity.LibRedirectServiceState
 import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
@@ -50,13 +48,10 @@ val DatabaseModule = module {
         WhitelistedNormalBrowser::class,
         WhitelistedInAppBrowser::class,
         ResolvedRedirect::class,
-        LibRedirectDefault::class,
-        LibRedirectServiceState::class,
         DisableInAppBrowserInSelected::class,
         Amp2HtmlMapping::class,
-//        ScenarioEntity::class
     ],
-    version = 22,
+    version = 23,
     autoMigrations = [
         AutoMigration(from = 2, to = 3),
         AutoMigration(from = 3, to = 4),
@@ -98,7 +93,8 @@ abstract class LinkSheetDatabase : RoomDatabase() {
             logger: Logger,
             migrator: CrossDatabaseMigration
         ): LinkSheetDatabase {
-            return addMigrations(*buildMigrations(logger)).addMigrations(Migration21to22(migrator)).build()
+            val migration = Migration21to23(logger, migrator).create()
+            return addMigrations(*buildMigrations(logger)).addMigrations(*migration).build()
         }
 
         fun create(

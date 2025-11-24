@@ -3,7 +3,6 @@ package fe.linksheet.module.database.migrations
 import android.content.ContentValues
 import android.database.Cursor
 import androidx.room.migration.Migration
-import androidx.room.util.useCursor
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.linksheet.api.database.CrossDatabaseMigration
 
@@ -11,14 +10,15 @@ class Migration21to22(
     private val migrator: CrossDatabaseMigration,
 ) : Migration(21, 22) {
     override fun migrate(db: SupportSQLiteDatabase) {
-        fun migrateTable(table: String) {
-            val cursor  = db.query("SELECT * FROM $table")
-            migrator.put(table, cursor.toContentValues())
-            db.query("DROP TABLE IF EXISTS $table")
+        db.use {
+            migrateTable(it, "lib_redirect_default")
+            migrateTable(it, "lib_redirect_service_state")
         }
+    }
 
-        migrateTable("lib_redirect_default")
-        migrateTable("lib_redirect_service_state")
+    private fun migrateTable(db: SupportSQLiteDatabase, table: String) {
+        val cursor = db.query("SELECT * FROM $table")
+        migrator.put(table, cursor.toContentValues())
     }
 }
 
@@ -45,5 +45,5 @@ private fun Cursor.toContentValues(): List<ContentValues> {
         }
     }
 
-    return useCursor { handleRows(it) }
+    return use { handleRows(it) }
 }

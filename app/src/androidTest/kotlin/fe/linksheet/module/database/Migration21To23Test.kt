@@ -10,17 +10,19 @@ import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
-import fe.linksheet.module.database.migrations.Migration21to22
+import fe.linksheet.module.database.migrations.Migration21to23
+import fe.linksheet.module.log.Logger
+import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.testlib.instrument.InstrumentationTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-internal class Migration21to22Test : InstrumentationTest {
+internal class Migration21To23Test : InstrumentationTest {
     private val testDb = "migration-test"
     private val linkSheetTestDb = "linksheet-$testDb"
-    private val libRedirectTestDb= "libredirect-$testDb"
+    private val libRedirectTestDb = "libredirect-$testDb"
 
     @get:Rule
     val linkSheetHelper: MigrationTestHelper = MigrationTestHelper(
@@ -42,8 +44,13 @@ internal class Migration21to22Test : InstrumentationTest {
             close()
         }
 
+
+        val logger = Logger(DebugLoggerDelegate(true, Migration21To23Test::class))
         val migrator = DefaultCrossDatabaseMigration()
-        val migratedLinkSheetDb = linkSheetHelper.runMigrationsAndValidate(linkSheetTestDb, 22, true,Migration21to22(migrator))
+        val migratedLinkSheetDb = linkSheetHelper.runMigrationsAndValidate(
+            linkSheetTestDb, 23, true,
+            *Migration21to23(logger, migrator).create()
+        )
 
         val tables = migrator.getTables()
         assertThat(tables).containsExactly("lib_redirect_default", "lib_redirect_service_state")
@@ -79,7 +86,8 @@ internal class Migration21to22Test : InstrumentationTest {
         val libRedirectDefaultCount = libRedirectDb.query("SELECT * FROM lib_redirect_default").use { it.count }
         assertThat(libRedirectDefaultCount).isEqualTo(2)
 
-        val libRedirectServiceStateCount = libRedirectDb.query("SELECT * FROM lib_redirect_service_state").use { it.count }
+        val libRedirectServiceStateCount =
+            libRedirectDb.query("SELECT * FROM lib_redirect_service_state").use { it.count }
         assertThat(libRedirectServiceStateCount).isEqualTo(2)
 
         libRedirectDb.close()

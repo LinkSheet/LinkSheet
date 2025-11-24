@@ -30,6 +30,12 @@ class ScenarioRepository internal constructor(
         return scenario
     }
 
+    companion object{
+        val DefaultScenario = mapOf<Scenario, List<ExpressionRule>>(
+            Scenario(name = "Default", position = 0, referrerApp = null) to emptyList()
+        )
+    }
+
     fun getAllScenarioExpressions(): Flow<Map<Scenario, List<ExpressionRule>>> {
         return scenarioExpressionDao.getAllScenarioExpressions()
     }

@@ -39,12 +39,10 @@ import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
-import kotlin.collections.component1
-import kotlin.collections.map
 import kotlin.uuid.ExperimentalUuidApi
 
 class RealLinkEngine(
@@ -70,6 +68,7 @@ class RealLinkEngine(
     fun createResolver(settings: IntentResolverSettings): LinkEngineIntentResolver {
         val scenarios = scenarioRepository
             .getAllScenarioExpressions()
+            .map { it.ifEmpty { ScenarioRepository.DefaultScenario } }
             .map { it.toEngineScenarios(settings) }
 
         return LinkEngineIntentResolver(

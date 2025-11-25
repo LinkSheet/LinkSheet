@@ -21,6 +21,15 @@ import kotlin.reflect.KProperty0
 //    Font(R.font.google_sans_text_bold, FontWeight.Bold),
 //)
 
+val GoogleSansFlexFontFamily = FontFamily(
+    Font(resId = R.font.googlesansflex, weight = FontWeight.Thin),
+    Font(resId = R.font.googlesansflex, weight = FontWeight.Light),
+    Font(resId = R.font.googlesansflex, weight = FontWeight.Normal),
+    Font(resId = R.font.googlesansflex, weight = FontWeight.Medium),
+    Font(resId = R.font.googlesansflex, weight = FontWeight.SemiBold),
+    Font(resId = R.font.googlesansflex, weight = FontWeight.Bold)
+)
+
 val HkGroteskFontFamily = FontFamily(
 //    Font(resId = R.font.hankengrotesk),
 //    Font(resId = R.font.hankengrotesk, weight = FontWeight.Medium),
@@ -44,15 +53,28 @@ val PoppinsFontFamily = FontFamily(
 val NewDefaultTypography = Typography()
 
 val HkGroteskSemiBold = TextStyle(
+//    fontFamily = GoogleSansFlexFontFamily,
     fontFamily = HkGroteskFontFamily,
     fontWeight = FontWeight.SemiBold
 )
 
-val DialogTitleStyle = TextStyle(
+val GoogleSansFlexTextStyle = TextStyle(
+    fontFamily = GoogleSansFlexFontFamily,
+//    fontFamily = HkGroteskFontFamily,
+//    fontWeight = FontWeight.SemiBold
+)
+
+// HeadlineLarge = 32.sp
+val HeadlineAlmostLargeStyle = TextStyle(
     fontFamily = HkGroteskFontFamily,
     fontWeight = FontWeight.SemiBold,
+    fontSize = 30.sp,
+).configure()
+
+val DialogTitleStyle = TextStyle(
+    fontWeight = FontWeight.SemiBold,
     fontSize = 18.sp,
-)
+).configure()
 
 val BodySmallStyle = TextStyle(
     fontSize = 12.sp,
@@ -96,30 +118,72 @@ val BodyExtraSmallStyle = TextStyle(
 //val TitleMediumSize = 16.sp
 //val TitleMediumTracking = 0.2.sp
 //val TitleMediumWeight = TypefaceTokens.WeightMedium
+private val highlightFont: TextStyle = HkGroteskSemiBold
+private fun TextStyle.configure(block: ((TextStyle) -> TextStyle)? = null): TextStyle {
+    val merged = merge(highlightFont)
+    if (block == null) return merged
+    return block(merged)
+}
+
+
 val NewTypography = Typography(
-    titleLarge = NewDefaultTypography.titleLarge.merge(HkGroteskSemiBold).copy(
-//        fontFamily = HkGroteskFontFamily,
-//        fontWeight = FontWeight.SemiBold,
-//        fontSize = 18.sp,
-//        lineHeight = 25.sp
-    ),
-    titleMedium = NewDefaultTypography.titleMedium.merge(HkGroteskSemiBold).copy(
-        fontSize = 16.sp,
-        lineHeight = 22.sp
+    titleLarge = NewDefaultTypography.titleLarge.configure {
+        // Default
+//        val TitleLarge =
+//            DefaultTextStyle.copy(
+//                fontFamily = TypeScaleTokens.TitleLargeFont,
+//                fontWeight = TypeScaleTokens.TitleLargeWeight,
+//                fontSize = TypeScaleTokens.TitleLargeSize,
+//                lineHeight = TypeScaleTokens.TitleLargeLineHeight,
+//                letterSpacing = TypeScaleTokens.TitleLargeTracking,
+//            )
+
+//        val TitleLargeFont = TypefaceTokens.Brand
+//        val TitleLargeLineHeight = 28.0.sp
+//        val TitleLargeSize = 22.sp
+//        val TitleLargeTracking = 0.0.sp
+//        val TitleLargeWeight = TypefaceTokens.WeightRegular
+        it.copy(
+            //        fontWeight = FontWeight.SemiBold,
+            //        fontSize = 18.sp,
+            //        lineHeight = 25.sp
+        )
+    },
+    titleMedium = NewDefaultTypography.titleMedium.configure {
+        it.copy(
+            fontSize = 16.sp,
+            lineHeight = 22.sp
 //        lineHeight = 24.sp
-    ),
-    titleSmall = NewDefaultTypography.titleSmall.merge(HkGroteskSemiBold).copy(
+        )
+    },
+    titleSmall = NewDefaultTypography.titleSmall.configure {
+        it.copy(
 //        fontFamily = HkGroteskFontFamily,
 //        fontWeight = FontWeight.SemiBold,
-    ),
-    headlineMedium = NewDefaultTypography.headlineMedium.merge(HkGroteskSemiBold).copy(
+        )
+    },
+    headlineLarge = NewDefaultTypography.headlineLarge.configure {
+//        val HeadlineLargeFont = TypefaceTokens.Brand
+//        val HeadlineLargeLineHeight = 40.0.sp
+//        val HeadlineLargeSize = 32.sp
+//        val HeadlineLargeTracking = 0.0.sp
+//        val HeadlineLargeWeight = TypefaceTokens.WeightRegular
+        it.copy(
+
+        )
+    },
+    headlineMedium = NewDefaultTypography.headlineMedium.configure {
+        it.copy(
 //        fontFamily = HkGroteskFontFamily,
 //        fontWeight = FontWeight.SemiBold
-    ),
-    headlineSmall = NewDefaultTypography.headlineSmall.merge(HkGroteskSemiBold).copy(
+        )
+    },
+    headlineSmall = NewDefaultTypography.headlineSmall.configure {
+        it.copy(
 //        fontFamily = HkGroteskFontFamily,
 //        fontWeight = FontWeight.SemiBold
-    ),
+        )
+    },
     bodyLarge = NewDefaultTypography.bodyLarge.copy(
 //        fontFamily = HkGroteskFontFamily,
 //        fontWeight = FontWeight.SemiBold

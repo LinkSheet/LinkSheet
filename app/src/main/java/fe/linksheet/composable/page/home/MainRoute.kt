@@ -9,21 +9,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import app.linksheet.compose.theme.HeadlineAlmostLargeStyle
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
+import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
@@ -32,8 +34,6 @@ import fe.linksheet.composable.page.home.card.ShizukuCard
 import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
-import app.linksheet.compose.theme.HkGroteskFontFamily
-import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.compose.ObserveClipboard
 import fe.linksheet.extension.compose.OnFocused
@@ -107,11 +107,16 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             item(key = R.string.app_name, contentType = ContentType.TextItem) {
                 Text(
                     modifier = Modifier,
-                    text = stringResource(R.string.app_name),
-                    fontFamily = HkGroteskFontFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 30.sp,
+                    text = stringResource(id = R.string.app_name),
+                    style = HeadlineAlmostLargeStyle
                 )
+//                Text(
+//                    modifier = Modifier,
+//                    text = stringResource(R.string.app_name),
+//                    fontFamily = HkGroteskFontFamily,
+//                    fontWeight = FontWeight.SemiBold,
+//                    fontSize = 30.sp,
+//                )
             }
 
             item(key = R.string.thanks_for_donating, contentType = ContentType.TextItem) {

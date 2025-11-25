@@ -1,24 +1,9 @@
 package fe.linksheet.feature.systeminfo
 
+import app.linksheet.api.SystemProperties
 import fe.kotlin.extension.string.substringOrNull
 import fe.std.process.android.AndroidStartConfig
 import fe.std.process.launchProcess
-
-interface SystemProperties {
-    fun get(key: String): String?
-    fun getAllProperties(): Map<String, String>
-
-    fun firstNotNullOrNull(vararg keys: String): String? {
-        for (key in keys) {
-            val value = get(key)
-            if (value == null) continue
-            return value
-        }
-
-        return null
-    }
-}
-
 object RealSystemProperties : SystemProperties {
     override fun get(key: String): String? {
         return android.os.SystemProperties.get(key)

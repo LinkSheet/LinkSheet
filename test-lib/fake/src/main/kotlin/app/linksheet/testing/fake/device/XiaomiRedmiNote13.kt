@@ -1,4 +1,4 @@
-package fe.linksheet.feature.systeminfo.device
+package app.linksheet.testing.fake.device
 
 object XiaomiRedmiNote13_A15 : Device(
     codename = "aurora",

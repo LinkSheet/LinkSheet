@@ -1,11 +1,8 @@
+
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.PluginOption
-import fe.buildlogic.common.extension.addCompilerOptions
-import fe.buildlogic.common.extension.addPluginOptions
 
 plugins {
     id("com.android.library")
@@ -27,6 +24,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":api"))
     implementation(project(":util"))
     compileOnly(project(":hidden-api"))
 

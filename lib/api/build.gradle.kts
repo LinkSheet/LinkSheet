@@ -1,5 +1,4 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
-import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 

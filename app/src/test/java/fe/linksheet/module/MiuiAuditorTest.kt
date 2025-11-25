@@ -1,13 +1,15 @@
 package fe.linksheet.module
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.testing.fake.device.*
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
+import fe.linksheet.BuildInfoFake
 import fe.linksheet.feature.systeminfo.DeviceInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.module.devicecompat.miui.MiuiAuditor
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -58,7 +60,7 @@ internal class MiuiAuditorTest : BaseUnitTest  {
 
     @org.junit.Test
     fun test() = table.forAll { device, expectedDeviceInfo, expectedMiui, expectedFingerprint ->
-        val infoService = SystemInfoService(device)
+        val infoService = SystemInfoService(device, buildInfo = BuildInfoFake.Info)
 
         val auditor = MiuiAuditor(infoService)
         val audit = auditor.audit(applicationContext)

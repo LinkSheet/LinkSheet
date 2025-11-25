@@ -1,4 +1,4 @@
-package fe.linksheet.feature.systeminfo.device
+package app.linksheet.testing.fake.device
 
 object XiaomiRedmiNote3 : Device(
     buildProperties = parseTestBuildProperties(

@@ -1,6 +1,6 @@
-package fe.linksheet.feature.systeminfo.device
+package app.linksheet.testing.fake.device
 
-object `Samsung A02s running Android 12` : Device(
+object SamsungA02sAndroid12 : Device(
     codename = "a02q",
     fingerprint = "samsung/a02qsq/a02q:12/SP1A.210812.016/A025VSQS6CXF3:user/release-keys",
     buildProperties = parseTestBuildProperties("""

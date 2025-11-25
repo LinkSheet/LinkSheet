@@ -9,6 +9,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import app.linksheet.api.CachedRequest
+import app.linksheet.api.SystemProperties
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.feature.app.PackageService
 import app.linksheet.feature.app.pkg.PackageIntentHandler
@@ -41,7 +42,6 @@ import fe.linksheet.LinkSheetApp
 import fe.linksheet.feature.systeminfo.BuildConstants
 import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.feature.systeminfo.SystemProperties
 import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
 import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import fe.linksheet.module.analytics.BaseAnalyticsService

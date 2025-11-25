@@ -1,6 +1,7 @@
 package fe.linksheet.feature.systeminfo
 
 import android.os.Build
+import app.linksheet.api.SystemProperties
 
 interface BuildConstants {
     val manufacturer: String

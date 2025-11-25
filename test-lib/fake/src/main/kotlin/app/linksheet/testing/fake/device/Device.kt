@@ -1,6 +1,6 @@
-package fe.linksheet.feature.systeminfo.device
+package app.linksheet.testing.fake.device
 
-import fe.linksheet.feature.systeminfo.SystemProperties
+import app.linksheet.api.SystemProperties
 
 // https://github.com/pytorch/cpuinfo/blob/main/test/mock/xiaomi-mi-5c.h
 // https://github.com/godotengine/godot/blob/master/platform/android/os_android.cpp

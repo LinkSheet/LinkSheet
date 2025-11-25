@@ -1,5 +1,6 @@
 package fe.linksheet.feature.systeminfo
 
+import app.linksheet.api.SystemProperties
 
 class SystemInfoService(
     val properties: SystemProperties = RealSystemProperties,

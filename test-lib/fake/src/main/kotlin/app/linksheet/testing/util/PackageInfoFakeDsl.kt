@@ -46,7 +46,6 @@ class PackageInfoFakeScope(val packageInfo: PackageInfo) {
         } else {
             val resolveInfo = ResolveInfo().apply {
                 this.activityInfo = activityInfo
-                resolvePackageName = activityInfo.packageName
             }
 
             resolveInfos.add(resolveInfo)
@@ -64,7 +63,6 @@ class ActivityScope(private val resolveInfos: MutableList<ResolveInfo>, val acti
     fun addFilter(filter: IntentFilter): ResolveInfo {
         val resolveInfo = ResolveInfo().apply {
             this.activityInfo = this@ActivityScope.activityInfo
-            resolvePackageName = activityInfo.packageName
             this.filter = filter
         }
 

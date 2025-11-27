@@ -3,6 +3,7 @@ package fe.linksheet.module.resolver
 import android.content.ComponentName
 import android.content.pm.ResolveInfo
 import fe.composekit.extension.componentName
+import fe.composekit.extension.packageName
 import fe.linksheet.extension.android.activityDescriptor
 import fe.linksheet.module.repository.whitelisted.createWhitelistedBrowserInfo
 
@@ -19,7 +20,7 @@ class ImprovedBrowserHandler(
                 return browsers.firstOrNull { it.activityInfo.componentName == cmp }
             }
 
-            return browsers.firstOrNull { it.resolvePackageName == selectedBrowser }
+            return browsers.firstOrNull { it.packageName == selectedBrowser }
         }
     }
 
@@ -79,7 +80,7 @@ class ImprovedBrowserHandler(
                     !whitelistedPackages.isNullOrEmpty() -> {
                         val info = createWhitelistedBrowserInfo(whitelistedPackages)
                         browsers.filter {
-                            it.activityInfo.componentName in info.componentNames || it.resolvePackageName in info.packageNames
+                            it.activityInfo.componentName in info.componentNames || it.packageName in info.packageNames
                         }
                     }
 

@@ -3,7 +3,7 @@ package app.linksheet.feature.app.pkg
 import android.content.pm.ApplicationInfo
 import android.content.pm.ComponentInfo
 import android.content.pm.ResolveInfo
-import fe.linksheet.util.extension.android.info
+import fe.composekit.extension.info
 
 interface PackageLabelService {
     fun loadComponentInfoLabel(info: ComponentInfo): String?

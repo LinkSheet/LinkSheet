@@ -1,10 +1,10 @@
 package app.linksheet.feature.app
 
-import android.content.pm.*
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageInfo
+import android.content.pm.ResolveInfo
 import android.content.pm.verify.domain.DomainVerificationUserState
 import androidx.annotation.VisibleForTesting
-import fe.android.compose.icon.BitmapIconPainter
-import fe.linksheet.util.extension.android.info
 import app.linksheet.feature.app.pkg.PackageIconLoader
 import app.linksheet.feature.app.pkg.PackageIntentHandler
 import app.linksheet.feature.app.pkg.PackageLabelService
@@ -13,10 +13,11 @@ import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.pkg.domain.VerificationBrowserState
 import app.linksheet.feature.app.pkg.domain.VerificationState
 import app.linksheet.feature.app.pkg.domain.VerificationStateCompat
+import fe.android.compose.icon.BitmapIconPainter
+import fe.composekit.extension.info
 import fe.linksheet.util.ApplicationInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlin.collections.iterator
 
 
 class PackageService(

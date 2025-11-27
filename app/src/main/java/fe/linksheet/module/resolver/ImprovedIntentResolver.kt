@@ -303,17 +303,17 @@ class ImprovedIntentResolver(
         }
 
         return@scope IntentResolveResult.Default(
-            newIntent,
-            uri,
-            unfurl,
-            referringPackage?.packageName,
-            sorted,
-            filtered,
-            app?.alwaysPreferred,
-            appList.isSingleOption || appList.noBrowsersOnlySingleApp,
-            resolveStatus,
-            libRedirectResult,
-            downloadable
+            intent = newIntent,
+            uri = uri,
+            unfurlResult = unfurl,
+            referringPackageName = referringPackage?.packageName,
+            resolved = sorted,
+            filteredItem = filtered,
+            alwaysPreferred = app?.alwaysPreferred,
+            hasSingleMatchingOption = appList.isSingleOption || appList.noBrowsersOnlySingleApp,
+            resolveModuleStatus = resolveStatus,
+            libRedirectResult = libRedirectResult,
+            downloadable = downloadable
         )
     }
 

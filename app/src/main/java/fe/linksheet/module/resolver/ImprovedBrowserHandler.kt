@@ -39,55 +39,51 @@ class ImprovedBrowserHandler(
 
         return when (config) {
             is BrowserModeConfigHelper.AlwaysAsk -> FilteredBrowserList(
-                config.mode,
-                browsers,
-                nonBrowsers
+                browserMode = config.mode,
+                browsers = browsers,
+                apps = nonBrowsers
             )
 
-            is BrowserModeConfigHelper.None -> {
-                val noBrowsersOnlySingleApp = resolveList.size == 1 && browsers.isEmpty()
-                FilteredBrowserList(
-                    config.mode,
-                    emptyList(),
-                    nonBrowsers,
-                    noBrowsersOnlySingleApp = noBrowsersOnlySingleApp
-                )
-            }
+            is BrowserModeConfigHelper.None -> FilteredBrowserList(
+                browserMode = config.mode,
+                browsers = if (nonBrowsers.isEmpty()) browsers else emptyList(),
+                apps = nonBrowsers,
+                isSingleOption = nonBrowsers.size == 1,
+                noBrowsersOnlySingleApp = resolveList.size == 1 && browsers.isEmpty()
+            )
 
             is BrowserModeConfigHelper.SelectedBrowser -> {
                 val browserResolveInfo = config.selectedBrowser?.let { getBrowser(browsers, it) }
                 val hasInfo = browserResolveInfo != null
-                val list = if (hasInfo) listOf(browserResolveInfo) else emptyList()
-
 //                // TODO: Need to use merged here since resolvedList might contain ResolveInfos also present in browsers
 //                // TODO: Do we really need to use the component?
 //                val isSingleOption = nonBrowsers.isEmpty()
 //                        && browsers.size == 1
 //                        && browsers.values.singleOrNull()?.activityInfo?.componentName == browserResolveInfo?.activityInfo?.componentName
                 FilteredBrowserList(
-                    config.mode,
-                    list,
-                    nonBrowsers,
+                    browserMode = config.mode,
+                    browsers = if (hasInfo) listOf(browserResolveInfo) else emptyList(),
+                    apps = nonBrowsers,
                     isSingleOption = hasInfo
                 )
             }
 
             is BrowserModeConfigHelper.Whitelisted -> {
                 val whitelistedPackages = config.whitelistedPackages
-
                 // TODO: If whitelisted empty, show all browsers; Does that make sense?
-                val whitelisted = when {
-                    !whitelistedPackages.isNullOrEmpty() -> {
-                        val info = createWhitelistedBrowserInfo(whitelistedPackages)
-                        browsers.filter {
-                            it.activityInfo.componentName in info.componentNames || it.packageName in info.packageNames
+                FilteredBrowserList(
+                    browserMode = config.mode,
+                    browsers = when {
+                        !whitelistedPackages.isNullOrEmpty() -> {
+                            val info = createWhitelistedBrowserInfo(whitelistedPackages)
+                            browsers.filter {
+                                it.activityInfo.componentName in info.componentNames || it.packageName in info.packageNames
+                            }
                         }
-                    }
 
-                    else -> browsers
-                }
-
-                FilteredBrowserList(config.mode, whitelisted, nonBrowsers)
+                        else -> browsers
+                    },
+                    apps = nonBrowsers)
             }
         }
     }

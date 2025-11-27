@@ -3,37 +3,13 @@ package app.linksheet.feature.engine.core
 import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
 import app.linksheet.feature.engine.core.context.EngineRunContext
 import app.linksheet.feature.engine.core.fetcher.LinkFetcher
-import app.linksheet.feature.engine.core.rule.PostProcessorInput
-import app.linksheet.feature.engine.core.rule.PostProcessorRule
-import app.linksheet.feature.engine.core.rule.PreProcessorInput
-import app.linksheet.feature.engine.core.rule.PreProcessorRule
-import app.linksheet.feature.engine.core.rule.Rule
-import app.linksheet.feature.engine.core.rule.RuleInput
-import app.linksheet.feature.engine.core.step.AfterStepRule
-import app.linksheet.feature.engine.core.step.BeforeStepRule
-import app.linksheet.feature.engine.core.step.EngineStep
-import app.linksheet.feature.engine.core.step.EngineStepId
-import app.linksheet.feature.engine.core.step.InPlaceStep
-import app.linksheet.feature.engine.core.step.SkipStep
-import app.linksheet.feature.engine.core.step.StepEnd
-import app.linksheet.feature.engine.core.step.StepResult
-import app.linksheet.feature.engine.core.step.StepRule
-import app.linksheet.feature.engine.core.step.StepRuleInput
-import app.linksheet.feature.engine.core.step.StepRuleResult
-import app.linksheet.feature.engine.core.step.StepStart
+import app.linksheet.feature.engine.core.rule.*
+import app.linksheet.feature.engine.core.step.*
 import app.linksheet.lib.log.Logger
 import fe.std.uri.StdUrl
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
 
 class LinkEngine(
     private val steps: List<EngineStep<*>>,
@@ -140,7 +116,8 @@ class LinkEngine(
             context,
             preProcessorRules,
             PreProcessorInput(url)
-        ); if (preResult != null) return@scope preResult
+        )
+        if (preResult != null) return@scope preResult
 
         val result = processSteps(context, url, 0)
         val resultUrl = (result as? UrlEngineResult)?.url ?: url

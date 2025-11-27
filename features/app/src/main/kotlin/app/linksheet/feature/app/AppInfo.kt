@@ -45,8 +45,11 @@ class DomainVerificationAppInfo(
     }
 }
 
-typealias ActivityAppInfoStatus = Pair<ActivityAppInfo, Boolean>
-
+data class ActivityAppInfoStatus(
+    val appInfo: ActivityAppInfo,
+    val enabled: Boolean,
+    val isSourcePackageNameOnly: Boolean
+)
 
 
 @Parcelize
@@ -66,7 +69,6 @@ open class ActivityAppInfo(
         val labelComparator = compareBy<ActivityAppInfo> { it.compareLabel }
     }
 }
-
 
 
 @Parcelize

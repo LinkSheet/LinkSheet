@@ -15,12 +15,17 @@ object ActivityAppInfoSortGlue {
     }.thenBy { (activityInfo, _) -> activityInfo.compareLabel }
 
     private fun mapBrowserState(appInfo: ActivityAppInfo, helper: WhitelistedBrowserInfo): ActivityAppInfoStatus {
-        val flag = (appInfo.packageName in helper.packageNames) || (appInfo.componentName in helper.componentNames)
-        return appInfo to flag
+        var flag = (appInfo.componentName in helper.componentNames)
+        var isSourcePackageNameOnly = false
+        if (appInfo.packageName in helper.packageNames) {
+            isSourcePackageNameOnly = true
+            flag = true
+        }
+        return ActivityAppInfoStatus(appInfo, flag, isSourcePackageNameOnly)
     }
 
-    fun mapBrowserState(browsers: List<ActivityAppInfo>, info: WhitelistedBrowserInfo): Map<ActivityAppInfo, Boolean> {
-        return browsers.map { mapBrowserState(it, info) }.sortedWith(valueAndLabelComparator).toMap()
+    fun mapBrowserState(browsers: List<ActivityAppInfo>, info: WhitelistedBrowserInfo): List<ActivityAppInfoStatus> {
+        return browsers.map { mapBrowserState(it, info) }.sortedWith(valueAndLabelComparator)
     }
 }
 

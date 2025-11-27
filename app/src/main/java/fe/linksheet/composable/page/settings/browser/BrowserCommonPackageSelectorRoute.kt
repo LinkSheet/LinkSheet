@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import app.linksheet.compose.extension.collectOnIO
-import app.linksheet.compose.extension.mapHelper
-import app.linksheet.compose.util.mapState
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.compose.extension.listHelper
+import app.linksheet.compose.util.listState
+import app.linksheet.feature.app.ActivityAppInfoStatus
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.settings.SettingsScaffold
@@ -32,16 +32,16 @@ fun BrowserCommonPackageSelectorRoute(
 ) {
     val items by viewModel.filteredItems.collectOnIO(null)
     val filter by viewModel.filter.collectOnIO()
-    val mapState = remember(items?.size, filter) {
-        mapState(items, filter)
+    val listState = remember(items?.size, filter) {
+        listState(items, filter)
     }
 
     val newState = remember {
-        mutableStateMapOf<ActivityAppInfo, Boolean>()
+        mutableStateMapOf<ActivityAppInfoStatus, Boolean>()
     }
 
     val backHandler: () -> Unit = {
-        viewModel.save(newState)
+        viewModel.save(items, newState)
         navController.popBackStack()
     }
 
@@ -63,22 +63,22 @@ fun BrowserCommonPackageSelectorRoute(
                 searchFilter = viewModel.filter
             )
 
-            mapHelper(
+            listHelper(
                 noItems = noItemsId,
                 notFound = R.string.no_such_app_found,
-                mapState = mapState,
-                map = items,
-                listKey = { it.flatComponentName },
-            ) { app, storedState ->
+                listState= listState,
+                list = items,
+                listKey = { it.appInfo.flatComponentName },
+            ) { app ->
                 CheckboxRow(
-                    checked = newState[app] ?: storedState,
+                    checked = newState[app] ?: app.enabled,
                     onCheckedChange = { newState[app] = it }
                 ) {
                     val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
 
                     BrowserIconTextRow(
-                        app = app,
-                        selected = storedState,
+                        app = app.appInfo,
+                        selected = app.enabled,
                         showSelectedText = false,
                         alwaysShowPackageName = alwaysShowPackageName
                     )

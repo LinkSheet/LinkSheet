@@ -1,8 +1,8 @@
 package fe.linksheet.module.viewmodel.base
 
 import android.app.Application
-import fe.kotlin.extension.map.filterIf
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfoStatus
+import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.Job
@@ -19,19 +19,17 @@ abstract class BrowserCommonViewModel(
     // TODO: This needs to be refactored
     open val filteredItems by lazy {
         items().combine(filter) { items, filter ->
-            items.filterIf(condition = filter.isNotEmpty()) { (info, _) ->
+            items.filterIf(filter = filter.isNotEmpty()) { (info, _) ->
                 info.compareLabel.contains(filter, ignoreCase = true)
-            }
+            }.toList()
         }
     }
 
-    protected open fun items(): Flow<Map<ActivityAppInfo, Boolean>> {
-        return flowOfLazy { emptyMap() }
+    protected open fun items(): Flow<List<ActivityAppInfoStatus>> {
+        return flowOfLazy { emptyList() }
     }
 
-    open fun save(selected: BrowserCommonSelected): Job {
+    open fun save(items: List<ActivityAppInfoStatus>?, selected: MutableMap<ActivityAppInfoStatus, Boolean>): Job {
         TODO()
     }
 }
-
-typealias BrowserCommonSelected = MutableMap<ActivityAppInfo, Boolean>

@@ -1,5 +1,6 @@
 package fe.linksheet.module.repository.whitelisted
 
+import app.linksheet.feature.app.ActivityAppInfoStatus
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.PackageEntityDao
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
@@ -19,9 +20,23 @@ abstract class WhitelistedBrowsersRepository<T : WhitelistedBrowser<T>, C : Pack
         return getAll().map { list -> createWhitelistedBrowserInfo(list.map { it.packageName }) }
     }
 
-    suspend fun insertOrDelete(insert: Boolean, flatComponentName: String) {
-        dao.insertOrDelete(PackageEntityDao.Mode.fromBool(insert), flatComponentName)
+    suspend fun migrateState(items: List<ActivityAppInfoStatus>) {
+        for (status in items) {
+            // Only package name is stored, if enabled -> store component name instead
+            if (status.isSourcePackageNameOnly) {
+                if (status.enabled) {
+                    dao.insert(status.appInfo.flatComponentName)
+                }
+
+                // Get rid of package name only entry
+                dao.delete(status.appInfo.packageName)
+            }
+        }
     }
 
-    suspend fun deleteByPackageName(packageName: String) = dao.deleteByFlatComponentName(packageName)
+    suspend fun insertOrDelete(newState: Boolean, status: ActivityAppInfoStatus) {
+        dao.insertOrDelete(PackageEntityDao.Mode.fromBool(newState), status.appInfo.flatComponentName)
+    }
+
+    suspend fun deleteByPackageName(packageName: String) = dao.deleteByPackageOrComponentName(packageName)
 }

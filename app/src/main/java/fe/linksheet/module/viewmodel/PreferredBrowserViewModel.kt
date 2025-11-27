@@ -5,6 +5,7 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.ActivityAppInfoStatus
 import fe.linksheet.extension.android.launchIO
 import fe.linksheet.feature.app.ActivityAppInfoSortGlue
 import fe.linksheet.module.preference.SensitivePreference
@@ -15,7 +16,6 @@ import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersReposi
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.browser.BrowserMode
-import fe.linksheet.module.viewmodel.base.BrowserCommonSelected
 import fe.linksheet.module.viewmodel.base.BrowserCommonViewModel
 import fe.linksheet.util.RefactorGlue
 import fe.linksheet.util.flowOfLazy
@@ -95,10 +95,15 @@ class PreferredBrowserViewModel(
         Normal, InApp
     }
 
-    override fun save(selected: BrowserCommonSelected) = launchIO {
+    override fun save(items: List<ActivityAppInfoStatus>?, selected: MutableMap<ActivityAppInfoStatus, Boolean>) = launchIO {
         val repo = repository.first()
-        selected.forEach { (activityInfo, enabled) ->
-            repo.insertOrDelete(enabled, activityInfo.flatComponentName)
+
+        if(items != null) {
+            repo.migrateState(items)
+        }
+
+        for ((status, newState) in selected) {
+            repo.insertOrDelete(newState, status)
         }
     }
 

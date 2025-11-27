@@ -10,5 +10,5 @@ abstract class WhitelistedBrowsersDao<T : PackageEntity<T>, C : PackageEntityCre
     abstract fun getAll(): Flow<List<T>>
 
     @Query("")
-    abstract override suspend fun deleteByFlatComponentName(packageName: String)
+    abstract override suspend fun deleteByPackageOrComponentName(packageName: String)
 }

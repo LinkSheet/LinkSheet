@@ -9,9 +9,7 @@ import fe.linksheet.util.WikiPage
 import kotlinx.serialization.Serializable
 
 
-const val mainRoute = "main_route"
 const val settingsRoute = "settings_route"
-const val appsSettingsRoute = "apps_settings_route"
 const val browserSettingsRoute = "browser_settings_route"
 
 const val inAppBrowserSettingsDisableInSelectedRoute = "inapp_browser_settings_route"
@@ -43,11 +41,7 @@ const val inAppBrowserSettingsDisableInSelectedRoute = "inapp_browser_settings_r
 
 const val aboutSettingsRoute = "about_settings_route"
 const val creditsSettingsRoute = "credits_settings_route"
-const val donateSettingsRoute = "donate_settings_route"
-
 const val themeSettingsRoute = "theme_settings_route"
-
-const val shizukuSettingsRoute = "shizuku_settings_route"
 
 
 //const val debugSettingsRoute = "debug_settings_route"
@@ -89,7 +83,6 @@ data class WhitelistedBrowsersSettingsRoute(val type: PreferredBrowserViewModel.
 data class SingleBrowserSettingsRoute(val type: PreferredBrowserViewModel.BrowserType) : Route
 
 const val inAppBrowserSettingsRoute = "in_app_browser_settings_route"
-const val pretendToBeAppRoute = "pretend_to_be_app"
 const val devModeRoute = "dev_mode"
 
 @Keep

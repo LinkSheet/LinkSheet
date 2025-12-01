@@ -10,12 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.*
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -24,6 +19,7 @@ import androidx.core.os.bundleOf
 import fe.android.compose.dialog.helper.dialogHelper
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
+import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.composable.util.*
 import fe.linksheet.extension.android.getApplicationInfoCompat
 import fe.linksheet.interconnect.IDomainSelectionResultCallback
@@ -32,7 +28,6 @@ import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.composable.ui.AppTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -209,5 +204,10 @@ class SelectDomainsConfirmationActivity : BaseComponentActivity() {
                 }
             }
         }
+    }
+
+    @Composable
+    private fun Dialog() {
+
     }
 }

@@ -11,11 +11,13 @@ import androidx.work.WorkerParameters
 import app.linksheet.api.CachedRequest
 import app.linksheet.api.SystemProperties
 import app.linksheet.compose.debug.DebugMenuSlotProvider
-import app.linksheet.feature.app.usecase.AllAppsUseCase
 import app.linksheet.feature.app.pkg.PackageIntentHandler
 import app.linksheet.feature.app.pkg.PackageLabelService
 import app.linksheet.feature.app.pkg.PackageLauncherService
 import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
+import app.linksheet.feature.app.usecase.AllAppsUseCase
+import app.linksheet.feature.app.usecase.BrowsersUseCase
+import app.linksheet.feature.app.usecase.DomainVerificationUseCase
 import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.engine.database.repository.CacheRepository
@@ -71,7 +73,6 @@ import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
 import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
-import fe.linksheet.module.resolver.BrowserResolver
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
@@ -137,6 +138,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             PackageLauncherService::class,
             PackageIntentHandler::class
         ),
+        definition<DomainVerificationUseCase>(DomainVerificationManagerCompat::class),
         definition<Redactor>(LogHasher::class),
         definition<Logger>(LoggerDelegate::class),
         definition<RealCachedRequest>(Request::class),
@@ -150,7 +152,6 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             CachedRequest::class,
             OkHttpClient::class,
         ),
-        definition<BrowserResolver>(AllAppsUseCase::class),
         definition<InAppBrowserHandler>(DisableInAppBrowserInSelectedRepository::class),
         definition<LibRedirectDefaultRepository>(LibRedirectDefaultDao::class),
         definition<LibRedirectStateRepository>(LibRedirectServiceStateDao::class),
@@ -176,7 +177,6 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<UrlResolver>(LocalTask.Redirector::class, LocalTask.Amp2Html::class, RemoteResolver::class),
         definition<VersionTracker>(BaseAnalyticsService::class, SystemInfoService::class),
         definition<MainViewModel>(
-            BrowserResolver::class,
             BaseAnalyticsService::class,
             MiuiCompatProvider::class,
             MiuiCompat::class,
@@ -186,11 +186,10 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<VerifiedLinkHandlersViewModel>(
             ShizukuServiceConnection::class,
-            AllAppsUseCase::class,
+            DomainVerificationUseCase::class,
             OneUiCompat::class
         ),
-        definition<PreferredAppSettingsViewModel>(AllAppsUseCase::class),
-        definition<PreferredBrowserViewModel>(BrowserResolver::class),
+        definition<PreferredBrowserViewModel>(BrowsersUseCase::class),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
         definition<ExportSettingsViewModel>(Gson::class, Clock::class, ZoneId::class),
         definition<AboutSettingsViewModel>(Gson::class),
@@ -221,12 +220,18 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<WorkDelegatorService>(WorkManager::class),
         definition<RedirectResolveRequest>(HttpClient::class),
         definition<Amp2HtmlResolveRequest>(HttpClient::class),
-        definition<VerifiedLinkHandlerViewModel>(AllAppsUseCase::class, OneUiCompat::class),
+        definition<VerifiedLinkHandlerViewModel>(DomainVerificationUseCase::class, OneUiCompat::class),
         definition<ShizukuSettingsViewModel>(
             ShizukuService::class,
             AppPreferenceRepository::class,
             ShizukuPreferences::class
         ),
+        definition<InAppBrowserSettingsViewModel>(AllAppsUseCase::class),
+        definition<WhitelistedBrowsersViewModel>(PreferredBrowserViewModel.BrowserType::class, BrowsersUseCase::class),
+        definition<SingleBrowserViewModel>(
+            PreferredBrowserViewModel.BrowserType::class,
+            BrowsersUseCase::class
+        )
     )
 
     @Test

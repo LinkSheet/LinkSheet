@@ -1,9 +1,7 @@
 package fe.linksheet.extension.android
 
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import fe.linksheet.extension.kotlin.setup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -24,25 +22,6 @@ inline fun <T> ViewModel.ioAsync(
     result
 }
 
-inline fun <T> ViewModel.ioAsync(
-    loading: MutableState<Boolean>,
-    crossinline block: suspend CoroutineScope.() -> T
-) = ioAsync({ loading.value = it }, block)
-
-inline fun <T> ViewModel.ioAsync(
-    list: MutableList<T>,
-    crossinline block: suspend CoroutineScope.() -> Iterable<T>
-) = ioAsync { list.setup(block()) }
-
-inline fun <T> ViewModel.ioAsync(
-    loading: MutableState<Boolean>,
-    list: MutableList<T>,
-    crossinline block: suspend CoroutineScope.() -> Iterable<T>
-) = ioAsync {
-    loading.value = true
-    list.setup(block())
-    loading.value = false
-}
 
 inline fun <T> ViewModel.launchIO(
     crossinline block: suspend CoroutineScope.() -> T

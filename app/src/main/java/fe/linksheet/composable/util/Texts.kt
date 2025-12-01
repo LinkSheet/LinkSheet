@@ -1,10 +1,6 @@
 package fe.linksheet.composable.util
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,19 +37,6 @@ fun HeadlineText(modifier: Modifier = Modifier, @StringRes headlineId: Int) {
 }
 
 @Composable
-fun LinkableSubtitleText(modifier: Modifier = Modifier, @StringRes id: Int, enabled: Boolean) {
-    LinkableTextView(
-        modifier = modifier,
-        id = id,
-        enabled = enabled,
-        style = LocalTextStyle.current.copy(
-            color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 16.sp
-        )
-    )
-}
-
-@Composable
 fun SubtitleText(
     modifier: Modifier = Modifier,
     fontStyle: FontStyle? = null,
@@ -78,20 +61,3 @@ fun SubtitleText(
     }
 }
 
-@Composable
-fun Texts(
-    modifier: Modifier = Modifier,
-    headline: CharSequence,
-    subtitle: CharSequence? = null,
-    content: @Composable (ColumnScope.() -> Unit)? = null,
-) {
-    Column(verticalArrangement = Arrangement.Center) {
-        HeadlineText(headline = headline)
-
-        if (subtitle != null) {
-            SubtitleText(modifier = modifier, subtitle = subtitle)
-        }
-
-        content?.invoke(this)
-    }
-}

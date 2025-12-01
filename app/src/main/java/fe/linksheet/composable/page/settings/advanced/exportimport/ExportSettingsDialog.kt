@@ -1,75 +1,136 @@
 package fe.linksheet.composable.page.settings.advanced.exportimport
 
 import android.content.Intent
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
+import android.os.Parcelable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ImportExport
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import app.linksheet.compose.theme.DialogTitleStyle
+import fe.android.compose.dialog.helper.result.ResultDialog
+import fe.android.compose.dialog.helper.result.ResultDialogState
+import fe.android.compose.dialog.helper.result.rememberResultDialogState
+import fe.android.compose.feedback.FeedbackType
+import fe.android.compose.feedback.LocalHapticFeedbackInteraction
+import fe.android.compose.feedback.wrap
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.component.ContentType
+import fe.composekit.component.dialog.DialogDefaults
+import fe.composekit.component.dialog.SaneAlertDialogTextButton
+import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
-import fe.linksheet.composable.util.*
-import kotlin.time.ExperimentalTime
+import fe.linksheet.composable.util.LinkableTextView
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
-@ExperimentalTime
+@Parcelize
+data class ExportResult(
+    val result: @RawValue FileSelectionResult,
+    val includeLogHashKey: Boolean,
+) : Parcelable
+
 @Composable
-fun ExportSettingsDialog(exportIntent: Intent, onResult: (FileSelectionResult, Boolean) -> Unit) {
+fun rememberExportSettingsDialog(
+    exportIntent: Intent,
+    onResult: (ExportResult) -> Unit
+): ResultDialogState<ExportResult> {
+    val interaction = LocalHapticFeedbackInteraction.current
+    val state = rememberResultDialogState<ExportResult>()
+
+    ResultDialog(state = state, onClose = onResult) {
+        ExportSettingsDialog(
+            exportIntent = exportIntent,
+            onDismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
+            onResult = interaction.wrap(FeedbackType.Confirm, state::close),
+        )
+    }
+
+    return state
+}
+
+
+@Composable
+private fun ExportSettingsDialog(
+    exportIntent: Intent,
+    onDismiss: () -> Unit,
+    onResult: (ExportResult) -> Unit
+) {
     val historyFlag = false
-    val context = LocalContext.current
 
     var includeLogHashKey by remember { mutableStateOf(false) }
     var includeHistory by remember { mutableStateOf(false) }
 
     val fileSelectedLauncher = rememberFileSelectedLauncher {
-        onResult(it, includeLogHashKey)
+        onResult(ExportResult(it, includeLogHashKey))
     }
 
-    DialogColumn {
-        HeadlineText(headlineId = R.string.export_settings)
-        DialogSpacer()
-
-        Text(text = stringResource(id = R.string.export_include_recommendation))
-
-        CheckboxRow(
-            checked = includeLogHashKey,
-            onClick = { includeLogHashKey = !includeLogHashKey },
-            textId = R.string.include_log_hash_key
-        )
-
-        if (historyFlag) {
-            Spacer(modifier = Modifier.height(5.dp))
-
-            CheckboxRow(
-                checked = includeHistory,
-                onClick = { includeHistory = !includeHistory },
-                textId = R.string.include_history
+    AlertDialog(
+        icon = {
+            Icon(
+                imageVector = Icons.Outlined.ImportExport,
+                contentDescription = stringResource(id = R.string.export_settings)
             )
-        }
+        },
+        title = {
+            Text(text = stringResource(id = R.string.export_settings), style = DialogTitleStyle)
+        },
+        text = {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                item(key = R.string.export_include_recommendation, contentType = ContentType.TextItem) {
+                    Text(text = stringResource(id = R.string.export_include_recommendation))
+                }
 
-        Spacer(modifier = Modifier.height(5.dp))
+                item(key = R.string.include_log_hash_key, contentType = ContentType.TextItem) {
+                    CheckboxListItem(
+                        checked = includeLogHashKey,
+                        onCheckedChange = { includeLogHashKey= !includeLogHashKey},
+                        position = ContentPosition.Leading,
+                        headlineContent = textContent(R.string.include_log_hash_key),
+                        otherContent = null
+                    )
+                }
 
-        LinkableTextView(
-            id = R.string.export_privacy,
-            style = LocalTextStyle.current.copy(
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 16.sp
-            )
-        )
+                if (historyFlag) {
+                    item(key = R.string.include_history, contentType = ContentType.TextItem) {
+                        CheckboxListItem(
+                            checked = includeHistory,
+                            onCheckedChange = { includeHistory = !includeHistory },
+                            position = ContentPosition.Leading,
+                            headlineContent = textContent(R.string.include_log_hash_key),
+                            otherContent = null
+                        )
+                    }
+                }
 
-        Spacer(modifier = Modifier.height(10.dp))
-
-        BottomRow {
-            TextButton(
-                onClick = { fileSelectedLauncher.launch(exportIntent) }
-            ) {
-                Text(text = stringResource(id = R.string.export_to_file))
+                item(key = R.string.export_privacy, contentType = ContentType.TextItem) {
+                    LinkableTextView(
+                        modifier = Modifier.padding(top = DialogDefaults.ContentPadding),
+                        id = R.string.export_privacy
+                    )
+                }
             }
+        },
+        onDismissRequest = onDismiss,
+        dismissButton = {
+            SaneAlertDialogTextButton(
+                content = textContent(R.string.cancel),
+                onClick = onDismiss
+            )
+        },
+        confirmButton = {
+            SaneAlertDialogTextButton(
+                content = textContent(R.string.export_to_file),
+                onClick = { fileSelectedLauncher.launch(exportIntent) }
+            )
         }
-    }
+    )
 }

@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 
 @Composable
 fun SettingsItemRow(
@@ -44,23 +43,5 @@ fun SettingsItemRow(
         subtitle = stringResource(id = subtitleId),
         onClick = onClick,
         image = image
-    )
-}
-
-@Composable
-fun SettingsItemRow(
-    navController: NavController,
-    navigateTo: String,
-    @StringRes headlineId: Int,
-    @StringRes subtitleId: Int,
-    image: @Composable (() -> Unit)? = null
-) {
-    SettingsItemRow(
-        headlineId = headlineId,
-        subtitleId = subtitleId,
-        image = image,
-        onClick = {
-            navController.navigate(navigateTo)
-        }
     )
 }

@@ -1,9 +1,9 @@
 package fe.linksheet.module.viewmodel
 
 import android.content.Intent
-import fe.composekit.core.AndroidVersion
 import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.usecase.DomainVerificationUseCase
+import fe.composekit.core.AndroidVersion
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -18,7 +18,7 @@ class VerifiedLinkHandlerViewModel(
     val packageName: String,
     val preferenceRepository: AppPreferenceRepository,
     private val preferredAppRepository: PreferredAppRepository,
-    private val packageService: PackageService,
+    private val service: DomainVerificationUseCase,
     private val intentCompat: OneUiCompat,
 ) : BaseViewModel(preferenceRepository) {
     fun openSettings(): Intent {
@@ -29,7 +29,7 @@ class VerifiedLinkHandlerViewModel(
     }
 
     fun get(packageName: String): DomainVerificationAppInfo? {
-        val info = packageService.createDomainVerificationAppInfo(packageName)
+        val info = service.createDomainVerificationAppInfo(packageName)
 
         return info
     }

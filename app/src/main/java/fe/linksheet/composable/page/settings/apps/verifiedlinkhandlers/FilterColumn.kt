@@ -1,17 +1,9 @@
 package fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,12 +11,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.android.compose.content.rememberOptionalContent
 import fe.linksheet.R
+import fe.linksheet.module.viewmodel.common.FilterState
+import fe.linksheet.module.viewmodel.common.StateModeFilter
+import fe.linksheet.module.viewmodel.common.TypeFilter
 
-data class FilterState(
-    val mode: VlhStateModeFilter,
-    val type: VlhTypeFilter,
-    val systemApps: Boolean
-)
+
 
 @Composable
 internal fun FilterColumn(
@@ -74,7 +65,7 @@ internal fun FilterColumn(
 @Composable
 private fun FilterColumnPreview() {
     FilterColumn(
-        state = FilterState(VlhStateModeFilter.ShowAll, VlhTypeFilter.All, true),
+        state = FilterState(StateModeFilter.ShowAll, TypeFilter.All, true),
         onChange = {
 
         },

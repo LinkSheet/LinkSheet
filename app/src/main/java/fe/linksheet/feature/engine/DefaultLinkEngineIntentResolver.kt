@@ -1,7 +1,8 @@
 package fe.linksheet.feature.engine
 
 import android.content.Context
-import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageLauncherService
 import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.engine.core.EngineScenario
@@ -45,7 +46,8 @@ fun DefaultLinkEngineIntentResolver(
     preferredAppRepository: PreferredAppRepository,
     normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
-    packageService: PackageService,
+    packageIntentHandler: PackageIntentHandler,
+    packageLauncherService: PackageLauncherService,
     appSorter: AppSorter,
     downloader: Downloader,
     browserHandler: ImprovedBrowserHandler,
@@ -144,7 +146,8 @@ fun DefaultLinkEngineIntentResolver(
         preferredAppRepository = preferredAppRepository,
         normalBrowsersRepository = normalBrowsersRepository,
         inAppBrowsersRepository = inAppBrowsersRepository,
-        packageService = packageService,
+        packageIntentHandler = packageIntentHandler,
+        packageLauncherService = packageLauncherService,
         appSorter = appSorter,
         browserHandler = browserHandler,
         inAppBrowserHandler = inAppBrowserHandler,

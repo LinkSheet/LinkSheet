@@ -11,7 +11,7 @@ import androidx.work.WorkerParameters
 import app.linksheet.api.CachedRequest
 import app.linksheet.api.SystemProperties
 import app.linksheet.compose.debug.DebugMenuSlotProvider
-import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.usecase.AllAppsUseCase
 import app.linksheet.feature.app.pkg.PackageIntentHandler
 import app.linksheet.feature.app.pkg.PackageLabelService
 import app.linksheet.feature.app.pkg.PackageLauncherService
@@ -131,7 +131,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             BuildConstants::class,
             BuildInfo::class
         ),
-        definition<PackageService>(
+        definition<AllAppsUseCase>(
             DomainVerificationManagerCompat::class,
             PackageLabelService::class,
             PackageLauncherService::class,
@@ -150,7 +150,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             CachedRequest::class,
             OkHttpClient::class,
         ),
-        definition<BrowserResolver>(PackageService::class),
+        definition<BrowserResolver>(AllAppsUseCase::class),
         definition<InAppBrowserHandler>(DisableInAppBrowserInSelectedRepository::class),
         definition<LibRedirectDefaultRepository>(LibRedirectDefaultDao::class),
         definition<LibRedirectStateRepository>(LibRedirectServiceStateDao::class),
@@ -186,10 +186,10 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<VerifiedLinkHandlersViewModel>(
             ShizukuServiceConnection::class,
-            PackageService::class,
+            AllAppsUseCase::class,
             OneUiCompat::class
         ),
-        definition<PreferredAppSettingsViewModel>(PackageService::class),
+        definition<PreferredAppSettingsViewModel>(AllAppsUseCase::class),
         definition<PreferredBrowserViewModel>(BrowserResolver::class),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
         definition<ExportSettingsViewModel>(Gson::class, Clock::class, ZoneId::class),
@@ -221,7 +221,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<WorkDelegatorService>(WorkManager::class),
         definition<RedirectResolveRequest>(HttpClient::class),
         definition<Amp2HtmlResolveRequest>(HttpClient::class),
-        definition<VerifiedLinkHandlerViewModel>(PackageService::class, OneUiCompat::class),
+        definition<VerifiedLinkHandlerViewModel>(AllAppsUseCase::class, OneUiCompat::class),
         definition<ShizukuSettingsViewModel>(
             ShizukuService::class,
             AppPreferenceRepository::class,

@@ -319,7 +319,7 @@ private fun BottomSheetAppsPreview_Grid(
 private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean) {
     val appSorter = AppSorter(
         queryAndAggregateUsageStats = { _, _ -> emptyMap() },
-        toAppInfo = { resolveInfo, browser -> resolveInfo.toActivityAppInfo() },
+        toActivityAppInfo = { resolveInfo, browser -> resolveInfo.toActivityAppInfo() },
         clock = Clock.System
     )
 

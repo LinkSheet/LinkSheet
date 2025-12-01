@@ -2,9 +2,9 @@ package fe.linksheet.module.resolver
 
 import android.content.ComponentName
 import android.content.pm.ResolveInfo
+import app.linksheet.feature.app.activityDescriptor
 import fe.composekit.extension.componentName
 import fe.composekit.extension.packageName
-import fe.linksheet.extension.android.activityDescriptor
 import fe.linksheet.module.repository.whitelisted.createWhitelistedBrowserInfo
 
 class ImprovedBrowserHandler(

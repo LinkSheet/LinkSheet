@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
-import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.AppInfoCreator
 import app.linksheet.feature.app.labelSorted
+import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageLauncherService
 import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.downloader.Downloader
@@ -64,7 +66,9 @@ class ImprovedIntentResolver(
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
-    private val packageInfoService: PackageService,
+    private val appInfoCreator: AppInfoCreator,
+    private val packageIntentHandler: PackageIntentHandler,
+    private val packageLauncherService: PackageLauncherService,
     private val appSorter: AppSorter,
     private val downloader: Downloader,
     private val urlResolver: UrlResolver,
@@ -143,7 +147,7 @@ class ImprovedIntentResolver(
         var uri = uriResult.getOrNull()
 
         emitEvent(ResolveEvent.QueryingBrowsers)
-        val browsers = packageInfoService.findHttpBrowsable(null)
+        val browsers = packageIntentHandler.findHttpBrowsable(null)
 
         val resolveEmbeds = settings.resolveEmbeds()
         val useClearUrls = settings.useClearUrls()
@@ -273,15 +277,15 @@ class ImprovedIntentResolver(
         emitEvent(ResolveEvent.LoadingPreferredApps)
         val app = queryPreferredApp(
             repository = preferredAppRepository,
-            packageInfoService = packageInfoService,
+            packageLauncherService = packageLauncherService,
             uri = uri
         )
         val lastUsedApps = queryAppSelectionHistory(
             repository = appSelectionHistoryRepository,
-            packageInfoService = packageInfoService,
+            packageLauncherService = packageLauncherService,
             uri = uri
         )
-        val resolveList = packageInfoService.findHandlers(uri, referringPackage?.packageName)
+        val resolveList = packageIntentHandler.findHandlers(uri, referringPackage?.packageName)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
@@ -343,13 +347,13 @@ class ImprovedIntentResolver(
     private suspend fun queryAppSelectionHistory(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         repository: AppSelectionHistoryRepository,
-        packageInfoService: PackageService,
+        packageLauncherService: PackageLauncherService,
         uri: Uri?,
     ): Map<String, Long> = withContext(dispatcher) {
         val lastUsedApps = repository.getLastUsedForHostGroupedByPackage(uri)
             ?: return@withContext emptyMap()
 
-        val (result, delete) = packageInfoService.hasLauncher(lastUsedApps.keys)
+        val (result, delete) = packageLauncherService.hasLauncher(lastUsedApps.keys)
         if (delete.isNotEmpty()) repository.delete(delete)
 
         lastUsedApps.filter { it.key in result }.toMap()
@@ -358,11 +362,11 @@ class ImprovedIntentResolver(
     private suspend fun queryPreferredApp(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         repository: PreferredAppRepository,
-        packageInfoService: PackageService,
+        packageLauncherService: PackageLauncherService,
         uri: Uri?,
     ): PreferredApp? = withContext(dispatcher) {
         val app = repository.getByHost(uri)
-        val resolveInfo = packageInfoService.getLauncherOrNull(app?.pkg)
+        val resolveInfo = packageLauncherService.getLauncherOrNull(app?.pkg)
         if (app != null && resolveInfo == null) repository.delete(app)
 
         app
@@ -375,8 +379,8 @@ class ImprovedIntentResolver(
             .cloneIntent(Intent.ACTION_WEB_SEARCH, null, true)
             .putExtra(SearchManager.QUERY, query)
 
-        val resolvedList = packageInfoService.findHandlers(newIntent)
-            .map { packageInfoService.toAppInfo(it, true) }
+        val resolvedList = packageIntentHandler.findHandlers(newIntent)
+            .map { appInfoCreator.toActivityAppInfo(it, null) }
             .labelSorted()
 
         return IntentResolveResult.WebSearch(query, newIntent, resolvedList)

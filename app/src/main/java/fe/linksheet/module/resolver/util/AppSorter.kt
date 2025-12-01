@@ -2,8 +2,9 @@ package fe.linksheet.module.resolver.util
 
 import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
-import fe.linksheet.extension.android.activityDescriptor
 import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.IAppInfo
+import app.linksheet.feature.app.activityDescriptor
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.FilteredBrowserList
 import kotlin.time.Clock
@@ -14,7 +15,7 @@ import kotlin.time.ExperimentalTime
 @OptIn(ExperimentalTime::class)
 class AppSorter(
     private val queryAndAggregateUsageStats: (beginTime: Long, endTime: Long) -> Map<String, UsageStats>,
-    private val toAppInfo: (ResolveInfo, browser: Boolean) -> ActivityAppInfo,
+    private val toActivityAppInfo: (ResolveInfo, installTime: Long?) -> ActivityAppInfo,
     private val clock: Clock,
     private val usageStatsPeriod: Duration = 14.days,
 ) {
@@ -35,7 +36,7 @@ class AppSorter(
         val comparator = listOfNotNull(
             createHistoryComparator(historyMap),
             createUsageStatComparator(),
-            ActivityAppInfo.labelComparator
+            IAppInfo.labelComparator
         ).fold(emptyComparator) { current, next -> current.then(next) }
 
         val sorted = infos.values.sortedWith(comparator)
@@ -54,13 +55,13 @@ class AppSorter(
         return infos.remove(lastChosenEntry?.key)
     }
 
-    private fun createHistoryComparator(historyMap: Map<String, Long>?): Comparator<ActivityAppInfo>? {
+    private fun createHistoryComparator(historyMap: Map<String, Long>?): Comparator<IAppInfo>? {
         if (historyMap == null) return null
         return compareByDescending { app -> historyMap[app.packageName] ?: -1L }
     }
 
     @OptIn(ExperimentalTime::class)
-    private fun createUsageStatComparator(): Comparator<ActivityAppInfo> {
+    private fun createUsageStatComparator(): Comparator<IAppInfo> {
         val now = clock.now()
         val sinceTime = now - usageStatsPeriod
         val usageStatsMap = queryAndAggregateUsageStats(sinceTime.toEpochMilliseconds(), now.toEpochMilliseconds())
@@ -75,12 +76,12 @@ class AppSorter(
         val map = mutableMapOf<String, ActivityAppInfo>()
 
         for (app in apps) {
-            val info = toAppInfo(app, false)
+            val info = toActivityAppInfo(app, null)
             map[app.activityInfo.activityDescriptor] = info
         }
 
         for (browser in browsers) {
-            val info = toAppInfo(browser, true)
+            val info = toActivityAppInfo(browser, null)
             map[browser.activityInfo.activityDescriptor] = info
         }
 

@@ -2,11 +2,7 @@ package fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers
 
 import android.os.Parcelable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.WebAssetOff
 import androidx.compose.material3.Icon
@@ -23,6 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import app.linksheet.compose.theme.DialogTitleStyle
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.IAppInfo
+import app.linksheet.feature.app.LinkHandling
 import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.dialog.helper.input.InputResultDialog
 import fe.android.compose.dialog.helper.input.InputResultDialogState
@@ -40,11 +40,8 @@ import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
-import app.linksheet.compose.theme.DialogTitleStyle
-import app.linksheet.feature.app.AppInfo
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.LinkHandling
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 @Composable
 fun rememberAppHostDialog(
@@ -104,7 +101,7 @@ fun AppHostDialogData.createState(): InitialState {
 
 @Parcelize
 data class AppHostDialogResult(
-    val info: AppInfo,
+    val info: @RawValue IAppInfo,
     val hosts: List<HostState>,
 ) : Parcelable
 

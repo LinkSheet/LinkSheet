@@ -25,11 +25,9 @@ import fe.composekit.component.list.column.shape.ShapeListItemDefaults
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
+import fe.linksheet.module.viewmodel.common.SortByState
+import fe.linksheet.module.viewmodel.common.SortType
 
-data class SortByState(
-    val sort: VlhSort,
-    val ascending: Boolean,
-)
 
 @Composable
 internal fun SortByColumn(
@@ -47,7 +45,7 @@ internal fun SortByColumn(
         LazyColumn(
             modifier = Modifier.selectableGroup(),
         ) {
-            items(items = VlhSort.entries, key = { it }) {
+            items(items = SortType.entries, key = { it }) {
                 SortByListItem(
                     headlineContent = textContent(it.stringRes),
                     selected = (state.sort == it),
@@ -73,10 +71,10 @@ internal fun SortByColumn(
     }
 }
 
-private val VlhSort.stringRes: Int
+private val SortType.stringRes: Int
     get() = when (this) {
-        VlhSort.AZ -> R.string.settings_verified_link_handlers__text_sort_by_a_z
-        VlhSort.InstallTime -> R.string.settings_verified_link_handlers__text_sort_by_installation_time
+        SortType.AZ -> R.string.settings_verified_link_handlers__text_sort_by_a_z
+        SortType.InstallTime -> R.string.settings_verified_link_handlers__text_sort_by_installation_time
     }
 
 @Composable
@@ -113,7 +111,7 @@ private fun SortByListItem(
 @Composable
 private fun SortByColumnPreview() {
     SortByColumn(
-        state = SortByState(VlhSort.AZ, true),
+        state = SortByState(SortType.AZ, true),
         onChange = {
 
         }

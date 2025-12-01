@@ -2,9 +2,9 @@ package fe.linksheet.module.viewmodel.module
 
 
 import fe.gson.GsonQualifier
+import fe.linksheet.feature.profile.ProfileFeatureModule
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
-import fe.linksheet.feature.profile.ProfileFeatureModule
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
@@ -41,11 +41,10 @@ val ViewModelModule = module {
             packageName = parameters.get(),
             preferenceRepository = get(),
             preferredAppRepository = get(),
-            packageService = get(),
+            service = get(),
             intentCompat = get()
         )
     }
-    viewModelOf(::PreferredAppSettingsViewModel)
     viewModelOf(::InAppBrowserSettingsViewModel)
     viewModelOf(::PreferredBrowserViewModel)
     viewModelOf(::BottomSheetSettingsViewModel)
@@ -109,4 +108,20 @@ val ViewModelModule = module {
     viewModelOf(::MarkdownViewModel)
     viewModelOf(::SqlViewModel)
     viewModelOf(::PreviewSettingsViewModel)
+    viewModel {parameters ->
+        WhitelistedBrowsersViewModel(
+            type = parameters.get(),
+            browserPackageService = get(),
+            normalBrowsersRepository = get(),
+            inAppBrowsersRepository = get(),
+            preferenceRepository = get()
+        )
+    }
+    viewModel { parameters ->
+        SingleBrowserViewModel(
+            type = parameters.get(),
+            browserPackageService = get(),
+            preferenceRepository = get()
+        )
+    }
 }

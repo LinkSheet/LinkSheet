@@ -3,7 +3,7 @@
 package fe.linksheet.module.resolver.module
 
 import android.app.usage.UsageStatsManager
-import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.AppInfoCreator
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
@@ -25,7 +25,6 @@ import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 
 val ResolverModule = module {
-    single { BrowserResolver(getPackageManager(), get()) }
     single {
         val experimentRepository = get<ExperimentRepository>()
         ImprovedBrowserHandler(
@@ -35,7 +34,7 @@ val ResolverModule = module {
     single {
         AppSorter(
             queryAndAggregateUsageStats = getSystemServiceOrThrow<UsageStatsManager>()::queryAndAggregateUsageStats,
-            toAppInfo = get<PackageService>()::toAppInfo,
+            toActivityAppInfo = get<AppInfoCreator>()::toActivityAppInfo,
             clock = get()
         )
     }
@@ -60,7 +59,8 @@ val ResolverModule = module {
             preferredAppRepository = get(),
             normalBrowsersRepository = get(),
             inAppBrowsersRepository = get(),
-            packageService = get(),
+            packageIntentHandler = get(),
+            packageLauncherService = get(),
             appSorter = get(),
             downloader = get(),
             browserHandler = get(),
@@ -80,7 +80,9 @@ val ResolverModule = module {
                 preferredAppRepository = get(),
                 normalBrowsersRepository = get(),
                 inAppBrowsersRepository = get(),
-                packageInfoService = get(),
+                appInfoCreator = get(),
+                packageIntentHandler = get(),
+                packageLauncherService = get(),
                 appSorter = get(),
                 downloader = get(),
                 urlResolver = get(),
@@ -90,7 +92,7 @@ val ResolverModule = module {
                 unfurler = get(),
                 networkStateService = get(),
                 privateBrowsingService = get(),
-                settings = settings
+                settings = settings,
             ),
             linkEngineIntentResolver = realLinkEngine.createResolver(settings),
             useLinkEngine = experimentRepository.asFunction(Experiments.linkEngine)

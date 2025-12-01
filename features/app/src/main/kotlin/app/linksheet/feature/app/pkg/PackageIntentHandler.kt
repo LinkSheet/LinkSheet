@@ -5,6 +5,8 @@ import android.content.IntentFilter
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
+import app.linksheet.feature.app.activityDescriptor
+import fe.composekit.extension.packageName
 import fe.linksheet.util.ResolveInfoFlags
 
 interface PackageIntentHandler {
@@ -40,12 +42,12 @@ class DefaultPackageIntentHandler(
         val intent = Intent(Intent.ACTION_VIEW, httpSchemeUri)
             .addCategory(Intent.CATEGORY_BROWSABLE)
         val resolveInfo = resolveActivity(intent, ResolveInfoFlags.MATCH_DEFAULT_ONLY)
-        val pkg = resolveInfo?.activityInfo?.packageName ?: return false
+        val pkg = resolveInfo?.packageName ?: return false
         return isSelf(pkg)
     }
 
-    internal fun Iterable<ResolveInfo>.filterLaunchable(): List<ResolveInfo> {
-        return filter { it.activityInfo.exported && it.activityInfo.applicationInfo.enabled }
+    internal fun ResolveInfo.isLaunchable(): Boolean {
+        return activityInfo.exported && activityInfo.applicationInfo.enabled
     }
 
     override fun findHttpBrowsable(packageName: String?): List<ResolveInfo> {
@@ -56,16 +58,16 @@ class DefaultPackageIntentHandler(
         val httpInfos = queryIntentActivities(httpIntent, ResolveInfoFlags.MATCH_ALL)
         val httpsInfos = queryIntentActivities(httpIntent.setData(httpsSchemeUri), ResolveInfoFlags.MATCH_ALL)
         return (httpInfos + httpsInfos)
-            .distinct()
-            .filterLaunchable()
-            .filter { !isSelf(it.activityInfo.packageName) }
+            .distinctBy { it.activityInfo.activityDescriptor }
+            .filter { it.isLaunchable() }
+            .filter { !isSelf(it.packageName) }
     }
 
     override fun findHandlers(intent: Intent): List<ResolveInfo> {
         val activities = queryIntentActivities(intent, QUERY_FLAGS)
-        return activities.filterLaunchable().filter {
-            !isLinkSheetCompat(it.activityInfo.packageName)
-        }
+        return activities
+            .filter { it.isLaunchable() }
+            .filter { !isLinkSheetCompat(it.packageName) }
     }
 
     override fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo> {

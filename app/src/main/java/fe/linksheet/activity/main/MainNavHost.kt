@@ -38,6 +38,7 @@ import fe.linksheet.composable.page.settings.browser.BrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.mode.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.page.settings.browser.mode.SingleBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.mode.WhitelistedBrowsersSettingsRoute
 import fe.linksheet.composable.page.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.page.settings.debug.SqlRoute
@@ -141,7 +142,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = browserSettingsRoute) {
-            BrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            BrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navigateNew = navigateNew)
         }
 
         animatedComposable(route = generalSettingsRoute) {
@@ -219,15 +220,23 @@ fun MainNavHost(
         animatedComposable(route = creditsSettingsRoute) {
             CreditsSettingsRoute(onBackPressed = onBackPressed)
         }
-
-        animatedComposable(route = preferredBrowserSettingsRoute) {
+        animatedComposable<PreferredBrowserSettingsRoute> { _, _ ->
             PreferredBrowserSettingsRoute(
-                navController = navController, onBackPressed = onBackPressed
+                onBackPressed = onBackPressed,
+                navigate = navigateNew,
             )
         }
-
-        animatedComposable(route = whitelistedBrowsersSettingsRoute) {
-            WhitelistedBrowsersSettingsRoute(navController = navController)
+        animatedComposable<WhitelistedBrowsersSettingsRoute> { _, route ->
+            WhitelistedBrowsersSettingsRoute(
+                type = route.type,
+                onBackPressed = onBackPressed,
+            )
+        }
+        animatedComposable<SingleBrowserSettingsRoute> { _, route ->
+            SingleBrowserSettingsRoute(
+                type = route.type,
+                onBackPressed = onBackPressed,
+            )
         }
 
         animatedComposable(route = inAppBrowserSettingsRoute) {

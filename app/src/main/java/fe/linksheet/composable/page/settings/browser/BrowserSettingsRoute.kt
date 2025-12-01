@@ -5,19 +5,20 @@ import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.OpenInBrowser
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
+import fe.composekit.route.Route
 import fe.linksheet.R
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import fe.linksheet.navigation.PreferredBrowserSettingsRoute
 import fe.linksheet.navigation.inAppBrowserSettingsRoute
-import fe.linksheet.navigation.preferredBrowserSettingsRoute
-
 
 @Composable
 fun BrowserSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
+    navigateNew: (Route) -> Unit,
 ) {
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.app_browsers), onBackPressed = onBackPressed) {
         group(size = 2) {
@@ -28,7 +29,7 @@ fun BrowserSettingsRoute(
                     icon = Icons.Outlined.OpenInBrowser.iconPainter,
                     shape = shape,
                     padding = padding,
-                    onClick = { navigate(preferredBrowserSettingsRoute) }
+                    onClick = { navigateNew(PreferredBrowserSettingsRoute) }
                 )
             }
 
@@ -44,43 +45,4 @@ fun BrowserSettingsRoute(
             }
         }
     }
-
-
-//    SettingsScaffold(R.string.browser, onBackPressed = onBackPressed) { padding ->
-//        LazyColumn(
-//            modifier = Modifier
-//                .padding(padding)
-//                .fillMaxHeight(), contentPadding = PaddingValues(horizontal = 5.dp)
-//        ) {
-//            item(key = preferredBrowserSettingsRoute) {
-//                SettingsItemRow(
-//                    navController = navController,
-//                    navigateTo = preferredBrowserSettingsRoute,
-//                    headlineContent = R.string.preferred_browser,
-//                    supportingContent = R.string.preferred_browser_explainer,
-//                    image = {
-//                        ColoredIcon(
-//                            icon = Icons.Default.OpenInBrowser,
-//                            descriptionId = R.string.preferred_browser
-//                        )
-//                    }
-//                )
-//            }
-//
-//            item(key = inAppBrowserSettingsRoute) {
-//                SettingsItemRow(
-//                    navController = navController,
-//                    navigateTo = inAppBrowserSettingsRoute,
-//                    headlineContent = R.string.in_app_browser,
-//                    supportingContent = R.string.in_app_browser_explainer,
-//                    image = {
-//                        ColoredIcon(
-//                            icon = Icons.Default.ExitToApp,
-//                            descriptionId = R.string.in_app_browser
-//                        )
-//                    }
-//                )
-//            }
-//        }
-//    }
 }

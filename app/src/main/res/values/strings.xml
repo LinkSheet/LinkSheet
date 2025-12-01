@@ -23,6 +23,7 @@
     <string name="usage_stats_sorting_explainer">Include Android system usage stats in sorting algorithm. Permission is requested on first toggle.</string>
     <string name="browser_mode">Browser mode</string>
     <string name="browser_mode_subtitle">Choose browsers to show</string>
+    <string name="browser_mode_divider">Mode</string>
     <string name="always_ask">Always ask</string>
     <string name="none">None</string>
     <string name="none_explainer">Only list native apps, remove all browsers. If only a single native app is present, it will automatically be opened. If no native app is present, all browsers are listed.</string>
@@ -568,4 +569,7 @@
     <string name="settings_scenario__text_scenarios">Configure scenarios</string>
     <string name="settings_scenario__text_data_type">Data type</string>
     <string name="settings_scenario__text_value">Value</string>
+    <string name="settings_apps_browsers_mode__title_selected">Single browser</string>
+    <string name="settings_apps_browsers_mode__subtitle_selected">Selected</string>
+    <string name="settings_apps_browsers_mode__text_none">None</string>
 </resources>

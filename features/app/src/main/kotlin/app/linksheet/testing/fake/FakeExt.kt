@@ -1,22 +1,25 @@
 package app.linksheet.testing.fake
 
-import android.content.pm.ActivityInfo
 import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
+import app.linksheet.feature.app.*
 import app.linksheet.testing.util.PackageInfoFake
 import app.linksheet.testing.util.firstActivityResolveInfo
 import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.icon.IconPainter
-import app.linksheet.feature.app.ActivityAppInfo
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.LinkHandling
-import app.linksheet.feature.app.PackageIdHelper
 
 fun PackageInfoFake.toActivityAppInfo(
     label: String,
     icon: Drawable = ImageFakes.EmptyDrawable,
 ): ActivityAppInfo {
-    return ActivityAppInfo(firstActivityResolveInfo?.activityInfo!!, label, BitmapIconPainter.drawable(icon))
+    val componentInfo = firstActivityResolveInfo?.activityInfo!!
+    val appInfo = AppInfo(
+        packageName = componentInfo.packageName,
+        label = label,
+        icon= BitmapIconPainter.drawable(icon),
+        0,
+    )
+    return ActivityAppInfo(appInfo, componentInfo)
 }
 
 fun PackageInfoFake.toActivityAppInfo(icon: Drawable = ImageFakes.EmptyDrawable): ActivityAppInfo {
@@ -24,7 +27,13 @@ fun PackageInfoFake.toActivityAppInfo(icon: Drawable = ImageFakes.EmptyDrawable)
 }
 
 fun ResolveInfo.toActivityAppInfo(icon: Drawable = ImageFakes.EmptyDrawable): ActivityAppInfo {
-    return ActivityAppInfo(activityInfo, activityInfo.name, BitmapIconPainter.drawable(icon))
+    val appInfo = AppInfo(
+        packageName = activityInfo.packageName,
+        label = activityInfo.name,
+        icon= BitmapIconPainter.drawable(icon),
+        0,
+    )
+    return ActivityAppInfo(appInfo, activityInfo)
 }
 fun PackageInfoFake.toDomainVerificationAppInfo(
     linkHandling: LinkHandling,
@@ -33,18 +42,21 @@ fun PackageInfoFake.toDomainVerificationAppInfo(
     stateVerified: MutableList<String>,
     icon: IconPainter
 ): DomainVerificationAppInfo {
+    val appInfo = AppInfo(
+        packageName = packageInfo.applicationInfo!!.packageName,
+        label = packageInfo.applicationInfo!!.name,
+        icon = icon,
+        flags = 0,
+    )
     return DomainVerificationAppInfo(
-        packageInfo.applicationInfo!!.packageName,
-        packageInfo.applicationInfo!!.name,
-        icon,
-        0,
-        null,
+        appInfo,
         linkHandling,
         stateNone,
         stateSelected,
         stateVerified
     )
 }
+
 fun PackageInfoFake.toDomainVerificationAppInfo(
     linkHandling: LinkHandling,
     stateNone: MutableList<String>,
@@ -52,21 +64,20 @@ fun PackageInfoFake.toDomainVerificationAppInfo(
     stateVerified: MutableList<String>,
     icon: Drawable = ImageFakes.EmptyDrawable,
 ): DomainVerificationAppInfo {
+    val appInfo = AppInfo(
+        packageName = packageInfo.applicationInfo!!.packageName,
+        label = packageInfo.applicationInfo!!.name,
+        icon = BitmapIconPainter.drawable(icon),
+        flags = 0,
+    )
     return DomainVerificationAppInfo(
-        packageInfo.applicationInfo!!.packageName,
-        packageInfo.applicationInfo!!.name,
-        BitmapIconPainter.drawable(icon),
-        0,
-        null,
+        appInfo,
         linkHandling,
         stateNone,
         stateSelected,
         stateVerified,
     )
 }
-
-val ActivityInfo.activityDescriptor
-    get() = PackageIdHelper.getDescriptor(this)
 
 fun Iterable<ResolveInfo>.asDescriptors(): List<String> {
     return map { it.activityInfo.activityDescriptor }.distinct()

@@ -12,6 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.preview.PreviewContainer
+import fe.linksheet.module.viewmodel.common.FilterState
+import fe.linksheet.module.viewmodel.common.SortByState
+import fe.linksheet.module.viewmodel.common.SortType
+import fe.linksheet.module.viewmodel.common.StateModeFilter
+import fe.linksheet.module.viewmodel.common.TypeFilter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,8 +79,8 @@ private fun SheetContent(
 private fun SheetContentPreview() {
     PreviewContainer {
         SheetContent(
-            sortState = SortByState(VlhSort.AZ, true),
-            filterState = FilterState(VlhStateModeFilter.ShowAll, VlhTypeFilter.All, true) ,
+            sortState = SortByState(SortType.AZ, true),
+            filterState = FilterState(StateModeFilter.ShowAll, TypeFilter.All, true) ,
             onSortStateChange = {
 
             },

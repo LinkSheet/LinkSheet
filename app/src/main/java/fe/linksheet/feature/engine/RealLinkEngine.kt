@@ -3,7 +3,8 @@
 package fe.linksheet.feature.engine
 
 import android.content.Context
-import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageLauncherService
 import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.engine.core.EngineResult
@@ -53,7 +54,8 @@ class RealLinkEngine(
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
-    private val packageService: PackageService,
+    private val packageIntentHandler: PackageIntentHandler,
+    private val packageLauncherService: PackageLauncherService,
     private val appSorter: AppSorter,
     private val downloader: Downloader,
     private val browserHandler: ImprovedBrowserHandler,
@@ -79,7 +81,8 @@ class RealLinkEngine(
             preferredAppRepository = preferredAppRepository,
             normalBrowsersRepository = normalBrowsersRepository,
             inAppBrowsersRepository = inAppBrowsersRepository,
-            packageService = packageService,
+            packageIntentHandler = packageIntentHandler,
+            packageLauncherService = packageLauncherService,
             appSorter = appSorter,
             browserHandler = browserHandler,
             inAppBrowserHandler = inAppBrowserHandler,

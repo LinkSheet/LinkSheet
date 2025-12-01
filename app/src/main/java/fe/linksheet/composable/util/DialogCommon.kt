@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import app.linksheet.compose.extension.items
 
 @Composable
 fun DialogColumn(content: @Composable ColumnScope.() -> Unit) {
@@ -32,18 +31,6 @@ fun <T> DialogContent(
     key: ((T) -> Any)? = null,
     bottomRow: @Composable RowScope.() -> Unit,
     content: @Composable LazyItemScope.(T) -> Unit
-) {
-    DialogBox(loading = items == null, bottomRow = bottomRow) {
-        items(items = items!!, key = key, itemContent = content)
-    }
-}
-
-@Composable
-fun <K, V> DialogContent(
-    items: Map<K, V>?,
-    key: (K) -> Any,
-    bottomRow: @Composable RowScope.() -> Unit,
-    content: @Composable LazyItemScope.(K, V) -> Unit
 ) {
     DialogBox(loading = items == null, bottomRow = bottomRow) {
         items(items = items!!, key = key, itemContent = content)

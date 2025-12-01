@@ -11,26 +11,6 @@ import androidx.compose.ui.unit.Dp
 import fe.android.compose.extension.enabled
 import fe.android.compose.extension.thenIf
 
-@Composable
-fun NonClickableRow(
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    paddingHorizontal: Dp = defaultHorizontalPadding,
-    paddingVertical: Dp = defaultVerticalPadding,
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
-    verticalAlignment: Alignment.Vertical = Alignment.Top,
-    content: @Composable RowScope.() -> Unit
-) {
-    ClickableRow(
-        modifier = modifier,
-        enabled = enabled,
-        paddingHorizontal = paddingHorizontal,
-        paddingVertical = paddingVertical,
-        horizontalArrangement = horizontalArrangement,
-        verticalAlignment = verticalAlignment,
-        content = content
-    )
-}
 
 @Composable
 fun ClickableRow(

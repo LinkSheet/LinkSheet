@@ -1,54 +1,33 @@
-package app.linksheet.feature.app
+package app.linksheet.feature.app.usecase
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
-import android.content.pm.ResolveInfo
 import android.content.pm.verify.domain.DomainVerificationUserState
 import androidx.annotation.VisibleForTesting
-import app.linksheet.feature.app.pkg.PackageIconLoader
+import app.linksheet.feature.app.AppInfoCreator
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.LinkHandling
 import app.linksheet.feature.app.pkg.PackageIntentHandler
-import app.linksheet.feature.app.pkg.PackageLabelService
-import app.linksheet.feature.app.pkg.PackageLauncherService
 import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.pkg.domain.VerificationBrowserState
 import app.linksheet.feature.app.pkg.domain.VerificationState
 import app.linksheet.feature.app.pkg.domain.VerificationStateCompat
-import fe.android.compose.icon.BitmapIconPainter
-import fe.composekit.extension.info
 import fe.linksheet.util.ApplicationInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-
-class PackageService(
+class DomainVerificationUseCase(
+    private val creator: AppInfoCreator,
     private val domainVerificationManager: DomainVerificationManagerCompat,
-    private val packageLabelService: PackageLabelService,
-    private val packageLauncherService: PackageLauncherService,
-    private val packageIconLoader: PackageIconLoader,
     private val packageIntentHandler: PackageIntentHandler,
-    val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
-    val getInstalledPackages: () -> List<PackageInfo>,
-) : PackageLabelService by packageLabelService,
-    PackageLauncherService by packageLauncherService,
-    PackageIconLoader by packageIconLoader,
-    PackageIntentHandler by packageIntentHandler {
-
-    fun toAppInfo(resolveInfo: ResolveInfo, isBrowser: Boolean): ActivityAppInfo {
-        val info = resolveInfo.info
-        val icon = BitmapIconPainter.drawable(loadIcon(info))
-
-        return ActivityAppInfo(
-            componentInfo = info,
-            label = loadComponentInfoLabel(info) ?: findApplicationLabel(info.applicationInfo),
-            icon = icon
-        )
-    }
-
+    private val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
+    private val getInstalledPackages: () -> List<PackageInfo>,
+) {
     fun getVerificationState(applicationInfo: ApplicationInfo): VerificationStateCompat? {
         // TODO: There should be some sort of hybrid state which allows checking the domain verification status of browsers
         // as well, as they may also have domains they can claim ownership over (Brave does this, for example)
         val browsable = packageIntentHandler.findHttpBrowsable(applicationInfo.packageName)
-        if (!browsable.isNullOrEmpty()) return VerificationBrowserState
+        if (browsable.isNotEmpty()) return VerificationBrowserState
 
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
     }
@@ -94,8 +73,6 @@ class PackageService(
     @VisibleForTesting
     fun createDomainVerificationAppInfo(applicationInfo: ApplicationInfo, installTime: Long?): DomainVerificationAppInfo? {
         val verificationState = getVerificationState(applicationInfo) ?: return null
-        val launcher = getLauncherOrNull(applicationInfo.packageName)
-        val label = findBestLabel(applicationInfo, launcher)
 
         val stateNone = mutableListOf<String>()
         val stateSelected = mutableListOf<String>()
@@ -118,19 +95,13 @@ class PackageService(
             else -> LinkHandling.Unsupported
         }
 
-        val icon = loadApplicationIcon(applicationInfo)
-        val status = DomainVerificationAppInfo(
-            applicationInfo.packageName,
-            label,
-            BitmapIconPainter.drawable(icon),
-            applicationInfo.flags,
-            installTime,
-            linkHandling,
-            stateNone,
-            stateSelected,
-            stateVerified
+        val appInfo = creator.toAppInfo(applicationInfo, installTime)
+        return DomainVerificationAppInfo(
+            appInfo = appInfo,
+            linkHandling = linkHandling,
+            stateNone = stateNone,
+            stateSelected = stateSelected,
+            stateVerified = stateVerified
         )
-
-        return status
     }
 }

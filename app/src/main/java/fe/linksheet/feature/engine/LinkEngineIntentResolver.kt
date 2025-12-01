@@ -3,7 +3,8 @@ package fe.linksheet.feature.engine
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.pkg.PackageLauncherService
 import app.linksheet.feature.browser.PrivateBrowsingService
 import app.linksheet.feature.engine.core.*
 import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
@@ -64,7 +65,8 @@ class LinkEngineIntentResolver(
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
     private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
-    private val packageService: PackageService,
+    private val packageIntentHandler: PackageIntentHandler,
+    private val packageLauncherService: PackageLauncherService,
     private val appSorter: AppSorter,
     private val browserHandler: ImprovedBrowserHandler,
     private val inAppBrowserHandler: InAppBrowserHandler,
@@ -140,7 +142,7 @@ class LinkEngineIntentResolver(
         val isReferrerBrowser = knownBrowser != null
 
         emitEvent(ResolveEvent.QueryingBrowsers)
-        val browsers = packageService.findHttpBrowsable(null)
+        val browsers = packageIntentHandler.findHttpBrowsable(null)
 
         val manualResolveRedirects = checkIntentFlag(intent, IntentKeyResolveRedirects, followRedirectsSettings.manualFollowRedirects())
         val ignoreLibRedirect = checkIntentFlag(intent, LibRedirectDefault.IgnoreIntentKey, libRedirectSettings.enableIgnoreLibRedirectButton())
@@ -187,16 +189,16 @@ class LinkEngineIntentResolver(
         emitEvent(ResolveEvent.LoadingPreferredApps)
         val app = queryPreferredApp(
             repository = preferredAppRepository,
-            packageService = packageService,
+            packageLauncherService = packageLauncherService,
             uri = resultUri
         )
 
         val lastUsedApps = queryAppSelectionHistory(
             repository = appSelectionHistoryRepository,
-            packageService = packageService,
+            packageLauncherService = packageLauncherService,
             uri = resultUri
         )
-        val resolveList = packageService.findHandlers(resultUri, referringPackage?.packageName)
+        val resolveList = packageIntentHandler.findHandlers(resultUri, referringPackage?.packageName)
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = browserSettings.createBrowserModeConfig(customTab is CustomTabInfo2.Allowed)
@@ -269,13 +271,13 @@ class LinkEngineIntentResolver(
     private suspend fun queryAppSelectionHistory(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         repository: AppSelectionHistoryRepository,
-        packageService: PackageService,
+        packageLauncherService: PackageLauncherService,
         uri: Uri?,
     ): Map<String, Long> = withContext(dispatcher) {
         val lastUsedApps = repository.getLastUsedForHostGroupedByPackage(uri)
             ?: return@withContext emptyMap()
 
-        val (result, delete) = packageService.hasLauncher(lastUsedApps.keys)
+        val (result, delete) = packageLauncherService.hasLauncher(lastUsedApps.keys)
         if (delete.isNotEmpty()) repository.delete(delete)
 
         lastUsedApps.filter { it.key in result }.toMap()
@@ -284,11 +286,11 @@ class LinkEngineIntentResolver(
     private suspend fun queryPreferredApp(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         repository: PreferredAppRepository,
-        packageService: PackageService,
+        packageLauncherService: PackageLauncherService,
         uri: Uri?,
     ): PreferredApp? = withContext(dispatcher) {
         val app = repository.getByHost(uri)
-        val resolveInfo = packageService.getLauncherOrNull(app?.pkg)
+        val resolveInfo = packageLauncherService.getLauncherOrNull(app?.pkg)
         if (app != null && resolveInfo == null) repository.delete(app)
 
         app

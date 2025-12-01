@@ -4,22 +4,17 @@ import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.usecase.DomainVerificationUseCase
+import app.linksheet.feature.app.IAppInfo
+import app.linksheet.feature.app.LinkHandling
 import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.filterIf
 import fe.kotlin.extension.iterable.groupByNoNullKeys
-import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.FilterState
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.HostState
-import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.SortByState
-import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhSort
-import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhStateModeFilter
-import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhTypeFilter
 import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
-import app.linksheet.feature.app.AppInfo
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.LinkHandling
-import app.linksheet.feature.app.PackageService
 import fe.linksheet.feature.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
@@ -30,19 +25,18 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuServiceConnection
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.module.viewmodel.common.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.util.Comparator
-import kotlin.collections.filter
 
 class VerifiedLinkHandlersViewModel(
     private val shizukuHandler: ShizukuServiceConnection,
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
     private val preferredAppRepository: PreferredAppRepository,
-    private val packageInfoService: PackageService,
+    private val service: DomainVerificationUseCase,
     private val intentCompat: OneUiCompat,
 ) : BaseViewModel(preferenceRepository) {
     val newVlh = experimentRepository.asViewModelState(Experiments.newVlh)
@@ -51,8 +45,8 @@ class VerifiedLinkHandlersViewModel(
 
     val filterDisabledOnly = MutableStateFlow(true)
 
-    val sortState = MutableStateFlow(SortByState(VlhSort.AZ, true))
-    val filterState = MutableStateFlow(FilterState(VlhStateModeFilter.ShowAll, VlhTypeFilter.All, true))
+    val sortState = MutableStateFlow(SortByState(SortType.AZ, true))
+    val filterState = MutableStateFlow(FilterState(StateModeFilter.ShowAll, TypeFilter.All, true))
     val searchQuery = MutableStateFlow("")
 
     private fun groupHosts(
@@ -93,7 +87,7 @@ class VerifiedLinkHandlersViewModel(
 
     //        val appsFiltered = packageInfoService.getDomainVerificationAppInfoFlow()
 //        .scan(emptyList<DomainVerificationAppInfo>()) { acc, elem -> acc + elem }
-    val appsFiltered = packageInfoService.getDomainVerificationAppInfoListFlow()
+    val appsFiltered = service.getDomainVerificationAppInfoListFlow()
         .flowOn(Dispatchers.IO)
 //        .flowOn(Dispatchers.IO)
         .combine(filterState) { apps, state ->
@@ -114,8 +108,8 @@ class VerifiedLinkHandlersViewModel(
 
     private val installTime = compareBy<DomainVerificationAppInfo> { it.installTime }
     private val sortComparators = mapOf(
-        VlhSort.InstallTime to (installTime to installTime.reversed()),
-        VlhSort.AZ to (AppInfo.labelComparator to AppInfo.labelComparator.reversed()),
+        SortType.InstallTime to (installTime to installTime.reversed()),
+        SortType.AZ to (IAppInfo.labelComparator to IAppInfo.labelComparator.reversed()),
     )
 
     private fun SortByState.toComparator(): Comparator<DomainVerificationAppInfo> {
@@ -124,19 +118,19 @@ class VerifiedLinkHandlersViewModel(
         return (if (ascending) asc else desc) as Comparator<DomainVerificationAppInfo>
     }
 
-    private fun VlhStateModeFilter.matches(info: DomainVerificationAppInfo): Boolean {
+    private fun StateModeFilter.matches(info: DomainVerificationAppInfo): Boolean {
         return when (this) {
-            VlhStateModeFilter.ShowAll -> true
-            VlhStateModeFilter.EnabledOnly -> info.enabled
-            VlhStateModeFilter.DisabledOnly -> !info.enabled
+            StateModeFilter.ShowAll -> true
+            StateModeFilter.EnabledOnly -> info.enabled
+            StateModeFilter.DisabledOnly -> !info.enabled
         }
     }
 
-    private fun VlhTypeFilter.matches(info: DomainVerificationAppInfo): Boolean {
+    private fun TypeFilter.matches(info: DomainVerificationAppInfo): Boolean {
         return when (this) {
-            VlhTypeFilter.All -> true
-            VlhTypeFilter.Browser -> info.linkHandling == LinkHandling.Browser
-            VlhTypeFilter.Native -> info.linkHandling != LinkHandling.Browser
+            TypeFilter.All -> true
+            TypeFilter.Browser -> info.linkHandling == LinkHandling.Browser
+            TypeFilter.Native -> info.linkHandling != LinkHandling.Browser
         }
     }
 
@@ -172,7 +166,7 @@ class VerifiedLinkHandlersViewModel(
     }
 
     fun updateHostState(
-        appInfo: AppInfo,
+        appInfo: IAppInfo,
         hostStates: List<HostState>,
     ) = viewModelScope.launch(Dispatchers.IO) {
         for ((host, previousState, currentState) in hostStates) {

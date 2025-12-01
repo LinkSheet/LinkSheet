@@ -1,6 +1,7 @@
 package fe.linksheet.module.repository.whitelisted
 
 import android.content.ComponentName
+import app.linksheet.feature.app.ActivityAppInfo
 
 
 data class WhitelistedBrowserInfo(
@@ -21,4 +22,14 @@ fun createWhitelistedBrowserInfo(list: Iterable<String>): WhitelistedBrowserInfo
     }
 
     return WhitelistedBrowserInfo(componentNames, packages)
+}
+
+fun WhitelistedBrowserInfo.mapBrowserState(appInfo: ActivityAppInfo): Pair<Boolean, Boolean> {
+    var isWhitelisted = (appInfo.componentName in componentNames)
+    var isSourcePackageNameOnly = false
+    if (appInfo.packageName in packageNames) {
+        isSourcePackageNameOnly = true
+        isWhitelisted = true
+    }
+    return isWhitelisted to isSourcePackageNameOnly
 }

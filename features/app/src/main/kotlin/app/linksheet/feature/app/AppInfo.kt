@@ -18,16 +18,12 @@ enum class LinkHandling {
 
 @Parcelize
 class DomainVerificationAppInfo(
-    packageName: String,
-    label: CharSequence,
-    icon: IconPainter? = null,
-    val flags: Int,
-    val installTime: Long? = null,
+    val appInfo: AppInfo,
     val linkHandling: LinkHandling,
     val stateNone: MutableList<String>,
     val stateSelected: MutableList<String>,
     val stateVerified: MutableList<String>,
-) : AppInfo(packageName, label.toString(), icon) {
+) : Parcelable, IAppInfo by appInfo {
 
     @IgnoredOnParcel
     val enabled by lazy {
@@ -54,32 +50,42 @@ data class ActivityAppInfoStatus(
 
 @Parcelize
 open class ActivityAppInfo(
+    val appInfo: AppInfo,
     val componentInfo: @RawValue ComponentInfo,
-    label: String,
-    icon: IconPainter? = null,
-) : AppInfo(componentInfo.packageName, label, icon) {
+) : Parcelable, IAppInfo by appInfo {
 
     @IgnoredOnParcel
     val componentName by lazy { componentInfo.componentName }
 
     @IgnoredOnParcel
     val flatComponentName by lazy { componentName.flattenToString() }
-
-    companion object {
-        val labelComparator = compareBy<ActivityAppInfo> { it.compareLabel }
-    }
 }
 
 
 @Parcelize
 open class AppInfo(
-    val packageName: String,
-    val label: String,
-    @IgnoredOnParcel val icon: IconPainter? = null,
-) : Parcelable {
+    override val packageName: String,
+    override val label: String,
+    @IgnoredOnParcel override val icon: IconPainter? = null,
+    override val flags: Int,
+    override val installTime: Long? = null,
+) : Parcelable, IAppInfo {
+
+
+}
+
+interface IAppInfo {
+    val packageName: String
+    val label: String
 
     @IgnoredOnParcel
-    val compareLabel = label.lowercase()
+    val icon: IconPainter?
+    val flags: Int
+    val installTime: Long?
+
+    @IgnoredOnParcel
+    val compareLabel: String
+        get() = label.lowercase()
 
     fun matches(query: String): Boolean {
         return compareLabel.contains(query, ignoreCase = true) || packageName.contains(
@@ -89,11 +95,11 @@ open class AppInfo(
     }
 
     companion object {
-        val labelComparator = compareBy<AppInfo> { it.compareLabel }
+        val labelComparator = compareBy<IAppInfo> { it.compareLabel }
     }
 }
 
-fun <T : AppInfo> List<T>.labelSorted(sorted: Boolean = true): List<T> {
-    return applyIf(sorted) { sortedWith(AppInfo.labelComparator) }
+fun <T : IAppInfo> List<T>.labelSorted(sorted: Boolean = true): List<T> {
+    return applyIf(sorted) { sortedWith(IAppInfo.labelComparator) }
 }
 

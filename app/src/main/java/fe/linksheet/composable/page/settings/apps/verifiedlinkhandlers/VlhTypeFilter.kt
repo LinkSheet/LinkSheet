@@ -4,35 +4,33 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material.icons.outlined.FilterAltOff
 import androidx.compose.material.icons.outlined.Http
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
-import androidx.compose.material.icons.outlined.Web
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import fe.linksheet.R
+import fe.linksheet.module.viewmodel.common.TypeFilter
 
-private val VlhTypeFilter.stringRes: Int
+private val TypeFilter.stringRes: Int
     get() = when (this) {
-        VlhTypeFilter.All -> R.string.settings_verified_link_handlers__text_vlh_type_filter_all
-        VlhTypeFilter.Browser -> R.string.settings_verified_link_handlers__text_vlh_type_filter_browser
-        VlhTypeFilter.Native -> R.string.settings_verified_link_handlers__text_vlh_type_filter_native
+        TypeFilter.All -> R.string.settings_verified_link_handlers__text_vlh_type_filter_all
+        TypeFilter.Browser -> R.string.settings_verified_link_handlers__text_vlh_type_filter_browser
+        TypeFilter.Native -> R.string.settings_verified_link_handlers__text_vlh_type_filter_native
     }
 
-private val VlhTypeFilter.icon: ImageVector
+private val TypeFilter.icon: ImageVector
     get() = when (this) {
-        VlhTypeFilter.All -> Icons.Outlined.FilterAltOff
-        VlhTypeFilter.Browser -> Icons.Outlined.Http
-        VlhTypeFilter.Native -> Icons.Outlined.Android
+        TypeFilter.All -> Icons.Outlined.FilterAltOff
+        TypeFilter.Browser -> Icons.Outlined.Http
+        TypeFilter.Native -> Icons.Outlined.Android
     }
 
 @Composable
-internal fun VlhTypeFilter(selection: VlhTypeFilter, onSelected: (VlhTypeFilter) -> Unit) {
+internal fun VlhTypeFilter(selection: TypeFilter, onSelected: (TypeFilter) -> Unit) {
     BaseStateFilter(
-        entries = VlhTypeFilter.entries,
-        allState = VlhTypeFilter.All,
+        entries = TypeFilter.entries,
+        allState = TypeFilter.All,
         selection = selection,
         onSelected = onSelected,
-        stringRes = VlhTypeFilter::stringRes,
-        icon = VlhTypeFilter::icon
+        stringRes = TypeFilter::stringRes,
+        icon = TypeFilter::icon
     )
 }

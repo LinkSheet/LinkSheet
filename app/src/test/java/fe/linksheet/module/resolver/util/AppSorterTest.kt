@@ -28,7 +28,7 @@ class AppSorterTest : BaseUnitTest {
     companion object {
         private val sorter = AppSorter(
             queryAndAggregateUsageStats = { _, _ -> emptyMap() },
-            toAppInfo = { resolveInfo, browser -> resolveInfo.toActivityAppInfo() },
+            toActivityAppInfo = { resolveInfo, browser -> resolveInfo.toActivityAppInfo() },
             clock = Clock.System
         )
         private val allAppsInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allApps)

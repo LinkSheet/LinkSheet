@@ -12,22 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import app.linksheet.compose.theme.HkGroteskFontFamily
 import app.linksheet.compose.theme.LegacyTypography
 
-@Composable
-fun SettingSpacerText(modifier: Modifier = Modifier, contentTitle: String) {
-    Text(
-        modifier = modifier,
-        text = contentTitle,
-        fontFamily = HkGroteskFontFamily,
-        fontSize = 16.sp,
-        fontWeight = FontWeight.SemiBold,
-        color = MaterialTheme.colorScheme.primary
-    )
-}
 
 @Composable
 fun HeadlineText(modifier: Modifier = Modifier, headline: CharSequence) {
@@ -52,15 +39,6 @@ fun HeadlineText(modifier: Modifier = Modifier, headline: CharSequence) {
 fun HeadlineText(modifier: Modifier = Modifier, @StringRes headlineId: Int) {
     HeadlineText(modifier, headline = stringResource(id = headlineId))
 }
-
-
-
-fun buildEnabledSubtitle(
-    modifier: Modifier = Modifier,
-    subtitle: String?
-): @Composable ((Boolean) -> Unit)? = if (subtitle != null) {
-    { SubtitleText(modifier = modifier, subtitle = subtitle) }
-} else null
 
 @Composable
 fun LinkableSubtitleText(modifier: Modifier = Modifier, @StringRes id: Int, enabled: Boolean) {
@@ -116,17 +94,4 @@ fun Texts(
 
         content?.invoke(this)
     }
-}
-
-@Composable
-fun Texts(
-    modifier: Modifier = Modifier,
-    @StringRes headlineId: Int,
-    @StringRes subtitleId: Int? = null
-) {
-    Texts(
-        modifier = modifier,
-        headline = stringResource(id = headlineId),
-        subtitle = subtitleId?.let { stringResource(id = it) }
-    )
 }

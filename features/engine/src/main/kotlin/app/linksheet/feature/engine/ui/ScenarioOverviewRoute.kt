@@ -39,7 +39,6 @@ import app.linksheet.feature.engine.database.entity.Scenario
 import app.linksheet.feature.engine.navigation.ScenarioRoute
 import app.linksheet.feature.engine.viewmodel.ScenarioOverviewViewModel
 import fe.android.compose.feedback.FeedbackType
-import fe.android.compose.feedback.HapticFeedbackInteraction
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -328,46 +327,29 @@ private fun ScenarioListItemPreview() {
 @Preview
 @Composable
 private fun ScenarioRoutePreview() {
-    PreviewProvider {
-        PreviewThemeNew {
-            ScenarioOverviewRouteInternal(
-                scenarios = listOf(
-                    Scenario(
-                        name = "Test scenario",
-                        position = 0,
-                        referrerApp = null
-                    ),
-                    Scenario(
-                        name = "Test scenario 2",
-                        position = 1,
-                        referrerApp = null
-                    ),
-                    Scenario(
-                        name = "Test scenario 3",
-                        position = 1,
-                        referrerApp = null
-                    )
+    PreviewThemeNew {
+        ScenarioOverviewRouteInternal(
+            scenarios = listOf(
+                Scenario(
+                    name = "Test scenario",
+                    position = 0,
+                    referrerApp = null
                 ),
-                onCreate = {},
-                navigateScenario = {},
-                onBackPressed = {},
-                move = { from, to -> false }
-            )
-        }
+                Scenario(
+                    name = "Test scenario 2",
+                    position = 1,
+                    referrerApp = null
+                ),
+                Scenario(
+                    name = "Test scenario 3",
+                    position = 1,
+                    referrerApp = null
+                )
+            ),
+            onCreate = {},
+            navigateScenario = {},
+            onBackPressed = {},
+            move = { from, to -> false }
+        )
     }
-}
-
-// TODO: Move this somewhere else?
-@Composable
-private fun PreviewProvider(content: @Composable () -> Unit) {
-    CompositionLocalProvider(
-        LocalHapticFeedbackInteraction provides PreviewHapticFeedbackInteraction,
-        content = content
-    )
-}
-
-object PreviewHapticFeedbackInteraction : HapticFeedbackInteraction {
-    override fun copy(content: String, type: FeedbackType) {}
-    override fun openUri(uri: String, type: FeedbackType) {}
-    override fun perform(type: FeedbackType) {}
 }

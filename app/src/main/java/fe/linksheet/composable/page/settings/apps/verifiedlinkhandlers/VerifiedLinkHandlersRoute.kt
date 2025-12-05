@@ -27,6 +27,8 @@ import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
 import fe.linksheet.R
+import fe.linksheet.composable.dialog.DomainVerificationDialogData
+import fe.linksheet.composable.dialog.rememberDomainVerificationAppInfoDialog
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
@@ -85,16 +87,16 @@ fun VerifiedLinkHandlersRoute(
 
     val preferredApps by viewModel.preferredApps.collectOnIO(emptyMap())
 
-    val items by viewModel.appsFiltered.collectOnIO()
-    val filter by viewModel.searchQuery.collectOnIO()
+    val items by viewModel.list.appsFiltered.collectOnIO()
+    val filter by viewModel.list.searchQuery.collectOnIO()
 
     val listState = remember(items?.size, filter, linkHandlingAllowed) {
         listState(items, filter)
     }
 
-    val dialogState = rememberAppHostDialog(
+    val dialogState = rememberDomainVerificationAppInfoDialog(
         onClose = { (info, hostStates) ->
-            viewModel.updateHostState(info, hostStates)
+            viewModel.handler.updateHostState(info, hostStates)
         }
     )
 
@@ -106,7 +108,7 @@ fun VerifiedLinkHandlersRoute(
                 titleContent = textContent(R.string.apps_which_can_open_links),
                 placeholderContent = textContent(R.string.settings__title_filter_apps),
                 query = filter,
-                onQueryChange = viewModel::search,
+                onQueryChange = viewModel.list::search,
                 onBackPressed = onBackPressed,
                 actions = {
                     IconButton(onClick = {
@@ -135,15 +137,15 @@ fun VerifiedLinkHandlersRoute(
         val state = rememberLazyListState()
         var lastItemIndex by rememberSaveable { mutableIntStateOf(0) }
         if (showBottomSheet) {
-            val sortState by viewModel.sortState.collectAsStateWithLifecycle()
-            val filterState by viewModel.filterState.collectAsStateWithLifecycle()
+            val sortState by viewModel.list.sortState.collectAsStateWithLifecycle()
+            val filterState by viewModel.list.filterState.collectAsStateWithLifecycle()
             FilterSortSheet(
                 sortState = sortState,
                 filterState = filterState,
                 onDismiss = { sortByState, filterState ->
                     lastItemIndex = state.firstVisibleItemIndex
-                    viewModel.sortState.value = sortByState
-                    viewModel.filterState.value = filterState
+                    viewModel.list.sortState.value = sortByState
+                    viewModel.list.filterState.value = filterState
                     showBottomSheet = false
                 }
             )
@@ -178,7 +180,7 @@ fun VerifiedLinkHandlersRoute(
                                 if (newVlh) {
                                     navigateNew(VlhAppRoute(item.packageName))
                                 } else {
-                                    dialogState.open(AppHostDialogData(item, preferredHosts))
+                                    dialogState.open(DomainVerificationDialogData(item, preferredHosts))
                                 }
                             },
                             onOtherClick = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {

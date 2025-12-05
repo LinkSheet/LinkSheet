@@ -23,7 +23,7 @@ val ViewModelModule = module {
         DefaultLogModule,
         ProfileFeatureModule
     )
-    single {
+    factory {
         LogViewCommon(
             preferenceRepository = get(),
             experimentRepository = get(),
@@ -111,7 +111,7 @@ val ViewModelModule = module {
     viewModel {parameters ->
         WhitelistedBrowsersViewModel(
             type = parameters.get(),
-            browserPackageService = get(),
+            useCase = get(),
             normalBrowsersRepository = get(),
             inAppBrowsersRepository = get(),
             preferenceRepository = get()
@@ -120,8 +120,9 @@ val ViewModelModule = module {
     viewModel { parameters ->
         SingleBrowserViewModel(
             type = parameters.get(),
-            browserPackageService = get(),
+            useCase = get(),
             preferenceRepository = get()
         )
     }
+    viewModelOf(::SelectDomainsConfirmationViewModel)
 }

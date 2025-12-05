@@ -11,9 +11,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.android.compose.content.rememberOptionalContent
 import fe.linksheet.R
-import fe.linksheet.module.viewmodel.common.FilterState
-import fe.linksheet.module.viewmodel.common.StateModeFilter
-import fe.linksheet.module.viewmodel.common.TypeFilter
+import fe.linksheet.module.viewmodel.common.applist.FilterState
+import fe.linksheet.module.viewmodel.common.applist.StateModeFilter
+import fe.linksheet.module.viewmodel.common.applist.TypeFilter
 
 
 

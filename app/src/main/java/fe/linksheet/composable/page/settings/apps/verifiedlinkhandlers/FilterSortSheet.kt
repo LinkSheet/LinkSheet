@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.preview.PreviewContainer
-import fe.linksheet.module.viewmodel.common.FilterState
-import fe.linksheet.module.viewmodel.common.SortByState
-import fe.linksheet.module.viewmodel.common.SortType
-import fe.linksheet.module.viewmodel.common.StateModeFilter
-import fe.linksheet.module.viewmodel.common.TypeFilter
+import fe.linksheet.module.viewmodel.common.applist.FilterState
+import fe.linksheet.module.viewmodel.common.applist.SortByState
+import fe.linksheet.module.viewmodel.common.applist.SortType
+import fe.linksheet.module.viewmodel.common.applist.StateModeFilter
+import fe.linksheet.module.viewmodel.common.applist.TypeFilter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

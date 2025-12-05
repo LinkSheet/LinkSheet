@@ -1,25 +1,26 @@
-package fe.linksheet.module.viewmodel.common
+package fe.linksheet.module.viewmodel.common.applist
 
 import app.linksheet.feature.app.DomainVerificationAppInfo
 import app.linksheet.feature.app.IAppInfo
 import app.linksheet.feature.app.LinkHandling
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class AppListCommon<T : IAppInfo>(
-    private val apps: Flow<List<T>>,
-    private val scope: CoroutineScope
+    apps: Flow<List<T>>,
+    private val scope: CoroutineScope,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     val sortState = MutableStateFlow(SortByState(SortType.AZ, true))
     val filterState = MutableStateFlow(FilterState(StateModeFilter.ShowAll, TypeFilter.All, true))
     val searchQuery = MutableStateFlow("")
 
     val appsFiltered = apps
-        .flowOn(Dispatchers.IO)
-//        .flowOn(Dispatchers.IO)
+        .flowOn(dispatcher)
         .combine(filterState) { apps, state ->
             apps.filter { state.matches(it) }
         }
@@ -40,10 +41,16 @@ class AppListCommon<T : IAppInfo>(
         searchQuery.value = query ?: ""
     }
 
-    private val installTime = compareBy<DomainVerificationAppInfo> { it.installTime }
+    private fun IAppInfo.matches(query: String): Boolean {
+        return compareLabel.contains(query, ignoreCase = true) || packageName.contains(
+            query,
+            ignoreCase = true
+        )
+    }
+
     private val sortComparators = mapOf(
-        SortType.InstallTime to (installTime to installTime.reversed()),
-        SortType.AZ to (IAppInfo.labelComparator to IAppInfo.labelComparator.reversed()),
+        SortType.InstallTime to IAppInfo.InstallTime,
+        SortType.AZ to IAppInfo.Label
     )
 
     private fun SortByState.toComparator(): Comparator<IAppInfo> {

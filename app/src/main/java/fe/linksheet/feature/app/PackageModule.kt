@@ -3,11 +3,11 @@ package fe.linksheet.feature.app
 import android.app.ActivityManager
 import android.content.pm.*
 import app.linksheet.feature.app.AppInfoCreator
+import app.linksheet.feature.app.pkg.*
+import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.usecase.AllAppsUseCase
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
-import app.linksheet.feature.app.pkg.*
-import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import app.linksheet.lib.flavors.LinkSheetApp
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
@@ -26,13 +26,14 @@ val AppFeatureModule = module {
         )
     }
     single<PackageLabelService> {
+        val pm = getPackageManager()
         DefaultPackageLabelService(
-            loadComponentInfoLabelInternal = { it.loadLabel(getPackageManager()) },
-            getApplicationLabel = getPackageManager()::getApplicationLabel,
+            loadComponentInfoLabelInternal = { it.loadLabel(pm) },
+            getApplicationLabel = pm::getApplicationLabel,
         )
     }
     single<PackageLauncherService> {
-        DefaultPackageLauncherService(getPackageManager()::queryIntentActivitiesCompat)
+        DefaultPackageLauncherService(queryIntentActivities = getPackageManager()::queryIntentActivitiesCompat)
     }
     single {
         val experimentRepository = get<ExperimentRepository>()
@@ -42,37 +43,31 @@ val AppFeatureModule = module {
             checkReferrerExperiment = experimentRepository.asFunction(Experiments.hideReferrerFromSheet)
         )
     }
-//    single {
-//        AndroidPackageServiceModule(
-//            context = get(),
-//            packageIconLoader = get(),
-//            packageIntentHandler = get(),
-//            packageLabelService = get(),
-//            packageLauncherService = get()
-//        )
-//    }
     single {
         AppInfoCreator(packageLabelService = get(), packageLauncherService = get(), packageIconLoader = get())
     }
-    single {
+    factory {
+        val pm = getPackageManager()
         AllAppsUseCase(
             creator = get(),
-            getInstalledPackages = getPackageManager()::getInstalledPackagesCompat,
+            getApplicationInfoOrNull = pm::getApplicationInfoCompatOrNull,
+            getInstalledPackages = pm::getInstalledPackagesCompat,
         )
     }
-    single {
+    factory {
         BrowsersUseCase(
             creator = get(),
             packageIntentHandler = get(),
         )
     }
-    single {
+    factory {
+        val pm = getPackageManager()
         DomainVerificationUseCase(
             creator = get(),
             domainVerificationManager = DomainVerificationManagerCompat(get()),
             packageIntentHandler = get(),
-            getApplicationInfoOrNull = getPackageManager()::getApplicationInfoCompatOrNull,
-            getInstalledPackages = getPackageManager()::getInstalledPackagesCompat,
+            getApplicationInfoOrNull = pm::getApplicationInfoCompatOrNull,
+            getInstalledPackages = pm::getInstalledPackagesCompat,
         )
     }
 }
@@ -96,28 +91,6 @@ fun AndroidPackageIconLoaderModule(
         loadActivityIcon = { it.loadIcon(packageManager) },
     )
 }
-
-//@Suppress("FunctionName")
-//internal fun AndroidPackageServiceModule(
-//    context: Context,
-//    packageLabelService: PackageLabelService,
-//    packageLauncherService: PackageLauncherService,
-//    packageIconLoader: PackageIconLoader,
-//    packageIntentHandler: PackageIntentHandler,
-//): AppPackageService {
-//    val packageManager = context.packageManager
-//
-//    return AppPackageService(
-//        domainVerificationManager = DomainVerificationManagerCompat(context),
-//        packageLabelService = packageLabelService,
-//        packageLauncherService = packageLauncherService,
-//        packageIconLoader = packageIconLoader,
-//        packageIntentHandler = packageIntentHandler,
-//        getApplicationInfoOrNull = packageManager::getApplicationInfoCompatOrNull,
-//        getInstalledPackages = packageManager::getInstalledPackagesCompat,
-//    )
-//}
-
 
 @Suppress("FunctionName")
 internal fun AndroidPackageIntentHandler(

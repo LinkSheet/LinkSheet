@@ -47,9 +47,8 @@ data class ActivityAppInfoStatus(
     val isSourcePackageNameOnly: Boolean
 )
 
-
 @Parcelize
-open class ActivityAppInfo(
+class ActivityAppInfo(
     val appInfo: AppInfo,
     val componentInfo: @RawValue ComponentInfo,
 ) : Parcelable, IAppInfo by appInfo {
@@ -61,18 +60,14 @@ open class ActivityAppInfo(
     val flatComponentName by lazy { componentName.flattenToString() }
 }
 
-
 @Parcelize
-open class AppInfo(
+class AppInfo(
     override val packageName: String,
     override val label: String,
     @IgnoredOnParcel override val icon: IconPainter? = null,
     override val flags: Int,
     override val installTime: Long? = null,
-) : Parcelable, IAppInfo {
-
-
-}
+) : Parcelable, IAppInfo
 
 interface IAppInfo {
     val packageName: String
@@ -87,19 +82,17 @@ interface IAppInfo {
     val compareLabel: String
         get() = label.lowercase()
 
-    fun matches(query: String): Boolean {
-        return compareLabel.contains(query, ignoreCase = true) || packageName.contains(
-            query,
-            ignoreCase = true
-        )
-    }
-
-    companion object {
-        val labelComparator = compareBy<IAppInfo> { it.compareLabel }
+    companion object Comparator {
+        val Label = ComparatorPair(comparator = compareBy { it.compareLabel })
+        val InstallTime = ComparatorPair(comparator = compareBy { it.installTime })
     }
 }
 
 fun <T : IAppInfo> List<T>.labelSorted(sorted: Boolean = true): List<T> {
-    return applyIf(sorted) { sortedWith(IAppInfo.labelComparator) }
+    return applyIf(sorted) { sortedWith(IAppInfo.Label.comparator) }
 }
 
+data class ComparatorPair(
+    val comparator: Comparator<IAppInfo>,
+    val reverseComparator: Comparator<IAppInfo> = comparator.reversed()
+)

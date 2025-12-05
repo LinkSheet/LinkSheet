@@ -50,13 +50,15 @@ class Downloader(
         val result = tryCatch {
             client.get(urlString = url.toString())
         }
-        if (result.isFailure()) {
-            return DownloadCheckResult.NonDownloadable
-        }
+
+        if (result.isFailure()) return DownloadCheckResult.NonDownloadable
         if (!result.value.status.isSuccess()) return DownloadCheckResult.NonDownloadable
 
-        val contentType =
-            result.value.contentType()?.withoutParameters()?.toString() ?: return DownloadCheckResult.NonDownloadable
+        val contentType = result.value
+            .contentType()
+            ?.withoutParameters()
+            ?.toString()
+            ?: return DownloadCheckResult.NonDownloadable
         val (fileName, _) = Extension.getFileNameFromUrl(url.url)
 
         return checkMimeType(contentType, fileName ?: url.toString(), mimeTypeToExtension[contentType]?.firstOrNull())

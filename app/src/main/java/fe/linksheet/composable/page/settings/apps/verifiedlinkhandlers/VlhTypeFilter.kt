@@ -7,7 +7,7 @@ import androidx.compose.material.icons.outlined.Http
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import fe.linksheet.R
-import fe.linksheet.module.viewmodel.common.TypeFilter
+import fe.linksheet.module.viewmodel.common.applist.TypeFilter
 
 private val TypeFilter.stringRes: Int
     get() = when (this) {

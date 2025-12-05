@@ -8,17 +8,26 @@ import app.linksheet.testing.util.firstActivityResolveInfo
 import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.icon.IconPainter
 
-fun PackageInfoFake.toActivityAppInfo(
-    label: String,
+fun PackageInfoFake.toAppInfo(
+    label: String = packageInfo.applicationInfo?.name!!,
     icon: Drawable = ImageFakes.EmptyDrawable,
-): ActivityAppInfo {
-    val componentInfo = firstActivityResolveInfo?.activityInfo!!
+): AppInfo {
     val appInfo = AppInfo(
-        packageName = componentInfo.packageName,
+        packageName = packageInfo.packageName,
         label = label,
         icon= BitmapIconPainter.drawable(icon),
         0,
     )
+
+    return appInfo
+}
+
+fun PackageInfoFake.toActivityAppInfo(
+    label: String,
+    icon: Drawable = ImageFakes.EmptyDrawable,
+): ActivityAppInfo {
+    val appInfo = toAppInfo(label, icon)
+    val componentInfo = firstActivityResolveInfo?.activityInfo!!
     return ActivityAppInfo(appInfo, componentInfo)
 }
 

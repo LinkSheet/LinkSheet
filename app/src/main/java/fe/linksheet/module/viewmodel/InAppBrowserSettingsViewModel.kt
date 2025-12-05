@@ -9,18 +9,18 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.viewmodel.common.AppListCommon
+import fe.linksheet.module.viewmodel.common.applist.AppListCommon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class InAppBrowserSettingsViewModel(
     private val repository: DisableInAppBrowserInSelectedRepository,
-    private val appPackageService: AllAppsUseCase,
+    private val useCase: AllAppsUseCase,
     preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val list by lazy { AppListCommon(apps = appPackageService.queryAllAppsFlow(), scope = viewModelScope) }
+    val list by lazy { AppListCommon(apps = useCase.queryAllAppsFlow(), scope = viewModelScope) }
     val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.inAppBrowserSettings)
 
     val disabledPackages = repository.getAll().map { list ->

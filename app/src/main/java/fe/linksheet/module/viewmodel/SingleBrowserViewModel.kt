@@ -8,15 +8,15 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.viewmodel.common.AppListCommon
+import fe.linksheet.module.viewmodel.common.applist.AppListCommon
 
 class SingleBrowserViewModel(
     val type: PreferredBrowserViewModel.BrowserType,
-    val browserPackageService: BrowsersUseCase,
+    val useCase: BrowsersUseCase,
     preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val list by lazy { AppListCommon(apps = browserPackageService.queryBrowsersFlow(), scope = viewModelScope) }
+    val list by lazy { AppListCommon(apps = useCase.queryBrowsersFlow(), scope = viewModelScope) }
 
     private val normalBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode)
     private val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.inAppBrowserMode)

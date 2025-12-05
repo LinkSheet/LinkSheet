@@ -25,8 +25,8 @@ import fe.composekit.component.list.column.shape.ShapeListItemDefaults
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
-import fe.linksheet.module.viewmodel.common.SortByState
-import fe.linksheet.module.viewmodel.common.SortType
+import fe.linksheet.module.viewmodel.common.applist.SortByState
+import fe.linksheet.module.viewmodel.common.applist.SortType
 
 
 @Composable

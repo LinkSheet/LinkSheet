@@ -12,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.toMutableStateMap
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,7 +23,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewContainer
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.LinkHandling
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toDomainVerificationAppInfo
 import fe.android.compose.icon.BitmapIconPainter
@@ -44,9 +46,8 @@ import fe.composekit.layout.column.group
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.LinkHandling
+import fe.linksheet.composable.dialog.DomainVerificationDialogData
+import fe.linksheet.composable.dialog.createState
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
 import fe.linksheet.util.drawBitmap
@@ -83,10 +84,9 @@ private fun VlhAppRouteInternal(
     preferredApps: List<PreferredApp>,
     openSettings: (String) -> Unit,
 ) {
-    val data = AppHostDialogData(appInfo, preferredApps.mapToSet { it.host })
-    val states = remember(data) { data.createState() }
-    val mutableStates = remember(data) { states.toMutableStateMap() }
-    val hosts = states.map { it.first }
+    val data = DomainVerificationDialogData(appInfo, preferredApps.mapToSet { it.host })
+    val mutableStates = remember(data) { data.createState() }
+    val states = remember(data) { mutableStates.toMap() }
 
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.settings_verified_link_handler__title_details),
@@ -142,7 +142,7 @@ private fun VlhAppRouteInternal(
 
         divider(id = R.string.settings_verified_link_handler__text_hosts)
 
-        group(list = hosts, key = { it }) { host, padding, shape ->
+        group(list = states.keys.toList(), key = { it }) { host, padding, shape ->
 //            val padding = DialogDefaults.ListItemInnerPadding.copy(
 //                vertical = 4.dp
 //            )

@@ -32,25 +32,6 @@ class DomainVerificationUseCase(
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
     }
 
-    fun getDomainVerificationAppInfos(): List<DomainVerificationAppInfo> {
-        val list = mutableListOf<DomainVerificationAppInfo>()
-        val packages = getInstalledPackages()
-        for (packageInfo in packages) {
-            val status = createDomainVerificationAppInfo(packageInfo) ?: continue
-            list.add(status)
-        }
-
-        return list
-    }
-
-    fun getDomainVerificationAppInfoFlow(): Flow<DomainVerificationAppInfo> = flow {
-        val packages = getInstalledPackages()
-        for (packageInfo in packages) {
-            val status = createDomainVerificationAppInfo(packageInfo) ?: continue
-            emit(status)
-        }
-    }
-
     fun getDomainVerificationAppInfoListFlow(): Flow<List<DomainVerificationAppInfo>> = flow {
         val packages = getInstalledPackages().mapNotNull { packageInfo ->
             createDomainVerificationAppInfo(packageInfo)

@@ -7,7 +7,7 @@ import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import fe.linksheet.R
-import fe.linksheet.module.viewmodel.common.StateModeFilter
+import fe.linksheet.module.viewmodel.common.applist.StateModeFilter
 
 private val StateModeFilter.stringRes: Int
     get() = when (this) {

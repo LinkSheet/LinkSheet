@@ -4,18 +4,11 @@ import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.app.DomainVerificationAppInfo
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
-import app.linksheet.feature.app.IAppInfo
-import app.linksheet.feature.app.LinkHandling
 import dev.zwander.shared.IShizukuService
-import fe.kotlin.extension.iterable.filterIf
 import fe.kotlin.extension.iterable.groupByNoNullKeys
-import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.HostState
-import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
-import fe.linksheet.feature.app.toPreferredApp
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -25,10 +18,13 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuServiceConnection
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.viewmodel.common.*
+import fe.linksheet.module.viewmodel.common.applist.AppListCommon
+import fe.linksheet.module.viewmodel.common.handler.LinkHandlerCommon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 
 class VerifiedLinkHandlersViewModel(
@@ -36,7 +32,7 @@ class VerifiedLinkHandlersViewModel(
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
     private val preferredAppRepository: PreferredAppRepository,
-    private val service: DomainVerificationUseCase,
+    private val useCase: DomainVerificationUseCase,
     private val intentCompat: OneUiCompat,
 ) : BaseViewModel(preferenceRepository) {
     val newVlh = experimentRepository.asViewModelState(Experiments.newVlh)
@@ -44,10 +40,6 @@ class VerifiedLinkHandlersViewModel(
     val lastEmitted = MutableStateFlow(0L)
 
     val filterDisabledOnly = MutableStateFlow(true)
-
-    val sortState = MutableStateFlow(SortByState(SortType.AZ, true))
-    val filterState = MutableStateFlow(FilterState(StateModeFilter.ShowAll, TypeFilter.All, true))
-    val searchQuery = MutableStateFlow("")
 
     private fun groupHosts(
         preferredApps: List<PreferredApp>,
@@ -87,66 +79,12 @@ class VerifiedLinkHandlersViewModel(
 
     //        val appsFiltered = packageInfoService.getDomainVerificationAppInfoFlow()
 //        .scan(emptyList<DomainVerificationAppInfo>()) { acc, elem -> acc + elem }
-    val appsFiltered = service.getDomainVerificationAppInfoListFlow()
-        .flowOn(Dispatchers.IO)
-//        .flowOn(Dispatchers.IO)
-        .combine(filterState) { apps, state ->
-            apps.filter { state.matches(it) }
-        }
-        .combine(searchQuery) { apps, searchQuery ->
-            apps.filterIf(searchQuery.isNotEmpty()) { it.matches(searchQuery) }
-        }
-        .combine(sortState) { apps, state ->
-            apps.sortedWith(state.toComparator())
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(0),
-            initialValue = null
-//            initialValue = emptyList()
-        )
 
-    private val installTime = compareBy<DomainVerificationAppInfo> { it.installTime }
-    private val sortComparators = mapOf(
-        SortType.InstallTime to (installTime to installTime.reversed()),
-        SortType.AZ to (IAppInfo.labelComparator to IAppInfo.labelComparator.reversed()),
-    )
-
-    private fun SortByState.toComparator(): Comparator<DomainVerificationAppInfo> {
-        val (asc, desc) = sortComparators[sort]!!
-        @Suppress("UNCHECKED_CAST")
-        return (if (ascending) asc else desc) as Comparator<DomainVerificationAppInfo>
-    }
-
-    private fun StateModeFilter.matches(info: DomainVerificationAppInfo): Boolean {
-        return when (this) {
-            StateModeFilter.ShowAll -> true
-            StateModeFilter.EnabledOnly -> info.enabled
-            StateModeFilter.DisabledOnly -> !info.enabled
-        }
-    }
-
-    private fun TypeFilter.matches(info: DomainVerificationAppInfo): Boolean {
-        return when (this) {
-            TypeFilter.All -> true
-            TypeFilter.Browser -> info.linkHandling == LinkHandling.Browser
-            TypeFilter.Native -> info.linkHandling != LinkHandling.Browser
-        }
-    }
-
-    private fun FilterState.matches(info: DomainVerificationAppInfo): Boolean {
-        if (!systemApps && info.flags in SYSTEM_APP_FLAGS) return false
-        if (!mode.matches(info)) return false
-        if (!type.matches(info)) return false
-        return true
-    }
+    val list by lazy { AppListCommon(apps = useCase.getDomainVerificationAppInfoListFlow(), scope = viewModelScope) }
+    val handler by lazy { LinkHandlerCommon(preferredAppRepository = preferredAppRepository, scope = viewModelScope) }
 
     fun emitLatest() {
         lastEmitted.value = System.currentTimeMillis()
-    }
-
-    fun search(query: String?) {
-        searchQuery.value = query ?: ""
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -163,23 +101,6 @@ class VerifiedLinkHandlersViewModel(
         }
 
         shizukuHandler.enqueueCommand(cmd)
-    }
-
-    fun updateHostState(
-        appInfo: IAppInfo,
-        hostStates: List<HostState>,
-    ) = viewModelScope.launch(Dispatchers.IO) {
-        for ((host, previousState, currentState) in hostStates) {
-            when {
-                previousState && !currentState -> {
-                    preferredAppRepository.deleteByHostAndPackageName(host, appInfo.packageName)
-                }
-
-                !previousState && currentState -> {
-                    preferredAppRepository.insert(appInfo.toPreferredApp(host, true))
-                }
-            }
-        }
     }
 }
 

@@ -9,6 +9,9 @@ val SYSTEM_APP_FLAGS = ApplicationInfoPrivateFlags.select(
     ApplicationInfoPrivateFlags.UPDATED_SYSTEM_APP
 )
 
-fun ApplicationInfo.isUserApp(): Boolean {
-    return flags !in SYSTEM_APP_FLAGS
-}
+val ApplicationInfo.isSystemApp: Boolean
+    get() = flags in SYSTEM_APP_FLAGS
+
+val ApplicationInfo.isUserApp: Boolean
+    get() = flags !in SYSTEM_APP_FLAGS
+

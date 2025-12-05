@@ -36,7 +36,7 @@ class AppSorter(
         val comparator = listOfNotNull(
             createHistoryComparator(historyMap),
             createUsageStatComparator(),
-            IAppInfo.labelComparator
+            IAppInfo.Label.comparator
         ).fold(emptyComparator) { current, next -> current.then(next) }
 
         val sorted = infos.values.sortedWith(comparator)

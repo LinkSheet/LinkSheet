@@ -70,7 +70,7 @@ fun AppConfigRoute(
 
     val host = "amazon.de"
     val app = context.packageManager.getInstalledPackagesCompat()
-        .first { it.applicationInfo?.isUserApp() == true }
+        .first { it.applicationInfo?.isUserApp == true }
     val applicationInfo = app.applicationInfo!!
 
 

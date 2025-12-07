@@ -565,4 +565,6 @@
     <string name="settings_links_preview__subtitle_preview_skip_browser">Eğer yönlendiren bir tarayıcıysa ön izlemeyi devre dışı bırak</string>
     <string name="settings_scenario__title_scenarios">Senaryolar</string>
     <string name="settings_scenario__text_scenarios">Senaryoları yapılandır</string>
+    <string name="settings_scenario__text_data_type">Veri tipi</string>
+    <string name="settings_scenario__text_value">Değer</string>
 </resources>

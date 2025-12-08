@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="enabled">Etkinleştirilmiş</string>
+    <string name="enabled">Etkin</string>
     <string name="enable_libredirect">LibRedirect\'i etkinleştir</string>
     <string name="enable_libredirect_explainer">Deneysel <annotation url-id="libredirect-github">LibRedirect</annotation> entegrasyonunu kullanarak bağlantıları gizlilik dostu ön yüzlere yönlendirir</string>
     <string name="lib_redirect">LibRedirect</string>

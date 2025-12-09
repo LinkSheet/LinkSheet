@@ -19,8 +19,8 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonListItem
-import fe.linksheet.composable.util.FilterChipValue
-import fe.linksheet.composable.util.FilterChips
+import fe.linksheet.composable.component.FilterChipValue
+import fe.linksheet.composable.component.FilterChips
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel.BrowserType

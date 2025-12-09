@@ -1,10 +1,9 @@
-package fe.linksheet.composable.util
+package fe.linksheet.composable.component
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
@@ -15,7 +14,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import fe.android.compose.content.rememberOptionalContent
-import fe.kotlin.extension.iterator.withElementInfo
 
 data class FilterChipValue<T>(
     val value: T,
@@ -29,8 +27,8 @@ fun <T> FilterChips(
     onClick: (T) -> Unit,
     values: List<FilterChipValue<T>>
 ) {
-    Row {
-        for ((value, _, _, last) in values.withElementInfo()) {
+    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+        for (value in values) {
             FilterChip(
                 value = value.value,
                 currentState = currentState,
@@ -38,10 +36,6 @@ fun <T> FilterChips(
                 label = value.string,
                 icon = value.icon
             )
-
-            if (!last) {
-                Spacer(modifier = Modifier.width(5.dp))
-            }
         }
     }
 }

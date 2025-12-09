@@ -3,7 +3,6 @@ package fe.linksheet.composable.page.settings.advanced.exportimport
 import android.content.Intent
 import android.os.Parcelable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ImportExport
@@ -11,7 +10,6 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.theme.DialogTitleStyle
@@ -22,13 +20,12 @@ import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.wrap
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.span.helper.composable.createAnnotatedString
 import fe.composekit.component.ContentType
-import fe.composekit.component.dialog.DialogDefaults
 import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
-import fe.linksheet.composable.util.LinkableTextView
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
@@ -112,10 +109,7 @@ private fun ExportSettingsDialog(
                 }
 
                 item(key = R.string.export_privacy, contentType = ContentType.TextItem) {
-                    LinkableTextView(
-                        modifier = Modifier.padding(top = DialogDefaults.ContentPadding),
-                        id = R.string.export_privacy
-                    )
+                    createAnnotatedString(id = R.string.export_privacy)
                 }
             }
         },

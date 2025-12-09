@@ -199,7 +199,7 @@
                  android:exported="true"
                  tools:ignore="ExportedService">
         </service>
-        <service android:name=".service.InterconnectService2"
+        <service android:name="app.linksheet.service.InterconnectService2"
                  android:enabled="true"
                  android:exported="true"
                  android:foregroundServiceType="specialUse"

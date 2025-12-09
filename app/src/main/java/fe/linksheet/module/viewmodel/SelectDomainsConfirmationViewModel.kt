@@ -13,7 +13,10 @@ class SelectDomainsConfirmationViewModel(
 ) : ViewModel() {
     val handler by lazy { LinkHandlerCommon(preferredAppRepository = preferredAppRepository, scope = viewModelScope) }
 
-    fun getApp(packageName: String): AppInfo? {
-        return useCase.queryApp(packageName)
+    fun getApp(packageName: String): Pair<AppInfo, List<String>>? {
+        val app = useCase.queryApp(packageName) ?: return null
+        val hosts = useCase.getSupportedHosts(packageName)
+
+        return app to hosts
     }
 }

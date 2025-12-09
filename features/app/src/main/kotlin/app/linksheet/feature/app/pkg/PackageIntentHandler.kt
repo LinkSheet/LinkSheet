@@ -12,6 +12,7 @@ import fe.linksheet.util.ResolveInfoFlags
 interface PackageIntentHandler {
     fun isSelfDefaultBrowser(): Boolean
     fun findHttpBrowsable(packageName: String?): List<ResolveInfo>
+    fun findSupportedHosts(packageName: String): List<String>
     fun findHandlers(intent: Intent): List<ResolveInfo>
     fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo>
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean
@@ -63,6 +64,17 @@ class DefaultPackageIntentHandler(
             .filter { !isSelf(it.packageName) }
     }
 
+    override fun findSupportedHosts(packageName: String): List<String> {
+        val viewIntent = Intent(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+            .setPackage(packageName)
+
+        val infos = queryIntentActivities(viewIntent, ResolveInfoFlags.MATCH_ALL)
+        return infos
+            .filter { it.filter != null }
+            .flatMap { it.filter.getHosts() }
+    }
+
     override fun findHandlers(intent: Intent): List<ResolveInfo> {
         val activities = queryIntentActivities(intent, QUERY_FLAGS)
         return activities
@@ -85,11 +97,20 @@ class DefaultPackageIntentHandler(
 
     @VisibleForTesting
     override fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean {
-        val authorityCount = filter.countDataAuthorities().takeIf { it > 0 } ?: return false
-        return filter.hasNonWildcardDataAuthority(authorityCount, uri) || filter.hasDataPath(uri.path)
+        return filter.hasNonWildcardDataAuthority(uri) || filter.hasDataPath(uri.path)
     }
 
-    private fun IntentFilter.hasNonWildcardDataAuthority(size: Int, uri: Uri): Boolean {
-        return (0 until size).map { getDataAuthority(it) }.any { it != anyHost && it.match(uri) >= 0 }
+    private fun IntentFilter.hasNonWildcardDataAuthority(uri: Uri): Boolean {
+        return getDataAuthorities().any { it != anyHost && it.match(uri) >= 0 }
+    }
+
+    private fun IntentFilter.getDataAuthorities(): List<IntentFilter.AuthorityEntry> {
+        return (0 until countDataAuthorities()).map { getDataAuthority(it) }
+    }
+
+    private fun IntentFilter.getHosts(): List<String> {
+        return getDataAuthorities()
+            .filter { it != anyHost }
+            .mapNotNull { it.host }
     }
 }

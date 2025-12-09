@@ -7,6 +7,7 @@ import app.linksheet.testing.fake.*
 import app.linksheet.testing.util.flatResolveInfos
 import assertk.assertThat
 import assertk.assertions.containsExactly
+import assertk.assertions.containsExactlyInAnyOrder
 import assertk.assertions.isNotNull
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.runner.RunWith
@@ -99,5 +100,39 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
 
         val handlers = handler.findHttpBrowsable(null)
         assertThat(handlers.asDescriptors()).containsExactly("com.duckduckgo.mobile.android/com.duckduckgo.app.dispatchers.IntentDispatcherActivity:")
+    }
+
+    @org.junit.Test
+    fun `test find supported hosts`() {
+        val handler: PackageIntentHandler = DefaultPackageIntentHandler(
+            queryIntentActivities = { _, _ -> PackageInfoFakes.Pepper.resolveInfos },
+            resolveActivity = { _, _ -> null },
+            isLinkSheetCompat = { false },
+            isSelf = { false },
+            checkReferrerExperiment = { true },
+        )
+
+        assertThat(handler.findSupportedHosts(PackageInfoFakes.Pepper.packageInfo.packageName)).containsExactly(
+            "www.pepper.pl",
+            "pl.dea.ls"
+        )
+    }
+
+    @org.junit.Test
+    fun `test find supported hosts 2`() {
+        val handler: PackageIntentHandler = DefaultPackageIntentHandler(
+            queryIntentActivities = { _, _ -> PackageInfoFakes.Youtube.resolveInfos },
+            resolveActivity = { _, _ -> null },
+            isLinkSheetCompat = { false },
+            isSelf = { false },
+            checkReferrerExperiment = { true },
+        )
+        assertThat(handler.findSupportedHosts(PackageInfoFakes.Youtube.packageInfo.packageName)).containsExactlyInAnyOrder(
+            "youtube.com",
+            "www.youtube.com",
+            "youtu.be",
+            "studio.youtube.com",
+            "m.youtube.com"
+        )
     }
 }

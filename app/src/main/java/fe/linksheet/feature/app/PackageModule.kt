@@ -19,7 +19,7 @@ import org.koin.dsl.module
 
 
 val AppFeatureModule = module {
-    single {
+    single<PackageIconLoader> {
         AndroidPackageIconLoaderModule(
             packageManager = getPackageManager(),
             activityManager = getSystemServiceOrThrow()
@@ -35,7 +35,7 @@ val AppFeatureModule = module {
     single<PackageLauncherService> {
         DefaultPackageLauncherService(queryIntentActivities = getPackageManager()::queryIntentActivitiesCompat)
     }
-    single {
+    single<PackageIntentHandler> {
         val experimentRepository = get<ExperimentRepository>()
 
         AndroidPackageIntentHandler(
@@ -44,12 +44,17 @@ val AppFeatureModule = module {
         )
     }
     single {
-        AppInfoCreator(packageLabelService = get(), packageLauncherService = get(), packageIconLoader = get())
+        AppInfoCreator(
+            packageLabelService = get(),
+            packageLauncherService = get(),
+            packageIconLoader = get()
+        )
     }
     factory {
         val pm = getPackageManager()
         AllAppsUseCase(
             creator = get(),
+            packageIntentHandler = get(),
             getApplicationInfoOrNull = pm::getApplicationInfoCompatOrNull,
             getInstalledPackages = pm::getInstalledPackagesCompat,
         )

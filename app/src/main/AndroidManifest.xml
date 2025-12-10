@@ -24,9 +24,16 @@
     <uses-permission android:name="moe.shizuku.manager.permission.API"/>
     <uses-permission android:name="moe.shizuku.manager.permission.Manager"/>
 
+    <permission-group android:name="${applicationId}.permission-group.INTERCONNECT"
+                      android:icon="@drawable/ic_permission"
+                      android:label="@string/generic__label_permission_group_interconnect"
+                      android:description="@string/generic__description_permission_group_interconnect"/>
     <permission android:name="${applicationId}.permission.INTERCONNECT"
+                android:icon="@drawable/ic_permission"
                 android:label="@string/generic__label_permission_interconnect"
-                android:protectionLevel="dangerous" />
+                android:description="@string/generic__description_permission_interconnect"
+                android:permissionGroup="${applicationId}.permission-group.INTERCONNECT"
+                android:protectionLevel="dangerous"/>
 
     <application
             android:name=".LinkSheetApp"

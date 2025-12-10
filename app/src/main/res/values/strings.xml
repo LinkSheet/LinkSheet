@@ -572,7 +572,10 @@
     <string name="settings_apps_browsers_mode__title_selected">Single browser</string>
     <string name="settings_apps_browsers_mode__subtitle_selected">Selected</string>
     <string name="settings_apps_browsers_mode__text_none">None</string>
-    <string name="generic__label_permission_interconnect">Configure LinkSheet</string>
+    <string name="generic__label_permission_interconnect">configure LinkSheet</string>
+    <string name="generic__label_permission_group_interconnect" translatable="false">LinkSheet</string>
+    <string name="generic__description_permission_interconnect">configure LinkSheet</string>
+    <string name="generic__description_permission_group_interconnect" translatable="false">@string/generic__label_permission_interconnect</string>
     <string name="notification__channel_interconnect_name">Interconnect</string>
     <string name="notification__channel_interconnect_description">Foreground notification when Interconnect service is active</string>
     <string name="notification_interconnect_name">Interconnect</string>

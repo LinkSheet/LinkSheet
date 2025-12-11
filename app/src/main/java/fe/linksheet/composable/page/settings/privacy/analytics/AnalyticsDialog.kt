@@ -1,7 +1,6 @@
 package fe.linksheet.composable.page.settings.privacy.analytics
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectableGroup
@@ -18,17 +17,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.span.helper.composable.createAnnotatedString
 import fe.composekit.component.ContentType
 import fe.composekit.component.dialog.DialogDefaults
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
-import fe.linksheet.composable.util.LinkableTextView
 import fe.linksheet.module.analytics.TelemetryLevel
-import app.linksheet.compose.theme.HkGroteskFontFamily
 
 
 @Composable
@@ -77,10 +76,7 @@ private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryL
         text = {
             LazyColumn(modifier = Modifier.selectableGroup(), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 item(key = R.string.telemetry_dialog_text, contentType = ContentType.TextItem) {
-                    LinkableTextView(
-                        modifier = Modifier.padding(bottom = DialogDefaults.ContentPadding),
-                        id = R.string.telemetry_dialog_text
-                    )
+                    createAnnotatedString(id = R.string.telemetry_dialog_text)
                 }
 
                 items(items = telemetryLevels, key = { it.titleId }) { item ->
@@ -99,10 +95,7 @@ private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryL
                 }
 
                 item(key = R.string.telemetry_dialog_text_2, contentType = ContentType.TextItem) {
-                    LinkableTextView(
-                        modifier = Modifier.padding(top = DialogDefaults.ContentPadding),
-                        id = R.string.telemetry_dialog_text_2
-                    )
+                    createAnnotatedString(id = R.string.telemetry_dialog_text_2)
                 }
             }
         },

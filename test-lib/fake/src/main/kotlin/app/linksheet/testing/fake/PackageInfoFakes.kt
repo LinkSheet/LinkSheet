@@ -1,5 +1,7 @@
 package app.linksheet.testing.fake
 
+import android.os.PatternMatcher
+import app.linksheet.testing.util.addDataPaths
 import app.linksheet.testing.util.buildPackageInfoTestFake
 
 object PackageInfoFakes {
@@ -56,7 +58,40 @@ object PackageInfoFakes {
     }
 
     val Youtube = buildPackageInfoTestFake("com.google.android.youtube", "Youtube") {
-        activity("com.google.android.youtube.UrlActivity")
+        activity("com.google.android.youtube.UrlActivity") {
+            addFilter {
+                addAction("android.intent.action.VIEW")
+                addAction("android.media.action.MEDIA_PLAY_FROM_SEARCH")
+                addCategory("android.intent.category.DEFAULT")
+                addCategory("android.intent.category.BROWSABLE")
+                addDataScheme("http")
+                addDataScheme("https")
+                addDataAuthority("youtube.com", null)
+                addDataAuthority("www.youtube.com", null)
+                addDataAuthority("m.youtube.com", null)
+                addDataAuthority("youtu.be", null)
+                addDataPaths(PatternMatcher.PATTERN_SIMPLE_GLOB, ".*")
+            }
+            addFilter {
+                addAction("android.intent.action.VIEW")
+                addAction("android.media.action.MEDIA_PLAY_FROM_SEARCH")
+                addCategory("android.intent.category.DEFAULT")
+                addCategory("android.intent.category.BROWSABLE")
+                addDataScheme("vnd.youtube")
+                addDataScheme("vnd.youtube.launch")
+            }
+            addFilter {
+                addAction("android.intent.action.VIEW")
+                addAction("android.media.action.MEDIA_PLAY_FROM_SEARCH")
+                addCategory("android.intent.category.DEFAULT")
+                addCategory("android.intent.category.BROWSABLE")
+                addDataScheme("http")
+                addDataScheme("https")
+                addDataAuthority("studio.youtube.com", null)
+                addDataPaths(PatternMatcher.PATTERN_SIMPLE_GLOB, "/channel/UC.*/cg_resolutions.*", "/channel/UC.*/content/promotions.*", "/promotion/.*")
+                addDataPaths(PatternMatcher.PATTERN_LITERAL, "/channel-appeal")
+            }
+        }
     }
 
     val NewPipe = buildPackageInfoTestFake("org.schabi.newpipe", "NewPipe") {

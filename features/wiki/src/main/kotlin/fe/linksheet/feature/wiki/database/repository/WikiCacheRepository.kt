@@ -2,6 +2,7 @@
 
 package fe.linksheet.feature.wiki.database.repository
 
+import fe.linksheet.extension.kotlin.nowMillis
 import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
 import fe.linksheet.feature.wiki.database.entity.WikiCache
 import fe.linksheet.util.CacheResult
@@ -23,10 +24,6 @@ class WikiCacheRepository(
             cached.timestamp > after -> CacheResult.Hit(cached)
             else -> CacheResult.Stale(cached)
         }
-    }
-
-    private fun Clock.nowMillis(): Long {
-        return now().toEpochMilliseconds()
     }
 
     suspend fun update(docCache: WikiCache, text: String) {

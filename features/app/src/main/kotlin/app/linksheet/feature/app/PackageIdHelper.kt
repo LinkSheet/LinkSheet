@@ -29,7 +29,7 @@ object PackageIdHelper {
 
     fun getDescriptor(activityAppInfo: ActivityAppInfo): String {
         val componentName = activityAppInfo.componentName
-        val appPackage = activityAppInfo.packageName
+        val appPackage = activityAppInfo.appInfo.packageName
         return createDescriptor(componentName, appPackage, "")
     }
 }

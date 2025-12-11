@@ -1,6 +1,6 @@
 package app.linksheet.feature.app.pkg.domain
 
-interface VerificationStateCompat
+sealed interface VerificationStateCompat
 
 data class VerificationState(
     val hostToStateMap: Map<String, Int>,

@@ -27,6 +27,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import app.linksheet.feature.app.AppInfo
+import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.LinkHandling
 import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.icon.iconPainter
@@ -38,8 +41,6 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.LinkHandling
 import fe.linksheet.util.drawBitmap
 
 @Composable
@@ -179,60 +180,72 @@ private class DomainVerificationAppInfoProvider() : PreviewParameterProvider<Lis
     override val values: Sequence<List<DomainVerificationAppInfo>> = sequenceOf(
         listOf(
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Allowed,
                 stateNone = mutableStateListOf(),
                 stateSelected = mutableStateListOf(),
                 stateVerified = mutableStateListOf(),
             ),
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Allowed,
                 stateNone = mutableStateListOf(),
                 stateSelected = mutableStateListOf("google.com"),
                 stateVerified = mutableStateListOf("google.com"),
             ),
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Allowed,
                 stateNone = mutableStateListOf("facebook.com"),
                 stateSelected = mutableStateListOf("google.com"),
                 stateVerified = mutableStateListOf("google.com"),
             ),
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Allowed,
                 stateNone = mutableStateListOf("facebook.com"),
                 stateSelected = mutableStateListOf(),
                 stateVerified = mutableStateListOf("google.com"),
             ),
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Allowed,
                 stateNone = mutableStateListOf("facebook.com"),
                 stateSelected = mutableStateListOf(),
                 stateVerified = mutableStateListOf(),
             ),
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Disallowed,
                 stateNone = mutableStateListOf(),
                 stateSelected = mutableStateListOf("facebook.com"),
@@ -241,20 +254,24 @@ private class DomainVerificationAppInfoProvider() : PreviewParameterProvider<Lis
         ),
         listOf(
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Unsupported,
                 stateNone = mutableStateListOf(),
                 stateSelected = mutableStateListOf(),
                 stateVerified = mutableStateListOf(),
             ),
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Unsupported,
                 stateNone = mutableStateListOf("google.com"),
                 stateSelected = mutableStateListOf(),
@@ -263,20 +280,24 @@ private class DomainVerificationAppInfoProvider() : PreviewParameterProvider<Lis
         ),
         listOf(
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Unsupported,
                 stateNone = mutableStateListOf(),
                 stateSelected = mutableStateListOf(),
                 stateVerified = mutableStateListOf(),
             ),
             DomainVerificationAppInfo(
-                packageName = "fe.linksheet",
-                label = "LinkSheet",
-                icon = icon,
-                flags = 0,
+                appInfo = AppInfo(
+                    packageName = "fe.linksheet",
+                    label = "LinkSheet",
+                    icon = icon,
+                    flags = 0
+                ),
                 linkHandling = LinkHandling.Browser,
                 stateNone = mutableStateListOf(),
                 stateSelected = mutableStateListOf(),
@@ -323,10 +344,12 @@ private fun VerifiedAppListItemPreviewPreApi31(
 private fun VerifiedAppListItemSinglePreview() {
     VerifiedAppListItem(
         item = DomainVerificationAppInfo(
-            packageName = "fe.linksheet",
-            label = "LinkSheet",
-            icon = DomainVerificationAppInfoProvider.icon,
-            flags = 0,
+            appInfo = AppInfo(
+                packageName = "fe.linksheet",
+                label = "LinkSheet",
+                icon = DomainVerificationAppInfoProvider.icon,
+                flags = 0
+            ),
             linkHandling = LinkHandling.Allowed,
             stateNone = mutableListOf(),
             stateSelected = mutableListOf("google.com"),

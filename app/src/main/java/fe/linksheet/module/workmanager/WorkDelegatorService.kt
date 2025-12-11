@@ -1,7 +1,8 @@
 package fe.linksheet.module.workmanager
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.work.*
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.WorkManager
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
 import fe.composekit.preference.asFunction
@@ -34,12 +35,12 @@ class WorkDelegatorService(
     fun setRemoteConfig(enabled: Boolean) {
         if (enabled) {
             workManager.enqueueUniquePeriodicWork(
-                RemoteAssetFetcherWorker.tag,
+                RemoteAssetFetcherWorker.TAG,
                 ExistingPeriodicWorkPolicy.KEEP,
                 RemoteAssetFetcherWorker.buildPeriodicWorkRequest()
             )
         } else {
-            workManager.cancelAllWorkByTag(RemoteAssetFetcherWorker.tag)
+            workManager.cancelAllWorkByTag(RemoteAssetFetcherWorker.TAG)
         }
     }
 }

@@ -1,6 +1,9 @@
 package fe.linksheet.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.WindowInsets
@@ -35,8 +38,18 @@ import org.koin.core.component.KoinComponent
 
 class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
     companion object {
-        const val EXTRA_CRASH_EXCEPTION = "EXTRA_CRASH_EXCEPTION_TEXT"
-        const val EXTRA_CRASH_TIMESTAMP = "EXTRA_CRASH_TIMESTAMP"
+        private const val EXTRA_CRASH_EXCEPTION = "EXTRA_CRASH_EXCEPTION_TEXT"
+        private const val EXTRA_CRASH_TIMESTAMP = "EXTRA_CRASH_TIMESTAMP"
+
+        fun start(context: Context, throwable: Throwable) {
+            val intent = Intent(context, CrashHandlerActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .putExtra(EXTRA_CRASH_EXCEPTION, Log.getStackTraceString(throwable))
+                .putExtra(EXTRA_CRASH_TIMESTAMP, System.currentTimeMillis())
+
+            context.startActivity(intent)
+        }
     }
 
     private val logger by injectLogger<CrashHandlerActivity>()

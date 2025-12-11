@@ -15,13 +15,12 @@ fun DomainVerificationManagerCompat(context: Context): DomainVerificationManager
         AndroidVersion.isAtLeastApi31S() -> Api31Impl(
             domainVerificationManager = context.getSystemService<DomainVerificationManager>()
         )
-
         else -> PreApi31Impl
     }
 }
 
 private object PreApi31Impl : DomainVerificationManagerCompat {
-    override fun getDomainVerificationUserState(packageName: String): VerificationStateCompat? {
+    override fun getDomainVerificationUserState(packageName: String): VerificationStateCompat {
         return VerificationUnsupportedState
     }
 }

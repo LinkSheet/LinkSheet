@@ -6,19 +6,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.util.listState
-import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.appbar.SearchTopAppBar
-import fe.composekit.component.icon.AppIconImage
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import app.linksheet.compose.extension.collectOnIO
+import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -27,8 +26,9 @@ fun InAppBrowserSettingsDisableInSelectedRoute(
     onBackPressed: () -> Unit,
     viewModel: InAppBrowserSettingsViewModel = koinViewModel(),
 ) {
-    val items by viewModel._filteredItems.collectOnIO(null)
-    val searchFilter by viewModel.searchFilter.collectOnIO()
+    val items by viewModel.list.appsFiltered.collectAsStateWithLifecycle()
+    val searchFilter by viewModel.list.searchQuery.collectAsStateWithLifecycle()
+    val disabledPackages by viewModel.disabledPackages.collectAsStateWithLifecycle(initialValue = emptySet())
 
     val listState = remember(items?.size, searchFilter) {
         listState(items, searchFilter)
@@ -42,7 +42,7 @@ fun InAppBrowserSettingsDisableInSelectedRoute(
                 titleContent = textContent(R.string.disable_in_selected),
                 placeholderContent = textContent(R.string.settings__title_filter_apps),
                 query = searchFilter,
-                onQueryChange = viewModel::search,
+                onQueryChange = viewModel.list::search,
                 onBackPressed = onBackPressed
             )
         }
@@ -55,10 +55,12 @@ fun InAppBrowserSettingsDisableInSelectedRoute(
                 list = items,
                 listKey = { it.packageName }
             ) { item, padding, shape ->
+                val isSelected = remember(disabledPackages, item) {
+                    item.packageName in disabledPackages
+                }
                 CheckboxListItem(
-                    checked = item.selected.value,
+                    checked = isSelected,
                     onCheckedChange = {
-                        item.update(it)
                         viewModel.save(item, it)
                     },
                     padding = padding,
@@ -71,10 +73,7 @@ fun InAppBrowserSettingsDisableInSelectedRoute(
                         Text(text = item.packageName, overflow = TextOverflow.Ellipsis, maxLines = 1)
                     },
                     otherContent = {
-                        AppIconImage(
-                            icon = BitmapIconPainter.bitmap(item.loadIcon(context)),
-                            label = item.label
-                        )
+                        AppInfoIcon(appInfo = item)
                     }
                 )
             }

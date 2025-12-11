@@ -2,8 +2,6 @@ package fe.linksheet
 
 import android.app.Activity
 import android.app.Application
-import android.content.Intent
-import android.util.Log
 import androidx.work.WorkManager
 import app.linksheet.api.DependencyProvider
 import app.linksheet.compose.debug.DebugMenuSlotProvider
@@ -85,13 +83,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
         LLog.addSink(AndroidLogSink())
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
-            val crashIntent = Intent(this, CrashHandlerActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(CrashHandlerActivity.EXTRA_CRASH_EXCEPTION, Log.getStackTraceString(throwable))
-                .putExtra(CrashHandlerActivity.EXTRA_CRASH_TIMESTAMP, System.currentTimeMillis())
-
-            startActivity(crashIntent)
+            CrashHandlerActivity.start(this, throwable)
             exitProcess(2)
         }
 

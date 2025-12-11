@@ -4,38 +4,32 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.compose.animation.AnimatedVisibility
+import android.os.Message
+import android.os.Messenger
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.core.content.IntentCompat
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.os.bundleOf
-import fe.android.compose.dialog.helper.dialogHelper
+import app.linksheet.feature.app.AppInfo
+import app.linksheet.testing.fake.PackageInfoFakes
+import app.linksheet.testing.fake.toAppInfo
+import fe.composekit.component.PreviewThemeNew
+import fe.composekit.extension.getBundleBinder
+import fe.composekit.extension.getParcelableExtraCompat
 import fe.linksheet.BuildConfig
-import fe.linksheet.R
-import fe.linksheet.composable.util.*
-import fe.linksheet.extension.android.getApplicationInfoCompat
+import fe.linksheet.composable.dialog.AppHostDialogResult
+import fe.linksheet.composable.dialog.AppInfoDialogData
+import fe.linksheet.composable.dialog.rememberAppInfoDialog
+import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.interconnect.IDomainSelectionResultCallback
 import fe.linksheet.interconnect.StringParceledListSlice
-import fe.linksheet.module.database.entity.AppSelectionHistory
-import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.repository.AppSelectionHistoryRepository
-import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.composable.ui.AppTheme
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import fe.linksheet.module.viewmodel.SelectDomainsConfirmationViewModel
+import org.koin.androidx.compose.koinViewModel
 
 class SelectDomainsConfirmationActivity : BaseComponentActivity() {
     companion object {
@@ -44,12 +38,15 @@ class SelectDomainsConfirmationActivity : BaseComponentActivity() {
         const val EXTRA_CALLING_PACKAGE = "calling_package"
         const val EXTRA_DOMAINS = "domains"
         const val EXTRA_CALLBACK = "callback"
+        const val EXTRA_MESSENGER = "messenger"
+        const val MSG_CHOOSER_FINISHED = 1
 
         fun start(
             context: Context,
             callingPackage: String,
             callingComponent: ComponentName,
             domains: StringParceledListSlice,
+            messenger: Messenger,
             callback: IDomainSelectionResultCallback? = null,
         ) {
             val intent = Intent(context, SelectDomainsConfirmationActivity::class.java)
@@ -59,6 +56,7 @@ class SelectDomainsConfirmationActivity : BaseComponentActivity() {
             intent.putExtra(EXTRA_DOMAINS, domains)
             intent.putExtra(EXTRA_CALLING_COMPONENT, callingComponent)
             intent.putExtra(EXTRA_CALLBACK, bundleOf(EXTRA_CALLBACK to callback?.asBinder()))
+            intent.putExtra(EXTRA_MESSENGER, messenger)
             intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
@@ -66,148 +64,108 @@ class SelectDomainsConfirmationActivity : BaseComponentActivity() {
         }
     }
 
-    private val preferredAppRepository: PreferredAppRepository by inject()
-    private val appSelectionHistoryRepository: AppSelectionHistoryRepository by inject()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (intent?.action != ACTION_CONFIRM) return
 
-        val callingComponent = IntentCompat.getParcelableExtra(
-            intent,
-            EXTRA_CALLING_COMPONENT,
-            ComponentName::class.java,
-        )
+        val callingComponent = intent.getParcelableExtraCompat<ComponentName>(EXTRA_CALLING_COMPONENT)
         val callingPackage = intent.getStringExtra(EXTRA_CALLING_PACKAGE)
-        val domains = IntentCompat.getParcelableExtra(
-            intent,
-            EXTRA_DOMAINS,
-            StringParceledListSlice::class.java
-        )?.list
-        val callback = intent.getBundleExtra(EXTRA_CALLBACK)
-            ?.getBinder(EXTRA_CALLBACK)
-            ?.let { IDomainSelectionResultCallback.Stub.asInterface(it) }
+        val domains = intent.getParcelableExtraCompat<StringParceledListSlice>(EXTRA_DOMAINS)?.list
+        val callback = intent.getBundleBinder(EXTRA_CALLBACK) {
+            IDomainSelectionResultCallback.Stub.asInterface(it)
+        }
+        val messenger = intent.getParcelableExtraCompat<Messenger>(EXTRA_MESSENGER)
+
+        fun finishSelection() {
+            finish()
+            messenger?.send(Message.obtain().apply {
+                what = MSG_CHOOSER_FINISHED
+            })
+        }
 
         if (callingPackage == null || domains == null || callingComponent == null) {
-            finish()
+            finishSelection()
             return
         }
 
-        val appLabel = packageManager.getApplicationInfoCompat(callingPackage, 0)
-            ?.loadLabel(packageManager) ?: callingPackage
-
         setContent(edgeToEdge = true) {
-            val scope = rememberCoroutineScope()
-
-            var loading by remember {
-                mutableStateOf(false)
-            }
-
             AppTheme {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    AnimatedVisibility(visible = loading) {
-                        CircularProgressIndicator()
+                AppPageWrapper(
+                    packageName = callingPackage,
+                    domains = domains,
+                    onClose = {
+                        callback?.onDomainSelectionConfirmed()
+                        finishSelection()
+                    },
+                    onDismiss = {
+                        callback?.onDomainSelectionCancelled()
+                        finishSelection()
                     }
-
-                    // TODO: Allow for user to deselect specific requested domains.
-                    val dialog = dialogHelper(
-                        state = domains,
-                        onClose = { confirmed ->
-                            scope.launch(Dispatchers.IO) {
-                                if (confirmed == true) {
-                                    loading = true
-
-                                    val preferred = mutableListOf<PreferredApp>()
-                                    val history = mutableListOf<AppSelectionHistory>()
-
-                                    domains.forEach { domain ->
-                                        preferred.add(
-                                            PreferredApp.new(
-                                                host = domain,
-                                                pkg = callingPackage,
-                                                cmp = callingComponent,
-                                                always = true,
-                                            )
-                                        )
-
-                                        history.add(
-                                            AppSelectionHistory(
-                                                host = domain,
-                                                packageName = callingPackage,
-                                                lastUsed = System.currentTimeMillis(),
-                                            )
-                                        )
-                                    }
-
-                                    preferredAppRepository.insert(preferred)
-                                    appSelectionHistoryRepository.insert(history)
-
-                                    loading = false
-                                }
-
-                                if (confirmed == true) {
-                                    callback?.onDomainSelectionConfirmed()
-                                } else {
-                                    callback?.onDomainSelectionCancelled()
-                                }
-
-                                finish()
-                            }
-                        },
-                        dynamicHeight = true,
-                        notifyCloseNoState = true,
-                    ) { state, close ->
-                        DialogColumn {
-                            HeadlineText(headlineId = R.string.domain_selection_confirmation_title)
-                            SubtitleText(
-                                subtitle = stringResource(
-                                    id = R.string.domain_selection_confirmation_subtitle,
-                                    appLabel
-                                )
-                            )
-                            DialogSpacer()
-                            DialogContent(
-                                items = state,
-                                key = { it },
-                                bottomRow = {
-                                    TextButton(
-                                        onClick = {
-                                            close(false)
-                                        },
-                                    ) {
-                                        Text(text = stringResource(id = R.string.no))
-                                    }
-
-                                    TextButton(
-                                        onClick = {
-                                            close(true)
-                                        },
-                                        colors = ButtonDefaults.textButtonColors(
-                                            contentColor = MaterialTheme.colorScheme.error,
-                                        ),
-                                    ) {
-                                        Text(text = stringResource(id = R.string.yes))
-                                    }
-                                },
-                                content = {
-                                    Row(modifier = Modifier.fillMaxWidth()) {
-                                        Text(text = it)
-                                    }
-                                },
-                            )
-                        }
-                    }
-
-                    LaunchedEffect(null) {
-                        dialog.open()
-                    }
-                }
+                )
             }
         }
+    }
+}
+
+@Composable
+private fun AppPageWrapper(
+    packageName: String,
+    domains: List<String>,
+    onClose: () -> Unit,
+    onDismiss: () -> Unit,
+    viewModel: SelectDomainsConfirmationViewModel = koinViewModel(),
+) {
+    val appInfo = remember(packageName) { viewModel.getAppInfoWithHosts(packageName) }
+    appInfo?.let { (appInfo, supportedHosts) ->
+        AppPageInternal(
+            appInfo = appInfo,
+            domains = supportedHosts.intersect(domains.toSet()),
+            onClose = { (appInfo, hostState) ->
+                viewModel.handler.updateHostState(appInfo, hostState)
+                onClose()
+            },
+            onDismiss = onDismiss
+        )
+    }
+}
+
+@Composable
+private fun AppPageInternal(
+    appInfo: AppInfo,
+    domains: Set<String>,
+    onClose: (AppHostDialogResult) -> Unit,
+    onDismiss: (() -> Unit)? = null,
+) {
+    val dialogState = rememberAppInfoDialog(
+        onClose = onClose,
+        onDismiss = onDismiss
+    )
+
+    LaunchedEffect(appInfo) {
+        dialogState.open(AppInfoDialogData(appInfo, domains.toSet()))
+    }
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+    ) {
+
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun AppPageInternalPreview() {
+    PreviewThemeNew {
+        AppPageInternal(
+            appInfo = PackageInfoFakes.MiBrowser.toAppInfo(),
+            domains = setOf("google.com", "youtube.com"),
+            onClose = { (appInfo, hostStates) ->
+
+            },
+            onDismiss = {
+
+            }
+        )
     }
 }

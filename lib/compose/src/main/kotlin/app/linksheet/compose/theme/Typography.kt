@@ -72,6 +72,7 @@ val HeadlineAlmostLargeStyle = TextStyle(
 ).configure()
 
 val DialogTitleStyle = TextStyle(
+    fontFamily = HkGroteskFontFamily,
     fontWeight = FontWeight.SemiBold,
     fontSize = 18.sp,
 ).configure()
@@ -119,8 +120,11 @@ val BodyExtraSmallStyle = TextStyle(
 //val TitleMediumTracking = 0.2.sp
 //val TitleMediumWeight = TypefaceTokens.WeightMedium
 private val highlightFont: TextStyle = HkGroteskSemiBold
+
 private fun TextStyle.configure(block: ((TextStyle) -> TextStyle)? = null): TextStyle {
-    val merged = merge(highlightFont)
+//    val merged = this
+//    val merged = highlightFont.merge(this)
+    val merged = this.merge(highlightFont)
     if (block == null) return merged
     return block(merged)
 }

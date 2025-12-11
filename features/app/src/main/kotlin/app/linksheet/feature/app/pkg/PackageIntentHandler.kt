@@ -5,11 +5,14 @@ import android.content.IntentFilter
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
+import app.linksheet.feature.app.activityDescriptor
+import fe.composekit.extension.packageName
 import fe.linksheet.util.ResolveInfoFlags
 
 interface PackageIntentHandler {
     fun isSelfDefaultBrowser(): Boolean
     fun findHttpBrowsable(packageName: String?): List<ResolveInfo>
+    fun findSupportedHosts(packageName: String): Set<String>
     fun findHandlers(intent: Intent): List<ResolveInfo>
     fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo>
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean
@@ -40,12 +43,12 @@ class DefaultPackageIntentHandler(
         val intent = Intent(Intent.ACTION_VIEW, httpSchemeUri)
             .addCategory(Intent.CATEGORY_BROWSABLE)
         val resolveInfo = resolveActivity(intent, ResolveInfoFlags.MATCH_DEFAULT_ONLY)
-        val pkg = resolveInfo?.activityInfo?.packageName ?: return false
+        val pkg = resolveInfo?.packageName ?: return false
         return isSelf(pkg)
     }
 
-    internal fun Iterable<ResolveInfo>.filterLaunchable(): List<ResolveInfo> {
-        return filter { it.activityInfo.exported && it.activityInfo.applicationInfo.enabled }
+    internal fun ResolveInfo.isLaunchable(): Boolean {
+        return activityInfo.exported && activityInfo.applicationInfo.enabled
     }
 
     override fun findHttpBrowsable(packageName: String?): List<ResolveInfo> {
@@ -56,16 +59,29 @@ class DefaultPackageIntentHandler(
         val httpInfos = queryIntentActivities(httpIntent, ResolveInfoFlags.MATCH_ALL)
         val httpsInfos = queryIntentActivities(httpIntent.setData(httpsSchemeUri), ResolveInfoFlags.MATCH_ALL)
         return (httpInfos + httpsInfos)
-            .distinct()
-            .filterLaunchable()
-            .filter { !isSelf(it.activityInfo.packageName) }
+            .distinctBy { it.activityInfo.activityDescriptor }
+            .filter { it.isLaunchable() }
+            .filter { !isSelf(it.packageName) }
+    }
+
+    override fun findSupportedHosts(packageName: String): Set<String> {
+        val httpIntent = Intent(Intent.ACTION_VIEW, httpSchemeUri)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+            .setPackage(packageName)
+
+        val httpInfos = queryIntentActivities(httpIntent, ResolveInfoFlags.MATCH_ALL)
+        val httpsInfos = queryIntentActivities(httpIntent.setData(httpsSchemeUri), ResolveInfoFlags.MATCH_ALL)
+
+        return (httpInfos + httpsInfos)
+            .filter { it.filter != null }
+            .flatMapTo(HashSet()) { it.filter.getHosts() }
     }
 
     override fun findHandlers(intent: Intent): List<ResolveInfo> {
         val activities = queryIntentActivities(intent, QUERY_FLAGS)
-        return activities.filterLaunchable().filter {
-            !isLinkSheetCompat(it.activityInfo.packageName)
-        }
+        return activities
+            .filter { it.isLaunchable() }
+            .filter { !isLinkSheetCompat(it.packageName) }
     }
 
     override fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo> {
@@ -83,11 +99,20 @@ class DefaultPackageIntentHandler(
 
     @VisibleForTesting
     override fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean {
-        val authorityCount = filter.countDataAuthorities().takeIf { it > 0 } ?: return false
-        return filter.hasNonWildcardDataAuthority(authorityCount, uri) || filter.hasDataPath(uri.path)
+        return filter.hasNonWildcardDataAuthority(uri) || filter.hasDataPath(uri.path)
     }
 
-    private fun IntentFilter.hasNonWildcardDataAuthority(size: Int, uri: Uri): Boolean {
-        return (0 until size).map { getDataAuthority(it) }.any { it != anyHost && it.match(uri) >= 0 }
+    private fun IntentFilter.hasNonWildcardDataAuthority(uri: Uri): Boolean {
+        return getDataAuthorities().any { it != anyHost && it.match(uri) >= 0 }
+    }
+
+    private fun IntentFilter.getDataAuthorities(): List<IntentFilter.AuthorityEntry> {
+        return (0 until countDataAuthorities()).map { getDataAuthority(it) }
+    }
+
+    private fun IntentFilter.getHosts(): List<String> {
+        return getDataAuthorities()
+            .filter { it != anyHost }
+            .mapNotNull { it.host }
     }
 }

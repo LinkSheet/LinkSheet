@@ -7,29 +7,30 @@ import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import fe.linksheet.R
+import fe.linksheet.module.viewmodel.common.applist.StateModeFilter
 
-private val VlhStateModeFilter.stringRes: Int
+private val StateModeFilter.stringRes: Int
     get() = when (this) {
-        VlhStateModeFilter.ShowAll -> R.string.settings_verified_link_handlers__text_handling_filter_all_short
-        VlhStateModeFilter.EnabledOnly -> R.string.settings_verified_link_handlers__text_handling_filter_enabled_short
-        VlhStateModeFilter.DisabledOnly -> R.string.settings_verified_link_handlers__text_handling_filter_disabled_short
+        StateModeFilter.ShowAll -> R.string.settings_verified_link_handlers__text_handling_filter_all_short
+        StateModeFilter.EnabledOnly -> R.string.settings_verified_link_handlers__text_handling_filter_enabled_short
+        StateModeFilter.DisabledOnly -> R.string.settings_verified_link_handlers__text_handling_filter_disabled_short
     }
 
-private val VlhStateModeFilter.icon: ImageVector
+private val StateModeFilter.icon: ImageVector
     get() = when (this) {
-        VlhStateModeFilter.ShowAll -> Icons.Outlined.FilterAltOff
-        VlhStateModeFilter.EnabledOnly -> Icons.Outlined.Visibility
-        VlhStateModeFilter.DisabledOnly -> Icons.Outlined.VisibilityOff
+        StateModeFilter.ShowAll -> Icons.Outlined.FilterAltOff
+        StateModeFilter.EnabledOnly -> Icons.Outlined.Visibility
+        StateModeFilter.DisabledOnly -> Icons.Outlined.VisibilityOff
     }
 
 @Composable
-internal fun VlhStateModeFilter(selection: VlhStateModeFilter, onSelected: (VlhStateModeFilter) -> Unit) {
+internal fun VlhStateModeFilter(selection: StateModeFilter, onSelected: (StateModeFilter) -> Unit) {
     BaseStateFilter(
-        entries = VlhStateModeFilter.entries,
-        allState = VlhStateModeFilter.ShowAll,
+        entries = StateModeFilter.entries,
+        allState = StateModeFilter.ShowAll,
         selection = selection,
         onSelected = onSelected,
-        stringRes = VlhStateModeFilter::stringRes,
-        icon = VlhStateModeFilter::icon
+        stringRes = StateModeFilter::stringRes,
+        icon = StateModeFilter::icon
     )
 }

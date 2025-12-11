@@ -85,7 +85,7 @@ class RemoteAssetFetcherWorker(
     }
 
     companion object {
-        const val tag = "remote-assets"
+        const val TAG = "remote-assets"
 
         fun enqueue(context: Context) {
             WorkManager.getInstance(context).enqueue(build())
@@ -101,7 +101,7 @@ class RemoteAssetFetcherWorker(
             return PeriodicWorkRequestBuilder<RemoteAssetFetcherWorker>(
                 repeatInterval = 1,
                 repeatIntervalTimeUnit = TimeUnit.DAYS
-            ).addTag(tag)
+            ).addTag(TAG)
                 .setConstraints(Constraints(requiredNetworkType = NetworkType.CONNECTED))
                 .build()
         }

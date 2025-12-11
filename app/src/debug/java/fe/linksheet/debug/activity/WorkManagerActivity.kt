@@ -65,7 +65,7 @@ class WorkManagerActivity : BaseComponentActivity(), KoinComponent {
 
 @Composable
 private fun WorkManagerScreen(context: Context, workService: WorkDelegatorService) {
-    val infos by workService.workManager.getWorkInfosForUniqueWorkFlow(RemoteAssetFetcherWorker.tag)
+    val infos by workService.workManager.getWorkInfosForUniqueWorkFlow(RemoteAssetFetcherWorker.TAG)
         .collectAsStateWithLifecycle(
             initialValue = emptyList(),
         )

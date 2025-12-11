@@ -1,10 +1,6 @@
 package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,13 +12,13 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.linksheet.compose.theme.HkGroteskFontFamily
+import app.linksheet.feature.app.ActivityAppInfo
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toActivityAppInfo
 import app.linksheet.testing.util.PackageInfoFake
 import fe.linksheet.R
 import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import app.linksheet.compose.theme.HkGroteskFontFamily
-import app.linksheet.feature.app.ActivityAppInfo
 
 object AppListItemRowDefaults {
     val RowHeight = 60.dp
@@ -72,10 +68,10 @@ private data class PreviewAppListItemState(
 
 private class ActivityAppInfoPreviewParameter() : PreviewParameterProvider<PreviewAppListItemState> {
     override val values = sequenceOf(
-        PreviewAppListItemState(PackageInfoFakes.Youtube, false, false),
-        PreviewAppListItemState(PackageInfoFakes.Youtube, false, true),
-        PreviewAppListItemState(PackageInfoFakes.Youtube, true, false),
-        PreviewAppListItemState(PackageInfoFakes.Youtube, true, true),
+        PreviewAppListItemState(PackageInfoFakes.Youtube, preferred = false, showPackage = false),
+        PreviewAppListItemState(PackageInfoFakes.Youtube, preferred = false, showPackage = true),
+        PreviewAppListItemState(PackageInfoFakes.Youtube, preferred = true, showPackage = false),
+        PreviewAppListItemState(PackageInfoFakes.Youtube, preferred = true, showPackage = true),
     )
 }
 

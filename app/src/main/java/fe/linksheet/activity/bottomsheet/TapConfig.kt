@@ -17,10 +17,12 @@ sealed class TapConfig(val name: String, @param:StringRes val stringRes: Int) : 
     data object OpenApp : TapConfig("open_app", R.string.open_app)
     data object SelectItem : TapConfig("select_item", R.string.select_app)
     data object OpenSettings : TapConfig("open_settings", R.string.open_app_settings_page)
+    data object AlwaysOpenApp : TapConfig("always_open_app", R.string.tap_customization__action_always_open_app)
+
 
     companion object : OptionTypeMapper<TapConfig, String>(
         key = { it.name },
-        options = { arrayOf(None, OpenApp, SelectItem, OpenSettings) }
+        options = { arrayOf(None, OpenApp, SelectItem, OpenSettings, AlwaysOpenApp) }
     )
 
     override fun toString(): String {

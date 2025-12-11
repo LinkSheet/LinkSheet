@@ -1,103 +1,96 @@
 package fe.linksheet.feature.app
 
 import android.app.ActivityManager
-import android.content.Context
-import android.content.pm.PackageManager
 import android.content.pm.getApplicationInfoCompatOrNull
 import android.content.pm.getInstalledPackagesCompat
 import android.content.pm.queryIntentActivitiesCompat
 import android.content.pm.resolveActivityCompat
-import app.linksheet.feature.app.PackageService
+import app.linksheet.feature.app.AppInfoCreator
+import app.linksheet.feature.app.pkg.*
+import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
+import app.linksheet.feature.app.usecase.AllAppsUseCase
+import app.linksheet.feature.app.usecase.BrowsersUseCase
+import app.linksheet.feature.app.usecase.DomainVerificationUseCase
 import app.linksheet.lib.flavors.LinkSheetApp
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
-import app.linksheet.feature.app.pkg.DefaultPackageIconLoader
-import app.linksheet.feature.app.pkg.DefaultPackageIntentHandler
-import app.linksheet.feature.app.pkg.DefaultPackageLabelService
-import app.linksheet.feature.app.pkg.DefaultPackageLauncherService
-import app.linksheet.feature.app.pkg.PackageIconLoader
-import app.linksheet.feature.app.pkg.PackageIntentHandler
-import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import org.koin.dsl.module
 
 
 val AppFeatureModule = module {
-    single {
-        AndroidPackageIconLoaderModule(
-            packageManager = getPackageManager(),
-            activityManager = getSystemServiceOrThrow()
+    single<PackageIconLoader> {
+        val pm = getPackageManager()
+        val launcherLargeIconDensity = getSystemServiceOrThrow<ActivityManager>().launcherLargeIconDensity
+
+        DefaultPackageIconLoader(
+            defaultIcon = pm.defaultActivityIcon,
+            getDrawableForDensity = { packageName, resId ->
+                pm.getResourcesForApplication(packageName).getDrawableForDensity(resId, launcherLargeIconDensity, null)
+            },
+            loadActivityIcon = { it.loadIcon(pm) },
         )
     }
-    single {
+    single<PackageLabelService> {
+        val pm = getPackageManager()
+        DefaultPackageLabelService(
+            loadComponentInfoLabelInternal = { it.loadLabel(pm) },
+            getApplicationLabel = pm::getApplicationLabel,
+        )
+    }
+    single<PackageLauncherService> {
+        DefaultPackageLauncherService(queryIntentActivities = getPackageManager()::queryIntentActivitiesCompat)
+    }
+    single<PackageIntentHandler> {
         val experimentRepository = get<ExperimentRepository>()
 
-        AndroidPackageIntentHandler(
-            packageManager = getPackageManager(),
+        val pm = getPackageManager()
+        DefaultPackageIntentHandler(
+            queryIntentActivities = pm::queryIntentActivitiesCompat,
+            resolveActivity = pm::resolveActivityCompat,
+            isLinkSheetCompat = { LinkSheetApp.Compat.isApp(it) != null },
+            isSelf = { BuildConfig.APPLICATION_ID == it },
             checkReferrerExperiment = experimentRepository.asFunction(Experiments.hideReferrerFromSheet)
         )
     }
-    single {
-        AndroidPackageServiceModule(context = get(), packageIconLoader = get(), packageIntentHandler = get())
+    single<DomainVerificationManagerCompat> {
+        DomainVerificationManagerCompat(context = get())
     }
-}
-
-
-@Suppress("FunctionName")
-fun AndroidPackageIconLoaderModule(
-    packageManager: PackageManager,
-    activityManager: ActivityManager,
-): PackageIconLoader {
-    val defaultIcon = packageManager.defaultActivityIcon
-    val launcherLargeIconDensity = activityManager.launcherLargeIconDensity
-
-    return DefaultPackageIconLoader(
-        defaultIcon = defaultIcon,
-        getDrawableForDensity = { packageName, resId ->
-            packageManager
-                .getResourcesForApplication(packageName)
-                .getDrawableForDensity(resId, launcherLargeIconDensity, null)
-        },
-        loadActivityIcon = { it.loadIcon(packageManager) },
-    )
-}
-
-@Suppress("FunctionName")
-internal fun AndroidPackageServiceModule(
-    context: Context,
-    packageIconLoader: PackageIconLoader,
-    packageIntentHandler: PackageIntentHandler,
-): PackageService {
-    val packageManager = context.packageManager
-
-    return PackageService(
-        domainVerificationManager = DomainVerificationManagerCompat(context),
-        packageLabelService = DefaultPackageLabelService(
-            loadComponentInfoLabelInternal = { it.loadLabel(packageManager) },
-            getApplicationLabel = packageManager::getApplicationLabel,
-        ),
-        packageLauncherService = DefaultPackageLauncherService(packageManager::queryIntentActivitiesCompat),
-        packageIconLoader = packageIconLoader,
-        packageIntentHandler = packageIntentHandler,
-        getApplicationInfoOrNull = packageManager::getApplicationInfoCompatOrNull,
-        getInstalledPackages = packageManager::getInstalledPackagesCompat,
-    )
-}
-
-
-@Suppress("FunctionName")
-internal fun AndroidPackageIntentHandler(
-    packageManager: PackageManager,
-    checkReferrerExperiment: () -> Boolean,
-): PackageIntentHandler {
-    return DefaultPackageIntentHandler(
-        queryIntentActivities = packageManager::queryIntentActivitiesCompat,
-        resolveActivity = packageManager::resolveActivityCompat,
-        isLinkSheetCompat = { pkg -> LinkSheetApp.Compat.isApp(pkg) != null },
-        isSelf = { pkg -> BuildConfig.APPLICATION_ID == pkg },
-        checkReferrerExperiment = checkReferrerExperiment,
-    )
+    single<ManifestParser> { ManifestParser() }
+    single {
+        AppInfoCreator(
+            packageLabelService = get(),
+            packageLauncherService = get(),
+            packageIconLoader = get()
+        )
+    }
+    factory {
+        val pm = getPackageManager()
+        AllAppsUseCase(
+            creator = get(),
+            manifestParser = get(),
+            domainVerificationManager = get(),
+            getApplicationInfoOrNull = pm::getApplicationInfoCompatOrNull,
+            getInstalledPackages = pm::getInstalledPackagesCompat,
+        )
+    }
+    factory {
+        BrowsersUseCase(
+            creator = get(),
+            packageIntentHandler = get(),
+        )
+    }
+    factory {
+        val pm = getPackageManager()
+        DomainVerificationUseCase(
+            creator = get(),
+            domainVerificationManager = get(),
+            packageIntentHandler = get(),
+            getApplicationInfoOrNull = pm::getApplicationInfoCompatOrNull,
+            getInstalledPackages = pm::getInstalledPackagesCompat,
+        )
+    }
 }

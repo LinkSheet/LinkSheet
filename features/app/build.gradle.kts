@@ -45,7 +45,7 @@ dependencies {
     implementation(_1fexd.composeKit.compose.core)
 
     implementation(Grrfe.gsonExt.core)
-
+    implementation("io.github.reandroid:ARSCLib:1.3.8")
     implementation(AndroidX.core.ktx)
 
     testImplementation(AndroidX.test.ext.junit.ktx)

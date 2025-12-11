@@ -20,16 +20,12 @@ import fe.linksheet.composable.page.mdviewer.MarkdownViewerWrapper
 import fe.linksheet.composable.page.settings.SettingsRoute
 import fe.linksheet.composable.page.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.page.settings.about.CreditsSettingsRoute
-import fe.linksheet.composable.page.settings.about.DonateSettingsRoute
 import fe.linksheet.composable.page.settings.about.VersionSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.AdvancedSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.ExperimentsSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.ExportImportSettingsRoute
-import fe.linksheet.composable.page.settings.advanced.ShizukuSettingsRoute
 import fe.linksheet.composable.page.settings.app.RuleOverviewRoute
 import fe.linksheet.composable.page.settings.app.RuleRoute
-import fe.linksheet.composable.page.settings.apps.AppsSettingsRoute
-import fe.linksheet.composable.page.settings.apps.PretendToBeAppSettingsRoute
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VerifiedLinkHandlersRoute
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
 import fe.linksheet.composable.page.settings.bottomsheet.BottomSheetSettingsRoute
@@ -38,6 +34,7 @@ import fe.linksheet.composable.page.settings.browser.BrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.mode.PreferredBrowserSettingsRoute
+import fe.linksheet.composable.page.settings.browser.mode.SingleBrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.mode.WhitelistedBrowsersSettingsRoute
 import fe.linksheet.composable.page.settings.debug.DebugSettingsRoute
 import fe.linksheet.composable.page.settings.debug.SqlRoute
@@ -136,12 +133,8 @@ fun MainNavHost(
             SettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navigateNew = navigateNew)
         }
 
-        animatedComposable(route = appsSettingsRoute) {
-            AppsSettingsRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
-        }
-
         animatedComposable(route = browserSettingsRoute) {
-            BrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            BrowserSettingsRoute(onBackPressed = onBackPressed, navigate = navigate, navigateNew = navigateNew)
         }
 
         animatedComposable(route = generalSettingsRoute) {
@@ -190,12 +183,6 @@ fun MainNavHost(
             ThemeSettingsRoute(onBackPressed = onBackPressed)
         }
 
-        animatedComposable(route = shizukuSettingsRoute) {
-            ShizukuSettingsRoute(
-                navController = navController, onBackPressed = onBackPressed
-            )
-        }
-
         animatedComposable(route = logViewerSettingsRoute) {
             LogSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
         }
@@ -210,24 +197,26 @@ fun MainNavHost(
             )
         }
 
-        animatedComposable(route = donateSettingsRoute) {
-            DonateSettingsRoute(
-                onBackPressed = onBackPressed
-            )
-        }
-
         animatedComposable(route = creditsSettingsRoute) {
             CreditsSettingsRoute(onBackPressed = onBackPressed)
         }
-
-        animatedComposable(route = preferredBrowserSettingsRoute) {
+        animatedComposable<PreferredBrowserSettingsRoute> { _, _ ->
             PreferredBrowserSettingsRoute(
-                navController = navController, onBackPressed = onBackPressed
+                onBackPressed = onBackPressed,
+                navigate = navigateNew,
             )
         }
-
-        animatedComposable(route = whitelistedBrowsersSettingsRoute) {
-            WhitelistedBrowsersSettingsRoute(navController = navController)
+        animatedComposable<WhitelistedBrowsersSettingsRoute> { _, route ->
+            WhitelistedBrowsersSettingsRoute(
+                type = route.type,
+                onBackPressed = onBackPressed,
+            )
+        }
+        animatedComposable<SingleBrowserSettingsRoute> { _, route ->
+            SingleBrowserSettingsRoute(
+                type = route.type,
+                onBackPressed = onBackPressed,
+            )
         }
 
         animatedComposable(route = inAppBrowserSettingsRoute) {
@@ -244,12 +233,6 @@ fun MainNavHost(
 
         animatedComposable<AppsWhichCanOpenLinksSettingsRoute> { _, _ ->
             VerifiedLinkHandlersRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
-        }
-
-        if (AndroidVersion.isAtLeastApi31S()) {
-            animatedComposable(route = pretendToBeAppRoute) {
-                PretendToBeAppSettingsRoute(onBackPressed = onBackPressed)
-            }
         }
 
         animatedComposable(route = devModeRoute) {

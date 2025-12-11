@@ -14,9 +14,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import app.linksheet.compose.theme.DialogTitleStyle
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.dialog.DialogDefaults
@@ -24,10 +23,15 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
-import app.linksheet.compose.theme.HkGroteskFontFamily
 
 
-private val tapConfigOptions = listOf(TapConfig.None, TapConfig.SelectItem, TapConfig.OpenApp, TapConfig.OpenSettings)
+private val tapConfigOptions = listOf(
+    TapConfig.None,
+    TapConfig.SelectItem,
+    TapConfig.OpenApp,
+    TapConfig.OpenSettings,
+    TapConfig.AlwaysOpenApp
+)
 
 @Composable
 fun TapConfigDialog(
@@ -44,10 +48,7 @@ fun TapConfigDialog(
         title = {
             Text(
                 text = stringResource(id = R.string.tap_customization_dialog_title, title),
-                fontFamily = HkGroteskFontFamily,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp
-//                style = MaterialTheme.typography.titleLarge.copy(fontSize = )
+                style = DialogTitleStyle,
             )
         },
         text = {

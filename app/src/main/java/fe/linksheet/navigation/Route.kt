@@ -3,18 +3,16 @@ package fe.linksheet.navigation
 
 import androidx.annotation.Keep
 import androidx.annotation.StringRes
+import fe.composekit.route.Route
+import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.util.WikiPage
 import kotlinx.serialization.Serializable
-import fe.composekit.route.Route
 
 
-const val mainRoute = "main_route"
 const val settingsRoute = "settings_route"
-const val appsSettingsRoute = "apps_settings_route"
 const val browserSettingsRoute = "browser_settings_route"
 
 const val inAppBrowserSettingsDisableInSelectedRoute = "inapp_browser_settings_route"
-const val whitelistedBrowsersSettingsRoute = "whitelisted_browsers_settings_route"
 
 //@Keep
 //data class InAppBrowserSettingsDisableInSelectedRoute(
@@ -43,11 +41,7 @@ const val whitelistedBrowsersSettingsRoute = "whitelisted_browsers_settings_rout
 
 const val aboutSettingsRoute = "about_settings_route"
 const val creditsSettingsRoute = "credits_settings_route"
-const val donateSettingsRoute = "donate_settings_route"
-
 const val themeSettingsRoute = "theme_settings_route"
-
-const val shizukuSettingsRoute = "shizuku_settings_route"
 
 
 //const val debugSettingsRoute = "debug_settings_route"
@@ -75,9 +69,20 @@ const val generalSettingsRoute = "general_settings_route"
 const val privacySettingsRoute = "privacy_settings_route"
 const val notificationSettingsRoute = "notification_settings_route"
 const val bottomSheetSettingsRoute = "bottom_sheet_settings_route"
-const val preferredBrowserSettingsRoute = "preferred_browser_settings_route"
+
+@Keep
+@Serializable
+data object PreferredBrowserSettingsRoute : Route
+
+@Keep
+@Serializable
+data class WhitelistedBrowsersSettingsRoute(val type: PreferredBrowserViewModel.BrowserType) : Route
+
+@Keep
+@Serializable
+data class SingleBrowserSettingsRoute(val type: PreferredBrowserViewModel.BrowserType) : Route
+
 const val inAppBrowserSettingsRoute = "in_app_browser_settings_route"
-const val pretendToBeAppRoute = "pretend_to_be_app"
 const val devModeRoute = "dev_mode"
 
 @Keep
@@ -120,6 +125,7 @@ data object DebugRoute : Route
 @Keep
 @Serializable
 data class LogTextViewerRoute(val id: String?, val name: String) : Route
+
 @Keep
 @Serializable
 data class VlhAppRoute(val packageName: String) : Route
@@ -143,7 +149,6 @@ data object SqlRoute : Route
 //        ::ExperimentSettingsRouteArg
 //    )
 //}
-
 
 
 object Routes {

@@ -12,7 +12,7 @@ import fe.linksheet.util.ResolveInfoFlags
 interface PackageIntentHandler {
     fun isSelfDefaultBrowser(): Boolean
     fun findHttpBrowsable(packageName: String?): List<ResolveInfo>
-    fun findSupportedHosts(packageName: String): List<String>
+    fun findSupportedHosts(packageName: String): Set<String>
     fun findHandlers(intent: Intent): List<ResolveInfo>
     fun findHandlers(uri: Uri, referringPackage: String?): List<ResolveInfo>
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean
@@ -64,15 +64,17 @@ class DefaultPackageIntentHandler(
             .filter { !isSelf(it.packageName) }
     }
 
-    override fun findSupportedHosts(packageName: String): List<String> {
-        val viewIntent = Intent(Intent.ACTION_VIEW)
+    override fun findSupportedHosts(packageName: String): Set<String> {
+        val httpIntent = Intent(Intent.ACTION_VIEW, httpSchemeUri)
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .setPackage(packageName)
 
-        val infos = queryIntentActivities(viewIntent, ResolveInfoFlags.MATCH_ALL)
-        return infos
+        val httpInfos = queryIntentActivities(httpIntent, ResolveInfoFlags.MATCH_ALL)
+        val httpsInfos = queryIntentActivities(httpIntent.setData(httpsSchemeUri), ResolveInfoFlags.MATCH_ALL)
+
+        return (httpInfos + httpsInfos)
             .filter { it.filter != null }
-            .flatMap { it.filter.getHosts() }
+            .flatMapTo(HashSet()) { it.filter.getHosts() }
     }
 
     override fun findHandlers(intent: Intent): List<ResolveInfo> {

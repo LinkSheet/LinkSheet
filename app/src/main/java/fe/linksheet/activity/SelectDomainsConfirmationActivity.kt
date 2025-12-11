@@ -115,7 +115,7 @@ private fun AppPageWrapper(
     onDismiss: () -> Unit,
     viewModel: SelectDomainsConfirmationViewModel = koinViewModel(),
 ) {
-    val appInfo = remember(packageName) { viewModel.getApp(packageName) }
+    val appInfo = remember(packageName) { viewModel.getAppInfoWithHosts(packageName) }
     appInfo?.let { (appInfo, supportedHosts) ->
         AppPageInternal(
             appInfo = appInfo,

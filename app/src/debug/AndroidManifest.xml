@@ -23,14 +23,16 @@
                 android:name=".debug.activity.LinkTestingActivity"
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
-
         <activity
                 android:name=".debug.activity.ExportLogDialogTestActivity"
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
-
         <activity
                 android:name=".debug.activity.WorkManagerActivity"
+                android:exported="true"
+                android:theme="@style/AppTheme"/>
+        <activity
+                android:name=".debug.activity.ManifestParserActivity"
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
         <!--        <activity android:name=".experiment.improved.resolver.activity.bottomsheet.ImprovedBottomSheetActivity"-->

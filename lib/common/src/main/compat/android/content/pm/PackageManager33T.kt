@@ -11,11 +11,10 @@ fun PackageManager.resolveActivityCompat(
 ): ResolveInfo? {
     return when {
         AndroidVersion.isAtLeastApi33T() -> resolveActivity(
-            intent,
-            PackageManager.ResolveInfoFlags.of(flags.value.toLong())
+            intent, PackageManager.ResolveInfoFlags.of(flags.value)
         )
 
-        else -> resolveActivity(intent, flags.value)
+        else -> resolveActivity(intent, flags.value.toInt())
     }
 }
 
@@ -26,19 +25,20 @@ fun PackageManager.queryIntentActivitiesCompat(
     return queryIntentActivitiesCompat(intent, flags.value)
 }
 
-private fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Int = 0): List<ResolveInfo> {
+private fun PackageManager.queryIntentActivitiesCompat(intent: Intent, flags: Long = 0L): List<ResolveInfo> {
     return when {
         AndroidVersion.isAtLeastApi33T() -> queryIntentActivities(
-            intent, PackageManager.ResolveInfoFlags.of(flags.toLong())
+            intent, PackageManager.ResolveInfoFlags.of(flags)
         )
-
-        else -> queryIntentActivities(intent, flags)
+        else -> queryIntentActivities(intent, flags.toInt())
     }
 }
 
-fun PackageManager.getInstalledPackagesCompat(flags: Int = 0): List<PackageInfo> {
-    return if (AndroidVersion.isAtLeastApi33T()) getInstalledPackages(PackageManager.PackageInfoFlags.of(flags.toLong()))
-    else getInstalledPackages(flags)
+fun PackageManager.getInstalledPackagesCompat(flags: Long = 0): List<PackageInfo> {
+    return when {
+        AndroidVersion.isAtLeastApi33T() -> getInstalledPackages(PackageManager.PackageInfoFlags.of(flags))
+        else -> getInstalledPackages(flags.toInt())
+    }
 }
 
 fun PackageManager.getApplicationInfoCompatOrNull(
@@ -52,9 +52,10 @@ fun PackageManager.getApplicationInfoCompat(
     packageName: String,
     flags: ApplicationInfoFlags = ApplicationInfoFlags.EMPTY,
 ): ApplicationInfo {
-    return if (AndroidVersion.isAtLeastApi33T()) getApplicationInfo(
-        packageName,
-        PackageManager.ApplicationInfoFlags.of(flags.value.toLong())
-    )
-    else getApplicationInfo(packageName, flags.value)
+    return when {
+        AndroidVersion.isAtLeastApi33T() -> getApplicationInfo(
+            packageName, PackageManager.ApplicationInfoFlags.of(flags.value)
+        )
+        else -> getApplicationInfo(packageName, flags.value.toInt())
+    }
 }

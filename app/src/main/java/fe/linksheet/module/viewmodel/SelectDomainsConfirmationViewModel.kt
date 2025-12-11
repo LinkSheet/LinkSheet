@@ -1,9 +1,10 @@
 package fe.linksheet.module.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.app.AppInfo
 import app.linksheet.feature.app.usecase.AllAppsUseCase
+import app.linksheet.feature.app.usecase.AppInfoWithHosts
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.common.handler.LinkHandlerCommon
 
@@ -13,10 +14,8 @@ class SelectDomainsConfirmationViewModel(
 ) : ViewModel() {
     val handler by lazy { LinkHandlerCommon(preferredAppRepository = preferredAppRepository, scope = viewModelScope) }
 
-    fun getApp(packageName: String): Pair<AppInfo, List<String>>? {
-        val app = useCase.queryApp(packageName) ?: return null
-        val hosts = useCase.getSupportedHosts(packageName)
-
-        return app to hosts
+    fun getAppInfoWithHosts(packageName: String): AppInfoWithHosts? {
+        val appInfoWithHosts = useCase.getAppInfoWithHosts(packageName)
+        return appInfoWithHosts
     }
 }

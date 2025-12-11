@@ -1,7 +1,10 @@
 package fe.linksheet.feature.app
 
 import android.app.ActivityManager
-import android.content.pm.*
+import android.content.pm.getApplicationInfoCompatOrNull
+import android.content.pm.getInstalledPackagesCompat
+import android.content.pm.queryIntentActivitiesCompat
+import android.content.pm.resolveActivityCompat
 import app.linksheet.feature.app.AppInfoCreator
 import app.linksheet.feature.app.pkg.*
 import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
@@ -20,9 +23,15 @@ import org.koin.dsl.module
 
 val AppFeatureModule = module {
     single<PackageIconLoader> {
-        AndroidPackageIconLoaderModule(
-            packageManager = getPackageManager(),
-            activityManager = getSystemServiceOrThrow()
+        val pm = getPackageManager()
+        val launcherLargeIconDensity = getSystemServiceOrThrow<ActivityManager>().launcherLargeIconDensity
+
+        DefaultPackageIconLoader(
+            defaultIcon = pm.defaultActivityIcon,
+            getDrawableForDensity = { packageName, resId ->
+                pm.getResourcesForApplication(packageName).getDrawableForDensity(resId, launcherLargeIconDensity, null)
+            },
+            loadActivityIcon = { it.loadIcon(pm) },
         )
     }
     single<PackageLabelService> {
@@ -38,11 +47,19 @@ val AppFeatureModule = module {
     single<PackageIntentHandler> {
         val experimentRepository = get<ExperimentRepository>()
 
-        AndroidPackageIntentHandler(
-            packageManager = getPackageManager(),
+        val pm = getPackageManager()
+        DefaultPackageIntentHandler(
+            queryIntentActivities = pm::queryIntentActivitiesCompat,
+            resolveActivity = pm::resolveActivityCompat,
+            isLinkSheetCompat = { LinkSheetApp.Compat.isApp(it) != null },
+            isSelf = { BuildConfig.APPLICATION_ID == it },
             checkReferrerExperiment = experimentRepository.asFunction(Experiments.hideReferrerFromSheet)
         )
     }
+    single<DomainVerificationManagerCompat> {
+        DomainVerificationManagerCompat(context = get())
+    }
+    single<ManifestParser> { ManifestParser() }
     single {
         AppInfoCreator(
             packageLabelService = get(),
@@ -54,7 +71,8 @@ val AppFeatureModule = module {
         val pm = getPackageManager()
         AllAppsUseCase(
             creator = get(),
-            packageIntentHandler = get(),
+            manifestParser = get(),
+            domainVerificationManager = get(),
             getApplicationInfoOrNull = pm::getApplicationInfoCompatOrNull,
             getInstalledPackages = pm::getInstalledPackagesCompat,
         )
@@ -69,44 +87,10 @@ val AppFeatureModule = module {
         val pm = getPackageManager()
         DomainVerificationUseCase(
             creator = get(),
-            domainVerificationManager = DomainVerificationManagerCompat(get()),
+            domainVerificationManager = get(),
             packageIntentHandler = get(),
             getApplicationInfoOrNull = pm::getApplicationInfoCompatOrNull,
             getInstalledPackages = pm::getInstalledPackagesCompat,
         )
     }
-}
-
-
-@Suppress("FunctionName")
-fun AndroidPackageIconLoaderModule(
-    packageManager: PackageManager,
-    activityManager: ActivityManager,
-): PackageIconLoader {
-    val defaultIcon = packageManager.defaultActivityIcon
-    val launcherLargeIconDensity = activityManager.launcherLargeIconDensity
-
-    return DefaultPackageIconLoader(
-        defaultIcon = defaultIcon,
-        getDrawableForDensity = { packageName, resId ->
-            packageManager
-                .getResourcesForApplication(packageName)
-                .getDrawableForDensity(resId, launcherLargeIconDensity, null)
-        },
-        loadActivityIcon = { it.loadIcon(packageManager) },
-    )
-}
-
-@Suppress("FunctionName")
-internal fun AndroidPackageIntentHandler(
-    packageManager: PackageManager,
-    checkReferrerExperiment: () -> Boolean,
-): PackageIntentHandler {
-    return DefaultPackageIntentHandler(
-        queryIntentActivities = packageManager::queryIntentActivitiesCompat,
-        resolveActivity = packageManager::resolveActivityCompat,
-        isLinkSheetCompat = { pkg -> LinkSheetApp.Compat.isApp(pkg) != null },
-        isSelf = { pkg -> BuildConfig.APPLICATION_ID == pkg },
-        checkReferrerExperiment = checkReferrerExperiment,
-    )
 }

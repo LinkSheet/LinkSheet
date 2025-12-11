@@ -4,7 +4,10 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import app.linksheet.feature.app.AppInfo
 import app.linksheet.feature.app.AppInfoCreator
-import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.pkg.ManifestParser
+import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
+import app.linksheet.feature.app.pkg.domain.VerificationState
+import app.linksheet.feature.app.pkg.domain.VerificationUnsupportedState
 import fe.linksheet.util.ApplicationInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,7 +15,8 @@ import kotlinx.coroutines.flow.flow
 
 class AllAppsUseCase(
     private val creator: AppInfoCreator,
-    private val packageIntentHandler: PackageIntentHandler,
+    private val manifestParser: ManifestParser,
+    private val domainVerificationManager: DomainVerificationManagerCompat,
     private val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
     private val getInstalledPackages: () -> List<PackageInfo>,
 ) {
@@ -36,7 +40,21 @@ class AllAppsUseCase(
             ?.let { creator.toAppInfo(it, null) }
     }
 
-    fun getSupportedHosts(packageName: String): List<String> {
-        return packageIntentHandler.findSupportedHosts(packageName)
+    fun getAppInfoWithHosts(packageName: String): AppInfoWithHosts? {
+        val applicationInfo = getApplicationInfoOrNull(packageName, ApplicationInfoFlags.EMPTY) ?: return null
+
+        val appInfo = creator.toAppInfo(applicationInfo, null)
+        val hosts = when (val state = domainVerificationManager.getDomainVerificationUserState(packageName)) {
+            null, is VerificationUnsupportedState -> manifestParser.parse(applicationInfo.sourceDir).toSet()
+            is VerificationState -> state.hostToStateMap.keys
+            else -> return null
+        }
+
+        return AppInfoWithHosts(appInfo, hosts)
     }
 }
+
+data class AppInfoWithHosts(
+    val appInfo: AppInfo,
+    val hosts: Set<String>
+)

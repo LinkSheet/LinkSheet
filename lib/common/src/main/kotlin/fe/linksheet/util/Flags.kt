@@ -6,6 +6,38 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 
+interface LongFlags {
+    val value: Long
+    val inv: Long
+        get() = value.inv()
+
+    operator fun contains(flag: Long): Boolean {
+        return (value and flag) != 0L
+    }
+    operator fun contains(flag: Int): Boolean {
+        return (value.toInt() and flag) != 0
+    }
+    fun Long.remove(): Long {
+        return this.and(inv)
+    }
+
+    fun Int.remove(): Int {
+        return this.and(inv.toInt())
+    }
+}
+
+interface LongFlagCompanion<T : LongFlags> {
+    val new: (Long) -> T
+
+    fun select(vararg flags: T): T {
+        val sum = flags.sumOf { it.value }
+        return new(sum)
+    }
+
+    fun T.inv(): T {
+        return new(this@inv.inv)
+    }
+}
 
 interface Flags {
     val value: Int
@@ -35,8 +67,10 @@ interface FlagCompanion<T : Flags> {
 }
 
 @JvmInline
-value class ResolveInfoFlags(override val value: Int) : Flags {
-    companion object : FlagCompanion<ResolveInfoFlags> {
+value class ResolveInfoFlags(override val value: Long) : LongFlags {
+    constructor(value: Int) : this(value.toLong())
+
+    companion object : LongFlagCompanion<ResolveInfoFlags> {
         val EMPTY = ResolveInfoFlags(0)
 
         val GET_META_DATA = ResolveInfoFlags(PackageManager.GET_META_DATA)
@@ -55,15 +89,15 @@ value class ResolveInfoFlags(override val value: Int) : Flags {
         val MATCH_SYSTEM_ONLY = ResolveInfoFlags(PackageManager.MATCH_SYSTEM_ONLY)
         val MATCH_UNINSTALLED_PACKAGES = ResolveInfoFlags(PackageManager.MATCH_UNINSTALLED_PACKAGES)
 
-        override val new: (Int) -> ResolveInfoFlags = {
-            ResolveInfoFlags(it)
-        }
+        override val new: (Long) -> ResolveInfoFlags = { ResolveInfoFlags(it) }
     }
 }
 
 @JvmInline
-value class ApplicationInfoFlags(override val value: Int) : Flags {
-    companion object : FlagCompanion<ApplicationInfoFlags> {
+value class ApplicationInfoFlags(override val value: Long) : LongFlags {
+    constructor(value: Int) : this(value.toLong())
+
+    companion object : LongFlagCompanion<ApplicationInfoFlags> {
         val EMPTY = ApplicationInfoFlags(0)
 
         val GET_META_DATA = ApplicationInfoFlags(PackageManager.GET_META_DATA)
@@ -79,35 +113,35 @@ value class ApplicationInfoFlags(override val value: Int) : Flags {
         val GET_UNINSTALLED_PACKAGES = ApplicationInfoFlags(PackageManager.GET_UNINSTALLED_PACKAGES)
         val MATCH_HIDDEN_UNTIL_INSTALLED_COMPONENTS = ApplicationInfoFlags(0x20000000)
         val MATCH_APEX = ApplicationInfoFlags(PackageManager.MATCH_APEX)
-       // 1L << 32
+        // 1L << 32
 //        val MATCH_ARCHIVED_PACKAGES = ApplicationInfoFlags(PackageManager.MATCH_ARCHIVED_PACKAGES)
 
-        override val new: (Int) -> ApplicationInfoFlags = {
-            ApplicationInfoFlags(it)
-        }
+        override val new: (Long) -> ApplicationInfoFlags = { ApplicationInfoFlags(it) }
     }
 }
 
 @JvmInline
-value class ApplicationInfoPrivateFlags(override val value: Int) : Flags {
-    companion object : FlagCompanion<ApplicationInfoPrivateFlags> {
+value class ApplicationInfoPrivateFlags(override val value: Long) : LongFlags {
+    constructor(value: Int) : this(value.toLong())
+
+    companion object : LongFlagCompanion<ApplicationInfoPrivateFlags> {
         val SYSTEM = ApplicationInfoPrivateFlags(ApplicationInfo.FLAG_SYSTEM)
         val UPDATED_SYSTEM_APP = ApplicationInfoPrivateFlags(ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)
 
-        override val new: (Int) -> ApplicationInfoPrivateFlags = {
-            ApplicationInfoPrivateFlags(it)
-        }
+        override val new: (Long) -> ApplicationInfoPrivateFlags = { ApplicationInfoPrivateFlags(it) }
     }
 }
 
 @JvmInline
-value class IntentFlags(override val value: Int) : Flags {
-    companion object : FlagCompanion<IntentFlags> {
+value class IntentFlags(override val value: Long) : LongFlags {
+    constructor(value: Int) : this(value.toLong())
+
+    companion object : LongFlagCompanion<IntentFlags> {
         val EMPTY = IntentFlags(0)
 
         val ACTIVITY_EXCLUDE_FROM_RECENTS = IntentFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
         val ACTIVITY_FORWARD_RESULT = IntentFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
 
-        override val new: (Int) -> IntentFlags = { IntentFlags(it) }
+        override val new: (Long) -> IntentFlags = { IntentFlags(it) }
     }
 }

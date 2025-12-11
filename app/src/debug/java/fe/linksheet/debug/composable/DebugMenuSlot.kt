@@ -31,6 +31,7 @@ import fe.linksheet.debug.activity.DebugActivity
 import fe.linksheet.debug.activity.ExportLogDialogTestActivity
 import fe.linksheet.debug.activity.LinkTestingActivity
 import fe.linksheet.debug.activity.LocaleDebugActivity
+import fe.linksheet.debug.activity.ManifestParserActivity
 import fe.linksheet.debug.activity.WorkManagerActivity
 import fe.linksheet.debug.module.viewmodel.DebugViewModel
 import fe.linksheet.extension.compose.dashedBorder
@@ -76,6 +77,13 @@ fun DebugMenuSlot(viewModel: DebugViewModel, navigate: (String) -> Unit) {
             }
 
             if (activity != null) {
+                item(key = "manifest-parser") {
+                    FilledTonalActivityLauncher(
+                        activity = activity,
+                        text = "Manifest parser",
+                        intent = createIntent(activity, ManifestParserActivity::class)
+                    )
+                }
                 item(key = "remoteconfig-assets") {
                     FilledTonalActivityLauncher(
                         activity = activity,

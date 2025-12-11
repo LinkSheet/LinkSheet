@@ -236,6 +236,17 @@ class BottomSheetViewModel(
             )
         }
 
+        if(config is TapConfig.AlwaysOpenApp) {
+            return makeOpenAppIntent(
+                info = info,
+                intent = result,
+                referrer = activity.referrer,
+                always = true,
+                privateBrowsingBrowser = (modifier as? ClickModifier.Private)?.browser,
+                persist = modifier !is ClickModifier.Private
+            )
+        }
+
         if (config is TapConfig.OpenSettings) {
             startPackageInfoActivity(activity, info)
             return null

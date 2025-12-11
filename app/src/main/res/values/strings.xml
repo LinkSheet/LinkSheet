@@ -334,6 +334,7 @@
     <string name="open_app">Open app</string>
     <string name="select_app">Select app</string>
     <string name="open_app_settings_page">Open app\'s settings page</string>
+    <string name="tap_customization__action_always_open_app">Set app as default for host &amp; open</string>
     <string name="tap_customization_dialog_title">Configure %s</string>
     <string name="tap_customization_dialog_title_single_tap">single tap</string>
     <string name="tap_customization_dialog_title_double_tap">double tap</string>

@@ -25,7 +25,13 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 
 
-private val tapConfigOptions = listOf(TapConfig.None, TapConfig.SelectItem, TapConfig.OpenApp, TapConfig.OpenSettings)
+private val tapConfigOptions = listOf(
+    TapConfig.None,
+    TapConfig.SelectItem,
+    TapConfig.OpenApp,
+    TapConfig.OpenSettings,
+    TapConfig.AlwaysOpenApp
+)
 
 @Composable
 fun TapConfigDialog(

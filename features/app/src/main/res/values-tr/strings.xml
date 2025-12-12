@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings__title_filter_apps">Uygulamaları filtrele</string>
+    <string name="no_apps_found">Uygulama bulunamadı.</string>
+    <string name="no_such_app_found">Böyle bir uygulama bulunamadı!</string>
+</resources>

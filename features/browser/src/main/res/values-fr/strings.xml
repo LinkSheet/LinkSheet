@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Activer le bouton \"Demander une navigation privée\"</string>
+    <string name="enable_request_private_browsing_button_explainer">Affiche un bouton à côté des navigateurs qui ouvre l\'URL cliquée en mode de navigation privée.</string>
+</resources>

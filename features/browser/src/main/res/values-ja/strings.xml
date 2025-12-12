@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">「プライベートブラウジングをリクエスト」ボタンを有効にする</string>
+    <string name="enable_request_private_browsing_button_explainer">ブラウザボタンの横にクリックした URL をプライベート ブラウジング モードで開くボタンを表示します。サポートされているブラウザ: %s</string>
+</resources>

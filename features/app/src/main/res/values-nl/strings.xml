@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings__title_filter_apps">Apps filteren</string>
+    <string name="no_apps_found">Geen apps gevonden.</string>
+    <string name="no_such_app_found">Geen app gevonden!</string>
+</resources>

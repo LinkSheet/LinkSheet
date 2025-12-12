@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings__title_filter_apps">Lọc ứng dụng</string>
+    <string name="no_apps_found">Không tìm thấy ứng dụng nào.</string>
+    <string name="no_such_app_found">Không tìm thấy ứng dụng như vậy!</string>
+</resources>

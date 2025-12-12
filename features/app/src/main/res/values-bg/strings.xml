@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings__title_filter_apps">Филтриране на приложения</string>
+    <string name="no_apps_found">Не са открити приложения.</string>
+    <string name="no_such_app_found">Не е намерено такова приложение!</string>
+</resources>

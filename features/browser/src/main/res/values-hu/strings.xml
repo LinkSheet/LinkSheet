@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Engedélyezze a \"Privát böngészés kérése\" gombot</string>
+    <string name="enable_request_private_browsing_button_explainer">A böngészők mellett egy gombot jelenít meg, amely privát böngészési módban nyitja meg a kattintott URL-t.</string>
+</resources>

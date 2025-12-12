@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+    <string name="settings__title_filter_apps">Filter apps</string>
+    <string name="no_apps_found">No apps found.</string>
+    <string name="no_such_app_found">No such app found!</string>
+</resources>

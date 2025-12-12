@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Bật nút \"Yêu cầu duyệt web riêng tư\"</string>
+    <string name="enable_request_private_browsing_button_explainer">Hiển thị nút bên cạnh các trình duyệt mở URL đã nhấp vào ở chế độ duyệt web riêng tư.</string>
+</resources>

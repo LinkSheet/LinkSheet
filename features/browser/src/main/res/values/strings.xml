@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+    <string name="enable_request_private_browsing_button">Enable \"Request private browsing\" button</string>
+    <string name="enable_request_private_browsing_button_explainer">Displays a button next to browsers which opens the clicked URL in private browsing mode.</string>
+    <string name="settings_private_browsing__title_enable">Enable</string>
+    <string name="settings_private_browsing__title_private_browsing">Private browsing</string>
+    <string name="settings_private_browsing__divider_configuration">Configuration</string>
+    <string name="settings_private_browsing_browsers__title_browsers">Enabled private browsers</string>
+    <string name="settings_private_browsing__title_allowed_browsers">Allowed browsers</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d browsers</string>
+</resources>

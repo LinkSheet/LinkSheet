@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Knop \"Privénavigatie\" tonen</string>
+    <string name="enable_request_private_browsing_button_explainer">Toon een knop naast browsers die de gekozen URL opent in de privénavigatiemodus.</string>
+</resources>

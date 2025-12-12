@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">\"ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਦੀ ਬੇਨਤੀ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
+    <string name="enable_request_private_browsing_button_explainer">ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੇ ਅੱਗੇ ਇੱਕ ਬਟਨ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਦਾ ਹੈ ਜੋ ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਮੋਡ ਵਿੱਚ ਕਲਿੱਕ ਕੀਤੇ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ। ਸਮਰਥਿਤ ਬ੍ਰਾਊਜ਼ਰ: %s</string>
+</resources>

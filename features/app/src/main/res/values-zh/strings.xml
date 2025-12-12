@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings__title_filter_apps">筛选应用</string>
+    <string name="no_apps_found">未找到应用。</string>
+    <string name="no_such_app_found">未找到应用！</string>
+</resources>

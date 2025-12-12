@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Бутон за поверително разглеждане</string>
+    <string name="enable_request_private_browsing_button_explainer">Добавя в долното меню бутон, който отваря посетената препратка в поверителен режим.</string>
+</resources>

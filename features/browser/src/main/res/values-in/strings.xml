@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Aktifkan tombol \"Minta penjelajahan pribadi\"</string>
+    <string name="enable_request_private_browsing_button_explainer">Menampilkan tombol di sebelah peramban yang membuka URL yang diklik dalam mode penjelajahan pribadi.</string>
+</resources>

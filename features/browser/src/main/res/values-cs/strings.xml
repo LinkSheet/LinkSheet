@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Povolit tlačítko „Požádat o soukromé prohlížení“</string>
+    <string name="enable_request_private_browsing_button_explainer">Zobrazí tlačítko vedle prohlížečů, které otevře danou adresu URL v soukromém režimu prohlížeče.</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings__title_filter_apps">Filtrovat aplikace</string>
+    <string name="no_apps_found">Nenalezeny žádné aplikace.</string>
+    <string name="no_such_app_found">Nenalezena žádná taková aplikace!</string>
+</resources>

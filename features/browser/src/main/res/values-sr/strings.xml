@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Омогући дугме „Захтевај приватно прегледање“</string>
+    <string name="enable_request_private_browsing_button_explainer">Приказује дугме поред прегледача које отвара URL на који је кликнуто у режиму приватног прегледања.</string>
+</resources>

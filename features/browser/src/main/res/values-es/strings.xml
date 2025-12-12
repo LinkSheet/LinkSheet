@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Activar botón \"Navegación privada\"</string>
+    <string name="enable_request_private_browsing_button_explainer">Muestra un botón junto a los navegadores que abre el enlace que te tocó en modo de navegación privada.</string>
+</resources>

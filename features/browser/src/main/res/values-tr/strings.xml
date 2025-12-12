@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">\"Gizli gezinme iste\" düğmesini etkinleştir</string>
+    <string name="enable_request_private_browsing_button_explainer">Tarayıcıların yanında, tıklanan URL\'yi gizli gezinme modunda açan bir düğme görüntüler.</string>
+</resources>

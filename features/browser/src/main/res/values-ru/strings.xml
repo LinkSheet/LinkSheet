@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Включить кнопку «Запросить приватный просмотр»</string>
+    <string name="enable_request_private_browsing_button_explainer">Отображение кнопки рядом с браузерами, которая открывает выбранный URL-адрес в режиме приватного просмотра.</string>
+</resources>

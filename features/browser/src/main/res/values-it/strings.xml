@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Abilita il pulsante \'Navigazione privata\'</string>
+    <string name="enable_request_private_browsing_button_explainer">Visualizza accanto ai browser un tasto che apre l\'URL in modalità di navigazione privata ﹙o \'incognito\'﹚.</string>
+</resources>

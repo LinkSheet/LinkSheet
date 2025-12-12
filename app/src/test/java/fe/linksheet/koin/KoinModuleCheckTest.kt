@@ -32,6 +32,7 @@ import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
 import app.linksheet.feature.shizuku.ShizukuService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
+import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
 import app.linksheet.testlib.koin.definition
 import app.linksheet.testlib.koin.injectedParameters
 import app.linksheet.testlib.koin.verifyAll
@@ -44,8 +45,6 @@ import fe.linksheet.LinkSheetApp
 import fe.linksheet.feature.systeminfo.BuildConstants
 import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
-import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao

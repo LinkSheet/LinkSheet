@@ -526,7 +526,6 @@
     <string name="export_settings__text_failure">Ayarlar dışa aktarılamadı!</string>
     <string name="import_settings__text_success">İçe aktarıldı!</string>
     <string name="import_settings__text_failure">Ayarlar içe aktarılamadı!</string>
-    <string name="generic__button_open_external">Harici olarak aç</string>
     <string name="generic__button_text_enable">Etkinleştir</string>
     <string name="generic__button_text_disable">Devre dışı bırak</string>
     <string name="settings_remote_config__text_content">LinkSheet, otomatik olarak yapılandırma sunucusuna bağlanarak dahili yapılandırmayı ve dokümantasyonu güncelleyebilir. Daha fazla bilgi için <annotation url-id="github.linksheet.wiki.privacy.remote-config">buraya</annotation> dokunun.</string>

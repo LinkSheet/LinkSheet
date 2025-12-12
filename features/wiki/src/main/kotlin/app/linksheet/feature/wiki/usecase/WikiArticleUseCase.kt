@@ -1,24 +1,29 @@
 package app.linksheet.feature.wiki.usecase
 
-import fe.httpkt.Request
-import fe.httpkt.ext.isHttpSuccess
-import fe.httpkt.ext.readToString
-import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
+import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import fe.linksheet.util.CacheResult
+import fe.std.result.isFailure
+import fe.std.result.tryCatch
+import io.ktor.client.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class WikiArticleUseCase(
-    val request: Request,
-    val repository: WikiCacheRepository,
-    val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+class WikiArticleUseCase internal constructor(
+    private val client: HttpClient,
+    private val repository: WikiCacheRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
-    private fun fetchText(url: String): String? {
-        val response = request.get(url = url)
-        if (!response.isHttpSuccess()) return null
+    private suspend fun fetchText(url: String): String? {
+        val result = tryCatch { client.get(urlString = url) }
+        if (result.isFailure()) return null
+        val response = result.value
+        if (!response.status.isSuccess()) return null
 
-        return response.readToString()
+        return response.bodyAsText()
     }
 
     suspend fun getWikiText(url: String): String? = withContext(dispatcher) {

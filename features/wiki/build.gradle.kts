@@ -1,11 +1,14 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
+import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 import fe.buildlogic.common.OptIn
 import fe.buildlogic.common.extension.addOptIn
 
 plugins {
     kotlin("android")
+    kotlin("plugin.compose")
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("androidx.room")
     id("com.google.devtools.ksp")
@@ -32,20 +35,40 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":util"))
     implementation(project(":api"))
+    implementation(project(":util"))
+    implementation(project(":common"))
+    implementation(project(":compose"))
+
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)
     ksp(AndroidX.room.compiler)
 
+    implementation(AndroidX.core.ktx)
+    implementation(Koin.android)
+    implementation(Koin.compose)
+    implementation(_1fexd.composeKit.compose.route)
+    implementation(_1fexd.composeKit.compose.component)
+    implementation(AndroidX.compose.ui)
+    implementation(AndroidX.compose.ui.toolingPreview)
+    implementation(AndroidX.compose.material3)
+    implementation(AndroidX.navigation.compose)
+    implementation(AndroidX.compose.material.icons.core)
+    implementation(AndroidX.compose.material.icons.extended)
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)
+    implementation(Grrfe.std.result.core)
+    implementation("com.github.jeziellago:compose-markdown:_")
 
-    implementation(Grrfe.httpkt.core)
-    implementation(Koin.android)
-
-    implementation(AndroidX.core.ktx)
+    implementation(JetBrains.ktor.client.core)
+    implementation(JetBrains.ktor.client.gson)
+    implementation(JetBrains.ktor.client.okHttp)
+    implementation(JetBrains.ktor.client.android)
+    implementation(JetBrains.ktor.client.logging)
+    implementation(JetBrains.ktor.client.contentNegotiation)
+    implementation(JetBrains.ktor.client.json)
+    implementation(JetBrains.ktor.client.encoding)
+    implementation(JetBrains.ktor.plugins.serialization.gson)
 
     testImplementation(AndroidX.test.ext.junit.ktx)
     testImplementation(project(":test-core"))

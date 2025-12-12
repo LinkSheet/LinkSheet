@@ -550,7 +550,6 @@
     <string name="app_host_dialog__text_no_hosts">لم يتم تعيين أي مضيفين ليتم فتحهم افتراضيًا في هذا التطبيق!</string>
     <string name="generic__button_text_close">أغلق</string>
     <string name="resolve_event__idle">خامل</string>
-    <string name="generic__button_open_external">افتح خارجيًا</string>
     <string name="settings_verified_link_handler__text_hosts">المضيفات</string>
     <string name="settings_verified_link_handler__title_details">التفاصيل</string>
     <string name="generic__button_text_settings">اﻹعدادات</string>

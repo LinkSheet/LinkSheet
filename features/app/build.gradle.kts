@@ -49,7 +49,7 @@ dependencies {
     implementation(_1fexd.composeKit.compose.component)
 
     implementation(Grrfe.gsonExt.core)
-    implementation("io.github.reandroid:ARSCLib:1.3.8")
+    implementation("io.github.reandroid:ARSCLib:_")
     implementation(AndroidX.core.ktx)
 
     testImplementation(Testing.robolectric)

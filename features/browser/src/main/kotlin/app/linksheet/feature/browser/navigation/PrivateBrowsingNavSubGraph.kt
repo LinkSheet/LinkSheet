@@ -15,7 +15,7 @@ import kotlin.uuid.ExperimentalUuidApi
 
 @Serializable
 object PrivateBrowsingNavSubGraph: NavSubGraph<PrivateBrowsingRoute> {
-    override val startDestination: PrivateBrowsingRoute = PrivateBrowsingRoute
+    override val startDestination = PrivateBrowsingRoute::class
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<PrivateBrowsingRoute> { _, route ->
             PrivateBrowsingSettings(onBackPressed = navController::popBackStack, navigate = navController::navigate)

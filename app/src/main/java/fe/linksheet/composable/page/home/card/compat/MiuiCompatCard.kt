@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.feature.wiki.navigation.MarkdownViewerRoute
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
@@ -17,7 +18,6 @@ import fe.composekit.component.card.AlertCard
 import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.composable.ui.PreviewTheme
-import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.util.LinkSheet
 
 fun LazyListScope.MiuiCompatCardWrapper(navigate: (Route) -> Unit, onClick: () -> Unit) {

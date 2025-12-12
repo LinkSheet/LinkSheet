@@ -298,7 +298,6 @@
     <string name="resolve_via_toast">解析成功</string>
     <string name="delete_log_dialog__title_delete_log">刪除工作階段？</string>
     <string name="notifications_explainer">已複製網址、已開始下載</string>
-    <string name="generic__button_open_external">在外部開啟</string>
     <string name="bottom_sheet__text_launch_illegal">啟動企圖無效！</string>
     <string name="bottom_sheet__text_launch_failure_other">啟動失敗！</string>
     <string name="bottom_sheet__text_launch_failure_unknown">啟動時發生未知錯誤！</string>

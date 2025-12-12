@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
-import fe.linksheet.feature.wiki.database.entity.WikiCache
+import app.linksheet.feature.wiki.database.dao.WikiCacheDao
+import app.linksheet.feature.wiki.database.entity.WikiCache
 
 @Database(
     entities = [WikiCache::class],

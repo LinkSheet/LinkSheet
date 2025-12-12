@@ -23,6 +23,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import app.linksheet.compose.theme.HeadlineAlmostLargeStyle
+import app.linksheet.feature.wiki.navigation.MarkdownViewerRoute
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
@@ -38,7 +39,6 @@ import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.compose.ObserveClipboard
 import fe.linksheet.extension.compose.OnFocused
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.navigation.MarkdownViewerRoute
 import fe.linksheet.navigation.settingsRoute
 import fe.linksheet.util.LinkSheet
 import fe.linksheet.util.buildconfig.Build

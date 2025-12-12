@@ -1,8 +1,8 @@
 package fe.linksheet.util
 
 import android.util.Log
-import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
+import app.linksheet.feature.wiki.core.WikiPage
 import fe.android.span.helper.LinkTags
 import fe.linksheet.R
 
@@ -73,17 +73,6 @@ object LinkSheet {
     )
 
     val CompatReleases = "$Org/compat/releases"
-}
-
-class WikiPage(
-    val org: String,
-    val repo: String,
-    val page: String,
-    val id: String? = null,
-    @param:StringRes val customTitle: Int? = null
-) {
-    val url = "https://github.com/$org/$repo/wiki/$page"
-    val rawUrl = "https://raw.githubusercontent.com/wiki/$org/$repo/$page.md"
 }
 
 

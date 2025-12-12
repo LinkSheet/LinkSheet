@@ -27,5 +27,5 @@ dependencies {
     implementation(AndroidX.sqlite.ktx)
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)
-    implementation("androidx.room:room-ktx:2.8.3")
+    implementation(AndroidX.room.ktx)
 }

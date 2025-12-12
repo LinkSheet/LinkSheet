@@ -534,7 +534,6 @@
     <string name="import_settings__text_failure">Увоз подешавања није успео!</string>
     <string name="export_settings__text_failure">Извоз подешавања није успео!</string>
     <string name="export_settings__text_success">Извезено!</string>
-    <string name="generic__button_open_external">Отвори спољно</string>
     <string name="generic__button_text_enable">Омогући</string>
     <string name="settings_remote_config__title_dialog">Омогућити удаљену конфигурацију?</string>
     <string name="generic__button_text_disable">Онемогући</string>

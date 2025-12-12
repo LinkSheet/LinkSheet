@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.UserHandleHidden
 import androidx.annotation.RequiresApi
 import app.linksheet.api.eventbus.IntentEventHandler
+import app.linksheet.feature.shizuku.extension.wrapShizuku
 import fe.linksheet.util.IntentFilters
 import rikka.shizuku.SystemServiceHelper
 

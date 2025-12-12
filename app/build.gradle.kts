@@ -406,7 +406,6 @@ dependencies {
 
     runtimeOnly(AndroidX.annotation)
 
-    implementation("com.github.jeziellago:compose-markdown:_")
 
     implementation("app.cash.zipline:zipline-android:_")
     implementation("app.cash.zipline:zipline-loader-android:_")

@@ -105,7 +105,6 @@ val ViewModelModule = module {
     viewModelOf(::ExperimentsViewModel)
     viewModelOf(::AppConfigViewModel)
     viewModelOf(::ProfileSwitchingSettingsViewModel)
-    viewModelOf(::MarkdownViewModel)
     viewModelOf(::SqlViewModel)
     viewModelOf(::PreviewSettingsViewModel)
     viewModel { parameters ->

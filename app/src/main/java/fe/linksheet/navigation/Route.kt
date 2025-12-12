@@ -2,10 +2,8 @@ package fe.linksheet.navigation
 
 
 import androidx.annotation.Keep
-import androidx.annotation.StringRes
 import fe.composekit.route.Route
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
-import fe.linksheet.util.WikiPage
 import kotlinx.serialization.Serializable
 
 
@@ -88,17 +86,6 @@ const val devModeRoute = "dev_mode"
 @Keep
 @Serializable
 data object AppsWhichCanOpenLinksSettingsRoute : Route
-
-@Keep
-@Serializable
-data class MarkdownViewerRoute(
-    val title: String,
-    val url: String,
-    val rawUrl: String = url,
-    @param:StringRes val customTitle: Int? = null,
-) : Route {
-    constructor(wikiPage: WikiPage) : this(wikiPage.page, wikiPage.url, wikiPage.rawUrl, wikiPage.customTitle)
-}
 
 @Keep
 @Serializable

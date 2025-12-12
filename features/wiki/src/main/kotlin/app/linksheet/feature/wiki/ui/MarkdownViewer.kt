@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.mdviewer
+package app.linksheet.feature.wiki.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,17 +18,17 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.compose.R
+import app.linksheet.compose.appbar.SaneSmallTopAppBar
+import app.linksheet.compose.debug.LocalUiDebug
+import app.linksheet.compose.debugBorder
+import app.linksheet.compose.preview.PreviewTheme
+import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
 import dev.jeziellago.compose.markdowntext.MarkdownText
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
-import fe.linksheet.R
-import app.linksheet.compose.appbar.SaneSmallTopAppBar
-import fe.linksheet.composable.ui.PreviewTheme
-import app.linksheet.compose.debugBorder
-import app.linksheet.compose.debug.LocalUiDebug
-import fe.linksheet.module.viewmodel.MarkdownViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

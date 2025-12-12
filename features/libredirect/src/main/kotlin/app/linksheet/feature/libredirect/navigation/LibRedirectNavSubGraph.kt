@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 object LibRedirectNavSubGraph : NavSubGraph<LibRedirectRoute> {
-    override val startDestination: LibRedirectRoute = LibRedirectRoute
+    override val startDestination = LibRedirectRoute::class
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<LibRedirectRoute> { _, route ->
             LibRedirectSettingsRoute(onBackPressed = navController::popBackStack, navigate = navController::navigate)

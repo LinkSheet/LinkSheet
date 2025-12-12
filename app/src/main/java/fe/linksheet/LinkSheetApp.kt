@@ -14,6 +14,7 @@ import app.linksheet.feature.engine.LinkEngineFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.shizuku.ShizukuModule
+import app.linksheet.feature.wiki.WikiFeatureModule
 import app.linksheet.lib.log.AndroidLogSink
 import app.linksheet.lib.log.LLog
 import app.linksheet.testing.Testing
@@ -29,7 +30,6 @@ import fe.gson.context.GlobalGsonContext
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.feature.app.AppFeatureModule
 import fe.linksheet.feature.profile.ProfileFeatureModule
-import fe.linksheet.feature.wiki.WikiFeatureModule
 import fe.linksheet.module.analytics.AnalyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.clock.ClockModule

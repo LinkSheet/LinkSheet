@@ -11,13 +11,13 @@ import app.linksheet.feature.browser.navigation.PrivateBrowsingNavSubGraph
 import app.linksheet.feature.engine.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
 import app.linksheet.feature.shizuku.navigation.ShizukuNavSubGraph
-import app.linksheet.feature.wiki.navigation.WikiNavSubGraph
+import app.linksheet.feature.wiki.navigation.WikiNav
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.NavTypes
 import fe.composekit.route.Route
+import fe.composekit.route.attachNav
 import fe.composekit.route.attachSubGraph
 import fe.linksheet.composable.page.home.HomePageNavSubGraph
-import fe.linksheet.composable.page.home.MainOverviewRoute
 import fe.linksheet.composable.page.settings.SettingsRoute
 import fe.linksheet.composable.page.settings.about.AboutSettingsRoute
 import fe.linksheet.composable.page.settings.about.CreditsSettingsRoute
@@ -67,14 +67,14 @@ fun MainNavHost(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         navController = navController,
         typeMap = NavTypes.Types,
-        startDestination = MainOverviewRoute
+        startDestination = HomePageNavSubGraph
     ) {
         attachSubGraph(HomePageNavSubGraph, navController)
         attachSubGraph(ScenarioNavSubGraph, navController)
         attachSubGraph(ShizukuNavSubGraph, navController)
         attachSubGraph(LibRedirectNavSubGraph, navController)
         attachSubGraph(PrivateBrowsingNavSubGraph, navController)
-        attachSubGraph(WikiNavSubGraph, navController)
+        attachNav(WikiNav, navController)
 
         animatedComposable<ExperimentRoute> { _, route ->
             ExperimentsSettingsRoute(onBackPressed = onBackPressed, experiment = route.experiment)

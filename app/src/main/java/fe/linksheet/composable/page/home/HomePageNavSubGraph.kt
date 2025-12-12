@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 object HomePageNavSubGraph : NavSubGraph<MainOverviewRoute> {
-    override val startDestination = MainOverviewRoute::class
+    override val startDestination = MainOverviewRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<MainOverviewRoute> { _, route ->
             NewMainRoute(navController = navController)

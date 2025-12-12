@@ -19,6 +19,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
+import app.linksheet.compose.list.item.PreferenceSwitchListItem
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.browser.ui.PrivateBrowsingListItem
+import app.linksheet.feature.browser.ui.PrivateBrowsingListItemDefaults
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.android.compose.feedback.FeedbackType
@@ -27,7 +32,6 @@ import fe.android.compose.feedback.wrap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.preference.helper.Preference
-import fe.composekit.core.AndroidVersion
 import fe.android.preference.helper.compose.StateMappedPreference
 import fe.composekit.component.ContentType
 import fe.composekit.component.icon.FilledIcon
@@ -35,21 +39,21 @@ import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.type.SwitchListItem
+import fe.composekit.core.AndroidVersion
 import fe.composekit.layout.column.GroupValueProvider
-import fe.composekit.preference.collectAsStateWithLifecycle
-import fe.linksheet.R
-import fe.linksheet.navigation.Routes
-import fe.linksheet.activity.bottomsheet.TapConfig
-import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
-import app.linksheet.compose.list.item.PreferenceSwitchListItem
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.composekit.preference.ViewModelStatePreference
+import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.route.Route
+import fe.linksheet.R
+import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
+import fe.linksheet.navigation.Routes
 import org.koin.androidx.compose.koinViewModel
 
 
-sealed class TapType(@param:StringRes val headline: Int, @param:StringRes val dialogTitle: Int) : GroupValueProvider<Int> {
+sealed class TapType(@param:StringRes val headline: Int, @param:StringRes val dialogTitle: Int) :
+    GroupValueProvider<Int> {
     override val key: Int = headline
 
     data object Single :
@@ -66,6 +70,7 @@ sealed class TapType(@param:StringRes val headline: Int, @param:StringRes val di
 fun BottomSheetSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (String) -> Unit,
+    navigateNew: (Route) -> Unit,
     viewModel: BottomSheetSettingsViewModel = koinViewModel(),
 ) {
     val activity = LocalActivity.current
@@ -121,19 +126,12 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            item(key = R.string.enable_request_private_browsing_button) { padding, shape ->
-                val browsers = remember {
-                    "Firefox"
-                }
-
-                PreferenceSwitchListItem(
+            item(key = PrivateBrowsingListItemDefaults.Key) { padding, shape ->
+                PrivateBrowsingListItem(
                     shape = shape,
                     padding = padding,
                     statePreference = viewModel.enableRequestPrivateBrowsingButton,
-                    headlineContent = textContent(id = R.string.enable_request_private_browsing_button),
-                    supportingContent = textContent(
-                        id = R.string.enable_request_private_browsing_button_explainer, browsers
-                    )
+                    navigate = navigateNew
                 )
             }
 
@@ -164,9 +162,7 @@ fun BottomSheetSettingsRoute(
                         shape = shape,
                         padding = padding,
                         statePreference = viewModel.bottomSheetProfileSwitcher,
-                        onContentClick = {
-                            navigate(Routes.ProfileSwitching)
-                        },
+                        onContentClick = { navigate(Routes.ProfileSwitching) },
                         headlineContent = textContent(R.string.switch_profile),
                         supportingContent = textContent(R.string.settings_bottom_sheet__text_profile_switcher),
                     )
@@ -190,7 +186,7 @@ fun BottomSheetSettingsRoute(
             items(map = tapTypePreferences) { type, pref, padding, shape ->
 //                val preference = tapTypePreferences[type]!!
 
-                TapConfigGroupItem(preference = pref, type = type,  padding = padding, shape = shape)
+                TapConfigGroupItem(preference = pref, type = type, padding = padding, shape = shape)
             }
 
             item(key = R.string.expand_on_app_select) { padding, shape ->

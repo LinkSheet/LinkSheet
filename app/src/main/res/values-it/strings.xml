@@ -48,7 +48,6 @@
     <string name="select_an_app">Seleziona un\'app</string>
     <string name="save">Salva</string>
     <string name="debug">Debug</string>
-    <string name="no_such_app_found">Nessuna applicazione trovata!</string>
     <string name="always_show_package_name">Mostra il nome del pacchetto dell\'app ﹙nome \'di sistema\'﹚</string>
     <string name="send_to">Condividi</string>
     <string name="hide_after_copying">Nascondi dopo la copia</string>
@@ -94,7 +93,6 @@
     <string name="normal">Normale</string>
     <string name="ignore_libredirect">Ignora LibRedirect</string>
     <string name="options">Preferenze</string>
-    <string name="no_apps_found">Nessuna app trovata.</string>
     <string name="usage_stats_sorting_explainer">Includi le statistiche di utilizzo nell\'algoritmo di ordinamento. L\'autorizzazione è richiesta alla prima attivazione.</string>
     <string name="follow_only_known_trackers_explainer">Tenta di seguire i reindirizzamenti solo quando l\'host è noto per essere un tracker/reindirizzamento. Sarà sempre abilitato se \'Risolvi i reindirizzamenti tramite un servizio esterno\' è abilitato.</string>
     <string name="copy_to_clipboard">Copia</string>
@@ -126,8 +124,6 @@
     <string name="download_started">Download avviato</string>
     <string name="no_browsers_found">Nessun browser trovato.</string>
     <string name="export">Esporta</string>
-    <string name="enable_request_private_browsing_button">Abilita il pulsante \'Navigazione privata\'</string>
-    <string name="enable_request_private_browsing_button_explainer">Visualizza accanto ai browser un tasto che apre l\'URL in modalità di navigazione privata ﹙o \'incognito\'﹚. Browser supportati: %s</string>
     <string name="use_unified_preferred_browser_explainer">L\'abilitazione di questa opzione applica le impostazioni seguenti sia ai link gestiti normalmente, sia a quelli aperti nel browser in-app. Usa i pulsanti qui sotto per passare dalla modalità normale a quella in-app quando è disabilitata.</string>
     <string name="enable_downloader_explainer">Aggiungi un pulsante \'Download\' nel foglio inferiore se l\'URL contiene un collegamento diretto a un file. Potrebbe avere <annotation url-id="privacy-downloader">implicazioni relative alla privacy</annotation></string>
     <string name="disable_in_selected_explainer">Disabilita il browser in-app per le app selezionate</string>

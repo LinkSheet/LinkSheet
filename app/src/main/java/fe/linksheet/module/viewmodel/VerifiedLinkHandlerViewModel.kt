@@ -1,7 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.content.Intent
-import app.linksheet.feature.app.DomainVerificationAppInfo
+import app.linksheet.feature.app.core.DomainVerificationAppInfo
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
 import fe.composekit.core.AndroidVersion
 import fe.linksheet.module.database.entity.PreferredApp

@@ -13,7 +13,7 @@ import fe.composekit.route.Route
 import fe.linksheet.*
 import fe.linksheet.composable.page.settings.link.downloader.downloaderPermissionState
 import fe.linksheet.composable.page.settings.link.downloader.requestDownloadPermission
-import fe.linksheet.composable.component.list.item.type.PreferenceDividedSwitchListItem
+import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.feature.libredirect.navigation.LibRedirectRoute

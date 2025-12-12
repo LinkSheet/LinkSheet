@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
+import app.linksheet.feature.app.applist.AppListCommon
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
 import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.groupByNoNullKeys
@@ -18,7 +19,6 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.shizuku.ShizukuCommand
 import fe.linksheet.module.shizuku.ShizukuServiceConnection
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.viewmodel.common.applist.AppListCommon
 import fe.linksheet.module.viewmodel.common.handler.LinkHandlerCommon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

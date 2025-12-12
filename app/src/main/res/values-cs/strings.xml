@@ -48,7 +48,6 @@
     <string name="always_disable">Vynutit zakázání</string>
     <string name="paste">Vložit</string>
     <string name="credits">Poděkování</string>
-    <string name="no_such_app_found">Nenalezena žádná taková aplikace!</string>
     <string name="add_all">Přidat vše</string>
     <string name="light">Světlý</string>
     <string name="browser_status">Stav prohlížeče</string>
@@ -127,7 +126,6 @@
     <string name="donate_crypto">Přispět kryptoměnou</string>
     <string name="no">Ne</string>
     <string name="no_handlers_found_explainer">Aplikace LinkSheet nedokáže otevřít tento odkaz.</string>
-    <string name="enable_request_private_browsing_button">Povolit tlačítko „Požádat o soukromé prohlížení“</string>
     <string name="thanks_for_donating">Děkujeme za váš příspěvek!</string>
     <string name="donate_explainer_crypto">Při přispívání kryptoměnou pošlete e-mail na adresu <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="download_started">Stahování spuštěno</string>
@@ -160,9 +158,7 @@
     <string name="log_viewer">Prohlížeč protokolů</string>
     <string name="request_timeout">Vypršení požadavku</string>
     <string name="no_browsers_found">Nenalezeny žádné prohlížeče.</string>
-    <string name="no_apps_found">Nenalezeny žádné aplikace.</string>
     <string name="export_log">Protokol exportu</string>
-    <string name="enable_request_private_browsing_button_explainer">Zobrazí tlačítko vedle prohlížečů, které otevře danou adresu URL v soukromém režimu prohlížeče. Podporované prohlížeče: %s</string>
     <string name="request_private_browsing">Soukromý</string>
     <string name="log">Protokol</string>
     <string name="redact_log">Redigovat protokol (doporučeno, vypnutím této funkce může dojít k úniku názvů balíčků a hostitelů)</string>
@@ -399,7 +395,6 @@
         <item quantity="many">%d zakázaných</item>
         <item quantity="other">%d zakázaných</item>
     </plurals>
-    <string name="settings__title_filter_apps">Filtrovat aplikace</string>
     <string name="link_handle_failed_text">LinkSheet nedokáže zpracovat tento odkaz, protože se zdá, že je poškozený. Můžete jej upravit níže a zkusit to znovu. Případně také můžete zkusit webové vyhledávání.</string>
     <string name="github_workflow_run_id"><b>ID workflow:</b> <font face="monospace">%s</font></string>
     <string name="reset_app_link_verification_status">Resetovat status ověřených odkazů aplikací</string>

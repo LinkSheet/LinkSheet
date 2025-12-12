@@ -9,7 +9,6 @@
     <string name="back">Назад</string>
     <string name="links">Препратки</string>
     <string name="version">Издание на LinkSheet</string>
-    <string name="no_such_app_found">Не е намерено такова приложение!</string>
     <string name="checkmark">Отметка</string>
     <string name="donate_subtitle">Надградете до <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
@@ -87,9 +86,7 @@
     <string name="use_unified_preferred_browser">Използване на общи настройки</string>
     <string name="enable_ignore_libredirect_button">Бутон за пренебрегване на LibRedirect</string>
     <string name="options">Настройки</string>
-    <string name="enable_request_private_browsing_button_explainer">Добавя в долното меню бутон, който отваря посетената препратка в поверителен режим. Поддържани браузъри: %s</string>
     <string name="request_private_browsing">Поверителен</string>
-    <string name="enable_request_private_browsing_button">Бутон за поверително разглеждане</string>
     <string name="selected_browser_explainer">Този браузър ще бъде отварян автоматично ако липсва приложение, което да отвори посетената препратка</string>
     <string name="github_explainer">Хранилище на изходния код</string>
     <string name="open_copied_link">От копираното</string>
@@ -142,7 +139,6 @@
     <string name="download_started">Изтеглянето започна</string>
     <string name="request_timeout">Изчакване на заявката</string>
     <string name="no_browsers_found">Не са открити браузъри.</string>
-    <string name="no_apps_found">Не са открити приложения.</string>
     <string name="export">Изнасяне</string>
     <string name="export_log">Изнасяне на дневника</string>
     <string name="copy_to_clipboard">Копиране в междинната памет</string>
@@ -465,7 +461,6 @@
     <string name="share">Споделяне</string>
     <string name="settings_shortcuts__subtitle_default_browser">Настройки на подразбирания браузър</string>
     <string name="settings_shortcuts__title_connected_apps">Свързани приложения</string>
-    <string name="settings__title_filter_apps">Филтриране на приложения</string>
     <string name="onboarding_3_subtitle">За да може LinkSheet да прехваща препратки, отварянето от регистрираните приложения трябва да бъде изключено</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none">
         <item quantity="one">%d изключено</item>

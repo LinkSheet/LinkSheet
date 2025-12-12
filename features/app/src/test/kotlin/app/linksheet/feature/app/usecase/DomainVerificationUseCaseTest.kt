@@ -1,19 +1,16 @@
-package app.linksheet.feature.app
+package app.linksheet.feature.app.usecase
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.app.pkg.DefaultPackageIconLoader
-import app.linksheet.feature.app.pkg.DefaultPackageIntentHandler
-import app.linksheet.feature.app.pkg.DefaultPackageLabelService
-import app.linksheet.feature.app.pkg.DefaultPackageLauncherService
-import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
-import app.linksheet.feature.app.pkg.domain.VerificationBrowserState
-import app.linksheet.feature.app.usecase.DomainVerificationUseCase
+import app.linksheet.feature.app.core.*
+import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
+import app.linksheet.feature.app.core.domain.VerificationBrowserState
 import app.linksheet.testing.fake.ImageFakes
 import app.linksheet.testing.fake.PackageInfoFakes
 import assertk.assertThat
 import assertk.assertions.isNotNull
 import fe.linksheet.testlib.core.BaseUnitTest
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
@@ -21,7 +18,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class DomainVerificationUseCaseTest : BaseUnitTest {
 
-    @org.junit.Test
+    @Test
     fun test() {
         val domainVerificationManager = DomainVerificationManagerCompat {
             VerificationBrowserState

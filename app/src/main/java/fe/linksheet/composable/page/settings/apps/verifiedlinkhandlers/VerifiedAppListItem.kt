@@ -27,9 +27,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import app.linksheet.feature.app.AppInfo
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.LinkHandling
+import app.linksheet.feature.app.core.AppInfo
+import app.linksheet.feature.app.core.DomainVerificationAppInfo
+import app.linksheet.feature.app.core.LinkHandling
 import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.icon.BitmapIconPainter
 import fe.android.compose.icon.iconPainter
@@ -40,8 +40,8 @@ import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
 import fe.linksheet.R
-import fe.linksheet.composable.component.appinfo.AppInfoIcon
-import fe.linksheet.util.drawBitmap
+import app.linksheet.feature.app.ui.AppInfoIcon
+import app.linksheet.compose.util.drawBitmap
 
 @Composable
 fun VerifiedAppListItem(

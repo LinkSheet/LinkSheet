@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateMap
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.LinkHandling
+import app.linksheet.feature.app.core.DomainVerificationAppInfo
+import app.linksheet.feature.app.core.LinkHandling
 import fe.android.compose.dialog.helper.input.InputResultDialog
 import fe.android.compose.dialog.helper.input.InputResultDialogState
 import fe.android.compose.dialog.helper.input.rememberInputResultDialog

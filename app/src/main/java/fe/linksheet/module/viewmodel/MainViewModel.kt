@@ -12,7 +12,7 @@ import androidx.core.content.getSystemService
 import androidx.navigation.NavDestination
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
-import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.core.PackageIntentHandler
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getFirstText
 import fe.composekit.extension.setText

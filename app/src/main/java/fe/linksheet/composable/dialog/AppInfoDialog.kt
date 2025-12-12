@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateMap
-import app.linksheet.feature.app.AppInfo
+import app.linksheet.feature.app.core.AppInfo
 import fe.android.compose.dialog.helper.input.InputResultDialog
 import fe.android.compose.dialog.helper.input.InputResultDialogState
 import fe.android.compose.dialog.helper.input.rememberInputResultDialog

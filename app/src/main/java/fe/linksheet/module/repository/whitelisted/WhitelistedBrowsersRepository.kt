@@ -1,7 +1,7 @@
 package fe.linksheet.module.repository.whitelisted
 
-import app.linksheet.feature.app.ActivityAppInfo
-import app.linksheet.feature.app.ActivityAppInfoStatus
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfoStatus
 import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.PackageEntityDao
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao

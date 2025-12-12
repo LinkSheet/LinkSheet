@@ -3,7 +3,7 @@ package fe.linksheet.module.viewmodel
 
 import android.content.ComponentName
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository

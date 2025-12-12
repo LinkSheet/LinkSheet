@@ -2,11 +2,11 @@ package fe.linksheet.activity.bottomsheet.content.success
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
-import app.linksheet.feature.browser.Browser
+import app.linksheet.feature.browser.core.Browser
 import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 
 @Composable
 fun AppContentRoot(

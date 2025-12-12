@@ -7,8 +7,8 @@ import android.os.PatternMatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.testing.util.addDataPaths
 import app.linksheet.testing.util.buildIntentFilter
-import app.linksheet.feature.app.pkg.DefaultPackageIntentHandler
-import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.core.DefaultPackageIntentHandler
+import app.linksheet.feature.app.core.PackageIntentHandler
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config

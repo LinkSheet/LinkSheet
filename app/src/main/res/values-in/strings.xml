@@ -24,7 +24,6 @@
     <string name="browser_mode">Mode peramban</string>
     <string name="always_ask">Selalu tanyakan</string>
     <string name="always_ask_explainer">Selalu cantumkan semua peramban</string>
-    <string name="no_such_app_found">Apl tersebut tidak ditemukan!</string>
     <string name="always_show_package_name">Selalu perlihatkan nama paket</string>
     <string name="remove_all">Tiadakan semua</string>
     <string name="add_all">Tambahkan semua</string>
@@ -138,11 +137,8 @@
     <string name="request_timeout_explainer">Menentukan berapa detik LinkSheet akan menunggu hingga koneksi terbentuk. Menyetel nilainya ke 0 akan menonaktifkan batas waktu, tetapi ini tidak direkomendasikan.</string>
     <string name="resolve_failed">%s gagal: %s</string>
     <string name="no_browsers_found">Tidak ditemukan peramban yang ada.</string>
-    <string name="no_apps_found">Tidak ditemukan aplikasi yang ada.</string>
     <string name="export">Ekspor</string>
     <string name="export_log">Ekspor log</string>
-    <string name="enable_request_private_browsing_button">Aktifkan tombol \"Minta penjelajahan pribadi\"</string>
-    <string name="enable_request_private_browsing_button_explainer">Menampilkan tombol di sebelah peramban yang membuka URL yang diklik dalam mode penjelajahan pribadi. Peramban yang didukung: %s</string>
     <string name="request_private_browsing">Pribadi</string>
     <string name="log">Log</string>
     <string name="redact_log">Kurangi isi log (direkomendasikan, menonaktifkan ini dapat membocorkan nama paket dan nama host)</string>

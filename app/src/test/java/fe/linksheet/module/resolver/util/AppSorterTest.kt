@@ -13,7 +13,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import assertk.assertions.isNull
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.testlib.core.BaseUnitTest

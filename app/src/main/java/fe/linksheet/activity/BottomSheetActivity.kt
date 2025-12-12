@@ -18,7 +18,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import app.linksheet.compose.debug.LocalUiDebug
 import app.linksheet.compose.debugBorder
-import app.linksheet.feature.browser.Browser
+import app.linksheet.feature.browser.core.Browser
 import fe.composekit.extension.setText
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
@@ -32,7 +32,7 @@ import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
 import app.linksheet.compose.extension.collectOnIO
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction

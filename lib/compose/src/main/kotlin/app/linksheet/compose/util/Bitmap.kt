@@ -1,4 +1,4 @@
-package fe.linksheet.util
+package app.linksheet.compose.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Size

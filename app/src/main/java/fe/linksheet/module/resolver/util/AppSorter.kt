@@ -2,9 +2,9 @@ package fe.linksheet.module.resolver.util
 
 import android.app.usage.UsageStats
 import android.content.pm.ResolveInfo
-import app.linksheet.feature.app.ActivityAppInfo
-import app.linksheet.feature.app.IAppInfo
-import app.linksheet.feature.app.activityDescriptor
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.app.core.IAppInfo
+import app.linksheet.feature.app.extension.activityDescriptor
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.FilteredBrowserList
 import kotlin.time.Clock

@@ -1,4 +1,4 @@
-package fe.linksheet.feature.wiki
+package fe.linksheet.feature.wiki.usecase
 
 import fe.httpkt.Request
 import fe.httpkt.ext.isHttpSuccess
@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 class WikiArticleUseCase(
     val request: Request,
     val repository: WikiCacheRepository,
-    val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
     private fun fetchText(url: String): String? {
         val response = request.get(url = url)
@@ -21,7 +21,7 @@ class WikiArticleUseCase(
         return response.readToString()
     }
 
-    suspend fun getWikiText(url: String): String? = withContext(ioDispatcher) {
+    suspend fun getWikiText(url: String): String? = withContext(dispatcher) {
         val cacheResult = repository.getCached(url)
         if (cacheResult is CacheResult.Hit) {
             return@withContext cacheResult.value.text

@@ -1,11 +1,11 @@
-package app.linksheet.feature.app.pkg
+package app.linksheet.feature.app.core
 
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
-import app.linksheet.feature.app.activityDescriptor
+import app.linksheet.feature.app.extension.activityDescriptor
 import fe.composekit.extension.packageName
 import fe.linksheet.util.ResolveInfoFlags
 

@@ -28,7 +28,6 @@
     <string name="none">None</string>
     <string name="none_explainer">Only list native apps, remove all browsers. If only a single native app is present, it will automatically be opened. If no native app is present, all browsers are listed.</string>
     <string name="always_ask_explainer">Always list all browsers</string>
-    <string name="no_such_app_found">No such app found!</string>
     <string name="send_to">Share to</string>
     <string name="default_apps_subtitle">Set default apps for hosts</string>
     <string name="always_show_package_name">Always show package name</string>
@@ -135,11 +134,8 @@
     <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be established. Setting this to 0 disables the timeout, but this is not recommended.</string>
     <string name="resolve_failed">%s failed: %s</string>
     <string name="no_browsers_found">No browsers found.</string>
-    <string name="no_apps_found">No apps found.</string>
     <string name="export">Export</string>
     <string name="export_log">Export log</string>
-    <string name="enable_request_private_browsing_button">Enable \"Request private browsing\" button</string>
-    <string name="enable_request_private_browsing_button_explainer">Displays a button next to browsers which opens the clicked URL in private browsing mode. Supported browsers: %s</string>
     <string name="request_private_browsing">Private</string>
     <string name="log">Log</string>
     <string name="redact_log">Redact log (recommended, disabling this may leak package names and host names)</string>
@@ -380,7 +376,6 @@
     <string name="settings_shortcuts__title_link_handlers">Link handlers</string>
     <string name="settings_shortcuts__title_connected_apps">Connected apps</string>
     <string name="settings_shortcuts__subtitle_default_browser">Open default browser settings page</string>
-    <string name="settings__title_filter_apps">Filter apps</string>
     <string name="settings_verified_link_handlers__text_user_apps">User apps</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">All</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Enabled</string>

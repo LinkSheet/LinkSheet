@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -43,20 +42,20 @@ inline fun <K, V> LazyListScope.items(
     }
 }
 
-inline fun <T> LazyListScope.listHelper(
-    @StringRes noItems: Int,
-    @StringRes notFound: Int? = null,
-    listState: ListState,
-    list: List<T>?,
-    noinline listKey: (T) -> Any,
-    crossinline listItem: @Composable LazyItemScope.(T) -> Unit,
-) {
-    if (listState == ListState.Items && list != null) {
-        items(items = list, key = listKey, itemContent = listItem)
-    } else {
-        loader(noItems, notFound, listState)
-    }
-}
+//inline fun <T> LazyListScope.listHelper(
+//    @StringRes noItems: Int,
+//    @StringRes notFound: Int? = null,
+//    listState: ListState,
+//    list: List<T>?,
+//    noinline listKey: (T) -> Any,
+//    crossinline listItem: @Composable LazyItemScope.(T) -> Unit,
+//) {
+//    if (listState == ListState.Items && list != null) {
+//        items(items = list, key = listKey, itemContent = listItem)
+//    } else {
+//        loader(noItems, notFound, listState)
+//    }
+//}
 
 fun <T> SaneLazyListScope.listHelper(
     @StringRes noItems: Int,
@@ -68,6 +67,23 @@ fun <T> SaneLazyListScope.listHelper(
 ) {
     if (listState == ListState.Items && !list.isNullOrEmpty()) {
         group(list = list, key = listKey, content = content)
+    } else {
+        loader(noItems, notFound, listState)
+    }
+}
+
+fun <T> SaneLazyListScope.listIndexedHelper(
+    @StringRes noItems: Int,
+    @StringRes notFound: Int? = null,
+    listState: ListState,
+    list: List<T>?,
+    listKey: (T) -> Any,
+    content: @Composable LazyItemScope.(Int, T, PaddingValues, Shape) -> Unit,
+) {
+    if (listState == ListState.Items && !list.isNullOrEmpty()) {
+        group(size = list.size) {
+            itemsIndexed(list = list, key = listKey, content = content)
+        }
     } else {
         loader(noItems, notFound, listState)
     }

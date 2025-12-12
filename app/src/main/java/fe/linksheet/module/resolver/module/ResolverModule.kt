@@ -3,7 +3,7 @@
 package fe.linksheet.module.resolver.module
 
 import android.app.usage.UsageStatsManager
-import app.linksheet.feature.app.AppInfoCreator
+import app.linksheet.feature.app.core.AppInfoCreator
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow

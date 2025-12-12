@@ -1,10 +1,7 @@
-package app.linksheet.feature.app
+package app.linksheet.feature.app.core
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
-import app.linksheet.feature.app.pkg.PackageIconLoader
-import app.linksheet.feature.app.pkg.PackageLabelService
-import app.linksheet.feature.app.pkg.PackageLauncherService
 import fe.android.compose.icon.BitmapIconPainter
 import fe.composekit.extension.info
 

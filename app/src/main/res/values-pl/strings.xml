@@ -20,7 +20,6 @@
     <string name="always_ask">Zawsze pytaj</string>
     <string name="none">Żadna</string>
     <string name="always_ask_explainer">Zawsze wyświetlaj listę wszystkich przeglądarek</string>
-    <string name="no_such_app_found">Nie znaleziono takiej aplikacji!</string>
     <string name="send_to">Udostępnij</string>
     <string name="default_apps_subtitle">Preferowane aplikacje to aplikacje ustawione jako „Zawsze” otwierające określone linki</string>
     <string name="always_show_package_name">Wyświetlaj nazwę pakietu</string>
@@ -127,10 +126,8 @@
     <string name="request_timeout">Limit czasu żądania</string>
     <string name="request_timeout_explainer">Określ ile sekund LinkSheet będzie oczekiwał na nawiązanie połączenia. Ustawienie tej wartości na 0 wyłącza limit czasu, ale nie jest to zalecane.</string>
     <string name="no_browsers_found">Nie znaleziono przeglądarek.</string>
-    <string name="no_apps_found">Nie znaleziono aplikacji.</string>
     <string name="export">Kopia zapasowa</string>
     <string name="export_log">Eksportuj log</string>
-    <string name="enable_request_private_browsing_button">Przycisk „Tryb prywatny”</string>
     <string name="request_private_browsing">Tryb prywatny</string>
     <string name="log">Log</string>
     <string name="redact_log">Redagowanie logu (zalecane, wyłączenie tej opcji może spowodować wyciek nazw pakietów i hostów)</string>
@@ -148,7 +145,6 @@
     <string name="follow_only_known_trackers_explainer">Próbuj śledzić przekierowania tylko wtedy, gdy host jest znany jako tracker lub przekierowanie. Jeśli opcja „Śledź przekierowania przez usługę zewnętrzną” jest włączona, ta opcja będzie zawsze aktywna</string>
     <string name="resolved_via">%s rozwiązano przez %s</string>
     <string name="resolve_failed">%s nie powiodło się: %s</string>
-    <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty adres URL w trybie przeglądania prywatnego. Obsługiwane przeglądarki: %s</string>
     <string name="usage_stats_sorting_explainer">Uwzględnij statystyki użycia systemu Android w algorytmie sortowania. Żądane jest uprawnienie przy pierwszym przełączeniu.</string>
     <string name="use_unified_preferred_browser_explainer">Po włączeniu zostaną zastosowane poniższe ustawienia do obsługi linków w trybach normalnym i w aplikacji. Jeśli opcja jest wyłączona, używaj poniższych przycisków, aby przełączać między tymi trybami.</string>
     <string name="shizuku_explainer_short">Bezpośrednia interakcja z API systemu</string>
@@ -354,7 +350,6 @@
     <string name="tap_customization_dialog_title">Skonfiguruj %s</string>
     <string name="telemetry_identifier_reset">Zresetuj identyfikator</string>
     <string name="telemetry_identity_basic">Podstawowe</string>
-    <string name="settings__title_filter_apps">Filtruj aplikacje</string>
     <string name="theme_enable_amoled">Czysta czerń</string>
     <string name="nightly_experiments_card_explainer">Naciśnij, aby sprawdzić funkcje, które są obecnie w fazie rozwoju</string>
     <string name="experiments_explainer_3">Eksperymenty są w fazie aktywnego rozwoju i mogą nie działać poprawnie lub wcale. Proszę nie zgłaszaj błędów na GitHubie. Jeśli chcesz przekazać opinię, zrób to na Discordzie.</string>

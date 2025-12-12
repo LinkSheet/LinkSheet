@@ -24,8 +24,7 @@ class BottomSheetSettingsViewModel(
     val gridLayout = preferenceRepository.asViewModelState(AppPreferences.gridLayout)
     val dontShowFilteredItem = preferenceRepository.asViewModelState(AppPreferences.dontShowFilteredItem)
     val previewUrl = preferenceRepository.asViewModelState(AppPreferences.previewUrl)
-    val enableRequestPrivateBrowsingButton =
-        preferenceRepository.asViewModelState(AppPreferences.enableRequestPrivateBrowsingButton)
+    val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.browser.enable)
 
     val usageStatsSorting = preferenceRepository.asViewModelState(AppPreferences.usageStatsSorting)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.hideBottomSheetChoiceButtons)

@@ -15,12 +15,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.extension.collectOnIO
-import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.util.listState
+import app.linksheet.feature.app.ui.AppFilterSearchTopAppBar
+import app.linksheet.feature.app.ui.appList
 import dev.zwander.shared.ShizukuUtil
 import dev.zwander.shared.ShizukuUtil.rememberHasShizukuPermissionAsState
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.composekit.component.appbar.SearchTopAppBar
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.composekit.core.AndroidVersion
@@ -104,11 +104,9 @@ fun VerifiedLinkHandlersRoute(
 
     SaneSettingsScaffold(
         topBar = {
-            SearchTopAppBar(
+            AppFilterSearchTopAppBar(
+                appListCommon = viewModel.list,
                 titleContent = textContent(R.string.apps_which_can_open_links),
-                placeholderContent = textContent(R.string.settings__title_filter_apps),
-                query = filter,
-                onQueryChange = viewModel.list::search,
                 onBackPressed = onBackPressed,
                 actions = {
                     IconButton(onClick = {
@@ -161,9 +159,7 @@ fun VerifiedLinkHandlersRoute(
                     item(key = "0") {
                         // Works around odd re-order scroll behavior: https://issuetracker.google.com/issues/234223556
                     }
-                    listHelper(
-                        noItems = R.string.no_apps_found,
-                        notFound = R.string.no_such_app_found,
+                    appList(
                         listState = listState,
                         list = items,
                         listKey = { it.packageName }

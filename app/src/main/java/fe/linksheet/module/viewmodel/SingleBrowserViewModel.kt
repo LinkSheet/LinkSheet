@@ -1,14 +1,14 @@
 package fe.linksheet.module.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.applist.AppListCommon
+import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.viewmodel.common.applist.AppListCommon
 
 class SingleBrowserViewModel(
     val type: PreferredBrowserViewModel.BrowserType,

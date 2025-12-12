@@ -1,4 +1,4 @@
-package app.linksheet.feature.browser
+package app.linksheet.feature.browser.core
 
 import android.content.Intent
 

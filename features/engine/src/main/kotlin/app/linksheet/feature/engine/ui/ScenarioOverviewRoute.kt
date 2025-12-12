@@ -7,7 +7,6 @@ import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -31,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.linksheet.compose.extension.collectOnIO
-import app.linksheet.compose.extension.loader
+import app.linksheet.compose.extension.listIndexedHelper
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.util.ListState
 import app.linksheet.feature.engine.R
@@ -46,7 +45,6 @@ import fe.composekit.component.CommonDefaults
 import fe.composekit.component.PreviewThemeNew
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.shape.CustomShapeDefaults
-import fe.composekit.layout.column.SaneLazyListScope
 import fe.composekit.route.Route
 import org.koin.androidx.compose.koinViewModel
 import sh.calvin.reorderable.ReorderableCollectionItemScope
@@ -129,7 +127,7 @@ private fun ScenarioOverviewRouteInternal(
         },
         state = lazyListState
     ) {
-        listHelper2(
+        listIndexedHelper(
             noItems = R.string.settings_scenario__title_scenarios,
             listState = mapState,
             list = localScenarios,
@@ -197,23 +195,6 @@ fun createAction(
         label = resources.getString(id),
         action = action
     )
-}
-
-fun <T> SaneLazyListScope.listHelper2(
-    @StringRes noItems: Int,
-    @StringRes notFound: Int? = null,
-    listState: ListState,
-    list: List<T>?,
-    listKey: (T) -> Any,
-    content: @Composable LazyItemScope.(Int, T, PaddingValues, Shape) -> Unit,
-) {
-    if (listState == ListState.Items && !list.isNullOrEmpty()) {
-        group(size = list.size) {
-            itemsIndexed(list = list, key = listKey, content = content)
-        }
-    } else {
-        loader(noItems, notFound, listState)
-    }
 }
 
 @Composable

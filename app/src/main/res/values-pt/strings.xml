@@ -27,7 +27,6 @@
     <string name="none">Nenhum</string>
     <string name="none_explainer">Listar apenas as apps nativas, remover todos os navegadores. Se apenas uma única app nativa estiver presente, essa será aberta automaticamente. Se nenhuma app nativa estiver presente, todos os navegadores serão listados.</string>
     <string name="always_ask_explainer">Sempre listar todos os navegadores</string>
-    <string name="no_such_app_found">Nenhuma app desta foi encontrada!</string>
     <string name="send_to">Partilhar para</string>
     <string name="default_apps_subtitle">Definir apps padrão para hosts</string>
     <string name="always_show_package_name">Sempre mostrar o nome do pacote</string>
@@ -130,11 +129,8 @@
     <string name="request_timeout_explainer">Define quantos segundos o LinkSheet aguardará o estabelecimento de uma conexão. Definir este valor como 0 desativa o tempo limite, mas isto não é recomendado.</string>
     <string name="resolve_failed">%s falhou: %s</string>
     <string name="no_browsers_found">Nenhum navegador encontrado.</string>
-    <string name="no_apps_found">Nenhuma app foi encontrada.</string>
     <string name="export">Exportar</string>
     <string name="export_log">Exportar log</string>
-    <string name="enable_request_private_browsing_button">Ativar o botão \"Solicitar navegação privada\"</string>
-    <string name="enable_request_private_browsing_button_explainer">Exibe um botão ao lado dos navegadores que abre o URL clicado no modo de navegação privada. Navegadores compatíveis: %s</string>
     <string name="request_private_browsing">Privado</string>
     <string name="log">Registo</string>
     <string name="redact_log">Reduzir o registo (recomendado, a desativação pode vazar nomes de pacotes e nomes de hosts)</string>

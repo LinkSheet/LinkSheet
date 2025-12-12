@@ -1,6 +1,6 @@
 package fe.linksheet.module.viewmodel.common.handler
 
-import app.linksheet.feature.app.IAppInfo
+import app.linksheet.feature.app.core.IAppInfo
 import fe.linksheet.composable.dialog.HostState
 import fe.linksheet.feature.app.toPreferredApp
 import fe.linksheet.module.repository.PreferredAppRepository

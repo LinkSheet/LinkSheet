@@ -7,13 +7,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
+import app.linksheet.compose.extension.collectOnIO
 import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.util.listState
+import app.linksheet.feature.libredirect.R
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
+import app.linksheet.feature.libredirect.navigation.LibRedirectServiceRoute
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.ComposableTextContent.Companion.content
@@ -22,12 +26,8 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.route.Route
-import app.linksheet.feature.libredirect.R
-import app.linksheet.feature.libredirect.navigation.LibRedirectServiceRoute
-import app.linksheet.compose.extension.collectOnIO
 import fe.linksheet.web.HostUtil
 import org.koin.androidx.compose.koinViewModel
-import androidx.compose.ui.platform.LocalResources
 
 @Composable
 fun LibRedirectSettingsRoute(
@@ -56,6 +56,7 @@ fun LibRedirectSettingsRoute(
 
         listHelper(
             noItems = R.string.no_libredirect_services,
+            notFound = null,
             listState = listState,
             list = services,
             listKey = { it.service.key },

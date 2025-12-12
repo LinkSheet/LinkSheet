@@ -41,7 +41,6 @@
     <string name="use_app_settings_explainer">Ứng dụng quyết định xem có nên sử dụng trình duyệt trong ứng dụng hay không</string>
     <string name="display_grid_layout_explainer">Hiển thị lưới thay vì danh sách ở trang dưới cùng</string>
     <string name="app_browsers">Ứng dụng</string>
-    <string name="no_apps_found">Không tìm thấy ứng dụng nào.</string>
     <string name="redirect_resolve_type_local_cache">bộ đệm cục bộ</string>
     <string name="use_unified_preferred_browser_explainer">Việc bật tính năng này sẽ áp dụng các thiết đặt bên dưới cho cả việc xử lý liên kết Thông thường và Trong ứng dụng. Sử dụng các nút bên dưới để chuyển giữa chế độ Bình thường và Trong ứng dụng khi bị tắt.</string>
     <string name="amp2html_local_cache_explainer">Lưu vào bộ nhớ đệm cục bộ các phiên bản không phải AMP đã truy xuất của trang web</string>
@@ -98,7 +97,6 @@
     <string name="options">Tùy chọn</string>
     <string name="about_explainer">Tín dụng, Giấy phép, Liên kết, Phiên bản</string>
     <string name="browser_status">Trạng thái trình duyệt</string>
-    <string name="no_such_app_found">Không tìm thấy ứng dụng như vậy!</string>
     <string name="request_private_browsing">Riêng tư</string>
     <string name="always">Luôn luôn</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
@@ -117,7 +115,6 @@
     <string name="pretend_to_be_app_explainer">Giả vờ là một ứng dụng gốc cho các miền được hỗ trợ bằng LinkSheetCompat</string>
     <string name="confirm">Xác nhận</string>
     <string name="disabled">Đã tắt</string>
-    <string name="enable_request_private_browsing_button">Bật nút \"Yêu cầu duyệt web riêng tư\"</string>
     <string name="redact_log">Biên tập lại nhật ký (được khuyến nghị, việc tắt tính năng này có thể làm rò rỉ tên gói và tên máy chủ)</string>
     <string name="search">Tìm kiếm</string>
     <string name="always_show_package_name">Luôn hiển thị tên gói</string>
@@ -142,7 +139,6 @@
     <string name="add">Thêm</string>
     <string name="follow_redirects_local_cache">Bật bộ đệm chuyển hướng cục bộ</string>
     <string name="privacy">Riêng tư</string>
-    <string name="enable_request_private_browsing_button_explainer">Hiển thị nút bên cạnh các trình duyệt mở URL đã nhấp vào ở chế độ duyệt web riêng tư. Trình duyệt được hỗ trợ: %s</string>
     <string name="pretend_to_be_app">Chặn các yêu cầu ứng dụng gốc</string>
     <string name="dont_show_filtered_item_explainer">Sẽ không bao giờ hiển thị phần trên cùng gợi ý ứng dụng được sử dụng lần cuối cho máy chủ được nhấp vào</string>
     <string name="version_name"><b>Phiên bản:</b> <font face="monospace">%s</font></string>
@@ -375,7 +371,6 @@
     <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
     <string name="telemetry_identifier_reset">Đặt lại số định danh</string>
     <string name="settings_bottom_sheet__text_profile_switcher">Hiển thị một nút ở trang dưới cùng để mở url trong một hồ sơ khác</string>
-    <string name="settings__title_filter_apps">Lọc ứng dụng</string>
     <string name="settings_notifications__divider_toasts">Thông báo ngắn</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Tất cả</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Đã bật</string>

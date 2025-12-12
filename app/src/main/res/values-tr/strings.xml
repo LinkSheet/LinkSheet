@@ -22,7 +22,6 @@
     <string name="usage_stats_sorting">Uygulamaları kullanıma göre sırala</string>
     <string name="always_ask">Her zaman sor</string>
     <string name="always_ask_explainer">Her zaman tüm tarayıcıları listele</string>
-    <string name="no_such_app_found">Böyle bir uygulama bulunamadı!</string>
     <string name="send_to">Şununla paylaş</string>
     <string name="always_show_package_name">Paket adını her zaman göster</string>
     <string name="open_with">Şununla aç</string>
@@ -110,7 +109,6 @@
     <string name="request_timeout_explainer">LinkSheet\'in bir bağlantının kurulması için kaç saniye bekleyeceğini belirler. Bunu 0 yapmak zaman aşımını devre dışı bırakır, ancak bu önerilmez.</string>
     <string name="no_browsers_found">Tarayıcı bulunamadı.</string>
     <string name="export">Dışa aktar</string>
-    <string name="enable_request_private_browsing_button">\"Gizli gezinme iste\" düğmesini etkinleştir</string>
     <string name="log">Günlük</string>
     <string name="include_settings">Ayarları dahil et (önerilir)</string>
     <string name="include_fingerprint">Cihaz parmak izini dahil et (önerilir)</string>
@@ -142,8 +140,6 @@
     <string name="debug">Hata ayıklama</string>
     <string name="logs">Günlükler</string>
     <string name="follow_only_known_trackers_explainer">Yönlendirmeleri yalnızca sunucunun bir izleyici/yönlendirici olduğu bilindiğinde takip etmeye çalışın. \"Harici hizmet aracılığıyla yönlendirmeleri takip et\" etkinleştirilmişse, bu her zaman etkin olacaktır</string>
-    <string name="no_apps_found">Uygulama bulunamadı.</string>
-    <string name="enable_request_private_browsing_button_explainer">Tarayıcıların yanında, tıklanan URL\'yi gizli gezinme modunda açan bir düğme görüntüler. Desteklenen tarayıcılar: %s</string>
     <string name="redact_log">Günlüğü yeniden düzenle (önerilir, bunu devre dışı bırakmak paket adlarını ve sunucu adlarını sızdırabilir)</string>
     <string name="export_log">Günlüğü dışa aktar</string>
     <string name="log_privacy">Günlük kaydı gizliliği hakkında bilgi edinmek için bu <annotation url-id="privacy-logs">bağlantıyı</annotation> ziyaret edebilirsiniz.</string>
@@ -375,7 +371,6 @@
     <string name="settings_shortcuts__title_link_handlers">Bağlantı işleyiciler</string>
     <string name="settings_shortcuts__title_connected_apps">Bağlanılan uygulamalar</string>
     <string name="settings_shortcuts__subtitle_default_browser">Varsayılan tarayıcı ayarları sayfasını aç</string>
-    <string name="settings__title_filter_apps">Uygulamaları filtrele</string>
     <string name="settings__title_shortcuts">Kısayollar</string>
     <string name="settings_verified_link_handlers__text_user_apps">Kullanıcı uygulamaları</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Hepsi</string>

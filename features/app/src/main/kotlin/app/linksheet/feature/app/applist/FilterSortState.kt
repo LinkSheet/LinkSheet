@@ -1,4 +1,4 @@
-package fe.linksheet.module.viewmodel.common.applist
+package app.linksheet.feature.app.applist
 
 enum class SortType {
     AZ,

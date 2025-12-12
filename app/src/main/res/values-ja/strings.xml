@@ -27,7 +27,6 @@
     <string name="none">無し</string>
     <string name="none_explainer">ネイティブアプリのみをリストし、全てのブラウザを削除します。 ネイティブアプリが 1 つだけ存在する場合、それを自動的に開きます。 ネイティブアプリが存在しない場合は、全てのブラウザがリストされます。</string>
     <string name="always_ask_explainer">常に全てのブラウザをリスト</string>
-    <string name="no_such_app_found">そのようなアプリは見つかりませんでした！</string>
     <string name="send_to">共有先</string>
     <string name="default_apps_subtitle">デフォルトアプリは、特定のウェブサイトを「常に」開くように設定したアプリです</string>
     <string name="always_show_package_name">常にパッケージ名を表示</string>
@@ -132,7 +131,6 @@
     <string name="dont_show_filtered_item_explainer">最後に使用したアプリを提案する上部の項目を表示しない</string>
     <string name="downloader_url_mime_type_explainer">URLの末尾にファイル拡張子（例：\".jpg\"）があるかどうかをチェックします。拡張子がある場合は、ダウンロードしたファイルにこのタイプが使われます。</string>
     <string name="disable_in_selected">強制無効化…</string>
-    <string name="no_apps_found">アプリが見つかりません。</string>
     <string name="donate_explainer_crypto">暗号通貨で寄付する場合は、<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> にメールを送信してください。</string>
     <string name="debug_build">デバッグビルド</string>
     <string name="url_copied_toast_explainer">ユーザーがURLをコピーしたときにトーストを表示する</string>
@@ -152,7 +150,6 @@
     <string name="link_handle_failed_text_field_label">クエリ</string>
     <string name="resolve_activity_failure">アクティビティを解決できませんでした！</string>
     <string name="customization">カスタマイズ</string>
-    <string name="settings__title_filter_apps">アプリをフィルター</string>
     <string name="reset_app_link_verification_status_subtitle">ここをタップしてすべてのアプリのアプリリンク検証ステータスをリセットし、Android が再確認するまで数分間お待ちください。確認は届きません。Shizuku が必要です。</string>
     <string name="reset_app_link_verification_status_toast">再確認を要求</string>
     <string name="switch_profile_explainer">下のシートに、タップしたリンクを（仕事用）プロファイルで開くためのボタンを表示します。 LinkSheetが両方のプロファイルにインストールされ、設定 -&gt; 特別なアプリへのアクセス -&gt; 仕事とプライベートのアプリの接続を介して手動でリンクされている必要があります</string>
@@ -388,8 +385,6 @@
     <string name="no_log_entries">このセッションにはログは含まれていません。</string>
     <string name="request_timeout_explainer">LinkSheet が接続の確立を待機する秒数を定義します。この値を 0 に設定するとタイムアウトは無効になりますが、推奨されません。</string>
     <string name="no_browsers_found">ブラウザが見つかりません。</string>
-    <string name="enable_request_private_browsing_button">「プライベートブラウジングをリクエスト」ボタンを有効にする</string>
-    <string name="enable_request_private_browsing_button_explainer">ブラウザボタンの横にクリックした URL をプライベート ブラウジング モードで開くボタンを表示します。サポートされているブラウザ: %s</string>
     <string name="amp2html_local_cache">ローカル Amp2Html キャッシュを有効にする</string>
     <string name="amp2html_local_cache_explainer">取得したウェブページの非AMPバージョンをローカルにキャッシュする</string>
     <string name="shizuku_explainer_short">システムAPIと直接連携する</string>

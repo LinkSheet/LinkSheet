@@ -1,4 +1,4 @@
-package fe.linksheet.composable.component.list.item.type
+package app.linksheet.compose.list.item
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable

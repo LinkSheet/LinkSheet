@@ -1,4 +1,4 @@
-package app.linksheet.feature.app.pkg.domain
+package app.linksheet.feature.app.core.domain
 
 sealed interface VerificationStateCompat
 

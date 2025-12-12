@@ -13,7 +13,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import app.linksheet.feature.app.pkg.ManifestParser
+import app.linksheet.feature.app.core.ManifestParser
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.composable.ui.AppTheme
 import org.koin.core.component.KoinComponent

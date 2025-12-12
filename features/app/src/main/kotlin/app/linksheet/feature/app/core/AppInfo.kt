@@ -1,4 +1,4 @@
-package app.linksheet.feature.app
+package app.linksheet.feature.app.core
 
 import android.content.pm.ComponentInfo
 import android.os.Parcelable

@@ -1,13 +1,13 @@
-package fe.linksheet.composable.component.appinfo
+package app.linksheet.feature.app.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import app.linksheet.feature.app.IAppInfo
+import app.linksheet.feature.app.core.IAppInfo
+import app.linksheet.feature.app.ui.AppInfoIconDefaults.DefaultIconSize
 import fe.composekit.component.icon.AppIconImage
-import fe.linksheet.composable.component.appinfo.AppInfoIconDefaults.DefaultIconSize
 
 object AppInfoIconDefaults {
     val DefaultIconSize = 32.dp
@@ -38,6 +38,6 @@ private fun AppInfoIconPreview() {
 //    }
 //
 //    AppInfoIcon(
-//        appInfo = PackageInfoFakes.Youtube.toActivityAppInfo(lazy { bitmap })
+//        appInfo = PackageInfoFakes.Youtube.toActivityAppInfo(icon = BitmapIconPainter.bitmap(bitmap))
 //    )
 }

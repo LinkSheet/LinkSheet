@@ -1,7 +1,7 @@
 package fe.linksheet.feature.app
 
-import app.linksheet.feature.app.ActivityAppInfo
-import app.linksheet.feature.app.IAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.app.core.IAppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 
 fun ActivityAppInfo.toPreferredApp(host: String, alwaysPreferred: Boolean): PreferredApp {

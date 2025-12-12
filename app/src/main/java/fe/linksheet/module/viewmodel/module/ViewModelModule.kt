@@ -108,7 +108,7 @@ val ViewModelModule = module {
     viewModelOf(::MarkdownViewModel)
     viewModelOf(::SqlViewModel)
     viewModelOf(::PreviewSettingsViewModel)
-    viewModel {parameters ->
+    viewModel { parameters ->
         WhitelistedBrowsersViewModel(
             type = parameters.get(),
             useCase = get(),

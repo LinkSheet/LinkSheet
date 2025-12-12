@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import app.linksheet.feature.browser.Browser
+import app.linksheet.feature.browser.core.Browser
 import app.linksheet.compose.preview.PreviewContainer
 import app.linksheet.testing.asPreferredApp
 import app.linksheet.testing.fake.PackageInfoFakes
@@ -35,7 +35,7 @@ import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
 import app.linksheet.compose.theme.HkGroteskFontFamily
 import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.feature.profile.CrossProfile
 import fe.linksheet.feature.profile.ProfileStatus

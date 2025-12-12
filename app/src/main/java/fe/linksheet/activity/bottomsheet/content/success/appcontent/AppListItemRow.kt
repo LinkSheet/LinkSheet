@@ -13,12 +13,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.linksheet.compose.theme.HkGroteskFontFamily
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toActivityAppInfo
 import app.linksheet.testing.util.PackageInfoFake
 import fe.linksheet.R
-import fe.linksheet.composable.component.appinfo.AppInfoIcon
+import app.linksheet.feature.app.ui.AppInfoIcon
 
 object AppListItemRowDefaults {
     val RowHeight = 60.dp

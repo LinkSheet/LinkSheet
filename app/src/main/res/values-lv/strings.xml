@@ -13,7 +13,6 @@
     <string name="usage_stats_sorting_explainer">Iekļauj Android sistēmas lietošanas statistiku šķirošanas algoritmā. Atļauja tiks pieprasīta pirmajā izmantošanas reizē.</string>
     <string name="none_explainer">Parāda tikai vietējās lietotnes ignorējot visus pārlūkus. Ja ir pieejama tikai viena vietējā lietotne, tā tiks automātiski izmantota. Ja nav nevienas vietējās lietotnes, tiks parādīti visi pārlūki.</string>
     <string name="always_ask_explainer">Vienmēr parāda visus pārlūkus</string>
-    <string name="no_such_app_found">Tāda lietotne nav atrasta!</string>
     <string name="opening_with_app">Atvēršana ar %s</string>
     <string name="apps_which_can_open_links">Pārbaudīti saites apstrādātāji</string>
     <string name="apps_which_can_open_links_explainer">Pieskarieties lietotnei, lai atvērtu izvēlni \"Atvērt pēc noklusējuma\", kas ļauj atspējot automātisko saites atvēršanu</string>
@@ -91,7 +90,6 @@
     <string name="notifications">Uznirstošie ziņojumi un paziņojumi</string>
     <string name="url_copied_toast">URL nokopēts</string>
     <string name="url_copied_toast_explainer">Parādīt uznirstošo ziņojumu, kad lietotājs nokopē URL</string>
-    <string name="settings__title_filter_apps">Filtrēt lietotnes</string>
     <string name="use_app_settings">Noklusējuma</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="zero">%d resursdatori: %s</item>

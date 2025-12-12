@@ -1,8 +1,8 @@
-package fe.linksheet.module.viewmodel.common.applist
+package app.linksheet.feature.app.applist
 
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.IAppInfo
-import app.linksheet.feature.app.LinkHandling
+import app.linksheet.feature.app.core.DomainVerificationAppInfo
+import app.linksheet.feature.app.core.IAppInfo
+import app.linksheet.feature.app.core.LinkHandling
 import fe.kotlin.extension.iterable.filterIf
 import fe.linksheet.extension.android.SYSTEM_APP_FLAGS
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.*
 class AppListCommon<T : IAppInfo>(
     apps: Flow<List<T>>,
     private val scope: CoroutineScope,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     val sortState = MutableStateFlow(SortByState(SortType.AZ, true))
     val filterState = MutableStateFlow(FilterState(StateModeFilter.ShowAll, TypeFilter.All, true))

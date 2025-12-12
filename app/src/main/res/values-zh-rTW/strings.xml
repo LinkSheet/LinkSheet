@@ -23,7 +23,6 @@
     <string name="always_ask">每次都詢問</string>
     <string name="none">無</string>
     <string name="always_ask_explainer">一律列出所有瀏覽器</string>
-    <string name="no_such_app_found">找不到應用程式！</string>
     <string name="send_to">分享</string>
     <string name="default_apps_subtitle">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
     <string name="always_show_package_name">一律顯示套件名稱</string>
@@ -146,7 +145,6 @@
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="onboarding_2_skip_button">略過</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">已停用</string>
-    <string name="settings__title_filter_apps">篩選應用程式</string>
     <string name="donate_card_headline">捐款以支持 LinkSheet</string>
     <string name="generic__text_url">網址</string>
     <string name="warning">警告</string>
@@ -211,12 +209,10 @@
     <string name="settings_main_setup_success__button_connected_apps">已連結的應用程式</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">不要顯示「僅限一次」與「一律採用」這兩個按鈕</string>
     <string name="theme_enable_material_you">動態色彩</string>
-    <string name="enable_request_private_browsing_button">啟用「隱私瀏覽」按鈕</string>
     <string name="retry">重試</string>
     <string name="privacy">隱私</string>
     <string name="settings_shortcuts__title_default_browser">預設瀏覽器</string>
     <string name="resolve_event__checking_browsers">正在檢查瀏覽器</string>
-    <string name="enable_request_private_browsing_button_explainer">在瀏覽器旁顯示一個用以要求在隱私瀏覽模式中開啟連結的按鈕。支援的瀏覽器：%s</string>
     <string name="theme_enable_amoled_explainer">在深色主題中採用純黑背景</string>
     <string name="onboarding_3_card_title">連結處理常式</string>
     <string name="build_info">建構資訊</string>
@@ -279,7 +275,6 @@
     <string name="onboarding_2_install_shizuku">安裝 Shizuku</string>
     <string name="tap_customization_dialog_text">選擇欲執行的動作</string>
     <string name="thanks_for_donating">感謝您的支持！</string>
-    <string name="no_apps_found">沒有應用程式。</string>
     <string name="debug_explainer">記錄檔、重設已驗證的處理常式</string>
     <string name="no_logs_found">尚無先前的記錄檔！</string>
     <string name="shizuku">Shizuku 整合</string>

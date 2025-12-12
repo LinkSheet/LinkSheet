@@ -6,17 +6,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.linksheet.compose.extension.listHelper
 import app.linksheet.compose.util.listState
+import app.linksheet.feature.app.ui.AppFilterSearchTopAppBar
+import app.linksheet.feature.app.ui.AppInfoIcon
+import app.linksheet.feature.app.ui.appList
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.composekit.component.appbar.SearchTopAppBar
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
-import fe.linksheet.composable.component.appinfo.AppInfoIcon
 import fe.linksheet.module.repository.whitelisted.mapBrowserState
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
@@ -41,19 +41,15 @@ fun WhitelistedBrowsersSettingsRoute(
 
     SaneSettingsScaffold(
         topBar = {
-            SearchTopAppBar(
+            AppFilterSearchTopAppBar(
+                appListCommon = viewModel.list,
                 titleContent = textContent(R.string.whitelisted),
-                placeholderContent = textContent(R.string.settings__title_filter_apps),
-                query = searchFilter,
-                onQueryChange = viewModel.list::search,
                 onBackPressed = onBackPressed
             )
         }
     ) { padding ->
         SaneLazyColumnLayout(padding = padding) {
-            listHelper(
-                noItems = R.string.no_apps_found,
-                notFound = R.string.no_such_app_found,
+            appList(
                 listState = listState,
                 list = items,
                 listKey = { it.flatComponentName }

@@ -55,7 +55,6 @@
     <string name="use_app_settings_explainer">ਐਪ ਨੂੰ ਇਹ ਫੈਸਲਾ ਕਰਨ ਦਿਓ ਕਿ ਕੀ ਇਨ-ਐਪ ਬ੍ਰਾਊਜ਼ਰ ਵਰਤਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ</string>
     <string name="display_grid_layout_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ ਸੂਚੀ ਦੀ ਬਜਾਏ ਇੱਕ ਗਰਿੱਡ ਵਿਖਾਓ</string>
     <string name="app_browsers">ਐਪਸ</string>
-    <string name="no_apps_found">ਕੋਈ ਐਪ ਨਹੀਂ ਲੱਭੀ।</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">ਲਿੰਕਸ਼ੀਟ ਇਸ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਖੋਲ੍ਹ ਸਕਦੀ।</string>
     <string name="redirect_resolve_type_local_cache">ਸਥਾਨਕ ਕੈਸ਼</string>
@@ -129,7 +128,6 @@
     <string name="about_explainer">ਇਸ ਐਪ ਬਾਰੇ, ਲਾਈਸੈਂਸ</string>
     <string name="shizuku_not_running_explainer">Shizuku ਨਹੀਂ ਚੱਲ ਰਿਹਾ ਹੈ। Shizuku ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ, ਫਿਰ ਇਸਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।</string>
     <string name="browser_status">ਬ੍ਰਾਊਜ਼ਰ ਸਥਿਤੀ</string>
-    <string name="no_such_app_found">ਅਜਿਹਾ ਕੋਈ ਐਪ ਨਹੀਂ ਮਿਲਿਆ!</string>
     <string name="request_private_browsing">ਪ੍ਰਾਈਵੇਟ</string>
     <string name="always">ਹਮੇਸ਼ਾਂ</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
@@ -153,7 +151,6 @@
     <string name="pretend_to_be_app_explainer">LinkSheetCompat ਨਾਲ ਸਮਰਥਿਤ ਡੋਮੇਨਾਂ ਲਈ ਇੱਕ ਮੂਲ ਐਪ ਹੋਣ ਦਾ ਦਿਖਾਵਾ ਕਰੋ</string>
     <string name="confirm">ਪੁਸ਼ਟੀ ਕਰੋ</string>
     <string name="disabled">ਡਿਸੇਬਲ ਕੀਤੇ</string>
-    <string name="enable_request_private_browsing_button">\"ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਦੀ ਬੇਨਤੀ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="redact_log">ਰੀਡੈਕਟ ਲੌਗ (ਸਿਫਾਰਿਸ਼ ਕੀਤਾ ਗਿਆ, ਇਸ ਨੂੰ ਅਯੋਗ ਕਰਨ ਨਾਲ ਪੈਕੇਜ ਨਾਮ ਅਤੇ ਹੋਸਟ ਨਾਮ ਲੀਕ ਹੋ ਸਕਦੇ ਹਨ)</string>
     <string name="show_linksheet_referrer_explainer">ਜਦੋਂ ਕੋਈ ਐਪ ਲਾਂਚ ਕੀਤੀ ਜਾਂਦੀ ਹੈ, ਤਾਂ ਇਹ ਐਹ ਵੇਖਣ ਲਈ ਜਾਂਚ ਕਰ ਸਕਦੀ ਹੈ ਕਿ ਕਿਹੜੀ ਐਪ ਲਾਂਚ ਕੀਤੀ ਗਈ ਹੈ, ਜਾਂ ਇਸਨੂੰ \"ਰੈਫਰ\" ਕੀਤਾ ਗਿਆ ਹੈ। ਮੂਲ ਰੂਪ ਵਿੱਚ, ਜਦੋਂ ਲਿੰਕਸ਼ੀਟ ਇੱਕ ਐਪ ਲਾਂਚ ਕਰਦੀ ਹੈ, ਇਹ ਆਪਣੇ ਆਪ ਨੂੰ ਛੁਪਾਉਂਦੀ ਹੈ, ਇਹ ਕਹਿੰਦੇ ਹੋਏ ਕਿ ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਲਾਂਚ ਕਰਨ ਵਾਲੀ ਐਪ ਉਹੀ ਹੈ ਜਿਸਨੇ ਟੀਚਾ ਲਾਂਚ ਕੀਤਾ ਹੈ। ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਖੋਲ੍ਹਣ ਵਾਲੇ ਐਪਾਂ ਲਈ ਰੈਫਰਰ ਵਜੋਂ ਇਸਨੂੰ ਦੁਬਾਰਾ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਇਸਨੂੰ ਚਾਲੂ ਕਰੋ।</string>
     <string name="search">ਖੋਜ ਕਰੋ</string>
@@ -191,7 +188,6 @@
     <string name="add">ਜੋੜ੍ਹੋ</string>
     <string name="follow_redirects_local_cache">ਸਥਾਨਕ ਰੀਡਾਇਰੈਕਟ ਕੈਸ਼ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="privacy">ਗੋਪਨੀਯਤਾ</string>
-    <string name="enable_request_private_browsing_button_explainer">ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੇ ਅੱਗੇ ਇੱਕ ਬਟਨ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਦਾ ਹੈ ਜੋ ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਮੋਡ ਵਿੱਚ ਕਲਿੱਕ ਕੀਤੇ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ। ਸਮਰਥਿਤ ਬ੍ਰਾਊਜ਼ਰ: %s</string>
     <string name="pretend_to_be_app">ਨੇਟਿਵ ਐਪ ਬੇਨਤੀਆਂ ਨੂੰ ਇੰਟਰਸੈਪਟ ਕਰੋ</string>
     <string name="shizuku">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
     <string name="dont_show_filtered_item_explainer">ਕਦੇ ਵੀ ਟੌਪ ਸੈਕਸ਼ਨ ਨੂੰ ਨਹੀਂ ਵਿਖਾਏਗਾ ਜੋ ਕਲਿੱਕ ਕੀਤੇ ਹੋਸਟ ਲਈ ਆਖਰੀ ਵਰਤੇ ਐਪ ਦਾ ਸੁਝਾਅ ਦਿੰਦਾ ਹੈ</string>

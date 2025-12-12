@@ -3,7 +3,7 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import fe.httpkt.Request
-import fe.linksheet.feature.wiki.WikiArticleUseCase
+import fe.linksheet.feature.wiki.usecase.WikiArticleUseCase
 import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
 
 class MarkdownViewModel(

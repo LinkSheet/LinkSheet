@@ -1,4 +1,4 @@
-package app.linksheet.feature.app.pkg
+package app.linksheet.feature.app.core
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.ComponentInfo

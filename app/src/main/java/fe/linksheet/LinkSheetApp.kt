@@ -149,7 +149,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             ShizukuModule,
             LibRedirectFeatureModule,
             LinkEngineFeatureModule,
-            WikiFeatureModule
+            WikiFeatureModule,
+            PrivateBrowsingModule
         )
     }
 

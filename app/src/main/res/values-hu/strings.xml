@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="no_such_app_found">Nem található ilyen alkalmazás!</string>
     <string name="send_to">Megosztás</string>
     <string name="default_apps_subtitle">Állítsa be az alapértelmezett alkalmazásokat a hostokhoz</string>
     <string name="always_show_package_name">Mindig megjeleníti a csomag nevét</string>
@@ -98,10 +97,8 @@
     <string name="links">Linkek</string>
     <string name="use_clear_urls">ClearURLs használata</string>
     <string name="loading_link">Link feldolgozása…</string>
-    <string name="no_apps_found">Nem találhatók alkalmazások.</string>
     <string name="follow_redirects_local_cache_explainer">Gyorsítótárazza az átirányítások eredményét helyileg</string>
     <string name="export_log">Napló exportálása</string>
-    <string name="enable_request_private_browsing_button">Engedélyezze a \"Privát böngészés kérése\" gombot</string>
     <string name="export">Exportálás</string>
     <string name="redact_log">Naplóbejegyzés elrejtése (ajánlott, ennek kikapcsolása kiszivárogtathatja a csomag- és hostneveket)</string>
     <string name="include_settings">Tartalmazza a beállításokat (ajánlott)</string>
@@ -159,7 +156,6 @@
     <string name="in_app_browser">Alkalmazáson belüli böngésző</string>
     <string name="disable_in_selected_explainer">Az alkalmazáson belüli böngésző letiltása a kiválasztott alkalmazásokban.</string>
     <string name="enable_ignore_libredirect_button_explainer">Megjelenít egy gombot az alsó panelen, ha az URL-t a LibRedirect segítségével irányították át, ami helyette az eredeti URL-t nyitja meg</string>
-    <string name="enable_request_private_browsing_button_explainer">A böngészők mellett egy gombot jelenít meg, amely privát böngészési módban nyitja meg a kattintott URL-t. Támogatott böngészők: %s</string>
     <string name="amp2html_external_service">Kísérlet a nem AMP-oldalverzió beszerzésére külső szolgáltatáson keresztül</string>
     <string name="enable_amp2html_explainer">Átirányítja az AMP oldalakat a normál webes verzióra. Ennek lehetnek <annotation url-id="privacy-amp2html">adatvédelemre vonatkozó következményei</annotation>.</string>
     <string name="mastodon_redirect_subtitle_2">A Mastodon Redirect forráskódja referenciaként volt használva a Shizuku interakcióhoz</string>
@@ -361,7 +357,6 @@
     <string name="reset_app_link_verification_status_toast">Újbóli ellenőrzés kérve</string>
     <string name="build_info">Build infó</string>
     <string name="settings_shortcuts__subtitle_default_browser">Nyissa meg az alapértelmezett böngészőbeállítások oldalát</string>
-    <string name="settings__title_filter_apps">Szűrő alkalmazások</string>
     <string name="settings_verified_link_handlers__text_user_apps">Felhasználói alkalmazások</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Mind</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Engedélyezve</string>

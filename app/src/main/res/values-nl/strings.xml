@@ -67,7 +67,6 @@
     <string name="credits_explainer">Dankbetuigingen, licenties</string>
     <string name="always_ask">Altijd vragen</string>
     <string name="none">Geen</string>
-    <string name="no_such_app_found">Geen app gevonden!</string>
     <string name="back">Terug</string>
     <string name="default_apps_subtitle">Stel standaardapps voor hosts in</string>
     <string name="browser_status">Browserstatus</string>
@@ -99,7 +98,6 @@
     <string name="follow_only_known_trackers_explainer">Probeer alleen omleidingen te volgen als van de host bekend is dat het een tracker/redirect is. Als \"Volg omleidingen via externe service\" is ingeschakeld, wordt dit altijd ingeschakeld.</string>
     <string name="disable_in_selected">Geforceerd uitschakelen…</string>
     <string name="logs">Logs</string>
-    <string name="no_apps_found">Geen apps gevonden.</string>
     <string name="log">Log</string>
     <string name="include_fingerprint">Fingerprint van apparaat bijvoegen (aanbevolen)</string>
     <string name="no_logs_found">Geen oude logs gevonden!</string>
@@ -149,10 +147,8 @@
     <string name="preview_url_explainer">Toon de aangeklikte URL (nadat deze is verwerkt)</string>
     <string name="use_app_settings_explainer">Apps bepalen zelf of de in-app browser wordt gebruikt</string>
     <string name="options">Opties</string>
-    <string name="enable_request_private_browsing_button_explainer">Toon een knop naast browsers die de gekozen URL opent in de privénavigatiemodus. Ondersteunde browsers: %s</string>
     <string name="include_settings">Instellingen meesturen (aanbevolen)</string>
     <string name="log_privacy">Voor meer informatie over de privacy van logs kun je <annotation url-id="privacy-logs">hier terecht</annotation>.</string>
-    <string name="enable_request_private_browsing_button">Knop \"Privénavigatie\" tonen</string>
     <string name="use_unified_preferred_browser_explainer">Wanneer ingeschakeld worden de onderstaande instellingen toegepast bij zowel het openen van normale links als bij in-app links. Gebruik anders de onderstaande knoppen om te schakelen tussen de modus voor normale links en in-app links.</string>
     <string name="advanced">Geavanceerd</string>
     <string name="amp2html_local_cache_explainer">Sla de opgehaalde niet-AMP-versies van webpagina\'s lokaal op</string>
@@ -424,7 +420,6 @@
     <string name="customization">Aanpassingen</string>
     <string name="settings__title_shortcuts">Snelkoppelingen</string>
     <string name="settings_shortcuts__title_connected_apps">Verbonden apps</string>
-    <string name="settings__title_filter_apps">Apps filteren</string>
     <string name="settings_notifications__divider_toasts">Toasts</string>
     <string name="settings_credits__app_credit_reason_seal">Inspiratie</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Inspiratie</string>

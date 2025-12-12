@@ -55,7 +55,6 @@
     <string name="use_app_settings_explainer">Dejar que la aplicación decida si el Navegador en aplicación debería ser usado</string>
     <string name="display_grid_layout_explainer">Mostrar una cuadrícula en lugar de una lista en la hoja inferior</string>
     <string name="app_browsers">Aplicaciones y Navegadores</string>
-    <string name="no_apps_found">No se han encontrado aplicaciones.</string>
     <string name="amp2html">Amp2Html</string>
     <string name="no_handlers_found_explainer">LinkSheet no puede abrir este enlace.</string>
     <string name="redirect_resolve_type_local_cache">caché local</string>
@@ -129,7 +128,6 @@
     <string name="about_explainer">Créditos, Licencia, Enlaces, Versión</string>
     <string name="shizuku_not_running_explainer">Shizuku no se está ejecutando. Pulse aquí para abrir Shizuku y siga las instrucciones para iniciarlo.</string>
     <string name="browser_status">Estado del navegador</string>
-    <string name="no_such_app_found">¡No se encontró la aplicación!</string>
     <string name="request_private_browsing">Privado</string>
     <string name="always">Siempre</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
@@ -153,7 +151,6 @@
     <string name="pretend_to_be_app_explainer">Pretende ser una aplicación nativa para dominios compatibles con LinkSheetCompat</string>
     <string name="confirm">Confirmar</string>
     <string name="disabled">Desactivado</string>
-    <string name="enable_request_private_browsing_button">Activar botón \"Navegación privada\"</string>
     <string name="redact_log">Redactar registro (recomendado; deshabilitarlo puede filtrar nombres de paquetes y nombres de dominio)</string>
     <string name="show_linksheet_referrer_explainer">Cuando se inicia una aplicación, puede comprobar qué aplicación se ha iniciado o \"referido\" a ella. De forma predeterminada, cuando LinkSheet lanza una aplicación, se oculta, diciendo que la aplicación que lanzó LinkSheet es el que la inició. Habilite esta opción para reinsertar LinkSheet como referencia para las aplicaciones que abre.</string>
     <string name="search">Buscar</string>
@@ -191,7 +188,6 @@
     <string name="add">Añadir</string>
     <string name="follow_redirects_local_cache">Activar la caché de redirección local</string>
     <string name="privacy">Privacidad</string>
-    <string name="enable_request_private_browsing_button_explainer">Muestra un botón junto a los navegadores que abre el enlace que te tocó en modo de navegación privada. Navegadores compatibles: %s</string>
     <string name="pretend_to_be_app">Interceptar solicitudes de aplicaciones nativas</string>
     <string name="shizuku">Integración con Shizuku</string>
     <string name="dont_show_filtered_item_explainer">No mostrar sección superior que sugiere la última aplicación utilizada para el dominio en el que se hizo clic</string>
@@ -376,7 +372,6 @@
     <string name="settings_shortcuts__title_link_handlers">Gestores de enlaces</string>
     <string name="settings_shortcuts__title_connected_apps">Aplicaciones conectadas</string>
     <string name="settings_shortcuts__subtitle_default_browser">Abrir la página de configuración del navegador por defecto</string>
-    <string name="settings__title_filter_apps">Filtrar aplicaciones</string>
     <string name="settings_verified_link_handlers__text_user_apps">Aplicaciones del usuario</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Activado</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Desactivado</string>

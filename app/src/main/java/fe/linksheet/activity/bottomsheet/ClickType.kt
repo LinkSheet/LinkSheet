@@ -1,6 +1,6 @@
 package fe.linksheet.activity.bottomsheet
 
-import app.linksheet.feature.browser.Browser
+import app.linksheet.feature.browser.core.Browser
 
 
 sealed interface ClickType {

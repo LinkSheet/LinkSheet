@@ -23,7 +23,6 @@
     <string name="none">Aucun</string>
     <string name="none_explainer">Ne répertorier que les applications natives, supprimer tous les navigateurs. Si une seule application native est présente, elle sera automatiquement ouverte. Si aucune application native n\'est présente, tous les navigateurs sont listés.</string>
     <string name="always_ask_explainer">Toujours lister tous les navigateurs</string>
-    <string name="no_such_app_found">Aucune application de ce type n\'a été trouvée !</string>
     <string name="send_to">Partager avec</string>
     <string name="default_apps_subtitle">Définir les applications par défaut pour les hôtes</string>
     <string name="remove_all">Supprimer tout</string>
@@ -73,7 +72,6 @@
     <string name="loading_link">Traitement du lien…</string>
     <string name="follow_redirects_external_service">Suivre les redirections via un service externe</string>
     <string name="apps_which_can_open_links_explainer">Appuyez sur une application pour ouvrir le menu \"Ouvrir par défaut\" qui vous permet de désactiver l\'ouverture automatique des liens</string>
-    <string name="enable_request_private_browsing_button_explainer">Affiche un bouton à côté des navigateurs qui ouvre l\'URL cliquée en mode de navigation privée. Navigateurs pris en charge : %s</string>
     <string name="enable_downloader_explainer">Ajouter un bouton \"Télécharger\" au bas de l\'écran si l\'url contient un lien direct vers un fichier. Cela peut avoir des <annotation url-id="privacy-downloader"> implications liées à la protection de la vie privée</annotation></string>
     <string name="request_timeout_explainer">Définit le nombre de secondes pendant lesquelles LinkSheet attendra qu\'une connexion soit établie. La valeur 0 désactive le délai d\'attente, mais ce n\'est pas recommandé.</string>
     <string name="enable_ignore_libredirect_button_explainer">Affiche un bouton dans la feuille inférieure si l\'url a été redirigée via LibRedirect, qui ouvre l\'url d\'origine à la place</string>
@@ -117,10 +115,8 @@
     <string name="request_timeout">Délai de requête</string>
     <string name="resolve_failed">%s échoué : %s</string>
     <string name="no_browsers_found">Aucun navigateur n\'a été trouvé.</string>
-    <string name="no_apps_found">Aucune application trouvée.</string>
     <string name="export">Exporter</string>
     <string name="export_log">Exporter le journal</string>
-    <string name="enable_request_private_browsing_button">Activer le bouton \"Demander une navigation privée\"</string>
     <string name="request_private_browsing">Privé</string>
     <string name="log">Journal</string>
     <string name="redact_log">Rédiger le journal (recommandé, la désactivation de cette option peut entraîner des fuites de noms de paquets et de noms d\'hôtes)</string>
@@ -429,7 +425,6 @@
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet n\'est pas configuré</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet est correctement configuré et prêt à fonctionner</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">LinkSheet n\'est pas défini comme le navigateur par défaut du système</string>
-    <string name="settings__title_filter_apps">Filtrer les apps</string>
     <string name="settings_verified_link_handlers__text_user_apps">Apps de l\'utilisateur</string>
     <string name="export_log_dialog__subtitle_redact_log">Recommandé, rédige les noms et les URL des applications</string>
     <string name="export_log_dialog__title_include_throwable">Inclure les journaux de crash</string>

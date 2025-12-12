@@ -1,7 +1,7 @@
 package fe.linksheet.activity.bottomsheet
 
 import android.content.Intent
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 
 sealed interface Interaction {
    val info: ActivityAppInfo

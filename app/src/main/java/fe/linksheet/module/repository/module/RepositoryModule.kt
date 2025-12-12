@@ -5,7 +5,9 @@ package fe.linksheet.module.repository.module
 import fe.linksheet.module.clock.ClockModule
 import fe.linksheet.module.database.DatabaseModule
 import fe.linksheet.module.database.LinkSheetDatabase
-import fe.linksheet.module.repository.*
+import fe.linksheet.module.repository.AppSelectionHistoryRepository
+import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
+import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
 import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository

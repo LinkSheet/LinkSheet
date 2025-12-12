@@ -2,12 +2,12 @@ package app.linksheet.feature.app.usecase
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
-import app.linksheet.feature.app.AppInfo
-import app.linksheet.feature.app.AppInfoCreator
-import app.linksheet.feature.app.pkg.ManifestParser
-import app.linksheet.feature.app.pkg.domain.DomainVerificationManagerCompat
-import app.linksheet.feature.app.pkg.domain.VerificationState
-import app.linksheet.feature.app.pkg.domain.VerificationUnsupportedState
+import app.linksheet.feature.app.core.AppInfo
+import app.linksheet.feature.app.core.AppInfoCreator
+import app.linksheet.feature.app.core.ManifestParser
+import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
+import app.linksheet.feature.app.core.domain.VerificationState
+import app.linksheet.feature.app.core.domain.VerificationUnsupportedState
 import fe.linksheet.util.ApplicationInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

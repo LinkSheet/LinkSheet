@@ -31,7 +31,6 @@
     <string name="copy_url">نسخ الرابط</string>
     <string name="always_ask_explainer">قم دائما بإدراج جميع المتصفحات</string>
     <string name="usage_stats_sorting">فرز التطبيقات حسب الاستخدام</string>
-    <string name="no_such_app_found">لا يوجد مثل هذا التطبيق!</string>
     <string name="none_explainer">قائمة التطبيقات الأصلية فقط ، وإزالة جميع المتصفحات. في حالة وجود تطبيق أصلي واحد فقط ، سيتم فتحه تلقائيا. في حالة عدم وجود تطبيق أصلي ، يتم عرض جميع المتصفحات.</string>
     <string name="default_apps_subtitle">التطبيقات المفضلة هي التطبيقات التي قمت بتعيينها على \"دائمًا\" لفتح مضيفين معينين</string>
     <string name="send_to">مشاركة الى</string>
@@ -124,11 +123,9 @@
     <string name="log_viewer">عارض السجل</string>
     <string name="request_timeout">انتهت مهلة الطلب</string>
     <string name="request_timeout_explainer">تحديد عدد الثواني التي سينتظرها LinkSheet حتى يتم إنشاء الاتصال. يؤدي تعيين هذا إلى 0 إلى تعطيل المهلة ، لكن لا يوصى بذلك.</string>
-    <string name="no_apps_found">لم يتم العثور على تطبيقات.</string>
     <string name="no_browsers_found">لم يتم العثور على متصفحات.</string>
     <string name="export_log">تصدير السجلات</string>
     <string name="export">تصدير</string>
-    <string name="enable_request_private_browsing_button">تمكين زر \"طلب التصفح الخاص\"</string>
     <string name="request_private_browsing">خاص</string>
     <string name="use_clear_urls">استخدام ClearURLs</string>
     <string name="options">الخيارات</string>
@@ -149,7 +146,6 @@
     <string name="resolved_via">%s تم حلها عبر %s</string>
     <string name="resolve_failed">%s فشل: %s</string>
     <string name="usage_stats_sorting_explainer">قم بتضمين إحصائيات استخدام نظام Android في خوارزمية الفرز. يتم طلب الإذن عند التبديل الأول.</string>
-    <string name="enable_request_private_browsing_button_explainer">يعرض زرا بجوار المتصفحات يفتح عنوان URL الذي تم النقر عليه في وضع التصفح الخاص. المتصفحات المدعومة: %s</string>
     <string name="use_unified_preferred_browser_explainer">يؤدي تمكين هذا إلى تطبيق الإعدادات أدناه على كل من التعامل مع الروابط العادية وداخل التطبيق. استخدم الأزرار أدناه للتبديل بين الوضع العادي والوضع داخل التطبيق عند تعطيله.</string>
     <string name="shizuku">دمج شيزوكو</string>
     <string name="shizuku_explainer_short">تفاعل مع واجهات برمجة تطبيقات النظام مباشرة</string>
@@ -516,7 +512,6 @@
         <item quantity="many">%d تم التحقق منهم</item>
         <item quantity="other"/>
     </plurals>
-    <string name="settings__title_filter_apps">تصفية التطبيقات</string>
     <string name="telemetry_configure_type">نوع التحليلات</string>
     <string name="export_log_dialog__subtitle_include_throwable">موصى به، ولكن لا يمكن تنقيحه</string>
     <string name="follow_redirects_short">عمليات إعادة التوجيه</string>

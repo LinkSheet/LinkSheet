@@ -1,6 +1,7 @@
 package fe.linksheet.module.preference.app
 
 
+import app.linksheet.feature.browser.preference.browserPreferences
 import app.linksheet.feature.libredirect.preference.libRedirectPreferences
 import app.linksheet.feature.shizuku.preference.shizukuPreferences
 import com.google.gson.JsonArray
@@ -8,14 +9,14 @@ import fe.android.preference.helper.PreferenceDefinition
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.activity.bottomsheet.TapConfig
+import fe.linksheet.composable.ui.Theme
+import fe.linksheet.composable.ui.ThemeV2
 import fe.linksheet.module.analytics.TelemetryIdentity
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.redactor.PackageProcessor
 import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.InAppBrowserHandler
-import fe.linksheet.composable.ui.Theme
-import fe.linksheet.composable.ui.ThemeV2
 import fe.linksheet.module.resolver.browser.BrowserMode
 import io.viascom.nanoid.NanoId
 import java.util.*
@@ -112,10 +113,6 @@ object AppPreferences : PreferenceDefinition(
 
     val amp2Html = Amp2Html
 
-    val enableRequestPrivateBrowsingButton = boolean(
-        "enable_request_private_browsing_button"
-    )
-
     @SensitivePreference
     val useTimeMs = long("use_time", 0)
 
@@ -187,6 +184,7 @@ object AppPreferences : PreferenceDefinition(
     val openGraphPreview = OpenGraphPreview
 
     val shizuku = shizukuPreferences(this::boolean)
+    val browser = browserPreferences(this::boolean)
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->

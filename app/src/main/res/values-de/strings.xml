@@ -24,7 +24,6 @@
     <string name="none_explainer">Nur native Apps auflisten, alle Browser entfernen. Wenn nur eine einzige native App vorhanden ist, wird diese automatisch geöffnet. Wenn keine native App vorhanden ist, werden alle Browser aufgelistet.</string>
     <string name="always_ask_explainer">Immer alle Browser auflisten</string>
     <string name="none">Keiner</string>
-    <string name="no_such_app_found">Keine solche App gefunden!</string>
     <string name="save">Speichern</string>
     <string name="app_browsers">Apps</string>
     <string name="github">Github</string>
@@ -60,7 +59,6 @@
     <string name="send_to">Teilen</string>
     <string name="enable_ignore_libredirect_button">Schaltfläche \"LibRedirect ignorieren\" aktivieren</string>
     <string name="use_app_settings_explainer">Die App entscheiden lassen, ob der In-App-Browser genutzt werden soll</string>
-    <string name="no_apps_found">Keine Apps gefunden.</string>
     <string name="normal">Normal</string>
     <string name="request_timeout_explainer">Definiert, wie viele Sekunden LinkSheet für die Herstellung einer Verbindung warten wird. Der Wert 0 deaktiviert die Zeitüberschreitung, dies wird aber nicht empfohlen.</string>
     <string name="resolve_failed">%s fehlgeschlagen: %s</string>
@@ -180,7 +178,6 @@
     <string name="donate_card_headline">Spenden, um LinkSheet zu unterstützen</string>
     <string name="general">Allgemein</string>
     <string name="pretend_to_be_app_explainer">Mit LinkSheetCompat vorgeben, eine native App für unterstützte Domains zu sein</string>
-    <string name="enable_request_private_browsing_button">Schaltfläche \"Privates Surfen anfordern\" aktivieren</string>
     <string name="redact_log">Protokoll schwärzen (empfohlen, bei Deaktivierung können Paket- und Hostnamen bekannt werden)</string>
     <string name="at_least_one_unknown_browser_installer">Mindestens (unbekannt) ein Browser installiert</string>
     <string name="checkmark">Häkchen</string>
@@ -203,7 +200,6 @@
     <string name="add">Hinzufügen</string>
     <string name="follow_redirects_local_cache">Lokalen Weiterleitungs-Zwischenspeicher aktivieren</string>
     <string name="privacy">Datenschutz</string>
-    <string name="enable_request_private_browsing_button_explainer">Zeigt eine Schaltfläche neben Browsern, welche die geklickte URL im privaten Surf-Modus öffnet. Unterstützte Browser: %s</string>
     <string name="pretend_to_be_app">Abfangen von Anfragen nativer Apps</string>
     <string name="shizuku">Shizuku-Integration</string>
     <string name="dont_show_filtered_item_explainer">Zeigt niemals den oberen Abschnitt an, der die zuletzt verwendete App für den angeklickten Host vorschlägt</string>

@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.os.bundleOf
-import app.linksheet.feature.app.AppInfo
+import app.linksheet.feature.app.core.AppInfo
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toAppInfo
 import fe.composekit.component.PreviewThemeNew

@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
-import app.linksheet.feature.app.AppInfoCreator
-import app.linksheet.feature.app.labelSorted
-import app.linksheet.feature.app.pkg.PackageIntentHandler
-import app.linksheet.feature.app.pkg.PackageLauncherService
-import app.linksheet.feature.browser.PrivateBrowsingService
+import app.linksheet.feature.app.core.AppInfoCreator
+import app.linksheet.feature.app.core.labelSorted
+import app.linksheet.feature.app.core.PackageIntentHandler
+import app.linksheet.feature.app.core.PackageLauncherService
+import app.linksheet.feature.browser.core.PrivateBrowsingService
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.downloader.isDownloadable

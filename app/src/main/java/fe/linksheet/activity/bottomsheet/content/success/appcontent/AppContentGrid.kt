@@ -23,16 +23,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.linksheet.feature.browser.Browser
+import app.linksheet.feature.browser.core.Browser
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.AppClickInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.Interaction
-import fe.linksheet.composable.component.appinfo.AppInfoIcon
+import app.linksheet.feature.app.ui.AppInfoIcon
 import fe.linksheet.composable.util.defaultRoundedCornerShape
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 
 
 data class GridItem(val info: ActivityAppInfo, val privateBrowsingBrowser: Browser? = null) {

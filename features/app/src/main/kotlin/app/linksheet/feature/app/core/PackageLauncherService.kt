@@ -1,4 +1,4 @@
-package app.linksheet.feature.app.pkg
+package app.linksheet.feature.app.core
 
 import android.content.Intent
 import android.content.pm.ResolveInfo

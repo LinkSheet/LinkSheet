@@ -1,6 +1,5 @@
 package fe.linksheet.module.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.linksheet.feature.app.usecase.AllAppsUseCase

@@ -3,9 +3,9 @@ package fe.linksheet.feature.engine
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import app.linksheet.feature.app.pkg.PackageIntentHandler
-import app.linksheet.feature.app.pkg.PackageLauncherService
-import app.linksheet.feature.browser.PrivateBrowsingService
+import app.linksheet.feature.app.core.PackageIntentHandler
+import app.linksheet.feature.app.core.PackageLauncherService
+import app.linksheet.feature.browser.core.PrivateBrowsingService
 import app.linksheet.feature.engine.core.*
 import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
 import app.linksheet.feature.engine.core.context.IgnoreLibRedirectExtra

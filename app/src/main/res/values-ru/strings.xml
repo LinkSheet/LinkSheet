@@ -45,7 +45,6 @@
     <string name="use_app_settings_explainer">Разрешить приложению решать, следует ли использовать браузер в приложении</string>
     <string name="display_grid_layout_explainer">Отобразить сетку вместо списка на нижнем листе</string>
     <string name="app_browsers">Приложения</string>
-    <string name="no_apps_found">Приложения не найдены.</string>
     <string name="amp2html">Amp2Html</string>
     <string name="redirect_resolve_type_local_cache">локальный кэш</string>
     <string name="use_unified_preferred_browser_explainer">Включение этого параметра применяет приведенные ниже настройки как к обычной обработке ссылок, так и к обработке ссылок в приложении. Используйте кнопки ниже для переключения между обычным режимом и режимом в приложении, когда он отключен.</string>
@@ -109,7 +108,6 @@
     <string name="about_explainer">Об этом приложении, лицензии</string>
     <string name="shizuku_not_running_explainer">Shizuku не запущен. Нажмите здесь, чтобы открыть Shizuku, затем следуйте инструкциям, чтобы запустить его</string>
     <string name="browser_status">Статус браузера</string>
-    <string name="no_such_app_found">Такого приложения не найдено!</string>
     <string name="request_private_browsing">Приватный</string>
     <string name="always">Всегда</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
@@ -129,7 +127,6 @@
     <string name="loading_link">Загрузка ссылки…</string>
     <string name="confirm">Подтвердить</string>
     <string name="disabled">Отключено</string>
-    <string name="enable_request_private_browsing_button">Включить кнопку «Запросить приватный просмотр»</string>
     <string name="redact_log">Редактировать лог (рекомендуется, отключение может привести к утечке названия пакетов и имен хостов)</string>
     <string name="search">Поиск</string>
     <string name="always_show_package_name">Всегда показывать название пакета</string>
@@ -157,7 +154,6 @@
     <string name="no_log_entries">Эта сессия не содержит логов.</string>
     <string name="add">Добавить</string>
     <string name="follow_redirects_local_cache">Включить локальный кэш перенаправления</string>
-    <string name="enable_request_private_browsing_button_explainer">Отображение кнопки рядом с браузерами, которая открывает выбранный URL-адрес в режиме приватного просмотра. Поддерживаемые браузеры: %s</string>
     <string name="shizuku">Интеграция Shizuku</string>
     <string name="dont_show_filtered_item_explainer">Больше не будет отображаться верхний раздел, в котором предлагается последнее использованное приложение для выбранного хоста</string>
     <string name="feature_flags">Экспериментальные функции</string>

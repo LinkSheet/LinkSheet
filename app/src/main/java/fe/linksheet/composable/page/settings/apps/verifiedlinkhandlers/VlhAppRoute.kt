@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewContainer
-import app.linksheet.feature.app.DomainVerificationAppInfo
-import app.linksheet.feature.app.LinkHandling
+import app.linksheet.feature.app.core.DomainVerificationAppInfo
+import app.linksheet.feature.app.core.LinkHandling
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toDomainVerificationAppInfo
 import fe.android.compose.icon.BitmapIconPainter
@@ -45,12 +45,12 @@ import fe.composekit.component.shape.CustomShapeDefaults
 import fe.composekit.layout.column.group
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.R
-import fe.linksheet.composable.component.appinfo.AppInfoIcon
+import app.linksheet.feature.app.ui.AppInfoIcon
 import fe.linksheet.composable.dialog.DomainVerificationDialogData
 import fe.linksheet.composable.dialog.createState
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
-import fe.linksheet.util.drawBitmap
+import app.linksheet.compose.util.drawBitmap
 import fe.linksheet.util.extension.android.tryStartActivity
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf

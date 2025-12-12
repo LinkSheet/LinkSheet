@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.theme.DialogTitleStyle
-import app.linksheet.feature.app.IAppInfo
+import app.linksheet.feature.app.core.IAppInfo
 import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text

@@ -11,7 +11,7 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.ExperimentalTime
 
-class WikiCacheRepository(
+class WikiCacheRepository internal constructor(
     val dao: WikiCacheDao,
     val clock: Clock,
 ) {

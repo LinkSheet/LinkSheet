@@ -1,9 +1,9 @@
 package fe.linksheet.feature.engine
 
 import android.content.Context
-import app.linksheet.feature.app.pkg.PackageIntentHandler
-import app.linksheet.feature.app.pkg.PackageLauncherService
-import app.linksheet.feature.browser.PrivateBrowsingService
+import app.linksheet.feature.app.core.PackageIntentHandler
+import app.linksheet.feature.app.core.PackageLauncherService
+import app.linksheet.feature.browser.core.PrivateBrowsingService
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.engine.core.EngineScenario
 import app.linksheet.feature.engine.core.LinkEngine

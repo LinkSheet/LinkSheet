@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import app.linksheet.compose.util.animatedComposable
+import app.linksheet.feature.browser.navigation.PrivateBrowsingNavSubGraph
 import app.linksheet.feature.engine.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
 import app.linksheet.feature.shizuku.navigation.ShizukuNavSubGraph
@@ -72,6 +73,7 @@ fun MainNavHost(
         attachSubGraph(ScenarioNavSubGraph, navController)
         attachSubGraph(ShizukuNavSubGraph, navController)
         attachSubGraph(LibRedirectNavSubGraph, navController)
+        attachSubGraph(PrivateBrowsingNavSubGraph, navController)
 
         animatedComposable<MarkdownViewerRoute> { _, route ->
             val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title
@@ -102,8 +104,6 @@ fun MainNavHost(
         animatedComposable<LogTextViewerRoute> { _, route ->
             LogTextSettingsRoute(onBackPressed = onBackPressed, sessionId = route.id, sessionName = route.name)
         }
-
-
 
         animatedComposable<VlhAppRoute> { _, route ->
             VlhAppRoute(onBackPressed = onBackPressed, packageName = route.packageName)
@@ -150,7 +150,11 @@ fun MainNavHost(
         }
 
         animatedComposable(route = bottomSheetSettingsRoute) {
-            BottomSheetSettingsRoute(onBackPressed = onBackPressed, navigate = navigate)
+            BottomSheetSettingsRoute(
+                onBackPressed = onBackPressed,
+                navigate = navigate,
+                navigateNew = navigateNew
+            )
         }
 
         if (AndroidVersion.isAtLeastApi30R()) {

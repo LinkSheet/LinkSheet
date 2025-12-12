@@ -1,8 +1,9 @@
-package app.linksheet.feature.browser
+package app.linksheet.feature.browser.core
 
 import android.content.Context
+import app.linksheet.feature.browser.R
 
-fun PrivateBrowsingService(context: Context): PrivateBrowsingService {
+internal fun PrivateBrowsingService(context: Context): PrivateBrowsingService {
     val browsers = arrayOf(
         FirefoxPrivateBrowser(context.resources.getStringArray(R.array.firefox)),
         OtherBrowser(context.resources.getStringArray(R.array.chromium)),

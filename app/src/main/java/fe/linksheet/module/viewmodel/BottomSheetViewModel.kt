@@ -13,24 +13,22 @@ import android.os.Environment
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.net.toUri
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.browser.Browser
-import app.linksheet.feature.browser.PrivateBrowsingService
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.browser.core.Browser
+import app.linksheet.feature.browser.core.PrivateBrowsingService
 import app.linksheet.feature.downloader.DownloadCheckResult
 import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.*
-import fe.linksheet.util.extension.android.getSystemServiceOrThrow
-import fe.linksheet.extension.android.startActivityWithConfirmation
 import fe.linksheet.extension.koin.injectLogger
-import app.linksheet.feature.app.ActivityAppInfo
+import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -41,6 +39,7 @@ import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.resolver.util.LaunchMainIntent
 import fe.linksheet.module.resolver.workaround.GithubWorkaround
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.util.extension.android.getSystemServiceOrThrow
 import fe.linksheet.util.extension.android.tryStartActivity
 import fe.linksheet.util.intent.StandardIntents
 import fe.std.result.isSuccess
@@ -78,7 +77,7 @@ class BottomSheetViewModel(
     val resolveViaToast = preferenceRepository.asViewModelState(AppPreferences.notifications.resolveViaToast)
     val resolveViaFailedToast = preferenceRepository.asViewModelState(AppPreferences.notifications.resolveViaFailedToast)
     val previewUrl = preferenceRepository.asViewModelState(AppPreferences.previewUrl)
-    val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.enableRequestPrivateBrowsingButton)
+    val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.browser.enable)
     val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.hideBottomSheetChoiceButtons)
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enable)

@@ -5,7 +5,7 @@ import android.net.Uri
 import androidx.compose.runtime.Stable
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.libredirect.LibRedirectResult
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 import fe.linksheet.util.intent.parser.UriException
 import fe.std.uri.StdUrl
 import me.saket.unfurl.UnfurlResult

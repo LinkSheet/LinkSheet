@@ -8,8 +8,10 @@ import fe.buildlogic.common.extension.addCompilerOptions
 import fe.buildlogic.common.extension.addPluginOptions
 
 plugins {
-    id("com.android.library")
     kotlin("android")
+    kotlin("plugin.compose")
+    kotlin("plugin.serialization")
+    id("com.android.library")
     id("kotlin-parcelize")
     id("com.gitlab.grrfe.new-build-logic-plugin")
 }
@@ -31,23 +33,26 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":compose"))
     implementation(project(":util"))
     implementation(project(":test-fake"))
-    implementation(AndroidX.compose.ui.graphics)
-    testImplementation(Testing.robolectric)
     compileOnly(project(":hidden-api"))
+    implementation(AndroidX.compose.ui)
+    implementation(AndroidX.compose.ui.toolingPreview)
+    implementation(AndroidX.compose.foundation)
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
 
     implementation(_1fexd.composeKit.core)
-    implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.compose.core)
+    implementation(_1fexd.composeKit.compose.component)
 
     implementation(Grrfe.gsonExt.core)
     implementation("io.github.reandroid:ARSCLib:1.3.8")
     implementation(AndroidX.core.ktx)
 
+    testImplementation(Testing.robolectric)
     testImplementation(AndroidX.test.ext.junit.ktx)
     testImplementation(project(":test-core"))
     testImplementation(Grrfe.std.test)

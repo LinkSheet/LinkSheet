@@ -2,14 +2,14 @@ package fe.linksheet.module.viewmodel
 
 
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.app.AppInfo
+import app.linksheet.feature.app.applist.AppListCommon
+import app.linksheet.feature.app.core.AppInfo
 import app.linksheet.feature.app.usecase.AllAppsUseCase
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.viewmodel.common.applist.AppListCommon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch

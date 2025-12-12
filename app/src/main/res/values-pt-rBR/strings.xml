@@ -26,7 +26,6 @@
     <string name="browser_mode">Modo de navegador</string>
     <string name="browser_mode_subtitle">Escolha os navegadores a serem mostrados</string>
     <string name="always_ask_explainer">Sempre listar todos os navegadores</string>
-    <string name="no_such_app_found">Este app não foi encontrado!</string>
     <string name="always_show_package_name">Sempre mostrar o nome do pacote</string>
     <string name="default_apps_subtitle">Definir apps padrão para hosts</string>
     <string name="send_to">Compartilhar para</string>
@@ -148,9 +147,6 @@
     <string name="log_files">Sessões anteriores</string>
     <string name="current_session">Sessão atual</string>
     <string name="resolve_failed">%s falhou: %s</string>
-    <string name="no_apps_found">Nenhum app foi encontrado.</string>
-    <string name="enable_request_private_browsing_button">Ativar o botão \"Solicitar navegação privada\"</string>
-    <string name="enable_request_private_browsing_button_explainer">Exibe um botão ao lado dos navegadores que abre o URL clicado no modo de navegação privada. Navegadores compatíveis: %s</string>
     <string name="use_unified_preferred_browser_explainer">A ativação dessa opção aplica as configurações abaixo ao tratamento de links Normal e Incorporado. Use os botões abaixo para alternar entre os modos Normal e Incorporado quando desativado.</string>
     <string name="enable_amp2html_explainer">Redireciona as páginas AMP para sua versão normal na Web. Isso pode ter <annotation url-id="privacy-amp2html">implicações relacionadas à privacidade</annotation></string>
     <string name="advanced">Avançado</string>

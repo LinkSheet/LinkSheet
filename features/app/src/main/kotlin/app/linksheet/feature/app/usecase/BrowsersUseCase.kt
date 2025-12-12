@@ -1,8 +1,8 @@
 package app.linksheet.feature.app.usecase
 
-import app.linksheet.feature.app.ActivityAppInfo
-import app.linksheet.feature.app.AppInfoCreator
-import app.linksheet.feature.app.pkg.PackageIntentHandler
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.app.core.AppInfoCreator
+import app.linksheet.feature.app.core.PackageIntentHandler
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

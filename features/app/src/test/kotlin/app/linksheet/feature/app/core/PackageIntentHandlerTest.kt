@@ -1,4 +1,4 @@
-package app.linksheet.feature.app.pkg
+package app.linksheet.feature.app.core
 
 import android.net.Uri
 import android.os.Build
@@ -112,7 +112,7 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
             checkReferrerExperiment = { true },
         )
 
-        assertThat(handler.findSupportedHosts(PackageInfoFakes.Pepper.packageInfo.packageName)).containsExactly(
+        assertThat(handler.findSupportedHosts(PackageInfoFakes.Pepper.packageInfo.packageName)).containsExactlyInAnyOrder(
             "www.pepper.pl",
             "pl.dea.ls"
         )

@@ -1,7 +1,7 @@
 package fe.linksheet.module.repository.whitelisted
 
 import android.content.ComponentName
-import app.linksheet.feature.app.ActivityAppInfo
+import app.linksheet.feature.app.core.ActivityAppInfo
 
 
 data class WhitelistedBrowserInfo(

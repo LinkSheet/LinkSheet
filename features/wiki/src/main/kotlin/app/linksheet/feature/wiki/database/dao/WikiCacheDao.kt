@@ -1,9 +1,9 @@
-package fe.linksheet.feature.wiki.database.dao
+package app.linksheet.feature.wiki.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
 import app.linksheet.api.database.BaseDao
-import fe.linksheet.feature.wiki.database.entity.WikiCache
+import app.linksheet.feature.wiki.database.entity.WikiCache
 
 @Dao
 interface WikiCacheDao : BaseDao<WikiCache> {

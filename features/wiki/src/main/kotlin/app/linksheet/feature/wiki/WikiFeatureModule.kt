@@ -1,9 +1,9 @@
 @file:OptIn(ExperimentalTime::class)
 
-package fe.linksheet.feature.wiki
+package app.linksheet.feature.wiki
 
-import fe.linksheet.feature.wiki.database.WikiDatabase
-import fe.linksheet.feature.wiki.database.repository.WikiCacheRepository
+import app.linksheet.feature.wiki.database.WikiDatabase
+import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 

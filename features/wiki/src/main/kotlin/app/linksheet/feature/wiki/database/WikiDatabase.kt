@@ -1,4 +1,4 @@
-package fe.linksheet.feature.wiki.database
+package app.linksheet.feature.wiki.database
 
 import android.content.Context
 import androidx.room.Database

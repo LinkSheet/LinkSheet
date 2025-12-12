@@ -1,10 +1,10 @@
 @file:OptIn(ExperimentalTime::class)
 
-package fe.linksheet.feature.wiki.database.repository
+package app.linksheet.feature.wiki.database.repository
 
+import app.linksheet.feature.wiki.database.dao.WikiCacheDao
+import app.linksheet.feature.wiki.database.entity.WikiCache
 import fe.linksheet.extension.kotlin.nowMillis
-import fe.linksheet.feature.wiki.database.dao.WikiCacheDao
-import fe.linksheet.feature.wiki.database.entity.WikiCache
 import fe.linksheet.util.CacheResult
 import kotlin.time.Clock
 import kotlin.time.Duration
@@ -26,8 +26,8 @@ class WikiCacheRepository internal constructor(
         }
     }
 
-    suspend fun update(docCache: WikiCache, text: String) {
-        val cache = docCache.copy(timestamp = clock.nowMillis(), text = text)
+    suspend fun update(cache: WikiCache, text: String) {
+        val cache = cache.copy(timestamp = clock.nowMillis(), text = text)
         insert(cache)
     }
 
@@ -36,7 +36,7 @@ class WikiCacheRepository internal constructor(
         insert(cache)
     }
 
-    suspend fun insert(docCache: WikiCache) {
-        dao.insert(docCache)
+    suspend fun insert(cache: WikiCache) {
+        dao.insert(cache)
     }
 }

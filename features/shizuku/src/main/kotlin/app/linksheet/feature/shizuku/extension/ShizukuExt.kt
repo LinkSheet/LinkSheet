@@ -1,4 +1,4 @@
-package app.linksheet.feature.shizuku
+package app.linksheet.feature.shizuku.extension
 
 import android.os.IBinder
 import android.os.IInterface

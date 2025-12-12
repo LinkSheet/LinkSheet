@@ -1,4 +1,4 @@
-package fe.linksheet.feature.wiki.usecase
+package app.linksheet.feature.wiki.usecase
 
 import fe.httpkt.Request
 import fe.httpkt.ext.isHttpSuccess

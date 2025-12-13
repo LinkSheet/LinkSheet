@@ -18,7 +18,7 @@ import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.usecase.AllAppsUseCase
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
-import app.linksheet.feature.browser.core.PrivateBrowsingService
+import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.libredirect.LibRedirectResolver
@@ -59,7 +59,6 @@ import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.language.AppLocaleService
-import mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -91,6 +90,7 @@ import fe.linksheet.testlib.core.BaseUnitTest
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import kotlinx.coroutines.CoroutineDispatcher
+import mozilla.components.support.base.log.logger.Logger
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -203,7 +203,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             ImageLoader::class,
             IntentResolver::class,
             IntentLauncher::class,
-            PrivateBrowsingService::class
+            PrivateBrowserUseCase::class
         ),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
         definition<Downloader>(HttpClient::class),
@@ -226,6 +226,9 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<SingleBrowserViewModel>(
             PreferredBrowserViewModel.BrowserType::class,
             BrowsersUseCase::class
+        ),
+        definition<SelectDomainsConfirmationViewModel>(
+            AllAppsUseCase::class
         )
     )
 

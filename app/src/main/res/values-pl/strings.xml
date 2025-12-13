@@ -583,4 +583,15 @@
     <string name="settings_scenario__text_scenarios">Konfiguruj scenariusze</string>
     <string name="settings_scenario__text_data_type">Typ danych</string>
     <string name="settings_scenario__text_value">Wartość</string>
+    <string name="browser_mode_divider">Tryb</string>
+    <string name="tap_customization__action_always_open_app">Ustaw aplikację jako domyślną dla linku i otwórz</string>
+    <string name="settings_apps_browsers_mode__title_selected">Pojedyncza przeglądarka</string>
+    <string name="settings_apps_browsers_mode__subtitle_selected">Wybrana</string>
+    <string name="settings_apps_browsers_mode__text_none">Brak</string>
+    <string name="generic__label_permission_interconnect">Konfiguruj LinkSheet</string>
+    <string name="generic__description_permission_interconnect">Konfiguruj LinkSheet</string>
+    <string name="notification__channel_interconnect_name">Interconnect</string>
+    <string name="notification__channel_interconnect_description">Powiadomienie na pierwszym planie, gdy usługa Interconnect jest aktywna</string>
+    <string name="notification_interconnect_name">Interconnect</string>
+    <string name="notification_interconnect_description">Interconnect jest aktywny</string>
 </resources>

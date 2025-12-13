@@ -2,4 +2,10 @@
 <resources>
     <string name="enable_request_private_browsing_button">Przycisk „Tryb prywatny”</string>
     <string name="enable_request_private_browsing_button_explainer">Wyświetla przycisk obok przeglądarek, który otwiera kliknięty adres URL w trybie przeglądania prywatnego.</string>
+    <string name="settings_private_browsing__title_private_browsing">Prywatne przeglądanie</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">Włącz prywatne przeglądanie</string>
+    <string name="settings_private_browsing__divider_configuration">Konfiguracja</string>
+    <string name="settings_private_browsing_browsers__title_browsers">Włączone prywatne przeglądarki</string>
+    <string name="settings_private_browsing__title_allowed_browsers">Dozwolone przeglądarki</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d przegląd.</string>
 </resources>

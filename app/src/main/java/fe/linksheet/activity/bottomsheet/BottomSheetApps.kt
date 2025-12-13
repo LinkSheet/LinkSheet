@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,8 +21,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import app.linksheet.feature.browser.core.Browser
 import app.linksheet.compose.preview.PreviewContainer
+import app.linksheet.compose.theme.HkGroteskFontFamily
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.browser.core.Browser
+import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.testing.asPreferredApp
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toActivityAppInfo
@@ -33,14 +36,11 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
 import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
-import app.linksheet.compose.theme.HkGroteskFontFamily
-import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.app.core.ActivityAppInfo
-import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.feature.profile.CrossProfile
 import fe.linksheet.feature.profile.ProfileStatus
 import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.feature.profile.UserProfileInfo
+import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.ResolveModuleStatus
@@ -66,7 +66,7 @@ fun BottomSheetApps(
     bottomSheetNativeLabel: Boolean,
     gridLayout: Boolean,
     appListSelectedIdx: Int,
-    isPrivateBrowser: (Boolean, ActivityAppInfo) -> Browser?,
+    isPrivateBrowser: suspend (Boolean, ActivityAppInfo) -> Browser?,
     showToast: (Int, Int, Boolean) -> Unit,
     copyUrl: (String, String) -> Unit,
     startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
@@ -115,7 +115,10 @@ fun BottomSheetApps(
         }
 
         if (hasPreferredApp) {
-            val privateBrowser = isPrivateBrowser(hasUri, result.filteredItem)
+            var privateBrowser by remember { mutableStateOf<Browser?>(null) }
+            LaunchedEffect(key1 = hasUri, key2 = result.filteredItem) {
+                privateBrowser = isPrivateBrowser(hasUri, result.filteredItem)
+            }
 
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 PreferredAppColumn(

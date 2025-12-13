@@ -14,16 +14,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import app.linksheet.feature.browser.ui.PrivateBrowsingListItem
-import app.linksheet.feature.browser.ui.PrivateBrowsingListItemDefaults
+import app.linksheet.feature.browser.ui.privateBrowsingListItem
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.android.compose.feedback.FeedbackType
@@ -32,7 +31,6 @@ import fe.android.compose.feedback.wrap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.preference.helper.Preference
-import fe.android.preference.helper.compose.StateMappedPreference
 import fe.composekit.component.ContentType
 import fe.composekit.component.icon.FilledIcon
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
@@ -52,17 +50,27 @@ import fe.linksheet.navigation.Routes
 import org.koin.androidx.compose.koinViewModel
 
 
-sealed class TapType(@param:StringRes val headline: Int, @param:StringRes val dialogTitle: Int) :
-    GroupValueProvider<Int> {
+sealed class TapType(
+    @param:StringRes val headline: Int,
+    @param:StringRes val dialogTitle: Int
+) : GroupValueProvider<Int> {
+
     override val key: Int = headline
 
-    data object Single :
-        TapType(R.string.tap_customization_single_tap, R.string.tap_customization_dialog_title_single_tap)
+    data object Single : TapType(
+        headline = R.string.tap_customization_single_tap,
+        dialogTitle = R.string.tap_customization_dialog_title_single_tap
+    )
 
-    data object Double :
-        TapType(R.string.tap_customization_double_tap, R.string.tap_customization_dialog_title_double_tap)
+    data object Double : TapType(
+        headline = R.string.tap_customization_double_tap,
+        dialogTitle = R.string.tap_customization_dialog_title_double_tap
+    )
 
-    data object Long : TapType(R.string.tap_customization_long_tap, R.string.tap_customization_dialog_title_long_tap)
+    data object Long : TapType(
+        headline = R.string.tap_customization_long_tap,
+        dialogTitle = R.string.tap_customization_dialog_title_long_tap
+    )
 }
 
 
@@ -76,9 +84,9 @@ fun BottomSheetSettingsRoute(
     val activity = LocalActivity.current
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange {
         if (!viewModel.usageStatsPermission.check()) {
-            viewModel.usageStatsSorting.update(false)
+            viewModel.usageStatsSorting(false)
         } else if (viewModel.wasTogglingUsageStatsSorting) {
-            viewModel.usageStatsSorting.update(true)
+            viewModel.usageStatsSorting(true)
             viewModel.wasTogglingUsageStatsSorting = false
         }
     }
@@ -102,7 +110,7 @@ fun BottomSheetSettingsRoute(
 
         divider(id = R.string.base_config)
 
-        group(size = 4 + if (AndroidVersion.isAtLeastApi30R()) 1 else 0) {
+        group(base = 4, AndroidVersion.isAtLeastApi30R()) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
                 val updateStatsSorting by viewModel.usageStatsSorting.collectAsStateWithLifecycle()
 
@@ -116,7 +124,7 @@ fun BottomSheetSettingsRoute(
                                 viewModel.usageStatsPermission.request(activity)
                                 viewModel.wasTogglingUsageStatsSorting = true
                             } else {
-                                viewModel.usageStatsSorting.update(it)
+                                viewModel.usageStatsSorting(it)
                             }
                         }
                     },
@@ -126,14 +134,10 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
-            item(key = PrivateBrowsingListItemDefaults.Key) { padding, shape ->
-                PrivateBrowsingListItem(
-                    shape = shape,
-                    padding = padding,
-                    statePreference = viewModel.enableRequestPrivateBrowsingButton,
-                    navigate = navigateNew
-                )
-            }
+            privateBrowsingListItem(
+                statePreference = viewModel.enableRequestPrivateBrowsingButton,
+                navigate = navigateNew
+            )
 
             item(key = R.string.dont_show_filtered_item) { padding, shape ->
                 PreferenceSwitchListItem(
@@ -283,64 +287,6 @@ private fun TapConfigGroupItem(
                 icon = Icons.Outlined.KeyboardArrowDown.iconPainter,
                 contentDescription = null
             )
-
-
-//                        FilledTonalIconButton(onClick = {}) {
-//                            Icon(imageVector = Icons.Outlined.Tune, contentDescription = stringResource(id = R.string.settings))
-//                        }
-////                        FilledIcon(
-////                            imageVector = Icons.Outlined.Tune,
-////                            contentDescription = stringResource(id = R.string.settings)
-////                        )
-        }
-    )
-}
-
-@Composable
-private fun TapConfigGroupItem(
-    preference: StateMappedPreference<TapConfig, String>,
-    type: TapType,
-    pref: StateMappedPreference<TapConfig, String>,
-    padding: PaddingValues,
-    shape: Shape,
-) {
-    val interaction = LocalHapticFeedbackInteraction.current
-
-    val state = rememberResultDialogState<TapConfig>()
-    val rotation by animateFloatAsState(targetValue = if (state.isOpen) 180f else 0f, label = "Arrow rotation")
-
-    ResultDialog(
-        state = state, onClose = { newConfig ->
-            preference(newConfig)
-            interaction.perform(FeedbackType.Confirm)
-        }) {
-        TapConfigDialog(
-            type = type,
-            currentConfig = preference.value,
-            onDismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
-            state::close
-        )
-    }
-
-    ClickableShapeListItem(
-        shape = shape,
-        padding = padding,
-        onClick = state::open,
-        role = Role.Button,
-        headlineContent = textContent(type.headline),
-        supportingContent = textContent(pref.value.id),
-        trailingContent = {
-            FilledIcon(
-                modifier = Modifier.rotate(rotation),
-                iconSize = 24.dp,
-                containerSize = 28.dp,
-                colors = IconButtonDefaults.filledIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer
-                ),
-                icon = Icons.Outlined.KeyboardArrowDown.iconPainter,
-                contentDescription = null
-            )
-
 
 //                        FilledTonalIconButton(onClick = {}) {
 //                            Icon(imageVector = Icons.Outlined.Tune, contentDescription = stringResource(id = R.string.settings))

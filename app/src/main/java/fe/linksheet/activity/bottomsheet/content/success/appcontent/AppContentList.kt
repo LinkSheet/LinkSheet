@@ -11,10 +11,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,8 +19,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.compose.debug.LocalUiDebug
+import app.linksheet.compose.debugBorder
+import app.linksheet.compose.preview.PreviewDebugProvider
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.browser.core.Browser
 import app.linksheet.testing.fake.PackageInfoFakes
+import app.linksheet.testing.fake.toActivityAppInfo
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
@@ -31,13 +35,6 @@ import fe.linksheet.activity.bottomsheet.AppClickInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.Interaction
-import app.linksheet.compose.debugBorder
-import app.linksheet.feature.app.core.ActivityAppInfo
-import app.linksheet.compose.debug.LocalUiDebug
-import androidx.core.net.toUri
-import app.linksheet.feature.browser.core.Browser
-import app.linksheet.compose.preview.PreviewDebugProvider
-import app.linksheet.testing.fake.toActivityAppInfo
 
 @Composable
 fun AppContentList(
@@ -49,7 +46,7 @@ fun AppContentList(
     showNativeLabel: Boolean,
     showPackage: Boolean,
     dispatch: (Interaction) -> Unit,
-    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
+    isPrivateBrowser: suspend (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
@@ -70,6 +67,11 @@ fun AppContentList(
                 items = apps,
                 key = { _, item -> item.flatComponentName }
             ) { index, info ->
+                var privateBrowser by remember { mutableStateOf<Browser?>(null) }
+                LaunchedEffect(key1 = uri, key2 = info) {
+                    privateBrowser = isPrivateBrowser(uri != null, info)
+                }
+
                 AppListItem(
                     appInfo = info,
                     selected = if (!hasPreferredApp) index == appListSelectedIdx else null,
@@ -77,7 +79,7 @@ fun AppContentList(
                         dispatch(AppClickInteraction(info, modifier, index, type))
                     },
                     preferred = false,
-                    privateBrowser = isPrivateBrowser(uri != null, info),
+                    privateBrowser = privateBrowser,
                     showPackage = showPackage,
                     showNativeLabel = showNativeLabel,
                 )

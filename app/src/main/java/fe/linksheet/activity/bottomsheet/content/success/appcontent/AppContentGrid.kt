@@ -1,7 +1,10 @@
 package fe.linksheet.activity.bottomsheet.content.success.appcontent
 
 import android.net.Uri
-import androidx.compose.foundation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -13,6 +16,8 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +28,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.app.ui.AppInfoIcon
 import app.linksheet.feature.browser.core.Browser
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
@@ -30,9 +37,7 @@ import fe.linksheet.activity.bottomsheet.AppClickInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
 import fe.linksheet.activity.bottomsheet.Interaction
-import app.linksheet.feature.app.ui.AppInfoIcon
 import fe.linksheet.composable.util.defaultRoundedCornerShape
-import app.linksheet.feature.app.core.ActivityAppInfo
 
 
 data class GridItem(val info: ActivityAppInfo, val privateBrowsingBrowser: Browser? = null) {
@@ -41,10 +46,10 @@ data class GridItem(val info: ActivityAppInfo, val privateBrowsingBrowser: Brows
     }
 }
 
-private fun createGridItems(
+private suspend fun createGridItems(
     apps: List<ActivityAppInfo>,
     uri: Uri?,
-    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
+    isPrivateBrowser: suspend (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
 ): List<GridItem> {
     val items = mutableListOf<GridItem>()
 
@@ -70,11 +75,13 @@ fun AppContentGrid(
     hideChoiceButtons: Boolean,
     showPackage: Boolean,
     dispatch: (Interaction) -> Unit,
-    isPrivateBrowser: (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
+    isPrivateBrowser: suspend (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
     showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
-    val items = remember(apps, uri) {
-        createGridItems(apps, uri, isPrivateBrowser)
+    val items = remember { mutableStateListOf<GridItem>() }
+    LaunchedEffect(key1 = apps, key2 = uri) {
+        items.clear()
+        items.addAll(createGridItems(apps, uri, isPrivateBrowser))
     }
 
     AppContent(

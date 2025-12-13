@@ -15,7 +15,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.viewModelScope
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
-import app.linksheet.feature.browser.core.PrivateBrowsingService
+import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.downloader.DownloadCheckResult
 import coil3.ImageLoader
 import fe.linksheet.R
@@ -63,7 +63,7 @@ class BottomSheetViewModel(
     val intentResolver: IntentResolver,
     val imageLoader: ImageLoader,
     val intentLauncher: IntentLauncher,
-    private val privateBrowsingService: PrivateBrowsingService,
+    private val privateBrowserUseCase: PrivateBrowserUseCase,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
     private val logger by injectLogger<BottomSheetViewModel>()
     val clipboardManager = context.getSystemServiceOrThrow<ClipboardManager>()
@@ -235,7 +235,7 @@ class BottomSheetViewModel(
             )
         }
 
-        if(config is TapConfig.AlwaysOpenApp) {
+        if (config is TapConfig.AlwaysOpenApp) {
             return makeOpenAppIntent(
                 info = info,
                 intent = result,
@@ -297,7 +297,10 @@ class BottomSheetViewModel(
         return null
     }
 
-    fun isKnownBrowser(packageName: String, privateOnly: Boolean): Browser? {
-        return privateBrowsingService.isKnownBrowser(packageName, privateOnly)
+    suspend fun isAllowedKnownBrowser(
+        componentName: ComponentName,
+        privateOnly: Boolean
+    ): Browser? = withContext(Dispatchers.IO) {
+        privateBrowserUseCase.isAllowedKnownBrowser(componentName, privateOnly)
     }
 }

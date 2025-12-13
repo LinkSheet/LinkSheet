@@ -84,7 +84,7 @@ fun <P : Preference<T, NT>, T : Any, NT> PreferenceRadioButtonListItem(
         colors = colors,
         position = position,
         selected = preference == value,
-        onSelect = { statePreference.update(value) },
+        onSelect = { statePreference(value) },
         overlineContent = overlineContent,
         headlineContent = headlineContent,
         supportingContent = supportingContent,

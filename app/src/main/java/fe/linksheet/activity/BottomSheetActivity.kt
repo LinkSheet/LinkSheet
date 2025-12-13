@@ -18,6 +18,8 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import app.linksheet.compose.debug.LocalUiDebug
 import app.linksheet.compose.debugBorder
+import app.linksheet.compose.extension.collectOnIO
+import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
 import fe.composekit.extension.setText
 import fe.composekit.preference.collectAsStateWithLifecycle
@@ -31,18 +33,18 @@ import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.extension.koin.injectLogger
-import app.linksheet.compose.extension.collectOnIO
-import app.linksheet.feature.app.core.ActivityAppInfo
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction
 import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.resolver.util.LaunchRawIntent
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.util.intent.Intents
+import fe.linksheet.util.intent.StandardIntents
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mozilla.components.support.utils.toSafeIntent
@@ -85,7 +87,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val intent = result.data
             ?.getStringExtra(TextEditorActivity.EXTRA_TEXT)
             ?.toUri()
-            ?.let { Intents.createSelfIntent(it) }
+            ?.let { StandardIntents.createSelfIntent(it) }
 
         onNewIntent(intent!!)
     }
@@ -287,9 +289,9 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
     }
 
-    private fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): Browser? {
+    private suspend fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): Browser? {
         if (!viewModel.enableRequestPrivateBrowsingButton.value || !hasUri) return null
-        return viewModel.isKnownBrowser(info.packageName, privateOnly = true)
+        return viewModel.isAllowedKnownBrowser(info.componentName, privateOnly = true)
     }
 
     private suspend fun maybeHandleResult(result: IntentResolveResult?): LaunchIntent? {

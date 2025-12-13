@@ -27,7 +27,7 @@ fun PrivateBrowsingBrowsersSettings(
 ) {
     val items by viewModel.list.appsFiltered.collectAsStateWithLifecycle()
     val searchFilter by viewModel.list.searchQuery.collectAsStateWithLifecycle()
-    val all by viewModel.all.collectAsStateWithLifecycle(initialValue = emptySet())
+    val all by viewModel.allowedBrowsers.collectAsStateWithLifecycle(initialValue = emptySet())
 
     val listState = remember(items?.size, searchFilter) {
         listState(items, searchFilter)

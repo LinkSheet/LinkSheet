@@ -119,7 +119,7 @@ private fun LocaleDropdown(
     ) {
         TextField(
             modifier = Modifier
-                .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
                 .fillMaxWidth(),
             value = selected?.displayName ?: "",
             onValueChange = {},

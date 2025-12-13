@@ -3,6 +3,7 @@ package app.linksheet.feature.browser
 import app.linksheet.feature.browser.core.PrivateBrowsingService
 import app.linksheet.feature.browser.database.PrivateBrowsingDatabase
 import app.linksheet.feature.browser.database.repository.PrivateBrowsingBrowserRepository
+import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.browser.viewmodel.PrivateBrowsingBrowserSettingsViewModel
 import app.linksheet.feature.browser.viewmodel.PrivateBrowsingSettingsViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +18,12 @@ val PrivateBrowsingModule = module {
     }
     factory {
         PrivateBrowsingBrowserRepository(dao = get<PrivateBrowsingDatabase>().privateBrowsingBrowserDao())
+    }
+    factory {
+        PrivateBrowserUseCase(
+            repository = get(),
+            privateBrowsingService = get()
+        )
     }
     viewModelOf(::PrivateBrowsingSettingsViewModel)
     viewModel {

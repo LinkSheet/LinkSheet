@@ -7,14 +7,14 @@ import app.linksheet.feature.browser.preference.BrowserPreferences
 import kotlinx.coroutines.flow.map
 
 class PrivateBrowsingSettingsViewModel internal constructor(
-    private val repository: PrivateBrowsingBrowserRepository,
+    repository: PrivateBrowsingBrowserRepository,
     preferenceRepository: AppPreferenceRepository,
     browserPreferences: BrowserPreferences,
 ) : ViewModel() {
 
     val enabled = preferenceRepository.asViewModelState(browserPreferences.enable)
 
-    val all = repository.getAll().map { list ->
+    val allowedBrowsers = repository.getAll().map { list ->
         list.mapTo(LinkedHashSet()) { it.flatComponentName }
     }
 }

@@ -24,7 +24,6 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import fe.linksheet.composable.util.groupSize
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.navigation.logViewerSettingsRoute
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
@@ -49,7 +48,7 @@ fun DebugSettingsRoute(
 
     val disableLogging by viewModel.disableLogging.collectAsStateWithLifecycle()
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.debug), onBackPressed = onBackPressed) {
-        group(size = groupSize(3, viewModel.miuiCompatRequired, disableLogging)) {
+        group(base = 3, viewModel.miuiCompatRequired, disableLogging) {
             item(key = R.string.logs) { padding, shape ->
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),

@@ -4,18 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import app.linksheet.compose.list.item.PreferenceSwitchListItem
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.SliderListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
-import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.R
-import app.linksheet.compose.list.item.PreferenceSwitchListItem
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import fe.linksheet.composable.util.groupSize
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
+import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.web.Darknet
 import org.koin.androidx.compose.koinViewModel
 
@@ -50,7 +49,7 @@ fun FollowRedirectsSettingsRoute(
 
         divider(id =  R.string.options)
 
-        group(size = groupSize(6, LinkSheetAppConfig.isPro())) {
+        group(base = 6, LinkSheetAppConfig.isPro()) {
             item(key = R.string.follow_redirects_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
                     enabled = contentSet,
@@ -131,7 +130,7 @@ fun FollowRedirectsSettingsRoute(
                     padding = padding,
                     valueRange = 0f..30f,
                     value = requestTimeout.toFloat(),
-                    onValueChange = { viewModel.requestTimeout.update(it.toInt()) },
+                    onValueChange = { viewModel.requestTimeout(it.toInt()) },
                     valueFormatter = { it.toInt().toString() },
                     headlineContent = textContent(R.string.request_timeout),
                     supportingContent = annotatedStringResource(R.string.request_timeout_explainer),

@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import app.linksheet.compose.list.item.PreferenceSwitchListItem
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.isGranted
@@ -17,12 +19,10 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.SliderListItem
 import fe.composekit.component.list.item.type.SwitchListItem
-import fe.linksheet.R
-import app.linksheet.compose.list.item.PreferenceSwitchListItem
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.linksheet.R
+import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -43,11 +43,11 @@ fun DownloaderSettingsRoute(
         item(key = R.string.enable_downloader, contentType = ContentType.SingleGroupItem) {
             SwitchListItem(
                 checked = enableDownloader,
-                onCheckedChange = {
+                onCheckedChange = { value ->
                     requestDownloadPermission(
                         writeExternalStoragePermissionState,
-                        { viewModel.enableDownloader.update(it) },
-                        it
+                        { viewModel.enableDownloader(it) },
+                        value
                     )
                 },
                 position = ContentPosition.Trailing,
@@ -79,7 +79,7 @@ fun DownloaderSettingsRoute(
                     padding = padding,
                     valueRange = 0f..30f,
                     value = requestTimeout.toFloat(),
-                    onValueChange = { viewModel.requestTimeout.update(it.toInt()) },
+                    onValueChange = { viewModel.requestTimeout(it.toInt()) },
                     valueFormatter = { it.toInt().toString() },
                     headlineContent = textContent(R.string.request_timeout),
                     supportingContent = annotatedStringResource(R.string.request_timeout_explainer),

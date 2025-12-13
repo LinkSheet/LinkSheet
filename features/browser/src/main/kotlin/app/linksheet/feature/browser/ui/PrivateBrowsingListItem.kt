@@ -10,11 +10,22 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.preference.helper.Preference
 import fe.composekit.component.CommonDefaults
 import fe.composekit.component.shape.CustomShapeDefaults
+import fe.composekit.layout.column.SaneLazyColumnGroupScope
 import fe.composekit.preference.ViewModelStatePreference
 import fe.composekit.route.Route
 
-object PrivateBrowsingListItemDefaults {
-    val Key = R.string.enable_request_private_browsing_button
+fun SaneLazyColumnGroupScope.privateBrowsingListItem(
+    statePreference: ViewModelStatePreference<Boolean, Boolean, Preference.Default<Boolean>>,
+    navigate: (Route) -> Unit,
+) {
+    item(key = R.string.settings_private_browsing__title_enable_private_browsing) { padding, shape ->
+        PrivateBrowsingListItem(
+            shape = shape,
+            padding = padding,
+            statePreference = statePreference,
+            navigate = navigate
+        )
+    }
 }
 
 @Composable
@@ -29,7 +40,7 @@ fun PrivateBrowsingListItem(
         padding = padding,
         statePreference = statePreference,
         onContentClick = { navigate(PrivateBrowsingRoute) },
-        headlineContent = textContent(id = R.string.settings_private_browsing__title_private_browsing),
+        headlineContent = textContent(id = R.string.settings_private_browsing__title_enable_private_browsing),
         supportingContent = textContent(
             id = R.string.enable_request_private_browsing_button_explainer
         )

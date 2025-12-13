@@ -29,7 +29,7 @@ class PrivateBrowsingBrowserSettingsViewModel internal constructor(
         )
     }
 
-    val all = repository.getAll().map { list ->
+    val allowedBrowsers = repository.getAll().map { list ->
         list.mapTo(LinkedHashSet()) { it.flatComponentName }
     }
 

@@ -1,15 +1,19 @@
 package fe.linksheet.extension.compose
 
-import androidx.compose.runtime.*
-import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.platform.Clipboard
+import fe.composekit.extension.getFirstText
 
 @Composable
-fun ClipboardManager.ObserveClipboard(onChanged: (String?) -> Unit) {
+fun Clipboard.ObserveClipboard(onChanged: (String?) -> Unit) {
     val callback by rememberUpdatedState(onChanged)
 
     DisposableEffect(nativeClipboard) {
         val listener = android.content.ClipboardManager.OnPrimaryClipChangedListener {
-            callback(getText()?.text)
+            callback(nativeClipboard.getFirstText())
         }
 
         nativeClipboard.addPrimaryClipChangedListener(listener)

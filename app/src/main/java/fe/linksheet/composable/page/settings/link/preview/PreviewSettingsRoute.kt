@@ -2,12 +2,11 @@ package fe.linksheet.composable.page.settings.link.preview
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import app.linksheet.compose.list.item.PreferenceSwitchListItem
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.linksheet.R
-import app.linksheet.compose.list.item.PreferenceSwitchListItem
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import fe.linksheet.composable.util.groupSize
 import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -31,7 +30,7 @@ fun PreviewSettingsRoute(
 
         divider(id = R.string.options)
 
-        group(size = groupSize(1)) {
+        group(size = 1) {
             item(key = R.string.settings_links_preview__title_preview_skip_browser) { padding, shape ->
                 PreferenceSwitchListItem(
                     shape = shape,

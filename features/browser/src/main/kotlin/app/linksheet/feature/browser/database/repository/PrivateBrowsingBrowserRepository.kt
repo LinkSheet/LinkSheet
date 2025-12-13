@@ -9,6 +9,14 @@ class PrivateBrowsingBrowserRepository internal constructor(private val dao: Pri
         return dao.getAll()
     }
 
+    suspend fun getByFlatComponentName(flatComponentName: String): PrivateBrowsingBrowser? {
+        return dao.getByFlatComponentName(flatComponentName)
+    }
+
+    suspend fun exists(flatComponentName: String): Boolean {
+        return getByFlatComponentName(flatComponentName) != null
+    }
+
     suspend fun insert(flatComponentName: String) {
         dao.insert(PrivateBrowsingBrowser(flatComponentName = flatComponentName))
     }

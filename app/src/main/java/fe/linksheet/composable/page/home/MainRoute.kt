@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalWindowInfo
@@ -50,8 +50,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinViewModel()) {
-    val context = LocalContext.current
-    val clipboardManager = LocalClipboardManager.current
+    val clipboardManager = LocalClipboard.current
 
     val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
     val newDefaultsDismissed by viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
@@ -187,7 +186,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                             navController.navigate(MarkdownViewerRoute(LinkSheet.WikiExperiments))
                         },
                         onDismiss = {
-                            viewModel.newDefaultsDismissed.update(true)
+                            viewModel.newDefaultsDismissed(true)
                         }
                     )
                 }

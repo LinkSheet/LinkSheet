@@ -23,7 +23,6 @@ import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
-import fe.linksheet.module.log.Logger
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
@@ -55,11 +54,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
+import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.SafeIntent
 
 class LinkEngineIntentResolver(
     val context: Context,
-    val logger: Logger,
     val client: HttpClient,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
@@ -75,6 +74,7 @@ class LinkEngineIntentResolver(
     private val privateBrowsingService: PrivateBrowsingService,
     private val settings: IntentResolverSettings,
 ) : IntentResolver {
+    private val logger = Logger("LinkEngineIntentResolver")
     private val browserSettings = settings.browserSettings
     private val previewSettings = settings.previewSettings
     private val downloaderSettings = settings.downloaderSettings
@@ -90,7 +90,7 @@ class LinkEngineIntentResolver(
 
     private fun emitEvent(event: ResolveEvent) {
         _events.tryEmit(event)
-        logger.info(event.toString())
+        logger.debug(event.toString())
     }
 
     private fun emitEventIf(predicate: Boolean, event: ResolveEvent) {
@@ -100,7 +100,7 @@ class LinkEngineIntentResolver(
 
     private fun emitInteraction(interaction: ResolverInteraction) {
         _interactions.tryEmit(interaction)
-        logger.info("Emitted interaction $interaction")
+        logger.debug("Emitted interaction $interaction")
     }
 
     private fun clearInteraction() = emitInteraction(ResolverInteraction.Clear)

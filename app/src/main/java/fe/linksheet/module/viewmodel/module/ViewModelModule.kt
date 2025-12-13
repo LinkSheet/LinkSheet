@@ -29,7 +29,6 @@ val ViewModelModule = module {
             experimentRepository = get(),
             pasteService = get(),
             gson = get(qualifier(GsonQualifier.Pretty)),
-            redactor = get(),
             systemInfoService = get()
         )
     }

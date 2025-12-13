@@ -11,7 +11,7 @@ import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import fe.linksheet.module.database.migrations.Migration21to23
-import fe.linksheet.module.log.Logger
+import mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.testlib.instrument.InstrumentationTest
 import org.junit.Rule

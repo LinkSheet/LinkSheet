@@ -5,11 +5,11 @@ import app.linksheet.feature.engine.core.context.EngineRunContext
 import app.linksheet.feature.engine.core.fetcher.LinkFetcher
 import app.linksheet.feature.engine.core.rule.*
 import app.linksheet.feature.engine.core.step.*
-import app.linksheet.lib.log.Logger
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import mozilla.components.support.base.log.logger.Logger
 
 class LinkEngine(
     private val steps: List<EngineStep<*>>,

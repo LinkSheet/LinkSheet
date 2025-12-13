@@ -5,7 +5,6 @@ import app.linksheet.api.CachedRequest
 import coil3.ImageLoader
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import fe.httpkt.Request
-import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
 import fe.linksheet.util.buildconfig.Build
 import fe.linksheet.util.withStatsTag
@@ -53,7 +52,7 @@ val HttpModule = module {
         val context = get<Context>()
         val okHttp = get<OkHttpClient>()
         // There's probably a better way to do this
-        val logger = if (Build.IsDebug) CoilLoggerAdapter(logger = createLogger<ImageLoader>()) else null
+        val logger = if (Build.IsDebug) CoilLoggerAdapter() else null
         ImageLoader.Builder(context)
             .components {
                 add(OkHttpNetworkFetcherFactory(callFactory = okHttp))
@@ -62,5 +61,5 @@ val HttpModule = module {
             .build()
     }
     single<Unfurler> { Unfurler(httpClient = get()) }
-    single<CachedRequest> { RealCachedRequest(get(), createLogger<RealCachedRequest>()) }
+    single<CachedRequest> { RealCachedRequest(get()) }
 }

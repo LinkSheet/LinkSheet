@@ -32,6 +32,8 @@ import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
 import app.linksheet.feature.shizuku.ShizukuService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
+import app.linksheet.feature.wiki.database.dao.WikiCacheDao
+import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
 import app.linksheet.testlib.koin.definition
 import app.linksheet.testlib.koin.injectedParameters
@@ -57,13 +59,10 @@ import fe.linksheet.module.devicecompat.miui.MiuiCompat
 import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
 import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.language.AppLocaleService
-import fe.linksheet.module.log.Logger
+import mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.module.log.file.LogPersistService
-import fe.linksheet.module.log.internal.LoggerDelegate
 import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.redactor.LogHasher
-import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.remoteconfig.RemoteConfigRepository
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
@@ -138,8 +137,6 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             PackageIntentHandler::class
         ),
         definition<DomainVerificationUseCase>(DomainVerificationManagerCompat::class),
-        definition<Redactor>(LogHasher::class),
-        definition<Logger>(LoggerDelegate::class),
         definition<RealCachedRequest>(Request::class),
         definition<RedirectResolveRequest>(
             Request::class,
@@ -170,7 +167,6 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<LogViewCommon>(
             PasteService::class,
             Gson::class,
-            Redactor::class,
             SystemInfoService::class
         ),
         definition<UrlResolver>(LocalTask.Redirector::class, LocalTask.Amp2Html::class, RemoteResolver::class),

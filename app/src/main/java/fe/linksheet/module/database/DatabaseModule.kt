@@ -9,7 +9,6 @@ import androidx.room.migration.Migration
 import app.linksheet.api.database.CrossDatabaseMigration
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.libredirect.database.LibRedirectDatabase
-import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
 import fe.linksheet.module.database.dao.PreferredAppDao
@@ -25,7 +24,7 @@ import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
 import fe.linksheet.module.database.migrations.*
-import fe.linksheet.module.log.Logger
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
@@ -34,7 +33,7 @@ val DatabaseModule = module {
     single<LinkSheetDatabase> {
         LinkSheetDatabase.create(
             context = get(),
-            logger = createLogger<LinkSheetDatabase>(),
+            logger = Logger("LinkSheetDatabase"),
             name = "linksheet",
             migrator = get(qualifier<LibRedirectDatabase>())
         )

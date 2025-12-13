@@ -4,9 +4,9 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import app.linksheet.feature.browser.core.Browser
-import fe.linksheet.interconnect.LinkSheetConnector
 import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.browser.core.Browser
+import app.linksheet.lib.flavors.LinkSheetReferrer
 import fe.linksheet.util.AndroidUri
 import fe.linksheet.util.Scheme
 
@@ -32,7 +32,7 @@ class DefaultIntentLauncher(
 
         val showAsReferrer = showAsReferrer()
         intent.putExtra(
-            LinkSheetConnector.EXTRA_REFERRER,
+            LinkSheetReferrer.EXTRA_REFERRER,
             if (showAsReferrer) AndroidUri.create(Scheme.Package, selfPackage) else referrer
         )
 

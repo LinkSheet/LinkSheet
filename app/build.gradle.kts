@@ -1,3 +1,4 @@
+
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import com.gitlab.grrfe.gradlebuild.android.ArchiveBaseName
 import com.gitlab.grrfe.gradlebuild.common.version.CurrentTagMode
@@ -5,7 +6,6 @@ import com.gitlab.grrfe.gradlebuild.common.version.TagReleaseParser
 import com.gitlab.grrfe.gradlebuild.common.version.asProvider
 import com.gitlab.grrfe.gradlebuild.common.version.closure
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies.LinkSheet
 import fe.build.dependencies.MozillaComponents
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
@@ -342,9 +342,9 @@ dependencies {
     implementation("io.viascom.nanoid:nanoid:_")
 
 //    implementation(LinkSheet.flavors.core)
-    implementation("com.github.LinkSheet.flavors:core:_")
-
-    implementation(LinkSheet.interconnect)
+//    implementation(LinkSheet.flavors.interconnect.core)
+    implementation("com.github.LinkSheet.flavors:interconnect-core:0.0.18")
+    implementation("com.github.LinkSheet.flavors:core:0.0.18")
 
     implementation(JetBrains.ktor.client.core)
     implementation(JetBrains.ktor.client.gson)

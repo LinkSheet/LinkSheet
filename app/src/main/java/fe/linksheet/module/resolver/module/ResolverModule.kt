@@ -8,7 +8,6 @@ import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
-import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.feature.engine.RealLinkEngine
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -53,7 +52,6 @@ val ResolverModule = module {
 
         val realLinkEngine = RealLinkEngine(
             context = get(),
-            logger = createLogger<RealLinkEngine>(),
             client = get(),
             appSelectionHistoryRepository = get(),
             preferredAppRepository = get(),
@@ -75,7 +73,6 @@ val ResolverModule = module {
         IntentResolverDelegate(
             improvedIntentResolver = ImprovedIntentResolver(
                 context = get(),
-                logger = createLogger<ImprovedIntentResolver>(),
                 appSelectionHistoryRepository = get(),
                 preferredAppRepository = get(),
                 normalBrowsersRepository = get(),

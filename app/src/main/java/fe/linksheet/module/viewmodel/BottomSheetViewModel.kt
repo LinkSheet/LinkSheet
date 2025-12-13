@@ -21,7 +21,6 @@ import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.*
-import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
@@ -29,7 +28,6 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.redactor.HashProcessor
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolveResult
@@ -48,6 +46,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
@@ -65,7 +64,7 @@ class BottomSheetViewModel(
     val intentLauncher: IntentLauncher,
     private val privateBrowserUseCase: PrivateBrowserUseCase,
 ) : BaseViewModel(preferenceRepository), KoinComponent {
-    private val logger by injectLogger<BottomSheetViewModel>()
+    private val logger = Logger("BottomSheetViewModel")
     val clipboardManager = context.getSystemServiceOrThrow<ClipboardManager>()
     val downloadManager = context.getSystemServiceOrThrow<DownloadManager>()
 
@@ -133,13 +132,15 @@ class BottomSheetViewModel(
             always = always
         )
 
-        logger.debug(app, HashProcessor.PreferenceAppHashProcessor, { "Inserting $it" }, "AppPreferencePersister")
+        logger.debug("Inserting $app")
 
-        kotlin.runCatching {
+        runCatching {
             withContext(Dispatchers.IO) {
                 preferredAppRepository.insert(app)
             }
-        }.onFailure { it.printStackTrace() }
+        }.onFailure {
+            logger.error("Failed insert", it)
+        }
 
         val historyEntry = AppSelectionHistory(
             host = host,
@@ -147,12 +148,7 @@ class BottomSheetViewModel(
             lastUsed = System.currentTimeMillis()
         )
 
-        logger.debug(
-            historyEntry,
-            HashProcessor.AppSelectionHistoryHashProcessor,
-            { "Inserting $it" },
-            "HistoryEntryPersister"
-        )
+        logger.debug("Inserting $historyEntry")
 
         withContext(Dispatchers.IO) {
             appSelectionHistoryRepository.insert(historyEntry)

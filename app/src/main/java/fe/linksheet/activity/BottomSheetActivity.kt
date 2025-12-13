@@ -32,7 +32,6 @@ import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrap
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolverInteraction
@@ -47,6 +46,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
@@ -56,7 +56,7 @@ import org.koin.core.component.KoinComponent
 
 // Must not be moved or renamed since LinkSheetCompat hardcodes the package/name
 class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
-    private val logger by injectLogger<BottomSheetActivity>()
+    private val logger = Logger("BottomSheetActivity")
     private val viewModel by viewModel<BottomSheetViewModel>()
 
     private val initialIntent = MutableStateFlow<Intent?>(null)
@@ -315,7 +315,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val result = launchHandler.start(intent.intent)
         if (result !is LaunchFailure) return
 
-        logger.error(result.ex, "Launch failed: $result")
+        logger.error("Launch failed: $result", result.ex)
         val textId = when (result) {
             is LaunchResult.Illegal -> R.string.bottom_sheet__text_launch_illegal
             is LaunchResult.NotAllowed -> R.string.bottom_sheet__text_launch_not_allowed

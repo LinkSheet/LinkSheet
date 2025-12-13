@@ -5,11 +5,10 @@ import fe.android.lifecycle.koin.extension.applicationLifecycle
 import fe.android.lifecycle.koin.extension.service
 import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.linksheet.BuildConfig
-import fe.linksheet.extension.koin.logger
-import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.dsl.module
 
 @OptIn(SensitivePreference::class)
@@ -26,7 +25,6 @@ val AnalyticsServiceModule = module {
             coroutineScope = applicationLifecycle.lifecycleCoroutineScope,
             initialLevel = if (hasMadeChoice) level else null,
             networkState = networkState,
-            logger = logger
         )
     }
 }
@@ -37,8 +35,8 @@ internal class AnalyticsService(
     coroutineScope: LifecycleCoroutineScope,
     initialLevel: TelemetryLevel? = null,
     networkState: NetworkStateService,
-    val logger: Logger,
 ) : BaseAnalyticsService {
+    private val logger = Logger("AnalyticsService")
     private val eventQueue = BatchedEventQueue(client, coroutineScope, logger, initialLevel, networkState)
 
     override fun changeLevel(newLevel: TelemetryLevel?) {

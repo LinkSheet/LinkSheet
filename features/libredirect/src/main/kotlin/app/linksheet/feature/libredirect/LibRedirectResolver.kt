@@ -26,7 +26,7 @@ class LibRedirectResolver(
     private val defaultRepository: LibRedirectDefaultRepository,
     private val stateRepository: LibRedirectStateRepository,
 ) : KoinComponent {
-//    private val logger by injectLogger<LibRedirectResolver>()
+//    private val logger = Logger("LibRedirectResolver")
 
     companion object {
         private val libRedirectServices by lazy { LibRedirectLoader.loadBuiltInServices() }

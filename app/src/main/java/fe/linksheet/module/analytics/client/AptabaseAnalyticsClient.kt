@@ -6,17 +6,16 @@ import fe.httpkt.ext.readToString
 import fe.httpkt.json.JsonBody
 import fe.linksheet.BuildConfig
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.TelemetryIdentityData
 import fe.linksheet.module.http.TaggedRequest
-import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.util.buildconfig.BuildType
 import fe.std.javatime.extension.unixMillisAtZone
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.dsl.module
 import java.io.IOException
 import java.time.format.DateTimeFormatter
@@ -31,7 +30,7 @@ val aptabaseAnalyticsClientModule = module {
 
         AptabaseAnalyticsClient(
             identity.create(applicationContext, id),
-            createLogger<AptabaseAnalyticsClient>(),
+            Logger("AptabaseAnalyticsClient"),
             BuildConfig.APTABASE_API_KEY
         )
     }

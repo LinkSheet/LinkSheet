@@ -4,7 +4,7 @@ import androidx.room.testing.MigrationTestHelper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.api.database.CrossDatabaseMigration
 import app.linksheet.api.database.DefaultCrossDatabaseMigration
-import fe.linksheet.module.log.Logger
+import mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.testlib.instrument.InstrumentationTest
 import org.junit.Rule

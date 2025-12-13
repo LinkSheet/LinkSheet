@@ -5,7 +5,6 @@ import android.content.pm.getApplicationInfoCompatOrNull
 import android.content.pm.getInstalledPackagesCompat
 import android.content.pm.queryIntentActivitiesCompat
 import android.content.pm.resolveActivityCompat
-import app.linksheet.feature.app.core.AppInfoCreator
 import app.linksheet.feature.app.core.*
 import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.usecase.AllAppsUseCase

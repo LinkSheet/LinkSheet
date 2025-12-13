@@ -9,12 +9,12 @@ import fe.linksheet.composable.page.edit.TextSource
 import fe.linksheet.composable.page.edit.TextValidator
 import fe.linksheet.composable.page.edit.WebUriTextValidator
 import fe.linksheet.composable.ui.AppTheme
-import fe.linksheet.extension.koin.injectLogger
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
 
 
 class TextEditorActivity : BaseComponentActivity(), KoinComponent {
-    private val logger by injectLogger<TextEditorActivity>()
+    private val logger = Logger("TextEditorActivity")
 
     companion object {
         const val EXTRA_TEXT = "EXTRA_TEXT"

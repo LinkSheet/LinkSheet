@@ -4,18 +4,16 @@ import android.content.Context
 import android.os.Parcelable
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
-import fe.linksheet.util.extension.android.getCurrentLanguageTag
+import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.SensitivePreference
-import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.redactor.Redactor
-import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.util.buildconfig.LinkSheetInfo
+import fe.linksheet.util.extension.android.getCurrentLanguageTag
 import kotlinx.parcelize.Parcelize
 
 
@@ -24,15 +22,13 @@ class LogViewCommon(
     private val experimentRepository: ExperimentRepository,
     private val pasteService: PasteService<*>,
     val gson: Gson,
-    private val redactor: Redactor,
     private val systemInfoService: SystemInfoService,
 ) {
     @OptIn(SensitivePreference::class)
     private fun logPreferences(redact: Boolean): Map<String, String?> {
         val preferences = preferenceRepository.exportPreferences(AppPreferences.sensitivePreferences)
-        val packages = AppPreferences.logPackages(if (redact) redactor else Redactor.NoOp, preferenceRepository)
 
-        return preferences + packages
+        return preferences
     }
 
     @Parcelize

@@ -2,9 +2,6 @@ package fe.linksheet.module.database.entity
 
 import android.content.ComponentName
 import androidx.room.*
-import fe.linksheet.module.redactor.Redactable
-import fe.linksheet.module.redactor.Redactor
-import fe.stringbuilder.util.commaSeparated
 
 @Entity(
     tableName = "openwith",
@@ -16,7 +13,7 @@ data class PreferredApp(
     @ColumnInfo(name = "packageName") val _packageName: String? = null,
     @ColumnInfo(name = "component") val _component: String?,
     val alwaysPreferred: Boolean,
-) : Redactable<PreferredApp> {
+) {
     @Ignore
     val cmp = tryGetComponentName(_component, _packageName)
 
@@ -48,21 +45,6 @@ data class PreferredApp(
         }
     }
 
-    override fun process(builder: StringBuilder, redactor: Redactor) = builder.commaSeparated {
-//        item {
-//            redactor.process(this, host, HostProcessor, "host=")
-//        }
-//        itemNotNull(packageName) {
-//            redactor.process(this, packageName, PackageProcessor, "pkg=")
-//        }
-//        item {
-//            redactor.process(this, componentName, HashProcessor.ComponentProcessor, "cmp=")
-//        }
-//        item {
-//            append("alwaysPreferred=", alwaysPreferred)
-//        }
-    }
-
     override fun equals(other: Any?): Boolean {
         if (other is PreferredApp) {
             return other.host == this.host && other._component == this._component && other._packageName == this._packageName
@@ -77,6 +59,4 @@ data class PreferredApp(
         result = 31 * result + (_component?.hashCode() ?: 0)
         return result
     }
-
-
 }

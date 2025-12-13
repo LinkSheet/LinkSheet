@@ -1,10 +1,9 @@
 package fe.linksheet.module.analytics.client
 
 import android.content.Context
-import fe.linksheet.extension.koin.createLogger
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
-import fe.linksheet.module.log.Logger
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.dsl.module
 
 internal class DebugLogAnalyticsClient(
@@ -13,7 +12,7 @@ internal class DebugLogAnalyticsClient(
     companion object {
         val module = module {
             single<AnalyticsClient> {
-                DebugLogAnalyticsClient(logger = createLogger<DebugLogAnalyticsClient>())
+                DebugLogAnalyticsClient(logger = Logger("DebugLogAnalyticsClient"))
             }
         }
     }

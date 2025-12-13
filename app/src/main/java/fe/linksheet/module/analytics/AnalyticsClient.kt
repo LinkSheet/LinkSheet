@@ -1,7 +1,7 @@
 package fe.linksheet.module.analytics
 
 import android.content.Context
-import fe.linksheet.module.log.Logger
+import mozilla.components.support.base.log.logger.Logger
 import java.io.IOException
 
 abstract class AnalyticsClient(val logger: Logger) {

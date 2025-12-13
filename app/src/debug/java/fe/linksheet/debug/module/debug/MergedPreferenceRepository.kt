@@ -3,7 +3,6 @@ package fe.linksheet.debug.module.debug
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.PreferenceRepository
 import fe.android.preference.helper.compose.StatePreferenceRepository
-import fe.linksheet.module.log.Logger
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
@@ -12,6 +11,7 @@ import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
+import mozilla.components.support.base.log.logger.Logger
 
 data class Repository(val definition: PreferenceDefinition, val preferenceRepository: PreferenceRepository) {
     val allPreferences by lazy { definition.all.map { it.key } }

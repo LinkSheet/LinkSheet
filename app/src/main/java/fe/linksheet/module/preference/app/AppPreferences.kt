@@ -14,8 +14,6 @@ import fe.linksheet.composable.ui.ThemeV2
 import fe.linksheet.module.analytics.TelemetryIdentity
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
-import fe.linksheet.module.redactor.PackageProcessor
-import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
 import io.viascom.nanoid.NanoId
@@ -119,11 +117,6 @@ object AppPreferences : PreferenceDefinition(
     val showLinkSheetAsReferrer = boolean("show_as_referrer")
     val devModeEnabled = boolean("dev_mode_enabled")
 
-    @SensitivePreference
-    val logKey = string("log_key") {
-        Redactor.createHmacKey()
-    }
-
     val firstRun = boolean("first_run", true)
     val showDiscordBanner = boolean("show_discord_banner", true)
 
@@ -202,23 +195,8 @@ object AppPreferences : PreferenceDefinition(
 
     @SensitivePreference
     val sensitivePreferences = setOf(
-        useTimeMs, logKey, telemetryIdentity, telemetryLevel, telemetryId
+        useTimeMs, telemetryIdentity, telemetryLevel, telemetryId
     )
-
-    @SensitivePreference
-    private val sensitivePackagePreferences = setOf(
-        selectedBrowser, selectedInAppBrowser
-    )
-
-    @OptIn(SensitivePreference::class)
-    fun logPackages(redactor: Redactor, repository: AppPreferenceRepository): Map<String, String?> {
-        return sensitivePackagePreferences.associate { pref ->
-            val value = repository.get(pref)
-            val strValue = value?.let { redactor.processToString(it, PackageProcessor) } ?: "<null>"
-
-            pref.key to strValue
-        }
-    }
 
     fun toJsonArray(preferences: Map<String, String?>): JsonArray {
         val objs = preferences.map { (key, value) ->

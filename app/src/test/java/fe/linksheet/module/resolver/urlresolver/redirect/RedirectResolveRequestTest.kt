@@ -8,11 +8,6 @@ import assertk.assertions.isInstanceOf
 import assertk.assertions.isNotNull
 import assertk.assertions.prop
 import fe.httpkt.Request
-import fe.linksheet.module.log.Logger
-import fe.linksheet.module.log.file.DebugLogPersistService
-import fe.linksheet.module.log.internal.DefaultLoggerDelegate
-import fe.linksheet.module.redactor.LogHasher
-import fe.linksheet.module.redactor.Redactor
 import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
 import fe.linksheet.testlib.core.BaseUnitTest
@@ -27,15 +22,8 @@ import org.robolectric.annotation.Config
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class RedirectResolveRequestTest : BaseUnitTest {
     companion object {
-        private val loggerDelegate = DefaultLoggerDelegate(
-            true,
-            "test",
-            Redactor(LogHasher.NoOpHasher),
-            DebugLogPersistService()
-        )
-        private val logger = Logger(loggerDelegate)
         private val request = Request()
-        private val cachedRequest = RealCachedRequest(request, logger)
+        private val cachedRequest = RealCachedRequest(request)
     }
 
     @org.junit.Test

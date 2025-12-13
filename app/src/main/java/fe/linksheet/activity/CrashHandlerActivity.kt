@@ -28,11 +28,11 @@ import fe.linksheet.composable.page.settings.debug.log.LogCard
 import fe.linksheet.composable.page.settings.debug.log.LogTextPageScaffold
 import fe.linksheet.composable.page.settings.debug.log.PrefixMessageCardContent
 import fe.linksheet.composable.ui.AppTheme
-import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import fe.std.time.unixMillisOf
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.component.KoinComponent
 
@@ -52,14 +52,14 @@ class CrashHandlerActivity : BaseComponentActivity(), KoinComponent {
         }
     }
 
-    private val logger by injectLogger<CrashHandlerActivity>()
+    private val logger = Logger("CrashHandler")
 
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val throwableString = intent.getStringExtra(EXTRA_CRASH_EXCEPTION) ?: return
-        logger.fatal(throwableString)
+        logger.error(throwableString)
         val timestamp = intent.getLongExtra(EXTRA_CRASH_TIMESTAMP, 0)
 
         setContent(edgeToEdge = true) {

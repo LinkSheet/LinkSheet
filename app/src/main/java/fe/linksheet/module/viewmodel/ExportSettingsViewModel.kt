@@ -53,7 +53,6 @@ class ExportSettingsViewModel(
     suspend fun exportPreferences(uri: Uri, includeLogHashKey: Boolean): IResult<Unit> {
         val set = AppPreferences.sensitivePreferences.toMutableSet()
         if (includeLogHashKey) {
-            set.remove(AppPreferences.logKey)
         }
 
         val preferences = preferenceRepository.exportPreferences(set)

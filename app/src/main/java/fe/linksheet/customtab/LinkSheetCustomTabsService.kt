@@ -4,11 +4,11 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsService
 import androidx.browser.customtabs.CustomTabsSessionToken
-import fe.linksheet.extension.koin.injectLogger
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
 
 class LinkSheetCustomTabsService : CustomTabsService(), KoinComponent {
-    private val logger by injectLogger<LinkSheetCustomTabsService>()
+    private val logger = Logger("LinkSheetCustomTabsService")
 
     override fun warmup(flags: Long): Boolean {
         logger.debug("⇢ warmup($flags)")

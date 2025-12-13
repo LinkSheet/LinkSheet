@@ -5,12 +5,14 @@ import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.gson.extension.io.fromJsonOrNull
 import fe.gson.extension.io.toJson
+import fe.linksheet.module.log.FileLogSink
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.localizedString
 import fe.std.javatime.time.unixMillis
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import mozilla.components.support.base.log.Log
 import java.io.File
 import java.time.LocalDateTime
 
@@ -118,6 +120,8 @@ internal class LogFileService(
     }
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) = withContext(Dispatchers.IO) {
+        Log.addSink(FileLogSink(this@LogFileService))
+
         val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
         getLogSessions().filter { it.millis < startupMillis }.forEach { delete(it) }
     }

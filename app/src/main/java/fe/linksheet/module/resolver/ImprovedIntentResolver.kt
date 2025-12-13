@@ -6,9 +6,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
 import app.linksheet.feature.app.core.AppInfoCreator
-import app.linksheet.feature.app.core.labelSorted
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
+import app.linksheet.feature.app.core.labelSorted
 import app.linksheet.feature.browser.core.PrivateBrowsingService
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.downloader.Downloader
@@ -29,7 +29,6 @@ import fe.linksheet.module.database.dao.base.PackageEntityCreator
 import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
-import fe.linksheet.module.log.Logger
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
@@ -56,12 +55,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
+import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.SafeIntent
 
 @Stable
 class ImprovedIntentResolver(
     val context: Context,
-    val logger: Logger,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
@@ -80,6 +79,7 @@ class ImprovedIntentResolver(
     private val privateBrowsingService: PrivateBrowsingService,
     private val settings: IntentResolverSettings,
 ) : IntentResolver {
+    private val logger = Logger("ImprovedIntentResolver")
     private val browserSettings = settings.browserSettings
     private val previewSettings = settings.previewSettings
     private val downloaderSettings = settings.downloaderSettings
@@ -95,7 +95,7 @@ class ImprovedIntentResolver(
 
     private fun emitEvent(event: ResolveEvent) {
         _events.tryEmit(event)
-        logger.info(event.toString())
+        logger.debug(event.toString())
     }
 
     private fun emitEventIf(predicate: Boolean, event: ResolveEvent) {
@@ -105,7 +105,7 @@ class ImprovedIntentResolver(
 
     private fun emitInteraction(interaction: ResolverInteraction) {
         _interactions.tryEmit(interaction)
-        logger.info("Emitted interaction $interaction")
+        logger.debug("Emitted interaction $interaction")
     }
 
     private fun clearInteraction() = emitInteraction(ResolverInteraction.Clear)
@@ -337,7 +337,7 @@ class ImprovedIntentResolver(
             result = deferred.await()
         } catch (e: CancellationException) {
             currentCoroutineContext().ensureActive()
-            logger.error(e)
+            logger.error("Failed to cancel", e)
         }
 
         clearInteraction()

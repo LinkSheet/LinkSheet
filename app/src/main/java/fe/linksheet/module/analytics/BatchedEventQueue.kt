@@ -2,10 +2,10 @@ package fe.linksheet.module.analytics
 
 import androidx.lifecycle.LifecycleCoroutineScope
 import fe.composekit.lifecycle.network.core.NetworkStateService
-import fe.linksheet.module.log.Logger
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.UNLIMITED
+import mozilla.components.support.base.log.logger.Logger
 import java.util.*
 import kotlin.math.pow
 

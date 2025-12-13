@@ -38,8 +38,10 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
         val extras = requireNotNull(intent.extras) { "Extras must not be null" }
         val keys = requireNotNull(extras.keySet().takeIf { it.isNotEmpty() }) { "Extras must not be empty" }
 
-        val successfulUpdates =
-            keys.mapCatching { it to update(extras, it) }.onEachFailure { logger.error(it) }.toSuccess().toMap()
+        val successfulUpdates = keys.mapCatching { it to update(extras, it) }
+            .onEachFailure { logger.error("Update failed", it) }
+            .toSuccess()
+            .toMap()
 
         for ((key, value) in successfulUpdates) {
             val msg = "Preference '$key' set to '$value'"

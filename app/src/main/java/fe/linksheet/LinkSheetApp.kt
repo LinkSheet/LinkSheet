@@ -15,8 +15,6 @@ import app.linksheet.feature.libredirect.LibRedirectFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.shizuku.ShizukuModule
 import app.linksheet.feature.wiki.WikiFeatureModule
-import app.linksheet.lib.log.AndroidLogSink
-import app.linksheet.lib.log.LLog
 import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
 import fe.android.lifecycle.CurrentActivityObserver
@@ -61,6 +59,8 @@ import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
+import mozilla.components.support.base.log.Log
+import mozilla.components.support.base.log.sink.AndroidLogSink
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
@@ -80,7 +80,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(currentActivityObserver)
-        LLog.addSink(AndroidLogSink())
+        Log.addSink(AndroidLogSink())
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             CrashHandlerActivity.start(this, throwable)
@@ -100,7 +100,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
         DynamicColors.applyToActivitiesIfAvailable(this)
 
         val koinModules = provideKoinModules()
-        val koinApplication = startKoin {
+        startKoin {
             androidLogger()
             androidApplicationContext(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)

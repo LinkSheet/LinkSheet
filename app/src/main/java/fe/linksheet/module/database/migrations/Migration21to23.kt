@@ -5,9 +5,9 @@ import android.database.Cursor
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.linksheet.api.database.CrossDatabaseMigration
-import fe.linksheet.module.log.Logger
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
+import mozilla.components.support.base.log.logger.Logger
 
 class Migration21to23(
     private val logger: Logger,
@@ -32,7 +32,7 @@ class Migration21to23(
                 migrateTable(db, "lib_redirect_service_state")
             }
             if (result.isFailure()) {
-                logger.error(result.exception)
+                logger.error("Error", result.exception)
             }
         }
     }

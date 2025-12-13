@@ -23,7 +23,7 @@ object AppSignature {
         if (this::buildType.isInitialized) return buildType
 
         val signature = context.packageManager.getSignature(context.packageName)
-        val knownSignature = LinkSheet.isValidSignature(CryptoUtil.sha256Hex(signature!!.toByteArray()))
+        val knownSignature = LinkSheet().isValidSignature(CryptoUtil.sha256Hex(signature!!.toByteArray()))
         buildType = SignatureBuildType.entries.first { it.signature == knownSignature }
 
         return buildType

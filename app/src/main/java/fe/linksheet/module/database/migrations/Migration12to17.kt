@@ -1,7 +1,7 @@
 package fe.linksheet.module.database.migrations
 
 import androidx.room.migration.Migration
-import fe.linksheet.module.log.Logger
+import mozilla.components.support.base.log.logger.Logger
 
 class Migration12to17(private val logger: Logger) {
     companion object {
@@ -19,8 +19,8 @@ class Migration12to17(private val logger: Logger) {
         return Migration(start, start + 1) { db ->
             logger.info("Running migration from $start to ${start + 1}")
 
-            runCatching { db.execSQL("DROP TABLE IF EXISTS installed_app") }.onFailure { logger.error(it) }
-            runCatching { db.execSQL("DROP TABLE IF EXISTS app_domain_verification_state") }.onFailure { logger.error(it) }
+            runCatching { db.execSQL("DROP TABLE IF EXISTS installed_app") }.onFailure { logger.error("Migration failed", it) }
+            runCatching { db.execSQL("DROP TABLE IF EXISTS app_domain_verification_state") }.onFailure { logger.error("Migration failed", it) }
         }
     }
 }

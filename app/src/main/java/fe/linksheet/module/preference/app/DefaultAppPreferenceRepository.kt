@@ -2,17 +2,17 @@ package fe.linksheet.module.preference.app
 
 import android.content.Context
 import fe.android.preference.helper.Preference
-import fe.linksheet.extension.koin.injectLogger
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
 
 class DefaultAppPreferenceRepository(val context: Context) : AppPreferenceRepository(context), KoinComponent {
-    private val logger by injectLogger<DefaultAppPreferenceRepository>()
+    private val logger = Logger("DefaultAppPreferenceRepository")
 
     private val preferencesRequiringPermission by lazy {
         mapOf(AppPreferences.usageStatsSorting to UsageStatsPermission(context))

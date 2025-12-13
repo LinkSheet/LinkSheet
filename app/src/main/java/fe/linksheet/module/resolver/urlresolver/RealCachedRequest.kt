@@ -2,8 +2,7 @@ package fe.linksheet.module.resolver.urlresolver
 
 import app.linksheet.api.CachedRequest
 import fe.httpkt.Request
-import fe.linksheet.module.log.Logger
-import fe.linksheet.module.redactor.HashProcessor
+import mozilla.components.support.base.log.logger.Logger
 import java.io.IOException
 import java.net.HttpURLConnection
 
@@ -23,7 +22,8 @@ data class CacheStatus(
     val send: () -> HttpURLConnection,
 )
 
-class RealCachedRequest(private val request: Request, private val logger: Logger) : CachedRequest {
+class RealCachedRequest(private val request: Request) : CachedRequest {
+    private val logger = Logger("RealCachedRequest")
     private val headCache = mutableMapOf<String, HttpURLConnection>()
     private val getCache = mutableMapOf<String, HttpURLConnection>()
 
@@ -37,15 +37,12 @@ class RealCachedRequest(private val request: Request, private val logger: Logger
     ): HttpURLConnection {
         val value = get(url)
         return if (value == null) {
-            logger.debug(
-                url,
-                HashProcessor.UrlProcessor
-            ) { "No cached response found for $type $it, sending request.." }
+            logger.debug("No cached response found for $type $url, sending request..")
             val answer = defaultValue()
             put(url, answer)
             answer
         } else {
-            logger.debug(url, HashProcessor.UrlProcessor) { "Cached response found for $type $it!" }
+            logger.debug("Cached response found for $type $url!")
             value
         }
     }

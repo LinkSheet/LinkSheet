@@ -13,12 +13,12 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import fe.composekit.core.AndroidVersion
-import fe.linksheet.extension.koin.injectLogger
+import mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
 
 
 object TestPackageQueryManager : KoinComponent {
-    private val logger by injectLogger<TestPackageQueryManager>()
+    private val logger = Logger("TestPackageQueryManager")
 
     @RequiresApi(Build.VERSION_CODES.S)
     fun findHandlers(context: Context, uri: Uri) {

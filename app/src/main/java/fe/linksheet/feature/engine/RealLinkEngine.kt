@@ -31,7 +31,6 @@ import app.linksheet.feature.engine.eval.rule.ExpressionPostProcessorRule
 import app.linksheet.feature.engine.eval.rule.ExpressionPreProcessorRule
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import fe.composekit.lifecycle.network.core.NetworkStateService
-import fe.linksheet.module.log.Logger
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
@@ -44,11 +43,11 @@ import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
+import mozilla.components.support.base.log.logger.Logger
 import kotlin.uuid.ExperimentalUuidApi
 
 class RealLinkEngine(
     private val context: Context,
-    private val logger: Logger,
     private val client: HttpClient,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
@@ -67,6 +66,8 @@ class RealLinkEngine(
     private val scenarioRepository: ScenarioRepository,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
+    private val logger = Logger("RealLinkEngine")
+
     fun createResolver(settings: IntentResolverSettings): LinkEngineIntentResolver {
         val scenarios = scenarioRepository
             .getAllScenarioExpressions()
@@ -75,7 +76,6 @@ class RealLinkEngine(
 
         return LinkEngineIntentResolver(
             context = context,
-            logger = logger,
             client = client,
             appSelectionHistoryRepository = appSelectionHistoryRepository,
             preferredAppRepository = preferredAppRepository,

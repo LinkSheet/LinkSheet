@@ -3,9 +3,8 @@ package fe.linksheet.module.database
 import androidx.room.testing.MigrationTestHelper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.api.database.DefaultCrossDatabaseMigration
-import fe.linksheet.module.log.Logger
-import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.testlib.instrument.InstrumentationTest
+import mozilla.components.support.base.log.logger.Logger
 import org.junit.Rule
 import org.junit.runner.RunWith
 
@@ -28,7 +27,7 @@ internal class Migration18to19Test : InstrumentationTest {
             close()
         }
 
-        val logger = Logger(DebugLoggerDelegate(true, MigrationTest::class))
+        val logger = Logger("Migration18to19Test")
 
         LinkSheetDatabase.create(targetContext, logger, testDb, DefaultCrossDatabaseMigration()).apply {
             openHelper.writableDatabase.close()

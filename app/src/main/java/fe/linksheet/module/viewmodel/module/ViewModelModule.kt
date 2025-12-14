@@ -96,6 +96,7 @@ val ViewModelModule = module {
             gson = get(qualifier(GsonQualifier.Pretty)),
             systemInfoService = get(),
             logPersistService = get(),
+            refineWrapper = get(),
             ioDispatcher = Dispatchers.IO
         )
     }

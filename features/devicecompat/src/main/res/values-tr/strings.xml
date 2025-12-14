@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_sheet__event_app_refusal">Hedef uygulama bağlantıyı işlemeyi reddetti!</string>
+    <string name="generic__label_personal_profile">Kişisel profil</string>
+    <string name="generic__label_unknown_profile">Bilinmeyen profil</string>
+    <string name="generic__label_work_profile">İş profili</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Dokunulan bağlantıyı başka bir profilde açmak için alt sayfada bir düğme gösterir</string>
+    <string name="settings_profile_switcher__divider_configuration">Yapılandırma</string>
+    <string name="settings_profile_switcher__divider_current_profile">Şu anki profil</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Diğer profiller</string>
+    <string name="settings_profile_switcher__text_current_profile">Şu anda bu profilde çalışıyor</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">LinkSheet\'i ikincil profilinizdeki karşılığına bağlamak için dokunun</string>
+    <string name="settings_profile_switcher__text_no_profile">Bu özellik yalnızca cihazınızda bir (iş) profili ayarlanmışsa kullanılabilir.</string>
+    <string name="settings_profile_switcher__text_not_installed">Bu profile bağlanılamıyor</string>
+    <string name="settings_profile_switcher__text_other_profile">Diğer profil</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Profiller arası bağlantıyı etkinleştir</string>
+    <string name="settings_profile_switcher__title_no_profile">Hiçbir profil mevcut değil</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Profil değiştirme</string>
+    <string name="switch_profile">Profil değiştirmeyi etkinleştir</string>
+    <string name="switch_profile_explainer">Alt sayfada bağlantıyı bir (iş) profilinde açmak için bir düğme gösterir. LinkSheet\'in her profilde yüklü olmasını ve Ayarlar -&gt; Özel uygulama erişimi -&gt; Bağlantılı iş ve kişisel uygulamalardan el ile bağlanmasını gerektirir</string>
+</resources>

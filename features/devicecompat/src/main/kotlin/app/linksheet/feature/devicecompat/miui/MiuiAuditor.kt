@@ -1,18 +1,18 @@
-package fe.linksheet.module.devicecompat.miui
+package app.linksheet.feature.devicecompat.miui
 
 import android.app.AppOpsManager
-import android.app.AppOpsManagerHidden
 import android.content.Context
 import android.os.Process
 import androidx.annotation.Keep
 import androidx.core.content.getSystemService
-import dev.rikka.tools.refine.Refine
+import app.linksheet.api.RefineWrapper
 import fe.linksheet.feature.systeminfo.BuildInfo
-import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.feature.systeminfo.DeviceInfo
+import fe.linksheet.feature.systeminfo.SystemInfoService
 
 class MiuiAuditor(
-    val service: SystemInfoService,
+    private val service: SystemInfoService,
+    private val refineWrapper: RefineWrapper
 ) {
     @Keep
     data class MiuiAudit(
@@ -38,21 +38,23 @@ class MiuiAuditor(
             .filterKeys { it.startsWith("ro") }
 
         return MiuiAudit(
-            service.buildInfo,
-            service.deviceInfo,
-            service.build.fingerprint,
-            MiuiVersion(code, name),
-            getMiuiOpStatus(context),
-            properties
+            buildInfo = service.buildInfo,
+            deviceInfo = service.deviceInfo,
+            fingerprint = service.build.fingerprint,
+            miui = MiuiVersion(code, name),
+            appOps = getMiuiOpStatus(context),
+            properties = properties
         )
     }
 
     private fun getMiuiOpStatus(context: Context): Map<Int, Int> {
         val appOpsManager = context.getSystemService<AppOpsManager>()!!
-        val appOpsManagerHidden = Refine.unsafeCast<AppOpsManagerHidden>(appOpsManager)
+        val appOpsManagerHidden = refineWrapper.cast(appOpsManager)
 
         return (0..40).map { 10_000 + it }.associateWith {
-            runCatching { appOpsManagerHidden.checkOp(it, Process.myUid(), context.packageName) }.getOrDefault(-1)
+            runCatching {
+                appOpsManagerHidden.checkOp(it, Process.myUid(), context.packageName)
+            }.getOrDefault(-1)
         }
     }
 }

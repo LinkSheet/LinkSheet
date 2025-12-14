@@ -6,12 +6,12 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
 import app.linksheet.feature.app.applist.AppListCommon
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
+import app.linksheet.feature.devicecompat.oneui.OneUiCompat
 import dev.zwander.shared.IShizukuService
 import fe.kotlin.extension.iterable.groupByNoNullKeys
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments

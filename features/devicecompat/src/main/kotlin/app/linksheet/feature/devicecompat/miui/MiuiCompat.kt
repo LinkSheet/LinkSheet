@@ -1,12 +1,12 @@
-package fe.linksheet.module.devicecompat.miui
+package app.linksheet.feature.devicecompat.miui
 
 import android.app.Activity
 import android.app.AppOpsManager
-import android.app.AppOpsManagerHidden
 import android.content.Context
 import android.os.Process
 import androidx.core.content.getSystemService
-import dev.rikka.tools.refine.Refine
+import app.linksheet.api.RefineWrapper
+import app.linksheet.api.WrappedAppOpsManagerHidden
 import fe.composekit.intent.buildIntent
 import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.std.lazy.ResettableLazy
@@ -22,7 +22,8 @@ interface MiuiCompatProvider {
 }
 
 class RealMiuiCompatProvider(
-    val infoService: SystemInfoService,
+    private val infoService: SystemInfoService,
+    private val refineWrapper: RefineWrapper,
 ) : MiuiCompatProvider {
     override val isXiaomiDevice = infoService.build.manufacturer.contains("xiaomi", ignoreCase = true)
 
@@ -39,7 +40,7 @@ class RealMiuiCompatProvider(
         if (!isRequired.value) return NoOpMiuiCompat
 
         val appOpsManager = context.getSystemService<AppOpsManager>()!!
-        return RealMiuiCompat(appOpsManager)
+        return RealMiuiCompat(refineWrapper.cast(appOpsManager))
     }
 }
 
@@ -54,22 +55,18 @@ object NoOpMiuiCompat : MiuiCompat {
 }
 
 class RealMiuiCompat(
-    private val appOpsManager: AppOpsManager,
+    private val appOpsManager: WrappedAppOpsManagerHidden,
 ) : MiuiCompat {
     companion object {
-        const val OP_BACKGROUND_START_ACTIVITY = 10021
-    }
-
-    private val hiddenAppOps by lazy {
-        Refine.unsafeCast<AppOpsManagerHidden>(appOpsManager)
+        private const val OP_BACKGROUND_START_ACTIVITY = 10021
     }
 
     override fun showAlert(context: Context): Boolean {
         return !hasBackgroundStartPermission(context)
     }
 
-    fun hasBackgroundStartPermission(context: Context): Boolean {
-        return runCatching { hiddenAppOps.checkOp(OP_BACKGROUND_START_ACTIVITY, Process.myUid(), context.packageName) }
+    private fun hasBackgroundStartPermission(context: Context): Boolean {
+        return runCatching { appOpsManager.checkOp(OP_BACKGROUND_START_ACTIVITY, Process.myUid(), context.packageName) }
             .map { it == 0 }
             .getOrDefault(false)
     }

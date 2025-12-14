@@ -9,6 +9,11 @@ import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.compose.debug.NoOpDebugMenuSlotProvider
 import app.linksheet.compose.debug.NoOpDebugPreferenceProvider
 import app.linksheet.feature.browser.PrivateBrowsingModule
+import app.linksheet.feature.devicecompat.CompatModule
+import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
+import app.linksheet.feature.devicecompat.miui.RealMiuiCompatProvider
+import app.linksheet.feature.devicecompat.oneui.OneUiCompatProvider
+import app.linksheet.feature.devicecompat.oneui.RealOneUiCompatProvider
 import app.linksheet.feature.downloader.DownloaderModule
 import app.linksheet.feature.engine.LinkEngineFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectFeatureModule
@@ -32,11 +37,6 @@ import fe.linksheet.module.analytics.AnalyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.clock.ClockModule
 import fe.linksheet.module.database.DatabaseModule
-import fe.linksheet.module.devicecompat.CompatModule
-import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.miui.RealMiuiCompatProvider
-import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
-import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
 import fe.linksheet.module.http.HttpModule
 import fe.linksheet.module.language.AppLocaleModule
 import fe.linksheet.module.log.DefaultLogModule
@@ -158,7 +158,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideCompatProvider(): Module {
         return module {
-            single<MiuiCompatProvider> { RealMiuiCompatProvider(get()) }
+            single<MiuiCompatProvider> { RealMiuiCompatProvider(get(), get()) }
             single<OneUiCompatProvider> { RealOneUiCompatProvider(get()) }
         }
     }

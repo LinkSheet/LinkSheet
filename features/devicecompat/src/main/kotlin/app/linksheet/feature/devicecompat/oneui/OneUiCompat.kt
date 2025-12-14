@@ -1,4 +1,4 @@
-package fe.linksheet.module.devicecompat.oneui
+package app.linksheet.feature.devicecompat.oneui
 
 import android.content.Context
 import android.content.Intent
@@ -22,7 +22,7 @@ interface OneUiCompatProvider {
 }
 
 class RealOneUiCompatProvider(
-    val infoService: SystemInfoService,
+    private val infoService: SystemInfoService,
 ) : OneUiCompatProvider {
 
     override val isSamsungDevice: Boolean = infoService.build.manufacturer.contains("samsung", ignoreCase = true)
@@ -33,10 +33,7 @@ class RealOneUiCompatProvider(
     }
 
     override val isRequired = resettableLazy {
-        isSamsungDevice
-                && !infoService.isCustomRom
-                && infoService.build.sdk == Build.VERSION_CODES.S
-                && readOneUiVersion() != null
+        isSamsungDevice && !infoService.isCustomRom && infoService.build.sdk == Build.VERSION_CODES.S && readOneUiVersion() != null
     }
 
     override fun provideCompat(context: Context): OneUiCompat = when {
@@ -54,8 +51,7 @@ object DefaultOneUiIntentCompat : OneUiCompat {
     @RequiresApi(Build.VERSION_CODES.S)
     override fun createAppOpenByDefaultSettingsIntent(packageName: String): Intent {
         return buildIntent(
-            Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-            Scheme.Package.create(packageName)
+            Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, Scheme.Package.create(packageName)
         )
     }
 }

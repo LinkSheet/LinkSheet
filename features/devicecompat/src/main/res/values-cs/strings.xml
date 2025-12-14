@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic__label_personal_profile">Osobní profil</string>
+    <string name="generic__label_unknown_profile">Neznámý profil</string>
+    <string name="generic__label_work_profile">Pracovní profil</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Zobrazí tlačítko ve spodním listu pro otevření odkazu v jiném profilu</string>
+    <string name="settings_profile_switcher__divider_configuration">Nastavení</string>
+    <string name="settings_profile_switcher__divider_current_profile">Aktuální profil</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Další profily</string>
+    <string name="settings_profile_switcher__text_current_profile">Aktuálně spuštěné v tomto profilu</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Klepnutím připojíte LinkSheet k jeho protějšku v sekundárním profilu</string>
+    <string name="settings_profile_switcher__text_no_profile">Tato funkce je k dispozici pouze, pokud jste na svém zařízení nastavili (pracovní) profil.</string>
+    <string name="settings_profile_switcher__text_not_installed">Nepodařilo se připojit k tomuto profilu</string>
+    <string name="settings_profile_switcher__text_other_profile">Jiný profil</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Povolit připojení napříč profily</string>
+    <string name="settings_profile_switcher__title_no_profile">Nejsou dostupné žádné profily</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Přepínač profilu</string>
+    <string name="switch_profile">Povolit přepínání profilů</string>
+    <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -&gt; Zvláštní přístup aplikací -&gt;Propojení pracovních a osobních aplikací</string>
+</resources>

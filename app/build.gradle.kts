@@ -256,13 +256,14 @@ junitPlatform {
 }
 
 dependencies {
-    implementation(project(":feature-systeminfo"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
+    implementation(project(":feature-devicecompat"))
     implementation(project(":feature-engine"))
     implementation(project(":feature-downloader"))
     implementation(project(":feature-libredirect"))
     implementation(project(":feature-shizuku"))
+    implementation(project(":feature-systeminfo"))
     implementation(project(":feature-profile"))
     implementation(project(":feature-wiki"))
     implementation(project(":integration-clearurl"))

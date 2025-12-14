@@ -3,9 +3,9 @@ package fe.linksheet.module.viewmodel
 import android.content.Intent
 import app.linksheet.feature.app.core.DomainVerificationAppInfo
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
+import app.linksheet.feature.devicecompat.oneui.OneUiCompat
 import fe.composekit.core.AndroidVersion
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel

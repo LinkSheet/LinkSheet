@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic__label_personal_profile">個人用プロファイル</string>
+    <string name="generic__label_unknown_profile">プロフィール不明</string>
+    <string name="generic__label_work_profile">仕事用プロファイル</string>
+    <string name="settings__hint_search">検索</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">別のプロファイルでURLを開くためのボタンをボトムシートに表示します</string>
+    <string name="settings_profile_switcher__divider_configuration">構成</string>
+    <string name="settings_profile_switcher__divider_current_profile">現在のプロフィール</string>
+    <string name="settings_profile_switcher__divider_other_profiles">その他のプロフィール</string>
+    <string name="settings_profile_switcher__text_current_profile">このプロファイルで現在実行中</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">タップして、LinkSheetをセカンダリ・プロファイルの対応するものに接続します</string>
+    <string name="settings_profile_switcher__text_no_profile">この機能は、デバイスに（仕事用）プロファイルが設定されている場合にのみ利用できます。</string>
+    <string name="settings_profile_switcher__text_not_installed">このプロファイルに接続できません</string>
+    <string name="settings_profile_switcher__text_other_profile">その他のプロフィール</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">クロスプロファイル接続を有効にする</string>
+    <string name="settings_profile_switcher__title_no_profile">利用可能なプロフィールはありません</string>
+    <string name="settings_profile_switcher__title_profile_switcher">プロフィール切り替え</string>
+    <string name="switch_profile">プロファイル切り替えを有効にする</string>
+</resources>

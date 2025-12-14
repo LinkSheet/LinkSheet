@@ -10,6 +10,7 @@ import app.linksheet.compose.util.animatedComposable
 import app.linksheet.feature.browser.navigation.PrivateBrowsingNavSubGraph
 import app.linksheet.feature.engine.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
+import app.linksheet.feature.profile.navigation.ProfileNav
 import app.linksheet.feature.shizuku.navigation.ShizukuNavSubGraph
 import app.linksheet.feature.wiki.navigation.WikiNav
 import fe.composekit.core.AndroidVersion
@@ -30,7 +31,6 @@ import fe.linksheet.composable.page.settings.app.RuleRoute
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VerifiedLinkHandlersRoute
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VlhAppRoute
 import fe.linksheet.composable.page.settings.bottomsheet.BottomSheetSettingsRoute
-import fe.linksheet.composable.page.settings.bottomsheet.ProfileSwitchingSettingsRoute
 import fe.linksheet.composable.page.settings.browser.BrowserSettingsRoute
 import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsDisableInSelectedRoute
 import fe.linksheet.composable.page.settings.browser.inapp.InAppBrowserSettingsRoute
@@ -75,6 +75,9 @@ fun MainNavHost(
         attachSubGraph(LibRedirectNavSubGraph, navController)
         attachSubGraph(PrivateBrowsingNavSubGraph, navController)
         attachNav(WikiNav, navController)
+        if (AndroidVersion.isAtLeastApi30R()) {
+            attachNav(ProfileNav, navController)
+        }
 
         animatedComposable<ExperimentRoute> { _, route ->
             ExperimentsSettingsRoute(onBackPressed = onBackPressed, experiment = route.experiment)
@@ -146,12 +149,6 @@ fun MainNavHost(
                 navigate = navigate,
                 navigateNew = navigateNew
             )
-        }
-
-        if (AndroidVersion.isAtLeastApi30R()) {
-            animatedComposable(route = Routes.ProfileSwitching) {
-                ProfileSwitchingSettingsRoute(onBackPressed = onBackPressed)
-            }
         }
 
         animatedComposable(route = linksSettingsRoute) {

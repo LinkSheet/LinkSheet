@@ -1,7 +1,6 @@
-package fe.linksheet.feature.profile
+package app.linksheet.feature.profile.core
 
 import android.os.UserHandle
-import android.os.UserHandleHidden
 import android.os.UserManager
 import fe.composekit.core.AndroidVersion
 
@@ -11,11 +10,10 @@ interface UserManagerCompat {
     fun getMyUserId(): Int = 0
 }
 
-fun UserManagerCompat(userManager: UserManager): UserManagerCompat {
-    return UserManagerCompatImpl(userManager)
-}
-
-private class UserManagerCompatImpl(val userManager: UserManager) : UserManagerCompat {
+internal class UserManagerCompatImpl(
+    private val userManager: UserManager,
+    private val myUserId: Int
+) : UserManagerCompat {
     override fun isManagedProfile(): Boolean {
         if (AndroidVersion.isAtLeastApi30R()) {
             return userManager.isManagedProfile
@@ -25,7 +23,7 @@ private class UserManagerCompatImpl(val userManager: UserManager) : UserManagerC
     }
 
     override fun getMyUserId(): Int {
-        return UserHandleHidden.myUserId()
+        return myUserId
     }
 
     override fun getUserProfiles(): List<UserHandle> {

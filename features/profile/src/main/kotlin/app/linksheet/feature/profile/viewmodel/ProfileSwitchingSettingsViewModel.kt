@@ -1,22 +1,21 @@
-package fe.linksheet.module.viewmodel
+package app.linksheet.feature.profile.viewmodel
 
 import android.app.Activity
-import android.app.Application
-import fe.linksheet.feature.profile.CrossProfile
-import fe.linksheet.feature.profile.ProfileStatus
-import fe.linksheet.feature.profile.ProfileSwitcher
-import fe.linksheet.module.preference.app.AppPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.viewmodel.base.BaseViewModel
+import androidx.lifecycle.ViewModel
+import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.profile.core.CrossProfile
+import app.linksheet.feature.profile.core.ProfileStatus
+import app.linksheet.feature.profile.core.ProfileSwitcher
+import app.linksheet.feature.profile.preference.ProfilePreferences
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.mapNotNull
 
-class ProfileSwitchingSettingsViewModel(
-    val context: Application,
+class ProfileSwitchingSettingsViewModel internal constructor(
     private val profileSwitcher: ProfileSwitcher,
     preferenceRepository: AppPreferenceRepository,
-) : BaseViewModel(preferenceRepository) {
+    profilePreferences: ProfilePreferences,
+) : ViewModel() {
     val status = flowOfLazy { profileSwitcher.getStatus() }
     val userProfileInfo = status
         .filterIsInstance<ProfileStatus.Available>()
@@ -24,7 +23,7 @@ class ProfileSwitchingSettingsViewModel(
             profileSwitcher.getUserProfileInfo(it)
         }
 
-    val enabled = preferenceRepository.asViewModelState(AppPreferences.bottomSheetProfileSwitcher)
+    val enabled = preferenceRepository.asViewModelState(profilePreferences.enable)
 
     fun checkIsManagedProfile(): Boolean {
         return profileSwitcher.checkIsManagedProfile()
@@ -40,4 +39,3 @@ class ProfileSwitchingSettingsViewModel(
         profileSwitcher.startOther(crossProfile, activity)
     }
 }
-

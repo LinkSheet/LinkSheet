@@ -1,0 +1,16 @@
+    <string name="generic__label_personal_profile">个人配置文件</string>
+    <string name="generic__label_unknown_profile">未知配置文件</string>
+    <string name="generic__label_work_profile">工作配置文件</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">在底栏显示按钮，将点击的链接在另一个配置文件中打开</string>
+    <string name="settings_profile_switcher__divider_configuration">配置</string>
+    <string name="settings_profile_switcher__divider_current_profile">当前配置文件</string>
+    <string name="settings_profile_switcher__divider_other_profiles">其他配置文件</string>
+    <string name="settings_profile_switcher__text_current_profile">目前在此配置文件运行</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">点击让 LinkSheet 与第二配置文件中的分身关联</string>
+    <string name="settings_profile_switcher__text_not_installed">无法关联到此配置文件</string>
+    <string name="settings_profile_switcher__text_other_profile">其他配置文件</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">启用跨配置文件关联</string>
+    <string name="settings_profile_switcher__title_profile_switcher">配置文件切换</string>
+</resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic__label_personal_profile">ملف التعريف الشخصي</string>
+    <string name="generic__label_unknown_profile">ملف تعريف غير معروف</string>
+    <string name="generic__label_work_profile">ملف تعريف العمل</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">يعرض زرًا في الورقة السفلية لفتح عنوان URL في ملف تعريف آخر</string>
+    <string name="settings_profile_switcher__divider_configuration">التهيئة</string>
+    <string name="settings_profile_switcher__divider_current_profile">ملف التعريف الحالي</string>
+    <string name="settings_profile_switcher__divider_other_profiles">ملفات تعريف أخرى</string>
+    <string name="settings_profile_switcher__text_current_profile">قيد التشغيل حاليًا في ملف التعريف هذا</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">انقر لتوصيل LinkSheet بنظيره في ملف التعريف الثانوي</string>
+    <string name="settings_profile_switcher__text_no_profile">هذه الميزة متاحة فقط إذا تم إعداد ملف تعريف (عمل) على جهازك.</string>
+    <string name="settings_profile_switcher__text_not_installed">غير قادر على الاتصال بملف التعريف هذا</string>
+    <string name="settings_profile_switcher__text_other_profile">ملف تعريف آخر</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">تمكين الاتصال عبر ملف التعريف</string>
+    <string name="settings_profile_switcher__title_no_profile">لا يوجد ملف/ات تعريف متاحة</string>
+    <string name="settings_profile_switcher__title_profile_switcher">تبديل ملف التعريف</string>
+    <string name="switch_profile">تمكين تبديل ملف التعريف</string>
+    <string name="switch_profile_explainer">يعرض زرًا في الورقة السفلية لفتح الرابط الذي تم النقر عليه في ملف تعريف (العمل). يتطلب تثبيت LinkSheet في كلا ملفي التعريف، وربطهما يدويًا عبر الإعدادات -&gt; الوصول الخاص للتطبيق -&gt; تطبيقات العمل والشخصية المتصلة</string>
+</resources>

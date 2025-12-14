@@ -1,4 +1,4 @@
-package fe.linksheet.feature.profile
+package app.linksheet.feature.profile.core
 
 import android.app.Activity
 import android.content.ComponentName
@@ -21,7 +21,7 @@ interface CrossProfileAppsCompat {
     fun startActivity(switchIntent: Intent, userHandle: UserHandle, activity: Activity): Boolean = false
 }
 
-fun CrossProfileAppsCompat(context: Context) = when {
+internal fun CrossProfileAppsCompat(context: Context) = when {
     AndroidVersion.isAtLeastApi30R() -> CrossProfileAppsCompatImpl.Api30(context.getSystemServiceOrThrow<CrossProfileApps>())
     AndroidVersion.isAtLeastApi28P() -> CrossProfileAppsCompatImpl.Api28(context.getSystemServiceOrThrow<CrossProfileApps>())
     else -> CrossProfileAppsCompatImpl.PreApi28

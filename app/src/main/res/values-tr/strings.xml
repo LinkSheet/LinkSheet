@@ -360,8 +360,7 @@
     <string name="link_handle_failed_text">LinkSheet, bu bağlantı hatalı göründüğü için bu bağlantıyı işleyemiyor. Aşağıdan düzenleyip tekrar deneyebilirsiniz. Alternatif olarak web\'de arama yapabilirsiniz.</string>
     <string name="customization">Özelleştirme</string>
     <string name="reset_app_link_verification_status_subtitle">Bütün uygulamaların bağlantı onaylama durumunu sıfırlamak için buraya dokunun, sonra Android\'in yeniden onaylaması için birkaç dakika bekleyin. Bir onay almayacaksınız. Shizuku gerektirir.</string>
-    <string name="switch_profile">Profil değiştirmeyi etkinleştir</string>
-    <string name="switch_profile_explainer">Alt sayfada bağlantıyı bir (iş) profilinde açmak için bir düğme gösterir. LinkSheet\'in her profilde yüklü olmasını ve Ayarlar -&gt; Özel uygulama erişimi -&gt; Bağlantılı iş ve kişisel uygulamalardan el ile bağlanmasını gerektirir</string>
+
     <string name="reset_app_link_verification_status">Uygulama bağlantı onaylama durumunu sıfırla</string>
     <string name="reset_app_link_verification_status_toast">Yeniden onaylama istendi</string>
     <string name="build_info">Derleme bilgisi</string>
@@ -478,21 +477,7 @@
     <string name="generic__text_edit">Düzenle</string>
     <string name="generic__button_text_done">Tamam</string>
     <string name="generic__text_url">Url</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Dokunulan bağlantıyı başka bir profilde açmak için alt sayfada bir düğme gösterir</string>
-    <string name="settings_profile_switcher__divider_configuration">Yapılandırma</string>
-    <string name="settings_profile_switcher__title_profile_switcher">Profil değiştirme</string>
     <string name="settings__hint_search">Ara</string>
-    <string name="bottom_sheet__event_app_refusal">Hedef uygulama bağlantıyı işlemeyi reddetti!</string>
-    <string name="settings_profile_switcher__title_enable_cross_profile">Profiller arası bağlantıyı etkinleştir</string>
-    <string name="settings_profile_switcher__text_enable_cross_profile">LinkSheet\'i ikincil profilinizdeki karşılığına bağlamak için dokunun</string>
-    <string name="settings_profile_switcher__text_current_profile">Şu anda bu profilde çalışıyor</string>
-    <string name="settings_profile_switcher__text_other_profile">Diğer profil</string>
-    <string name="settings_profile_switcher__divider_current_profile">Şu anki profil</string>
-    <string name="generic__label_unknown_profile">Bilinmeyen profil</string>
-    <string name="settings_profile_switcher__text_not_installed">Bu profile bağlanılamıyor</string>
-    <string name="generic__label_personal_profile">Kişisel profil</string>
-    <string name="generic__label_work_profile">İş profili</string>
-    <string name="settings_profile_switcher__divider_other_profiles">Diğer profiller</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Ek kurulum gerekli</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Xiaomi\'nin uygulamaları öngörülemeyen yöntemlerle ciddi şekilde kısıtladığı ve bunun da LinkSheet\'in düzgün çalışmamasına yol açtığı biliniyor.\nAşağıdaki düğmeye dokunun, sonra \"Arka planda yeni pencere aç\" izni verin</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">İzin iste</string>
@@ -517,8 +502,7 @@
     <string name="settings_home__text_clipboard_card">Mevcut pano içeriği bir URL ise ana sayfada göster</string>
     <string name="settings_home__title_clipboard_card">Pano kartı</string>
     <string name="resolve_event__idle">Boşta</string>
-    <string name="settings_profile_switcher__title_no_profile">Hiçbir profil mevcut değil</string>
-    <string name="settings_profile_switcher__text_no_profile">Bu özellik yalnızca cihazınızda bir (iş) profili ayarlanmışsa kullanılabilir.</string>
+
     <string name="settings_language__dialog_title">Uygulama dili</string>
     <string name="settings_language__text_system_language_with_language">%s (sistem dili)</string>
     <string name="settings_language__text_system_language">Sistem dili</string>

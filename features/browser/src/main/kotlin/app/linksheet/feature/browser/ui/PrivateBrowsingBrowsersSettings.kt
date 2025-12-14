@@ -21,7 +21,7 @@ import fe.composekit.component.page.SaneSettingsScaffold
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun PrivateBrowsingBrowsersSettings(
+internal fun PrivateBrowsingBrowsersSettings(
     onBackPressed: () -> Unit,
     viewModel: PrivateBrowsingBrowserSettingsViewModel = koinViewModel(),
 ) {

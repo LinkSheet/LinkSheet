@@ -278,9 +278,6 @@
     <string name="settings_app_config__description_browsers">متصفحات الويب المثبتة</string>
     <string name="settings_app_config_rules__btn_new_rule">قاعدة جديدة</string>
     <string name="settings_app_config_rules__subtitle_default_rule">يتم استخدام هذه القاعدة إذا لم تتطابق أي قاعدة أخرى</string>
-    <string name="settings_profile_switcher__divider_current_profile">ملف التعريف الحالي</string>
-    <string name="settings_profile_switcher__divider_other_profiles">ملفات تعريف أخرى</string>
-    <string name="generic__label_personal_profile">ملف التعريف الشخصي</string>
     <string name="settings_main_miui_compat__text_request_failed">فشل طلب الإذن!</string>
     <string name="settings__subtitle_advanced"><![CDATA[تجارب وتصدير/استيراد]]></string>
     <string name="settings_verified_link_handlers__text_user_apps">تطبيقات المستخدم</string>
@@ -328,7 +325,6 @@
     <string name="export_log_dialog__title_include_fingerprint">تضمين بصمة الإصدار</string>
     <string name="export_log_dialog__title_redact_log">تنقيح السجل</string>
     <string name="generic__button_text_cancel">إلغاء</string>
-    <string name="settings_profile_switcher__text_not_installed">غير قادر على الاتصال بملف التعريف هذا</string>
     <string name="resolve_event__sorting_apps">جاري فرز قائمة التطبيقات</string>
     <string name="resolve_event__generating_preview">جاري إنشاء معاينة</string>
     <string name="home__clipboard_card_source">من الحافظة</string>
@@ -340,7 +336,6 @@
     <string name="settings__hint_search">بحث</string>
     <string name="hide_bottom_sheet_choice_buttons">إخفاء أزرار الاختيار</string>
     <string name="export_log_dialog__title_share_logs">مشاركة السجل</string>
-    <string name="generic__label_work_profile">ملف تعريف العمل</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">الإعداد الإضافي مطلوب</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">طلب الإذن</string>
     <string name="tap_customization_double_tap">إجراء النقر المزدوج</string>
@@ -370,7 +365,6 @@
     <string name="telemetry_level_exhaustive">شامل</string>
     <string name="telemetry_identity_basic">أساسي</string>
     <string name="telemetry_configure_title">التحليلات</string>
-    <string name="switch_profile">تمكين تبديل ملف التعريف</string>
     <string name="settings_shortcuts__subtitle_default_browser">فتح صفحة إعدادات المتصفح الافتراضي</string>
     <string name="settings_app_config__title_native_apps">التطبيقات</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">لم يتم تعيين LinkSheet كمتصفح افتراضي للنظام</string>
@@ -423,8 +417,6 @@
         <item quantity="other"/>
     </plurals>
     <string name="resolve_embeds_explainer">حل المرايا المضمنة مثل fxtwitter.com إلى المضيف الحقيقي</string>
-    <string name="settings_profile_switcher__title_profile_switcher">تبديل ملف التعريف</string>
-    <string name="settings_profile_switcher__divider_configuration">التهيئة</string>
     <string name="resolve_embeds">حل التضمينات</string>
     <string name="onboarding_3_title">تعطيل معالجات الروابط الافتراضية</string>
     <string name="theme_mode">وضع السمة</string>
@@ -476,8 +468,6 @@
     <string name="telemetry_level_minimal_description">مقاييس الإصدار المثبت</string>
     <string name="telemetry_level_standard_description">إحصائيات استخدام مجمعة</string>
     <string name="link_handle_failed_text_field_label">استعلام</string>
-    <string name="switch_profile_explainer">يعرض زرًا في الورقة السفلية لفتح الرابط الذي تم النقر عليه في ملف تعريف (العمل). يتطلب تثبيت LinkSheet في كلا ملفي التعريف، وربطهما يدويًا عبر الإعدادات -&gt; الوصول الخاص للتطبيق -&gt; تطبيقات العمل والشخصية المتصلة</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">يعرض زرًا في الورقة السفلية لفتح عنوان URL في ملف تعريف آخر</string>
     <string name="verified_link_handlers_subtitle">التحكم في حالة التحقق من التطبيق والمجال</string>
     <string name="settings_shortcuts__title_connected_apps">التطبيقات المتصلة</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">مفعل</string>
@@ -497,11 +487,6 @@
     <string name="settings_edit_rule__title_edit_rule">جاري تحرير القاعدة</string>
     <string name="generic__text_url">عنوان URL</string>
     <string name="generic__text_edit">تحرير</string>
-    <string name="settings_profile_switcher__title_enable_cross_profile">تمكين الاتصال عبر ملف التعريف</string>
-    <string name="settings_profile_switcher__text_enable_cross_profile">انقر لتوصيل LinkSheet بنظيره في ملف التعريف الثانوي</string>
-    <string name="generic__label_unknown_profile">ملف تعريف غير معروف</string>
-    <string name="settings_profile_switcher__text_current_profile">قيد التشغيل حاليًا في ملف التعريف هذا</string>
-    <string name="settings_profile_switcher__text_other_profile">ملف تعريف آخر</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">من المعروف أن Xiaomi تقيد التطبيقات بشدة بطرق غير متوقعة، مما يؤدي إلى عدم عمل LinkSheet بشكل صحيح.\nانقر فوق الزر أدناه، ثم اسمح بإذن فتح نوافذ جديدة في الخلفية</string>
     <string name="generic__button_learn_more">تعرف على المزيد</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
@@ -553,7 +538,6 @@
     <string name="settings_verified_link_handler__text_hosts">المضيفات</string>
     <string name="settings_verified_link_handler__title_details">التفاصيل</string>
     <string name="generic__button_text_settings">اﻹعدادات</string>
-    <string name="settings_profile_switcher__title_no_profile">لا يوجد ملف/ات تعريف متاحة</string>
     <string name="settings_remote_config__title_dialog">تفعيل الإعدادات عن بُعد؟</string>
     <string name="settings_remote_config__text_content">يمكن لـ LinkSheet تحديث التضبيطات الداخلية ومصادر التوثيق تلقائيًا عن طريق الاتصال بخادم التكوين الخاص به. لمعرفة المزيد، انقر <annotation url-id="github.linksheet.wiki.privacy.remote-config">هنا</annotation>.</string>
     <string name="generic__button_text_enable">فعِّل</string>
@@ -564,7 +548,6 @@
     <string name="bottom_sheet__text_launch_not_allowed">الإطلاق غير مسموح به!</string>
     <string name="bottom_sheet__text_launch_failure_other">فشل الإطلاق!</string>
     <string name="settings_language__text_system_language_with_language">%s (لغة النظام)</string>
-    <string name="settings_profile_switcher__text_no_profile">هذه الميزة متاحة فقط إذا تم إعداد ملف تعريف (عمل) على جهازك.</string>
     <string name="bottom_sheet__text_launch_failure_unknown">فشل إطلاق مجهول!</string>
     <string name="settings__title_sql">استعلام Sql</string>
     <string name="settings_sql__text_query">استعلام</string>

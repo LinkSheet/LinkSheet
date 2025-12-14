@@ -263,6 +263,7 @@ dependencies {
     implementation(project(":feature-downloader"))
     implementation(project(":feature-libredirect"))
     implementation(project(":feature-shizuku"))
+    implementation(project(":feature-profile"))
     implementation(project(":feature-wiki"))
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))

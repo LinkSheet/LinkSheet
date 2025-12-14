@@ -26,6 +26,10 @@ import app.linksheet.compose.theme.HkGroteskFontFamily
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
 import app.linksheet.feature.downloader.DownloadCheckResult
+import app.linksheet.feature.profile.core.CrossProfile
+import app.linksheet.feature.profile.core.ProfileStatus
+import app.linksheet.feature.profile.core.ProfileSwitcher
+import app.linksheet.feature.profile.core.UserProfileInfo
 import app.linksheet.testing.asPreferredApp
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toActivityAppInfo
@@ -36,10 +40,6 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.content.success.AppContentRoot
 import fe.linksheet.activity.bottomsheet.content.success.PreferredAppColumn
 import fe.linksheet.activity.bottomsheet.content.success.url.UrlBarWrapper
-import fe.linksheet.feature.profile.CrossProfile
-import fe.linksheet.feature.profile.ProfileStatus
-import fe.linksheet.feature.profile.ProfileSwitcher
-import fe.linksheet.feature.profile.UserProfileInfo
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.resolver.FilteredBrowserList
 import fe.linksheet.module.resolver.IntentResolveResult

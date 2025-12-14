@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.settings.bottomsheet
+package app.linksheet.feature.profile.ui
 
 import android.app.Activity
 import android.os.Build
@@ -17,7 +17,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.compose.extension.toImageBitmap
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewContainer
+import app.linksheet.feature.profile.R
+import app.linksheet.feature.profile.core.CrossProfile
+import app.linksheet.feature.profile.core.ProfileStatus
+import app.linksheet.feature.profile.core.UserProfileInfo
+import app.linksheet.feature.profile.viewmodel.ProfileSwitchingSettingsViewModel
 import fe.android.compose.icon.BitmapIconPainter.Companion.bitmap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -29,18 +36,11 @@ import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShap
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.group
 import fe.composekit.preference.collectAsStateWithLifecycle
-import fe.linksheet.R
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import fe.linksheet.extension.android.toImageBitmap
-import fe.linksheet.feature.profile.CrossProfile
-import fe.linksheet.feature.profile.ProfileStatus
-import fe.linksheet.feature.profile.UserProfileInfo
-import fe.linksheet.module.viewmodel.ProfileSwitchingSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
-fun ProfileSwitchingSettingsRoute(
+internal fun ProfileSwitchingSettings(
     onBackPressed: () -> Unit,
     viewModel: ProfileSwitchingSettingsViewModel = koinViewModel(),
 ) {

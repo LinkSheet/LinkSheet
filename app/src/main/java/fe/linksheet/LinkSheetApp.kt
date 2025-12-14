@@ -13,6 +13,7 @@ import app.linksheet.feature.downloader.DownloaderModule
 import app.linksheet.feature.engine.LinkEngineFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
+import app.linksheet.feature.profile.ProfileFeatureModule
 import app.linksheet.feature.shizuku.ShizukuModule
 import app.linksheet.feature.wiki.WikiFeatureModule
 import app.linksheet.testing.Testing
@@ -27,7 +28,6 @@ import fe.gson.GlobalGsonModule
 import fe.gson.context.GlobalGsonContext
 import fe.linksheet.activity.CrashHandlerActivity
 import fe.linksheet.feature.app.AppFeatureModule
-import fe.linksheet.feature.profile.ProfileFeatureModule
 import fe.linksheet.module.analytics.AnalyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.clock.ClockModule
@@ -46,6 +46,7 @@ import fe.linksheet.module.paste.PasteServiceModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.receiver.BroadcastEventBusModule
+import fe.linksheet.module.refine.RefineModule
 import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.resolver.module.ResolverModule
@@ -115,6 +116,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideKoinModules(): List<Module> {
         return listOf(
+            RefineModule,
             ClockModule,
             SystemInfoServiceModule,
             PrivateBrowsingModule,
@@ -150,7 +152,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             LibRedirectFeatureModule,
             LinkEngineFeatureModule,
             WikiFeatureModule,
-            PrivateBrowsingModule
+            PrivateBrowsingModule,
         )
     }
 

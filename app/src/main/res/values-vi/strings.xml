@@ -370,7 +370,6 @@
     <string name="telemetry_level_standard_description">Thống kê sử dụng tổng hợp</string>
     <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
     <string name="telemetry_identifier_reset">Đặt lại số định danh</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Hiển thị một nút ở trang dưới cùng để mở url trong một hồ sơ khác</string>
     <string name="settings_notifications__divider_toasts">Thông báo ngắn</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Tất cả</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Đã bật</string>

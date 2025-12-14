@@ -17,11 +17,11 @@ import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
 import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.downloader.DownloadCheckResult
+import app.linksheet.feature.profile.core.ProfileSwitcher
 import coil3.ImageLoader
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.*
-import fe.linksheet.feature.profile.ProfileSwitcher
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -80,7 +80,7 @@ class BottomSheetViewModel(
     val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.hideBottomSheetChoiceButtons)
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enable)
-    val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.bottomSheetProfileSwitcher)
+    val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.profileSwitcher.enable)
     val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.tapConfig.single)
     val tapConfigDouble = preferenceRepository.asViewModelState(AppPreferences.tapConfig.double)
     val tapConfigLong = preferenceRepository.asViewModelState(AppPreferences.tapConfig.long)

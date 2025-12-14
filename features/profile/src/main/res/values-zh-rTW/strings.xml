@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic__label_personal_profile">個人資料夾</string>
+    <string name="generic__label_unknown_profile">不明資料夾</string>
+    <string name="generic__label_work_profile">工作資料夾</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">在底部功能表顯示一個使網址在另個資料夾中開啟的按鈕</string>
+    <string name="settings_profile_switcher__divider_current_profile">目前資料夾</string>
+    <string name="settings_profile_switcher__divider_other_profiles">其他資料夾</string>
+    <string name="settings_profile_switcher__text_current_profile">目前運作於此資料夾</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">輕觸以將 LinkSheet 與同時安裝在另個資料夾中的 LinkSheet 建立連結</string>
+    <string name="settings_profile_switcher__text_no_profile">此功能僅適用於設有資料夾 (例如工作資料夾) 的裝置。</string>
+    <string name="settings_profile_switcher__text_not_installed">無法連結此資料夾</string>
+    <string name="settings_profile_switcher__text_other_profile">其他資料夾</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">啟用跨資料夾連結</string>
+    <string name="settings_profile_switcher__title_no_profile">沒有可用的資料夾</string>
+    <string name="settings_profile_switcher__title_profile_switcher">資料夾切換鈕</string>
+    <string name="switch_profile">啟用個人或工作資料夾切換鈕</string>
+</resources>

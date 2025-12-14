@@ -5,7 +5,7 @@ import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import fe.linksheet.feature.profile.ProfileSwitcher
+import app.linksheet.feature.profile.core.ProfileSwitcher
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
@@ -34,7 +34,7 @@ class BottomSheetSettingsViewModel(
     val tapConfigLong = preferenceRepository.asViewModelState(AppPreferences.tapConfig.long)
     val expandOnAppSelect = preferenceRepository.asViewModelState(AppPreferences.expandOnAppSelect)
     val bottomSheetNativeLabel = preferenceRepository.asViewModelState(AppPreferences.bottomSheetNativeLabel)
-    val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.bottomSheetProfileSwitcher)
+    val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.profileSwitcher.enable)
 
     val usageStatsPermission = UsageStatsPermission(context)
 

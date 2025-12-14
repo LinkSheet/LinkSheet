@@ -21,7 +21,7 @@ import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun PrivateBrowsingSettings(
+internal fun PrivateBrowsingSettings(
     onBackPressed: () -> Unit,
     navigate: (Route) -> Unit,
     viewModel: PrivateBrowsingSettingsViewModel = koinViewModel(),

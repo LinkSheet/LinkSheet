@@ -200,12 +200,6 @@
             </intent-filter>
         </service>
 
-        <!-- Interconnect -->
-        <service android:name=".InterconnectService"
-                 android:enabled="true"
-                 android:exported="true"
-                 tools:ignore="ExportedService">
-        </service>
         <service android:name="app.linksheet.service.InterconnectService2"
                  android:enabled="true"
                  android:exported="true"

@@ -361,8 +361,6 @@
     <string name="reset_app_link_verification_status">Restablecer el estado de verificación del enlace de la aplicación</string>
     <string name="reset_app_link_verification_status_subtitle">Toque aquí para restablecer el estado de verificación del enlace de aplicaciones de todas las aplicaciones y luego espere unos minutos mientras Android las vuelve a verificar. No recibirás una confirmación. Requiere Shizuku.</string>
     <string name="reset_app_link_verification_status_toast">Solicitada una nueva verificación</string>
-    <string name="switch_profile">Activar el cambio de perfil</string>
-    <string name="switch_profile_explainer">Muestra un botón en la hoja inferior para abrir el enlace pulsado en un perfil (de trabajo). Requiere que LinkSheet esté instalado en ambos perfiles y vinculado manualmente a través de Ajustes -&gt; Acceso a aplicaciones especiales -&gt; Aplicaciones personales y de trabajo conectadas</string>
     <string name="customization">Personalización</string>
     <string name="build_info">Información de compilación</string>
     <string name="verified_link_handlers">Gestores de enlaces verificados</string>
@@ -485,21 +483,8 @@
     <string name="home__clipboard_card_source">Desde el portapapeles</string>
     <string name="generic__text_edit">Editar</string>
     <string name="generic__button_text_done">Hecho</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Muestra un botón al pie de página para abrir la URL en otro perfil</string>
-    <string name="settings_profile_switcher__title_profile_switcher">Cambio de perfil</string>
-    <string name="settings_profile_switcher__divider_configuration">Configuración</string>
     <string name="settings__hint_search">Buscar</string>
     <string name="bottom_sheet__event_app_refusal">¡La aplicación de destino se negó a procesar la conexión!</string>
-    <string name="settings_profile_switcher__divider_current_profile">Perfil actual</string>
-    <string name="settings_profile_switcher__divider_other_profiles">Otros perfiles</string>
-    <string name="generic__label_personal_profile">Perfil personal</string>
-    <string name="generic__label_work_profile">Perfil de trabajo</string>
-    <string name="generic__label_unknown_profile">Perfil desconocido</string>
-    <string name="settings_profile_switcher__text_not_installed">No se puede conectar a este perfil</string>
-    <string name="settings_profile_switcher__text_current_profile">Actualmente en este perfil</string>
-    <string name="settings_profile_switcher__text_other_profile">Otro perfil</string>
-    <string name="settings_profile_switcher__title_enable_cross_profile">Habilitar conexión entre perfiles</string>
-    <string name="settings_profile_switcher__text_enable_cross_profile">Toque para conectar LinkSheet a su contraparte en su perfil secundario</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Configuración adicional requerida</string>
     <string name="settings_main_miui_compat__text_request_failed">¡Error al solicitar permiso!</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Se sabe que Xiaomi restringe fuertemente las aplicaciones de formas impredecibles, lo que provoca que LinkSheet no funcione correctamente.\nPulsa el botón de abajo y luego habilita el permiso \"Abrir nuevas ventanas en segundo plano\"</string>
@@ -523,6 +508,5 @@
     <string name="bottom_sheet__button_manual_redirect">Seguir redirecciones</string>
     <string name="generic__button_text_share">Compartir</string>
     <string name="resolve_event__idle">Sin uso</string>
-    <string name="settings_profile_switcher__text_no_profile">Esta función solo está disponible si se ha configurado un perfil (de trabajo) en tu dispositivo.</string>
-    <string name="settings_profile_switcher__title_no_profile">No hay perfil(es) disponible(s)</string>
+
 </resources>

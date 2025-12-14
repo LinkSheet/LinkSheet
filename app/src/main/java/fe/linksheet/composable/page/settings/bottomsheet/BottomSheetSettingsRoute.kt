@@ -19,10 +19,10 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.feature.browser.ui.privateBrowsingListItem
+import app.linksheet.feature.profile.ui.profileSwitchingListItem
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.android.compose.feedback.FeedbackType
@@ -35,7 +35,6 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.icon.FilledIcon
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.list.item.ContentPosition
-import fe.composekit.component.list.item.EnabledContent
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.core.AndroidVersion
 import fe.composekit.layout.column.GroupValueProvider
@@ -46,7 +45,6 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
-import fe.linksheet.navigation.Routes
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -160,17 +158,11 @@ fun BottomSheetSettingsRoute(
             }
 
             if (AndroidVersion.isAtLeastApi30R()) {
-                item(key = R.string.switch_profile) { padding, shape ->
-                    PreferenceDividedSwitchListItem(
-                        enabled = if (viewModel.profileSwitcher.canQuickToggle()) EnabledContent.all else EnabledContent.Main.set,
-                        shape = shape,
-                        padding = padding,
-                        statePreference = viewModel.bottomSheetProfileSwitcher,
-                        onContentClick = { navigate(Routes.ProfileSwitching) },
-                        headlineContent = textContent(R.string.switch_profile),
-                        supportingContent = textContent(R.string.settings_bottom_sheet__text_profile_switcher),
-                    )
-                }
+                profileSwitchingListItem(
+                    profileSwitcher = viewModel.profileSwitcher,
+                    statePreference = viewModel.bottomSheetProfileSwitcher,
+                    navigate = navigateNew
+                )
             }
 
 //            item(key = R.string.show_native_label) { padding, shape ->

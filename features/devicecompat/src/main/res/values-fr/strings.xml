@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic__label_personal_profile">Profil personnel</string>
+    <string name="generic__label_unknown_profile">Profil inconnu</string>
+    <string name="generic__label_work_profile">Profil professionnel</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Affiche un bouton dans la partie inférieure pour ouvrir l\'url dans un autre profil</string>
+    <string name="settings_profile_switcher__divider_configuration">Configuration</string>
+    <string name="settings_profile_switcher__divider_current_profile">Profil actuel</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Autres profils</string>
+    <string name="settings_profile_switcher__text_current_profile">Actuellement en cours d\'exécution dans ce profil</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Appuyez pour connecter LinkSheet à son homologue dans votre profil secondaire</string>
+    <string name="settings_profile_switcher__text_no_profile">Cette fonctionnalité n\'est disponible que si un profil (professionnel) a été configuré sur votre appareil.</string>
+    <string name="settings_profile_switcher__text_not_installed">Impossible de se connecter à ce profil</string>
+    <string name="settings_profile_switcher__text_other_profile">Autre profil</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Activer la connexion multiprofil</string>
+    <string name="settings_profile_switcher__title_no_profile">Aucun profil(s) disponible</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Commutation de profil</string>
+    <string name="switch_profile">Activer la commutation de profil</string>
+    <string name="switch_profile_explainer">Affiche un bouton dans la partie inférieure de l\'écran pour ouvrir le lien appuyé dans un profil (professionnel-). Nécessite que LinkSheet soit installé dans les deux profils et lié manuellement via Paramètres -&gt; Accès spécial aux applications -&gt; Applications professionnelles et personnelles connectées</string>
+</resources>

@@ -3,6 +3,7 @@ package fe.linksheet.module.preference.app
 
 import app.linksheet.feature.browser.preference.browserPreferences
 import app.linksheet.feature.libredirect.preference.libRedirectPreferences
+import app.linksheet.feature.profile.preference.profilePreferences
 import app.linksheet.feature.shizuku.preference.shizukuPreferences
 import com.google.gson.JsonArray
 import fe.android.preference.helper.PreferenceDefinition
@@ -159,8 +160,6 @@ object AppPreferences : PreferenceDefinition(
     @SensitivePreference
     val installationId = string("installation_id") { UUID.randomUUID().toString() }
 
-    val bottomSheetProfileSwitcher = boolean("bottom_sheet_profile_switcher")
-
     // TODO: This should be moved to a proper implementation which uses a string set or something similar, but we don't have an API for that (yet)
     val lastVersions = string("last_versions_v0")
 //    val lastVersionsV1 = jsonMapped<LastVersion?>("last_versions", null)
@@ -178,6 +177,7 @@ object AppPreferences : PreferenceDefinition(
 
     val shizuku = shizukuPreferences(this::boolean)
     val browser = browserPreferences(this::boolean)
+    val profileSwitcher = profilePreferences(this::boolean)
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->

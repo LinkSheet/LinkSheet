@@ -316,7 +316,6 @@
     <string name="onboarding_3_card_explainer">A Google bevezette az ellenőrzött alkalmazáshivatkozásokat az Android 12-ben, amely lehetővé teszi az alkalmazások számára, hogy kriptográfiailag igazolják a domainek tulajdonjogát. Ezt a viselkedést manuálisan le kell tiltani ahhoz, hogy a LinkSheet elfoghassa a kiválasztott hivatkozásokat.</string>
     <string name="theme_enable_material_you">Dinamikus szín</string>
     <string name="theme_enable_amoled">Tiszta fekete</string>
-    <string name="switch_profile">Profilváltás engedélyezése</string>
     <string name="settings__title_shortcuts">Parancsikonok</string>
     <string name="export_log_dialog__subtitle_include_throwable">Ajánlott, elrejti az alkalmazások neveit és URL-jeit</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">Átugrik</string>
@@ -372,7 +371,6 @@
     <string name="export_log_dialog__subtitle_include_fingerprint">Ajánlott</string>
     <string name="export_log_dialog__title_include_settings">Tartalmazza a beállításokat</string>
     <string name="export_log_dialog__subtitle_include_settings">Ajánlott</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Megjelenít egy gombot az alsó panelen az URL megnyitásához egy másik profilban</string>
     <string name="telemetry_level_exhaustive_description">Részletes használati statisztikák</string>
     <string name="open_app">Alkalmazás megnyitása</string>
     <string name="retry">Próbálja újra</string>
@@ -410,7 +408,6 @@
     <string name="telemetry_dialog_title">A LinkSheet tiszteletben tartja az Ön személyes adatait</string>
     <string name="reset_app_link_verification_status">Állítsa vissza az alkalmazáshivatkozás-ellenőrzés állapotát</string>
     <string name="reset_app_link_verification_status_subtitle">Koppintson ide az összes alkalmazás alkalmazáshivatkozás-ellenőrzés állapotának visszaállításához, majd várjon néhány percet, amíg az Android újra ellenőrzi őket. Nem fog visszaigazolást kapni. Shizuku kell hozzá.</string>
-    <string name="switch_profile_explainer">Megjelenít egy gombot az alsó lapon a megérintett hivatkozás megnyitásához egy (munka-)profilban. A LinkSheet-nek mindkét profilban telepítve kell lennie, és manuálisan kell összekapcsolni a Beállítások - Speciális alkalmazáshozzáférés - Összekapcsolt munkahelyi és személyes alkalmazások</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_selected_alt">
         <item quantity="one">%d engedélyezett gazdagép</item>
         <item quantity="other">%d engedélyezett gazdagép</item>
@@ -428,7 +425,6 @@
     <string name="settings_app_config__title_native_apps">Alkalmazások</string>
     <string name="settings_app_config_rules__btn_new_rule">Új szabály</string>
     <string name="resolve_event__running_libredirect">Megpróbálja megtalálni a FOSS-frontendet</string>
-    <string name="settings_profile_switcher__title_profile_switcher">Profil váltás</string>
     <string name="settings_app_config_rules__title_default_rule">Alapértelmezett szabály</string>
     <string name="generic__button_text_delete">Törlés</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">A LinkSheet nincs beállítva a rendszer alapértelmezett böngészőjeként</string>
@@ -467,18 +463,7 @@
     <string name="delete_log_dialog__subtitle_delete_info">Törli ezt a napló munkamenetet? Visszavonni már nem lehet!</string>
     <string name="generic__text_edit">Szerkesztés</string>
     <string name="home__clipboard_card_source">A vágólapról</string>
-    <string name="settings_profile_switcher__divider_configuration">Konfiguráció</string>
     <string name="bottom_sheet__event_app_refusal">A célalkalmazás megtagadta a link kezelését!</string>
-    <string name="settings_profile_switcher__title_enable_cross_profile">Profilok közötti kapcsolat engedélyezése</string>
-    <string name="settings_profile_switcher__text_enable_cross_profile">Koppintson a LinkSheet és a másodlagos profilban lévő megfelelőjének összekapcsolásához</string>
-    <string name="settings_profile_switcher__divider_current_profile">Jelenlegi profil</string>
-    <string name="settings_profile_switcher__divider_other_profiles">Egyéb profilok</string>
-    <string name="generic__label_personal_profile">Személyes profil</string>
-    <string name="generic__label_work_profile">Munka profil</string>
-    <string name="generic__label_unknown_profile">Ismeretlen profil</string>
-    <string name="settings_profile_switcher__text_not_installed">Nem lehet csatlakozni ehhez a profilhoz</string>
-    <string name="settings_profile_switcher__text_current_profile">Jelenleg ebben a profilban fut</string>
-    <string name="settings_profile_switcher__text_other_profile">Egyéb profil</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">További beállítás szükséges</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Engedélykérés</string>
     <string name="settings_main_miui_compat__text_request_failed">Nem sikerült engedély kérni!</string>

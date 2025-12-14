@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_bottom_sheet__text_profile_switcher">Hiển thị một nút ở trang dưới cùng để mở url trong một hồ sơ khác</string>
+</resources>

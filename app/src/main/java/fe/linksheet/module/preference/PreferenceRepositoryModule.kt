@@ -2,6 +2,7 @@ package fe.linksheet.module.preference
 
 import app.linksheet.feature.browser.preference.BrowserPreferences
 import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
+import app.linksheet.feature.profile.preference.ProfilePreferences
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
@@ -21,4 +22,5 @@ val PreferenceRepositoryModule = module {
     single<ShizukuPreferences> { AppPreferences.shizuku }
     single<LibRedirectPreferences> { AppPreferences.libRedirect }
     single<BrowserPreferences> { AppPreferences.browser }
+    single<ProfilePreferences> { AppPreferences.profileSwitcher }
 }

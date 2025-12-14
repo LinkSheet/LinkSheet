@@ -1,6 +1,11 @@
 package fe.linksheet.debug
 
 import android.os.StrictMode
+import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.compose.debug.DebugPreferenceProvider
+import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
+import app.linksheet.feature.devicecompat.oneui.OneUiCompatProvider
+import app.linksheet.feature.devicecompat.oneui.RealOneUiCompatProvider
 import app.linksheet.testing.Testing
 import fe.linksheet.LinkSheetApp
 import fe.linksheet.debug.module.debug.RealDebugMenuSlotProvider
@@ -10,11 +15,6 @@ import fe.linksheet.debug.module.preference.DebugPreferenceRepository
 import fe.linksheet.debug.module.viewmodel.module.DebugViewModelModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.analytics.client.aptabaseAnalyticsClientModule
-import app.linksheet.compose.debug.DebugMenuSlotProvider
-import app.linksheet.compose.debug.DebugPreferenceProvider
-import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.oneui.OneUiCompatProvider
-import fe.linksheet.module.devicecompat.oneui.RealOneUiCompatProvider
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -44,7 +44,7 @@ class DebugLinkSheetApp : LinkSheetApp() {
 
     override fun provideCompatProvider(): Module {
         return module {
-            single<MiuiCompatProvider> { DebugMiuiCompatProvider }
+            single<MiuiCompatProvider> { DebugMiuiCompatProvider(get()) }
             single<OneUiCompatProvider> { RealOneUiCompatProvider(get()) }
         }
     }

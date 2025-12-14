@@ -361,7 +361,6 @@
     <string name="customization">Přizpůsobení</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">Zakázané</string>
     <string name="flavor"><b>Úprava:</b> <font face="monospace">%s</font></string>
-    <string name="switch_profile">Povolit přepínání profilů</string>
     <string name="build_info">Informace o sestavení</string>
     <string name="verified_link_handlers">Ověření zpracovatelé odkazů</string>
     <string name="verified_link_handlers_subtitle">Ovládání stavu ověření domény aplikací</string>
@@ -483,7 +482,6 @@
         <item quantity="many">%d ověřených hostitelů</item>
         <item quantity="other">%d ověřených hostitelů</item>
     </plurals>
-    <string name="switch_profile_explainer">Zobrazí tlačítko ve spodním listu pro otevření odkazu, na který jste klepnuli, v (pracovním) profilu. Vyžaduje, aby byla aplikace LinkSheet nainstalována v obou profilech a manuálně propojena přes Nastavení -&gt; Zvláštní přístup aplikací -&gt;Propojení pracovních a osobních aplikací</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet není nastaven</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet je nastaven</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet je správně nastaven a připraven k provozu</string>
@@ -492,21 +490,8 @@
     <string name="home__clipboard_card_source">Ze schránky</string>
     <string name="generic__text_edit">Upravit</string>
     <string name="generic__button_text_done">Hotovo</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Zobrazí tlačítko ve spodním listu pro otevření odkazu v jiném profilu</string>
-    <string name="settings_profile_switcher__divider_configuration">Nastavení</string>
-    <string name="settings_profile_switcher__title_profile_switcher">Přepínač profilu</string>
     <string name="bottom_sheet__event_app_refusal">Cílová aplikace odmítla zpracovat odkaz!</string>
     <string name="settings__hint_search">Hledat</string>
-    <string name="generic__label_work_profile">Pracovní profil</string>
-    <string name="settings_profile_switcher__title_enable_cross_profile">Povolit připojení napříč profily</string>
-    <string name="generic__label_unknown_profile">Neznámý profil</string>
-    <string name="settings_profile_switcher__text_not_installed">Nepodařilo se připojit k tomuto profilu</string>
-    <string name="settings_profile_switcher__text_current_profile">Aktuálně spuštěné v tomto profilu</string>
-    <string name="settings_profile_switcher__text_enable_cross_profile">Klepnutím připojíte LinkSheet k jeho protějšku v sekundárním profilu</string>
-    <string name="settings_profile_switcher__divider_current_profile">Aktuální profil</string>
-    <string name="settings_profile_switcher__divider_other_profiles">Další profily</string>
-    <string name="generic__label_personal_profile">Osobní profil</string>
-    <string name="settings_profile_switcher__text_other_profile">Jiný profil</string>
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">Vyžádat oprávnění</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Vyžadováno další nastavení</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Společnost Xiaomi je známá tím, že silně a nepředvídatelným způsobem omezuje aplikace, což vede k tomu, že LinkSheet nefunguje správně.\nKlepněte na tlačítko níže a povolte oprávnění „Otevírat nová okna při běhu na pozadí“</string>
@@ -531,8 +516,7 @@
     <string name="settings_verified_link_handlers__text_browser">Prohlížeč</string>
     <string name="generic__button_text_share">Sdílet</string>
     <string name="resolve_event__idle">Nečinný</string>
-    <string name="settings_profile_switcher__text_no_profile">Tato funkce je k dispozici pouze, pokud jste na svém zařízení nastavili (pracovní) profil.</string>
-    <string name="settings_profile_switcher__title_no_profile">Nejsou dostupné žádné profily</string>
+
     <string name="settings_home__title_clipboard_card">Karta schránky</string>
     <string name="settings_home__text_clipboard_card">Zobrazit aktuální obsah schránky na domovské stránce, pokud se jedná o adresu</string>
     <string name="settings_language__dialog_title">Jazyk aplikace</string>

@@ -492,19 +492,7 @@
     <string name="generic__text_edit">Edytuj</string>
     <string name="generic__button_text_done">Gotowe</string>
     <string name="home__clipboard_card_source">Ze schowka</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Wyświetla przycisk w dolnym panelu, który otwiera link w innym profilu</string>
-    <string name="settings_profile_switcher__title_profile_switcher">Przełączanie profili</string>
-    <string name="settings_profile_switcher__divider_configuration">Konfiguracja</string>
-    <string name="settings_profile_switcher__divider_current_profile">Aktualny profil</string>
-    <string name="settings_profile_switcher__divider_other_profiles">Inne profile</string>
-    <string name="generic__label_personal_profile">Osobisty profil</string>
-    <string name="generic__label_unknown_profile">Nieznany profil</string>
-    <string name="settings_profile_switcher__text_not_installed">Nie można połączyć z tym profilem</string>
-    <string name="settings_profile_switcher__text_current_profile">Ten profil jest aktualnie używany</string>
-    <string name="settings_profile_switcher__text_other_profile">Inny profil</string>
-    <string name="settings_profile_switcher__title_enable_cross_profile">Włącz połączenie między profilami</string>
-    <string name="settings_profile_switcher__text_enable_cross_profile">Dotknij, aby połączyć LinkSheet z jego odpowiednikiem w drugim profilu</string>
-    <string name="generic__label_work_profile">Profil pracy</string>
+
     <string name="settings__hint_search">Szukaj</string>
     <string name="bottom_sheet__event_app_refusal">Docelowa aplikacja odmówiła obsługi linku!</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Wymagana dodatkowa konfiguracja</string>
@@ -531,8 +519,7 @@
     <string name="settings_verified_link_handlers__text_browser">Przeglądarka</string>
     <string name="generic__button_text_share">Udostępnij</string>
     <string name="resolve_event__idle">Bezczynny</string>
-    <string name="settings_profile_switcher__title_no_profile">Brak dostępnych profili</string>
-    <string name="settings_profile_switcher__text_no_profile">Funkcja ta jest dostępna tylko wtedy, gdy na Twoim urządzeniu skonfigurowano (służbowy) profil.</string>
+
     <string name="settings_home__title_clipboard_card">Karta schowka</string>
     <string name="settings_home__text_clipboard_card">Pokaż aktualną zawartość schowka na stronie głównej, jeśli jest to adres URL</string>
     <string name="settings_language__dialog_title">Język aplikacji</string>

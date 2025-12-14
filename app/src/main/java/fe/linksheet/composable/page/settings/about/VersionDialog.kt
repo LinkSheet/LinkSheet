@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.window.DialogProperties
 import fe.linksheet.BuildConfig
 import fe.linksheet.composable.component.dialog.AlertDialogContent
-import fe.linksheet.extension.android.toImageBitmap
+import app.linksheet.compose.extension.toImageBitmap
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

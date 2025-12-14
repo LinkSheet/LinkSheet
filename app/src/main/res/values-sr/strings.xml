@@ -362,8 +362,6 @@
     <string name="reset_app_link_verification_status_toast">Поновна верификација неопходна</string>
     <string name="reset_app_link_verification_status_subtitle">Додирните овде да бисте ресетовали статус верификације линка апликације за све апликације, а затим сачекајте неколико минута док их Android поново верификује. Нећете добити потврду. Захтева Shizuku.</string>
     <string name="customization">Прилагођавање</string>
-    <string name="switch_profile">Омогући промену профила</string>
-    <string name="switch_profile_explainer">Приказује дугме у доњем листу за отварање додирнутог линка у (радном) профилу. Захтева да се LinkSheet инсталира у оба профила и да се ручно повеже преко Подешавања -&gt; Посебан приступ апликацијама -&gt; Повезане радне и личне апликације</string>
     <string name="build_info">Информације о издању</string>
     <string name="settings__title_shortcuts">Пречице</string>
     <string name="settings_shortcuts__title_default_browser">Подразумевани прегледач</string>
@@ -485,21 +483,8 @@
     <string name="generic__button_text_done">Готово</string>
     <string name="generic__text_edit">Измени</string>
     <string name="home__clipboard_card_source">Из привремене меморије</string>
-    <string name="settings_bottom_sheet__text_profile_switcher">Приказује дугме у доњем листу за отварање линка у другом профилу</string>
-    <string name="settings_profile_switcher__title_profile_switcher">Мењање профила</string>
-    <string name="settings_profile_switcher__divider_configuration">Конфигурација</string>
-    <string name="settings_profile_switcher__title_enable_cross_profile">Омогући међупрофилну везу</string>
-    <string name="generic__label_personal_profile">Лични профил</string>
-    <string name="generic__label_work_profile">Радни профил</string>
-    <string name="generic__label_unknown_profile">Непознати профил</string>
-    <string name="settings_profile_switcher__text_not_installed">Није могуће повезивање на овај профил</string>
-    <string name="settings_profile_switcher__text_current_profile">Тренутно ради на овом профилу</string>
-    <string name="settings_profile_switcher__divider_other_profiles">Други профили</string>
-    <string name="settings_profile_switcher__text_enable_cross_profile">Додирните да бисте повезали LinkSheet са његовим панданом у вашем секундарном профилу</string>
     <string name="bottom_sheet__event_app_refusal">Циљна апликација је одбила да обрађује линк!</string>
-    <string name="settings_profile_switcher__text_other_profile">Други профил</string>
     <string name="settings__hint_search">Претрага</string>
-    <string name="settings_profile_switcher__divider_current_profile">Тренутни профил</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Потребно је додатно подешавање</string>
     <string name="settings_main_miui_compat__text_request_failed">Затраживање дозволе није успело!</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">Познато је да Xiaomi снажно ограничава апликације на непредвидиве начине, што доводи до тога да LinkSheet не функционише исправно.\nДодирните дугме испод, а затим дајте дозволу „Отвори нове прозоре у позадини“</string>
@@ -523,8 +508,7 @@
     <string name="settings_verified_link_handlers__text_browser">Прегледач</string>
     <string name="generic__button_text_share">Дели</string>
     <string name="resolve_event__idle">У мировању</string>
-    <string name="settings_profile_switcher__title_no_profile">Нема доступних профила</string>
-    <string name="settings_profile_switcher__text_no_profile">Ова функција је доступна само ако је на вашем уређају подешен (радни) профил.</string>
+
     <string name="settings_home__title_clipboard_card">Картица привремене меморије</string>
     <string name="settings_home__text_clipboard_card">Приказивање тренутног садржаја привремене меморије на почетној страници, ако је URL адреса</string>
     <string name="settings_language__dialog_title">Језик апликације</string>

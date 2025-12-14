@@ -1,8 +1,8 @@
 package fe.linksheet.module.viewmodel.module
 
 
+import app.linksheet.feature.profile.ProfileFeatureModule
 import fe.gson.GsonQualifier
-import fe.linksheet.feature.profile.ProfileFeatureModule
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.repository.module.RepositoryModule
@@ -96,6 +96,7 @@ val ViewModelModule = module {
             gson = get(qualifier(GsonQualifier.Pretty)),
             systemInfoService = get(),
             logPersistService = get(),
+            refineWrapper = get(),
             ioDispatcher = Dispatchers.IO
         )
     }
@@ -103,7 +104,6 @@ val ViewModelModule = module {
     viewModelOf(::NotificationSettingsViewModel)
     viewModelOf(::ExperimentsViewModel)
     viewModelOf(::AppConfigViewModel)
-    viewModelOf(::ProfileSwitchingSettingsViewModel)
     viewModelOf(::SqlViewModel)
     viewModelOf(::PreviewSettingsViewModel)
     viewModel { parameters ->

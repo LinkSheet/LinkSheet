@@ -54,7 +54,7 @@ import fe.composekit.component.shape.CustomShapeDefaults
 import fe.composekit.layout.column.SaneLazyListScope
 import fe.linksheet.R
 import fe.linksheet.extension.android.isUserApp
-import fe.linksheet.extension.android.toImageBitmap
+import app.linksheet.compose.extension.toImageBitmap
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState

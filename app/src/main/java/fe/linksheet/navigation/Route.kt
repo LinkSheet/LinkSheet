@@ -145,6 +145,5 @@ object Routes {
     const val RuleOverview = "route__rules_overview"
     const val RuleNew = "route__rule_new"
     const val AboutVersion = "route__about_version"
-    const val ProfileSwitching = "route__profile_switching"
 }
 

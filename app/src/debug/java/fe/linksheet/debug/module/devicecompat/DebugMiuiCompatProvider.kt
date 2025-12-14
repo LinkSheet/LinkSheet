@@ -3,12 +3,13 @@ package fe.linksheet.debug.module.devicecompat
 import android.app.AppOpsManager
 import android.content.Context
 import androidx.core.content.getSystemService
-import fe.linksheet.module.devicecompat.miui.MiuiCompat
-import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.miui.RealMiuiCompat
+import app.linksheet.api.RefineWrapper
+import app.linksheet.feature.devicecompat.miui.MiuiCompat
+import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
+import app.linksheet.feature.devicecompat.miui.RealMiuiCompat
 import fe.std.lazy.resettableLazy
 
-object DebugMiuiCompatProvider : MiuiCompatProvider {
+class DebugMiuiCompatProvider(private val refineWrapper: RefineWrapper) : MiuiCompatProvider {
     private var required = false
 
     override val isXiaomiDevice = true
@@ -19,7 +20,7 @@ object DebugMiuiCompatProvider : MiuiCompatProvider {
 
     override fun provideCompat(context: Context): MiuiCompat {
         val appOpsManager = context.getSystemService<AppOpsManager>()!!
-        return RealMiuiCompat(appOpsManager)
+        return RealMiuiCompat(refineWrapper.cast(appOpsManager))
     }
 
     fun toggleRequired(): Boolean {

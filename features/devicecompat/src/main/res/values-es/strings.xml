@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic__label_personal_profile">Perfil personal</string>
+    <string name="generic__label_unknown_profile">Perfil desconocido</string>
+    <string name="generic__label_work_profile">Perfil de trabajo</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Muestra un botón al pie de página para abrir la URL en otro perfil</string>
+    <string name="settings_profile_switcher__divider_configuration">Configuración</string>
+    <string name="settings_profile_switcher__divider_current_profile">Perfil actual</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Otros perfiles</string>
+    <string name="settings_profile_switcher__text_current_profile">Actualmente en este perfil</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Toque para conectar LinkSheet a su contraparte en su perfil secundario</string>
+    <string name="settings_profile_switcher__text_no_profile">Esta función solo está disponible si se ha configurado un perfil (de trabajo) en tu dispositivo.</string>
+    <string name="settings_profile_switcher__text_not_installed">No se puede conectar a este perfil</string>
+    <string name="settings_profile_switcher__text_other_profile">Otro perfil</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Habilitar conexión entre perfiles</string>
+    <string name="settings_profile_switcher__title_no_profile">No hay perfil(es) disponible(s)</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Cambio de perfil</string>
+    <string name="switch_profile">Activar el cambio de perfil</string>
+    <string name="switch_profile_explainer">Muestra un botón en la hoja inferior para abrir el enlace pulsado en un perfil (de trabajo). Requiere que LinkSheet esté instalado en ambos perfiles y vinculado manualmente a través de Ajustes -&gt; Acceso a aplicaciones especiales -&gt; Aplicaciones personales y de trabajo conectadas</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic__label_personal_profile">Személyes profil</string>
+    <string name="generic__label_unknown_profile">Ismeretlen profil</string>
+    <string name="generic__label_work_profile">Munka profil</string>
+    <string name="settings_bottom_sheet__text_profile_switcher">Megjelenít egy gombot az alsó panelen az URL megnyitásához egy másik profilban</string>
+    <string name="settings_profile_switcher__divider_configuration">Konfiguráció</string>
+    <string name="settings_profile_switcher__divider_current_profile">Jelenlegi profil</string>
+    <string name="settings_profile_switcher__divider_other_profiles">Egyéb profilok</string>
+    <string name="settings_profile_switcher__text_current_profile">Jelenleg ebben a profilban fut</string>
+    <string name="settings_profile_switcher__text_enable_cross_profile">Koppintson a LinkSheet és a másodlagos profilban lévő megfelelőjének összekapcsolásához</string>
+    <string name="settings_profile_switcher__text_not_installed">Nem lehet csatlakozni ehhez a profilhoz</string>
+    <string name="settings_profile_switcher__text_other_profile">Egyéb profil</string>
+    <string name="settings_profile_switcher__title_enable_cross_profile">Profilok közötti kapcsolat engedélyezése</string>
+    <string name="settings_profile_switcher__title_profile_switcher">Profil váltás</string>
+    <string name="switch_profile">Profilváltás engedélyezése</string>
+    <string name="switch_profile_explainer">Megjelenít egy gombot az alsó lapon a megérintett hivatkozás megnyitásához egy (munka-)profilban. A LinkSheet-nek mindkét profilban telepítve kell lennie, és manuálisan kell összekapcsolni a Beállítások - Speciális alkalmazáshozzáférés - Összekapcsolt munkahelyi és személyes alkalmazások</string>
+</resources>

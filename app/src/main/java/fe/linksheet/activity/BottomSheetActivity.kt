@@ -132,7 +132,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 //        )
 
         LaunchedEffect(key1 = resolveResult) {
-            logger.info("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")
+            logger.debug("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")
             if (resolveResult != IntentResolveResult.Pending) {
                 // Need to do this in a separate effect as otherwise the preview image seems to mess up the layout-ing
                 if (viewModel.improvedBottomSheetExpandFully.value) {
@@ -144,7 +144,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
 
         LaunchedEffect(key1 = event) {
-            logger.info("Latest event: $event")
+            logger.debug("Latest event: $event")
         }
 
         val controller = remember {
@@ -208,9 +208,9 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     event = event,
                     interaction = interaction,
                     requestExpand = {
-                        logger.info("Loading indicator: Pre-Request expand")
+                        logger.debug("Loading indicator: Pre-Request expand")
                         coroutineScope.launch {
-                            logger.info("Loading indicator: Request expand")
+                            logger.debug("Loading indicator: Request expand")
                             sheetState.expand()
                         }
                     }
@@ -329,19 +329,19 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
     override fun onStop() {
         super.onStop()
-        logger.info("onStop")
+        logger.debug("onStop")
 
         finish()
     }
 
     override fun onResume() {
         super.onResume()
-        logger.info("onResume")
+        logger.debug("onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        logger.info("onPause")
+        logger.debug("onPause")
     }
 
     fun setInitialIntent(intent: Intent) {
@@ -352,7 +352,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        logger.info("onNewIntent: $intent")
+        logger.debug("onNewIntent: $intent")
 
         latestNewIntent.tryEmit(intent)
         viewModel.resolveAsync(intent.toSafeIntent(), referrer)

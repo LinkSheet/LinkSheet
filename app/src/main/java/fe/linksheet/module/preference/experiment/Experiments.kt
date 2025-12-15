@@ -14,7 +14,8 @@ object Experiments : PreferenceDefinition(
     "experiment_ui_overhaul",
     "experiment_edit_clipboard",
     "experiment_url_bar_preview",
-    "experiment_url_bar_preview_skip_browser"
+    "experiment_url_bar_preview_skip_browser",
+    "experiment_hide_referrer_from_sheet"
 ) {
     val improvedBottomSheetExpandFully = boolean(
         key = "experiment_impr_btm_sheet_expand_fully"
@@ -42,10 +43,6 @@ object Experiments : PreferenceDefinition(
         key = "experiment_enable_analytics",
         default = false
     )
-    val hideReferrerFromSheet = boolean(
-        key = "experiment_hide_referrer_from_sheet"
-    )
-
     val noBottomSheetStateSave = boolean(
         key = "experiment_no_bottom_sheet_state_save"
     )
@@ -82,7 +79,7 @@ object Experiments : PreferenceDefinition(
             experiment("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully),
             experiment("Double tap url to open app", improvedBottomSheetUrlDoubleTap),
             experiment("LibRedirect QuickJS engine", libRedirectJsEngine),
-            experiment("Hide referring app from results in bottom sheet", hideReferrerFromSheet),
+//            experiment("Hide referring app from results in bottom sheet", hideReferrerFromSheet),
             experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),
             experiment("Auto-launch single browser", autoLaunchSingleBrowser),
             experiment("Manual redirect resolving", manualFollowRedirects),

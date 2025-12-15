@@ -20,20 +20,21 @@ class BottomSheetSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enableIgnoreLibRedirectButton)
-    val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.hideAfterCopying)
-    val gridLayout = preferenceRepository.asViewModelState(AppPreferences.gridLayout)
-    val dontShowFilteredItem = preferenceRepository.asViewModelState(AppPreferences.dontShowFilteredItem)
+    val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideAfterCopying)
+    val gridLayout = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.gridLayout)
+    val dontShowFilteredItem = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.dontShowFilteredItem)
     val previewUrl = preferenceRepository.asViewModelState(AppPreferences.previewUrl)
     val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.browser.enable)
 
-    val usageStatsSorting = preferenceRepository.asViewModelState(AppPreferences.usageStatsSorting)
-    val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.hideBottomSheetChoiceButtons)
+    val usageStatsSorting = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.usageStatsSorting)
+    val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideBottomSheetChoiceButtons)
+    val hideReferringApp = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideReferringApp)
 
-    val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.tapConfig.single)
-    val tapConfigDouble = preferenceRepository.asViewModelState(AppPreferences.tapConfig.double)
-    val tapConfigLong = preferenceRepository.asViewModelState(AppPreferences.tapConfig.long)
-    val expandOnAppSelect = preferenceRepository.asViewModelState(AppPreferences.expandOnAppSelect)
-    val bottomSheetNativeLabel = preferenceRepository.asViewModelState(AppPreferences.bottomSheetNativeLabel)
+    val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.single)
+    val tapConfigDouble = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.double)
+    val tapConfigLong = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.long)
+    val expandOnAppSelect = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.expandOnAppSelect)
+    val bottomSheetNativeLabel = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.bottomSheetNativeLabel)
     val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.profileSwitcher.enable)
 
     val usageStatsPermission = UsageStatsPermission(context)

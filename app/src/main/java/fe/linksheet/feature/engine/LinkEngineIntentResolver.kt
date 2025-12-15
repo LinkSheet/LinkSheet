@@ -2,6 +2,7 @@ package fe.linksheet.feature.engine
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.net.Uri
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
@@ -37,6 +38,7 @@ import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.CustomTabInfo2
 import fe.linksheet.module.resolver.util.IntentSanitizer
+import fe.linksheet.util.AndroidAppPackage
 import fe.linksheet.util.Scheme
 import fe.linksheet.util.getAndroidAppPackage
 import fe.linksheet.util.intent.parser.IntentParser
@@ -198,7 +200,8 @@ class LinkEngineIntentResolver(
             packageLauncherService = packageLauncherService,
             uri = resultUri
         )
-        val resolveList = packageIntentHandler.findHandlers(resultUri, referringPackage?.packageName)
+        var resolveList = packageIntentHandler.findHandlers(resultUri, referringPackage?.packageName)
+        resolveList = maybeFilter(resolveList, referringPackage, settings.bottomSheetSettings.hideReferringApp())
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = browserSettings.createBrowserModeConfig(customTab is CustomTabInfo2.Allowed)
@@ -213,7 +216,7 @@ class LinkEngineIntentResolver(
             appList = appList,
             lastChosen = app,
             historyMap = lastUsedApps,
-            returnLastChosen = !settings.dontShowFilteredItem()
+            returnLastChosen = !settings.bottomSheetSettings.dontShowFilteredItem()
         )
 
         return@scope IntentResolveResult.Default(
@@ -229,6 +232,18 @@ class LinkEngineIntentResolver(
             libRedirectResult = sealedContext[ContextResultId.LibRedirect]?.wrapped,
             downloadable = downloadResult?.toFetchResult()
         )
+    }
+
+    private fun maybeFilter(
+        resolveList: List<ResolveInfo>,
+        referringPackage: AndroidAppPackage?,
+        hideReferringApp: Boolean
+    ): List<ResolveInfo> {
+        if (hideReferringApp && referringPackage != null) {
+            return resolveList.filter { it.activityInfo.packageName != referringPackage.packageName }
+        }
+
+        return resolveList
     }
 
     private suspend fun BrowserSettings.createBrowserModeConfig(

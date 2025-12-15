@@ -3,6 +3,7 @@ package fe.linksheet.module.resolver
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.net.Uri
 import androidx.compose.runtime.Stable
 import app.linksheet.feature.app.core.AppInfoCreator
@@ -42,6 +43,7 @@ import fe.linksheet.module.resolver.urlresolver.base.UrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
+import fe.linksheet.util.AndroidAppPackage
 import fe.linksheet.util.AndroidUri
 import fe.linksheet.util.Scheme
 import fe.linksheet.util.intent.cloneIntent
@@ -285,7 +287,9 @@ class ImprovedIntentResolver(
             packageLauncherService = packageLauncherService,
             uri = uri
         )
-        val resolveList = packageIntentHandler.findHandlers(uri, referringPackage?.packageName)
+        var resolveList = packageIntentHandler.findHandlers(uri, referringPackage?.packageName)
+        resolveList = maybeFilter(resolveList, referringPackage, settings.bottomSheetSettings.hideReferringApp())
+
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
@@ -296,7 +300,7 @@ class ImprovedIntentResolver(
             appList,
             app,
             lastUsedApps,
-            returnLastChosen = !settings.dontShowFilteredItem()
+            returnLastChosen = !settings.bottomSheetSettings.dontShowFilteredItem()
         )
 
         val previewUrl = previewSettings.previewUrl()
@@ -319,6 +323,18 @@ class ImprovedIntentResolver(
             libRedirectResult = libRedirectResult,
             downloadable = downloadable
         )
+    }
+
+    private fun maybeFilter(
+        resolveList: List<ResolveInfo>,
+        referringPackage: AndroidAppPackage?,
+        hideReferringApp: Boolean
+    ): List<ResolveInfo> {
+        if (hideReferringApp && referringPackage != null) {
+            return resolveList.filter { it.activityInfo.packageName != referringPackage.packageName }
+        }
+
+        return resolveList
     }
 
     private suspend fun <R> CoroutineScope.cancelable(event: ResolveEvent, block: suspend () -> R): R? {

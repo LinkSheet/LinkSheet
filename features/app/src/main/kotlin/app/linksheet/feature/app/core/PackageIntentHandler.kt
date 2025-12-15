@@ -19,11 +19,10 @@ interface PackageIntentHandler {
 }
 
 class DefaultPackageIntentHandler(
-    val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
-    val resolveActivity: (Intent, ResolveInfoFlags) -> ResolveInfo?,
-    val isLinkSheetCompat: (String) -> Boolean,
-    val isSelf: (String) -> Boolean,
-    val checkReferrerExperiment: () -> Boolean,
+    private val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
+    private val resolveActivity: (Intent, ResolveInfoFlags) -> ResolveInfo?,
+    private val isLinkSheetCompat: (String) -> Boolean,
+    private val isSelf: (String) -> Boolean,
 ) : PackageIntentHandler {
 
     companion object {
@@ -88,13 +87,7 @@ class DefaultPackageIntentHandler(
         val viewIntent = Intent(Intent.ACTION_VIEW, uri).addCategory(Intent.CATEGORY_BROWSABLE)
         val activities = findHandlers(viewIntent)
 
-        var filtered = activities.filter { isLinkHandler(it.filter, uri) }
-
-        if (referringPackage != null && checkReferrerExperiment()) {
-            filtered = filtered.filter { it.activityInfo.packageName != referringPackage }
-        }
-
-        return filtered
+        return activities.filter { isLinkHandler(it.filter, uri) }
     }
 
     @VisibleForTesting

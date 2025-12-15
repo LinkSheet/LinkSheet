@@ -5,6 +5,7 @@ package fe.linksheet.module.preference.state
 import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
+import fe.linksheet.extension.kotlin.nowMillis
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
@@ -39,13 +40,13 @@ internal class AppStateService(
     private val updates = mapOf(
         AppStatePreferences.newDefaults.`2024-12-16` to NewDefaults20241216,
         AppStatePreferences.newDefaults.`2025-07-29` to NewDefaults20250729(preferenceRepository),
-        AppStatePreferences.newDefaults.`2025-08-03` to NewDefaults20250803
+        AppStatePreferences.newDefaults.`2025-08-03` to NewDefaults20250803,
+        AppStatePreferences.newDefaults.`2025-12-15` to NewDefaults20251215(preferenceRepository),
     )
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
         runMigrations()
-        val now = clock.now().toEpochMilliseconds()
-        init(now)
+        init(now = clock.nowMillis())
     }
 
     suspend fun runMigrations() = withContext(Dispatchers.IO) {

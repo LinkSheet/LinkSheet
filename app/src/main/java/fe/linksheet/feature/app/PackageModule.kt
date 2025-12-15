@@ -11,12 +11,10 @@ import app.linksheet.feature.app.usecase.AllAppsUseCase
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
 import app.linksheet.lib.flavors.LinkSheetApp
-import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
 import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
 import org.koin.dsl.module
 
 
@@ -52,7 +50,6 @@ val AppFeatureModule = module {
             resolveActivity = pm::resolveActivityCompat,
             isLinkSheetCompat = { LinkSheetApp.Compat.isApp(it) != null },
             isSelf = { BuildConfig.APPLICATION_ID == it },
-            checkReferrerExperiment = experimentRepository.asFunction(Experiments.hideReferrerFromSheet)
         )
     }
     single<DomainVerificationManagerCompat> {

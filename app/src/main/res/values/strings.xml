@@ -558,4 +558,6 @@
     <string name="notification__channel_interconnect_description">Foreground notification when Interconnect service is active</string>
     <string name="notification_interconnect_name">Interconnect</string>
     <string name="notification_interconnect_description">Interconnect is active</string>
+    <string name="settings_bottom_sheet__title_hide_referring_app">Hide referring app</string>
+    <string name="settings_bottom_sheet__subtitle_hide_referring_app">Don\'t list referring/source app, even if it can handle link</string>
 </resources>

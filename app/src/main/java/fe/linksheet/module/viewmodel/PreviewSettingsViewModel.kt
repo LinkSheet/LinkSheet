@@ -7,8 +7,8 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 class PreviewSettingsViewModel(
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
-    val urlPreview = preferenceRepository.asViewModelState(AppPreferences.openGraphPreview.enable)
-    val urlPreviewSkipBrowser = preferenceRepository.asViewModelState(AppPreferences.openGraphPreview.skipBrowser)
+    val urlPreview = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.openGraphPreview.enable)
+    val urlPreviewSkipBrowser = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.openGraphPreview.skipBrowser)
     val followRedirects = preferenceRepository.asViewModelState(AppPreferences.followRedirects.enable)
     val followRedirectsLocalCache = preferenceRepository.asViewModelState(AppPreferences.followRedirects.localCache)
     val followRedirectsExternalService = preferenceRepository.asViewModelState(AppPreferences.followRedirects.externalService)

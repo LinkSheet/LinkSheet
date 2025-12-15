@@ -15,6 +15,6 @@ class LinksSettingsViewModel(
     val followRedirects = preferenceRepository.asViewModelState(AppPreferences.followRedirects.enable)
     val enableDownloader = preferenceRepository.asViewModelState(AppPreferences.downloader.enable)
     val enableAmp2Html = preferenceRepository.asViewModelState(AppPreferences.amp2Html.enable)
-    val urlPreview = preferenceRepository.asViewModelState(AppPreferences.openGraphPreview.enable)
+    val urlPreview = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.openGraphPreview.enable)
     val resolveEmbeds = preferenceRepository.asViewModelState(AppPreferences.resolveEmbeds)
 }

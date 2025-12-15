@@ -108,7 +108,7 @@ fun BottomSheetSettingsRoute(
 
         divider(id = R.string.base_config)
 
-        group(base = 4, AndroidVersion.isAtLeastApi30R()) {
+        group(base = 5, AndroidVersion.isAtLeastApi30R()) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
                 val updateStatsSorting by viewModel.usageStatsSorting.collectAsStateWithLifecycle()
 
@@ -154,6 +154,16 @@ fun BottomSheetSettingsRoute(
                     statePreference = viewModel.hideBottomSheetChoiceButtons,
                     headlineContent = textContent(R.string.hide_bottom_sheet_choice_buttons),
                     supportingContent = textContent(R.string.hide_bottom_sheet_choice_buttons_explainer),
+                )
+            }
+
+            item(key = R.string.settings_bottom_sheet__title_hide_referring_app) { padding, shape ->
+                PreferenceSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.hideReferringApp,
+                    headlineContent = textContent(R.string.settings_bottom_sheet__title_hide_referring_app),
+                    supportingContent = textContent(R.string.settings_bottom_sheet__subtitle_hide_referring_app),
                 )
             }
 

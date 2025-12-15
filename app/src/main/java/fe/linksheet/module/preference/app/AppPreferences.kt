@@ -56,9 +56,6 @@ object AppPreferences : PreferenceDefinition(
         }
     }
 
-    val hideAfterCopying = boolean("hide_after_copying")
-    val usageStatsSorting = boolean("usage_stats_sorting")
-
     @SensitivePreference
     val selectedBrowser = string("selected_browser")
     val browserMode = mapped("browser_mode", BrowserMode.AlwaysAsk, BrowserMode)
@@ -76,10 +73,8 @@ object AppPreferences : PreferenceDefinition(
     )
 
     val alwaysShowPackageName = boolean("always_show_package_name")
-    val gridLayout = boolean("grid_layout")
     val useClearUrls = boolean("use_clear_urls")
     val useFastForwardRules = boolean("fast_forward_rules")
-    val dontShowFilteredItem = boolean("dont_show_filtered_item")
     val requestTimeout = int("follow_redirects_timeout", 15)
 
     @SensitivePreference
@@ -90,7 +85,6 @@ object AppPreferences : PreferenceDefinition(
     val firstRun = boolean("first_run", true)
 
     val resolveEmbeds = boolean("resolve_embeds")
-    val hideBottomSheetChoiceButtons = boolean("hide_bottom_sheet_choice_buttons")
 
     @SensitivePreference
     val telemetryId = string("telemetry_id") { NanoId.generate() }
@@ -101,9 +95,6 @@ object AppPreferences : PreferenceDefinition(
     val telemetryShowInfoDialog = boolean("telemetry_dialog", true)
 
     val lastVersion = int("last_version", -1)
-
-    val expandOnAppSelect = boolean("expand_on_app_select", true)
-    val bottomSheetNativeLabel = boolean("bottom_sheet_native_label", true)
 
     @SensitivePreference
     val installationId = string("installation_id") { UUID.randomUUID().toString() }
@@ -116,13 +107,12 @@ object AppPreferences : PreferenceDefinition(
     val remoteConfig = boolean("remote_config", false)
     val previewUrl = boolean("preview_url", true)
 
-    val openGraphPreview = OpenGraphPreview(registry)
+    val bottomSheet = BottomSheet(registry)
     val notifications = Notifications(registry)
     val amp2Html = Amp2Html(registry)
     val downloader = Downloader(registry)
     val followRedirects = FollowRedirects(registry)
     val themeV2 = ThemeV2(registry)
-    val tapConfig = TapConfig(registry)
 
     val libRedirect = libRedirectPreferences(registry)
     val shizuku = shizukuPreferences(registry)

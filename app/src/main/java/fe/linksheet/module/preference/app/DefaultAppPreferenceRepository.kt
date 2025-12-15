@@ -15,7 +15,7 @@ class DefaultAppPreferenceRepository(val context: Context) : AppPreferenceReposi
     private val logger = Logger("DefaultAppPreferenceRepository")
 
     private val preferencesRequiringPermission by lazy {
-        mapOf(AppPreferences.usageStatsSorting to UsageStatsPermission(context))
+        mapOf(AppPreferences.bottomSheet.usageStatsSorting to UsageStatsPermission(context))
     }
 
     suspend fun init(dispatcher: CoroutineDispatcher = Dispatchers.IO) = withContext(dispatcher) {

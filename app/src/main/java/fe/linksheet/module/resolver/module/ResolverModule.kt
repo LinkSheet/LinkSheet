@@ -101,15 +101,20 @@ data class IntentResolverSettings(
     val useClearUrls: () -> Boolean,
     val useFastForwardRules: () -> Boolean,
     val requestTimeout: () -> Int,
-    val dontShowFilteredItem: () -> Boolean,
     val resolveEmbeds: () -> Boolean,
     val autoLaunchSingleBrowser: () -> Boolean,
+    val bottomSheetSettings: BottomSheetSettings,
     val browserSettings: BrowserSettings,
     val libRedirectSettings: LibRedirectSettings,
     val amp2HtmlSettings: Amp2HtmlSettings,
     val followRedirectsSettings: FollowRedirectsSettings,
     val downloaderSettings: DownloaderSettings,
     val previewSettings: PreviewSettings,
+)
+
+data class BottomSheetSettings(
+    val dontShowFilteredItem: () -> Boolean,
+    val hideReferringApp: () -> Boolean,
 )
 
 data class BrowserSettings(
@@ -167,9 +172,12 @@ fun createSettings(
         useClearUrls = prefRepo.asFunction(AppPreferences.useClearUrls),
         useFastForwardRules = prefRepo.asFunction(AppPreferences.useFastForwardRules),
         requestTimeout = prefRepo.asFunction(AppPreferences.requestTimeout),
-        dontShowFilteredItem = prefRepo.asFunction(AppPreferences.dontShowFilteredItem),
         resolveEmbeds = prefRepo.asFunction(AppPreferences.resolveEmbeds),
         autoLaunchSingleBrowser = experimentRepository.asFunction(Experiments.autoLaunchSingleBrowser),
+        bottomSheetSettings = BottomSheetSettings(
+            dontShowFilteredItem = prefRepo.asFunction(AppPreferences.bottomSheet.dontShowFilteredItem),
+            hideReferringApp = prefRepo.asFunction(AppPreferences.bottomSheet.hideReferringApp),
+        ),
         browserSettings = BrowserSettings(
             inAppBrowserSettings = prefRepo.asFunction(AppPreferences.inAppBrowserSettings),
             browserMode = prefRepo.asFunction(AppPreferences.browserMode),
@@ -206,8 +214,8 @@ fun createSettings(
             downloaderCheckUrlMimeType = prefRepo.asFunction(AppPreferences.downloader.checkUrlMimeType),
         ),
         previewSettings = PreviewSettings(
-            previewUrl = prefRepo.asFunction(AppPreferences.openGraphPreview.enable),
-            previewUrlSkipBrowser = prefRepo.asFunction(AppPreferences.openGraphPreview.skipBrowser),
+            previewUrl = prefRepo.asFunction(AppPreferences.bottomSheet.openGraphPreview.enable),
+            previewUrlSkipBrowser = prefRepo.asFunction(AppPreferences.bottomSheet.openGraphPreview.skipBrowser),
         ),
     )
 }

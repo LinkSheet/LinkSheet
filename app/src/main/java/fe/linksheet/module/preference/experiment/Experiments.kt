@@ -16,14 +16,10 @@ object Experiments : PreferenceDefinition(
     "experiment_url_bar_preview",
     "experiment_url_bar_preview_skip_browser",
     "experiment_hide_referrer_from_sheet",
-    "experiment_expressive_loading_sheet"
+    "experiment_expressive_loading_sheet",
+    "experiment_impr_btm_sheet_url_double_tap",
+    "experiment_impr_btm_sheet_expand_fully"
 ) {
-    val improvedBottomSheetExpandFully = boolean(
-        key = "experiment_impr_btm_sheet_expand_fully"
-    )
-    val improvedBottomSheetUrlDoubleTap = boolean(
-        key = "experiment_impr_btm_sheet_url_double_tap"
-    )
     val autoLaunchSingleBrowser = boolean(
         key = "experiment_improved_bottom_sheet_auto_launch_single_browser"
     )
@@ -73,8 +69,8 @@ object Experiments : PreferenceDefinition(
         group(
             name = "improved_bottom_sheet",
             displayName = "Improved bottom sheet",
-            experiment("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully),
-            experiment("Double tap url to open app", improvedBottomSheetUrlDoubleTap),
+//            experiment("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully),
+//            experiment("Double tap url to open app", improvedBottomSheetUrlDoubleTap),
             experiment("LibRedirect QuickJS engine", libRedirectJsEngine),
 //            experiment("Hide referring app from results in bottom sheet", hideReferrerFromSheet),
             experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),

@@ -108,7 +108,7 @@ fun BottomSheetSettingsRoute(
 
         divider(id = R.string.base_config)
 
-        group(base = 5, AndroidVersion.isAtLeastApi30R()) {
+        group(base = 6, AndroidVersion.isAtLeastApi30R()) {
             item(key = R.string.usage_stats_sorting) { padding, shape ->
                 val updateStatsSorting by viewModel.usageStatsSorting.collectAsStateWithLifecycle()
 
@@ -167,6 +167,16 @@ fun BottomSheetSettingsRoute(
                 )
             }
 
+            item(key = R.string.settings_bottom_sheet__title_expand_fully) { padding, shape ->
+                PreferenceSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.expandFully,
+                    headlineContent = textContent(R.string.settings_bottom_sheet__title_expand_fully),
+                    supportingContent = textContent(R.string.settings_bottom_sheet__subtitle_expand_fully),
+                )
+            }
+
             if (AndroidVersion.isAtLeastApi30R()) {
                 profileSwitchingListItem(
                     profileSwitcher = viewModel.profileSwitcher,
@@ -208,7 +218,7 @@ fun BottomSheetSettingsRoute(
 
         divider(id = R.string.urlbar_settings)
 
-        group(size = 3) {
+        group(size = 4) {
             item(key = R.string.preview_url) { padding, shape ->
                 PreferenceSwitchListItem(
                     shape = shape,
@@ -236,6 +246,16 @@ fun BottomSheetSettingsRoute(
                     statePreference = viewModel.enableIgnoreLibRedirectButton,
                     headlineContent = textContent(R.string.enable_ignore_libredirect_button),
                     supportingContent = textContent(R.string.enable_ignore_libredirect_button_explainer),
+                )
+            }
+
+            item(key = R.string.settings_bottom_sheet__title_double_tap_url) { padding, shape ->
+                PreferenceSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.doubleTapUrl,
+                    headlineContent = textContent(R.string.settings_bottom_sheet__title_double_tap_url),
+                    supportingContent = textContent(R.string.settings_bottom_sheet__subtitle_double_tap_url),
                 )
             }
         }

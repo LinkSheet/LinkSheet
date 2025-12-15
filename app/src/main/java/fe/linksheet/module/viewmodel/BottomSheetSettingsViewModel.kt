@@ -29,11 +29,13 @@ class BottomSheetSettingsViewModel(
     val usageStatsSorting = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.usageStatsSorting)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideBottomSheetChoiceButtons)
     val hideReferringApp = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideReferringApp)
+    val doubleTapUrl = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.doubleTapUrl)
 
     val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.single)
     val tapConfigDouble = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.double)
     val tapConfigLong = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.long)
     val expandOnAppSelect = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.expandOnAppSelect)
+    val expandFully = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.expandFully)
     val bottomSheetNativeLabel = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.bottomSheetNativeLabel)
     val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.profileSwitcher.enable)
 

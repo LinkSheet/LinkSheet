@@ -135,7 +135,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             logger.debug("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")
             if (resolveResult != IntentResolveResult.Pending) {
                 // Need to do this in a separate effect as otherwise the preview image seems to mess up the layout-ing
-                if (viewModel.improvedBottomSheetExpandFully.value) {
+                if (viewModel.expandFully.value) {
                     sheetState.expand()
                 } else {
                     sheetState.partialExpand()
@@ -227,7 +227,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 val hideBottomSheetChoiceButtons by viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
                 val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
                 val manualFollowRedirects by viewModel.manualFollowRedirects.collectAsStateWithLifecycle()
-                val improvedBottomSheetUrlDoubleTap by viewModel.improvedBottomSheetUrlDoubleTap.collectAsStateWithLifecycle()
+                val doubleTapUrl by viewModel.doubleTapUrl.collectAsStateWithLifecycle()
 
                 BottomSheetApps(
                     modifier = modifier,
@@ -257,7 +257,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     showPackage = alwaysShowPackageName,
                     previewUrl = previewUrl,
                     hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
-                    urlCardDoubleTap = improvedBottomSheetUrlDoubleTap
+                    urlCardDoubleTap = doubleTapUrl
                 )
             }
 

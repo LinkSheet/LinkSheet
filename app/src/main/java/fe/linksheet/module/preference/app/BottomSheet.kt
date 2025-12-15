@@ -13,6 +13,8 @@ class BottomSheet(registry: PreferenceRegistry) {
     val expandOnAppSelect = registry.boolean("expand_on_app_select", true)
     val bottomSheetNativeLabel = registry.boolean("bottom_sheet_native_label", true)
     val hideReferringApp = registry.boolean("hide_referrer_from_sheet")
+    val doubleTapUrl = registry.boolean("double_tap_url")
+    val expandFully = registry.boolean("expand_fully")
 
     val openGraphPreview = OpenGraphPreview(registry)
     val tapConfig = TapConfig(registry)

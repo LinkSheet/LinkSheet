@@ -15,7 +15,8 @@ object Experiments : PreferenceDefinition(
     "experiment_edit_clipboard",
     "experiment_url_bar_preview",
     "experiment_url_bar_preview_skip_browser",
-    "experiment_hide_referrer_from_sheet"
+    "experiment_hide_referrer_from_sheet",
+    "experiment_expressive_loading_sheet"
 ) {
     val improvedBottomSheetExpandFully = boolean(
         key = "experiment_impr_btm_sheet_expand_fully"
@@ -49,10 +50,6 @@ object Experiments : PreferenceDefinition(
     val aggressiveFollowRedirects = boolean(
         key = "experiment_aggressive_follow_redirects"
     )
-    val expressiveLoadingSheet = boolean(
-        key = "experiment_expressive_loading_sheet",
-        default = true
-    )
     val linkEngine = boolean(
         key = "experiment_link_engine"
     )
@@ -85,7 +82,7 @@ object Experiments : PreferenceDefinition(
             experiment("Manual redirect resolving", manualFollowRedirects),
             experiment("Disable bottom sheet state save", noBottomSheetStateSave),
             experiment("Aggressive follow redirects", aggressiveFollowRedirects),
-            experiment("Expressive loading indicator", expressiveLoadingSheet)
+//            experiment("Expressive loading indicator", expressiveLoadingSheet)
         ),
         group(
             name = "logging",

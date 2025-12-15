@@ -202,9 +202,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     ) {
         when (resolveResult) {
             is IntentResolveResult.Pending -> {
-                val expressiveLoadingSheet by viewModel.expressiveLoadingSheet.collectAsStateWithLifecycle()
                 LoadingIndicatorWrapper(
-                    expressiveLoadingSheet = expressiveLoadingSheet,
                     event = event,
                     interaction = interaction,
                     requestExpand = {

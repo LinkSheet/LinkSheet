@@ -564,4 +564,6 @@
     <string name="settings_bottom_sheet__subtitle_double_tap_url">Open suggested app when url is double-tapped</string>
     <string name="settings_bottom_sheet__title_expand_fully">Expand fully</string>
     <string name="settings_bottom_sheet__subtitle_expand_fully">Auto-expand bottom sheet to its full height</string>
+    <string name="settings_browser_mode__title_auto_launch_single_browser">Auto launch single browser</string>
+    <string name="settings_browser_mode__subtitle_auto_launch_single_browser">If there is only a single app available, which is also a browser, launch it automatically</string>
 </resources>

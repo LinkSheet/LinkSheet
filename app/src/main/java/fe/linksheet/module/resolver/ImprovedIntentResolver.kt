@@ -293,7 +293,8 @@ class ImprovedIntentResolver(
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
-        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, browsers, resolveList)
+        val autoLaunchSingleBrowser = browserSettings.autoLaunchSingleBrowser()
+        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, autoLaunchSingleBrowser, browsers, resolveList)
 
         emitEvent(ResolveEvent.SortingApps)
         val (sorted, filtered) = appSorter.sort(

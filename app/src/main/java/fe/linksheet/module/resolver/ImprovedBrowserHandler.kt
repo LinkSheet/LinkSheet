@@ -7,9 +7,7 @@ import fe.composekit.extension.componentName
 import fe.composekit.extension.packageName
 import fe.linksheet.module.repository.whitelisted.createWhitelistedBrowserInfo
 
-class ImprovedBrowserHandler(
-    private val autoLaunchSingleBrowserExperiment: () -> Boolean
-) {
+class ImprovedBrowserHandler {
     companion object {
         internal fun getBrowser(browsers: List<ResolveInfo>, selectedBrowser: String): ResolveInfo? {
             // selectedBrowser used to store the package name only, but since a browser might expose multiple activities which
@@ -26,13 +24,14 @@ class ImprovedBrowserHandler(
 
     fun filterBrowsers(
         config: BrowserModeConfigHelper,
+        autoLaunchSingleBrowser: Boolean,
         browsers: List<ResolveInfo>,
         resolveList: List<ResolveInfo>,
     ): FilteredBrowserList {
         val nonBrowsers = getAllNonBrowsers(browsers, resolveList)
 
-        if (autoLaunchSingleBrowserExperiment()) {
-            AutoLaunchSingleBrowserExperiment.handle(config, nonBrowsers, browsers)?.let { result ->
+        if (autoLaunchSingleBrowser) {
+            AutoLaunchSingleBrowserHandler.handle(config, nonBrowsers, browsers)?.let { result ->
                 return result
             }
         }

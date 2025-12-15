@@ -19,7 +19,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class ExperimentAutoLaunchSingleBrowserTest : BaseUnitTest  {
+internal class AutoLaunchSingleBrowserHandlerTest : BaseUnitTest  {
     companion object {
         private val whitelistedNull = BrowserModeConfigHelper.Whitelisted(null)
         private val whitelistedEmpty = BrowserModeConfigHelper.Whitelisted(emptySet())
@@ -78,7 +78,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : BaseUnitTest  {
     @org.junit.Test
     fun `no browsers, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
-            AutoLaunchSingleBrowserExperiment.handle(config, emptyList(), emptyList())
+            AutoLaunchSingleBrowserHandler.handle(config, emptyList(), emptyList())
         }
 
         assertEach(configs) { config ->
@@ -89,7 +89,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : BaseUnitTest  {
     @org.junit.Test
     fun `single browser, single app`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
-            AutoLaunchSingleBrowserExperiment.handle(
+            AutoLaunchSingleBrowserHandler.handle(
                 config,
                 listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube),
                 listOfNotNull(PackageInfoFakes.DuckDuckGoBrowser.firstActivityResolveInfo)
@@ -104,7 +104,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : BaseUnitTest  {
     @org.junit.Test
     fun `single browser, many apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
-            AutoLaunchSingleBrowserExperiment.handle(
+            AutoLaunchSingleBrowserHandler.handle(
                 config,
                 listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube, PackageInfoFakes.NewPipe),
                 listOfNotNull(PackageInfoFakes.DuckDuckGoBrowser.firstActivityResolveInfo)
@@ -119,7 +119,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : BaseUnitTest  {
     @org.junit.Test
     fun `single browser, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
-            AutoLaunchSingleBrowserExperiment.handle(
+            AutoLaunchSingleBrowserHandler.handle(
                 config,
                 emptyList(),
                 listOfNotNull(PackageInfoFakes.DuckDuckGoBrowser.firstActivityResolveInfo)
@@ -134,7 +134,7 @@ internal class ExperimentAutoLaunchSingleBrowserTest : BaseUnitTest  {
     @org.junit.Test
     fun `many browsers, no apps`() {
         val runTest: (BrowserModeConfigHelper) -> FilteredBrowserList? = { config ->
-            AutoLaunchSingleBrowserExperiment.handle(config, emptyList(), ImprovedBrowserHandlerTest.allBrowsersResolveInfos)
+            AutoLaunchSingleBrowserHandler.handle(config, emptyList(), ImprovedBrowserHandlerTest.allBrowsersResolveInfos)
         }
 
         assertAll {

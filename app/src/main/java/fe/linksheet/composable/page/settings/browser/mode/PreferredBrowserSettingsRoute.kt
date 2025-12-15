@@ -18,9 +18,9 @@ import fe.composekit.component.list.item.ListItemFilledIconButton
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
 import fe.linksheet.R
-import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.composable.component.FilterChipValue
 import fe.linksheet.composable.component.FilterChips
+import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel.BrowserType
@@ -149,6 +149,17 @@ fun PreferredBrowserSettingsRoute(
                     )
                 }
             }
+        }
+
+
+        divider(id = R.string.options)
+
+        item(key = R.string.settings_browser_mode__title_auto_launch_single_browser, contentType = ContentType.SingleGroupItem) {
+            PreferenceSwitchListItem(
+                statePreference = viewModel.autoLaunchSingleBrowser,
+                headlineContent = textContent(R.string.settings_browser_mode__title_auto_launch_single_browser),
+                supportingContent = textContent(R.string.settings_browser_mode__subtitle_auto_launch_single_browser),
+            )
         }
     }
 }

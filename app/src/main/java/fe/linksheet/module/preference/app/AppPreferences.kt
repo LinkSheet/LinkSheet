@@ -16,8 +16,6 @@ import fe.linksheet.composable.ui.Theme
 import fe.linksheet.module.analytics.TelemetryIdentity
 import fe.linksheet.module.analytics.TelemetryLevel
 import fe.linksheet.module.preference.SensitivePreference
-import fe.linksheet.module.resolver.InAppBrowserHandler
-import fe.linksheet.module.resolver.browser.BrowserMode
 import io.viascom.nanoid.NanoId
 import java.util.*
 import kotlin.reflect.KClass
@@ -45,6 +43,10 @@ object AppPreferences : PreferenceDefinition(
             return this@AppPreferences.boolean(key, default)
         }
 
+        override fun string(key: String, default: String?): Preference.Nullable<String> {
+            return this@AppPreferences.string(key, default)
+        }
+
         override fun <T : Any, M : Any> mapped(
             key: String,
             default: T,
@@ -56,21 +58,6 @@ object AppPreferences : PreferenceDefinition(
         }
     }
 
-    @SensitivePreference
-    val selectedBrowser = string("selected_browser")
-    val browserMode = mapped("browser_mode", BrowserMode.AlwaysAsk, BrowserMode)
-
-    @SensitivePreference
-    val selectedInAppBrowser = string("selected_in_app_browser")
-    val inAppBrowserMode = mapped("in_app_browser_mode", BrowserMode.AlwaysAsk, BrowserMode)
-
-    val unifiedPreferredBrowser = boolean("unified_preferred_browser", true)
-
-    val inAppBrowserSettings = mapped(
-        "in_app_browser_setting",
-        InAppBrowserHandler.InAppBrowserMode.UseAppSettings,
-        InAppBrowserHandler.InAppBrowserMode
-    )
 
     val alwaysShowPackageName = boolean("always_show_package_name")
     val useClearUrls = boolean("use_clear_urls")
@@ -88,8 +75,10 @@ object AppPreferences : PreferenceDefinition(
 
     @SensitivePreference
     val telemetryId = string("telemetry_id") { NanoId.generate() }
+
     @SensitivePreference
     val telemetryIdentity = mapped("telemetry_identity_2", TelemetryIdentity.Basic, TelemetryIdentity)
+
     @SensitivePreference
     val telemetryLevel = mapped("telemetry_level", TelemetryLevel.Standard, TelemetryLevel)
     val telemetryShowInfoDialog = boolean("telemetry_dialog", true)
@@ -107,6 +96,7 @@ object AppPreferences : PreferenceDefinition(
     val remoteConfig = boolean("remote_config", false)
     val previewUrl = boolean("preview_url", true)
 
+    val browserMode = BrowserMode(registry)
     val bottomSheet = BottomSheet(registry)
     val notifications = Notifications(registry)
     val amp2Html = Amp2Html(registry)

@@ -21,7 +21,7 @@ class InAppBrowserSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val list by lazy { AppListCommon(apps = useCase.queryAllAppsFlow(), scope = viewModelScope) }
-    val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.inAppBrowserSettings)
+    val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.inAppBrowserSettings)
 
     val disabledPackages = repository.getAll().map { list ->
         list.mapToSet { it.packageName }

@@ -41,11 +41,13 @@ class NewDefaults20251215(private val preferenceRepository: AppPreferenceReposit
     private val hideReferrerFromSheet = "experiment_hide_referrer_from_sheet"
     private val doubleTap = "experiment_impr_btm_sheet_url_double_tap"
     private val expandFully = "experiment_impr_btm_sheet_expand_fully"
+    private val autoLaunchSingleBrowser = "experiment_improved_bottom_sheet_auto_launch_single_browser"
 
     override fun execute(experimentsRepository: ExperimentRepository) {
         migrate(experimentsRepository, preferenceRepository, hideReferrerFromSheet, AppPreferences.bottomSheet.hideReferringApp)
         migrate(experimentsRepository, preferenceRepository, doubleTap, AppPreferences.bottomSheet.doubleTapUrl)
         migrate(experimentsRepository, preferenceRepository, expandFully, AppPreferences.bottomSheet.expandFully)
+        migrate(experimentsRepository, preferenceRepository, autoLaunchSingleBrowser, AppPreferences.browserMode.autoLaunchSingleBrowser)
     }
 }
 

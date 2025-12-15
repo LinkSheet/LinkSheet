@@ -25,10 +25,7 @@ import kotlin.time.ExperimentalTime
 
 val ResolverModule = module {
     single {
-        val experimentRepository = get<ExperimentRepository>()
-        ImprovedBrowserHandler(
-            autoLaunchSingleBrowserExperiment = experimentRepository.asFunction(Experiments.autoLaunchSingleBrowser),
-        )
+        ImprovedBrowserHandler()
     }
     single {
         AppSorter(
@@ -102,7 +99,6 @@ data class IntentResolverSettings(
     val useFastForwardRules: () -> Boolean,
     val requestTimeout: () -> Int,
     val resolveEmbeds: () -> Boolean,
-    val autoLaunchSingleBrowser: () -> Boolean,
     val bottomSheetSettings: BottomSheetSettings,
     val browserSettings: BrowserSettings,
     val libRedirectSettings: LibRedirectSettings,
@@ -118,6 +114,7 @@ data class BottomSheetSettings(
 )
 
 data class BrowserSettings(
+    val autoLaunchSingleBrowser: () -> Boolean,
     val inAppBrowserSettings: () -> InAppBrowserHandler.InAppBrowserMode,
     val browserMode: () -> BrowserMode,
     val selectedBrowser: () -> String?,
@@ -173,18 +170,18 @@ fun createSettings(
         useFastForwardRules = prefRepo.asFunction(AppPreferences.useFastForwardRules),
         requestTimeout = prefRepo.asFunction(AppPreferences.requestTimeout),
         resolveEmbeds = prefRepo.asFunction(AppPreferences.resolveEmbeds),
-        autoLaunchSingleBrowser = experimentRepository.asFunction(Experiments.autoLaunchSingleBrowser),
         bottomSheetSettings = BottomSheetSettings(
             dontShowFilteredItem = prefRepo.asFunction(AppPreferences.bottomSheet.dontShowFilteredItem),
             hideReferringApp = prefRepo.asFunction(AppPreferences.bottomSheet.hideReferringApp),
         ),
         browserSettings = BrowserSettings(
-            inAppBrowserSettings = prefRepo.asFunction(AppPreferences.inAppBrowserSettings),
-            browserMode = prefRepo.asFunction(AppPreferences.browserMode),
-            selectedBrowser = prefRepo.asFunction(AppPreferences.selectedBrowser),
-            inAppBrowserMode = prefRepo.asFunction(AppPreferences.inAppBrowserMode),
-            selectedInAppBrowser = prefRepo.asFunction(AppPreferences.selectedInAppBrowser),
-            unifiedPreferredBrowser = prefRepo.asFunction(AppPreferences.unifiedPreferredBrowser),
+            autoLaunchSingleBrowser = prefRepo.asFunction(AppPreferences.browserMode.autoLaunchSingleBrowser),
+            inAppBrowserSettings = prefRepo.asFunction(AppPreferences.browserMode.inAppBrowserSettings),
+            browserMode = prefRepo.asFunction(AppPreferences.browserMode.browserMode),
+            selectedBrowser = prefRepo.asFunction(AppPreferences.browserMode.selectedBrowser),
+            inAppBrowserMode = prefRepo.asFunction(AppPreferences.browserMode.inAppBrowserMode),
+            selectedInAppBrowser = prefRepo.asFunction(AppPreferences.browserMode.selectedInAppBrowser),
+            unifiedPreferredBrowser = prefRepo.asFunction(AppPreferences.browserMode.unifiedPreferredBrowser),
         ),
         libRedirectSettings = LibRedirectSettings(
             enableIgnoreLibRedirectButton = prefRepo.asFunction(AppPreferences.libRedirect.enableIgnoreLibRedirectButton),

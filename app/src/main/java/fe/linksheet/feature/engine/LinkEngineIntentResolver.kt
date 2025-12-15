@@ -207,6 +207,7 @@ class LinkEngineIntentResolver(
         val browserModeConfigHelper = browserSettings.createBrowserModeConfig(customTab is CustomTabInfo2.Allowed)
         val appList = browserHandler.filterBrowsers(
             config = browserModeConfigHelper,
+            autoLaunchSingleBrowser = settings.browserSettings.autoLaunchSingleBrowser(),
             browsers = browsers,
             resolveList = resolveList
         )

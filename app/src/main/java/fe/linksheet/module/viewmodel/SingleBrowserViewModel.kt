@@ -18,8 +18,8 @@ class SingleBrowserViewModel(
 
     val list by lazy { AppListCommon(apps = useCase.queryBrowsersFlow(), scope = viewModelScope) }
 
-    private val normalBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode)
-    private val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.inAppBrowserMode)
+    private val normalBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.browserMode)
+    private val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.inAppBrowserMode)
 
     val browserMode = when (type) {
         PreferredBrowserViewModel.BrowserType.Normal -> normalBrowserMode
@@ -27,9 +27,9 @@ class SingleBrowserViewModel(
     }
 
     @OptIn(SensitivePreference::class)
-    private val selectedNormalBrowser = preferenceRepository.asViewModelState(AppPreferences.selectedBrowser)
+    private val selectedNormalBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.selectedBrowser)
     @OptIn(SensitivePreference::class)
-    private val selectedInAppBrowser = preferenceRepository.asViewModelState(AppPreferences.selectedInAppBrowser)
+    private val selectedInAppBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.selectedInAppBrowser)
 
     val selectedBrowser = when (type) {
         PreferredBrowserViewModel.BrowserType.Normal -> selectedNormalBrowser

@@ -19,7 +19,8 @@ class PreferredBrowserViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val type = MutableStateFlow(BrowserType.Normal)
-    val unifiedPreferredBrowser = preferenceRepository.asViewModelState(AppPreferences.unifiedPreferredBrowser)
+    val autoLaunchSingleBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.autoLaunchSingleBrowser)
+    val unifiedPreferredBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.unifiedPreferredBrowser)
 
     fun init() {
         viewModelScope.launch {
@@ -29,8 +30,8 @@ class PreferredBrowserViewModel(
         }
     }
 
-    private val normalBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode)
-    private val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.inAppBrowserMode)
+    private val normalBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.browserMode)
+    private val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.inAppBrowserMode)
 
     val browserMode = type.map {
         when (it) {
@@ -40,10 +41,10 @@ class PreferredBrowserViewModel(
     }
 
     @OptIn(SensitivePreference::class)
-    private val selectedNormalBrowser = preferenceRepository.asViewModelState(AppPreferences.selectedBrowser)
+    private val selectedNormalBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.selectedBrowser)
 
     @OptIn(SensitivePreference::class)
-    private val selectedInAppBrowser = preferenceRepository.asViewModelState(AppPreferences.selectedInAppBrowser)
+    private val selectedInAppBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.selectedInAppBrowser)
 
     val selectedBrowser = type.map {
         when (it) {

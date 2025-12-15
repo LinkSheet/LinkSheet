@@ -2,7 +2,7 @@ package fe.linksheet.module.resolver
 
 import android.content.pm.ResolveInfo
 
-object AutoLaunchSingleBrowserExperiment {
+object AutoLaunchSingleBrowserHandler {
     fun handle(
         config: BrowserModeConfigHelper,
         nonBrowsers: List<ResolveInfo>,

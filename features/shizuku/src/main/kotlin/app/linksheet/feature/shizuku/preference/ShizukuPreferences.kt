@@ -1,5 +1,6 @@
 package app.linksheet.feature.shizuku.preference
 
+import app.linksheet.api.PreferenceRegistry
 import fe.android.preference.helper.Preference
 
 interface ShizukuPreferences {
@@ -7,9 +8,9 @@ interface ShizukuPreferences {
     val autoDisableLinkHandling: Preference.Boolean
 }
 
-fun shizukuPreferences(boolean: (key: String, default: Boolean) -> Preference.Boolean): ShizukuPreferences {
+fun shizukuPreferences(registry: PreferenceRegistry): ShizukuPreferences {
     return object : ShizukuPreferences {
-        override val enable = boolean("enable_shizuku", false)
-        override val autoDisableLinkHandling = boolean("auto_disable_link_handling", false)
+        override val enable = registry.boolean("enable_shizuku", false)
+        override val autoDisableLinkHandling = registry.boolean("auto_disable_link_handling", false)
     }
 }

@@ -67,16 +67,11 @@ object Experiments : PreferenceDefinition(
         group(
             name = "improved_bottom_sheet",
             displayName = "Improved bottom sheet",
-//            experiment("Auto-expand bottom sheet fully", improvedBottomSheetExpandFully),
-//            experiment("Double tap url to open app", improvedBottomSheetUrlDoubleTap),
             experiment("LibRedirect QuickJS engine", libRedirectJsEngine),
-//            experiment("Hide referring app from results in bottom sheet", hideReferrerFromSheet),
             experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),
-//            experiment("Auto-launch single browser", autoLaunchSingleBrowser),
             experiment("Manual redirect resolving", manualFollowRedirects),
             experiment("Disable bottom sheet state save", noBottomSheetStateSave),
             experiment("Aggressive follow redirects", aggressiveFollowRedirects),
-//            experiment("Expressive loading indicator", expressiveLoadingSheet)
         ),
         group(
             name = "logging",

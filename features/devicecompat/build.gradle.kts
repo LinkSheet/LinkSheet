@@ -52,6 +52,7 @@ dependencies {
 
     testImplementation(AndroidX.test.ext.junit.ktx)
     testImplementation(project(":test-core"))
+    testImplementation(project(":test-fake"))
     testImplementation(Grrfe.std.test)
     testImplementation(Grrfe.std.result.assert)
     testImplementation("com.willowtreeapps.assertk:assertk:_")

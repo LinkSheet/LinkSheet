@@ -1,4 +1,4 @@
-package fe.linksheet
+package app.linksheet.feature
 
 import fe.linksheet.feature.systeminfo.BuildInfo
 

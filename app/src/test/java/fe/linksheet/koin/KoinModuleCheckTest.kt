@@ -55,9 +55,9 @@ import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
 import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
-import fe.linksheet.module.devicecompat.miui.MiuiCompat
-import fe.linksheet.module.devicecompat.miui.MiuiCompatProvider
-import fe.linksheet.module.devicecompat.oneui.OneUiCompat
+import app.linksheet.feature.devicecompat.miui.MiuiCompat
+import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
+import app.linksheet.feature.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.language.AppLocaleService
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.paste.PasteService

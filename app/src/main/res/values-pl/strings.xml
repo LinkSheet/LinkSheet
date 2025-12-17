@@ -492,7 +492,6 @@
     <string name="generic__text_edit">Edytuj</string>
     <string name="generic__button_text_done">Gotowe</string>
     <string name="home__clipboard_card_source">Ze schowka</string>
-
     <string name="settings__hint_search">Szukaj</string>
     <string name="bottom_sheet__event_app_refusal">Docelowa aplikacja odmówiła obsługi linku!</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">Wymagana dodatkowa konfiguracja</string>
@@ -519,7 +518,6 @@
     <string name="settings_verified_link_handlers__text_browser">Przeglądarka</string>
     <string name="generic__button_text_share">Udostępnij</string>
     <string name="resolve_event__idle">Bezczynny</string>
-
     <string name="settings_home__title_clipboard_card">Karta schowka</string>
     <string name="settings_home__text_clipboard_card">Pokaż aktualną zawartość schowka na stronie głównej, jeśli jest to adres URL</string>
     <string name="settings_language__dialog_title">Język aplikacji</string>
@@ -575,4 +573,12 @@
     <string name="notification__channel_interconnect_description">Powiadomienie na pierwszym planie, gdy usługa Interconnect jest aktywna</string>
     <string name="notification_interconnect_name">Interconnect</string>
     <string name="notification_interconnect_description">Interconnect jest aktywny</string>
+    <string name="settings_bottom_sheet__title_hide_referring_app">Ukryj aplikację odsyłającą</string>
+    <string name="settings_bottom_sheet__subtitle_hide_referring_app">Nie wyświetlaj aplikacji odsyłającej/źródłowej, nawet jeśli obsługuje ona linki</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">Dwukrotne dotknięcie linku</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">Otwórz sugerowaną aplikację po dwukrotnym dotknięciu linku</string>
+    <string name="settings_bottom_sheet__title_expand_fully">Rozwiń całkowicie</string>
+    <string name="settings_bottom_sheet__subtitle_expand_fully">Automatycznie rozszerz dolny panel do pełnej wysokości</string>
+    <string name="settings_browser_mode__title_auto_launch_single_browser">Automatyczne uruchom pojedynczą przeglądarkę</string>
+    <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Jeśli dostępna jest tylko jedna aplikacja, która jest jednocześnie przeglądarką, uruchom ją automatycznie</string>
 </resources>

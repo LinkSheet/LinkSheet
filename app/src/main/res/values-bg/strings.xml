@@ -504,7 +504,6 @@
     <string name="settings_verified_link_handlers__text_browser">Мрежов четец</string>
     <string name="generic__button_text_share">Споделяне</string>
     <string name="resolve_event__idle">Изчакване</string>
-
     <string name="settings_home__title_clipboard_card">Карта на паметта за обмен</string>
     <string name="settings_home__text_clipboard_card">Показване съдържанието на паметта за обмен на началната страница ако е адрес</string>
     <string name="settings_language__dialog_title">Език на приложението</string>
@@ -560,4 +559,12 @@
     <string name="notification_interconnect_name">Взаимосвързаност</string>
     <string name="notification_interconnect_description">Услугата Взаимосвързаност работи</string>
     <string name="notification__channel_interconnect_description">Известие на преден план, когато услугата Взаимосвързаност работи</string>
+    <string name="settings_bottom_sheet__title_hide_referring_app">Скриване на отварящото приложение</string>
+    <string name="settings_bottom_sheet__subtitle_hide_referring_app">Да не бъде показвано отварящото/изходното приложение, дори да може да обработи препратката</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">Двъуратно докосване на адреси</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">Отваряне на предложеното приложение при двойно докосване</string>
+    <string name="settings_bottom_sheet__title_expand_fully">Напълно разгъване</string>
+    <string name="settings_bottom_sheet__subtitle_expand_fully">Разгъване на долното меню до пълната му височина</string>
+    <string name="settings_browser_mode__title_auto_launch_single_browser">Автоматично отваряне при един мрежов четец</string>
+    <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Ако има само едно приложение и то е мрежов четец, да бъде отворено</string>
 </resources>

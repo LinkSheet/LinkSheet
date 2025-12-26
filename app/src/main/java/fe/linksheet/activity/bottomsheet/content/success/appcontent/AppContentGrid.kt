@@ -34,9 +34,9 @@ import app.linksheet.feature.browser.core.Browser
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.AppClickInteraction
+import fe.linksheet.activity.bottomsheet.AppInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
-import fe.linksheet.activity.bottomsheet.Interaction
 import fe.linksheet.composable.util.defaultRoundedCornerShape
 
 
@@ -74,9 +74,8 @@ fun AppContentGrid(
     hasPreferredApp: Boolean,
     hideChoiceButtons: Boolean,
     showPackage: Boolean,
-    dispatch: (Interaction) -> Unit,
+    dispatch: (AppInteraction) -> Unit,
     isPrivateBrowser: suspend (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
-    showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     val items = remember { mutableStateListOf<GridItem>() }
     LaunchedEffect(key1 = apps, key2 = uri) {
@@ -91,7 +90,6 @@ fun AppContentGrid(
         hideChoiceButtons = hideChoiceButtons,
 //        showNativeLabel = showNativeLabel,
         dispatch = dispatch,
-        showToast = showToast,
     ) { modifier ->
         LazyVerticalGrid(
             modifier = modifier,

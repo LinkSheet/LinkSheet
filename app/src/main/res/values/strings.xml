@@ -566,5 +566,7 @@
     <string name="settings_bottom_sheet__subtitle_expand_fully">Auto-expand bottom sheet to its full height</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">Auto launch single browser</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">If there is only a single app available, which is also a browser, launch it automatically</string>
+    <string name="generic__text_mode">Mode</string>
     <string name="settings_follow_redirects__title_mode_auto">Auto</string>
+    <string name="settings_follow_redirects__title_mode_manual">Manual</string>
 </resources>

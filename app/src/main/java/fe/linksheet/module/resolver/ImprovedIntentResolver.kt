@@ -176,13 +176,16 @@ class ImprovedIntentResolver(
 
         val resolveStatus = ResolveModuleStatus()
 
-        val manualResolveRedirects = intent.getBooleanExtra(IntentKeyResolveRedirects, false)
-
-        val followRedirects = followRedirectsSettings.followRedirects() || manualResolveRedirects
-        val skipFollowRedirects = followRedirectsSettings.followRedirectsSkipBrowser() && isReferrerBrowser
+        val shouldFollowRedirects = shouldFollowRedirects(
+            enabled = followRedirectsSettings.followRedirects(),
+            mode = followRedirectsSettings.followRedirectsMode(),
+            skipBrowser = followRedirectsSettings.followRedirectsSkipBrowser(),
+            isReferrerBrowser = isReferrerBrowser,
+            hasManualFlag = intent.getBooleanExtra(IntentKeyResolveRedirects, false),
+        )
 
         var resolvedUri: Uri? = uri
-        if (followRedirects && !skipFollowRedirects) {
+        if (shouldFollowRedirects) {
             val redirectsUri = cancelable(ResolveEvent.ResolvingRedirects) {
                 runRedirectResolver(
                     resolveModuleStatus = resolveStatus,
@@ -288,8 +291,7 @@ class ImprovedIntentResolver(
             uri = uri
         )
         var resolveList = packageIntentHandler.findHandlers(uri, referringPackage?.packageName)
-        resolveList = maybeFilter(resolveList, referringPackage, settings.bottomSheetSettings.hideReferringApp())
-
+        resolveList = maybeFilterReferrer(resolveList, referringPackage, settings.bottomSheetSettings.hideReferringApp())
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
@@ -326,7 +328,7 @@ class ImprovedIntentResolver(
         )
     }
 
-    private fun maybeFilter(
+    private fun maybeFilterReferrer(
         resolveList: List<ResolveInfo>,
         referringPackage: AndroidAppPackage?,
         hideReferringApp: Boolean
@@ -496,6 +498,20 @@ class ImprovedIntentResolver(
         private val embedResolverConfig by lazy { BundledEmbedResolveConfigLoader.load().getOrNull() }
 
         const val IntentKeyResolveRedirects = "resolve_redirects"
+
+        internal fun shouldFollowRedirects(
+            enabled: Boolean,
+            mode: FollowRedirectsMode,
+            skipBrowser: Boolean,
+            isReferrerBrowser: Boolean,
+            hasManualFlag: Boolean
+        ): Boolean {
+            if (!enabled) return false
+            return when (mode) {
+                is FollowRedirectsMode.Auto -> !(skipBrowser && isReferrerBrowser)
+                is FollowRedirectsMode.Manual -> hasManualFlag
+            }
+        }
     }
 
     private val clearUrls by lazy { clearUrlProviders?.let { ClearUrls(it) } }

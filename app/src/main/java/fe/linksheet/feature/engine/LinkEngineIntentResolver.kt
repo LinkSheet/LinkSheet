@@ -146,7 +146,15 @@ class LinkEngineIntentResolver(
         emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = packageIntentHandler.findHttpBrowsable(null)
 
-        val manualResolveRedirects = checkIntentFlag(intent, IntentKeyResolveRedirects, followRedirectsSettings.manualFollowRedirects())
+        val shouldFollowRedirects = ImprovedIntentResolver.shouldFollowRedirects(
+            enabled = followRedirectsSettings.followRedirects(),
+            mode = followRedirectsSettings.followRedirectsMode(),
+            skipBrowser = followRedirectsSettings.followRedirectsSkipBrowser(),
+            isReferrerBrowser = isReferrerBrowser,
+            hasManualFlag = intent.getBooleanExtra(IntentKeyResolveRedirects, false),
+        )
+        intent.extras?.remove(IntentKeyResolveRedirects)
+
         val ignoreLibRedirect = checkIntentFlag(intent, LibRedirectDefault.IgnoreIntentKey, libRedirectSettings.enableIgnoreLibRedirectButton())
 
         val context = DefaultEngineRunContext {
@@ -154,7 +162,7 @@ class LinkEngineIntentResolver(
                 add(IgnoreLibRedirectExtra)
             }
 
-            if (manualResolveRedirects && (isReferrerBrowser && followRedirectsSettings.followRedirectsSkipBrowser())) {
+            if (!shouldFollowRedirects) {
                 add(SkipFollowRedirectsExtra)
             }
 

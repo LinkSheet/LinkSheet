@@ -102,7 +102,10 @@ class BottomSheetViewModel(
         intentResolver.warmup()
     }
 
-    fun resolveAsync(intent: SafeIntent, uri: Uri?) = viewModelScope.launch(Dispatchers.IO) {
+    fun resolveAsync(intent: SafeIntent, uri: Uri?, reset: Boolean = true) = viewModelScope.launch(Dispatchers.IO) {
+        if (reset) {
+            _resolveResultFlow.emit(IntentResolveResult.Pending)
+        }
         val resolveResult = intentResolver.resolve(intent, uri)
         _resolveResultFlow.emit(resolveResult)
     }

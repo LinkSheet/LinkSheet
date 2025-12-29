@@ -556,4 +556,5 @@
     <string name="settings_bottom_sheet__subtitle_expand_fully">自动将底栏展开至全高</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">自动启动指定浏览器</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">如果只有一个可用应用且该应用是浏览器，则自动启动</string>
+    <string name="generic__label_arrow_rotation">箭头旋转动画</string>
 </resources>

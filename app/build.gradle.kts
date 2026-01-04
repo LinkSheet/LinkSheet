@@ -208,7 +208,7 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addCompilerOptions(CompilerOption.WhenGuards, CompilerOption.NestedTypeAliases)
+        addCompilerOptions(CompilerOption.WhenGuards, CompilerOption.NestedTypeAliases, CompilerOption.SkipPreReleaseCheck)
         addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
     }
 

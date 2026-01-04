@@ -44,7 +44,8 @@ val HttpModule = module {
             engine { preconfigured = get<OkHttpClient>() }
             install(ContentNegotiation) { gson() }
             install(HttpTimeout) {
-                requestTimeoutMillis = 1000
+                // TODO: Is this a good idea?
+                requestTimeoutMillis = HttpTimeoutConfig.INFINITE_TIMEOUT_MS
             }
         }
     }

@@ -3,7 +3,7 @@ package fe.linksheet.feature.systeminfo
 import app.linksheet.api.SystemProperties
 
 class SystemInfoService(
-    val properties: SystemProperties = RealSystemProperties,
+    val properties: SystemProperties,
     val build: BuildConstants = InjectedBuildConstants(properties),
     val buildInfo: BuildInfo
 ) {

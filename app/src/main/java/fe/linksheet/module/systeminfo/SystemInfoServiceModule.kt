@@ -20,7 +20,7 @@ val SystemInfoServiceModule = module {
             BuildConfig.GITHUB_WORKFLOW_RUN_ID
         )
         SystemInfoService(
-            properties = RealSystemProperties,
+            properties = RealSystemProperties(refineWrapper = get()),
             build = StaticBuildConstants,
             buildInfo = buildInfo
         )

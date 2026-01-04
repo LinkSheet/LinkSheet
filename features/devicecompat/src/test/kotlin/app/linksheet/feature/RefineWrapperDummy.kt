@@ -23,4 +23,8 @@ object RefineWrapperDummy : RefineWrapper {
     override fun myUserId(): Int {
         return 0
     }
+
+    override fun getSystemProperty(key: String): String? {
+       return null
+    }
 }

@@ -32,4 +32,8 @@ class RealRefineWrapper : RefineWrapper {
     override fun myUserId(): Int {
         return UserHandleHidden.myUserId()
     }
+
+    override fun getSystemProperty(key: String): String? {
+        return android.os.SystemProperties.get(key)
+    }
 }

@@ -1,4 +1,4 @@
-package app.linksheet.feature
+package app.linksheet.feature.devicecompat.util
 
 import android.app.AppOpsManager
 import android.os.UserHandle

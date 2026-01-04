@@ -1,7 +1,8 @@
-package app.linksheet.feature
+package app.linksheet.feature.devicecompat.oneui
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.devicecompat.oneui.RealOneUiCompatProvider
+import app.linksheet.feature.devicecompat.util.BuildInfoFake
 import app.linksheet.testing.fake.device.Device
 import app.linksheet.testing.fake.device.SamsungA02sAndroid12
 import app.linksheet.testing.fake.device.XiaomiRedmi2a
@@ -12,8 +13,10 @@ import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class OneUiCompatProviderTest : BaseUnitTest  {
     private fun Device.isProviderRequired(): Boolean {
         val service = SystemInfoService(this, buildInfo = BuildInfoFake.Info)

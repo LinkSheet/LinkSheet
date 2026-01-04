@@ -40,7 +40,6 @@ internal class DomainVerificationUseCaseTest : BaseUnitTest {
                 resolveActivity = { _, _ -> null },
                 isLinkSheetCompat = { false },
                 isSelf = { false },
-                checkReferrerExperiment = { false }
             ),
             getApplicationInfoOrNull = { _, _ -> null },
             getInstalledPackages = { emptyList() },

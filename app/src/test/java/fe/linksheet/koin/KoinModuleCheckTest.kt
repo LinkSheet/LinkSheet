@@ -9,6 +9,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import app.linksheet.api.CachedRequest
+import app.linksheet.api.RefineWrapper
 import app.linksheet.api.SystemProperties
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.feature.app.core.PackageIntentHandler
@@ -19,6 +20,9 @@ import app.linksheet.feature.app.usecase.AllAppsUseCase
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
 import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
+import app.linksheet.feature.devicecompat.miui.MiuiCompat
+import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
+import app.linksheet.feature.devicecompat.oneui.OneUiCompat
 import app.linksheet.feature.downloader.Downloader
 import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.libredirect.LibRedirectResolver
@@ -55,9 +59,6 @@ import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
 import fe.linksheet.module.database.dao.resolver.ResolvedRedirectDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
-import app.linksheet.feature.devicecompat.miui.MiuiCompat
-import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
-import app.linksheet.feature.devicecompat.oneui.OneUiCompat
 import fe.linksheet.module.language.AppLocaleService
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.paste.PasteService
@@ -194,6 +195,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             Gson::class,
             SystemInfoService::class,
             LogPersistService::class,
+            RefineWrapper::class,
             CoroutineDispatcher::class
         ),
         definition<LogTextSettingsViewModel>(),

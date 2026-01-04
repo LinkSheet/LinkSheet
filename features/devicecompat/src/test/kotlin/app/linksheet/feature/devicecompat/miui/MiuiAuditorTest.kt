@@ -1,7 +1,9 @@
-package app.linksheet.feature
+package app.linksheet.feature.devicecompat.miui
 
+import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.devicecompat.miui.MiuiAuditor
+import app.linksheet.feature.devicecompat.util.BuildInfoFake
+import app.linksheet.feature.devicecompat.util.RefineWrapperDummy
 import app.linksheet.testing.fake.device.*
 import assertk.assertThat
 import assertk.assertions.isEqualTo
@@ -11,8 +13,10 @@ import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class MiuiAuditorTest : BaseUnitTest  {
     private val table = tableOf("device", "expectedDeviceInfo", "expectedMiui", "expectedFingerprint")
         .row<Device, DeviceInfo, MiuiAuditor.MiuiVersion, String>(

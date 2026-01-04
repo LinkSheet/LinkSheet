@@ -51,6 +51,7 @@ dependencies {
     implementation(AndroidX.compose.material.icons.extended)
 
     testImplementation(AndroidX.test.ext.junit.ktx)
+    testImplementation(Testing.robolectric)
     testImplementation(project(":test-core"))
     testImplementation(project(":test-fake"))
     testImplementation(Grrfe.std.test)

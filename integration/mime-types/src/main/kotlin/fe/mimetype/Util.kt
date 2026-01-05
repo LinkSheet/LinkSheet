@@ -1,11 +1,11 @@
-package fe.linksheet.util.mime
+package fe.mimetype
 
-object Util {
-    fun createReverseMap(mimeTypeToExtensions: Map<String, Array<String>>): Map<String, String> {
+public object Util {
+    public fun createReverseMap(mimeTypeToExtensions: Map<String, Array<String>>): Map<String, String> {
         val extensionToMimeType = mutableMapOf<String, String>()
         for ((mimeType, extensions) in mimeTypeToExtensions) {
             for (it in extensions) {
-                extensionToMimeType.put(it, mimeType)
+                extensionToMimeType[it] = mimeType
             }
         }
 

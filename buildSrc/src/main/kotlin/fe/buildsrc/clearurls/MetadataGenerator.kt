@@ -1,4 +1,4 @@
-package fe.buildsrc
+package fe.buildsrc.clearurls
 
 import com.squareup.javapoet.FieldSpec
 import com.squareup.javapoet.JavaFile

@@ -159,15 +159,12 @@ class BottomSheetViewModel(
     }
 
     fun startDownload(resources: Resources, uri: String, downloadable: DownloadCheckResult.Downloadable) {
-        val path = "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
+        val path = "${resources.getString(R.string.app_name)}${File.separator}${downloadable.fileName}"
 
         val request = DownloadManager.Request(uri.toUri())
-            .setTitle(resources.getString(R.string.linksheet_download))
+//            .setTitle(resources.getString(R.string.linksheet_download))
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setDestinationInExternalPublicDir(
-                Environment.DIRECTORY_DOWNLOADS,
-                path
-            )
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, path)
 
         downloadManager.enqueue(request)
     }

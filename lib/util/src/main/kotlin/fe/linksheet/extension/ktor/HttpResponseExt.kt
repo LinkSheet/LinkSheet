@@ -19,6 +19,10 @@ fun HttpResponse.refresh(): String? {
     return headers["refresh"]
 }
 
+fun HttpMessage.contentDisposition(): ContentDisposition? {
+    return headers[HttpHeaders.ContentDisposition]?.let { ContentDisposition.parse(it) }
+}
+
 suspend fun HttpResponse.parseHeadAsStream(): Document {
     return JsoupHelper.parseHeadAsStream(bodyAsChannel().toInputStream(), urlString(), charset())
 }

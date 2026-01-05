@@ -412,4 +412,6 @@
     <string name="generic__button_dismiss">關閉</string>
     <string name="unknown_host">「%s」已遭封鎖或不存在</string>
     <string name="no_internet_connection">沒有網際網路連線</string>
+    <string name="link_handle_failed_text">由於連結的格式似乎有誤，LinkSheet 無法處理。你可以在下方編輯後再試一次，或在網上搜尋之。</string>
+    <string name="link_handle_failed">發生錯誤</string>
 </resources>

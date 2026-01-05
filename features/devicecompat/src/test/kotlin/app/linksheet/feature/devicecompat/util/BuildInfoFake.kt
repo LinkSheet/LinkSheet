@@ -1,4 +1,4 @@
-package fe.linksheet
+package app.linksheet.feature.devicecompat.util
 
 import fe.linksheet.feature.systeminfo.BuildInfo
 

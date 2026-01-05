@@ -1,6 +1,6 @@
 package fe.linksheet.module.resolver.urlresolver.redirect
 
-import fe.linksheet.extension.ktor.parseHtmlBody
+import fe.linksheet.extension.ktor.parseHeadAsStream
 import fe.linksheet.extension.ktor.refresh
 import fe.linksheet.extension.ktor.urlString
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
@@ -72,7 +72,8 @@ class RedirectResolveRequest(
 
     private suspend fun HttpResponse.handleRefreshMeta(): String? {
         return runCatching {
-            RefreshParser.parseHtml(parseHtmlBody())?.takeIfValid()
+            val document = parseHeadAsStream()
+            RefreshParser.parseHtml(document)?.takeIfValid()
         }.getOrNull()
     }
 

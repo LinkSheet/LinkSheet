@@ -1,7 +1,7 @@
 package fe.linksheet.extension.okhttp
 
+import fe.linksheet.web.JsoupHelper
 import fe.linksheet.web.isHtml
-import fe.linksheet.web.parseHtmlBody
 import io.ktor.http.*
 import io.ktor.utils.io.charsets.*
 import okhttp3.Response
@@ -28,5 +28,5 @@ fun Response.refresh(): String? {
 }
 
 fun Response.parseHtmlBody(): Document {
-    return body.byteStream().use { it.parseHtmlBody(urlString(), charset()) }
+    return JsoupHelper.parseHeadAsStream(body.byteStream(), urlString(), charset())
 }

@@ -16,9 +16,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     companion object {
-        private val handler = ImprovedBrowserHandler(
-            autoLaunchSingleBrowserExperiment = { false },
-        )
+        private val handler = ImprovedBrowserHandler()
         internal val allBrowsersResolveInfos = PackageInfoFakes.allBrowsers.mapNotNull { it.firstActivityResolveInfo }
         private val allAppsInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allApps)
         private val allBrowsersInfoList = listOfFirstActivityResolveInfo(PackageInfoFakes.allBrowsers)
@@ -29,7 +27,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     fun `always ask user which browser to choose`() {
         val config = BrowserModeConfigHelper.AlwaysAsk
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
+        val result = handler.filterBrowsers(config, false, allBrowsersResolveInfos, allResolvedInfoList)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -45,7 +43,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     fun `only list native apps`() {
         val config = BrowserModeConfigHelper.None
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
+        val result = handler.filterBrowsers(config, false, allBrowsersResolveInfos, allResolvedInfoList)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -62,7 +60,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
         val config = BrowserModeConfigHelper.None
 
         val youtube = listOfFirstActivityResolveInfo(PackageInfoFakes.Youtube)
-        val result = handler.filterBrowsers(config, emptyList(), youtube)
+        val result = handler.filterBrowsers(config, false, emptyList(), youtube)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -78,7 +76,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     fun `only list native apps, of which user has multiple`() {
         val config = BrowserModeConfigHelper.None
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
+        val result = handler.filterBrowsers(config, false, allBrowsersResolveInfos, allResolvedInfoList)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -94,7 +92,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     fun `only list native apps, of which user has none`() {
         val config = BrowserModeConfigHelper.None
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, emptyList())
+        val result = handler.filterBrowsers(config, false, allBrowsersResolveInfos, emptyList())
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -110,7 +108,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     fun `selected browser, but none specified`() {
         val config = BrowserModeConfigHelper.SelectedBrowser(null)
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
+        val result = handler.filterBrowsers(config, false, allBrowsersResolveInfos, allResolvedInfoList)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -126,7 +124,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     fun `selected browser`() {
         val config = BrowserModeConfigHelper.SelectedBrowser(PackageInfoFakes.MiBrowser.packageInfo.packageName)
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
+        val result = handler.filterBrowsers(config, false,allBrowsersResolveInfos, allResolvedInfoList)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -142,7 +140,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     fun `whitelisted browsers, but none selected`() {
         val config = BrowserModeConfigHelper.Whitelisted(null)
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
+        val result = handler.filterBrowsers(config, false, allBrowsersResolveInfos, allResolvedInfoList)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -160,7 +158,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     fun `whitelisted browsers, one selected`() {
         val config = BrowserModeConfigHelper.Whitelisted(packageSetOf(PackageInfoFakes.MiBrowser))
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
+        val result = handler.filterBrowsers(config, false, allBrowsersResolveInfos, allResolvedInfoList)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,
@@ -181,7 +179,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
             )
         )
 
-        val result = handler.filterBrowsers(config, allBrowsersResolveInfos, allResolvedInfoList)
+        val result = handler.filterBrowsers(config, false, allBrowsersResolveInfos, allResolvedInfoList)
         assertThat(result).isDataClassEqualTo(
             FilteredBrowserList(
                 browserMode = config.mode,

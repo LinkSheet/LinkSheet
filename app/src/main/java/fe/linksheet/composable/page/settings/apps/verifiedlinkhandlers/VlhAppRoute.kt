@@ -25,8 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewContainer
+import app.linksheet.compose.util.drawBitmap
 import app.linksheet.feature.app.core.DomainVerificationAppInfo
 import app.linksheet.feature.app.core.LinkHandling
+import app.linksheet.feature.app.ui.AppInfoIcon
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toDomainVerificationAppInfo
 import fe.android.compose.icon.BitmapIconPainter
@@ -45,12 +47,10 @@ import fe.composekit.component.shape.CustomShapeDefaults
 import fe.composekit.layout.column.group
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.R
-import app.linksheet.feature.app.ui.AppInfoIcon
 import fe.linksheet.composable.dialog.DomainVerificationDialogData
 import fe.linksheet.composable.dialog.createState
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
-import app.linksheet.compose.util.drawBitmap
 import fe.linksheet.util.extension.android.tryStartActivity
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -84,7 +84,9 @@ private fun VlhAppRouteInternal(
     preferredApps: List<PreferredApp>,
     openSettings: (String) -> Unit,
 ) {
-    val data = DomainVerificationDialogData(appInfo, preferredApps.mapToSet { it.host })
+    val data = remember(appInfo, preferredApps) {
+         DomainVerificationDialogData(appInfo, preferredApps.mapToSet { it.host })
+    }
     val mutableStates = remember(data) { data.createState() }
     val states = remember(data) { mutableStates.toMap() }
 

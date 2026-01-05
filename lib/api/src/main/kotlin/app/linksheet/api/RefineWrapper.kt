@@ -8,6 +8,7 @@ interface RefineWrapper {
     fun cast(userHandle: UserHandle): WrappedUserHandleHidden
     fun cast(appOpsManager: AppOpsManager): WrappedAppOpsManagerHidden
     fun myUserId(): Int
+    fun getSystemProperty(key: String): String?
 }
 
 data class WrappedUserHandleHidden(val identifier: Int)

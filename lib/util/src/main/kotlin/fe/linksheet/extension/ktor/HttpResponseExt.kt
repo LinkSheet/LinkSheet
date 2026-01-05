@@ -1,7 +1,7 @@
 package fe.linksheet.extension.ktor
 
+import fe.linksheet.web.JsoupHelper
 import fe.linksheet.web.isHtml
-import fe.linksheet.web.parseHtmlBody
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.utils.io.jvm.javaio.*
@@ -19,6 +19,10 @@ fun HttpResponse.refresh(): String? {
     return headers["refresh"]
 }
 
-suspend fun HttpResponse.parseHtmlBody(): Document {
-    return bodyAsChannel().toInputStream().use { it.parseHtmlBody(urlString(), charset()) }
+fun HttpMessage.contentDisposition(): ContentDisposition? {
+    return headers[HttpHeaders.ContentDisposition]?.let { ContentDisposition.parse(it) }
+}
+
+suspend fun HttpResponse.parseHeadAsStream(): Document {
+    return JsoupHelper.parseHeadAsStream(bodyAsChannel().toInputStream(), urlString(), charset())
 }

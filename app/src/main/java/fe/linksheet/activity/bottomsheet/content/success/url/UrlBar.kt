@@ -2,7 +2,6 @@ package fe.linksheet.activity.bottomsheet.content.success.url
 
 import android.content.ClipboardManager
 import android.content.Intent
-import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,19 +22,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
-import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import app.linksheet.compose.extension.toImageBitmap
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.downloader.isDownloadable
 import app.linksheet.feature.libredirect.LibRedirectResult
-import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.profile.core.CrossProfile
-import app.linksheet.feature.profile.core.ProfileSwitcher
 import coil3.ImageLoader
 import fe.android.compose.icon.BitmapIconPainter.Companion.bitmap
 import fe.android.compose.icon.IconPainter
@@ -45,12 +39,8 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
 import fe.linksheet.R
 import fe.linksheet.activity.TextEditorActivity
-import fe.linksheet.activity.bottomsheet.BottomSheetStateController
-import fe.linksheet.activity.bottomsheet.ClickModifier
-import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
-import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.activity.bottomsheet.*
 import fe.linksheet.module.resolver.IntentResolveResult
-import fe.linksheet.util.intent.Intents
 import fe.linksheet.util.intent.StandardIntents
 import me.saket.unfurl.UnfurlResult
 
@@ -58,52 +48,31 @@ import me.saket.unfurl.UnfurlResult
 @Composable
 fun UrlBarWrapper(
     result: IntentResolveResult.Default,
-    profileSwitcher: ProfileSwitcher,
     imageLoader: ImageLoader?,
     enableIgnoreLibRedirectButton: Boolean,
-    enableSwitchProfile: Boolean,
-    enableUrlCopiedToast: Boolean,
-    enableDownloadStartedToast: Boolean,
     enableUrlCardDoubleTap: Boolean,
     enableManualRedirect: Boolean,
-    hideAfterCopying: Boolean,
     controller: BottomSheetStateController,
-    showToast: (Int) -> Unit,
-    copyUrl: (String, String) -> Unit,
-    startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
+    profiles: List<CrossProfile>?,
 ) {
     val uriString = result.uri.toString()
-    val clipboardLabel = stringResource(id = R.string.generic__text_url)
     val context = LocalContext.current
-    val activity = LocalActivity.current
 
     UrlBar(
         uri = uriString,
         imageLoader = imageLoader,
-        profiles = if (enableSwitchProfile) profileSwitcher.getProfiles() else null,
+        profiles = profiles,
         switchProfile = { crossProfile, url ->
-            controller.hideAndFinish()
-            if (activity != null) {
-                profileSwitcher.switchTo(crossProfile, url, activity)
-            }
+            controller.dispatch(SwitchProfileInteraction(url, crossProfile))
         },
         unfurlResult = result.unfurlResult,
         downloadable = result.downloadable,
         libRedirected = if (enableIgnoreLibRedirectButton) result.libRedirectResult as? LibRedirectResult.Redirected else null,
         copyUri = { uri ->
-            copyUrl(clipboardLabel, uri)
-
-            if (enableUrlCopiedToast) {
-                showToast(R.string.url_copied)
-            }
-
-            if (hideAfterCopying) {
-                controller.hideAndFinish()
-            }
+            controller.dispatch(CopyUrlInteraction(uri))
         },
         shareUri = { uri ->
-            controller.hideAndFinish()
-            controller.startActivity(controller.createChooser(Intents.createShareUriIntent(uri)))
+            controller.dispatch(ShareUrlInteraction(uri))
         },
         editUri = { text ->
             val intent = Intent(context, TextEditorActivity::class.java)
@@ -120,31 +89,13 @@ fun UrlBarWrapper(
             text
         },
         downloadUri = { uri, downloadResult ->
-            startDownload(uri, downloadResult)
-
-            if (enableDownloadStartedToast) {
-                showToast(R.string.download_started)
-            }
-
-            if (hideAfterCopying) {
-                controller.hideAndFinish()
-            }
+            controller.dispatch(StartDownloadInteraction(uri, downloadResult))
         },
         ignoreLibRedirect = { redirectedResult ->
-            controller.onNewIntent(
-                StandardIntents.createSelfIntent(
-                    redirectedResult.originalUri,
-                    bundleOf(LibRedirectDefault.IgnoreIntentKey to true)
-                )
-            )
+            controller.dispatch(IgnoreLibRedirectInteraction(redirectedResult))
         },
         manualRedirect = if (enableManualRedirect) { uri ->
-            controller.onNewIntent(
-                StandardIntents.createSelfIntent(
-                    uri.toUri(),
-                    bundleOf(ImprovedIntentResolver.IntentKeyResolveRedirects to true)
-                )
-            )
+            controller.dispatch(ManualRedirectInteraction(uri))
         } else null,
         onDoubleClick = {
             if (result.app != null) {
@@ -181,7 +132,8 @@ fun UrlBar(
         UrlCard(
             uri = uri,
             imageLoader = imageLoader,
-            unfurlResult = unfurlResult, onDoubleClick = onDoubleClick
+            unfurlResult = unfurlResult,
+            onDoubleClick = onDoubleClick
         )
 
         LazyRow(

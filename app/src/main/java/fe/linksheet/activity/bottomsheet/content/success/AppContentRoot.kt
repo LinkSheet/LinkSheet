@@ -4,7 +4,7 @@ import android.net.Uri
 import androidx.compose.runtime.Composable
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
-import fe.linksheet.activity.bottomsheet.Interaction
+import fe.linksheet.activity.bottomsheet.AppInteraction
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentGrid
 import fe.linksheet.activity.bottomsheet.content.success.appcontent.AppContentList
 
@@ -18,9 +18,8 @@ fun AppContentRoot(
     hideChoiceButtons: Boolean,
     showNativeLabel: Boolean,
     showPackage: Boolean,
-    dispatch: (Interaction) -> Unit,
+    dispatch: (AppInteraction) -> Unit,
     isPrivateBrowser: suspend (hasUri: Boolean, info: ActivityAppInfo) -> Browser?,
-    showToast: (textId: Int, duration: Int, uiThread: Boolean) -> Unit,
 ) {
     if (gridLayout) {
         AppContentGrid(
@@ -31,7 +30,6 @@ fun AppContentRoot(
             hideChoiceButtons = hideChoiceButtons,
             showPackage = showPackage,
             isPrivateBrowser = isPrivateBrowser,
-            showToast = showToast,
             dispatch = dispatch,
         )
     } else {
@@ -44,7 +42,6 @@ fun AppContentRoot(
             showPackage = showPackage,
             showNativeLabel = showNativeLabel,
             isPrivateBrowser = isPrivateBrowser,
-            showToast = showToast,
             dispatch = dispatch,
         )
     }

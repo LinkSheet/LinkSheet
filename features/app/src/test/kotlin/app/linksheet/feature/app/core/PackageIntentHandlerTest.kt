@@ -24,7 +24,6 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
             resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
-            checkReferrerExperiment = { true },
         )
 
         val handlers = handler.findHandlers(Uri.parse("https://www.youtube.com/watch?v=evIpx9Onc2c"), null)
@@ -42,7 +41,6 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
             resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
-            checkReferrerExperiment = { true },
         )
 
         val handlers = handler.findHandlers(Uri.parse("https://t.me/magiskalpha"), null)
@@ -58,7 +56,6 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
             resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
-            checkReferrerExperiment = { true },
         )
 
         assertThat(handler.findHttpBrowsable(null))
@@ -78,7 +75,6 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
             resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
-            checkReferrerExperiment = { true },
         )
 
         val handlers = handler.findHttpBrowsable(null)
@@ -95,7 +91,6 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
             resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
-            checkReferrerExperiment = { true },
         )
 
         val handlers = handler.findHttpBrowsable(null)
@@ -109,7 +104,6 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
             resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
-            checkReferrerExperiment = { true },
         )
 
         assertThat(handler.findSupportedHosts(PackageInfoFakes.Pepper.packageInfo.packageName)).containsExactlyInAnyOrder(
@@ -125,7 +119,6 @@ internal class PackageIntentHandlerTest : BaseUnitTest {
             resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
-            checkReferrerExperiment = { true },
         )
         assertThat(handler.findSupportedHosts(PackageInfoFakes.Youtube.packageInfo.packageName)).containsExactlyInAnyOrder(
             "youtube.com",

@@ -1,24 +1,42 @@
 package fe.linksheet.composable.page.settings.link.redirect
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material3.ButtonGroupDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Text
+import androidx.compose.material3.ToggleButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
+import fe.composekit.component.PreviewThemeNew
 import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.SliderListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
+import fe.linksheet.module.resolver.FollowRedirectsMode
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.web.Darknet
 import org.koin.androidx.compose.koinViewModel
 
+private val followRedirectsModes = listOf(FollowRedirectsMode.Auto, FollowRedirectsMode.Manual)
 
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun FollowRedirectsSettingsRoute(
     onBackPressed: () -> Unit,
@@ -36,6 +54,7 @@ fun FollowRedirectsSettingsRoute(
         Darknet.entries.joinToString(separator = ", ") { it.displayName }
     }
     val followRedirects by viewModel.followRedirects.collectAsStateWithLifecycle()
+    val followRedirectsMode by viewModel.followRedirectsMode.collectAsStateWithLifecycle()
     val contentSet = remember(followRedirects) { followRedirects.toEnabledContentSet() }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.follow_redirects), onBackPressed = onBackPressed) {
@@ -47,7 +66,27 @@ fun FollowRedirectsSettingsRoute(
             )
         }
 
-        divider(id =  R.string.options)
+        divider(id = R.string.generic__text_mode)
+
+        item(key = -R.string.generic__text_mode, contentType = ContentType.SingleGroupItem) {
+            ConnectedToggleButtonFlowRow(
+                current = followRedirectsMode,
+                items = followRedirectsModes,
+                onChange = viewModel.followRedirectsMode,
+                itemContent = {
+                    Text(
+                        text = stringResource(
+                            id = when (it) {
+                                FollowRedirectsMode.Auto -> R.string.settings_follow_redirects__title_mode_auto
+                                FollowRedirectsMode.Manual -> R.string.settings_follow_redirects__title_mode_manual
+                            }
+                        )
+                    )
+                }
+            )
+        }
+
+        divider(id = R.string.options)
 
         group(base = 6, LinkSheetAppConfig.isPro()) {
             item(key = R.string.follow_redirects_local_cache) { padding, shape ->
@@ -97,7 +136,7 @@ fun FollowRedirectsSettingsRoute(
                 )
             }
 
-            if(LinkSheetAppConfig.isPro()){
+            if (LinkSheetAppConfig.isPro()) {
                 item(key = R.string.follow_redirects_external_service) { padding, shape ->
                     PreferenceSwitchListItem(
                         enabled = (followRedirects && LinkSheetAppConfig.isPro()).toEnabledContentSet(),
@@ -137,5 +176,59 @@ fun FollowRedirectsSettingsRoute(
                 )
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+private fun <T> ConnectedToggleButtonFlowRow(
+    modifier: Modifier = Modifier,
+    current: T,
+    items: List<T>,
+    onChange: (T) -> Unit,
+    itemContent: @Composable RowScope.(T) -> Unit
+) {
+    FlowRow(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
+        verticalArrangement = Arrangement.spacedBy(2.dp),
+    ) {
+        for ((index, item) in items.withIndex()) {
+            ToggleButton(
+                modifier = Modifier.semantics { role = Role.RadioButton },
+                checked = item == current,
+                onCheckedChange = { onChange(item) },
+                shapes = when (index) {
+                    0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
+                    items.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
+                    else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
+                },
+            ) {
+                itemContent(item)
+                //                        Icon(
+                //                            imageVector = if (type == item) TypeSelector.checkedIcons[index] else TypeSelector.unCheckedIcons[index],
+                //                            contentDescription = null,
+                //                        )
+                //                        Spacer(modifier = Modifier.size(ToggleButtonDefaults.IconSpacing))
+            }
+        }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+private fun FollowRedirectsSettingsRoutePreview() {
+    PreviewThemeNew {
+        ConnectedToggleButtonFlowRow(
+            items = followRedirectsModes,
+            current = FollowRedirectsMode.Auto,
+            onChange = {
+
+            },
+            itemContent = {
+                Text(it.toString())
+            }
+        )
     }
 }

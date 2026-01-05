@@ -208,7 +208,7 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addCompilerOptions(CompilerOption.WhenGuards, CompilerOption.NestedTypeAliases)
+        addCompilerOptions(CompilerOption.WhenGuards, CompilerOption.NestedTypeAliases, CompilerOption.SkipPreReleaseCheck)
         addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
     }
 
@@ -337,6 +337,7 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-network-okhttp:_")
     implementation("io.coil-kt.coil3:coil-network-okhttp:_")
     implementation("io.coil-kt.coil3:coil-network-ktor3:_")
+    implementation("io.coil-kt.coil3:coil-svg:_")
     implementation("io.coil-kt.coil3:coil-test:_")
 
     implementation("com.github.seancfoley:ipaddress:_")

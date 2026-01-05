@@ -27,6 +27,7 @@ internal class DownloaderTest : BaseUnitTest {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -37, 0, 67, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         )
+        private const val CONTENT_DISPOSITION_TEST_TOKEN = "CONTENT_DISPOSITION_TEST"
         private val downloader = Downloader(
             HttpClient(MockEngine {
                 val urlStr = it.url.toString()
@@ -34,11 +35,22 @@ internal class DownloaderTest : BaseUnitTest {
                     urlStr.contains("FyWt0wvWAAAxgYk") -> {
                         return@MockEngine respond(content = FyWt0wvWAAAxgYk, headers = headersOf(HttpHeaders.ContentType, "image/jpeg"))
                     }
+                    urlStr.contains(CONTENT_DISPOSITION_TEST_TOKEN) -> {
+                        return@MockEngine respond(
+                            content = FyWt0wvWAAAxgYk,
+                            headers = headersOf(
+                                HttpHeaders.ContentType to listOf("image/jpeg"),
+                                HttpHeaders.ContentDisposition to listOf("Content-Disposition: attachment; filename=\"$CONTENT_DISPOSITION_TEST_TOKEN.jpeg\"")
+                            )
+                        )
+                    }
                     urlStr == "https://github.com" -> {
                         return@MockEngine respond(content = "<html></html>")
                     }
 
-                    else -> respondOk()
+                    else -> {
+                        respondOk()
+                    }
                 }
             })
         )
@@ -56,13 +68,17 @@ internal class DownloaderTest : BaseUnitTest {
             assertEquals(expected, downloader.checkIsNonHtmlFileEnding(inputUrl.toStdUrlOrThrow()))
         }
 
+    }
+
+    @Test
+    fun `test checkIsNonHtmlFileEnding downloadable`() {
         mapOf(
             "test.jpg" to "https://test.com/test.jpg",
             "test.yeet.jpg" to "https://test.com/test.yeet.jpg",
         ).forEach { (expectedFile, inputUrl) ->
             val downloadable = downloader.checkIsNonHtmlFileEnding(inputUrl.toStdUrlOrThrow())
             assertIs<DownloadCheckResult.Downloadable>(downloadable)
-            assertEquals(expectedFile, downloadable.toFileName())
+            assertEquals(expectedFile, downloadable.fileName)
         }
     }
 
@@ -73,9 +89,24 @@ internal class DownloaderTest : BaseUnitTest {
         )
 
         assertIs<DownloadCheckResult.Downloadable>(downloadable)
-        assertEquals("FyWt0wvWAAAxgYk.jpg", downloadable.toFileName())
+        assertEquals("FyWt0wvWAAAxgYk.jpg", downloadable.fileName)
 
         val nonDownloadable = downloader.isNonHtmlContentUri("https://github.com".toStdUrlOrThrow())
         assertIs<DownloadCheckResult.NonDownloadable>(nonDownloadable)
+    }
+
+    @Test
+    fun `test content disposition header handling`() = runTest {
+        val downloadable = downloader.isNonHtmlContentUri(
+            "https://pbs.twimg.com/media/${CONTENT_DISPOSITION_TEST_TOKEN}?format=jpg&name=medium".toStdUrlOrThrow(),
+        )
+
+        assertIs<DownloadCheckResult.Downloadable>(downloadable)
+        assertEquals("${CONTENT_DISPOSITION_TEST_TOKEN}.jpeg", downloadable.fileName)
+    }
+
+    @Test
+    fun `test findExtension`()  {
+
     }
 }

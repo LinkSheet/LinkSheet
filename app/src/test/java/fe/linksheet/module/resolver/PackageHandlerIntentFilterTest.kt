@@ -5,10 +5,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.PatternMatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.testing.util.addDataPaths
-import app.linksheet.testing.util.buildIntentFilter
 import app.linksheet.feature.app.core.DefaultPackageIntentHandler
 import app.linksheet.feature.app.core.PackageIntentHandler
+import app.linksheet.testing.util.addDataPaths
+import app.linksheet.testing.util.buildIntentFilter
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -24,7 +24,6 @@ internal class PackageHandlerIntentFilterTest : BaseUnitTest  {
             resolveActivity = { _, _ -> null },
             isLinkSheetCompat = { false },
             isSelf = { false },
-            checkReferrerExperiment = { true }
         )
 
         private val githubIntentFilter = buildIntentFilter {

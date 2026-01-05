@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="enable_request_private_browsing_button_explainer">在浏览器旁边显示一个按钮，以在隐私浏览模式下打开点击的链接</string>
+    <string name="enable_request_private_browsing_button_explainer">在浏览器旁边显示一个按钮，以在隐私浏览模式下打开点击的链接。</string>
+    <string name="enable_request_private_browsing_button">启用“请求无痕浏览”按钮</string>
+    <string name="settings_private_browsing__title_private_browsing">无痕浏览</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">启用无痕浏览</string>
+    <string name="settings_private_browsing__divider_configuration">配置</string>
+    <string name="settings_private_browsing_browsers__title_browsers">已启用的无痕浏览器</string>
+    <string name="settings_private_browsing__title_allowed_browsers">白名单浏览器</string>
+    <string name="settings_private_browsing__text_allowed_browsers">共 %d 个浏览器</string>
 </resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request_private_browsing_button">Kasuta nuppu „Privaatne veebisirvimine“</string>
+    <string name="settings_private_browsing__title_private_browsing">Privaatne veebisirvimine</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">Kasuta privaatset veebisirvimist</string>
+    <string name="settings_private_browsing__divider_configuration">Seadistused</string>
+    <string name="settings_private_browsing__title_allowed_browsers">Lubatud veebibrauserid</string>
+    <string name="settings_private_browsing_browsers__title_browsers">Lubatud privaatsed veebibrauserid</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d veebibrauserit</string>
+    <string name="enable_request_private_browsing_button_explainer">Kuvab veebibrauserite kõrval nuppu, mis avab klõpsatud veebiaadressi privaatses veebisirvimise režiimis.</string>
+</resources>

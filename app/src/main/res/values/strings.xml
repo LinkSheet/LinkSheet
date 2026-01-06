@@ -543,4 +543,6 @@
     <string name="settings_verified_link_handler__text_no_hosts">No hosts!</string>
     <string name="settings_verified_link_handler__text_no_such_host_found">No such host found!</string>
     <string name="settings_verified_link_handler__placeholder_filter_hosts">Filter hosts</string>
+    <string name="qs_tile_label">Open copied link</string>
+    <string name="qs_tile_no_link">No link in clipboard</string>
 </resources>

@@ -52,7 +52,7 @@ class PrivateBinPasteService(val config: PrivateBinConfig) : PasteService<Privat
         cipher: String,
         compression: String
     ): JsonArray {
-        val encryption = arrayOf(
+        val encryption = arrayOf<Any>(
             Base64.encode(iv), Base64.encode(kdfSalt), kdfIterations, kdfSize,
             tagLength, algorithm, cipher, compression
         )

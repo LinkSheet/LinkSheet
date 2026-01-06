@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -21,6 +22,7 @@ import app.linksheet.compose.debugBorder
 import app.linksheet.compose.extension.collectOnIO
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
+import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import fe.composekit.extension.setText
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
@@ -32,20 +34,16 @@ import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrap
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.module.resolver.IntentResolveResult
-import fe.linksheet.module.resolver.ResolveEvent
-import fe.linksheet.module.resolver.ResolverInteraction
+import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.resolver.util.LaunchRawIntent
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import fe.linksheet.util.intent.Intents
 import fe.linksheet.util.intent.StandardIntents
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.mapNotNull
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -148,19 +146,15 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
 
         val controller = remember {
+            val hideSheet = {
+                coroutineScope.launch { sheetState.hide() }
+            }
+
             DefaultBottomSheetStateController(
-                activity = this@BottomSheetActivity,
                 editorLauncher = editorLauncher,
-                coroutineScope = coroutineScope,
-                drawerState = sheetState,
-                onNewIntent = ::onNewIntent,
                 dispatch = { interaction ->
-                    coroutineScope.launch {
-                        (resolveResult as? IntentResolveResult.Default)
-                            ?.let { viewModel.handle(this@BottomSheetActivity, it, interaction) }
-                            ?.let { handleLaunch(it) }
-                    }
-                }
+                    handleInteraction(interaction, resolveResult, hideSheet)
+                },
             )
         }
 
@@ -218,15 +212,12 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             is IntentResolveResult.Default -> {
                 val enableIgnoreLibRedirectButton by viewModel.enableIgnoreLibRedirectButton.collectAsStateWithLifecycle()
                 val bottomSheetProfileSwitcher by viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
-                val urlCopiedToast by viewModel.urlCopiedToast.collectAsStateWithLifecycle()
-                val downloadStartedToast by viewModel.downloadStartedToast.collectAsStateWithLifecycle()
-                val hideAfterCopying by viewModel.hideAfterCopying.collectAsStateWithLifecycle()
                 val bottomSheetNativeLabel by viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
                 val gridLayout by viewModel.gridLayout.collectAsStateWithLifecycle()
                 val previewUrl by viewModel.previewUrl.collectAsStateWithLifecycle()
                 val hideBottomSheetChoiceButtons by viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
                 val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
-                val manualFollowRedirects by viewModel.manualFollowRedirects.collectAsStateWithLifecycle()
+                val followRedirectsMode by viewModel.followRedirectsMode.collectAsStateWithLifecycle()
                 val doubleTapUrl by viewModel.doubleTapUrl.collectAsStateWithLifecycle()
 
                 BottomSheetApps(
@@ -234,25 +225,12 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     result = resolveResult,
                     imageLoader = viewModel.imageLoader,
                     enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
-                    enableSwitchProfile = bottomSheetProfileSwitcher,
-                    profileSwitcher = viewModel.profileSwitcher,
-                    enableUrlCopiedToast = urlCopiedToast,
-                    enableDownloadStartedToast = downloadStartedToast,
-                    enableManualRedirect = manualFollowRedirects,
-                    hideAfterCopying = hideAfterCopying,
+                    profiles = if (bottomSheetProfileSwitcher) viewModel.profileSwitcher.getProfiles() else null,
+                    enableManualRedirect = followRedirectsMode == FollowRedirectsMode.Manual,
                     bottomSheetNativeLabel = bottomSheetNativeLabel,
                     gridLayout = gridLayout,
                     appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
-                    copyUrl = { label, url ->
-                        viewModel.clipboardManager.setText(label, url)
-                    },
-                    startDownload = { url, downloadable ->
-                        viewModel.startDownload(resources, url, downloadable)
-                    },
                     isPrivateBrowser = ::isPrivateBrowser,
-                    showToast = { textId, duration, _ ->
-                        coroutineScope.launch { showToast(textId = textId, duration = duration) }
-                    },
                     controller = controller,
                     showPackage = alwaysShowPackageName,
                     previewUrl = previewUrl,
@@ -280,6 +258,75 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
     }
 
+    private fun handleInteraction(
+        interaction: BottomSheetInteraction,
+        resolveResult: IntentResolveResult,
+        hideSheet: () -> Job
+    ) {
+        when (interaction) {
+            is AppInteraction -> {
+                lifecycleScope.launch {
+                    if (interaction.info == null) {
+                        showToast(R.string.something_went_wrong, Toast.LENGTH_SHORT)
+                    } else {
+                        (resolveResult as? IntentResolveResult.Default)
+                            ?.let { viewModel.handle(this@BottomSheetActivity, it, interaction) }
+                            ?.let { handleLaunch(it) }
+                    }
+                }
+            }
+
+            is SwitchProfileInteraction -> {
+                hideAndFinish(hideSheet)
+                viewModel.profileSwitcher.switchTo(interaction.crossProfile, interaction.url, this)
+            }
+
+            is ManualRedirectInteraction -> {
+                val intent = StandardIntents.createSelfIntent(
+                    uri = interaction.uri.toUri(),
+                    extras = bundleOf(ImprovedIntentResolver.IntentKeyResolveRedirects to true)
+                )
+                onNewIntent(intent)
+            }
+
+            is IgnoreLibRedirectInteraction -> {
+                val intent = StandardIntents.createSelfIntent(
+                    uri = interaction.result.originalUri,
+                    extras = bundleOf(LibRedirectDefault.IgnoreIntentKey to true)
+                )
+                onNewIntent(intent)
+            }
+
+            is CopyUrlInteraction -> {
+                val clipboardLabel = resources.getString(R.string.generic__text_url)
+                viewModel.clipboardManager.setText(clipboardLabel, interaction.url)
+                if (viewModel.urlCopiedToast()) {
+                    lifecycleScope.launch { showToast(R.string.url_copied, Toast.LENGTH_SHORT) }
+                }
+
+                if (viewModel.hideAfterCopying()) {
+                    hideAndFinish(hideSheet)
+                }
+            }
+
+            is StartDownloadInteraction -> {
+                viewModel.startDownload(resources, interaction.url, interaction.downloadable)
+                if (viewModel.downloadStartedToast()) {
+                    lifecycleScope.launch { showToast(R.string.download_started, Toast.LENGTH_SHORT) }
+                }
+
+                if (viewModel.hideAfterCopying()) {
+                    hideAndFinish(hideSheet)
+                }
+            }
+
+            is ShareUrlInteraction -> {
+                hideAndFinish(hideSheet)
+                startActivity(Intent.createChooser(Intents.createShareUriIntent(interaction.url), null))
+            }
+        }
+    }
+
     private suspend fun showToast(textId: Int, duration: Int = Toast.LENGTH_SHORT) {
         val text = getString(textId)
         withContext(Dispatchers.Main) {
@@ -304,6 +351,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     false
                 )
             }
+
             is IntentResolveResult.IntentResult -> LaunchRawIntent(result.intent)
             else -> null
         }

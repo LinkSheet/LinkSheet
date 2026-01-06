@@ -1,4 +1,4 @@
-package fe.buildsrc
+package fe.buildsrc.clearurls
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.provider.Property
@@ -11,7 +11,7 @@ import java.net.http.HttpResponse
 
 abstract class UpdateRulesTask : DefaultTask() {
     companion object {
-        const val RULES_JSON_URL = "https://raw.githubusercontent.com/ClearURLs/Rules/master/data.min.json"
+        private const val RULES_JSON_URL = "https://raw.githubusercontent.com/ClearURLs/Rules/master/data.min.json"
     }
 
     @get:Input

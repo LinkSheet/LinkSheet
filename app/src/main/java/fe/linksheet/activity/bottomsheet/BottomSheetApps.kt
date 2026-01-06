@@ -1,9 +1,7 @@
 package fe.linksheet.activity.bottomsheet
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,9 +25,6 @@ import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.profile.core.CrossProfile
-import app.linksheet.feature.profile.core.ProfileStatus
-import app.linksheet.feature.profile.core.ProfileSwitcher
-import app.linksheet.feature.profile.core.UserProfileInfo
 import app.linksheet.testing.asPreferredApp
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toActivityAppInfo
@@ -46,7 +41,6 @@ import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.util.AppSorter
-import kotlinx.coroutines.CompletionHandler
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
@@ -57,24 +51,17 @@ fun BottomSheetApps(
     result: IntentResolveResult.Default,
     imageLoader: ImageLoader?,
     enableIgnoreLibRedirectButton: Boolean,
-    enableSwitchProfile: Boolean,
-    profileSwitcher: ProfileSwitcher,
-    enableUrlCopiedToast: Boolean,
-    enableDownloadStartedToast: Boolean,
     enableManualRedirect: Boolean,
-    hideAfterCopying: Boolean,
     bottomSheetNativeLabel: Boolean,
     gridLayout: Boolean,
     appListSelectedIdx: Int,
     isPrivateBrowser: suspend (Boolean, ActivityAppInfo) -> Browser?,
-    showToast: (Int, Int, Boolean) -> Unit,
-    copyUrl: (String, String) -> Unit,
-    startDownload: (String, DownloadCheckResult.Downloadable) -> Unit,
     controller: BottomSheetStateController,
     showPackage: Boolean,
     previewUrl: Boolean,
     hideBottomSheetChoiceButtons: Boolean,
     urlCardDoubleTap: Boolean,
+    profiles: List<CrossProfile>?,
 ) {
     val hasUri = result.uri != null
     val hasResolvedApps = result.resolved.isNotEmpty()
@@ -95,19 +82,12 @@ fun BottomSheetApps(
             ) {
                 UrlBarWrapper(
                     imageLoader = imageLoader,
-                    profileSwitcher = profileSwitcher,
                     result = result,
                     enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
-                    enableSwitchProfile = enableSwitchProfile,
-                    enableUrlCopiedToast = enableUrlCopiedToast,
-                    enableDownloadStartedToast = enableDownloadStartedToast,
+                    profiles = profiles,
                     enableUrlCardDoubleTap = urlCardDoubleTap,
                     enableManualRedirect = enableManualRedirect,
-                    hideAfterCopying = hideAfterCopying,
                     controller = controller,
-                    showToast = { id -> showToast(id, Toast.LENGTH_SHORT, false) },
-                    copyUrl = copyUrl,
-                    startDownload = startDownload,
                 )
 
                 HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(0.25f))
@@ -173,34 +153,17 @@ fun BottomSheetApps(
                 hideChoiceButtons = hideBottomSheetChoiceButtons,
                 showPackage = showPackage,
                 isPrivateBrowser = isPrivateBrowser,
-                showToast = showToast,
                 showNativeLabel = bottomSheetNativeLabel,
-                dispatch = controller.dispatch
+                dispatch = controller.dispatch,
             )
         }
     }
 }
 
-private object ProfileSwitcherStub : ProfileSwitcher {
-    override fun checkIsManagedProfile(): Boolean = false
-    override fun getStatus(): ProfileStatus = ProfileStatus.Unsupported
-    override fun getUserProfileInfo(status: ProfileStatus): UserProfileInfo? = null
-    override fun launchCrossProfileInteractSettings(activity: Activity): Boolean = false
-    override fun canQuickToggle(): Boolean = false
-    override fun switchTo(profile: CrossProfile, url: String, activity: Activity) {}
-    override fun startOther(profile: CrossProfile, activity: Activity) {}
-    override fun getProfiles(status: ProfileStatus): List<CrossProfile>? = null
-}
-
 object BottomSheetStateControllerStub : BottomSheetStateController {
     override val editorLauncher: ActivityResultLauncher<Intent>
         get() = TODO("Not yet implemented")
-    override val onNewIntent: (Intent) -> Unit = {}
-    override fun hideAndFinish() {}
-    override fun hide(onCompletion: CompletionHandler?) {}
-    override fun startActivity(intent: Intent) {}
-    override fun finish() {}
-    override val dispatch: (Interaction) -> Unit = {}
+    override val dispatch: (BottomSheetInteraction) -> Unit = {}
 }
 
 private class PreviewStateProvider() : PreviewParameterProvider<PreviewState> {
@@ -350,26 +313,19 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
     PreviewContainer {
         BottomSheetApps(
             result = result,
+            imageLoader = null,
             enableIgnoreLibRedirectButton = false,
-            enableSwitchProfile = false,
-            profileSwitcher = ProfileSwitcherStub,
-            enableUrlCopiedToast = false,
-            enableDownloadStartedToast = false,
             enableManualRedirect = false,
-            hideAfterCopying = false,
             bottomSheetNativeLabel = false,
             gridLayout = gridLayout,
             appListSelectedIdx = -1,
             isPrivateBrowser = { hasUri, info -> null },
-            showToast = { textId, duration, uiThread -> },
-            copyUrl = { label, url -> },
-            startDownload = { uri, downloadable -> },
             controller = BottomSheetStateControllerStub,
             showPackage = false,
             previewUrl = true,
             hideBottomSheetChoiceButtons = state.hideBottomSheetChoiceButtons,
             urlCardDoubleTap = false,
-            imageLoader = null
+            profiles = null
         )
     }
 }

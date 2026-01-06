@@ -26,8 +26,8 @@ android {
 
 dependencies {
     implementation(project(":api"))
-    implementation(project(":util"))
     implementation(project(":compose"))
+    implementation(project(":util"))
 
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)
@@ -48,6 +48,7 @@ dependencies {
     implementation(AndroidX.compose.material.icons.core)
     implementation(AndroidX.compose.material.icons.extended)
 
+    testImplementation(Testing.robolectric)
     testImplementation(AndroidX.test.ext.junit.ktx)
     testImplementation(project(":test-core"))
     testImplementation(Grrfe.std.test)

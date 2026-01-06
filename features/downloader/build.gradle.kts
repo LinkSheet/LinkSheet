@@ -35,6 +35,7 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":util"))
     implementation(project(":api"))
+    implementation(project(":integration-mime-types"))
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.uri)

@@ -19,6 +19,7 @@ import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.profile.core.ProfileSwitcher
 import coil3.ImageLoader
+import fe.composekit.preference.asFunction
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.activity.bottomsheet.*
@@ -69,9 +70,9 @@ class BottomSheetViewModel(
     val downloadManager = context.getSystemServiceOrThrow<DownloadManager>()
 
     val themeAmoled = preferenceRepository.asViewModelState(AppPreferences.themeV2.amoled)
-    val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideAfterCopying)
-    val urlCopiedToast = preferenceRepository.asViewModelState(AppPreferences.notifications.urlCopiedToast)
-    val downloadStartedToast = preferenceRepository.asViewModelState(AppPreferences.notifications.downloadStartedToast)
+    val hideAfterCopying = preferenceRepository.asFunction(AppPreferences.bottomSheet.hideAfterCopying)
+    val urlCopiedToast = preferenceRepository.asFunction(AppPreferences.notifications.urlCopiedToast)
+    val downloadStartedToast = preferenceRepository.asFunction(AppPreferences.notifications.downloadStartedToast)
     val gridLayout = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.gridLayout)
     val resolveViaToast = preferenceRepository.asViewModelState(AppPreferences.notifications.resolveViaToast)
     val resolveViaFailedToast = preferenceRepository.asViewModelState(AppPreferences.notifications.resolveViaFailedToast)
@@ -89,7 +90,7 @@ class BottomSheetViewModel(
     val expandFully = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.expandFully)
     val doubleTapUrl = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.doubleTapUrl)
     val interceptAccidentalTaps = experimentRepository.asViewModelState(Experiments.interceptAccidentalTaps)
-    val manualFollowRedirects = experimentRepository.asViewModelState(Experiments.manualFollowRedirects)
+    val followRedirectsMode = preferenceRepository.asViewModelState(AppPreferences.followRedirects.mode)
     val noBottomSheetStateSave = experimentRepository.asViewModelState(Experiments.noBottomSheetStateSave)
     val appListSelectedIdx = mutableIntStateOf(-1)
     val events = intentResolver.events
@@ -102,7 +103,10 @@ class BottomSheetViewModel(
         intentResolver.warmup()
     }
 
-    fun resolveAsync(intent: SafeIntent, uri: Uri?) = viewModelScope.launch(Dispatchers.IO) {
+    fun resolveAsync(intent: SafeIntent, uri: Uri?, reset: Boolean = true) = viewModelScope.launch(Dispatchers.IO) {
+        if (reset) {
+            _resolveResultFlow.emit(IntentResolveResult.Pending)
+        }
         val resolveResult = intentResolver.resolve(intent, uri)
         _resolveResultFlow.emit(resolveResult)
     }
@@ -155,15 +159,12 @@ class BottomSheetViewModel(
     }
 
     fun startDownload(resources: Resources, uri: String, downloadable: DownloadCheckResult.Downloadable) {
-        val path = "${resources.getString(R.string.app_name)}${File.separator}${downloadable.toFileName()}"
+        val path = "${resources.getString(R.string.app_name)}${File.separator}${downloadable.fileName}"
 
         val request = DownloadManager.Request(uri.toUri())
-            .setTitle(resources.getString(R.string.linksheet_download))
+//            .setTitle(resources.getString(R.string.linksheet_download))
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setDestinationInExternalPublicDir(
-                Environment.DIRECTORY_DOWNLOADS,
-                path
-            )
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, path)
 
         downloadManager.enqueue(request)
     }
@@ -261,8 +262,9 @@ class BottomSheetViewModel(
     suspend fun handle(
         activity: BottomSheetActivity,
         result: IntentResolveResult.Default,
-        interaction: Interaction,
+        interaction: AppInteraction,
     ): LaunchIntent? {
+        val info = interaction.info ?: return null
         if (interaction is AppClickInteraction) {
             return handleClick(
                 activity = activity,
@@ -271,7 +273,7 @@ class BottomSheetViewModel(
 //                    isExpanded = sheetState.isExpanded(),
                 requestExpand = { },
                 result = result.intent,
-                info = interaction.info,
+                info = info,
                 type = interaction.type,
                 modifier = interaction.modifier
             )
@@ -280,7 +282,7 @@ class BottomSheetViewModel(
         if (interaction is ChoiceButtonInteraction || interaction is PreferredAppChoiceButtonInteraction) {
             val modifier = interaction.modifier
             return makeOpenAppIntent(
-                info = interaction.info,
+                info = info,
                 intent = result.intent,
                 referrer = activity.referrer,
                 always = modifier is ClickModifier.Always,

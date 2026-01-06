@@ -1,4 +1,4 @@
-package fe.buildsrc
+package fe.buildsrc.clearurls
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.provider.Property

@@ -567,4 +567,7 @@
     <string name="settings_bottom_sheet__subtitle_expand_fully">Разгъване на долното меню до пълната му височина</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">Автоматично отваряне при един мрежов четец</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Ако има само едно приложение и то е мрежов четец, да бъде отворено</string>
+    <string name="generic__text_mode">Режим</string>
+    <string name="settings_follow_redirects__title_mode_auto">Автоматично</string>
+    <string name="settings_follow_redirects__title_mode_manual">Ръчно</string>
 </resources>

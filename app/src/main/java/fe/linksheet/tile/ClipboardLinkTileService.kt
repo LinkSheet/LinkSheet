@@ -11,6 +11,11 @@ import fe.linksheet.activity.ClipboardProxyActivity
 import android.app.PendingIntent
 
 @RequiresApi(Build.VERSION_CODES.N)
+/**
+ * Known issue: TileService might cause memory leaks on some Android versions.
+ * See: https://github.com/square/leakcanary/issues/2207
+ * After extensive exploration, this appears to be a system-level issue that cannot be resolved here.
+ */
 class ClipboardLinkTileService : TileService() {
 
     override fun onClick() {

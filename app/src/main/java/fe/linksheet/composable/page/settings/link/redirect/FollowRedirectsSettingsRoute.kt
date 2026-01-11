@@ -216,11 +216,6 @@ private fun <T> ConnectedToggleButtonFlowRow(
                 },
             ) {
                 itemContent(item)
-                //                        Icon(
-                //                            imageVector = if (type == item) TypeSelector.checkedIcons[index] else TypeSelector.unCheckedIcons[index],
-                //                            contentDescription = null,
-                //                        )
-                //                        Spacer(modifier = Modifier.size(ToggleButtonDefaults.IconSpacing))
             }
         }
     }

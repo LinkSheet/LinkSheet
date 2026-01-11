@@ -38,11 +38,37 @@ sealed class LocalTask<T : ResolverEntity<T>>(val request: LocalResolveRequest, 
 
 class UrlResolver(
     private val redirectorTask: LocalTask.Redirector,
+    private val aggressiveRedirectorTask: LocalTask.Redirector,
     private val amp2HtmlTask: LocalTask.Amp2Html,
     private val remoteResolver: RemoteResolver,
     private val cacheRepository: CacheRepository,
 ) : KoinComponent {
     private val logger = Logger("UrlResolver")
+    suspend fun resolveRedirect(
+        uri: Uri,
+        localCache: Boolean,
+        resolvePredicate: ResolvePredicate? = null,
+        aggressive: Boolean,
+        externalService: Boolean,
+        connectTimeout: Int,
+        canAccessInternet: Boolean,
+        allowDarknets: Boolean,
+        allowLocalNetwork: Boolean,
+    ): Result<ResolveResultType>? {
+        val task = if(aggressive) aggressiveRedirectorTask else redirectorTask
+        return resolve(
+            task,
+            uri,
+            localCache,
+            resolvePredicate,
+            externalService,
+            connectTimeout,
+            canAccessInternet,
+            allowDarknets,
+            allowLocalNetwork,
+            ResolveType.FollowRedirects
+        )
+    }
 
     suspend fun resolve(
         uri: Uri,

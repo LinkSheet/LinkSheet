@@ -132,6 +132,7 @@ data class FollowRedirectsSettings(
     val followRedirectsExternalService: () -> Boolean,
     val followRedirectsAllowDarknets: () -> Boolean,
     val followRedirectsAllowLocalNetwork: () -> Boolean,
+    val followRedirectsAggressive: () -> Boolean
 )
 
 data class Amp2HtmlSettings(
@@ -205,6 +206,7 @@ fun createSettings(
             followRedirectsExternalService = prefRepo.asFunction(AppPreferences.followRedirects.externalService),
             followRedirectsAllowDarknets = prefRepo.asFunction(AppPreferences.followRedirects.allowDarknets),
             followRedirectsAllowLocalNetwork = prefRepo.asFunction(AppPreferences.followRedirects.allowLocalNetwork),
+            followRedirectsAggressive  = prefRepo.asFunction(AppPreferences.followRedirects.aggressive)
         ),
         downloaderSettings = DownloaderSettings(
             enableDownloader = prefRepo.asFunction(AppPreferences.downloader.enable),

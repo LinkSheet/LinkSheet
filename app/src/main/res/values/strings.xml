@@ -569,4 +569,6 @@
     <string name="generic__text_mode">Mode</string>
     <string name="settings_follow_redirects__title_mode_auto">Auto</string>
     <string name="settings_follow_redirects__title_mode_manual">Manual</string>
+    <string name="settings_follow_redirects__title_aggressive">Aggressive mode</string>
+    <string name="settings_follow_redirects__subtitle_aggressive">Fetch full page body for better compatibility with sites which don\'t use HTTP redirects</string>
 </resources>

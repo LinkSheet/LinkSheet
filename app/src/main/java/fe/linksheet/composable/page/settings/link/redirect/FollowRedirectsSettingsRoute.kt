@@ -88,7 +88,7 @@ fun FollowRedirectsSettingsRoute(
 
         divider(id = R.string.options)
 
-        group(base = 6, LinkSheetAppConfig.isPro()) {
+        group(base = 7, LinkSheetAppConfig.isPro()) {
             item(key = R.string.follow_redirects_local_cache) { padding, shape ->
                 PreferenceSwitchListItem(
                     enabled = contentSet,
@@ -111,6 +111,17 @@ fun FollowRedirectsSettingsRoute(
 //                    onContentClick = { followRedirectsKnownTrackers.open(Unit) },
                     headlineContent = textContent(R.string.follow_only_known_trackers),
                     supportingContent = annotatedStringResource(R.string.follow_only_known_trackers_explainer),
+                )
+            }
+
+            item(key = R.string.settings_follow_redirects__title_aggressive) { padding, shape ->
+                PreferenceSwitchListItem(
+                    enabled = contentSet,
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.followRedirectsAggressive,
+                    headlineContent = textContent(R.string.settings_follow_redirects__title_aggressive),
+                    supportingContent = textContent(id = R.string.settings_follow_redirects__subtitle_aggressive),
                 )
             }
 

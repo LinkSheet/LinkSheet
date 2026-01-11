@@ -198,7 +198,8 @@ class ImprovedIntentResolver(
                     followOnlyKnownTrackers = followRedirectsSettings.followOnlyKnownTrackers(),
                     followRedirectsLocalCache = followRedirectsSettings.followRedirectsLocalCache(),
                     followRedirectsAllowDarknets = followRedirectsSettings.followRedirectsAllowDarknets(),
-                    followRedirectsAllowLocalNetwork = followRedirectsSettings.followRedirectsAllowLocalNetwork()
+                    followRedirectsAllowLocalNetwork = followRedirectsSettings.followRedirectsAllowLocalNetwork(),
+                    followRedirectsAggressive = followRedirectsSettings.followRedirectsAggressive()
                 )
             }
             if (redirectsUri != null) {
@@ -565,7 +566,8 @@ class ImprovedIntentResolver(
         followOnlyKnownTrackers: Boolean,
         followRedirectsLocalCache: Boolean,
         followRedirectsAllowDarknets: Boolean,
-        followRedirectsAllowLocalNetwork: Boolean
+        followRedirectsAllowLocalNetwork: Boolean,
+        followRedirectsAggressive: Boolean
     ): Uri? = withContext(dispatcher) {
         logger.debug("Executing runRedirectResolver on ${Thread.currentThread().name}")
         currentCoroutineContext().ensureActive()
@@ -576,16 +578,16 @@ class ImprovedIntentResolver(
                 (!followRedirectsExternalService && !followOnlyKnownTrackers) || FastForward.isTracker(uri.toString())
             }
 
-            resolver.resolve(
+            resolver.resolveRedirect(
                 uriToResolve,
                 followRedirectsLocalCache,
                 resolvePredicate,
+                followRedirectsAggressive,
                 followRedirectsExternalService,
                 requestTimeout,
                 canAccessInternet,
                 followRedirectsAllowDarknets,
                 followRedirectsAllowLocalNetwork,
-                ResolveType.FollowRedirects
             )
         }
     }

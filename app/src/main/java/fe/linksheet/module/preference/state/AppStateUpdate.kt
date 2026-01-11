@@ -44,6 +44,7 @@ class NewDefaults20251215(private val preferenceRepository: AppPreferenceReposit
     private val expandFully = "experiment_impr_btm_sheet_expand_fully"
     private val autoLaunchSingleBrowser = "experiment_improved_bottom_sheet_auto_launch_single_browser"
     private val manualFollowRedirects = "experiment_manual_follow_redirects"
+    private val aggressiveFollowRedirects = "experiment_aggressive_follow_redirects"
 
     override fun execute(experimentsRepository: ExperimentRepository) {
         migrate(experimentsRepository, preferenceRepository, hideReferrerFromSheet, AppPreferences.bottomSheet.hideReferringApp)
@@ -56,6 +57,7 @@ class NewDefaults20251215(private val preferenceRepository: AppPreferenceReposit
                 preferenceRepository.put(AppPreferences.followRedirects.mode, FollowRedirectsMode.Manual)
             }
         }
+        migrate(experimentsRepository, preferenceRepository, aggressiveFollowRedirects, AppPreferences.followRedirects.aggressive)
     }
 }
 

@@ -4,16 +4,11 @@ import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
 import android.nfc.NfcAdapter
+import androidx.core.net.toUri
 import fe.linksheet.web.UriUtil
-import fe.std.result.Failure
-import fe.std.result.IResult
-import fe.std.result.isSuccess
-import fe.std.result.mapFailure
-import fe.std.result.success
-import fe.std.result.tryCatch
+import fe.std.result.*
 import mozilla.components.support.utils.SafeIntent
 import mozilla.components.support.utils.WebURLFinder
-import androidx.core.net.toUri
 
 
 open class IntentParser internal constructor(
@@ -41,7 +36,7 @@ open class IntentParser internal constructor(
             Intent.ACTION_SEND -> parseSendAction(intent)
             Intent.ACTION_VIEW, NfcAdapter.ACTION_NDEF_DISCOVERED -> parseViewAction(intent)
             Intent.ACTION_PROCESS_TEXT -> parseProcessTextAction(intent)
-            else -> Failure(UnsupportedIntentActionException(action))
+            else -> +UnsupportedIntentActionException(action)
         }
     }
 
@@ -53,7 +48,7 @@ open class IntentParser internal constructor(
             if (uri.isSuccess()) return uri
         }
 
-        return NoUriFoundFailure
+        return +NoUriFoundException()
     }
 
     private fun parseProcessTextAction(intent: SafeIntent): IResult<Uri> {
@@ -62,7 +57,7 @@ open class IntentParser internal constructor(
             return parseText(processText.toString())
         }
 
-        return Failure(NoSuchExtraException(Intent.EXTRA_PROCESS_TEXT))
+        return +NoSuchExtraException(Intent.EXTRA_PROCESS_TEXT)
     }
 
     private fun parseSendAction(
@@ -99,12 +94,11 @@ open class IntentParser internal constructor(
             return parseText(extras[Intent.EXTRA_TEXT].toString())
         }
 
-        return NoUriFoundFailure
+        return +NoUriFoundException()
     }
 
     internal fun parseText(text: String): IResult<Uri> {
-        var url = WebURLFinder(text).bestWebURL()
-        if (url == null) return Failure(NoUriFoundRecoverableException(text))
+        var url = WebURLFinder(text).bestWebURL() ?: return +NoUriFoundRecoverableException(text)
 
         if (!url.contains(":")) {
             // This URL does not have a scheme, default to http://
@@ -116,7 +110,7 @@ open class IntentParser internal constructor(
 
     private fun tryParseWebUriStrict(text: CharSequence, allowInsecure: Boolean = true): IResult<Uri> {
         val str = text.toString()
-        if (!UriUtil.isWebStrict(str, allowInsecure)) return Failure(NoUriFoundRecoverableException(str))
+        if (!UriUtil.isWebStrict(str, allowInsecure)) return +NoUriFoundRecoverableException(str)
 
         return tryCatch { str.toUri() }.mapFailure {
             NoUriFoundRecoverableException(str, it)
@@ -124,8 +118,7 @@ open class IntentParser internal constructor(
     }
 
     private fun readExtra(intent: SafeIntent, map: MutableMap<String, CharSequence>?, extra: String): IResult<Uri>? {
-        val value = intent.getCharSequenceExtra(extra)
-        if (value == null) return Failure(NoSuchExtraException(extra))
+        val value = intent.getCharSequenceExtra(extra) ?: return +NoSuchExtraException(extra)
 
         val result = tryParseWebUriStrict(value)
         if (result.isSuccess()) return result
@@ -135,22 +128,11 @@ open class IntentParser internal constructor(
     }
 }
 
-private val NoUriFoundFailure = Failure<Uri>(NoUriFoundException)
+sealed class UriException(cause: Throwable? = null) : Exception(cause)
 
-sealed class UriException : Exception()
+class NoUriFoundException : UriException()
+class UriParseException : UriException()
 
-data object NoUriFoundException : UriException() {
-    private fun readResolve(): Any = NoUriFoundException
-}
-
-data object UriParseException : UriException() {
-    private fun readResolve(): Any = UriParseException
-}
-
-data class NoUriFoundRecoverableException(val recoverable: String, val wrappedEx: Throwable? = null) : UriException() {
-
-}
-
+data class NoUriFoundRecoverableException(val recoverable: String, val wrappedEx: Throwable? = null) : UriException(wrappedEx)
 data class NoSuchExtraException(val name: String) : UriException()
-
 data class UnsupportedIntentActionException(val action: String?) : UriException()

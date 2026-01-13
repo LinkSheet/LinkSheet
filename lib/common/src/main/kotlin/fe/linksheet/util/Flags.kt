@@ -145,3 +145,27 @@ value class IntentFlags(override val value: Long) : LongFlags {
         override val new: (Long) -> IntentFlags = { IntentFlags(it) }
     }
 }
+
+@JvmInline
+value class ComponentInfoFlags(override val value: Long) : LongFlags {
+    constructor(value: Int) : this(value.toLong())
+
+    companion object : LongFlagCompanion<ComponentInfoFlags> {
+        val EMPTY = ComponentInfoFlags(0)
+
+        val GET_META_DATA = ComponentInfoFlags(PackageManager.GET_META_DATA)
+        val GET_SHARED_LIBRARY_FILES = ComponentInfoFlags(PackageManager.GET_SHARED_LIBRARY_FILES)
+        val MATCH_ALL = ComponentInfoFlags(PackageManager.MATCH_ALL)
+        val MATCH_DEFAULT_ONLY = ComponentInfoFlags(PackageManager.MATCH_DEFAULT_ONLY)
+        val MATCH_DISABLED_COMPONENTS = ComponentInfoFlags(PackageManager.MATCH_DISABLED_COMPONENTS)
+        val MATCH_DISABLED_UNTIL_USED_COMPONENTS = ComponentInfoFlags(PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS)
+        @RequiresApi(Build.VERSION_CODES.Q)
+        val MATCH_DIRECT_BOOT_AUTO = ComponentInfoFlags(PackageManager.MATCH_DIRECT_BOOT_AUTO)
+        val MATCH_DIRECT_BOOT_AWARE = ComponentInfoFlags(PackageManager.MATCH_DIRECT_BOOT_AWARE)
+        val MATCH_DIRECT_BOOT_UNAWARE = ComponentInfoFlags(PackageManager.MATCH_DIRECT_BOOT_UNAWARE)
+        val MATCH_SYSTEM_ONLY = ComponentInfoFlags(PackageManager.MATCH_SYSTEM_ONLY)
+        val MATCH_UNINSTALLED_PACKAGES = ComponentInfoFlags(PackageManager.MATCH_UNINSTALLED_PACKAGES)
+
+        override val new: (Long) -> ComponentInfoFlags = { ComponentInfoFlags(it) }
+    }
+}

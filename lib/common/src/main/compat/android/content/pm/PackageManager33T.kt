@@ -1,8 +1,10 @@
 package android.content.pm
 
+import android.content.ComponentName
 import android.content.Intent
 import fe.composekit.core.AndroidVersion
 import fe.linksheet.util.ApplicationInfoFlags
+import fe.linksheet.util.ComponentInfoFlags
 import fe.linksheet.util.ResolveInfoFlags
 
 fun PackageManager.resolveActivityCompat(
@@ -57,5 +59,23 @@ fun PackageManager.getApplicationInfoCompat(
             packageName, PackageManager.ApplicationInfoFlags.of(flags.value)
         )
         else -> getApplicationInfo(packageName, flags.value.toInt())
+    }
+}
+fun PackageManager.getActivityInfoCompatOrNull(
+    componentName: ComponentName,
+    flags: ComponentInfoFlags = ComponentInfoFlags.EMPTY
+): ActivityInfo? {
+    return runCatching { getActivityInfoCompat(componentName, flags) }.getOrNull()
+}
+
+fun PackageManager.getActivityInfoCompat(
+    componentName: ComponentName,
+    flags: ComponentInfoFlags = ComponentInfoFlags.EMPTY
+): ActivityInfo {
+    return when {
+        AndroidVersion.isAtLeastApi33T() -> getActivityInfo(
+            componentName, PackageManager.ComponentInfoFlags.of(flags.value)
+        )
+        else -> getActivityInfo(componentName, flags.value.toInt())
     }
 }

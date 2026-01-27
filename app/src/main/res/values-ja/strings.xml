@@ -492,7 +492,6 @@
     <string name="app_host_dialog__title_hosts">デフォルトのホスト</string>
     <string name="generic__button_text_share">共有</string>
     <string name="resolve_event__idle">アイドル</string>
-
     <string name="settings_language__dialog_title">アプリの言語</string>
     <string name="settings_language__text_system_language">システムの言語</string>
     <string name="settings_language__text_system_language_with_language">%s （システムの言語）</string>
@@ -536,4 +535,25 @@
     <string name="settings_scenario__text_data_type">データのタイプ</string>
     <string name="settings_verified_link_handlers__text_vlh_type_filter_all"><![CDATA[すべてのアプリ]]></string>
     <string name="settings_links_follow_redirects__text_local_network">非公開ホストでリダイレクトに従うことを許可する</string>
+    <string name="browser_mode_divider">モード</string>
+    <string name="settings__hint_search">検索</string>
+    <string name="settings_apps_browsers_mode__subtitle_selected">選択済み</string>
+    <string name="settings_apps_browsers_mode__text_none">なし</string>
+    <string name="generic__label_permission_interconnect">LinkSheet を設定</string>
+    <string name="generic__description_permission_interconnect">LinkSheet を設定</string>
+    <string name="notification__channel_interconnect_name">相互接続</string>
+    <string name="notification__channel_interconnect_description">相互接続サービスがアクティブな場合のフォアグラウンド通知</string>
+    <string name="notification_interconnect_name">相互接続</string>
+    <string name="notification_interconnect_description">相互接続はアクティブです</string>
+    <string name="settings_bottom_sheet__title_hide_referring_app">参照アプリを非表示にする</string>
+    <string name="settings_bottom_sheet__subtitle_hide_referring_app">リンクを処理できる場合でも、参照 / ソースアプリを表示しません</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">URL をダブルタップ</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">URL をダブルタップして提案されたアプリを開きます</string>
+    <string name="settings_bottom_sheet__title_expand_fully">すべて展開</string>
+    <string name="settings_bottom_sheet__subtitle_expand_fully">ボトムシートを最大の高さまで自動的に展開します</string>
+    <string name="generic__text_mode">モード</string>
+    <string name="settings_follow_redirects__title_mode_auto">自動</string>
+    <string name="settings_follow_redirects__title_mode_manual">手動</string>
+    <string name="settings_browser_mode__title_auto_launch_single_browser">単一のブラウザを自動起動</string>
+    <string name="settings_browser_mode__subtitle_auto_launch_single_browser">ブラウザアプリが 1 つしか利用できない場合は、そのアプリを自動的に起動します</string>
 </resources>

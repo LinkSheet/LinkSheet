@@ -3,9 +3,7 @@ package android.content.pm
 import android.content.ComponentName
 import android.content.Intent
 import fe.composekit.core.AndroidVersion
-import fe.linksheet.util.ApplicationInfoFlags
-import fe.linksheet.util.ComponentInfoFlags
-import fe.linksheet.util.ResolveInfoFlags
+import fe.linksheet.util.*
 
 fun PackageManager.resolveActivityCompat(
     intent: Intent,
@@ -61,6 +59,7 @@ fun PackageManager.getApplicationInfoCompat(
         else -> getApplicationInfo(packageName, flags.value.toInt())
     }
 }
+
 fun PackageManager.getActivityInfoCompatOrNull(
     componentName: ComponentName,
     flags: ComponentInfoFlags = ComponentInfoFlags.EMPTY
@@ -78,4 +77,32 @@ fun PackageManager.getActivityInfoCompat(
         )
         else -> getActivityInfo(componentName, flags.value.toInt())
     }
+}
+
+fun PackageManager.getPackageInfoCompatOrNull(
+    packageName: String,
+    flags: PackageInfoFlags = PackageInfoFlags.EMPTY
+): PackageInfo? {
+    return runCatching { getPackageInfoCompat(packageName, flags) }.getOrNull()
+}
+
+fun PackageManager.getPackageInfoCompat(
+    packageName: String,
+    flags: PackageInfoFlags = PackageInfoFlags.EMPTY
+): PackageInfo {
+    return when {
+        AndroidVersion.isAtLeastApi33T() -> getPackageInfo(
+            packageName, PackageManager.PackageInfoFlags.of(flags.value)
+        )
+
+        else -> getPackageInfo(packageName, flags.value.toInt())
+    }
+}
+
+fun PackageManager.setComponentEnabledSettingCompat(
+    componentName: ComponentName,
+    newState: ComponentEnabledStateFlags = ComponentEnabledStateFlags.EMPTY,
+    flags: ComponentEnabledFlags = ComponentEnabledFlags.EMPTY,
+) {
+    setComponentEnabledSetting(componentName, newState.value.toInt(), flags.value.toInt())
 }

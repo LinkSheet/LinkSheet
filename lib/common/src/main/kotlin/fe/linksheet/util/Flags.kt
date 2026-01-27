@@ -14,9 +14,11 @@ interface LongFlags {
     operator fun contains(flag: Long): Boolean {
         return (value and flag) != 0L
     }
+
     operator fun contains(flag: Int): Boolean {
         return (value.toInt() and flag) != 0
     }
+
     fun Long.remove(): Long {
         return this.and(inv)
     }
@@ -112,6 +114,7 @@ value class ApplicationInfoFlags(override val value: Long) : LongFlags {
         val GET_DISABLED_UNTIL_USED_COMPONENTS = ApplicationInfoFlags(PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS)
         val GET_UNINSTALLED_PACKAGES = ApplicationInfoFlags(PackageManager.GET_UNINSTALLED_PACKAGES)
         val MATCH_HIDDEN_UNTIL_INSTALLED_COMPONENTS = ApplicationInfoFlags(0x20000000)
+        @RequiresApi(Build.VERSION_CODES.Q)
         val MATCH_APEX = ApplicationInfoFlags(PackageManager.MATCH_APEX)
         // 1L << 32
 //        val MATCH_ARCHIVED_PACKAGES = ApplicationInfoFlags(PackageManager.MATCH_ARCHIVED_PACKAGES)
@@ -159,6 +162,7 @@ value class ComponentInfoFlags(override val value: Long) : LongFlags {
         val MATCH_DEFAULT_ONLY = ComponentInfoFlags(PackageManager.MATCH_DEFAULT_ONLY)
         val MATCH_DISABLED_COMPONENTS = ComponentInfoFlags(PackageManager.MATCH_DISABLED_COMPONENTS)
         val MATCH_DISABLED_UNTIL_USED_COMPONENTS = ComponentInfoFlags(PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS)
+
         @RequiresApi(Build.VERSION_CODES.Q)
         val MATCH_DIRECT_BOOT_AUTO = ComponentInfoFlags(PackageManager.MATCH_DIRECT_BOOT_AUTO)
         val MATCH_DIRECT_BOOT_AWARE = ComponentInfoFlags(PackageManager.MATCH_DIRECT_BOOT_AWARE)
@@ -167,5 +171,78 @@ value class ComponentInfoFlags(override val value: Long) : LongFlags {
         val MATCH_UNINSTALLED_PACKAGES = ComponentInfoFlags(PackageManager.MATCH_UNINSTALLED_PACKAGES)
 
         override val new: (Long) -> ComponentInfoFlags = { ComponentInfoFlags(it) }
+    }
+}
+
+@JvmInline
+value class PackageInfoFlags(override val value: Long) : LongFlags {
+    constructor(value: Int) : this(value.toLong())
+
+    companion object : LongFlagCompanion<PackageInfoFlags> {
+        val EMPTY = PackageInfoFlags(0)
+
+        val GET_ACTIVITIES = PackageInfoFlags(PackageManager.GET_ACTIVITIES)
+        val GET_CONFIGURATIONS = PackageInfoFlags(PackageManager.GET_CONFIGURATIONS)
+        val GET_GIDS = PackageInfoFlags(PackageManager.GET_GIDS)
+        val GET_INSTRUMENTATION = PackageInfoFlags(PackageManager.GET_INSTRUMENTATION)
+        val GET_META_DATA = PackageInfoFlags(PackageManager.GET_META_DATA)
+        val GET_PERMISSIONS = PackageInfoFlags(PackageManager.GET_PERMISSIONS)
+        val GET_PROVIDERS = PackageInfoFlags(PackageManager.GET_PROVIDERS)
+        val GET_RECEIVERS = PackageInfoFlags(PackageManager.GET_RECEIVERS)
+        val GET_SERVICES = PackageInfoFlags(PackageManager.GET_SERVICES)
+        val GET_SHARED_LIBRARY_FILES = PackageInfoFlags(PackageManager.GET_SHARED_LIBRARY_FILES)
+        val GET_SIGNATURES = PackageInfoFlags(PackageManager.GET_SIGNATURES)
+        @RequiresApi(Build.VERSION_CODES.P)
+        val GET_SIGNING_CERTIFICATES = PackageInfoFlags(PackageManager.GET_SIGNING_CERTIFICATES)
+        val GET_URI_PERMISSION_PATTERNS = PackageInfoFlags(PackageManager.GET_URI_PERMISSION_PATTERNS)
+        val MATCH_UNINSTALLED_PACKAGES = PackageInfoFlags(PackageManager.MATCH_UNINSTALLED_PACKAGES)
+        val MATCH_DISABLED_COMPONENTS = PackageInfoFlags(PackageManager.MATCH_DISABLED_COMPONENTS)
+        val MATCH_DISABLED_UNTIL_USED_COMPONENTS = PackageInfoFlags(PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS)
+        val MATCH_SYSTEM_ONLY = PackageInfoFlags(PackageManager.MATCH_SYSTEM_ONLY)
+        @RequiresApi(Build.VERSION_CODES.Q)
+        val MATCH_APEX = PackageInfoFlags(PackageManager.MATCH_APEX)
+        @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+        val MATCH_ARCHIVED_PACKAGES = PackageInfoFlags(PackageManager.MATCH_ARCHIVED_PACKAGES)
+        val GET_DISABLED_COMPONENTS = PackageInfoFlags(PackageManager.GET_DISABLED_COMPONENTS)
+        val GET_DISABLED_UNTIL_USED_COMPONENTS = PackageInfoFlags(PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS)
+        val GET_UNINSTALLED_PACKAGES = PackageInfoFlags(PackageManager.GET_UNINSTALLED_PACKAGES)
+        val MATCH_DIRECT_BOOT_AWARE = PackageInfoFlags(PackageManager.MATCH_DIRECT_BOOT_AWARE)
+        val MATCH_DIRECT_BOOT_UNAWARE = PackageInfoFlags(PackageManager.MATCH_DIRECT_BOOT_UNAWARE)
+        @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+        val GET_ATTRIBUTIONS_LONG = PackageInfoFlags(PackageManager.GET_ATTRIBUTIONS_LONG)
+
+        override val new: (Long) -> PackageInfoFlags = { PackageInfoFlags(it) }
+    }
+}
+
+@JvmInline
+value class ComponentEnabledStateFlags(override val value: Long) : LongFlags {
+    constructor(value: Int) : this(value.toLong())
+
+    companion object : LongFlagCompanion<ComponentEnabledStateFlags> {
+        val EMPTY = ComponentEnabledStateFlags(0)
+
+        val COMPONENT_ENABLED_STATE_DEFAULT = ComponentEnabledStateFlags(PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
+        val COMPONENT_ENABLED_STATE_ENABLED = ComponentEnabledStateFlags(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+        val COMPONENT_ENABLED_STATE_DISABLED = ComponentEnabledStateFlags(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+        val COMPONENT_ENABLED_STATE_DISABLED_USER = ComponentEnabledStateFlags(PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
+        val COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED = ComponentEnabledStateFlags(PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED)
+
+        override val new: (Long) -> ComponentEnabledStateFlags = { ComponentEnabledStateFlags(it) }
+    }
+}
+
+@JvmInline
+value class ComponentEnabledFlags(override val value: Long) : LongFlags {
+    constructor(value: Int) : this(value.toLong())
+
+    companion object : LongFlagCompanion<ComponentEnabledFlags> {
+        val EMPTY = ComponentEnabledFlags(0)
+
+        val DONT_KILL_APP = ComponentEnabledFlags(PackageManager.DONT_KILL_APP)
+        @RequiresApi(Build.VERSION_CODES.R)
+        val SYNCHRONOUS = ComponentEnabledFlags(PackageManager.SYNCHRONOUS)
+
+        override val new: (Long) -> ComponentEnabledFlags = { ComponentEnabledFlags(it) }
     }
 }

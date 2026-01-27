@@ -20,9 +20,8 @@ import androidx.lifecycle.lifecycleScope
 import app.linksheet.compose.debug.LocalUiDebug
 import app.linksheet.compose.debugBorder
 import app.linksheet.compose.extension.collectOnIO
-import app.linksheet.feature.app.core.ActivityAppInfo
-import app.linksheet.feature.browser.core.Browser
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
+import app.linksheet.feature.profile.core.switchTo
 import fe.composekit.extension.setText
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
@@ -36,12 +35,12 @@ import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.android.showToast
 import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.util.LaunchIntent
-import fe.linksheet.module.resolver.util.LaunchRawIntent
+import fe.linksheet.module.resolver.util.LaunchOtherProfileIntent
+import fe.linksheet.module.resolver.util.Launchable
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.util.intent.Intents
 import fe.linksheet.util.intent.StandardIntents
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.mapNotNull
 import mozilla.components.support.base.log.logger.Logger
@@ -57,9 +56,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     private val logger = Logger("BottomSheetActivity")
     private val viewModel by viewModel<BottomSheetViewModel>()
 
-    private val initialIntent = MutableStateFlow<Intent?>(null)
-    private val latestNewIntent = MutableStateFlow<Intent?>(null)
-
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         Log.d(BottomSheetActivity::class.simpleName, "Received result for $result")
         // Apps may "refuse" to handle an intent and return back to LinkSheet instantly
@@ -67,7 +63,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         // (and subsequently being written to latestNewIntent) and RESULT_CANCELED
         // * Hermit also sends RESULT_CANCELED for some reason, but doesn't provide a new intent first, meaning we can
         // still differentiate between a successful and a non-successful launch using the condition below
-        if (result.resultCode == RESULT_OK || latestNewIntent.value == null) {
+        if (result.resultCode == RESULT_OK || viewModel.latestNewIntentFlow.value == null) {
             finish()
         } else {
             showToast(
@@ -79,7 +75,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     }
     private val launchHandler = LaunchHandler(launcher)
 
-    val editorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val editorLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode != RESULT_OK || result.data == null) return@registerForActivityResult
 
         val intent = result.data
@@ -90,7 +86,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         onNewIntent(intent!!)
     }
 
-    private val intentFlow = MutableStateFlow(initialIntent.value)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,7 +93,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         lifecycleScope.launch {
             viewModel.resolveResultFlow
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .mapNotNull(::maybeHandleResult)
+                .mapNotNull(viewModel::maybeHandleResult)
                 .collectLatest(::handleLaunch)
         }
 
@@ -119,7 +114,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val interaction by viewModel.interactions.collectOnIO()
 
         val resolveResult by viewModel.resolveResultFlow.collectAsStateWithLifecycle()
-        val currentIntent by intentFlow.collectAsStateWithLifecycle()
+        val currentIntent by viewModel.intentFlow.collectAsStateWithLifecycle()
 
         val coroutineScope = rememberCoroutineScope()
         val sheetState = rememberM3FixModalBottomSheetState()
@@ -230,7 +225,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     bottomSheetNativeLabel = bottomSheetNativeLabel,
                     gridLayout = gridLayout,
                     appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
-                    isPrivateBrowser = ::isPrivateBrowser,
+                    isPrivateBrowser = viewModel::isPrivateBrowser,
                     controller = controller,
                     showPackage = alwaysShowPackageName,
                     previewUrl = previewUrl,
@@ -250,6 +245,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     }
                 )
             }
+
 
             is IntentResolveResult.ResolveUrlFailed, is IntentResolveResult.UrlModificationFailed -> {}
             is IntentResolveResult.WebSearch -> {}
@@ -278,7 +274,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
             is SwitchProfileInteraction -> {
                 hideAndFinish(hideSheet)
-                viewModel.profileSwitcher.switchTo(interaction.crossProfile, interaction.url, this)
+                viewModel.profileSwitcher.switchTo<BottomSheetActivity>(interaction.crossProfile, interaction.url, this)
             }
 
             is ManualRedirectInteraction -> {
@@ -334,43 +330,28 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
     }
 
-    private suspend fun isPrivateBrowser(hasUri: Boolean, info: ActivityAppInfo): Browser? {
-        if (!viewModel.enableRequestPrivateBrowsingButton.value || !hasUri) return null
-        return viewModel.isAllowedKnownBrowser(info.componentName, privateOnly = true)
-    }
-
-    private suspend fun maybeHandleResult(result: IntentResolveResult?): LaunchIntent? {
-        return when (result) {
-            is IntentResolveResult.Default if result.hasAutoLaunchApp && result.app != null -> {
-                viewModel.makeOpenAppIntent(
-                    result.app,
-                    result.intent,
-                    referrer,
-                    result.isRegularPreferredApp,
-                    null,
-                    false
-                )
+    private suspend fun handleLaunch(intent: Launchable) {
+        when (intent) {
+            is LaunchOtherProfileIntent -> {
+                finish()
+                viewModel.profileSwitcher.switchTo<BottomSheetActivity>(intent.profile, intent.url, this)
             }
+            is LaunchIntent -> {
+                val result = launchHandler.start(intent.intent)
+                if (result !is LaunchFailure) return
 
-            is IntentResolveResult.IntentResult -> LaunchRawIntent(result.intent)
-            else -> null
+                logger.error("Launch failed: $result", result.ex)
+                val textId = when (result) {
+                    is LaunchResult.Illegal -> R.string.bottom_sheet__text_launch_illegal
+                    is LaunchResult.NotAllowed -> R.string.bottom_sheet__text_launch_not_allowed
+                    is LaunchResult.Other -> R.string.bottom_sheet__text_launch_failure_other
+                    is LaunchResult.Unknown -> R.string.bottom_sheet__text_launch_failure_unknown
+                    is LaunchResult.NotFound -> R.string.resolve_activity_failure
+                }
+
+                showToast(textId)
+            }
         }
-    }
-
-    private suspend fun handleLaunch(intent: LaunchIntent) {
-        val result = launchHandler.start(intent.intent)
-        if (result !is LaunchFailure) return
-
-        logger.error("Launch failed: $result", result.ex)
-        val textId = when (result) {
-            is LaunchResult.Illegal -> R.string.bottom_sheet__text_launch_illegal
-            is LaunchResult.NotAllowed -> R.string.bottom_sheet__text_launch_not_allowed
-            is LaunchResult.Other -> R.string.bottom_sheet__text_launch_failure_other
-            is LaunchResult.Unknown -> R.string.bottom_sheet__text_launch_failure_unknown
-            is LaunchResult.NotFound -> R.string.resolve_activity_failure
-        }
-
-        showToast(textId)
     }
 
     override fun onStop() {
@@ -391,17 +372,20 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     }
 
     fun setInitialIntent(intent: Intent) {
-        initialIntent.tryEmit(intent)
-        latestNewIntent.tryEmit(null)
-        viewModel.resolveAsync(intent.toSafeIntent(), referrer)
+        viewModel.tryEmitIntent(intent, null)
+
+        val options = ResolveOptions(referrer, viewModel.getMetaData(this))
+        viewModel.resolveAsync(intent.toSafeIntent(), options)
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         logger.debug("onNewIntent: $intent")
 
-        latestNewIntent.tryEmit(intent)
-        viewModel.resolveAsync(intent.toSafeIntent(), referrer)
+        viewModel.tryEmitIntent(null, intent)
+
+        val options = ResolveOptions(referrer, viewModel.getMetaData(this))
+        viewModel.resolveAsync(intent.toSafeIntent(), options)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

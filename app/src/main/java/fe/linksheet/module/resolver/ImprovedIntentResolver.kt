@@ -49,6 +49,7 @@ import fe.linksheet.util.Scheme
 import fe.linksheet.util.intent.cloneIntent
 import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.parser.UriException
+import fe.linksheet.util.intent.parser.UriParseException
 import fe.std.result.getOrNull
 import fe.std.result.isFailure
 import kotlinx.coroutines.*
@@ -126,12 +127,12 @@ class ImprovedIntentResolver(
 //
 //    }
 
-    override suspend fun resolve(intent: SafeIntent, referrer: Uri?): IntentResolveResult = coroutineScope scope@{
+    override suspend fun resolve(intent: SafeIntent, options: ResolveOptions): IntentResolveResult = coroutineScope scope@{
         initState(ResolveEvent.Initialized, ResolverInteraction.Initialized)
         val canAccessInternet = networkStateService.isNetworkConnected
 
-        logger.debug("Referrer=$referrer")
-        val referringPackage = AndroidUri.get(Scheme.Package, referrer)
+        logger.debug("Referrer=${options.referrer}")
+        val referringPackage = AndroidUri.get(Scheme.Package, options.referrer)
         val isReferrerBrowser = privateBrowsingService.isKnownBrowser(referringPackage?.packageName) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
@@ -147,6 +148,10 @@ class ImprovedIntentResolver(
         }
 
         var uri = uriResult.getOrNull()
+        if (options.forwardProfile) {
+            val stdUrl = uri?.toStdUrl() ?: return@scope IntentResolveResult.IntentParseFailed(UriParseException())
+            return@scope IntentResolveResult.OtherProfile(stdUrl)
+        }
 
         emitEvent(ResolveEvent.QueryingBrowsers)
         val browsers = packageIntentHandler.findHttpBrowsable(null)
@@ -276,7 +281,7 @@ class ImprovedIntentResolver(
             } ?: DownloadCheckResult.NonDownloadable
         }
 
-        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, browserSettings.inAppBrowserSettings())
+        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(options.referrer, browserSettings.inAppBrowserSettings())
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
         val newIntent = IntentSanitizer.sanitize(intent, Intent.ACTION_VIEW, uri, dropExtras)
 
@@ -317,6 +322,7 @@ class ImprovedIntentResolver(
         return@scope IntentResolveResult.Default(
             intent = newIntent,
             uri = uri,
+            referrer = options.referrer,
             unfurlResult = unfurl,
             referringPackageName = referringPackage?.packageName,
             resolved = sorted,

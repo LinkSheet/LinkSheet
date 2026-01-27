@@ -1,6 +1,7 @@
 package app.linksheet.feature.profile.core
 
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.UserHandle
@@ -31,7 +32,7 @@ interface ProfileSwitcher {
     fun getUserProfileInfo(status: ProfileStatus = getStatus()): UserProfileInfo?
     fun launchCrossProfileInteractSettings(activity: Activity): Boolean
     fun canQuickToggle(): Boolean
-    fun switchTo(profile: CrossProfile, url: String, activity: Activity)
+    fun switchTo(profile: CrossProfile, url: String, activity: Activity, target: ComponentName)
     fun startOther(profile: CrossProfile, activity: Activity)
     fun getProfiles(status: ProfileStatus = getStatus()): List<CrossProfile>?
 }
@@ -102,9 +103,9 @@ internal class RealProfileSwitcher(
         return status is ProfileStatus.Available
     }
 
-    override fun switchTo(profile: CrossProfile, url: String, activity: Activity) {
+    override fun switchTo(profile: CrossProfile, url: String, activity: Activity, target: ComponentName) {
         val switchIntent = Intent(Intent.ACTION_VIEW, url.toUri())
-            .setComponent(activity.componentName)
+            .setComponent(target)
         crossProfileAppsCompat.startActivity(switchIntent, profile.userHandle, activity)
     }
 
@@ -137,6 +138,11 @@ internal class RealProfileSwitcher(
         val userHandle = refineWrapper.cast(handle)
         return toCrossProfile(handle, userHandle.identifier)
     }
+}
+
+inline fun <reified T : Activity> ProfileSwitcher.switchTo(profile: CrossProfile, url: String, activity: T) {
+    val componentName = ComponentName(activity.baseContext, T::class.java)
+    switchTo(profile, url, activity, componentName)
 }
 
 sealed interface ProfileStatus {

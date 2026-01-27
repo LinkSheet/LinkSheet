@@ -571,4 +571,5 @@
     <string name="settings_follow_redirects__title_mode_manual">Manual</string>
     <string name="settings_follow_redirects__title_aggressive">Aggressive mode</string>
     <string name="settings_follow_redirects__subtitle_aggressive">Fetch full page body for better compatibility with sites which don\'t use HTTP redirects</string>
+    <string name="handler_target__label_switch_profile_view_intent">Switch profile</string>
 </resources>

@@ -1,6 +1,5 @@
 package fe.linksheet.module.resolver
 
-import android.net.Uri
 import kotlinx.coroutines.flow.StateFlow
 import mozilla.components.support.utils.SafeIntent
 
@@ -23,9 +22,9 @@ class IntentResolverDelegate(
 
     override suspend fun resolve(
         intent: SafeIntent,
-        referrer: Uri?
+        options: ResolveOptions
     ): IntentResolveResult {
-        return delegate.resolve(intent, referrer)
+        return delegate.resolve(intent, options)
     }
 
     override suspend fun warmup() {

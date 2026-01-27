@@ -190,6 +190,19 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity-alias>
+        <activity-alias
+                android:name=".intent.SwitchProfileSendIntentHandler"
+                android:enabled="true"
+                android:exported="true"
+                android:label="@string/handler_target__label_switch_profile_view_intent"
+                android:targetActivity=".activity.BottomSheetActivity">
+            <meta-data android:name="app.linksheet.profile.FORWARD" android:value="true" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity-alias>
 
         <service android:name=".customtab.LinkSheetCustomTabsService"
                  android:exported="true"

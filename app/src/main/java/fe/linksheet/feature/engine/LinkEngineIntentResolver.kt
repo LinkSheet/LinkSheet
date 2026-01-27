@@ -130,7 +130,7 @@ class LinkEngineIntentResolver(
 
     override suspend fun resolve(
         intent: SafeIntent,
-        referrer: Uri?,
+        options: ResolveOptions
     ): IntentResolveResult = coroutineScope scope@{
         val canAccessInternet = networkStateService.isNetworkConnected
         val urlParseResult = parseIntent(intent)
@@ -139,7 +139,7 @@ class LinkEngineIntentResolver(
         }
 
         val startUrl = urlParseResult.value
-        val referringPackage = referrer?.getAndroidAppPackage(Scheme.Package)
+        val referringPackage = options.referrer?.getAndroidAppPackage(Scheme.Package)
         val knownBrowser = privateBrowsingService.isKnownBrowser(referringPackage?.packageName)
         val isReferrerBrowser = knownBrowser != null
 
@@ -192,7 +192,7 @@ class LinkEngineIntentResolver(
 
         val downloadResult = sealedContext[ContextResultId.Download]
 
-        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(referrer, browserSettings.inAppBrowserSettings())
+        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(options.referrer, browserSettings.inAppBrowserSettings())
         val customTab = CustomTabHandler.getInfo2(intent, allowCustomTab)
         val newIntent = IntentSanitizer.sanitize(intent, Intent.ACTION_VIEW, resultUri, customTab.dropExtras)
 
@@ -231,6 +231,7 @@ class LinkEngineIntentResolver(
         return@scope IntentResolveResult.Default(
             intent = newIntent,
             uri = resultUri,
+            referrer = options.referrer,
             unfurlResult = sealedContext[ContextResultId.Preview]?.toUnfurlResult(),
             referringPackageName = referringPackage?.packageName,
             resolved = sorted,

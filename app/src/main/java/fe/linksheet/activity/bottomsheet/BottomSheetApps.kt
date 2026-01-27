@@ -299,6 +299,7 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
     val result = IntentResolveResult.Default(
         intent = Intent(),
         uri = Uri.parse("https://google.com"),
+        referrer = null,
         unfurlResult = null,
         referringPackageName = null,
         resolved = sorted,

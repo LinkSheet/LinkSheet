@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
+import app.linksheet.feature.profile.core.CrossProfile
 import app.linksheet.lib.flavors.LinkSheetReferrer
 import fe.linksheet.util.AndroidUri
 import fe.linksheet.util.Scheme
@@ -58,10 +59,14 @@ class DefaultIntentLauncher(
     }
 }
 
-sealed class LaunchIntent(val intent: Intent) {
+sealed interface Launchable {
+
+}
+sealed class LaunchIntent(val intent: Intent) : Launchable {
 
 }
 
+class LaunchOtherProfileIntent(val profile: CrossProfile, val url: String) : Launchable
 class LaunchRawIntent(intent: Intent) : LaunchIntent(intent)
 class LaunchMainIntent(intent: Intent) : LaunchIntent(intent)
 class LaunchViewIntent(intent: Intent) : LaunchIntent(intent)

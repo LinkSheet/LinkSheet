@@ -17,7 +17,7 @@ internal class ManifestParserTest : BaseUnitTest {
     fun test() {
         val stream = ManifestParserTest::class.java.getResourceAsStream("/linksheet_compat-2025-12-11.apk")
         val bytes = ArchiveBytes(stream)
-        val hosts = ManifestParser().parse(bytes)
+        val hosts = DefaultManifestParser().parseHosts(bytes)
         assertThat(hosts).containsExactlyInAnyOrder(
             "github.com",
             "reddit.com",

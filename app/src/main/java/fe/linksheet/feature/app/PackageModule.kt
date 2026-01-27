@@ -1,10 +1,7 @@
 package fe.linksheet.feature.app
 
 import android.app.ActivityManager
-import android.content.pm.getApplicationInfoCompatOrNull
-import android.content.pm.getInstalledPackagesCompat
-import android.content.pm.queryIntentActivitiesCompat
-import android.content.pm.resolveActivityCompat
+import android.content.pm.*
 import app.linksheet.feature.app.core.*
 import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.usecase.AllAppsUseCase
@@ -55,7 +52,7 @@ val AppFeatureModule = module {
     single<DomainVerificationManagerCompat> {
         DomainVerificationManagerCompat(context = get())
     }
-    single<ManifestParser> { ManifestParser() }
+    single<ManifestParser> { DefaultManifestParser() }
     single {
         AppInfoCreator(
             packageLabelService = get(),

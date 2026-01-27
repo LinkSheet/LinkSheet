@@ -45,7 +45,7 @@ class AllAppsUseCase(
 
         val appInfo = creator.toAppInfo(applicationInfo, null)
         val hosts = when (val state = domainVerificationManager.getDomainVerificationUserState(packageName)) {
-            null, is VerificationUnsupportedState -> manifestParser.parse(applicationInfo.sourceDir).toSet()
+            null, is VerificationUnsupportedState -> manifestParser.parseHosts(applicationInfo.sourceDir).toSet()
             is VerificationState -> state.hostToStateMap.keys
             else -> return null
         }

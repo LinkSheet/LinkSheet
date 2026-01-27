@@ -13,7 +13,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import app.linksheet.feature.app.core.ManifestParser
+import app.linksheet.feature.app.core.DefaultManifestParser
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.composable.ui.AppTheme
 import org.koin.core.component.KoinComponent
@@ -42,8 +42,8 @@ private fun ManifestParserScreen(context: Context) {
     val list = remember { mutableStateListOf<String>() }
     Button(onClick = {
         val info = context.packageManager.getApplicationInfoCompat("app.linksheet.interconnect.testapp")
-        val parser = ManifestParser()
-        list.addAll(parser.parse(info.sourceDir))
+        val parser = DefaultManifestParser()
+        list.addAll(parser.parseHosts(info.sourceDir))
     }) {
         Text(text = "Parse")
     }

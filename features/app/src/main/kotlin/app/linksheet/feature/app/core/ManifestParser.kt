@@ -7,8 +7,13 @@ import com.reandroid.arsc.chunk.xml.ResXmlAttribute
 import com.reandroid.arsc.chunk.xml.ResXmlElement
 import java.io.FileInputStream
 
-class ManifestParser {
-    fun parse(bytes: ArchiveBytes): Set<String> {
+interface ManifestParser {
+    fun parseHosts(bytes: ArchiveBytes): Set<String>
+    fun parseHosts(path: String): Set<String>
+}
+
+class DefaultManifestParser : ManifestParser {
+    override fun parseHosts(bytes: ArchiveBytes): Set<String> {
         val apkModule = ApkModule(bytes.createZipEntryMap())
 
         val manifestBlock = apkModule.getAndroidManifest()
@@ -16,17 +21,17 @@ class ManifestParser {
         return activities.toSequence().flatMap { activity ->
             activity.getElements("intent-filter")
                 .toSequence()
-                .flatMap { parseIntentFilter(it) }
+                .flatMap { getHosts(it) }
         }.toSet()
     }
 
-    fun parse(path: String): Set<String> {
+    override fun parseHosts(path: String): Set<String> {
         val inputStream = FileInputStream(path)
         val archiveBytes = ArchiveBytes(inputStream)
-        return parse(archiveBytes)
+        return parseHosts(archiveBytes)
     }
 
-    private fun parseIntentFilter(intentFilter: ResXmlElement) = sequence {
+    private fun getHosts(intentFilter: ResXmlElement) = sequence {
         val actions = intentFilter.getElements("action")
         val categories = intentFilter.getElements("category")
         val actionNames = actions.toSequence().mapNotNull { it.getFirstAttribute("name")?.valueString }.toSet()

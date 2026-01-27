@@ -12,27 +12,17 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.DebugMenuButton
+import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.shizuku.shizukuDebugItem
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.onboarding.OnboardingActivity
 import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog
-import fe.linksheet.debug.activity.ComponentStateActivity
-import fe.linksheet.debug.activity.ComposableRendererActivity
-import fe.linksheet.debug.activity.DebugActivity
-import fe.linksheet.debug.activity.ExportLogDialogTestActivity
-import fe.linksheet.debug.activity.LinkTestingActivity
-import fe.linksheet.debug.activity.LocaleDebugActivity
-import fe.linksheet.debug.activity.ManifestParserActivity
-import fe.linksheet.debug.activity.WorkManagerActivity
+import fe.linksheet.debug.activity.*
 import fe.linksheet.debug.module.viewmodel.DebugViewModel
 import fe.linksheet.extension.compose.dashedBorder
 import fe.linksheet.navigation.Routes
@@ -77,6 +67,13 @@ fun DebugMenuSlot(viewModel: DebugViewModel, navigate: (String) -> Unit) {
             }
 
             if (activity != null) {
+                item(key = "metadata-handler") {
+                    FilledTonalActivityLauncher(
+                        activity = activity,
+                        text = "Metadata handler",
+                        intent = createIntent(activity, MetaDataHandlerActivity::class)
+                    )
+                }
                 item(key = "manifest-parser") {
                     FilledTonalActivityLauncher(
                         activity = activity,

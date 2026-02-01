@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.linksheet.compose.R
+import app.linksheet.compose.R as CommonR
 import app.linksheet.compose.appbar.SaneSmallTopAppBar
 import app.linksheet.compose.debug.LocalUiDebug
 import app.linksheet.compose.debugBorder
@@ -91,7 +91,7 @@ private fun MarkdownViewer(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
-                            contentDescription = stringResource(R.string.generic__button_open_external),
+                            contentDescription = stringResource(CommonR.string.generic__button_text_open_external),
                         )
                     }
                 },

@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import app.linksheet.compose.R
 import app.linksheet.compose.theme.HkGroteskFontFamily
+import app.linksheet.compose.R as CommonR
 
 @Composable
 fun SaneAppBarTitle(modifier: Modifier = Modifier, headline: String) {
@@ -31,7 +31,7 @@ fun SaneAppBarBackButton(
     IconButton(modifier = modifier, onClick = onBackPressed) {
         Icon(
             imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-            contentDescription = stringResource(R.string.back),
+            contentDescription = stringResource(CommonR.string.back),
         )
     }
 }

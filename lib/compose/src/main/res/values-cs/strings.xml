@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic__button_open_external">Otevřít externě</string>
+    <string name="generic__button_text_open_external">Otevřít externě</string>
 </resources>

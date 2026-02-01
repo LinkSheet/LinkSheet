@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Functions
-import androidx.compose.material.icons.rounded.Webhook
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -17,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.theme.DialogTitleStyle
+import app.linksheet.feature.engine.R
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
@@ -27,8 +27,8 @@ import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.dialog.SaneIconAlertDialog
-import app.linksheet.feature.engine.R
 import my.nanihadesuka.compose.ScrollbarSettings
+import app.linksheet.compose.R as CommonR
 
 @Composable
 fun rememberNewScenarioDialog(onConfirm: (String) -> Unit): ResultDialogState<String> {
@@ -75,12 +75,12 @@ private fun NewScenarioDialog(
         onDismiss = {},
         confirmButton = {
             Button(onClick = { onConfirm(scenarioNameState.text.toString()) }) {
-                textContent(R.string.generic__button_text_create).content()
+                textContent(CommonR.string.generic__button_text_create).content()
             }
         },
         dismissButton = {
             SaneAlertDialogTextButton(
-                content = textContent(R.string.generic__button_text_cancel),
+                content = textContent(CommonR.string.generic__button_text_cancel),
                 onClick = onDismiss
             )
         }

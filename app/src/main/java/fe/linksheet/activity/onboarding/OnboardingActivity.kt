@@ -27,6 +27,7 @@ import app.linksheet.compose.theme.PoppinsFontFamily
 import fe.linksheet.extension.compose.LargeTopAppBar
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import app.linksheet.compose.R as CommonR
 
 class OnboardingActivity : BaseComponentActivity() {
     private val onboardingViewModel by viewModel<MainViewModel>()
@@ -88,7 +89,7 @@ class OnboardingActivity : BaseComponentActivity() {
                                     IconButton(onClick = back) {
                                         Icon(
                                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                            contentDescription = stringResource(R.string.back),
+                                            contentDescription = stringResource(CommonR.string.back),
                                         )
                                     }
                                 }

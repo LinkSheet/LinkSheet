@@ -51,6 +51,7 @@ import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import kotlin.uuid.ExperimentalUuidApi
+import app.linksheet.compose.R as CommonR
 
 
 @Composable
@@ -121,7 +122,7 @@ private fun ScenarioOverviewRouteInternal(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Add,
-                    contentDescription = stringResource(id = R.string.generic__button_add)
+                    contentDescription = stringResource(id = CommonR.string.generic__button_text_add)
                 )
             }
         },
@@ -148,10 +149,10 @@ private fun ScenarioOverviewRouteInternal(
                     shape = shape,
                     padding = padding,
                     customActions = listOf(
-                        createAction(resources, R.string.generic__action_move_up) {
+                        createAction(resources, CommonR.string.generic__action_move_up) {
                             if (index > 0) move(item, localScenarios[index - 1]) else false
                         },
-                        createAction(resources, R.string.generic__action_move_down) {
+                        createAction(resources, CommonR.string.generic__action_move_down) {
                             if (index < localScenarios.size - 1) move(item, localScenarios[index + 1]) else false
                         },
                     ),

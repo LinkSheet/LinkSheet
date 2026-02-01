@@ -31,7 +31,6 @@
     <string name="add_all">添加所有</string>
     <string name="hide_after_copying">操作时自动隐藏</string>
     <string name="hide_after_copying_explainer">点击“复制链接”或“下载”等操作按钮后隐藏底栏</string>
-    <string name="back">返回</string>
     <string name="display_grid_layout">网格布局</string>
     <string name="display_grid_layout_explainer">在底栏中显示网格而非列表</string>
     <string name="set_as_browser_done">LinkSheet已设置为默认浏览器！</string>

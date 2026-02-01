@@ -89,7 +89,7 @@ class OnboardingActivity : BaseComponentActivity() {
                                     IconButton(onClick = back) {
                                         Icon(
                                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                            contentDescription = stringResource(CommonR.string.back),
+                                            contentDescription = stringResource(CommonR.string.generic__button_text_back),
                                         )
                                     }
                                 }

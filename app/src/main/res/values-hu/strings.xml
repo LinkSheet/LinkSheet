@@ -6,7 +6,6 @@
     <string name="add_all">Összes hozzáadása</string>
     <string name="hide_after_copying">Automatikus elrejtés művelet közben</string>
     <string name="hide_after_copying_explainer">Automatikusan elrejti az alsó lapot, amikor egy műveletgombot, például a \"Hivatkozás másolása\" vagy a \"Letöltés\"-t megérint</string>
-    <string name="back">Vissza</string>
     <string name="display_grid_layout_explainer">Rácsos megjelenítés lista helyett az alsó panelen</string>
     <string name="set_as_browser_done">A LinkSheet alapértelmezett böngészőként lett beállítva!</string>
     <string name="disabled">Letiltva</string>

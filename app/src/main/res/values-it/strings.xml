@@ -29,7 +29,6 @@
     <string name="donate_subtitle">Passa a LinkSheet Pro</string>
     <string name="none_explainer">Elenca solo le app native, rimuovendo tutti i browser. Se è presente una sola app nativa, questa verrà aperta automaticamente. Se non è presente alcuna app nativa, vengono elencati tutti i browser.</string>
     <string name="error">Errore</string>
-    <string name="back">Indietro</string>
     <string name="github">GitHub</string>
     <string name="links">Link</string>
     <string name="open_with_linksheet">Apri con LinkSheet</string>

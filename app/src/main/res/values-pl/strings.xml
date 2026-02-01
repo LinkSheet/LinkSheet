@@ -27,7 +27,6 @@
     <string name="remove_all">Usuń wszystkie</string>
     <string name="add_all">Dodaj wszystkie</string>
     <string name="hide_after_copying">Auto. ukryj po akcji</string>
-    <string name="back">Cofnij</string>
     <string name="display_grid_layout">Układ siatki</string>
     <string name="display_grid_layout_explainer">Pokazuj układ siatki zamiast listy</string>
     <string name="browser_status">Status przeglądarki</string>

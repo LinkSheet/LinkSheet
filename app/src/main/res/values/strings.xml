@@ -36,7 +36,6 @@
     <string name="add_all">Add all</string>
     <string name="hide_after_copying">Auto-hide on action</string>
     <string name="hide_after_copying_explainer">Automatically hide bottom sheet when an action button such as \"Copy link\" or \"Download\" is tapped</string>
-    <string name="back">Back</string>
     <string name="display_grid_layout">Grid layout</string>
     <string name="display_grid_layout_explainer">Show a grid instead of a list in the bottom sheet</string>
     <string name="set_as_browser_done">LinkSheet has been set as default browser!</string>

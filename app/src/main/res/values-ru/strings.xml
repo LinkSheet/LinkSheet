@@ -73,7 +73,6 @@
     <string name="donate_subtitle">Если вы хотите сделать пожертвование и получить <b>LinkSheet Pro</b></string>
     <string name="advanced">Расширенные настройки</string>
     <string name="shizuku_explainer_short">Взаимодействие с системными API напрямую</string>
-    <string name="back">Назад</string>
     <string name="linksheet_download">Скачать LinkSheet</string>
     <string name="follow_redirects_external_service_explainer">Следовать перенаправлениям с помощью API, развернутого на сайте supabase.com (<annotation url-id="supabase-privacy">Политика конфиденциальности</annotation>)</string>
     <string name="include_fingerprint">Включить отпечаток пальца устройства (рекомендуется)</string>

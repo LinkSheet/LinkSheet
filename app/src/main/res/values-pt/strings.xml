@@ -35,7 +35,6 @@
     <string name="add_all">Adicionar todos</string>
     <string name="hide_after_copying">Ocultar ao selecionar ação</string>
     <string name="hide_after_copying_explainer">Ocultar automaticamente a folha inferior quando um botão de ação, como \"Copiar ligação\" ou \"Descarregar\", for tocado</string>
-    <string name="back">Voltar</string>
     <string name="display_grid_layout">Layout de grade</string>
     <string name="display_grid_layout_explainer">Mostrar uma grade em vez de uma lista na folha inferior</string>
     <string name="set_as_browser_done">O LinkSheet tem que ser definido como navegação padrão!</string>

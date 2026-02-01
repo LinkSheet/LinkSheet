@@ -30,7 +30,6 @@
     <string name="apps_which_can_open_links_explainer">Otomatik bağlantı açmayı devre dışı bırakmanıza izin veren \"Varsayılan olarak aç\" menüsünü açmak için bir uygulamaya dokunun</string>
     <string name="apps_which_can_open_links_explainer_2">LinkSheet\'in davranışına müdahale edebilecek tüm uygulamaları listeler</string>
     <string name="remove_all">Hepsini kaldır</string>
-    <string name="back">Geri</string>
     <string name="hide_after_copying_explainer">\"Bağlantıyı kopyala\" veya \"İndir\" gibi eylem düğmelerine dokunduktan sonra alt sayfayı otomatik olarak gizle</string>
     <string name="add_all">Hepsini ekle</string>
     <string name="hide_after_copying">Eylemden sonra otomatik olarak gizle</string>

@@ -28,7 +28,6 @@
     <string name="remove_all">Tiadakan semua</string>
     <string name="add_all">Tambahkan semua</string>
     <string name="hide_after_copying">Sembunyikan otomatis usai tindakan</string>
-    <string name="back">Kembali</string>
     <string name="display_grid_layout">Tata letak kisi</string>
     <string name="display_grid_layout_explainer">Gunakan kisi di lembar bawah alih-alih tata letak daftar</string>
     <string name="browser_status">Status peramban</string>

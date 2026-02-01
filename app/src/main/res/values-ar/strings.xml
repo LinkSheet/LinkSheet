@@ -38,7 +38,6 @@
     <string name="disabled">معطل</string>
     <string name="always_show_package_name_explainer">اعرض دائما أسماء الحزم بدلا من أسماء التطبيقات فقط. هذا ينطبق على التطبيق بأكمله.</string>
     <string name="whitelisted_browsers">المتصفحات المدرجة في القائمة البيضاء</string>
-    <string name="back">رجوع</string>
     <string name="set_as_browser_done">تم تعيين ورقة الروابط كمتصفح افتراضي!</string>
     <string name="browser_status">حالة المتصفح</string>
     <string name="app_browsers">تطبيقات</string>

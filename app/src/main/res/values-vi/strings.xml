@@ -67,7 +67,6 @@
     <string name="redirect_resolve_type_remote">máy chủ từ xa</string>
     <string name="donate_subtitle">Nâng cấp lên <b>LinkSheet Pro</b></string>
     <string name="built_at"><b>Được dựng lúc:</b> <font face="monospace">%s</font></string>
-    <string name="back">Quay lại</string>
     <string name="linksheet_download">Tải xuống LinkSheet</string>
     <string name="include_fingerprint">Bao gồm dấu vân tay của thiết bị (được khuyến nghị)</string>
     <string name="default_apps">Ứng dụng ưu tiên</string>

@@ -61,7 +61,6 @@
     <string name="always_show_package_name_explainer">Vždy zobrazit názvy balíčků namísto samotných názvů aplikací. Toto platí pro celou aplikaci.</string>
     <string name="hide_after_copying">Automaticky skrýt při akci</string>
     <string name="hide_after_copying_explainer">Automaticky skrýt spodní list při klepnutí na akční tlačítko jako „Kopírovat odkaz“ nebo „Stáhnout“</string>
-    <string name="back">Zpět</string>
     <string name="display_grid_layout">Mřížka</string>
     <string name="display_grid_layout_explainer">Zobrazit mřížku namísto seznamu ve spodním listu</string>
     <string name="set_as_browser_done">Aplikace LinkSheet byla nastavena jako výchozí prohlížeč!</string>

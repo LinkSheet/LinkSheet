@@ -99,7 +99,6 @@
     <string name="advanced">Напредно</string>
     <string name="built_at"><b>Израђено на:</b> <font face="monospace">%s</font></string>
     <string name="shizuku_explainer_short">Директно комуницирајте са системским API-јима</string>
-    <string name="back">Назад</string>
     <string name="linksheet_download">LinkSheet преузимање</string>
     <string name="follow_redirects_external_service_explainer">Пратите преусмеравања користећи API постављен на supabase.com (<annotation url-id="supabase-privacy">Политика приватности</annotation>)</string>
     <string name="include_fingerprint">Укључи отисак прста уређаја (препоручено)</string>

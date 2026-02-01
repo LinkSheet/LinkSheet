@@ -6,7 +6,6 @@
     <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, намиращ се на supabase.com (<annotation url-id="supabase-privacy">Политика за поверителност</annotation>)</string>
     <string name="download">Изтегляне</string>
     <string name="usage_stats_sorting">Сортиране на приложенията според използването им</string>
-    <string name="back">Назад</string>
     <string name="links">Препратки</string>
     <string name="version">Издание на LinkSheet</string>
     <string name="checkmark">Отметка</string>

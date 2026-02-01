@@ -65,7 +65,6 @@
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
     <string name="use_clear_urls_explainer">Usar a integração experimental com o <annotation url-id="clearurls-github">ClearURLs</annotation> (limpa parâmetros de rastreamento de URLs)</string>
     <string name="error">Erro</string>
-    <string name="back">Voltar</string>
     <string name="selected_browser_explainer">Esse navegador será aberto automaticamente se nenhum aplicativo nativo puder lidar com o link clicado</string>
     <string name="display_grid_layout_explainer">Mostrar uma grade em vez de uma lista na folha inferior</string>
     <string name="follow_redirects_external_service">Seguir redirecionamentos via serviço externo</string>

@@ -31,7 +31,6 @@
     <string name="add_all">全部新增</string>
     <string name="hide_after_copying">採取行動後自動隱藏</string>
     <string name="hide_after_copying_explainer">當輕觸諸如「複製連結」或「下載」等按鈕後自動隱藏底部功能表</string>
-    <string name="back">返回</string>
     <string name="display_grid_layout">格狀版面配置</string>
     <string name="display_grid_layout_explainer">在底部功能表以格狀檢視而非清單</string>
     <string name="set_as_browser_done">已將 LinkSheet 設為預設瀏覽器！</string>

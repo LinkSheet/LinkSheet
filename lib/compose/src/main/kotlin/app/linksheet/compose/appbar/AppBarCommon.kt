@@ -31,7 +31,7 @@ fun SaneAppBarBackButton(
     IconButton(modifier = modifier, onClick = onBackPressed) {
         Icon(
             imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-            contentDescription = stringResource(CommonR.string.back),
+            contentDescription = stringResource(CommonR.string.generic__button_text_back),
         )
     }
 }

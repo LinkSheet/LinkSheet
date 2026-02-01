@@ -91,7 +91,6 @@
     <string name="advanced">Avanzado</string>
     <string name="built_at"><b>Compilado a las:</b> <font face="monospace">%s</font></string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
-    <string name="back">Atrás</string>
     <string name="linksheet_download">Descarga de LinkSheet</string>
     <string name="follow_redirects_external_service_explainer">Sigue las redirecciones mediante una API desplegada en supabase.com (<annotation url-id="supabase-privacy">Política de privacidad</annotation>)</string>
     <string name="include_fingerprint">Incluir huella digital del dispositivo (recomendado)</string>

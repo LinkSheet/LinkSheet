@@ -91,7 +91,6 @@
     <string name="advanced">ਉੱਨਤ</string>
     <string name="built_at">(UTC) \'ਤੇ ਬਣਾਇਆ ਗਿਆ:</string>
     <string name="shizuku_explainer_short">ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰੋ</string>
-    <string name="back">ਪਿੱਛੇ</string>
     <string name="linksheet_download">ਲਿੰਕਸ਼ੀਟ ਡਾਊਨਲੋਡ</string>
     <string name="follow_redirects_external_service_explainer">ਸੁਪਰਬੇਸਡਾਟਕਾਮ (<annotation url-id="supabase-privacy"> \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>)</string>
     <string name="include_fingerprint">ਡਿਵਾਈਸ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸ਼ਾਮਲ ਕਰੋ (ਸਿਫਾਰਸ਼ੀ)</string>

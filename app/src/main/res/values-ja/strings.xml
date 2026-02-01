@@ -35,7 +35,6 @@
     <string name="add_all">全て追加</string>
     <string name="hide_after_copying">アクションを自動で非表示</string>
     <string name="hide_after_copying_explainer">「リンクをコピー」や「ダウンロード」などのアクションボタンを押した後、下のシートを自動的に非表示にします</string>
-    <string name="back">戻る</string>
     <string name="display_grid_layout">グリッドレイアウト</string>
     <string name="set_as_browser_done">LinkSheet がデフォルトのブラウザに設定されました！</string>
     <string name="pretend_to_be_app_explainer_2">Google Chrome などの一部のアプリは、検索結果で YouTube のリンクをタップすると、YouTube のアプリがあればそれを開こうとします。LinkSheetCompat は、YouTube などの特定のウェブサイトのリンクをタップしたときに、YouTube のアプリがあるかのように Chrome に見せかけます。そして、実際に YouTube のアプリがない場合は、LinkSheet という別のアプリを使ってリンクを開きます。</string>

@@ -28,7 +28,6 @@
     <string name="remove_all">Supprimer tout</string>
     <string name="add_all">Ajouter tout</string>
     <string name="hide_after_copying">Masquage auto en cas d\'action</string>
-    <string name="back">Retour</string>
     <string name="display_grid_layout">Disposition de la grille</string>
     <string name="display_grid_layout_explainer">Afficher une grille au lieu d\'une liste dans la feuille inférieure</string>
     <string name="set_as_browser_done">LinkSheet a été défini comme navigateur par défaut !</string>

@@ -30,7 +30,6 @@
     <string name="hide_after_copying">Automatisches Ausblenden bei Aktion</string>
     <string name="follow_redirects">Weiterleitungen folgen</string>
     <string name="light">Hell</string>
-    <string name="back">Zurück</string>
     <string name="version">LinkSheet-Version</string>
     <string name="remove_all">Alle entfernen</string>
     <string name="paste">Einfügen</string>

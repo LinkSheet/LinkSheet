@@ -580,4 +580,7 @@
     <string name="settings_bottom_sheet__subtitle_expand_fully">Automatycznie rozszerz dolny panel do pełnej wysokości</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">Automatyczne uruchom pojedynczą przeglądarkę</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Jeśli dostępna jest tylko jedna aplikacja, która jest jednocześnie przeglądarką, uruchom ją automatycznie</string>
+    <string name="generic__text_mode">Tryb</string>
+    <string name="settings_follow_redirects__title_mode_auto">Auto</string>
+    <string name="settings_follow_redirects__title_mode_manual">Ręczny</string>
 </resources>

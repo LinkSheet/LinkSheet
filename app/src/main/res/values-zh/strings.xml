@@ -556,4 +556,7 @@
     <string name="settings_browser_mode__title_auto_launch_single_browser">自动启动指定浏览器</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">如果只有一个可用应用且该应用是浏览器，则自动启动</string>
     <string name="generic__label_arrow_rotation">箭头旋转动画</string>
+    <string name="generic__text_mode">模式</string>
+    <string name="settings_follow_redirects__title_mode_auto">自动</string>
+    <string name="settings_follow_redirects__title_mode_manual">手动</string>
 </resources>

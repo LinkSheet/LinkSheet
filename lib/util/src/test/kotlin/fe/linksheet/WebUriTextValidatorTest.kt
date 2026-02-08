@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.edit
+package fe.linksheet
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -5,6 +5,6 @@
     <string name="settings_scenario__text_data_type">Data type</string>
     <string name="settings_scenario__text_value">Value</string>
     <string name="settings_scenario__title_new_scenario_dialog">New scenario</string>
-    <string name="settings_scenario__text_placeholder_name">Scenario name</string>
+    <string name="settings_scenario__text_placeholder_instance">Scenario name</string>
     <string name="settings_scenario__divider_rules">Rules</string>
 </resources>

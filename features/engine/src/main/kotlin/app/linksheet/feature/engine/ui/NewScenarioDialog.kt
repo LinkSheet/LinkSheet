@@ -87,7 +87,7 @@ private fun NewScenarioDialog(
     ) {
         TextField(
             state = scenarioNameState,
-            placeholder = { Text(text = stringResource(R.string.settings_scenario__text_placeholder_name)) }
+            placeholder = { Text(text = stringResource(R.string.settings_scenario__text_placeholder_instance)) }
         )
 
 //        TextContentWrapper(

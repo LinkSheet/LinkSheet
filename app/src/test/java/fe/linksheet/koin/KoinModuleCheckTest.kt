@@ -12,6 +12,7 @@ import app.linksheet.api.CachedRequest
 import app.linksheet.api.RefineWrapper
 import app.linksheet.api.SystemProperties
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLabelService
 import app.linksheet.feature.app.core.PackageLauncherService
@@ -28,8 +29,10 @@ import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.database.dao.LibRedirectDefaultDao
 import app.linksheet.feature.libredirect.database.dao.LibRedirectServiceStateDao
+import app.linksheet.feature.libredirect.database.dao.LibRedirectUserInstanceDao
 import app.linksheet.feature.libredirect.database.repository.LibRedirectDefaultRepository
 import app.linksheet.feature.libredirect.database.repository.LibRedirectStateRepository
+import app.linksheet.feature.libredirect.database.repository.LibRedirectUserInstanceRepository
 import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
@@ -207,6 +210,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             ImageLoader::class,
             IntentResolver::class,
             IntentLauncher::class,
+            MetaDataHandler::class,
             PrivateBrowserUseCase::class
         ),
         definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
@@ -233,7 +237,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<SelectDomainsConfirmationViewModel>(
             AllAppsUseCase::class
-        )
+        ),
+        definition<LibRedirectUserInstanceRepository>(LibRedirectUserInstanceDao::class)
     )
 
     @Test

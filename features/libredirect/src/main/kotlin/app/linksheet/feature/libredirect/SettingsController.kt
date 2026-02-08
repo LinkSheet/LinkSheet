@@ -85,4 +85,8 @@ data class ServiceSettings(
     fun maybeGetFrontend(frontendKey: String): FrontendState? {
         return frontends.firstOrNull { it.frontendKey == frontendKey }
     }
+
+    fun getCurrentVersion(): Int {
+        return 1
+    }
 }

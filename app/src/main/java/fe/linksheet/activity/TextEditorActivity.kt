@@ -1,13 +1,15 @@
 package fe.linksheet.activity
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import fe.composekit.core.getEnumExtra
 import fe.composekit.intent.buildIntent
+import fe.linksheet.TextValidator
+import fe.linksheet.Validator
+import fe.linksheet.WebUriTextValidator
 import fe.linksheet.composable.page.edit.TextEditorPage
 import fe.linksheet.composable.page.edit.TextSource
-import fe.linksheet.composable.page.edit.TextValidator
-import fe.linksheet.composable.page.edit.WebUriTextValidator
 import fe.linksheet.composable.ui.AppTheme
 import mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
@@ -22,10 +24,6 @@ class TextEditorActivity : BaseComponentActivity(), KoinComponent {
         const val EXTRA_SOURCE = "EXTRA_SOURCE"
     }
 
-    enum class ExtraValidator {
-        WebUriTextValidator
-    }
-
     enum class ExtraSource {
         ClipboardCard
     }
@@ -36,9 +34,9 @@ class TextEditorActivity : BaseComponentActivity(), KoinComponent {
         }
     }
 
-    private fun Intent.getValidator(default: ExtraValidator): TextValidator {
-        return when (getEnumExtra<ExtraValidator>(EXTRA_VALIDATOR) ?: default) {
-            ExtraValidator.WebUriTextValidator -> WebUriTextValidator
+    private fun Intent.getValidator(default: Validator): TextValidator<Uri> {
+        return when (getEnumExtra<Validator>(EXTRA_VALIDATOR) ?: default) {
+            Validator.WebUriTextValidator -> WebUriTextValidator
         }
     }
 
@@ -48,7 +46,7 @@ class TextEditorActivity : BaseComponentActivity(), KoinComponent {
         val initialText = intent.getStringExtra(EXTRA_TEXT) ?: ""
 
         val source = intent.getSource(ExtraSource.ClipboardCard)
-        val validator = intent.getValidator(ExtraValidator.WebUriTextValidator)
+        val validator = intent.getValidator(Validator.WebUriTextValidator)
 
         setContent(edgeToEdge = true) {
             AppTheme {

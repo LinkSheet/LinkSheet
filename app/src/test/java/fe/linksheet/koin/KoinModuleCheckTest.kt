@@ -200,7 +200,9 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<LogTextSettingsViewModel>(),
         definition<MarkdownViewModel>(Request::class, WikiCacheRepository::class),
-        definition<LibRedirectServiceSettingsViewModel>(),
+        definition<LibRedirectServiceSettingsViewModel>(
+            CoroutineDispatcher::class
+        ),
         definition<BottomSheetViewModel>(
             ImageLoader::class,
             IntentResolver::class,

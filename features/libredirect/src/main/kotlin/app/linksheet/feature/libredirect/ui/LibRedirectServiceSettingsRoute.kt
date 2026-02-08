@@ -1,13 +1,16 @@
 package app.linksheet.feature.libredirect.ui
 
+import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -20,14 +23,18 @@ import app.linksheet.feature.libredirect.R
 import app.linksheet.feature.libredirect.ServiceSettings
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
+import fe.android.compose.content.OptionalContent
 import fe.android.compose.extension.enabled
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.compose.text.TextContent
+import fe.composekit.component.CommonDefaults
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.composekit.component.list.item.type.SwitchListItem
+import fe.composekit.component.shape.CustomShapeDefaults
 import fe.linksheet.web.HostUtil
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -53,16 +60,28 @@ fun LibRedirectServiceSettingsRoute(
     val selectedFrontend by viewModel.selectedFrontend.collectOnIO(null)
     val enabled by viewModel.enabled.collectOnIO(false)
 
-    let2(settings, selectedFrontend) { settings, selectedFrontend ->
+    let2(settings, selectedFrontend) { settings, (default, state) ->
+        val userInstances by viewModel.getUserInstances(state.frontendKey).collectAsStateWithLifecycle(
+            initialValue = emptyList()
+        )
         LibRedirectServiceSettingsRouteInternal(
             enabled = enabled,
             settings = settings,
-            selected = selectedFrontend.first,
-            frontendState = selectedFrontend.second,
+            selected = default,
+            frontendState = state,
+            instances = state.instances,
+            userInstances = userInstances,
             onBackPressed = onBackPressed,
+            customInstancesExperiment = viewModel.customInstancesExperiment(),
             updateState = viewModel::updateState,
             updateInstance = viewModel::updateInstance,
             resetServiceToFrontend = viewModel::resetServiceToFrontend,
+            addInstance = {
+                viewModel.addInstance(state.frontendKey, it.toString())
+            },
+            deleteInstance = {
+                viewModel.deleteInstance(state.frontendKey, it)
+            }
         )
     }
 }
@@ -85,22 +104,31 @@ private fun LibRedirectServiceSettingsRouteInternal(
     settings: ServiceSettings,
     selected: LibRedirectDefault,
     frontendState: FrontendState,
+    instances: Set<String>,
+    userInstances: List<String>,
     onBackPressed: () -> Unit,
+    customInstancesExperiment: Boolean,
     updateState: (Boolean) -> Unit,
-    updateInstance: (LibRedirectDefault, String) -> Unit,
-    resetServiceToFrontend: (FrontendState) -> Unit
+    updateInstance: (LibRedirectDefault, String, Boolean) -> Unit,
+    resetServiceToFrontend: (FrontendState) -> Unit,
+    addInstance: (Uri) -> Unit,
+    deleteInstance: (String) -> Unit
 ) {
+    val libRedirectDialog = rememberLibRedirectInstanceDialog(onConfirm = addInstance)
+
     SaneScaffoldSettingsPage(
         headline = stringResource(R.string.lib_redirect_service, settings.service.name),
         onBackPressed = onBackPressed,
         floatingActionButton = {
-            FloatingActionButton(
-                modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
-                onClick = {
-
+            if (customInstancesExperiment) {
+                FloatingActionButton(
+                    modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
+                    onClick = {
+                        libRedirectDialog.open()
+                    }
+                ) {
+                    Icon(imageVector = Icons.Outlined.Add, contentDescription = null)
                 }
-            ) {
-                Icon(imageVector = Icons.Outlined.Add, contentDescription = null)
             }
         }
     ) {
@@ -126,41 +154,97 @@ private fun LibRedirectServiceSettingsRouteInternal(
 
         divider(id = R.string.instance)
 
-        group(size = frontendState.instances.size + 1) {
+        group(size = instances.size + userInstances.size + 1) {
             item(key = R.string.random_instance) { padding, shape ->
-                RadioButtonListItem(
+                InstanceListItem(
+                    instance = LibRedirectDefault.randomInstance,
                     shape = shape,
                     padding = padding,
-                    enabled = enabled.toEnabledContentSet(),
-                    selected = selected.instanceUrl == LibRedirectDefault.randomInstance,
-                    onSelect = {
-                        updateInstance(selected, LibRedirectDefault.randomInstance)
-                    },
-                    position = ContentPosition.Leading,
+                    enabled = enabled,
                     headlineContent = textContent(R.string.random_instance),
-                    otherContent = null
+                    selected = selected.instanceUrl == LibRedirectDefault.randomInstance,
+                    onSelect = { updateInstance(selected, LibRedirectDefault.randomInstance, false) },
                 )
             }
 
-            for (instance in frontendState.instances) {
+            for (instance in instances) {
                 item(key = instance) { padding, shape ->
-                    RadioButtonListItem(
+                    InstanceListItem(
+                        instance = instance,
                         shape = shape,
                         padding = padding,
-                        enabled = enabled.toEnabledContentSet(),
+                        enabled = enabled,
                         selected = selected.instanceUrl == instance,
-                        onSelect = {
-                            updateInstance(selected, instance)
-                        },
-                        position = ContentPosition.Leading,
-                        headlineContent = text(HostUtil.cleanHttpsScheme(instance)),
-                        otherContent = null
+                        onSelect = { updateInstance(selected, instance, false) }
+                    )
+                }
+            }
+
+            for (instance in userInstances) {
+                item(key = instance) { padding, shape ->
+                    UserDefinedInstanceListItem(
+                        instance = instance,
+                        shape = shape,
+                        padding = padding,
+                        enabled = enabled,
+                        selected = selected.instanceUrl == instance,
+                        onSelect = { updateInstance(selected, instance, true) },
+                        onDelete = { deleteInstance(instance) }
                     )
                 }
             }
         }
     }
 }
+
+@Composable
+private fun InstanceListItem(
+    shape: Shape = CustomShapeDefaults.SingleShape,
+    padding: PaddingValues = CommonDefaults.EmptyPadding,
+    enabled: Boolean,
+    selected: Boolean,
+    instance: String,
+    headlineContent: TextContent? = null,
+    otherContent: OptionalContent = null,
+    onSelect: () -> Unit,
+) {
+    RadioButtonListItem(
+        shape = shape,
+        padding = padding,
+        enabled = enabled.toEnabledContentSet(),
+        selected = selected,
+        onSelect = onSelect,
+        position = ContentPosition.Leading,
+        headlineContent = headlineContent ?: text(HostUtil.cleanHttpsScheme(instance)),
+        otherContent = otherContent
+    )
+}
+
+@Composable
+private fun UserDefinedInstanceListItem(
+    shape: Shape = CustomShapeDefaults.SingleShape,
+    padding: PaddingValues = CommonDefaults.EmptyPadding,
+    enabled: Boolean,
+    selected: Boolean,
+    instance: String,
+    onSelect: () -> Unit,
+    onDelete: () -> Unit
+) {
+    InstanceListItem(
+        shape = shape,
+        padding = padding,
+        enabled = enabled,
+        selected = selected,
+        onSelect = onSelect,
+        instance = instance,
+        otherContent = {
+            FilledTonalIconButton(onClick = onDelete) {
+                Icon(imageVector = Icons.Rounded.DeleteOutline, contentDescription = null)
+            }
+        }
+    )
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -243,10 +327,32 @@ private fun LibRedirectServiceSettingsRoutePreview() {
             ),
             selected = libRedirectDefault,
             frontendState = frontendState,
+            instances = frontendState.instances,
+            userInstances = listOf(),
             onBackPressed = {},
+            customInstancesExperiment = false,
             updateState = {},
-            updateInstance = { _, _ -> },
-            resetServiceToFrontend = {}
+            updateInstance = { _, _, _ -> },
+            resetServiceToFrontend = {},
+            addInstance = { _ ->
+
+            },
+            deleteInstance = {
+
+            }
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun InstanceListItemPreview() {
+    PreviewContainer {
+        InstanceListItem(
+            enabled = true,
+            selected = false,
+            instance = "reddit.linksheet.app",
+            onSelect = {}
         )
     }
 }

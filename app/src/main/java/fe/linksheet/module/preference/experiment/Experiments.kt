@@ -58,11 +58,14 @@ object Experiments : PreferenceDefinition(
         key = "experiment_scenario"
     )
 
+    val libRedirectCustomInstances = boolean(
+        key = "libredirect_custom_instances",
+    )
+
     val experiments = listOf(
         group(
             name = "improved_bottom_sheet",
             displayName = "Improved bottom sheet",
-            experiment("LibRedirect QuickJS engine", libRedirectJsEngine),
             experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),
             experiment("Disable bottom sheet state save", noBottomSheetStateSave),
         ),
@@ -80,6 +83,12 @@ object Experiments : PreferenceDefinition(
             name = "new_vlh",
             displayName = "New verified link handlers page",
             experiment("Enable new VLH page", newVlh)
+        ),
+        group(
+            name = "libredirect",
+            displayName = "LibRedirect",
+            experiment("QuickJS engine", libRedirectJsEngine),
+            experiment("Custom instances", libRedirectCustomInstances)
         )
     )
 

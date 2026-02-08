@@ -1,5 +1,6 @@
 package fe.linksheet.composable.page.edit
 
+import android.net.Uri
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
@@ -7,8 +8,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +27,8 @@ import androidx.core.widget.addTextChangedListener
 import fe.android.compose.system.rememberSystemService
 import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
+import fe.linksheet.TextValidator
+import fe.linksheet.WebUriTextValidator
 
 
 private val editorPadding = 16.dp
@@ -31,7 +37,7 @@ private val editorPadding = 16.dp
 @Composable
 fun TextEditorPage(
     source: TextSource = TextSource.ClipboardCard,
-    validator: TextValidator = WebUriTextValidator,
+    validator: TextValidator<Uri> = WebUriTextValidator,
     initialText: String,
     onDone: (String) -> Unit,
     onDismiss: () -> Unit,

@@ -3,6 +3,10 @@ package app.linksheet.feature.libredirect.preference
 import app.linksheet.api.PreferenceRegistry
 import fe.android.preference.helper.Preference
 
+enum class Experiment {
+    CustomInstances
+}
+
 interface LibRedirectPreferences {
     val enable: Preference.Boolean
     val enableIgnoreLibRedirectButton: Preference.Boolean

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_scenario__title_scenarios">Scenariusze</string>
+    <string name="settings_scenario__text_scenarios">Konfiguruj scenariusze</string>
+    <string name="settings_scenario__text_data_type">Typ danych</string>
+    <string name="settings_scenario__text_value">Wartość</string>
+    <string name="settings_scenario__title_new_scenario_dialog">Nowy scenariusz</string>
+    <string name="settings_scenario__text_placeholder_instance">Nazwa scenariusza</string>
+    <string name="settings_scenario__divider_rules">Reguły</string>
+</resources>

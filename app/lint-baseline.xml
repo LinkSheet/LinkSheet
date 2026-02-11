@@ -1,2097 +1,2676 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 8.10.0" type="baseline" client="gradle" dependencies="false" name="AGP (8.10.0)"
-        variant="all" version="8.10.0">
+<issues format="6" by="lint 8.10.0" type="baseline" client="gradle" dependencies="false" name="AGP (8.10.0)" variant="all" version="8.10.0">
 
     <issue
-            id="ConfigurationScreenWidthHeight"
-            message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
-            errorLine1="    val width = LocalConfiguration.current.screenWidthDp.dp - targetWidth"
-            errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="MissingTvBanner"
+        message="Expecting `android:banner` with the `&lt;application>` tag or each Leanback launcher activity"
+        errorLine1="    &lt;application"
+        errorLine2="     ~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetPreApi30.kt"
-                line="41"
-                column="17"/>
+            file="src/main/AndroidManifest.xml"
+            line="38"
+            column="6"/>
     </issue>
 
     <issue
-            id="LocalContextResourcesRead"
-            message="Reading Resources using LocalContext.current.resources"
-            errorLine1="                    clipboardManager.setText(context.resources.getString(R.string.log), text)"
-            errorLine2="                                             ~~~~~~~~~~~~~~~~~">
+        id="ImpliedTouchscreenHardware"
+        message="Hardware feature `android.hardware.touchscreen` not explicitly marked as optional "
+        errorLine1="&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2=" ~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/composable/util/ExportLogDialog.kt"
-                line="115"
-                column="46"/>
+            file="src/main/AndroidManifest.xml"
+            line="2"
+            column="2"/>
     </issue>
 
     <issue
-            id="LocalContextResourcesRead"
-            message="Reading Resources using LocalContext.current.resources"
-            errorLine1="    val resources = LocalContext.current.resources"
-            errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="MissingLeanbackSupport"
+        message="Expecting `&lt;uses-feature android:name=&quot;android.software.leanback&quot; android:required=&quot;false&quot; />` tag"
+        errorLine1="&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2=" ~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/composable/page/settings/link/libredirect/NewLibRedirectServiceSettingsRoute.kt"
-                line="54"
-                column="21"/>
+            file="src/main/AndroidManifest.xml"
+            line="2"
+            column="2"/>
     </issue>
 
     <issue
-            id="LocalContextResourcesRead"
-            message="Reading Resources using LocalContext.current.resources"
-            errorLine1="    val resources = LocalContext.current.resources"
-            errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="WrongConstant"
+        message="Must be one of: Service.START_STICKY_COMPATIBILITY, Service.START_STICKY, Service.START_NOT_STICKY, Service.START_REDELIVER_INTENT"
+        errorLine1="        return 1"
+        errorLine2="               ~">
         <location
-                file="src/main/java/fe/linksheet/composable/page/settings/link/libredirect/NewLibRedirectSettingsRoute.kt"
-                line="93"
-                column="21"/>
+            file="src/main/java/fe/linksheet/feature/engine/LinkEngineService.kt"
+            line="18"
+            column="16"/>
     </issue>
 
     <issue
-            id="LocalContextResourcesRead"
-            message="Reading Resources using LocalContext.current.resources"
-            errorLine1="    val resources = LocalContext.current.resources"
-            errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="NonObservableLocale"
+        message="Reading locale in a non-observable way in a composable function"
+        errorLine1="                val list = LocaleListCompat.getAdjustedDefault()"
+        errorLine2="                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/composable/page/settings/apps/verifiedlinkhandlers/VerifiedAppListItem.kt"
-                line="150"
-                column="21"/>
+            file="src/debug/java/fe/linksheet/debug/activity/locale/LocaleScreen.kt"
+            line="43"
+            column="28"/>
     </issue>
 
     <issue
-            id="ModifierParameter"
-            message="Optional Modifier parameter should have a default value of `Modifier`"
-            errorLine1="    modifier: Modifier = AlertCardDefaults.MinHeight,"
-            errorLine2="    ~~~~~~~~">
+        id="ConfigurationScreenWidthHeight"
+        message="Using Configuration.screenWidthDp instead of LocalWindowInfo.current.containerSize"
+        errorLine1="    val width = LocalConfiguration.current.screenWidthDp.dp - targetWidth"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/composable/page/settings/app/AppConfigRoute.kt"
-                line="175"
-                column="5"/>
+            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetPreApi30.kt"
+            line="41"
+            column="17"/>
     </issue>
 
     <issue
-            id="ModifierParameter"
-            message="Optional Modifier parameter should have a default value of `Modifier`"
-            errorLine1="    modifier: Modifier = AlertCardDefaults.MinHeight,"
-            errorLine2="    ~~~~~~~~">
+        id="ModifierParameter"
+        message="Optional Modifier parameter should have a default value of `Modifier`"
+        errorLine1="    modifier: Modifier = AlertCardDefaults.MinHeight,"
+        errorLine2="    ~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/activity/bottomsheet/content/failure/FailureSheetLinkCard.kt"
-                line="27"
-                column="5"/>
+            file="src/main/java/fe/linksheet/composable/page/settings/app/AppConfigRoute.kt"
+            line="174"
+            column="5"/>
     </issue>
 
     <issue
-            id="ModifierParameter"
-            message="Modifier parameter should be named modifier"
-            errorLine1="    contentModifier: Modifier,"
-            errorLine2="    ~~~~~~~~~~~~~~~">
+        id="ModifierParameter"
+        message="Optional Modifier parameter should have a default value of `Modifier`"
+        errorLine1="    modifier: Modifier = AlertCardDefaults.MinHeight,"
+        errorLine2="    ~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheet.kt"
-                line="16"
-                column="5"/>
+            file="src/main/java/fe/linksheet/activity/bottomsheet/content/failure/FailureSheetLinkCard.kt"
+            line="27"
+            column="5"/>
     </issue>
 
     <issue
-            id="ModifierParameter"
-            message="Modifier parameter should be named modifier"
-            errorLine1="    contentModifier: Modifier,"
-            errorLine2="    ~~~~~~~~~~~~~~~">
+        id="ModifierParameter"
+        message="Modifier parameter should be named modifier"
+        errorLine1="    contentModifier: Modifier,"
+        errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheet.kt"
-                line="38"
-                column="5"/>
+            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheet.kt"
+            line="16"
+            column="5"/>
     </issue>
 
     <issue
-            id="ModifierParameter"
-            message="Modifier parameter should be named modifier"
-            errorLine1="    contentModifier: Modifier,"
-            errorLine2="    ~~~~~~~~~~~~~~~">
+        id="ModifierParameter"
+        message="Modifier parameter should be named modifier"
+        errorLine1="    contentModifier: Modifier,"
+        errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetApi30.kt"
-                line="29"
-                column="5"/>
+            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheet.kt"
+            line="38"
+            column="5"/>
     </issue>
 
     <issue
-            id="ModifierParameter"
-            message="Modifier parameter should be named modifier"
-            errorLine1="    contentModifier: Modifier,"
-            errorLine2="    ~~~~~~~~~~~~~~~">
+        id="ModifierParameter"
+        message="Modifier parameter should be named modifier"
+        errorLine1="    contentModifier: Modifier,"
+        errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetPreApi30.kt"
-                line="29"
-                column="5"/>
+            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetApi30.kt"
+            line="29"
+            column="5"/>
     </issue>
 
     <issue
-            id="ModifierParameter"
-            message="Modifier parameter should be the first optional parameter"
-            errorLine1="    modifier: Modifier = Modifier,"
-            errorLine2="    ~~~~~~~~">
+        id="ModifierParameter"
+        message="Modifier parameter should be named modifier"
+        errorLine1="    contentModifier: Modifier,"
+        errorLine2="    ~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/composable/page/settings/SettingsScaffold.kt"
-                line="76"
-                column="5"/>
+            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetPreApi30.kt"
+            line="29"
+            column="5"/>
     </issue>
 
     <issue
-            id="PrivateResource"
-            message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-alpha03. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x1&quot; type=&quot;dimen&quot;>0.3&lt;/item>"
-            errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="PrivateResource"
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x1&quot; type=&quot;dimen&quot;>0.3&lt;/item>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="3"
-                column="32"/>
+            file="src/main/res/values/values.xml"
+            line="3"
+            column="32"/>
     </issue>
 
     <issue
-            id="PrivateResource"
-            message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-alpha03. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x2&quot; type=&quot;dimen&quot;>0.8&lt;/item>"
-            errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="PrivateResource"
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x2&quot; type=&quot;dimen&quot;>0.8&lt;/item>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="4"
-                column="32"/>
+            file="src/main/res/values/values.xml"
+            line="4"
+            column="32"/>
     </issue>
 
     <issue
-            id="PrivateResource"
-            message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-alpha03. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y1&quot; type=&quot;dimen&quot;>0&lt;/item>"
-            errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="PrivateResource"
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y1&quot; type=&quot;dimen&quot;>0&lt;/item>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="5"
-                column="32"/>
+            file="src/main/res/values/values.xml"
+            line="5"
+            column="32"/>
     </issue>
 
     <issue
-            id="PrivateResource"
-            message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-alpha03. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y2&quot; type=&quot;dimen&quot;>0.2&lt;/item>"
-            errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="PrivateResource"
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y2&quot; type=&quot;dimen&quot;>0.2&lt;/item>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="6"
-                column="32"/>
+            file="src/main/res/values/values.xml"
+            line="6"
+            column="32"/>
     </issue>
 
     <issue
-            id="PrivateResource"
-            message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-alpha03. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x1&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
-            errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="PrivateResource"
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x1&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="7"
-                column="32"/>
+            file="src/main/res/values/values.xml"
+            line="7"
+            column="32"/>
     </issue>
 
     <issue
-            id="PrivateResource"
-            message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-alpha03. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x2&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
-            errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="PrivateResource"
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x2&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="8"
-                column="32"/>
+            file="src/main/res/values/values.xml"
+            line="8"
+            column="32"/>
     </issue>
 
     <issue
-            id="PrivateResource"
-            message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-alpha03. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y1&quot; type=&quot;dimen&quot;>0.7&lt;/item>"
-            errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="PrivateResource"
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y1&quot; type=&quot;dimen&quot;>0.7&lt;/item>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="9"
-                column="32"/>
+            file="src/main/res/values/values.xml"
+            line="9"
+            column="32"/>
     </issue>
 
     <issue
-            id="PrivateResource"
-            message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-alpha03. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y2&quot; type=&quot;dimen&quot;>1&lt;/item>"
-            errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="PrivateResource"
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y2&quot; type=&quot;dimen&quot;>1&lt;/item>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="10"
-                column="32"/>
+            file="src/main/res/values/values.xml"
+            line="10"
+            column="32"/>
     </issue>
 
     <issue
-            id="DiscouragedApi"
-            message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
-            errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
-            errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="DiscouragedApi"
+        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
+        errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="59"
-                column="17"/>
+            file="src/main/AndroidManifest.xml"
+            line="69"
+            column="17"/>
     </issue>
 
     <issue
-            id="DiscouragedApi"
-            message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
-            errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
-            errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="DiscouragedApi"
+        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
+        errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="82"
-                column="17"/>
+            file="src/main/AndroidManifest.xml"
+            line="93"
+            column="17"/>
     </issue>
 
     <issue
-            id="DiscouragedApi"
-            message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
-            errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
-            errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="DiscouragedApi"
+        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
+        errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="88"
-                column="17"/>
+            file="src/main/AndroidManifest.xml"
+            line="99"
+            column="17"/>
     </issue>
 
     <issue
-            id="DiscouragedApi"
-            message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
-            errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
-            errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="DiscouragedApi"
+        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
+        errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="94"
-                column="17"/>
+            file="src/main/AndroidManifest.xml"
+            line="105"
+            column="17"/>
     </issue>
 
     <issue
-            id="MissingQuantity"
-            message="For locale &quot;cs&quot; (Czech) the following quantity should also be defined: `many` (e.g. &quot;10.0 dne&quot;)"
-            errorLine1="    &lt;plurals name=&quot;settings_verified_link_handlers__text_app_host_info_none_alt&quot;>"
-            errorLine2="    ^">
+        id="Typos"
+        message="Repeated word &quot;die&quot; in message: possible typo"
+        errorLine1="    &lt;string name=&quot;general_settings_explainer&quot;>Einstellungen, die die gesamte App betreffen&lt;/string>"
+        errorLine2="                                                             ^">
         <location
-                file="src/main/res/values-cs/strings.xml"
-                line="402"
-                column="5"/>
+            file="src/main/res/values-de/strings.xml"
+            line="191"
+            column="62"/>
     </issue>
 
     <issue
-            id="MissingQuantity"
-            message="For locale &quot;cs&quot; (Czech) the following quantity should also be defined: `many` (e.g. &quot;10.0 dne&quot;)"
-            errorLine1="    &lt;plurals name=&quot;settings_verified_link_handlers__text_app_host_info_none&quot;>"
-            errorLine2="    ^">
+        id="Typos"
+        message="Repeated word &quot;tek&quot; in message: possible typo"
+        errorLine1="    &lt;string name=&quot;onboarding_2_card_explainer&quot;>Shizuku, LinkSheet\&apos;in (bir sonraki adım olan) bütün uygulamaların varsayılan bağlantı açma davranışını tek tek kapatmak yerine, tek seferde kapatmasına izin verir.&lt;/string>"
+        errorLine2="                                                                                                                                                       ^">
         <location
-                file="src/main/res/values-cs/strings.xml"
-                line="407"
-                column="5"/>
+            file="src/main/res/values-tr/strings.xml"
+            line="305"
+            column="152"/>
     </issue>
 
     <issue
-            id="MissingQuantity"
-            message="For locale &quot;cs&quot; (Czech) the following quantity should also be defined: `many` (e.g. &quot;10.0 dne&quot;)"
-            errorLine1="    &lt;plurals name=&quot;settings_verified_link_handlers__text_app_host_info_selected&quot;>"
-            errorLine2="    ^">
+        id="ExtraTranslation"
+        message="&quot;enable_request_private_browsing_button_explainer&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;enable_request_private_browsing_button_explainer&quot;>Добавя в долното меню бутон, който отваря посетената препратка в поверителен режим. Поддържани мрежови четци: %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-cs/strings.xml"
-                line="471"
-                column="5"/>
+            file="src/main/res/values-bg/strings.xml"
+            line="88"
+            column="13"/>
     </issue>
 
     <issue
-            id="MissingQuantity"
-            message="For locale &quot;cs&quot; (Czech) the following quantity should also be defined: `many` (e.g. &quot;10.0 dne&quot;)"
-            errorLine1="    &lt;plurals name=&quot;settings_verified_link_handlers__text_app_host_info_selected_alt&quot;>"
-            errorLine2="    ^">
+        id="ExtraTranslation"
+        message="&quot;enable_request_private_browsing_button&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;enable_request_private_browsing_button&quot;>Бутон за поверително разглеждане&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-cs/strings.xml"
-                line="476"
-                column="5"/>
+            file="src/main/res/values-bg/strings.xml"
+            line="90"
+            column="13"/>
     </issue>
 
     <issue
-            id="MissingQuantity"
-            message="For locale &quot;cs&quot; (Czech) the following quantity should also be defined: `many` (e.g. &quot;10.0 dne&quot;)"
-            errorLine1="    &lt;plurals name=&quot;settings_verified_link_handlers__text_app_host_info&quot;>"
-            errorLine2="    ^">
+        id="ExtraTranslation"
+        message="&quot;no_apps_found&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;no_apps_found&quot;>Не са открити приложения.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-cs/strings.xml"
-                line="481"
-                column="5"/>
+            file="src/main/res/values-bg/strings.xml"
+            line="143"
+            column="13"/>
     </issue>
 
     <issue
-            id="MissingQuantity"
-            message="For locale &quot;cs&quot; (Czech) the following quantity should also be defined: `many` (e.g. &quot;10.0 dne&quot;)"
-            errorLine1="    &lt;plurals name=&quot;settings_verified_link_handlers__text_app_host_info_verified&quot;>"
-            errorLine2="    ^">
+        id="ExtraTranslation"
+        message="&quot;switch_profile_explainer&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile_explainer&quot;>下のシートに、タップしたリンクを（仕事用）プロファイルで開くためのボタンを表示します。 LinkSheetが両方のプロファイルにインストールされ、設定 -&amp;gt; 特別なアプリへのアクセス -&amp;gt; 仕事とプライベートのアプリの接続を介して手動でリンクされている必要があります&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-cs/strings.xml"
-                line="486"
-                column="5"/>
+            file="src/main/res/values-ja/strings.xml"
+            line="153"
+            column="13"/>
     </issue>
 
     <issue
-            id="MissingQuantity"
-            message="For locale &quot;cs&quot; (Czech) the following quantity should also be defined: `many` (e.g. &quot;10.0 dne&quot;)"
-            errorLine1="    &lt;plurals name=&quot;settings_verified_link_handlers__text_app_host_info_verified_alt&quot;>"
-            errorLine2="    ^">
+        id="ExtraTranslation"
+        message="&quot;generic__label_work_profile&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;generic__label_work_profile&quot;>Werkprofiel&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-cs/strings.xml"
-                line="491"
-                column="5"/>
+            file="src/main/res/values-nl/strings.xml"
+            line="179"
+            column="13"/>
     </issue>
 
     <issue
-            id="MissingQuantity"
-            message="For locale &quot;cs&quot; (Czech) the following quantity should also be defined: `many` (e.g. &quot;10.0 dne&quot;)"
-            errorLine1="    &lt;plurals name=&quot;settings_verified_link_handlers__text_app_host_default_host&quot;>"
-            errorLine2="    ^">
+        id="ExtraTranslation"
+        message="&quot;generic__label_unknown_profile&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;generic__label_unknown_profile&quot;>Onbekend profiel&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-cs/strings.xml"
-                line="535"
-                column="5"/>
+            file="src/main/res/values-nl/strings.xml"
+            line="211"
+            column="13"/>
     </issue>
 
     <issue
-            id="Typos"
-            message="Repeated word &quot;die&quot; in message: possible typo"
-            errorLine1="    &lt;string name=&quot;general_settings_explainer&quot;>Einstellungen, die die gesamte App betreffen&lt;/string>"
-            errorLine2="                                                             ^">
+        id="ExtraTranslation"
+        message="&quot;switch_profile&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile&quot;>启用档案切换&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-de/strings.xml"
-                line="205"
-                column="62"/>
+            file="src/main/res/values-zh/strings.xml"
+            line="302"
+            column="13"/>
     </issue>
 
     <issue
-            id="Typos"
-            message="Repeated word &quot;tek&quot; in message: possible typo"
-            errorLine1="    &lt;string name=&quot;onboarding_2_card_explainer&quot;>Shizuku, LinkSheet\&apos;in (bir sonraki adım olan) bütün uygulamaların varsayılan bağlantı açma davranışını tek tek kapatmak yerine, tek seferde kapatmasına izin verir.&lt;/string>"
-            errorLine2="                                                                                                                                                       ^">
+        id="ExtraTranslation"
+        message="&quot;switch_profile&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile&quot;>Włącz przełączanie profili&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-tr/strings.xml"
-                line="322"
-                column="152"/>
+            file="src/main/res/values-pl/strings.xml"
+            line="312"
+            column="13"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `flavor`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;flavor&quot;>फ्लेवर:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="ExtraTranslation"
+        message="&quot;switch_profile_explainer&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile_explainer&quot;>在底栏中显示按钮，用于将点击的链接在（工作）空间中打开。两个空间都需要安装 LinkSheet，并使用“设置 -&amp;gt; 特殊应用权限 -&amp;gt; 关联的工作&amp;amp;个人应用”手动进行关联&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-hi/strings.xml"
-                line="23"
-                column="5"/>
+            file="src/main/res/values-zh/strings.xml"
+            line="318"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;switch_profile&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile&quot;>Превключване на профили&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-bg/strings.xml"
+            line="333"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;switch_profile_explainer&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile_explainer&quot;>Wyświetla przycisk w dolnym panelu, aby otworzyć kliknięty link w profilu (pracy). Wymaga, aby LinkSheet był zainstalowany w obu profilach i ręcznie powiązany za pomocą Ustawienia -&amp;gt; Aplikacje -&amp;gt; Aplikacje ze specjalnym dostępem -&amp;gt; Wspólny widok aplikacji służbowych i osobistych&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pl/strings.xml"
+            line="338"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;switch_profile&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile&quot;>Bật chuyển đổi hồ sơ&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-vi/strings.xml"
+            line="352"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;switch_profile_explainer&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile_explainer&quot;>Hiển thị một nút ở trang dưới cùng để mở liên kết đã nhấn trong hồ sơ (công việc-). Yêu cầu cài đặt LinkSheet trong cả hai cấu hình và được liên kết thủ công thông qua Thiết đặt -&amp;gt; Quyền truy cập ứng dụng đặc biệt -&amp;gt; Ứng dụng cá nhân và công việc được kết nối&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-vi/strings.xml"
+            line="353"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;switch_profile&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile&quot;>Schakelen tussen profielen inschakelen&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-nl/strings.xml"
+            line="418"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `flavor`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;flavor&quot;>फ्लेवर:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-hi/strings.xml"
+            line="23"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="199"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `last_updated`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;last_updated&quot;>अंतिम अपडेट की (यूटीसी):&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-hi/strings.xml"
+            line="29"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="255"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `built_at`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;built_at&quot;>(UTC) पर निर्मित:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-hi/strings.xml"
+            line="72"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="198"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `github_workflow_run_id`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;github_workflow_run_id&quot;>बिल्ड वर्कफ़्लो आईडी:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-hi/strings.xml"
+            line="77"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="200"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `version_name`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;version_name&quot;>पूर्ण आईडेंटिफायर:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-hi/strings.xml"
+            line="88"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="197"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `built_at`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;built_at&quot;>(UTC) \&apos;ਤੇ ਬਣਾਇਆ ਗਿਆ:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pa/strings.xml"
+            line="92"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="198"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `github_workflow_run_id`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;github_workflow_run_id&quot;>ਬਿਲਡ ਵਰਕਫਲੋ ਆਈਡੀ:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pa/strings.xml"
+            line="134"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="200"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `built_at`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;built_at&quot;>Build erstellt um (UTC):&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-de/strings.xml"
+            line="141"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="198"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `github_workflow_run_id`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;github_workflow_run_id&quot;>Build-Workflow-ID:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-de/strings.xml"
+            line="168"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="200"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `flavor`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;flavor&quot;>Flavor:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-ru/strings.xml"
+            line="187"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="199"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `built_at`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;built_at&quot;>Построено в (UTC):&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-ru/strings.xml"
+            line="188"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="198"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `version_name`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;version_name&quot;>ਪੂਰਾ ਪਛਾਣਕਰਤਾ:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pa/strings.xml"
+            line="193"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="197"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `github_workflow_run_id`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;github_workflow_run_id&quot;>Идентификатор рабочего процесса сборки:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-ru/strings.xml"
+            line="204"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="200"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `version_name`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;version_name&quot;>Vollständige Bezeichnung:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-de/strings.xml"
+            line="205"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="197"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `flavor`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;flavor&quot;>ਵੰਨਗੀ:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pa/strings.xml"
+            line="209"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="199"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `last_updated`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;last_updated&quot;>ਆਖਰੀ ਵਾਰ ਅੱਪਡੇਟ ਕੀਤਾ (UTC):&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pa/strings.xml"
+            line="227"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="255"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="StringFormatCount"
+        message="Inconsistent number of arguments in formatting string `version_name`; found both 0 here and 1 in values/strings.xml"
+        errorLine1="    &lt;string name=&quot;version_name&quot;>Полный идентификатор:&lt;/string>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-ru/strings.xml"
+            line="229"
+            column="5"/>
+        <location
+            file="src/main/res/values/strings.xml"
+            line="197"
+            column="5"
+            message="Conflicting number of arguments (1) here"/>
+    </issue>
+
+    <issue
+        id="UnusedTranslation"
+        message="The language `cs (Czech)` is present in this project, but not declared in the `localeConfig` resource"
+        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="UnusedTranslation"
+        message="The language `et (Estonian)` is present in this project, but not declared in the `localeConfig` resource"
+        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="UnusedTranslation"
+        message="The language `hu (Hungarian)` is present in this project, but not declared in the `localeConfig` resource"
+        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="UnusedTranslation"
+        message="The language `in (Indonesian)` is present in this project, but not declared in the `localeConfig` resource"
+        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="UnusedTranslation"
+        message="The language `lv (Latvian)` is present in this project, but not declared in the `localeConfig` resource"
+        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="UnusedTranslation"
+        message="The language `nl (Dutch)` is present in this project, but not declared in the `localeConfig` resource"
+        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="UnusedTranslation"
+        message="The language `pt (Portuguese)` is present in this project, but not declared in the `localeConfig` resource"
+        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="UnusedTranslation"
+        message="The language `pt (Portuguese)` is present in this project, but not declared in the `localeConfig` resource"
+        errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="215"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="35"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `last_updated`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;last_updated&quot;>अंतिम अपडेट की (यूटीसी):&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="ObsoleteSdkInt"
+        message="Unnecessary; `SDK_INT` is always >= 26"
+        errorLine1="                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> deviceLocale.stripExtensions()"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-hi/strings.xml"
-                line="29"
-                column="5"/>
+            file="src/main/java/fe/linksheet/module/language/AppLocaleService.kt"
+            line="54"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <location
+            file="src/debug/res/mipmap-anydpi-v26"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <location
+            file="src/main/res/mipmap-anydpi-v26"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.app_shizuku` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/app_shizuku.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.seed` appears to be unused"
+        errorLine1="    &lt;color name=&quot;seed&quot;>#6750A4&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="3"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_light_onSecondaryContainer` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_light_onSecondaryContainer&quot;>#1D192B&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="11"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_light_shadow` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_light_shadow&quot;>#000000&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="30"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_light_surfaceTint` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_light_surfaceTint&quot;>#6750A4&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="271"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/values/colors.xml"
+            line="31"
+            column="12"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `built_at`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;built_at&quot;>(UTC) पर निर्मित:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_light_outlineVariant` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_light_outlineVariant&quot;>#CAC4D0&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-hi/strings.xml"
-                line="72"
-                column="5"/>
+            file="src/main/res/values/colors.xml"
+            line="32"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_light_scrim` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_light_scrim&quot;>#000000&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="214"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/values/colors.xml"
+            line="33"
+            column="12"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `github_workflow_run_id`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;github_workflow_run_id&quot;>बिल्ड वर्कफ़्लो आईडी:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_dark_shadow` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_dark_shadow&quot;>#000000&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-hi/strings.xml"
-                line="77"
-                column="5"/>
+            file="src/main/res/values/colors.xml"
+            line="60"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_dark_surfaceTint` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_dark_surfaceTint&quot;>#D0BCFF&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="216"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/values/colors.xml"
+            line="61"
+            column="12"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `version_name`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;version_name&quot;>पूर्ण आईडेंटिफायर:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_dark_outlineVariant` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_dark_outlineVariant&quot;>#49454F&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-hi/strings.xml"
-                line="88"
-                column="5"/>
+            file="src/main/res/values/colors.xml"
+            line="62"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.md_theme_dark_scrim` appears to be unused"
+        errorLine1="    &lt;color name=&quot;md_theme_dark_scrim&quot;>#000000&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="213"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/values/colors.xml"
+            line="63"
+            column="12"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `built_at`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;built_at&quot;>(UTC) \&apos;ਤੇ ਬਣਾਇਆ ਗਿਆ:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.domain_verification_24` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
         <location
-                file="src/main/res/values-pa/strings.xml"
-                line="95"
-                column="5"/>
+            file="src/main/res/drawable/domain_verification_24.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.domain_verification_off_24` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
         <location
-                file="src/main/res/values/strings.xml"
-                line="214"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/domain_verification_off_24.xml"
+            line="1"
+            column="1"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `github_workflow_run_id`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;github_workflow_run_id&quot;>ਬਿਲਡ ਵਰਕਫਲੋ ਆਈਡੀ:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.mipmap.ic_notification_small` appears to be unused">
         <location
-                file="src/main/res/values-pa/strings.xml"
-                line="144"
-                column="5"/>
+            file="src/main/res/mipmap-hdpi/ic_notification_small.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.keep_off_24px` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
         <location
-                file="src/main/res/values/strings.xml"
-                line="216"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/keep_off_24px.xml"
+            line="1"
+            column="1"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `built_at`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;built_at&quot;>Build erstellt um (UTC):&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.leak_canary_test_class_name` appears to be unused"
+        errorLine1="    &lt;string name=&quot;leak_canary_test_class_name&quot; tools:ignore=&quot;MissingTranslation&quot;>__________no.Assert&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-de/strings.xml"
-                line="150"
-                column="5"/>
+            file="src/main/res/values/leak_canary_test_class_name.xml"
+            line="3"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding0_notext` appears to be unused">
         <location
-                file="src/main/res/values/strings.xml"
-                line="214"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/onboarding0_notext.webp"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `github_workflow_run_id`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;github_workflow_run_id&quot;>Build-Workflow-ID:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding0_notext_dark_resized` appears to be unused">
         <location
-                file="src/main/res/values-de/strings.xml"
-                line="180"
-                column="5"/>
+            file="src/main/res/drawable/onboarding0_notext_dark_resized.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding0_notext_resized` appears to be unused">
         <location
-                file="src/main/res/values/strings.xml"
-                line="216"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/onboarding0_notext_resized.webp"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `flavor`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;flavor&quot;>Flavor:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding2_notext` appears to be unused">
         <location
-                file="src/main/res/values-ru/strings.xml"
-                line="204"
-                column="5"/>
+            file="src/main/res/drawable/onboarding2_notext.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding2_notext_dark_resized` appears to be unused">
         <location
-                file="src/main/res/values/strings.xml"
-                line="215"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/onboarding2_notext_dark_resized.webp"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `built_at`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;built_at&quot;>Построено в (UTC):&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding2_notext_resized` appears to be unused">
         <location
-                file="src/main/res/values-ru/strings.xml"
-                line="205"
-                column="5"/>
+            file="src/main/res/drawable/onboarding2_notext_resized.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding3_notext` appears to be unused">
         <location
-                file="src/main/res/values/strings.xml"
-                line="214"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/onboarding3_notext.webp"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `version_name`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;version_name&quot;>ਪੂਰਾ ਪਛਾਣਕਰਤਾ:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding3_notext_dark_resized` appears to be unused">
         <location
-                file="src/main/res/values-pa/strings.xml"
-                line="210"
-                column="5"/>
+            file="src/main/res/drawable/onboarding3_notext_dark_resized.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding3_notext_resized` appears to be unused">
         <location
-                file="src/main/res/values/strings.xml"
-                line="213"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/onboarding3_notext_resized.webp"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `github_workflow_run_id`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;github_workflow_run_id&quot;>Идентификатор рабочего процесса сборки:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding6_notext` appears to be unused">
         <location
-                file="src/main/res/values-ru/strings.xml"
-                line="221"
-                column="5"/>
+            file="src/main/res/drawable/onboarding6_notext.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding6_notext_dark_resized` appears to be unused">
         <location
-                file="src/main/res/values/strings.xml"
-                line="216"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/onboarding6_notext_dark_resized.webp"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `version_name`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;version_name&quot;>Vollständige Bezeichnung:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding6_notext_resized` appears to be unused">
         <location
-                file="src/main/res/values-de/strings.xml"
-                line="222"
-                column="5"/>
+            file="src/main/res/drawable/onboarding6_notext_resized.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding7_notext` appears to be unused">
         <location
-                file="src/main/res/values/strings.xml"
-                line="213"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/onboarding7_notext.webp"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `flavor`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;flavor&quot;>ਵੰਨਗੀ:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding7_notext_dark_resized` appears to be unused">
         <location
-                file="src/main/res/values-pa/strings.xml"
-                line="226"
-                column="5"/>
+            file="src/main/res/drawable/onboarding7_notext_dark_resized.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.onboarding7_notext_resized` appears to be unused">
         <location
-                file="src/main/res/values/strings.xml"
-                line="215"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/main/res/drawable/onboarding7_notext_resized.webp"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `last_updated`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;last_updated&quot;>ਆਖਰੀ ਵਾਰ ਅੱਪਡੇਟ ਕੀਤਾ (UTC):&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.drawable.outline_domain_verification_24` appears to be unused"
+        errorLine1="&lt;vector android:height=&quot;24dp&quot; android:tint=&quot;#000000&quot;"
+        errorLine2="^">
         <location
-                file="src/main/res/values-pa/strings.xml"
-                line="244"
-                column="5"/>
+            file="src/main/res/drawable/outline_domain_verification_24.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.en` appears to be unused"
+        errorLine1="    &lt;string name=&quot;en&quot; translatable=&quot;false&quot;>English&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="271"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/debug/res/values/strings.xml"
+            line="6"
+            column="13"/>
     </issue>
 
     <issue
-            id="StringFormatCount"
-            message="Inconsistent number of arguments in formatting string `version_name`; found both 0 here and 1 in values/strings.xml"
-            errorLine1="    &lt;string name=&quot;version_name&quot;>Полный идентификатор:&lt;/string>"
-            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.hi` appears to be unused"
+        errorLine1="    &lt;string name=&quot;hi&quot; translatable=&quot;false&quot;>हिन्दी&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
         <location
-                file="src/main/res/values-ru/strings.xml"
-                line="246"
-                column="5"/>
+            file="src/debug/res/values/strings.xml"
+            line="7"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.fr` appears to be unused"
+        errorLine1="    &lt;string name=&quot;fr&quot; translatable=&quot;false&quot;>Français&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="213"
-                column="5"
-                message="Conflicting number of arguments (1) here"/>
+            file="src/debug/res/values/strings.xml"
+            line="8"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedTranslation"
-            message="The language `cs (Czech)` is present in this project, but not declared in the `localeConfig` resource"
-            errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
-            errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.opening_with_app` appears to be unused"
+        errorLine1="    &lt;string name=&quot;opening_with_app&quot;>Opening with %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="33"
-                column="35"/>
+            file="src/main/res/values/strings.xml"
+            line="8"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedTranslation"
-            message="The language `hu (Hungarian)` is present in this project, but not declared in the `localeConfig` resource"
-            errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
-            errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.default_apps` appears to be unused"
+        errorLine1="    &lt;string name=&quot;default_apps&quot;>Default apps&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="33"
-                column="35"/>
+            file="src/main/res/values/strings.xml"
+            line="9"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedTranslation"
-            message="The language `in (Indonesian)` is present in this project, but not declared in the `localeConfig` resource"
-            errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
-            errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.ja` appears to be unused"
+        errorLine1="    &lt;string name=&quot;ja&quot; translatable=&quot;false&quot;>日本語&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="33"
-                column="35"/>
+            file="src/debug/res/values/strings.xml"
+            line="9"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedTranslation"
-            message="The language `lv (Latvian)` is present in this project, but not declared in the `localeConfig` resource"
-            errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
-            errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.language` appears to be unused"
+        errorLine1="    &lt;string name=&quot;language&quot;>English&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="33"
-                column="35"/>
+            file="src/debug/res/values/strings.xml"
+            line="10"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedTranslation"
-            message="The language `nl (Dutch)` is present in this project, but not declared in the `localeConfig` resource"
-            errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
-            errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.preferred_apps_settings` appears to be unused"
+        errorLine1="    &lt;string name=&quot;preferred_apps_settings&quot;>Set preferred apps for hosts they support&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="33"
-                column="35"/>
+            file="src/main/res/values/strings.xml"
+            line="10"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedTranslation"
-            message="The language `pt (Portuguese)` is present in this project, but not declared in the `localeConfig` resource"
-            errorLine1="            android:localeConfig=&quot;@xml/locales_config&quot;"
-            errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.set_as_browser` appears to be unused"
+        errorLine1="    &lt;string name=&quot;set_as_browser&quot;>Set as browser&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="33"
-                column="35"/>
+            file="src/main/res/values/strings.xml"
+            line="11"
+            column="13"/>
     </issue>
 
     <issue
-            id="ExportedService"
-            message="Exported service does not require permission"
-            errorLine1="        &lt;service android:name=&quot;.InterconnectService&quot;"
-            errorLine2="         ~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.set_as_browser_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;set_as_browser_explainer&quot;>Tap here to make LinkSheet the default browser&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/AndroidManifest.xml"
-                line="191"
-                column="10"/>
+            file="src/main/res/values/strings.xml"
+            line="12"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.seed` appears to be unused"
-            errorLine1="    &lt;color name=&quot;seed&quot;>#6750A4&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.apps_which_can_open_links_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;apps_which_can_open_links_explainer&quot;>Tap an app to open the \&quot;Open by default\&quot; menu which allows you to disable automatic link opening&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="3"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="14"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_light_onSecondaryContainer` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_light_onSecondaryContainer&quot;>#1D192B&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.apps_which_can_open_links_explainer_2` appears to be unused"
+        errorLine1="    &lt;string name=&quot;apps_which_can_open_links_explainer_2&quot;>Lists all apps which may interfere with LinkSheet\&apos;s behavior&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="11"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="15"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_light_shadow` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_light_shadow&quot;>#000000&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.no_preferred_apps_set_yet` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_preferred_apps_set_yet&quot;>No apps have been set as preferred yet.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="30"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="16"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_light_surfaceTint` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_light_surfaceTint&quot;>#6750A4&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.confirm` appears to be unused"
+        errorLine1="    &lt;string name=&quot;confirm&quot;>Confirm&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="31"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="20"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_light_outlineVariant` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_light_outlineVariant&quot;>#CAC4D0&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.clear` appears to be unused"
+        errorLine1="    &lt;string name=&quot;clear&quot;>Clear&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="32"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="21"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_light_scrim` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_light_scrim&quot;>#000000&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.send_to` appears to be unused"
+        errorLine1="    &lt;string name=&quot;send_to&quot;>Share to&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="33"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="31"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_dark_shadow` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_dark_shadow&quot;>#000000&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.default_apps_subtitle` appears to be unused"
+        errorLine1="    &lt;string name=&quot;default_apps_subtitle&quot;>Set default apps for hosts&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="60"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="32"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_dark_surfaceTint` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_dark_surfaceTint&quot;>#D0BCFF&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.remove_all` appears to be unused"
+        errorLine1="    &lt;string name=&quot;remove_all&quot;>Remove all&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="61"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="35"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_dark_outlineVariant` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_dark_outlineVariant&quot;>#49454F&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.add_all` appears to be unused"
+        errorLine1="    &lt;string name=&quot;add_all&quot;>Add all&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="62"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="36"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.color.md_theme_dark_scrim` appears to be unused"
-            errorLine1="    &lt;color name=&quot;md_theme_dark_scrim&quot;>#000000&lt;/color>"
-            errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.set_as_browser_done` appears to be unused"
+        errorLine1="    &lt;string name=&quot;set_as_browser_done&quot;>LinkSheet has been set as default browser!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/colors.xml"
-                line="63"
-                column="12"/>
+            file="src/main/res/values/strings.xml"
+            line="41"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.domain_verification_24` appears to be unused"
-            errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
-            errorLine2="^">
+        id="UnusedResources"
+        message="The resource `R.string.browser_status` appears to be unused"
+        errorLine1="    &lt;string name=&quot;browser_status&quot;>Browser status&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/domain_verification_24.xml"
-                line="2"
-                column="1"/>
+            file="src/main/res/values/strings.xml"
+            line="42"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.domain_verification_off_24` appears to be unused"
-            errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
-            errorLine2="^">
+        id="UnusedResources"
+        message="The resource `R.string.selected_browser_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;selected_browser_explainer&quot;>This browser will automatically be opened if no native app can handle the clicked link&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/domain_verification_off_24.xml"
-                line="1"
-                column="1"/>
+            file="src/main/res/values/strings.xml"
+            line="46"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.keep_off_24px` appears to be unused"
-            errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
-            errorLine2="^">
+        id="UnusedResources"
+        message="The resource `R.string.disabled` appears to be unused"
+        errorLine1="    &lt;string name=&quot;disabled&quot;>Disabled&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/keep_off_24px.xml"
-                line="1"
-                column="1"/>
+            file="src/main/res/values/strings.xml"
+            line="47"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.leak_canary_test_class_name` appears to be unused"
-            errorLine1="    &lt;string name=&quot;leak_canary_test_class_name&quot; tools:ignore=&quot;MissingTranslation&quot;>__________no.Assert&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.whitelisted_browsers` appears to be unused"
+        errorLine1="    &lt;string name=&quot;whitelisted_browsers&quot;>Whitelisted browsers&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/leak_canary_test_class_name.xml"
-                line="3"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="52"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding0_notext` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.enable_request_private_browsing_button_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;enable_request_private_browsing_button_explainer&quot;>Добавя в долното меню бутон, който отваря посетената препратка в поверителен режим. Поддържани мрежови четци: %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding0_notext.webp"/>
+            file="src/main/res/values-bg/strings.xml"
+            line="88"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding0_notext_dark_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.resolved_via` appears to be unused"
+        errorLine1="    &lt;string name=&quot;resolved_via&quot;>%s resolved via %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding0_notext_dark_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="88"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding0_notext_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.enable_request_private_browsing_button` appears to be unused"
+        errorLine1="    &lt;string name=&quot;enable_request_private_browsing_button&quot;>Бутон за поверително разглеждане&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding0_notext_resized.webp"/>
+            file="src/main/res/values-bg/strings.xml"
+            line="90"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding2_notext` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.add` appears to be unused"
+        errorLine1="    &lt;string name=&quot;add&quot;>Add&lt;/string>"
+        errorLine2="            ~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding2_notext.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="92"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding2_notext_dark_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.select_an_app` appears to be unused"
+        errorLine1="    &lt;string name=&quot;select_an_app&quot;>Select an app&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding2_notext_dark_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="93"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding2_notext_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.close` appears to be unused"
+        errorLine1="    &lt;string name=&quot;close&quot;>Close&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding2_notext_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="94"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding3_notext` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.linksheet_download` appears to be unused"
+        errorLine1="    &lt;string name=&quot;linksheet_download&quot;>LinkSheet Download&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding3_notext.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="100"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding3_notext_dark_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.no_apps_which_can_handle_links_found` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_apps_which_can_handle_links_found&quot;>No apps which can handle links have been found.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding3_notext_dark_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="114"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding3_notext_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.copy_to_clipboard` appears to be unused"
+        errorLine1="    &lt;string name=&quot;copy_to_clipboard&quot;>Copy to clipboard&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding3_notext_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="121"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding6_notext` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.resolve_failed` appears to be unused"
+        errorLine1="    &lt;string name=&quot;resolve_failed&quot;>%s failed: %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding6_notext.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="134"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding6_notext_dark_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.no_browsers_found` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_browsers_found&quot;>No browsers found.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding6_notext_dark_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="135"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding6_notext_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.export_log` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_log&quot;>Export log&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding6_notext_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="137"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding7_notext` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.log` appears to be unused"
+        errorLine1="    &lt;string name=&quot;log&quot;>Log&lt;/string>"
+        errorLine2="            ~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding7_notext.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="139"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding7_notext_dark_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.redact_log` appears to be unused"
+        errorLine1="    &lt;string name=&quot;redact_log&quot;>Redact log (recommended, disabling this may leak package names and host names)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding7_notext_dark_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="140"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.onboarding7_notext_resized` appears to be unused">
+        id="UnusedResources"
+        message="The resource `R.string.include_settings` appears to be unused"
+        errorLine1="    &lt;string name=&quot;include_settings&quot;>Include settings (recommended)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/onboarding7_notext_resized.webp"/>
+            file="src/main/res/values/strings.xml"
+            line="141"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.drawable.outline_domain_verification_24` appears to be unused"
-            errorLine1="&lt;vector android:height=&quot;24dp&quot; android:tint=&quot;#000000&quot;"
-            errorLine2="^">
+        id="UnusedResources"
+        message="The resource `R.string.include_fingerprint` appears to be unused"
+        errorLine1="    &lt;string name=&quot;include_fingerprint&quot;>Include device fingerprint (recommended)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/outline_domain_verification_24.xml"
-                line="1"
-                column="1"/>
+            file="src/main/res/values/strings.xml"
+            line="142"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.en` appears to be unused"
-            errorLine1="    &lt;string name=&quot;en&quot; translatable=&quot;false&quot;>English&lt;/string>"
-            errorLine2="            ~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.log_privacy` appears to be unused"
+        errorLine1="    &lt;string name=&quot;log_privacy&quot;>To learn about log privacy, you can visit this &lt;annotation url-id=&quot;privacy-logs&quot;>link&lt;/annotation>.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/debug/res/values/strings.xml"
-                line="6"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="143"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.hi` appears to be unused"
-            errorLine1="    &lt;string name=&quot;hi&quot; translatable=&quot;false&quot;>हिन्दी&lt;/string>"
-            errorLine2="            ~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.no_apps_found` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_apps_found&quot;>Не са открити приложения.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/debug/res/values/strings.xml"
-                line="7"
-                column="13"/>
+            file="src/main/res/values-bg/strings.xml"
+            line="143"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.fr` appears to be unused"
-            errorLine1="    &lt;string name=&quot;fr&quot; translatable=&quot;false&quot;>Français&lt;/string>"
-            errorLine2="            ~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.switch_profile_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;switch_profile_explainer&quot;>下のシートに、タップしたリンクを（仕事用）プロファイルで開くためのボタンを表示します。 LinkSheetが両方のプロファイルにインストールされ、設定 -&amp;gt; 特別なアプリへのアクセス -&amp;gt; 仕事とプライベートのアプリの接続を介して手動でリンクされている必要があります&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/debug/res/values/strings.xml"
-                line="8"
-                column="13"/>
+            file="src/main/res/values-ja/strings.xml"
+            line="153"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.opening_with_app` appears to be unused"
-            errorLine1="    &lt;string name=&quot;opening_with_app&quot;>Opening with %s&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.shizuku` appears to be unused"
+        errorLine1="    &lt;string name=&quot;shizuku&quot;>Shizuku integration&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="8"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="154"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.default_apps` appears to be unused"
-            errorLine1="    &lt;string name=&quot;default_apps&quot;>Default apps&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.shizuku_explainer_short` appears to be unused"
+        errorLine1="    &lt;string name=&quot;shizuku_explainer_short&quot;>Interact with system APIs directly&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="9"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="155"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.ja` appears to be unused"
-            errorLine1="    &lt;string name=&quot;ja&quot; translatable=&quot;false&quot;>日本語&lt;/string>"
-            errorLine2="            ~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.apps_which_can_open_links_shizuku_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;apps_which_can_open_links_shizuku_explainer&quot;>Shizuku mode activated, tap an app to toggle its automatic link handling capabilities. Long tap an app to open its \&quot;Open by default\&quot; settings menu.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/debug/res/values/strings.xml"
-                line="9"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="157"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.language` appears to be unused"
-            errorLine1="    &lt;string name=&quot;language&quot;>English&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.enable_all` appears to be unused"
+        errorLine1="    &lt;string name=&quot;enable_all&quot;>Enable all&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
-                file="src/debug/res/values/strings.xml"
-                line="10"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="158"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.preferred_apps_settings` appears to be unused"
-            errorLine1="    &lt;string name=&quot;preferred_apps_settings&quot;>Set preferred apps for hosts they support&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.disable_all` appears to be unused"
+        errorLine1="    &lt;string name=&quot;disable_all&quot;>Disable all&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="10"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="159"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.set_as_browser` appears to be unused"
-            errorLine1="    &lt;string name=&quot;set_as_browser&quot;>Set as browser&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.feature_flags` appears to be unused"
+        errorLine1="    &lt;string name=&quot;feature_flags&quot;>Feature flags&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="11"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="165"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.set_as_browser_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;set_as_browser_explainer&quot;>Tap here to make LinkSheet the default browser&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.feature_flags_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;feature_flags_explainer&quot;>Enable or disable experimental features&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="12"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="166"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.apps_which_can_open_links_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;apps_which_can_open_links_explainer&quot;>Tap an app to open the \&quot;Open by default\&quot; menu which allows you to disable automatic link opening&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.launch_onboarding` appears to be unused"
+        errorLine1="    &lt;string name=&quot;launch_onboarding&quot;>Launch onboarding&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="14"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="167"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.no_preferred_apps_set_yet` appears to be unused"
-            errorLine1="    &lt;string name=&quot;no_preferred_apps_set_yet&quot;>No apps have been set as preferred yet.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.pretend_to_be_app` appears to be unused"
+        errorLine1="    &lt;string name=&quot;pretend_to_be_app&quot;>Intercept native app requests&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="16"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="168"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.confirm` appears to be unused"
-            errorLine1="    &lt;string name=&quot;confirm&quot;>Confirm&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.pretend_to_be_app_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;pretend_to_be_app_explainer&quot;>Pretend to be a native app for supported domains with LinkSheetCompat&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="20"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="169"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.send_to` appears to be unused"
-            errorLine1="    &lt;string name=&quot;send_to&quot;>Share to&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.pretend_to_be_app_explainer_2` appears to be unused"
+        errorLine1="    &lt;string name=&quot;pretend_to_be_app_explainer_2&quot;>Some apps like Google Chrome explicitly search for a native app to handle, for example, a Youtube link when it is tapped in the search results. LinkSheetCompat pretends to be such a native app for supported hosts and then forwards the request to LinkSheet.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="31"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="170"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.default_apps_subtitle` appears to be unused"
-            errorLine1="    &lt;string name=&quot;default_apps_subtitle&quot;>Set default apps for hosts&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.compat_installed` appears to be unused"
+        errorLine1="    &lt;string name=&quot;compat_installed&quot;>LinkSheetCompat is already installed&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="32"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="171"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.remove_all` appears to be unused"
-            errorLine1="    &lt;string name=&quot;remove_all&quot;>Remove all&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.configure` appears to be unused"
+        errorLine1="    &lt;string name=&quot;configure&quot;>Configure&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="35"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="172"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.add_all` appears to be unused"
-            errorLine1="    &lt;string name=&quot;add_all&quot;>Add all&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.configure_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;configure_explainer&quot;>Tap here to configure LinkSheetCompat&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="36"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="173"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.set_as_browser_done` appears to be unused"
-            errorLine1="    &lt;string name=&quot;set_as_browser_done&quot;>LinkSheet has been set as default browser!&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.no_handlers_found` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_handlers_found&quot;>No browser or native app found!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="42"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="176"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.browser_status` appears to be unused"
-            errorLine1="    &lt;string name=&quot;browser_status&quot;>Browser status&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.no_handlers_found_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_handlers_found_explainer&quot;>LinkSheet can not open this link.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="43"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="177"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.disabled` appears to be unused"
-            errorLine1="    &lt;string name=&quot;disabled&quot;>Disabled&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.success` appears to be unused"
+        errorLine1="    &lt;string name=&quot;success&quot;>Success&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="49"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="178"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.resolved_via` appears to be unused"
-            errorLine1="    &lt;string name=&quot;resolved_via&quot;>%s resolved via %s&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.generic__label_work_profile` appears to be unused"
+        errorLine1="    &lt;string name=&quot;generic__label_work_profile&quot;>Werkprofiel&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="90"
-                column="13"/>
+            file="src/main/res/values-nl/strings.xml"
+            line="179"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.add` appears to be unused"
-            errorLine1="    &lt;string name=&quot;add&quot;>Add&lt;/string>"
-            errorLine2="            ~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.at_least_one_known_browser_installed` appears to be unused"
+        errorLine1="    &lt;string name=&quot;at_least_one_known_browser_installed&quot;>At least one browser installed&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="100"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="180"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.select_an_app` appears to be unused"
-            errorLine1="    &lt;string name=&quot;select_an_app&quot;>Select an app&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.at_least_one_known_browser_installed_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;at_least_one_known_browser_installed_explainer&quot;>LinkSheet has detected at least one app known to be a browser.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="101"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="181"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.close` appears to be unused"
-            errorLine1="    &lt;string name=&quot;close&quot;>Close&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.at_least_one_unknown_browser_installer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;at_least_one_unknown_browser_installer&quot;>At least one (unknown) browser installed&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="102"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="182"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.no_apps_which_can_handle_links_found` appears to be unused"
-            errorLine1="    &lt;string name=&quot;no_apps_which_can_handle_links_found&quot;>No apps which can handle links have been found.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.at_least_one_unknown_browser_installer_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;at_least_one_unknown_browser_installer_explainer&quot;>LinkSheet has detected at least one app claiming to be a browser. LinkSheet\&apos;s list may not be complete. If you think this is an error, submit an issue on Github.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="123"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="183"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.resolve_failed` appears to be unused"
-            errorLine1="    &lt;string name=&quot;resolve_failed&quot;>%s failed: %s&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.no_browser_installed` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_browser_installed&quot;>No browser installed&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="146"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="184"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.apps_which_can_open_links_shizuku_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;apps_which_can_open_links_shizuku_explainer&quot;>Shizuku mode activated, tap an app to toggle its automatic link handling capabilities. Long tap an app to open its \&quot;Open by default\&quot; settings menu.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.no_browser_installed_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no_browser_installed_explainer&quot;>LinkSheet was unable to detect at least one application claiming to be a browser. For the best experience, install a browser.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="173"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="185"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.enable_all` appears to be unused"
-            errorLine1="    &lt;string name=&quot;enable_all&quot;>Enable all&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.yes` appears to be unused"
+        errorLine1="    &lt;string name=&quot;yes&quot;>Yes&lt;/string>"
+        errorLine2="            ~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="174"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="186"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.disable_all` appears to be unused"
-            errorLine1="    &lt;string name=&quot;disable_all&quot;>Disable all&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.no` appears to be unused"
+        errorLine1="    &lt;string name=&quot;no&quot;>No&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="175"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="187"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.feature_flags` appears to be unused"
-            errorLine1="    &lt;string name=&quot;feature_flags&quot;>Feature flags&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.domain_selection_confirmation_subtitle` appears to be unused"
+        errorLine1="    &lt;string name=&quot;domain_selection_confirmation_subtitle&quot;>Are you sure you want to set %s as the preferred application for the following domains?&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="181"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="189"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.feature_flags_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;feature_flags_explainer&quot;>Enable or disable experimental features&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.donate_card_headline` appears to be unused"
+        errorLine1="    &lt;string name=&quot;donate_card_headline&quot;>Donate to support LinkSheet&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="182"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="191"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.pretend_to_be_app_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;pretend_to_be_app_explainer&quot;>Pretend to be a native app for supported domains with LinkSheetCompat&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.donate_card_subtitle` appears to be unused"
+        errorLine1="    &lt;string name=&quot;donate_card_subtitle&quot;>If you like LinkSheet, consider leaving a star on Github and/or donating.\nDonators who donate more than &lt;b>5€&lt;/b> are eligible for &lt;b>LinkSheet Pro&lt;/b>, which will have exclusive features.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="185"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="192"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.no_handlers_found` appears to be unused"
-            errorLine1="    &lt;string name=&quot;no_handlers_found&quot;>No browser or native app found!&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.dismiss` appears to be unused"
+        errorLine1="    &lt;string name=&quot;dismiss&quot;>Dismiss&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="192"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="208"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.no_handlers_found_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;no_handlers_found_explainer&quot;>LinkSheet can not open this link.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.join` appears to be unused"
+        errorLine1="    &lt;string name=&quot;join&quot;>Join&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="193"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="209"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.success` appears to be unused"
-            errorLine1="    &lt;string name=&quot;success&quot;>Success&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.donate_crypto` appears to be unused"
+        errorLine1="    &lt;string name=&quot;donate_crypto&quot;>Donate via crypto&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="194"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="210"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.at_least_one_known_browser_installed` appears to be unused"
-            errorLine1="    &lt;string name=&quot;at_least_one_known_browser_installed&quot;>At least one browser installed&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.donate_card` appears to be unused"
+        errorLine1="    &lt;string name=&quot;donate_card&quot;>Donate with card (via BuyMeACoffee)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="196"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="211"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.at_least_one_known_browser_installed_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;at_least_one_known_browser_installed_explainer&quot;>LinkSheet has detected at least one app known to be a browser.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.generic__label_unknown_profile` appears to be unused"
+        errorLine1="    &lt;string name=&quot;generic__label_unknown_profile&quot;>Onbekend profiel&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="197"
-                column="13"/>
+            file="src/main/res/values-nl/strings.xml"
+            line="211"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.at_least_one_unknown_browser_installer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;at_least_one_unknown_browser_installer&quot;>At least one (unknown) browser installed&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.donate_explainer_crypto` appears to be unused"
+        errorLine1="    &lt;string name=&quot;donate_explainer_crypto&quot;>When donating with crypto, send an email to &lt;annotation url=&quot;mailto:1fexd@420blaze.it&quot;>1fexd@420blaze.it&lt;/annotation>.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="198"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="212"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.at_least_one_unknown_browser_installer_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;at_least_one_unknown_browser_installer_explainer&quot;>LinkSheet has detected at least one app claiming to be a browser. LinkSheet\&apos;s list may not be complete. If you think this is an error, submit an issue on Github.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.donate_learn_more` appears to be unused"
+        errorLine1="    &lt;string name=&quot;donate_learn_more&quot;>Learn more&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="199"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="213"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.no_browser_installed` appears to be unused"
-            errorLine1="    &lt;string name=&quot;no_browser_installed&quot;>No browser installed&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.linksheet_donation_explainer_2` appears to be unused"
+        errorLine1="    &lt;string name=&quot;linksheet_donation_explainer_2&quot;>A donation of more than &lt;b>5€&lt;/b> allows you access to &lt;b>LinkSheet Pro&lt;/b>, which includes &lt;b>Pro exclusive features&lt;/b> such as: following redirects externally, obtaining non-AMP pages externally and more to come!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="200"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="215"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.no_browser_installed_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;no_browser_installed_explainer&quot;>LinkSheet was unable to detect at least one application claiming to be a browser. For the best experience, install a browser.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.app_setup` appears to be unused"
+        errorLine1="    &lt;string name=&quot;app_setup&quot;>App setup&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="201"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="219"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.donate_card_headline` appears to be unused"
-            errorLine1="    &lt;string name=&quot;donate_card_headline&quot;>Donate to support LinkSheet&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.other` appears to be unused"
+        errorLine1="    &lt;string name=&quot;other&quot;>Other&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="207"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="220"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.donate_card_subtitle` appears to be unused"
-            errorLine1="    &lt;string name=&quot;donate_card_subtitle&quot;>If you like LinkSheet, consider leaving a star on Github and/or donating.\nDonators who donate more than &lt;b>5€&lt;/b> are eligible for &lt;b>LinkSheet Pro&lt;/b>, which will have exclusive features.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.clear_urls_version` appears to be unused"
+        errorLine1="    &lt;string name=&quot;clear_urls_version&quot;>ClearURLs rules&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="208"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="236"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.dismiss` appears to be unused"
-            errorLine1="    &lt;string name=&quot;dismiss&quot;>Dismiss&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.dev_mode_enabled` appears to be unused"
+        errorLine1="    &lt;string name=&quot;dev_mode_enabled&quot;>Congratulations, you have enabled dev-mode. Just be cautious.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="224"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="237"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.join` appears to be unused"
-            errorLine1="    &lt;string name=&quot;join&quot;>Join&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.running_unofficial_build` appears to be unused"
+        errorLine1="    &lt;string name=&quot;running_unofficial_build&quot;>Unofficial build&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="225"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="239"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.donate_learn_more` appears to be unused"
-            errorLine1="    &lt;string name=&quot;donate_learn_more&quot;>Learn more&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.enable_linksheet_compat` appears to be unused"
+        errorLine1="    &lt;string name=&quot;enable_linksheet_compat&quot;>Enable the experimental LinkSheet Compat menu&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="229"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="257"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.app_setup` appears to be unused"
-            errorLine1="    &lt;string name=&quot;app_setup&quot;>App setup&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.enable_linksheet_compat_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;enable_linksheet_compat_explainer&quot;>The menu can be found in the sub-menu \&quot;Apps\&quot; and when installed, is able to intercept requests to certain native apps.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="235"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="258"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.other` appears to be unused"
-            errorLine1="    &lt;string name=&quot;other&quot;>Other&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.include_throwable` appears to be unused"
+        errorLine1="    &lt;string name=&quot;include_throwable&quot;>Include crash logs (recommended, but can not be redacted)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="236"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="260"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.dev_mode_enabled` appears to be unused"
-            errorLine1="    &lt;string name=&quot;dev_mode_enabled&quot;>Congratulations, you have enabled dev-mode. Just be cautious.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.online_services` appears to be unused"
+        errorLine1="    &lt;string name=&quot;online_services&quot;>Online services&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="253"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="264"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.running_unofficial_build` appears to be unused"
-            errorLine1="    &lt;string name=&quot;running_unofficial_build&quot;>Unofficial build&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.permission_required` appears to be unused"
+        errorLine1="    &lt;string name=&quot;permission_required&quot;>Permission required&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="255"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="306"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.enable_linksheet_compat` appears to be unused"
-            errorLine1="    &lt;string name=&quot;enable_linksheet_compat&quot;>Enable the experimental LinkSheet Compat menu&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.permission_required_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;permission_required_explainer&quot;>Some imported preferences require permissions that are currently not given to LinkSheet. Tap below to request them.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="273"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="307"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.enable_linksheet_compat_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;enable_linksheet_compat_explainer&quot;>The menu can be found in the sub-menu \&quot;Apps\&quot; and when installed, is able to intercept requests to certain native apps.&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.switch_profile` appears to be unused"
+        errorLine1="    &lt;string name=&quot;switch_profile&quot;>Превключване на профили&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="274"
-                column="13"/>
+            file="src/main/res/values-bg/strings.xml"
+            line="333"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.online_services` appears to be unused"
-            errorLine1="    &lt;string name=&quot;online_services&quot;>Online services&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.link_handle_failed_text_field_label` appears to be unused"
+        errorLine1="    &lt;string name=&quot;link_handle_failed_text_field_label&quot;>Query&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="280"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="359"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.link_handle_failed_text_field_label` appears to be unused"
-            errorLine1="    &lt;string name=&quot;link_handle_failed_text_field_label&quot;>Query&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.settings_verified_link_handlers__text_user_apps` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings_verified_link_handlers__text_user_apps&quot;>User apps&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="374"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="375"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.switch_profile_explainer` appears to be unused"
-            errorLine1="    &lt;string name=&quot;switch_profile_explainer&quot;>Displays a button in the bottom sheet to open the tapped link in a (work-) profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -> Special app access ->Connected work &amp;amp; personal apps&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.settings_notifications__divider_toasts` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings_notifications__divider_toasts&quot;>Toasts&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="382"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="379"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.settings_verified_link_handlers__text_user_apps` appears to be unused"
-            errorLine1="    &lt;string name=&quot;settings_verified_link_handlers__text_user_apps&quot;>User apps&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.settings__hint_search` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings__hint_search&quot;>Search&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="394"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="481"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.settings_notifications__divider_toasts` appears to be unused"
-            errorLine1="    &lt;string name=&quot;settings_notifications__divider_toasts&quot;>Toasts&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.settings_scenario__title_scenarios` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings_scenario__title_scenarios&quot;>Scenarios&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="398"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="545"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.settings_profile_switcher__divider_configuration` appears to be unused"
-            errorLine1="    &lt;string name=&quot;settings_profile_switcher__divider_configuration&quot;>Configuration&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.settings_scenario__text_scenarios` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings_scenario__text_scenarios&quot;>Configure scenarios&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="501"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="546"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.string.settings__hint_search` appears to be unused"
-            errorLine1="    &lt;string name=&quot;settings__hint_search&quot;>Search&lt;/string>"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.settings_scenario__text_data_type` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings_scenario__text_data_type&quot;>Data type&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/strings.xml"
-                line="502"
-                column="13"/>
+            file="src/main/res/values/strings.xml"
+            line="547"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.dimen.m3_sys_motion_easing_emphasized_accelerate_control_x1` appears to be unused"
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x1&quot; type=&quot;dimen&quot;>0.3&lt;/item>"
-            errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.settings_scenario__text_value` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings_scenario__text_value&quot;>Value&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="3"
-                column="26"/>
+            file="src/main/res/values/strings.xml"
+            line="548"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.dimen.m3_sys_motion_easing_emphasized_accelerate_control_x2` appears to be unused"
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x2&quot; type=&quot;dimen&quot;>0.8&lt;/item>"
-            errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.settings_apps_browsers_mode__subtitle_selected` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings_apps_browsers_mode__subtitle_selected&quot;>Selected&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="4"
-                column="26"/>
+            file="src/main/res/values/strings.xml"
+            line="550"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.dimen.m3_sys_motion_easing_emphasized_accelerate_control_y1` appears to be unused"
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y1&quot; type=&quot;dimen&quot;>0&lt;/item>"
-            errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.string.notification_interconnect_name` appears to be unused"
+        errorLine1="    &lt;string name=&quot;notification_interconnect_name&quot;>Interconnect&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="5"
-                column="26"/>
+            file="src/main/res/values/strings.xml"
+            line="558"
+            column="13"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.dimen.m3_sys_motion_easing_emphasized_accelerate_control_y2` appears to be unused"
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y2&quot; type=&quot;dimen&quot;>0.2&lt;/item>"
-            errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.dimen.m3_sys_motion_easing_emphasized_accelerate_control_x1` appears to be unused"
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x1&quot; type=&quot;dimen&quot;>0.3&lt;/item>"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="6"
-                column="26"/>
+            file="src/main/res/values/values.xml"
+            line="3"
+            column="26"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.dimen.m3_sys_motion_easing_emphasized_decelerate_control_x1` appears to be unused"
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x1&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
-            errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.dimen.m3_sys_motion_easing_emphasized_accelerate_control_x2` appears to be unused"
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x2&quot; type=&quot;dimen&quot;>0.8&lt;/item>"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="7"
-                column="26"/>
+            file="src/main/res/values/values.xml"
+            line="4"
+            column="26"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.dimen.m3_sys_motion_easing_emphasized_decelerate_control_x2` appears to be unused"
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x2&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
-            errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.dimen.m3_sys_motion_easing_emphasized_accelerate_control_y1` appears to be unused"
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y1&quot; type=&quot;dimen&quot;>0&lt;/item>"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="8"
-                column="26"/>
+            file="src/main/res/values/values.xml"
+            line="5"
+            column="26"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.dimen.m3_sys_motion_easing_emphasized_decelerate_control_y1` appears to be unused"
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y1&quot; type=&quot;dimen&quot;>0.7&lt;/item>"
-            errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.dimen.m3_sys_motion_easing_emphasized_accelerate_control_y2` appears to be unused"
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y2&quot; type=&quot;dimen&quot;>0.2&lt;/item>"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="9"
-                column="26"/>
+            file="src/main/res/values/values.xml"
+            line="6"
+            column="26"/>
     </issue>
 
     <issue
-            id="UnusedResources"
-            message="The resource `R.dimen.m3_sys_motion_easing_emphasized_decelerate_control_y2` appears to be unused"
-            errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y2&quot; type=&quot;dimen&quot;>1&lt;/item>"
-            errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.dimen.m3_sys_motion_easing_emphasized_decelerate_control_x1` appears to be unused"
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x1&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values/values.xml"
-                line="10"
-                column="26"/>
+            file="src/main/res/values/values.xml"
+            line="7"
+            column="26"/>
     </issue>
 
     <issue
-            id="TypographyEllipsis"
-            message="Replace &quot;...&quot; with ellipsis character (…, &amp;#8230;) ?"
-            errorLine1="    &lt;string name=&quot;onboarding_0_subtitle&quot;>Válassza ki, hogy mindig kapjon értesítést egy hivatkozás megnyitásakor, állítsa be az alapértelmezett böngészőket és egyebek...&lt;/string>"
-            errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UnusedResources"
+        message="The resource `R.dimen.m3_sys_motion_easing_emphasized_decelerate_control_x2` appears to be unused"
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x2&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/values-hu/strings.xml"
-                line="330"
-                column="42"/>
+            file="src/main/res/values/values.xml"
+            line="8"
+            column="26"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/app_gmsflags.png` in densityless folder">
+        id="UnusedResources"
+        message="The resource `R.dimen.m3_sys_motion_easing_emphasized_decelerate_control_y1` appears to be unused"
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y1&quot; type=&quot;dimen&quot;>0.7&lt;/item>"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/app_gmsflags.png"/>
+            file="src/main/res/values/values.xml"
+            line="9"
+            column="26"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/app_linksheet.png` in densityless folder">
+        id="UnusedResources"
+        message="The resource `R.dimen.m3_sys_motion_easing_emphasized_decelerate_control_y2` appears to be unused"
+        errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y2&quot; type=&quot;dimen&quot;>1&lt;/item>"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/app_linksheet.png"/>
+            file="src/main/res/values/values.xml"
+            line="10"
+            column="26"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/app_mastodonredirect.png` in densityless folder">
+        id="TypographyEllipsis"
+        message="Replace &quot;...&quot; with ellipsis character (…, &amp;#8230;) ?"
+        errorLine1="    &lt;string name=&quot;onboarding_0_subtitle&quot;>Válassza ki, hogy mindig kapjon értesítést egy hivatkozás megnyitásakor, állítsa be az alapértelmezett böngészőket és egyebek...&lt;/string>"
+        errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/res/drawable/app_mastodonredirect.png"/>
+            file="src/main/res/values-hu/strings.xml"
+            line="313"
+            column="42"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/app_openlinkwith.png` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/app_gmsflags.png` in densityless folder">
         <location
-                file="src/main/res/drawable/app_openlinkwith.png"/>
+            file="src/main/res/drawable/app_gmsflags.png"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/app_seal.png` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/app_linksheet.png` in densityless folder">
         <location
-                file="src/main/res/drawable/app_seal.png"/>
+            file="src/main/res/drawable/app_linksheet.png"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding0_notext.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/app_mastodonredirect.png` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding0_notext.webp"/>
+            file="src/main/res/drawable/app_mastodonredirect.png"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding0_notext_dark_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/app_openlinkwith.png` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding0_notext_dark_resized.webp"/>
+            file="src/main/res/drawable/app_openlinkwith.png"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding0_notext_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/app_seal.png` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding0_notext_resized.webp"/>
+            file="src/main/res/drawable/app_seal.png"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding2_notext.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ic_permission.png` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding2_notext.webp"/>
+            file="src/main/res/drawable/ic_permission.png"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding2_notext_dark_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding0_notext.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding2_notext_dark_resized.webp"/>
+            file="src/main/res/drawable/onboarding0_notext.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding2_notext_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding0_notext_dark_resized.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding2_notext_resized.webp"/>
+            file="src/main/res/drawable/onboarding0_notext_dark_resized.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding3_notext.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding0_notext_resized.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding3_notext.webp"/>
+            file="src/main/res/drawable/onboarding0_notext_resized.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding3_notext_dark_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding2_notext.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding3_notext_dark_resized.webp"/>
+            file="src/main/res/drawable/onboarding2_notext.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding3_notext_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding2_notext_dark_resized.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding3_notext_resized.webp"/>
+            file="src/main/res/drawable/onboarding2_notext_dark_resized.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding6_notext.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding2_notext_resized.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding6_notext.webp"/>
+            file="src/main/res/drawable/onboarding2_notext_resized.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding6_notext_dark_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding3_notext.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding6_notext_dark_resized.webp"/>
+            file="src/main/res/drawable/onboarding3_notext.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding6_notext_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding3_notext_dark_resized.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding6_notext_resized.webp"/>
+            file="src/main/res/drawable/onboarding3_notext_dark_resized.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding7_notext.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding3_notext_resized.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding7_notext.webp"/>
+            file="src/main/res/drawable/onboarding3_notext_resized.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding7_notext_dark_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding6_notext.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding7_notext_dark_resized.webp"/>
+            file="src/main/res/drawable/onboarding6_notext.webp"/>
     </issue>
 
     <issue
-            id="IconLocation"
-            message="Found bitmap drawable `res/drawable/onboarding7_notext_resized.webp` in densityless folder">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding6_notext_dark_resized.webp` in densityless folder">
         <location
-                file="src/main/res/drawable/onboarding7_notext_resized.webp"/>
+            file="src/main/res/drawable/onboarding6_notext_dark_resized.webp"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding6_notext_resized.webp` in densityless folder">
         <location
-                file="src/debug/res/mipmap-hdpi/ic_launcher_monochrome.png"/>
+            file="src/main/res/drawable/onboarding6_notext_resized.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding7_notext.webp` in densityless folder">
         <location
-                file="src/debug/res/mipmap-hdpi/ic_launcher_foreground.png"/>
+            file="src/main/res/drawable/onboarding7_notext.webp"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding7_notext_dark_resized.webp` in densityless folder">
         <location
-                file="src/debug/res/mipmap-mdpi/ic_launcher_monochrome.png"/>
+            file="src/main/res/drawable/onboarding7_notext_dark_resized.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/onboarding7_notext_resized.webp` in densityless folder">
         <location
-                file="src/debug/res/mipmap-mdpi/ic_launcher_foreground.png"/>
+            file="src/main/res/drawable/onboarding7_notext_resized.webp"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
         <location
-                file="src/debug/res/mipmap-xhdpi/ic_launcher_monochrome.png"/>
+            file="src/debug/res/mipmap-hdpi/ic_launcher_monochrome.png"/>
         <location
-                file="src/debug/res/mipmap-xhdpi/ic_launcher_foreground.png"/>
+            file="src/debug/res/mipmap-hdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
         <location
-                file="src/debug/res/mipmap-xxhdpi/ic_launcher_monochrome.png"/>
+            file="src/debug/res/mipmap-mdpi/ic_launcher_monochrome.png"/>
         <location
-                file="src/debug/res/mipmap-xxhdpi/ic_launcher_foreground.png"/>
+            file="src/debug/res/mipmap-mdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
         <location
-                file="src/debug/res/mipmap-xxxhdpi/ic_launcher_monochrome.png"/>
+            file="src/debug/res/mipmap-xhdpi/ic_launcher_monochrome.png"/>
         <location
-                file="src/debug/res/mipmap-xxxhdpi/ic_launcher_foreground.png"/>
+            file="src/debug/res/mipmap-xhdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
         <location
-                file="src/main/res/mipmap-hdpi/ic_launcher_monochrome.png"/>
+            file="src/debug/res/mipmap-xxhdpi/ic_launcher_monochrome.png"/>
         <location
-                file="src/main/res/mipmap-hdpi/ic_launcher_foreground.png"/>
+            file="src/debug/res/mipmap-xxhdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
         <location
-                file="src/main/res/mipmap-mdpi/ic_launcher_monochrome.png"/>
+            file="src/debug/res/mipmap-xxxhdpi/ic_launcher_monochrome.png"/>
         <location
-                file="src/main/res/mipmap-mdpi/ic_launcher_foreground.png"/>
+            file="src/debug/res/mipmap-xxxhdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
         <location
-                file="src/main/res/mipmap-xhdpi/ic_launcher_monochrome.png"/>
+            file="src/main/res/mipmap-mdpi/ic_launcher_monochrome.png"/>
         <location
-                file="src/main/res/mipmap-xhdpi/ic_launcher_foreground.png"/>
+            file="src/main/res/mipmap-mdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
         <location
-                file="src/main/res/mipmap-xxhdpi/ic_launcher_monochrome.png"/>
+            file="src/main/res/mipmap-xhdpi/ic_launcher_monochrome.png"/>
         <location
-                file="src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png"/>
+            file="src/main/res/mipmap-xhdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="IconDuplicates"
-            message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png">
         <location
-                file="src/main/res/mipmap-xxxhdpi/ic_launcher_monochrome.png"/>
+            file="src/main/res/mipmap-xxhdpi/ic_launcher_monochrome.png"/>
         <location
-                file="src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"/>
+            file="src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="        this.data = Uri.parse(&quot;package:${info.packageName}&quot;)"
-            errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png, ic_notification_small.png">
+        <location
+            file="src/main/res/mipmap-hdpi/ic_notification_small.png"/>
         <location
-                file="src/main/java/fe/linksheet/extension/android/ActivityExt.kt"
-                line="27"
-                column="21"/>
+            file="src/main/res/mipmap-hdpi/ic_launcher_monochrome.png"/>
+        <location
+            file="src/main/res/mipmap-hdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="        this.data = Uri.parse(&quot;package:${info.packageName}&quot;)"
-            errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_launcher_foreground.png, ic_launcher_monochrome.png, ic_notification_small.png">
+        <location
+            file="src/main/res/mipmap-xxxhdpi/ic_notification_small.png"/>
         <location
-                file="src/main/java/fe/linksheet/extension/android/ActivityExt.kt"
-                line="27"
-                column="21"/>
+            file="src/main/res/mipmap-xxxhdpi/ic_launcher_monochrome.png"/>
+        <location
+            file="src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="        this.data = Uri.parse(&quot;package:${info.packageName}&quot;)"
-            errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: ic_permission.png, ic_notification_small2.png">
+        <location
+            file="src/main/res/mipmap-xxxhdpi/ic_notification_small2.png"/>
         <location
-                file="src/main/java/fe/linksheet/extension/android/ActivityExt.kt"
-                line="34"
-                column="21"/>
+            file="src/main/res/drawable/ic_permission.png"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="        this.data = Uri.parse(&quot;package:${info.packageName}&quot;)"
-            errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="        this.data = Uri.parse(&quot;package:${info.packageName}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/extension/android/ActivityExt.kt"
-                line="34"
-                column="21"/>
+            file="src/main/java/fe/linksheet/extension/android/ActivityExt.kt"
+            line="27"
+            column="21"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="            Uri.parse(&quot;package:${packageName}&quot;)"
-            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="        this.data = Uri.parse(&quot;package:${info.packageName}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/util/AppOpenByDefaultUtil.kt"
-                line="18"
-                column="13"/>
+            file="src/main/java/fe/linksheet/extension/android/ActivityExt.kt"
+            line="34"
+            column="21"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="        uri = Uri.parse(&quot;https://google.com&quot;),"
-            errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="            Uri.parse(&quot;package:${packageName}&quot;)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/activity/bottomsheet/BottomSheetApps.kt"
-                line="335"
-                column="15"/>
+            file="src/main/java/fe/linksheet/util/AppOpenByDefaultUtil.kt"
+            line="18"
+            column="13"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="        return Uri.parse(read.nextString())"
-            errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="        uri = Uri.parse(&quot;https://google.com&quot;),"
+        errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/util/serialization/DisplayActivityInfoTypeAdapter.kt"
-                line="13"
-                column="16"/>
+            file="src/main/java/fe/linksheet/activity/bottomsheet/BottomSheetApps.kt"
+            line="301"
+            column="15"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX function `createBitmap` instead?"
-            errorLine1="        val bitmap = Bitmap.createBitmap(width, height, config)"
-            errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="        return Uri.parse(read.nextString())"
+        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/util/image/ImageFactory.kt"
-                line="25"
-                column="22"/>
+            file="src/main/java/fe/linksheet/util/serialization/DisplayActivityInfoTypeAdapter.kt"
+            line="13"
+            column="16"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="        return runCatching { Uri.parse(url) }.getOrNull()"
-            errorLine2="                             ~~~~~~~~~~~~~~">
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="        return runCatching { Uri.parse(url) }.getOrNull()"
+        errorLine2="                             ~~~~~~~~~~~~~~">
         <location
-                file="src/main/java/fe/linksheet/module/resolver/ImprovedIntentResolver.kt"
-                line="502"
-                column="30"/>
+            file="src/main/java/fe/linksheet/module/resolver/ImprovedIntentResolver.kt"
+            line="555"
+            column="30"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="                        Uri.parse(url),"
-            errorLine2="                        ~~~~~~~~~~~~~~">
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="                        Uri.parse(url),"
+        errorLine2="                        ~~~~~~~~~~~~~~">
         <location
-                file="src/debug/java/fe/linksheet/debug/activity/LinkTestingActivity.kt"
-                line="54"
-                column="25"/>
+            file="src/debug/java/fe/linksheet/debug/activity/LinkTestingActivity.kt"
+            line="54"
+            column="25"/>
     </issue>
 
     <issue
-            id="UseKtx"
-            message="Use the KTX extension function `String.toUri` instead?"
-            errorLine1="            Intent(Intent.ACTION_VIEW, Uri.parse(url), context, BottomSheetActivity::class.java)"
-            errorLine2="                                       ~~~~~~~~~~~~~~">
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="            Intent(Intent.ACTION_VIEW, Uri.parse(url), context, BottomSheetActivity::class.java)"
+        errorLine2="                                       ~~~~~~~~~~~~~~">
         <location
-                file="src/debug/java/fe/linksheet/debug/command/ViewUrlCommand.kt"
-                line="17"
-                column="40"/>
+            file="src/debug/java/fe/linksheet/debug/command/ViewUrlCommand.kt"
+            line="17"
+            column="40"/>
     </issue>
 
 </issues>

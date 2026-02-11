@@ -51,20 +51,16 @@ fun M3ELoadingIndicatorSheetContent(
                 style = MaterialTheme.typography.titleMedium
             )
 
-            Text(text = stringResource(id = event.id, *event.args), style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = stringResource(id = event.id, *event.args),
+                style = MaterialTheme.typography.bodyMedium
+            )
         }
 
         if (LocalInspectionMode.current) {
-            ContainedLoadingIndicator(
-                progress = { 0.7f }
-            )
-//            CircularWavyProgressIndicator()
-//            LoadingIndicator(
-//                progress = { 0.7f },
-//            )
+            ContainedLoadingIndicator(progress = { 0.7f })
         } else {
             ContainedLoadingIndicator()
-//            LoadingIndicator()
         }
 
         if (interaction is ResolverInteraction.Cancelable) {
@@ -72,13 +68,10 @@ fun M3ELoadingIndicatorSheetContent(
                 val size = ButtonDefaults.MediumContainerHeight
                 Button(
 //                    modifier = Modifier.heightIn(size),
-                    contentPadding =
-                        PaddingValues(
-                            start = 62.dp,
-                            top = 12.dp,
-                            end = 62.dp,
-                            bottom = 12.dp
-                        ),
+                    contentPadding = PaddingValues(
+                        horizontal = 62.dp,
+                        vertical = 12.dp,
+                    ),
                     onClick = {
                         Log.d("Interact", "Cancel")
                         interaction.cancel()
@@ -91,6 +84,8 @@ fun M3ELoadingIndicatorSheetContent(
                 }
 
             }
+        } else {
+//            Spacer(modifier = Modifier.height(ButtonDefaults.MinHeight))
         }
 //        LinearProgressIndicator(modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp))
     }

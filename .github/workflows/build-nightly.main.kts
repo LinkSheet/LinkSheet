@@ -27,7 +27,6 @@ import io.github.typesafegithub.workflows.dsl.expressions.ExpressionContext
 import io.github.typesafegithub.workflows.dsl.expressions.expr
 import io.github.typesafegithub.workflows.dsl.workflow
 import io.github.typesafegithub.workflows.yaml.ConsistencyCheckJobConfig
-import kotlin.collections.mapOf
 
 
 val KEYSTORE_FILE by Contexts.secrets
@@ -325,18 +324,27 @@ fun JobBuilder<*>.setupAndroid() {
 }
 
 fun WorkflowBuilder.setupWorkflow(release: Boolean) {
-    val unitTestJob = job(
-        id = "unit-tests",
-        name = "Unit tests",
+    val setupAndroidJob = job(
+        id = "setup-android",
+        name = "Setup android",
         runsOn = UbuntuLatest
     ) {
         setupAndroid()
+    }
+
+    val unitTestJob = job(
+        id = "unit-tests",
+        name = "Unit tests",
+        runsOn = UbuntuLatest,
+        needs = listOf(setupAndroidJob)
+    ) {
         run(command = "./gradlew testFossReleaseUnitTest")
     }
     val integrationTestJob = job(
         id = "integration-tests",
         name = "Integration tests",
-        runsOn = UbuntuLatest
+        runsOn = UbuntuLatest,
+        needs = listOf(setupAndroidJob)
     ) {
         run(
             name = "Enable KVM",
@@ -350,8 +358,6 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
                 }
             }
         )
-
-        setupAndroid()
 
         val apiLevel = 35
         val avdInfoStep = uses(
@@ -383,10 +389,9 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
         id = "build-release",
         name = "Build release",
         runsOn = UbuntuLatest,
-        needs = listOf(unitTestJob, integrationTestJob),
+        needs = listOf(setupAndroidJob, unitTestJob, integrationTestJob),
     ) {
         run(name = "Install JQ", command = "sudo apt-get install jq -y")
-        setupAndroid()
         val androidKeyStore = uses(action = base64ToFile)
 
         val (foss, pro) = buildFlavor(androidKeyStore.outputs["filePath"])

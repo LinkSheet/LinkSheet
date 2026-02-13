@@ -18,7 +18,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.linksheet.compose.R as CommonR
 import app.linksheet.compose.appbar.SaneSmallTopAppBar
 import app.linksheet.compose.debug.LocalUiDebug
 import app.linksheet.compose.debugBorder
@@ -30,6 +29,7 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
 import org.koin.androidx.compose.koinViewModel
+import app.linksheet.compose.R as CommonR
 
 @Composable
 fun <T, R> rememberSavableWithInit(key1: T, block: suspend (T) -> R?): R? {

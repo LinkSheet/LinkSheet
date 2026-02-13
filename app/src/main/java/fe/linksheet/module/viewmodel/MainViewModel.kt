@@ -49,7 +49,7 @@ class MainViewModel(
     private val intentHandler: PackageIntentHandler,
     private val workDelegatorService: WorkDelegatorService,
 ) : BaseViewModel(preferenceRepository) {
-    val newDefaultsDismissed = appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2024_12_29_InfoDismissed)
+    val newDefaultsDismissed = appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2025_12_15_InfoDismissed)
 
     @OptIn(SensitivePreference::class)
     val telemetryLevel = experimentRepository.asViewModelState(AppPreferences.telemetryLevel)

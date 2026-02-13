@@ -25,7 +25,6 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addOptIn(OptIn.ExperimentalTime)
     }
 
     buildFeatures {

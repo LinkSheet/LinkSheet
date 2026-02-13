@@ -39,3 +39,6 @@ val generateMimeTypes = tasks.register<UpdateMimeTypesTask>("generateMimeTypes")
         )
     )
 }
+
+val assemble by tasks
+assemble.dependsOn(generateMimeTypes)

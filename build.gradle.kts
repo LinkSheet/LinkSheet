@@ -25,6 +25,13 @@ subprojects {
             extensions.findByType<LibraryExtension>()?.configurePickFirsts()
         }
 
+        val testTask = tasks.findByName("test")
+        val assembleTask = tasks.findByName("assemble")
+
+        if (testTask != null && assembleTask != null) {
+            testTask.dependsOn(assembleTask)
+        }
+
         dependencies {
             configurations.findByName("implementation")?.let { implementation ->
                 implementation(platform(LinkSheet.flavors.bom))

@@ -40,5 +40,5 @@ val generateMimeTypes = tasks.register<UpdateMimeTypesTask>("generateMimeTypes")
     )
 }
 
-val assemble by tasks
-assemble.dependsOn(generateMimeTypes)
+val compileKotlin by tasks
+compileKotlin.dependsOn(generateMimeTypes)

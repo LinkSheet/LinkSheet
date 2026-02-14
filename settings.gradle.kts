@@ -27,6 +27,12 @@ pluginManagement {
         id("androidx.navigation.safeargs") version "2.8.2"
     }
 
+    buildscript {
+        dependencies {
+            classpath("com.android.tools:r8:9.0.32")
+        }
+    }
+
     when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]

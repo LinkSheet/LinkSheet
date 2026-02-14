@@ -11,9 +11,8 @@ import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import fe.linksheet.module.database.migrations.Migration21to23
-import mozilla.components.support.base.log.logger.Logger
-import fe.linksheet.module.log.internal.DebugLoggerDelegate
 import fe.linksheet.testlib.instrument.InstrumentationTest
+import mozilla.components.support.base.log.logger.Logger
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -45,7 +44,7 @@ internal class Migration21To23Test : InstrumentationTest {
         }
 
 
-        val logger = Logger(DebugLoggerDelegate(true, Migration21To23Test::class))
+        val logger = Logger(Migration21To23Test::class.simpleName!!)
         val migrator = DefaultCrossDatabaseMigration()
         val migratedLinkSheetDb = linkSheetHelper.runMigrationsAndValidate(
             linkSheetTestDb, 23, true,

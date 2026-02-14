@@ -518,7 +518,7 @@
     <string name="generic__button_text_share">Udostępnij</string>
     <string name="resolve_event__idle">Bezczynny</string>
     <string name="settings_home__title_clipboard_card">Karta schowka</string>
-    <string name="settings_home__text_clipboard_card">Pokaż aktualną zawartość schowka na stronie głównej, jeśli jest to adres URL</string>
+    <string name="settings_home__text_clipboard_card">Pokaż aktualną zawartość schowka na stronie głównej, jeśli jest to link</string>
     <string name="settings_language__dialog_title">Język aplikacji</string>
     <string name="settings_language__text_system_language_with_language">%s (język systemowy)</string>
     <string name="settings_language__text_system_language">Język systemowy</string>

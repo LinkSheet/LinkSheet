@@ -191,7 +191,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<PreferredBrowserViewModel>(BrowsersUseCase::class),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
         definition<ExportSettingsViewModel>(Gson::class, Clock::class, ZoneId::class),
-        definition<AboutSettingsViewModel>(Gson::class),
+        definition<AboutSettingsViewModel>(Gson::class, SystemInfoService::class),
         definition<DevSettingsViewModel>(
             ShizukuServiceConnection::class,
             MiuiCompatProvider::class,

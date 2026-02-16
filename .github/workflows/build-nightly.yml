@@ -20,13 +20,13 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
     - id: 'step-0'
-      uses: 'actions/checkout@v4'
+      uses: 'actions/checkout@v6'
       with:
         fetch-depth: '0'
         fetch-tags: 'true'
         submodules: 'true'
     - id: 'step-1'
-      uses: 'actions/setup-java@v4'
+      uses: 'actions/setup-java@v5'
       with:
         java-version: '21'
         distribution: 'zulu'
@@ -49,13 +49,13 @@ jobs:
         sudo udevadm control --reload-rules
         sudo udevadm trigger --name-match=kvm
     - id: 'step-1'
-      uses: 'actions/checkout@v4'
+      uses: 'actions/checkout@v6'
       with:
         fetch-depth: '0'
         fetch-tags: 'true'
         submodules: 'true'
     - id: 'step-2'
-      uses: 'actions/setup-java@v4'
+      uses: 'actions/setup-java@v5'
       with:
         java-version: '21'
         distribution: 'zulu'
@@ -87,13 +87,13 @@ jobs:
       name: 'Install JQ'
       run: 'sudo apt-get install jq -y'
     - id: 'step-1'
-      uses: 'actions/checkout@v4'
+      uses: 'actions/checkout@v6'
       with:
         fetch-depth: '0'
         fetch-tags: 'true'
         submodules: 'true'
     - id: 'step-2'
-      uses: 'actions/setup-java@v4'
+      uses: 'actions/setup-java@v5'
       with:
         java-version: '21'
         distribution: 'zulu'

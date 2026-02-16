@@ -2,9 +2,9 @@
 
 @file:Repository("https://repo.maven.apache.org/maven2/")
 @file:Repository("https://bindings.krzeminski.it")
-@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.4.0")
-@file:DependsOn("actions:checkout:v4")
-@file:DependsOn("actions:setup-java:v4")
+@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.7.0")
+@file:DependsOn("actions:checkout:v6")
+@file:DependsOn("actions:setup-java:v5")
 @file:DependsOn("actions:cache:v4")
 @file:DependsOn("actions:upload-artifact:v4")
 @file:DependsOn("gradle:actions__setup-gradle:v3")
@@ -341,9 +341,8 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
             name = "Enable KVM",
             shell = Shell.Bash,
             command =  bash {
-                val echoKvm = echo("""'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"'""")
                 exec {
-                    +(echoKvm pipe tee("/etc/udev/rules.d/99-kvm4all.rules", sudo = true))
+                    +(echo("""'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"'""") pipe sudo(tee("/etc/udev/rules.d/99-kvm4all.rules")))
                     +sudo("udevadm control --reload-rules")
                     +sudo("udevadm trigger --name-match=kvm")
                 }

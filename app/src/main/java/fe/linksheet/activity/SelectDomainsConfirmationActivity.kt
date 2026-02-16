@@ -14,7 +14,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.os.bundleOf
 import app.linksheet.feature.app.core.AppInfo
 import app.linksheet.testing.fake.PackageInfoFakes
 import app.linksheet.testing.fake.toAppInfo
@@ -55,7 +54,9 @@ class SelectDomainsConfirmationActivity : BaseComponentActivity() {
             intent.putExtra(EXTRA_CALLING_PACKAGE, callingPackage)
             intent.putExtra(EXTRA_DOMAINS, domains)
             intent.putExtra(EXTRA_CALLING_COMPONENT, callingComponent)
-            intent.putExtra(EXTRA_CALLBACK, bundleOf(EXTRA_CALLBACK to callback?.asBinder()))
+            intent.putExtra(EXTRA_CALLBACK, Bundle().apply {
+                putBinder(EXTRA_CALLBACK, callback?.asBinder())
+            })
             intent.putExtra(EXTRA_MESSENGER, messenger)
             intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

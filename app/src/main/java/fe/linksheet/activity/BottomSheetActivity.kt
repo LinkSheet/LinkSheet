@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -280,15 +279,20 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             is ManualRedirectInteraction -> {
                 val intent = StandardIntents.createSelfIntent(
                     uri = interaction.uri.toUri(),
-                    extras = bundleOf(ImprovedIntentResolver.IntentKeyResolveRedirects to true)
+                    extras = Bundle().apply {
+                        putBoolean(ImprovedIntentResolver.IntentKeyResolveRedirects , true)
+                    }
                 )
                 onNewIntent(intent)
             }
 
             is IgnoreLibRedirectInteraction -> {
+
                 val intent = StandardIntents.createSelfIntent(
                     uri = interaction.result.originalUri,
-                    extras = bundleOf(LibRedirectDefault.IgnoreIntentKey to true)
+                    extras = Bundle().apply {
+                        putBoolean(LibRedirectDefault.IgnoreIntentKey, true)
+                    }
                 )
                 onNewIntent(intent)
             }

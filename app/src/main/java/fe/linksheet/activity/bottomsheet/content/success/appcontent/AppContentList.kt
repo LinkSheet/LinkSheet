@@ -32,9 +32,9 @@ import fe.composekit.component.shape.CustomShapeDefaults
 import fe.kotlin.extension.iterable.getOrFirstOrNull
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.AppClickInteraction
+import fe.linksheet.activity.bottomsheet.AppInteraction
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
-import fe.linksheet.activity.bottomsheet.AppInteraction
 
 @Composable
 fun AppContentList(
@@ -126,7 +126,7 @@ fun AppListItem(
             )
 
             if (privateBrowser != null) {
-                CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
                     // TODO: Checkout if we should reduce this button's size
                     FilledTonalIconButton(onClick = {
                         onClick(

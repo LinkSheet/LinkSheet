@@ -36,6 +36,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.appbar.SaneLargeTopAppBar
+import app.linksheet.compose.extension.toImageBitmap
 import fe.android.compose.extension.atElevation
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
@@ -54,7 +55,6 @@ import fe.composekit.component.shape.CustomShapeDefaults
 import fe.composekit.layout.column.SaneLazyListScope
 import fe.linksheet.R
 import fe.linksheet.extension.android.isUserApp
-import app.linksheet.compose.extension.toImageBitmap
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
@@ -243,7 +243,7 @@ private fun ReorderableCollectionItemScope.ItemCard2(
 //            }
             if (isSelected) {
                 Row(modifier = Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
-                    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                    CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
                         IconButton(
                             onClick = onRemoveRequested,
                         ) {

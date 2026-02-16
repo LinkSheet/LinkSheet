@@ -12,7 +12,6 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.util.buildconfig.LinkSheetInfo
 import fe.linksheet.util.extension.android.getCurrentLanguageTag
 import kotlinx.parcelize.Parcelize
 
@@ -52,7 +51,7 @@ class LogViewCommon(
         val (fingerprint, preferences, redact, throwable) = settings
 
         return gson.toJson(jsonObject {
-            "build_info" += LinkSheetInfo.buildInfo
+            "build_info" += systemInfoService.buildInfo
             "device_info" += systemInfoService.deviceInfo
 
             "locale" += context.getCurrentLanguageTag()

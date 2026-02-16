@@ -83,7 +83,8 @@ val ViewModelModule = module {
         AboutSettingsViewModel(
             context = get(),
             gson = get(qualifier(GsonQualifier.Pretty)),
-            preferenceRepository = get()
+            preferenceRepository = get(),
+            infoService = get()
         )
     }
     viewModel {

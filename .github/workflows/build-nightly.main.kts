@@ -371,7 +371,7 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
                     "api-level" to "$apiLevel",
                     "arch" to expr(avdInfoStep.outputs["arch"]),
                     "target" to expr(avdInfoStep.outputs["target"]),
-                    "script" to "./gradlew connectedFossReleaseAndroidTest"
+                    "script" to "./gradlew connectedFossAndroidTest"
                 )
             ),
         )

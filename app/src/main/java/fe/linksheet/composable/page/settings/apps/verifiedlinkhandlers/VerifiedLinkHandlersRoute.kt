@@ -30,7 +30,6 @@ import fe.linksheet.R
 import fe.linksheet.composable.dialog.DomainVerificationDialogData
 import fe.linksheet.composable.dialog.rememberDomainVerificationAppInfoDialog
 import fe.linksheet.extension.compose.ObserveStateChange
-import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.navigation.VlhAppRoute
 import fe.linksheet.util.extension.android.tryStartActivity
@@ -71,19 +70,19 @@ fun VerifiedLinkHandlersRoute(
 //        state.endRefresh()
     }
 
-    fun postCommand(packageName: String) {
-//        state.startRefresh()
-        viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 500) {
-            val newState = !linkHandlingAllowed
-            val result = setDomainState(packageName, "all", newState)
-            if (packageName == allPackages) {
-                // TODO: Revert previous state instead of always setting to !newState
-                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", !newState)
-            }
-
-            result
-        }
-    }
+//    fun postCommand(packageName: String) {
+////        state.startRefresh()
+//        viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 500) {
+//            val newState = !linkHandlingAllowed
+//            val result = setDomainState(packageName, "all", newState)
+//            if (packageName == allPackages) {
+//                // TODO: Revert previous state instead of always setting to !newState
+//                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", !newState)
+//            }
+//
+//            result
+//        }
+//    }
 
     val preferredApps by viewModel.preferredApps.collectOnIO(emptyMap())
 

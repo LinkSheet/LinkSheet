@@ -2,6 +2,7 @@ package app.linksheet.feature.engine.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.RewriteQueriesToDropUnusedColumns
 import app.linksheet.api.database.BaseDao
 import app.linksheet.feature.engine.database.entity.ExpressionRule
 import app.linksheet.feature.engine.database.entity.Scenario
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ScenarioExpressionDao : BaseDao<ScenarioExpression> {
+    @RewriteQueriesToDropUnusedColumns
     @Query("""
         SELECT * 
         FROM scenario s
@@ -19,6 +21,7 @@ interface ScenarioExpressionDao : BaseDao<ScenarioExpression> {
     """)
     fun getAllScenarioExpressions(): Flow<Map<Scenario, List<ExpressionRule>>>
 
+    @RewriteQueriesToDropUnusedColumns
     @Query(
         """
         SELECT * 

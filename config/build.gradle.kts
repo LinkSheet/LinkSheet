@@ -1,3 +1,4 @@
+import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.buildlogic.Version
 
 plugins {
@@ -10,10 +11,10 @@ group = "fe.linksheet.config"
 
 android {
     namespace = group.toString()
-    compileSdk = Version.COMPILE_SDK
+    compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
-        minSdk = Version.MIN_SDK
+        minSdk = AndroidSdk.MIN_SDK
     }
 }
 

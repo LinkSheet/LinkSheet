@@ -3,9 +3,9 @@ package fe.linksheet.module.log.file.entry
 import androidx.annotation.Keep
 import com.google.gson.JsonObject
 import fe.gson.dsl.jsonObject
-import fe.std.javatime.extension.unixMillisUtc
 import fe.kotlin.extension.string.decodeBase64Throw
 import fe.kotlin.extension.string.encodeBase64Throw
+import fe.std.javatime.extension.unixMillisUtc
 import fe.stringbuilder.util.buildSeparatedString
 import kotlin.io.encoding.ExperimentalEncodingApi
 
@@ -19,11 +19,11 @@ sealed class LogEntry(
     private val redactedMessage: String? = null,
 ) {
     override fun toString() = buildSeparatedString(" ") {
-        item { append(type) }
-        item { append(unixMillis) }
-        itemNotNull(prefix) { append(prefix) }
-        item { append(message.encodeBase64Throw()) }
-        itemNotNull(redactedMessage) { append(redactedMessage!!.encodeBase64Throw()) }
+        item(prefix = null) { append(type) }
+        item(prefix = null) { append(unixMillis) }
+        itemNotNull(prefix, prefix = null) { append(prefix) }
+        item(prefix = null) { append(message.encodeBase64Throw()) }
+        itemNotNull(redactedMessage, prefix = null) { append(redactedMessage!!.encodeBase64Throw()) }
     }
 
     fun toCopyLogJson(redact: Boolean, includeThrowable: Boolean): JsonObject {

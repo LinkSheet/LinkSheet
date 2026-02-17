@@ -423,6 +423,7 @@ dependencies {
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
     implementation("dev.rikka.tools.refine:runtime:_")
 
+    implementation(MozillaComponents.support.utils)
     implementation(MozillaComponents.lib.publicSuffixList)
     implementation(platform(KotlinX.serialization.bom))
     implementation(KotlinX.serialization.json)

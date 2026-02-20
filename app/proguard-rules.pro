@@ -117,6 +117,8 @@
 -dontwarn io.ktor.client.plugins.HttpTimeout
 -dontwarn io.ktor.utils.io.CoroutinesKt
 -dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn com.google.re2j.Matcher
+-dontwarn com.google.re2j.Pattern
 
 -printmapping mapping.txt
 -printusage usage.txt

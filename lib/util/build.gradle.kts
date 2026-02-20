@@ -1,6 +1,5 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies.MozillaComponents
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 
@@ -37,7 +36,6 @@ dependencies {
     implementation(Square.okHttp3.android)
     implementation(JetBrains.ktor.client.core)
     implementation("org.jsoup:jsoup:_")
-    implementation(MozillaComponents.support.utils)
     implementation("com.github.seancfoley:ipaddress:_")
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.compose.runtime)

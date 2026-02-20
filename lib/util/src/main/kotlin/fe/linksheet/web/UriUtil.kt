@@ -5,7 +5,7 @@ import android.net.Uri
 import android.util.Patterns
 import android.webkit.URLUtil
 import fe.kotlin.extension.iterable.mapToSet
-import mozilla.components.support.ktx.util.URLStringUtils
+import app.linksheet.mozilla.components.support.ktx.util.URLStringUtils
 import androidx.core.net.toUri
 
 object UriUtil {

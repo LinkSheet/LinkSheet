@@ -8,7 +8,7 @@ import assertk.assertions.isTrue
 import fe.composekit.intent.buildIntent
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.IntentFlags
-import mozilla.components.support.utils.toSafeIntent
+import app.linksheet.mozilla.components.support.utils.toSafeIntent
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.intArrayOf

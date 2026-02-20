@@ -6,7 +6,6 @@ import com.gitlab.grrfe.gradlebuild.common.version.TagReleaseParser
 import com.gitlab.grrfe.gradlebuild.common.version.asProvider
 import com.gitlab.grrfe.gradlebuild.common.version.closure
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies.MozillaComponents
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 import fe.buildlogic.common.CompilerOption
@@ -426,8 +425,6 @@ dependencies {
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
     implementation("dev.rikka.tools.refine:runtime:_")
 
-    implementation(MozillaComponents.support.utils)
-    implementation(MozillaComponents.lib.publicSuffixList)
     implementation(platform(KotlinX.serialization.bom))
     implementation(KotlinX.serialization.json)
     implementation(KotlinX.serialization.protobuf)

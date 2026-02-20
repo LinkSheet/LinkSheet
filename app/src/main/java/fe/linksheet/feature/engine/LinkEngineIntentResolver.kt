@@ -57,7 +57,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import mozilla.components.support.base.log.logger.Logger
-import mozilla.components.support.utils.SafeIntent
+import app.linksheet.mozilla.components.support.utils.SafeIntent
 
 class LinkEngineIntentResolver(
     val context: Context,

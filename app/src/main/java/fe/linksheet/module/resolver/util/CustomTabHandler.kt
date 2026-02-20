@@ -1,7 +1,7 @@
 package fe.linksheet.module.resolver.util
 
 import androidx.browser.customtabs.CustomTabsIntent
-import mozilla.components.support.utils.SafeIntent
+import app.linksheet.mozilla.components.support.utils.SafeIntent
 
 object CustomTabHandler {
     private const val EXTRA_SESSION = CustomTabsIntent.EXTRA_SESSION

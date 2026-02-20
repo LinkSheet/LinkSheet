@@ -7,8 +7,8 @@ import android.nfc.NfcAdapter
 import androidx.core.net.toUri
 import fe.linksheet.web.UriUtil
 import fe.std.result.*
-import mozilla.components.support.utils.SafeIntent
-import mozilla.components.support.utils.WebURLFinder
+import app.linksheet.mozilla.components.support.utils.SafeIntent
+import app.linksheet.mozilla.components.support.utils.WebURLFinder
 
 
 open class IntentParser internal constructor(

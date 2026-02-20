@@ -455,17 +455,15 @@ dependencies {
         testImplementation(notation)
     }
 
-    testImplementation(CashApp.turbine)
     testImplementation("org.mock-server:mockserver-client-java:_")
     testImplementation("org.testcontainers:mockserver:_")
     testImplementation("org.testcontainers:toxiproxy:_")
 
+    testImplementation(Testing.junit.jupiter.api)
     testRuntimeOnly(Testing.junit.jupiter.engine)
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:_")
     testImplementation(Testing.junit4)
 
-    testImplementation(Testing.junit.jupiter.api)
-    testRuntimeOnly(Testing.junit.jupiter.engine)
     testImplementation(Testing.junit.jupiter.params)
 
     androidTestImplementation(Testing.junit.jupiter.api)

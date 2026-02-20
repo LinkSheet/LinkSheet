@@ -66,7 +66,10 @@ android {
         val publicLocalProperties = rootProject.file("public.local.properties").readPropertiesOrNull()
 
         val supportedLocales = publicLocalProperties.getOrSystemEnv("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
-        resourceConfigurations.addAll(supportedLocales)
+        androidResources {
+            @Suppress("UnstableApiUsage")
+            localeFilters += supportedLocales
+        }
         tasks.register("createLocaleConfig") {
             val localeString = supportedLocales.joinToString(
                 separator = System.lineSeparator(),

@@ -114,11 +114,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+    }
 
-        room {
-            schemaDirectory("$projectDir/schemas")
-            generateKotlin = true
-        }
+    room {
+        schemaDirectory("$projectDir/schemas")
+        generateKotlin = true
     }
 
     signingConfigs {

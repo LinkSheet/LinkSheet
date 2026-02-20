@@ -43,7 +43,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.mapNotNull
 import mozilla.components.support.base.log.logger.Logger
-import mozilla.components.support.utils.toSafeIntent
+import app.linksheet.mozilla.components.support.utils.toSafeIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 

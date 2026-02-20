@@ -247,7 +247,7 @@ private fun ReorderableCollectionItemScope.ScenarioListItem(
 //            }
             if (isSelected) {
                 Row(modifier = Modifier.fillMaxHeight(), verticalAlignment = Alignment.CenterVertically) {
-                    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                    CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides 0.dp) {
                         IconButton(
                             onClick = onRemoveRequested,
                         ) {

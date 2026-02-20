@@ -56,7 +56,7 @@ class AppListCommon<T : IAppInfo>(
     private fun SortByState.toComparator(): Comparator<IAppInfo> {
         val (asc, desc) = sortComparators[sort]!!
         val comp = if (ascending) asc else desc
-        return comp as Comparator<IAppInfo>
+        return comp
     }
 
     private fun StateModeFilter.matches(info: DomainVerificationAppInfo): Boolean {

@@ -1,7 +1,7 @@
 package fe.linksheet.module.resolver
 
 import kotlinx.coroutines.flow.StateFlow
-import mozilla.components.support.utils.SafeIntent
+import app.linksheet.mozilla.components.support.utils.SafeIntent
 
 interface IntentResolver {
     val events: StateFlow<ResolveEvent>

@@ -13,8 +13,7 @@ import fe.std.result.assert.assertSuccess
 import fe.std.result.getOrNull
 import fe.std.test.TestFunction
 import fe.std.test.tableTest
-import mozilla.components.support.utils.toSafeIntent
-import fe.linksheet.testlib.core.JunitTest
+import app.linksheet.mozilla.components.support.utils.toSafeIntent
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.intArrayOf

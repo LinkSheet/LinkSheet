@@ -49,7 +49,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mozilla.components.support.base.log.logger.Logger
-import mozilla.components.support.utils.SafeIntent
+import app.linksheet.mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
 import java.util.*

@@ -38,9 +38,6 @@ import fe.composekit.component.shape.CustomShapeDefaults
 import fe.linksheet.web.HostUtil
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
 
 
 @Composable
@@ -59,51 +56,39 @@ fun LibRedirectServiceSettingsRoute(
 
     val selectedFrontend by viewModel.selectedFrontend.collectOnIO(null)
     val enabled by viewModel.enabled.collectOnIO(false)
+    val userInstances by viewModel.userInstances.collectOnIO(initialState = emptyList())
 
-    let2(settings, selectedFrontend) { settings, (default, state) ->
-        val userInstances by viewModel.getUserInstances(state.frontendKey).collectAsStateWithLifecycle(
-            initialValue = emptyList()
-        )
-        LibRedirectServiceSettingsRouteInternal(
-            enabled = enabled,
-            settings = settings,
-            selected = default,
-            frontendState = state,
-            instances = state.instances,
-            userInstances = userInstances,
-            onBackPressed = onBackPressed,
-            customInstancesExperiment = viewModel.customInstancesExperiment(),
-            updateState = viewModel::updateState,
-            updateInstance = viewModel::updateInstance,
-            resetServiceToFrontend = viewModel::resetServiceToFrontend,
-            addInstance = {
-                viewModel.addInstance(state.frontendKey, it.toString())
-            },
-            deleteInstance = {
-                viewModel.deleteInstance(state.frontendKey, it)
+    LibRedirectServiceSettingsRouteInternal(
+        enabled = enabled,
+        settings = settings,
+        selected = selectedFrontend?.default,
+        frontendState = selectedFrontend?.state,
+        instances = selectedFrontend?.state?.instances ?: emptySet(),
+        userInstances = userInstances,
+        onBackPressed = onBackPressed,
+        customInstancesExperiment = viewModel.customInstancesExperiment(),
+        updateState = viewModel::updateState,
+        updateInstance = viewModel::updateInstance,
+        resetServiceToFrontend = viewModel::resetServiceToFrontend,
+        addInstance = {
+            selectedFrontend?.state?.frontendKey?.let { frontendKey ->
+                viewModel.addInstance(frontendKey, it.toString())
             }
-        )
-    }
-}
-
-
-@OptIn(ExperimentalContracts::class)
-inline fun <T1, T2, R> let2(t1: T1?, t2: T2?, block: (T1, T2) -> R): R? {
-    contract {
-        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
-    }
-    if (t1 != null && t2 != null) {
-        return block(t1, t2)
-    }
-    return null
+        },
+        deleteInstance = {
+            selectedFrontend?.state?.frontendKey?.let { frontendKey ->
+                viewModel.deleteInstance(frontendKey, it)
+            }
+        }
+    )
 }
 
 @Composable
 private fun LibRedirectServiceSettingsRouteInternal(
     enabled: Boolean,
-    settings: ServiceSettings,
-    selected: LibRedirectDefault,
-    frontendState: FrontendState,
+    settings: ServiceSettings?,
+    selected: LibRedirectDefault?,
+    frontendState: FrontendState?,
     instances: Set<String>,
     userInstances: List<String>,
     onBackPressed: () -> Unit,
@@ -117,7 +102,9 @@ private fun LibRedirectServiceSettingsRouteInternal(
     val libRedirectDialog = rememberLibRedirectInstanceDialog(onConfirm = addInstance)
 
     SaneScaffoldSettingsPage(
-        headline = stringResource(R.string.lib_redirect_service, settings.service.name),
+        headline = settings?.service?.name
+            ?.let { stringResource(R.string.lib_redirect_service, it) }
+            ?: stringResource(R.string.lib_redirect),
         onBackPressed = onBackPressed,
         floatingActionButton = {
             if (customInstancesExperiment) {
@@ -147,7 +134,7 @@ private fun LibRedirectServiceSettingsRouteInternal(
             FrontendDropdown(
                 enabled = enabled,
                 selected = frontendState,
-                frontends = settings.frontends,
+                frontends = settings?.frontends ?: emptyList(),
                 onChange = resetServiceToFrontend
             )
         }
@@ -162,8 +149,10 @@ private fun LibRedirectServiceSettingsRouteInternal(
                     padding = padding,
                     enabled = enabled,
                     headlineContent = textContent(R.string.random_instance),
-                    selected = selected.instanceUrl == LibRedirectDefault.randomInstance,
-                    onSelect = { updateInstance(selected, LibRedirectDefault.randomInstance, false) },
+                    selected = selected?.instanceUrl == LibRedirectDefault.randomInstance,
+                    onSelect = {
+                        selected?.let { updateInstance(it, LibRedirectDefault.randomInstance, false) }
+                    },
                 )
             }
 
@@ -174,8 +163,10 @@ private fun LibRedirectServiceSettingsRouteInternal(
                         shape = shape,
                         padding = padding,
                         enabled = enabled,
-                        selected = selected.instanceUrl == instance,
-                        onSelect = { updateInstance(selected, instance, false) }
+                        selected = selected?.instanceUrl == instance,
+                        onSelect = {
+                            selected?.let { updateInstance(it, instance, false) }
+                        }
                     )
                 }
             }
@@ -187,8 +178,10 @@ private fun LibRedirectServiceSettingsRouteInternal(
                         shape = shape,
                         padding = padding,
                         enabled = enabled,
-                        selected = selected.instanceUrl == instance,
-                        onSelect = { updateInstance(selected, instance, true) },
+                        selected = selected?.instanceUrl == instance,
+                        onSelect = {
+                            selected?.let { updateInstance(it, instance, true) }
+                        },
                         onDelete = { deleteInstance(instance) }
                     )
                 }
@@ -250,7 +243,7 @@ private fun UserDefinedInstanceListItem(
 @Composable
 private fun FrontendDropdown(
     enabled: Boolean,
-    selected: FrontendState,
+    selected: FrontendState?,
     frontends: List<FrontendState>,
     onChange: (FrontendState) -> Unit,
 ) {
@@ -265,7 +258,7 @@ private fun FrontendDropdown(
                 .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, enabled)
                 .fillMaxWidth()
                 .enabled(enabled),
-            value = selected.name,
+            value = selected?.name ?: "",
             onValueChange = {},
             readOnly = true,
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
@@ -313,7 +306,7 @@ private fun LibRedirectServiceSettingsRoutePreview() {
     val libRedirectDefault = LibRedirectDefault("reddit", "libreddit", "https://redlib.catsarch.com")
     val frontendState = FrontendState(
         "reddit", "libreddit", "libreddit",
-        LibRedirectData.LibRedditInstance.hosts.toSet(),
+        LibRedirectData.RedLibInstance.hosts.toSet(),
         "https://redlib.catsarch.com"
     )
     PreviewContainer {

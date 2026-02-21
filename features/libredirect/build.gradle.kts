@@ -19,6 +19,7 @@ android {
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     kotlin {
@@ -40,6 +41,7 @@ dependencies {
     implementation(project(":util"))
     implementation(project(":api"))
     implementation(project(":compose"))
+    implementation(project(":test-core"))
     compileOnly(project(":hidden-api"))
     implementation(AndroidX.room.common)
     implementation(AndroidX.room.runtime)
@@ -79,8 +81,14 @@ dependencies {
     testImplementation(Testing.robolectric)
     testImplementation(KotlinX.coroutines.test)
     testImplementation(AndroidX.test.ext.junit.ktx)
-    testImplementation(project(":test-core"))
     testImplementation(Grrfe.std.test)
     testImplementation(Grrfe.std.result.assert)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
+
+    androidTestImplementation(AndroidX.test.runner)
+    androidTestImplementation(AndroidX.test.rules)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(AndroidX.test.ext.junit.ktx)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    debugImplementation(AndroidX.compose.ui.testManifest)
 }

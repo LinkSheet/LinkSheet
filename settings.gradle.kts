@@ -110,6 +110,9 @@ buildSettings {
         trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
         trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
         trySubstitute(LinkSheet.flavors, properties["flavors.dir"])
+        trySubstitute("com.github.1fexd.libredirectkt", properties["libredirectkt.dir"]) {
+            this["lib"] = "lib"
+        }
     }
 }
 

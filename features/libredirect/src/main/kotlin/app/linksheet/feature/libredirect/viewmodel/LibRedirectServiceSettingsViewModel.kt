@@ -14,12 +14,10 @@ import app.linksheet.feature.libredirect.database.repository.LibRedirectStateRep
 import app.linksheet.feature.libredirect.database.repository.LibRedirectUserInstanceRepository
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffect
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class LibRedirectServiceSettingsViewModel(
     val context: Application,
     private val serviceKey: String,
@@ -29,7 +27,7 @@ class LibRedirectServiceSettingsViewModel(
     val customInstancesExperiment: () -> Boolean,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
-//    val enableLibRedirect = preferenceRepository.asViewModelState(libRedirectPreferences.enable)
+    //    val enableLibRedirect = preferenceRepository.asViewModelState(libRedirectPreferences.enable)
     private val controller = SettingsController()
 
     private val _settings = MutableStateFlow<ServiceSettings?>(null)
@@ -38,12 +36,6 @@ class LibRedirectServiceSettingsViewModel(
     fun loadSettings() {
         viewModelScope.launch {
             _settings.value = controller.loadSettings(serviceKey)
-        }
-    }
-
-    fun getUserInstances(frontend: String): Flow<List<String>> {
-        return userInstanceRepository.getByServiceAndFrontendOrNull(serviceKey, frontend).map { list ->
-            list.map { it.instanceUrl }
         }
     }
 
@@ -63,35 +55,34 @@ class LibRedirectServiceSettingsViewModel(
     suspend fun transform(
         transform: Pair<ServiceSettings, LibRedirectDefault?>,
         handleSideEffect: ProduceSideEffect<LibRedirectDefault>
-    ): Pair<LibRedirectDefault, FrontendState> {
+    ): SelectedFrontend {
         val (settings, stored) = transform
 //        userInstanceRepository.getByServiceAndFrontendOrNull(serviceKey)
 
         if (stored == null) {
-            return settings.fallback!! to settings.defaultFrontend!!
+            return SelectedFrontend(settings.fallback!!, settings.defaultFrontend!!)
         }
 
         val frontend = settings.maybeGetFrontend(stored.frontendKey)
         if (frontend == null) {
             handleSideEffect(stored)
-            return settings.fallback!! to settings.defaultFrontend!!
+            return SelectedFrontend(settings.fallback!!, settings.defaultFrontend!!)
         }
 
         // Url is no longer available in instances shipped
         if (stored.instanceUrl != LibRedirectDefault.randomInstance && stored.instanceUrl !in frontend.instances) {
             // TODO: Use version to do a more exhaustive check? Otherwise assume instance is gone, fall back to new default
             if (!stored.userDefined) {
-                return settings.fallback!! to settings.defaultFrontend!!
+                return SelectedFrontend(settings.fallback!!, settings.defaultFrontend!!)
 //                     TODO: Do something about this
 //                    return@mapProducingSideEffect stored.copy(instanceUrl = fallback.instanceUrl)
             }
         }
 
-        return stored to frontend
+        return SelectedFrontend(stored, frontend)
     }
 
-
-    val selectedFrontend: Flow<Pair<LibRedirectDefault, FrontendState>> = _settings
+    val selectedFrontend: Flow<SelectedFrontend> = _settings
         .filterNotNull()
         .combine(defaultRepository.getByServiceKey(serviceKey)) { settings, stored ->
             settings to stored
@@ -101,6 +92,14 @@ class LibRedirectServiceSettingsViewModel(
             transform = ::transform,
             handleSideEffect = { default -> defaultRepository.delete(default) }
         )
+    val userInstances: Flow<List<String>> = selectedFrontend
+        .flatMapLatest { selectedFrontend ->
+            userInstanceRepository
+                .getByServiceAndFrontendOrNull(serviceKey, selectedFrontend.state)
+                .map { list ->
+                    list.map { it.instanceUrl }
+                }
+        }
 
     val enabled = stateRepository.isEnabledFlow(serviceKey)
 
@@ -149,3 +148,5 @@ data class BuiltInFrontendHolder(
     val instances: Set<String>,
     val defaultInstance: String,
 )
+
+data class SelectedFrontend(val default: LibRedirectDefault, val state: FrontendState)

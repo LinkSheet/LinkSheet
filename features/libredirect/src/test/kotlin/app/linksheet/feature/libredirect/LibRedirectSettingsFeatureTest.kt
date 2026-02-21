@@ -14,7 +14,7 @@ import org.junit.Test
 internal class LibRedirectSettingsFeatureTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
     private val loadBuiltInServices = listOf(LibRedirectData.RedditService)
-    private val loadBuiltInInstances = listOf(LibRedirectData.LibRedditInstance)
+    private val loadBuiltInInstances = listOf(LibRedirectData.RedLibInstance)
 
     @Test
     fun test() = runTest(dispatcher) {

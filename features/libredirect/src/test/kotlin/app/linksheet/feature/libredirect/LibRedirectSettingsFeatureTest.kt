@@ -19,9 +19,11 @@ internal class LibRedirectSettingsFeatureTest : BaseUnitTest {
     @Test
     fun test() = runTest(dispatcher) {
         val feature = SettingsController(
-            loadBuiltInServices = { loadBuiltInServices },
-            loadBuiltInInstances = { loadBuiltInInstances },
-            ioDispatcher = dispatcher
+            useCase = LibRedirectUseCase(
+                _loadBuiltInServices = { loadBuiltInServices },
+                _loadBuiltInInstances = { loadBuiltInInstances },
+                ioDispatcher = dispatcher
+            )
         )
         val settings = feature.loadSettings("reddit")
         assertThat(settings).isNotNull().all {

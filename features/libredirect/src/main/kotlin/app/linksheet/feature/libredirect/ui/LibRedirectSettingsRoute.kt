@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -24,6 +25,7 @@ import app.linksheet.feature.libredirect.R
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.libredirect.navigation.LibRedirectServiceRoute
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -43,7 +45,11 @@ fun LibRedirectSettingsRoute(
     navigate: (Route) -> Unit,
     viewModel: LibRedirectSettingsViewModel = koinViewModel(),
 ) {
-    val services by viewModel.services.collectOnIO(null)
+    LaunchedEffect(key1 = Unit) {
+        viewModel.init()
+    }
+
+    val services by viewModel.services.collectOnIO(initialState = null)
 
     LibRedirectSettingsRouteInternal(
         onBackPressed = onBackPressed,
@@ -65,6 +71,13 @@ internal fun LibRedirectSettingsRouteInternal(
 ) {
     val listState = remember(services?.size) {
         listState(services)
+    }
+
+    val logger = remember {
+        Logger("LibRedirectSettingsRouteInternal")
+    }
+    LaunchedEffect(services) {
+//        logger.debug("$services")
     }
 
     SaneScaffoldSettingsPage(

@@ -1,33 +1,25 @@
 package app.linksheet.feature.libredirect
 
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
-import fe.libredirectkt.LibRedirectInstance
-import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectService
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class SettingsController(
-    private val loadBuiltInServices: () -> List<LibRedirectService> = LibRedirectLoader::loadBuiltInServices,
-    private val loadBuiltInInstances: () -> List<LibRedirectInstance> = LibRedirectLoader::loadBuiltInInstances,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val useCase: LibRedirectUseCase,
 ) {
-    suspend fun loadSettings(serviceKey: String) = withContext(ioDispatcher) {
-        val builtInInstances = loadBuiltInInstances().associate { it.frontendKey to it.hosts.toSet() }
+    suspend fun loadSettings(serviceKey: String): ServiceSettings? {
+        val builtInInstances = useCase.loadBuiltInInstances().associate { it.frontendKey to it.hosts.toSet() }
 
-        val service = createService(serviceKey) ?: return@withContext null
+        val service = createService(serviceKey) ?: return null
         val (states, defaultFrontendState) = loadInstances(service, builtInInstances)
         val fallback = defaultFrontendState?.let { createDefault(it) }
 
-        ServiceSettings(service, fallback, states, defaultFrontendState)
+        return ServiceSettings(service, fallback, states, defaultFrontendState)
     }
 
-    private fun createService(serviceKey: String): LibRedirectService? {
-        val builtInServices = loadBuiltInServices().associateBy { it.key }
+    private suspend fun createService(serviceKey: String): LibRedirectService? {
+        val builtInServices = useCase.loadBuiltInServices().associateBy { it.key }
 
         val service = builtInServices[serviceKey] ?: return null
-
         return service
     }
 

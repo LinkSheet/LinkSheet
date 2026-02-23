@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.linksheet.feature.libredirect.FrontendState
+import app.linksheet.feature.libredirect.LibRedirectUseCase
 import app.linksheet.feature.libredirect.ServiceSettings
 import app.linksheet.feature.libredirect.SettingsController
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
@@ -25,10 +26,11 @@ class LibRedirectServiceSettingsViewModel(
     private val stateRepository: LibRedirectStateRepository,
     private val userInstanceRepository: LibRedirectUserInstanceRepository,
     val customInstancesExperiment: () -> Boolean,
+    private val useCase: LibRedirectUseCase,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
     //    val enableLibRedirect = preferenceRepository.asViewModelState(libRedirectPreferences.enable)
-    private val controller = SettingsController()
+    private val controller = SettingsController(useCase = useCase)
 
     private val _settings = MutableStateFlow<ServiceSettings?>(null)
     val settings = _settings.asStateFlow()

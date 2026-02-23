@@ -42,6 +42,7 @@ dependencies {
     implementation(project(":api"))
     implementation(project(":compose"))
     implementation(project(":test-core"))
+    implementation(project(":log"))
     compileOnly(project(":hidden-api"))
     implementation(AndroidX.room.common)
     implementation(AndroidX.room.runtime)

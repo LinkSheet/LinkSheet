@@ -4,16 +4,14 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.libredirect.LibRedirectUseCase
 import app.linksheet.feature.libredirect.database.repository.LibRedirectDefaultRepository
 import app.linksheet.feature.libredirect.database.repository.LibRedirectStateRepository
 import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import fe.libredirectkt.LibRedirectInstance
-import fe.libredirectkt.LibRedirectLoader
 import fe.libredirectkt.LibRedirectService
-import fe.linksheet.util.flowOfLazy
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class LibRedirectSettingsViewModel(
     val context: Application,
@@ -30,13 +28,29 @@ class LibRedirectSettingsViewModel(
 
     val enableLibRedirect = preferenceRepository.asViewModelState(libRedirectPreferences.enable)
 
-    private val builtInServices = flowOfLazy { LibRedirectLoader.loadBuiltInServices() }
-    private val builtinInstances = flowOfLazy {
-        LibRedirectLoader.loadBuiltInInstances()
+
+    private val useCase = LibRedirectUseCase()
+    private val _builtInServices = MutableStateFlow<List<LibRedirectService>>(emptyList())
+    val builtInServices = _builtInServices.asStateFlow()
+
+    private val _builtInInstances = MutableStateFlow<List<LibRedirectInstance>>(emptyList())
+    val builtInInstances = _builtInInstances.asStateFlow()
+
+    fun init() {
+        viewModelScope.launch {
+            _builtInServices.value = useCase.loadBuiltInServices()
+            _builtInInstances.value = useCase.loadBuiltInInstances()
+//            _settings.value = controller.loadSettings(serviceKey)
+        }
     }
 
-    val services = builtInServices
-        .combine(builtinInstances, ::buildState)
+    val services = _builtInServices
+        .combine(_builtInInstances, ::buildState)
+//        .shareIn(
+//            scope = viewModelScope,
+//            started = SharingStarted.Lazily,
+//            replay = 1
+//        )
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(0),

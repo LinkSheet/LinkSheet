@@ -1,6 +1,8 @@
 package fe.linksheet.composable.ui
 
 import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
 import androidx.annotation.StringRes
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -9,9 +11,9 @@ import androidx.compose.ui.graphics.Color
 import app.linksheet.compose.theme.DarkColors
 import app.linksheet.compose.theme.LightColors
 import fe.android.preference.helper.OptionTypeMapper
+import fe.composekit.core.AndroidVersion
 import fe.composekit.layout.column.GroupValueProvider
 import fe.linksheet.R
-import fe.composekit.core.AndroidVersion
 import fe.linksheet.util.StringResHolder
 
 sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHolder, GroupValueProvider<Int> {
@@ -68,4 +70,16 @@ sealed class ThemeV2(val name: String, @StringRes stringRes: Int) : StringResHol
     companion object : OptionTypeMapper<ThemeV2, String>({ it.name }, {
         arrayOf(System, Light, Dark)
     })
+}
+
+fun ThemeV2.isDarkTheme(resources: Resources): Boolean {
+    // Via SystemDarkStyle.auto detectDarkMode
+    val systemDarkTheme = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+    return isDarkTheme(systemDarkTheme)
+}
+
+fun ThemeV2.isDarkTheme(
+    systemDarkTheme: Boolean
+): Boolean {
+    return this == ThemeV2.Dark  || (this == ThemeV2.System && systemDarkTheme)
 }

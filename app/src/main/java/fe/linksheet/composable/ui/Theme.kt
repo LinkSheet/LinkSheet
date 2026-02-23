@@ -16,6 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
+import app.linksheet.compose.debug.DebugPreferenceProvider
+import app.linksheet.compose.debug.LocalUiDebug
+import app.linksheet.compose.theme.LightColors
+import app.linksheet.compose.theme.NewTypography
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.rememberHapticFeedbackInteraction
 import fe.android.preference.helper.EnumTypeMapper
@@ -24,10 +28,6 @@ import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.android.span.helper.LocalLinkTags
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
-import app.linksheet.compose.debug.DebugPreferenceProvider
-import app.linksheet.compose.debug.LocalUiDebug
-import app.linksheet.compose.theme.LightColors
-import app.linksheet.compose.theme.NewTypography
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.LinkSheetLinkTags
 import org.koin.androidx.compose.KoinAndroidContext
@@ -101,7 +101,7 @@ fun AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
     themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
     debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
-    updateEdgeToEdge: ((SystemBarStyle, SystemBarStyle) -> Unit)? = null,
+    updateEdgeToEdge: ((statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
@@ -116,7 +116,7 @@ fun AppTheme(
 
     if (edgeToEdge && updateEdgeToEdge != null) {
         LaunchedEffect(key1 = themeV2) {
-            val isDarkMode: (Resources) -> Boolean = { _ -> themeV2 == ThemeV2.Dark || systemDarkTheme }
+            val isDarkMode: (Resources) -> Boolean = { resources -> themeV2.isDarkTheme(resources) }
 
             updateEdgeToEdge(
                 SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT, detectDarkMode = isDarkMode),

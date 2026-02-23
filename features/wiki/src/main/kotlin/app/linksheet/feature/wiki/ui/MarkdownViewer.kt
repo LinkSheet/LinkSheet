@@ -1,5 +1,6 @@
 package app.linksheet.feature.wiki.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -117,6 +118,8 @@ private fun MarkdownViewer(
                         modifier = Modifier,
                         markdown = markdown,
                         linkColor = LocalLinkAnnotationStyle.current.style.color,
+                        syntaxHighlightColor = MaterialTheme.colorScheme.tertiary,
+                        syntaxHighlightTextColor = MaterialTheme.colorScheme.onTertiary,
                         style = MaterialTheme.typography.bodyMedium,
                         isTextSelectable = true,
 //                        onLinkClicked = {
@@ -238,12 +241,9 @@ private class MarkdownPreviewParameterProvider : PreviewParameterProvider<Pair<S
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview(group = "MarkdownViewerPage", showBackground = false)
+
 @Composable
-private fun PreviewText(
-    @PreviewParameter(MarkdownPreviewParameterProvider::class) preview: Pair<String, String>,
-) {
+private fun MarkdownViewerPreviewBase(preview: Pair<String, String>) {
     val (title, markdown) = preview
 
     PreviewTheme {
@@ -254,6 +254,22 @@ private fun PreviewText(
             onOpenExternally = {}
         )
     }
+}
+
+@Preview(group = "MarkdownViewerPage", showBackground = false, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Composable
+private fun PreviewTextLight(
+    @PreviewParameter(MarkdownPreviewParameterProvider::class) preview: Pair<String, String>,
+) {
+  MarkdownViewerPreviewBase(preview)
+}
+
+@Preview(group = "MarkdownViewerPage", showBackground = false, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewTextDark(
+    @PreviewParameter(MarkdownPreviewParameterProvider::class) preview: Pair<String, String>,
+) {
+    MarkdownViewerPreviewBase(preview)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

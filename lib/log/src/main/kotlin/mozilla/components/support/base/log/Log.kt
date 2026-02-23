@@ -4,7 +4,6 @@
 
 package mozilla.components.support.base.log
 
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import mozilla.components.support.base.log.sink.LogSink
 import mozilla.components.support.base.log.sink.TestModeLogSink
@@ -86,9 +85,9 @@ object Log {
         // We intentionally omit ASSERT and VERBOSE. If you change this,
         // be aware of the impact on consumers.
 
-        DEBUG(Log.DEBUG),
-        INFO(Log.INFO),
-        WARN(Log.WARN),
-        ERROR(Log.ERROR),
+        DEBUG(android.util.Log.DEBUG),
+        INFO(android.util.Log.INFO),
+        WARN(android.util.Log.WARN),
+        ERROR(android.util.Log.ERROR),
     }
 }

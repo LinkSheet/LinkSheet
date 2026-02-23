@@ -10,6 +10,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.PrintWriter
 import java.io.StringWriter
+import kotlin.collections.HashSet
 
 private const val STACK_TRACE_INITIAL_BUFFER_SIZE = 256
 private const val STACK_TRACE_MAX_LENGTH = 100000

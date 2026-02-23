@@ -1,25 +1,33 @@
 package fe.linksheet.composable.page.settings.browser.mode
 
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.preview.PreviewContainer
+import app.linksheet.feature.app.core.ActivityAppInfo
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.android.preference.helper.Preference
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
-import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.preference.*
 import fe.composekit.route.Route
 import fe.linksheet.R
-import fe.linksheet.composable.component.FilterChipValue
-import fe.linksheet.composable.component.FilterChips
+import fe.linksheet.composable.component.ConnectedToggleButtonFlowRow
 import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
@@ -41,32 +49,67 @@ fun PreferredBrowserSettingsRoute(
     val type by viewModel.type.collectAsStateWithLifecycle()
     val modePref by viewModel.browserMode.collectAsStateWithLifecycle(initialValue = null)
     val browserStatePref by viewModel.selectedBrowser.collectAsStateWithLifecycle(initialValue = null)
-    val unifiedPreferredBrowser by viewModel.unifiedPreferredBrowser.collectAsStateWithLifecycle()
 
-    SaneScaffoldSettingsPage(headline = stringResource(id = R.string.browser_mode), onBackPressed = onBackPressed) {
+    PreferredBrowserSettingsRouteInternal(
+        onBackPressed = onBackPressed,
+        navigate = navigate,
+        type = type,
+        onChangeType = viewModel::updateType,
+        modePref = modePref,
+        browserStatePref = browserStatePref,
+        unifiedPreferredBrowserPref = viewModel.unifiedPreferredBrowser,
+        autoLaunchSingleBrowserPref = viewModel.autoLaunchSingleBrowser,
+        getAppInfo = viewModel::getAppInfo
+    )
+}
+
+@Composable
+private fun PreferredBrowserSettingsRouteInternal(
+    onBackPressed: () -> Unit,
+    navigate: (Route) -> Unit,
+    type: BrowserType,
+    onChangeType: (BrowserType) -> Unit,
+    modePref: ViewModelStatePreference<BrowserMode, BrowserMode, Preference.Mapped<BrowserMode, String>>?,
+    browserStatePref: ViewModelStatePreference<String, String?, Preference.Nullable<String>>?,
+    unifiedPreferredBrowserPref: BooleanVmPref,
+    autoLaunchSingleBrowserPref: BooleanVmPref,
+    getAppInfo: (String?) -> ActivityAppInfo?,
+) {
+    SaneScaffoldSettingsPage(
+        headline = stringResource(id = R.string.browser_mode),
+        onBackPressed = onBackPressed
+    ) {
 //        divider(id = R.string.browser_mode_subtitle)
 
         item(key = R.string.browser_mode_subtitle, contentType = ContentType.SingleGroupItem) {
             PreferenceSwitchListItem(
-                statePreference = viewModel.unifiedPreferredBrowser,
+                statePreference = unifiedPreferredBrowserPref,
                 headlineContent = textContent(R.string.use_unified_preferred_browser),
                 supportingContent = textContent(R.string.use_unified_preferred_browser_explainer),
             )
+        }
 
+        item(key = 1, contentType = ContentType.Divider) {
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+
+        item(key = 2, contentType = ContentType.SingleGroupItem) {
+            val unifiedPreferredBrowser by unifiedPreferredBrowserPref.collectAsStateWithLifecycle()
             if (!unifiedPreferredBrowser) {
-                FilterChips(
-                    currentState = type,
-                    onClick = { viewModel.type.value = it },
-                    values = listOf(
-                        FilterChipValue(
-                            BrowserType.Normal,
-                            R.string.normal
-                        ),
-                        FilterChipValue(
-                            BrowserType.InApp,
-                            R.string.in_app
+                ConnectedToggleButtonFlowRow(
+                    current = type,
+                    items = BrowserType.entries,
+                    onChange = onChangeType,
+                    itemContent = {
+                        Text(
+                            text = stringResource(
+                                id = when (it) {
+                                    BrowserType.Normal -> R.string.normal
+                                    BrowserType.InApp -> R.string.in_app
+                                }
+                            )
                         )
-                    )
+                    }
                 )
             }
         }
@@ -126,7 +169,7 @@ fun PreferredBrowserSettingsRoute(
             item(key = R.string.settings_apps_browsers_mode__title_selected) { padding, shape ->
                 modePref?.let {
                     val browserState by browserStatePref!!.collectAsStateWithLifecycle()
-                    val appInfo = viewModel.getAppInfo(browserState)
+                    val appInfo = getAppInfo(browserState)
 
                     PreferenceRadioButtonListItem(
                         padding = padding,
@@ -151,15 +194,35 @@ fun PreferredBrowserSettingsRoute(
             }
         }
 
-
         divider(id = R.string.options)
 
-        item(key = R.string.settings_browser_mode__title_auto_launch_single_browser, contentType = ContentType.SingleGroupItem) {
+        item(
+            key = R.string.settings_browser_mode__title_auto_launch_single_browser,
+            contentType = ContentType.SingleGroupItem
+        ) {
             PreferenceSwitchListItem(
-                statePreference = viewModel.autoLaunchSingleBrowser,
+                statePreference = autoLaunchSingleBrowserPref,
                 headlineContent = textContent(R.string.settings_browser_mode__title_auto_launch_single_browser),
                 supportingContent = textContent(R.string.settings_browser_mode__subtitle_auto_launch_single_browser),
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun PreferredBrowserSettingsRouteInternalPreview() {
+    PreviewContainer {
+        PreferredBrowserSettingsRouteInternal(
+            onBackPressed = {},
+            navigate = {},
+            type = BrowserType.Normal,
+            onChangeType = {},
+            modePref = FakePreferences.mapped(BrowserMode.SelectedBrowser, BrowserMode.Companion).vm,
+            browserStatePref = fakeStringVM(null),
+            unifiedPreferredBrowserPref = fakeBooleanVM(false),
+            autoLaunchSingleBrowserPref = fakeBooleanVM(true),
+            getAppInfo = { null }
+        )
     }
 }

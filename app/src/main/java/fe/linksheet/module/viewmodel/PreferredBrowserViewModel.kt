@@ -10,6 +10,7 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -18,7 +19,8 @@ class PreferredBrowserViewModel(
     preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val type = MutableStateFlow(BrowserType.Normal)
+    private val _type = MutableStateFlow(BrowserType.Normal)
+    val type = _type.asStateFlow()
     val autoLaunchSingleBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.autoLaunchSingleBrowser)
     val unifiedPreferredBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.unifiedPreferredBrowser)
 
@@ -26,14 +28,17 @@ class PreferredBrowserViewModel(
         viewModelScope.launch {
             unifiedPreferredBrowser.stateFlow
                 .map { it }
-                .collect { type.emit(BrowserType.Normal) }
+                .collect { _type.emit(BrowserType.Normal) }
         }
+    }
+    fun updateType(type: BrowserType) {
+        _type.value = type
     }
 
     private val normalBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.browserMode)
     private val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.inAppBrowserMode)
 
-    val browserMode = type.map {
+    val browserMode = _type.map {
         when (it) {
             BrowserType.Normal -> normalBrowserMode
             BrowserType.InApp -> inAppBrowserMode
@@ -46,7 +51,7 @@ class PreferredBrowserViewModel(
     @OptIn(SensitivePreference::class)
     private val selectedInAppBrowser = preferenceRepository.asViewModelState(AppPreferences.browserMode.selectedInAppBrowser)
 
-    val selectedBrowser = type.map {
+    val selectedBrowser = _type.map {
         when (it) {
             BrowserType.Normal -> selectedNormalBrowser
             BrowserType.InApp -> selectedInAppBrowser

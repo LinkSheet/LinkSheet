@@ -5,7 +5,7 @@ import androidx.room.Room
 import app.linksheet.api.database.DefaultCrossDatabaseMigration
 import fe.linksheet.module.database.LinkSheetDatabase
 import fe.linksheet.module.database.LinkSheetDatabase.Companion.configureAndBuild
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 

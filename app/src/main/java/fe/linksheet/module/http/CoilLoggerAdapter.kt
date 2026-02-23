@@ -1,7 +1,7 @@
 package fe.linksheet.module.http
 
 import coil3.util.Logger
-import mozilla.components.support.base.log.logger.Logger as MozLogger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger as MozLogger
 
 
 class CoilLoggerAdapter(

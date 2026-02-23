@@ -2,7 +2,7 @@ package fe.linksheet.debug.command
 
 import android.content.Context
 import android.content.Intent
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
 import kotlin.reflect.KClass
 

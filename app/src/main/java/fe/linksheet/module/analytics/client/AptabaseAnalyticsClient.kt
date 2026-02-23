@@ -15,7 +15,7 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.util.buildconfig.BuildType
 import fe.std.javatime.extension.unixMillisAtZone
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.koin.dsl.module
 import java.io.IOException
 import java.time.format.DateTimeFormatter

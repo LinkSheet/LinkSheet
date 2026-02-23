@@ -2,11 +2,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package mozilla.components.support.base.log
+package app.linksheet.mozilla.components.support.base.log
 
+import android.util.Log
 import androidx.annotation.VisibleForTesting
-import mozilla.components.support.base.log.sink.LogSink
-import mozilla.components.support.base.log.sink.TestModeLogSink
+import app.linksheet.mozilla.components.support.base.log.sink.LogSink
+import app.linksheet.mozilla.components.support.base.log.sink.TestModeLogSink
 
 /**
  * API for logging messages and exceptions.
@@ -85,9 +86,9 @@ object Log {
         // We intentionally omit ASSERT and VERBOSE. If you change this,
         // be aware of the impact on consumers.
 
-        DEBUG(android.util.Log.DEBUG),
-        INFO(android.util.Log.INFO),
-        WARN(android.util.Log.WARN),
-        ERROR(android.util.Log.ERROR),
+        DEBUG(Log.DEBUG),
+        INFO(Log.INFO),
+        WARN(Log.WARN),
+        ERROR(Log.ERROR),
     }
 }

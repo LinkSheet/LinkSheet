@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package mozilla.components.support.base.log.logger
+package app.linksheet.mozilla.components.support.base.log.logger
 
 import android.os.SystemClock
-import mozilla.components.support.base.log.Log
+import app.linksheet.mozilla.components.support.base.log.Log
 
 /**
  * A wrapper for the <code>Log</code> object providing a more convenient API for logging.

@@ -3,6 +3,7 @@ package fe.linksheet.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.core.getEnumExtra
 import fe.composekit.intent.buildIntent
 import fe.linksheet.TextValidator
@@ -11,7 +12,6 @@ import fe.linksheet.WebUriTextValidator
 import fe.linksheet.composable.page.edit.TextEditorPage
 import fe.linksheet.composable.page.edit.TextSource
 import fe.linksheet.composable.ui.AppTheme
-import mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
 
 

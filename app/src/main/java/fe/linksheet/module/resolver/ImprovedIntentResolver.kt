@@ -58,7 +58,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 
 @Stable

@@ -94,7 +94,7 @@ import fe.linksheet.testlib.core.BaseUnitTest
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import kotlinx.coroutines.CoroutineDispatcher
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI

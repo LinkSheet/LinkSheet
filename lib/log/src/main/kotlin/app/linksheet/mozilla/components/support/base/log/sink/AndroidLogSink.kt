@@ -2,10 +2,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-package mozilla.components.support.base.log.sink
+package app.linksheet.mozilla.components.support.base.log.sink
 
-import mozilla.components.support.base.ext.getStacktraceAsString
-import mozilla.components.support.base.log.Log
+import app.linksheet.mozilla.components.support.base.ext.getStacktraceAsString
+import app.linksheet.mozilla.components.support.base.log.Log
 
 /**
  * <code>LogSink</code> implementation that writes to Android's log.

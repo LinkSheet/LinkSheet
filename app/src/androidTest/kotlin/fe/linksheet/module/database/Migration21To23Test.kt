@@ -12,7 +12,7 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import fe.linksheet.module.database.migrations.Migration21to23
 import fe.linksheet.testlib.instrument.InstrumentationTest
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

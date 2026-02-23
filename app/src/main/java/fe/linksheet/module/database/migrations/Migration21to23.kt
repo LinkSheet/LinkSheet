@@ -7,7 +7,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import app.linksheet.api.database.CrossDatabaseMigration
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 
 class Migration21to23(
     private val logger: Logger,

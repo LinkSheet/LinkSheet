@@ -24,7 +24,7 @@ import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
 import fe.linksheet.module.database.migrations.*
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 

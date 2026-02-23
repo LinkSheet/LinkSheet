@@ -1,7 +1,7 @@
 package fe.linksheet.module.database.migrations
 
 import androidx.room.migration.Migration
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 
 class Migration12to17(private val logger: Logger) {
     companion object {

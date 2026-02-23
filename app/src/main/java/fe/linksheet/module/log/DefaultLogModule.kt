@@ -8,8 +8,8 @@ import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import mozilla.components.support.base.log.Log
-import mozilla.components.support.base.log.sink.LogSink
+import app.linksheet.mozilla.components.support.base.log.Log
+import app.linksheet.mozilla.components.support.base.log.sink.LogSink
 import org.koin.dsl.module
 
 val DefaultLogModule = module {

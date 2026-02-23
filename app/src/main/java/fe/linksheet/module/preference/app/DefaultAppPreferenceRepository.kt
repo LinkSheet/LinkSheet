@@ -8,7 +8,7 @@ import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
 
 class DefaultAppPreferenceRepository(val context: Context) : AppPreferenceRepository(context), KoinComponent {

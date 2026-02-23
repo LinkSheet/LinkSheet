@@ -8,7 +8,7 @@ import fe.linksheet.BuildConfig
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.koin.dsl.module
 
 @OptIn(SensitivePreference::class)

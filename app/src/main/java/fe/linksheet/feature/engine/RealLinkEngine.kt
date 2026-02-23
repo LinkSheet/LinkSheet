@@ -30,6 +30,7 @@ import app.linksheet.feature.engine.database.repository.ScenarioRepository
 import app.linksheet.feature.engine.eval.rule.ExpressionPostProcessorRule
 import app.linksheet.feature.engine.eval.rule.ExpressionPreProcessorRule
 import app.linksheet.feature.libredirect.LibRedirectResolver
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -43,7 +44,6 @@ import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
-import mozilla.components.support.base.log.logger.Logger
 import kotlin.uuid.ExperimentalUuidApi
 
 class RealLinkEngine(

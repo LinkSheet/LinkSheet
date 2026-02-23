@@ -11,7 +11,7 @@ import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 
 data class Repository(val definition: PreferenceDefinition, val preferenceRepository: PreferenceRepository) {
     val allPreferences by lazy { definition.all.map { it.key } }

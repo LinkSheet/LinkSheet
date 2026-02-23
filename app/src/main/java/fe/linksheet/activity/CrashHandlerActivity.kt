@@ -32,7 +32,7 @@ import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import fe.std.time.unixMillisOf
-import mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.component.KoinComponent
 

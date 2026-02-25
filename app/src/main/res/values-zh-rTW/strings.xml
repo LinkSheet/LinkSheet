@@ -258,7 +258,7 @@
     <string name="version_name"><b>版本：</b><font face="monospace">%s</font></string>
     <string name="built_at"><b>建構於：</b><font face="monospace">%s</font></string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">行為變更</string>
-    <string name="settings_main_experiment_news__text_experiment_state_updated">部分實驗功能選項已功成身退並轉為預設行為。</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">部分實驗功能選項已功成身退並成為預設行為。</string>
     <string name="logs">記錄檔</string>
     <string name="log_viewer">記錄檔檢視器</string>
     <string name="current_session">目前工作階段</string>
@@ -413,4 +413,18 @@
     <string name="no_internet_connection">沒有網際網路連線</string>
     <string name="link_handle_failed_text">由於連結的格式似乎有誤，LinkSheet 無法處理。你可以在下方編輯後再試一次，或在網上搜尋之。</string>
     <string name="link_handle_failed">發生錯誤</string>
+    <string name="browser_mode_divider">模式</string>
+    <string name="generic__text_mode">模式</string>
+    <string name="settings_follow_redirects__title_mode_auto">自動</string>
+    <string name="settings_follow_redirects__title_mode_manual">手動</string>
+    <string name="settings_follow_redirects__subtitle_mode_auto">自動跟進所有重新導向</string>
+    <string name="settings_follow_redirects__subtitle_mode_manual">在底部功能表中顯示「跟進重新導向」按鈕</string>
+    <string name="settings_follow_redirects__title_aggressive">積極模式</string>
+    <string name="settings_apps_browsers_mode__text_none">無</string>
+    <string name="settings_apps_browsers_mode__title_selected">指定瀏覽器</string>
+    <string name="tap_customization__action_always_open_app">設為預設值並開啟</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">輕觸兩下網址</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">輕觸兩下網址即可開啟建議的應用程式</string>
+    <string name="handler_target__label_switch_profile_view_intent">切換資料夾</string>
+    <string name="settings_follow_redirects__subtitle_aggressive">擷取完整網頁以與未使用 HTTP 重新導向的網站更加相容</string>
 </resources>

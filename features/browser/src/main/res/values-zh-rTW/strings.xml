@@ -5,4 +5,10 @@
     <string name="no_such_app_found">找不到應用程式！</string>
     <string name="enable_request_private_browsing_button">啟用「隱私瀏覽」按鈕</string>
     <string name="enable_request_private_browsing_button_explainer">在瀏覽器旁顯示一個用以要求在隱私瀏覽模式中開啟連結的按鈕</string>
+    <string name="settings_private_browsing__title_private_browsing">隱私瀏覽按鈕</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">啟用隱私瀏覽按鈕</string>
+    <string name="settings_private_browsing__divider_configuration">配置</string>
+    <string name="settings_private_browsing__text_allowed_browsers">共 %d 款瀏覽器</string>
+    <string name="settings_private_browsing_browsers__title_browsers">已啟用的隱私瀏覽器</string>
+    <string name="settings_private_browsing__title_allowed_browsers">允許的瀏覽器</string>
 </resources>

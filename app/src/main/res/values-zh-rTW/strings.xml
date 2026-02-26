@@ -427,4 +427,11 @@
     <string name="settings_bottom_sheet__subtitle_double_tap_url">輕觸兩下網址即可開啟建議的應用程式</string>
     <string name="handler_target__label_switch_profile_view_intent">切換資料夾</string>
     <string name="settings_follow_redirects__subtitle_aggressive">擷取完整網頁以與未使用 HTTP 重新導向的網站更加相容</string>
+    <string name="show_linksheet_referrer_explainer">每個應用程式啟動時，可以得知其是被何者所發起 (或稱其「參照」之)。在預設情況下，當 LinkSheet 啟動了某個應用程式時，會隱藏自身並宣稱先前啟動 LinkSheet 的應用程式才是發起者。如啟用此選項，LinkSheet 將重新成為被啟動的應用程式的參照。</string>
+    <string name="settings_bottom_sheet__title_hide_referring_app">隱藏參照應用程式</string>
+    <string name="settings_bottom_sheet__subtitle_hide_referring_app">即使來源應用程式能夠處理連結，也不要將其列入</string>
+    <string name="settings_browser_mode__subtitle_auto_launch_single_browser">若僅有一款支援的應用程式，且其為瀏覽器，則自動啟動之</string>
+    <string name="settings_browser_mode__title_auto_launch_single_browser">自動採用唯一瀏覽器</string>
+    <string name="settings_bottom_sheet__subtitle_expand_fully">自動將底部功能表完全展開</string>
+    <string name="settings_bottom_sheet__title_expand_fully">完全展開</string>
 </resources>

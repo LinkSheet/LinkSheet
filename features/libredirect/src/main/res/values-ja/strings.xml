@@ -12,4 +12,6 @@
     <string name="no_libredirect_services">LibRedirect サービスが見つかりません！</string>
     <string name="enable_libredirect">LibRedirect を有効にする</string>
     <string name="enable_libredirect_explainer">実験的な <annotation url-id="libredirect-github">LibRedirect</annotation> 統合を使用して、プライバシーに配慮したフロントエンドにリンクをリダイレクトします</string>
+    <string name="settings_libredirect__title_add_instance">インスタンスを追加</string>
+    <string name="settings_libredirect__text_placeholder_instance">インスタンス</string>
 </resources>

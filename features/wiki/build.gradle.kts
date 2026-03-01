@@ -10,7 +10,7 @@ plugins {
     id("com.android.library")
     id("androidx.room")
     id("com.google.devtools.ksp")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {

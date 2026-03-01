@@ -4,7 +4,7 @@ import fe.buildsrc.mimetypes.UpdateMimeTypesTask
 
 plugins {
     kotlin("jvm")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 kotlin {

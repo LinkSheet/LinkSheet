@@ -13,7 +13,7 @@ plugins {
     id("net.nemerosa.versioning") apply false
     id("androidx.room") apply false
     id("com.google.devtools.ksp") apply false
-    id("com.gitlab.grrfe.new-build-logic-plugin") apply false
+    id("com.gitlab.grrfe.android-build-plugin") apply false
 }
 
 subprojects {

@@ -7,7 +7,7 @@ import fe.buildlogic.Version
 plugins {
     kotlin("android")
     id("com.android.library")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.library-build-plugin")
     id("kotlin-parcelize")
 }
 android {

@@ -2,8 +2,6 @@ import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
-import fe.buildlogic.common.OptIn
-import fe.buildlogic.common.extension.addOptIn
 
 plugins {
     kotlin("android")
@@ -12,7 +10,7 @@ plugins {
     id("com.android.library")
     id("androidx.room")
     id("com.google.devtools.ksp")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {

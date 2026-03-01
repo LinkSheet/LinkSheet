@@ -1,12 +1,11 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
-import fe.buildlogic.Version
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.extension.addCompilerOptions
+import com.gitlab.grrfe.gradlebuild.common.CompilerOption
+import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
 
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 group = "fe.linksheet.testlib.core"
@@ -20,7 +19,7 @@ android {
     }
 
     kotlin {
-        jvmToolchain(Version.JVM)
+        jvmToolchain(com.gitlab.grrfe.gradlebuild.Version.JVM)
         addCompilerOptions(CompilerOption.AllowKotlinPackage)
     }
 

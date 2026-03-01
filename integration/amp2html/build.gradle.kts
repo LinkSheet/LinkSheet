@@ -2,7 +2,7 @@ import fe.build.dependencies.Grrfe
 
 plugins {
     kotlin("jvm")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 kotlin {

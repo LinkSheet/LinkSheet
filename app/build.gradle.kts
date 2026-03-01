@@ -1,21 +1,22 @@
 
+//import com.gitlab.grrfe.gradlebuild.common.version.asProvider
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import com.gitlab.grrfe.gradlebuild.android.ArchiveBaseName
-import com.gitlab.grrfe.gradlebuild.common.version.CurrentTagMode
-import com.gitlab.grrfe.gradlebuild.common.version.TagReleaseParser
-import com.gitlab.grrfe.gradlebuild.common.version.asProvider
-import com.gitlab.grrfe.gradlebuild.common.version.closure
+import com.gitlab.grrfe.gradlebuild.android.extension.buildConfig
+import com.gitlab.grrfe.gradlebuild.android.extension.buildStringConfigField
+import com.gitlab.grrfe.gradlebuild.common.CompilerOption
+import com.gitlab.grrfe.gradlebuild.common.PluginOption
+import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
+import com.gitlab.grrfe.gradlebuild.extension.addPluginOptions
+import com.gitlab.grrfe.gradlebuild.extension.getOrSystemEnv
+import com.gitlab.grrfe.gradlebuild.extension.readPropertiesOrNull
+import com.gitlab.grrfe.gradlebuild.version.CurrentTagMode
+import com.gitlab.grrfe.gradlebuild.version.TagReleaseParser
+import com.gitlab.grrfe.gradlebuild.version.asProvider
+import com.gitlab.grrfe.gradlebuild.version.closure
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.PluginOption
-import fe.buildlogic.common.extension.addCompilerOptions
-import fe.buildlogic.common.extension.addPluginOptions
-import fe.buildlogic.extension.buildConfig
-import fe.buildlogic.extension.buildStringConfigField
-import fe.buildlogic.extension.getOrSystemEnv
-import fe.buildlogic.extension.readPropertiesOrNull
 import fe.buildlogic.version.AndroidVersionStrategy
 
 plugins {
@@ -29,7 +30,7 @@ plugins {
     id("androidx.room")
     id("com.google.devtools.ksp")
     id("dev.rikka.tools.refine")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit5")
 }
 

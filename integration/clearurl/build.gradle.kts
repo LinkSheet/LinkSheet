@@ -4,7 +4,7 @@ import fe.buildsrc.clearurls.UpdateRulesTask
 
 plugins {
     kotlin("jvm")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 kotlin {

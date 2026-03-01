@@ -21,6 +21,8 @@ import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.profile.ProfileFeatureModule
 import app.linksheet.feature.shizuku.ShizukuModule
 import app.linksheet.feature.wiki.WikiFeatureModule
+import app.linksheet.mozilla.components.support.base.log.Log
+import app.linksheet.mozilla.components.support.base.log.sink.AndroidLogSink
 import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
 import fe.android.lifecycle.CurrentActivityObserver

@@ -9,8 +9,9 @@ import com.gitlab.grrfe.gradlebuild.common.CompilerOption
 import com.gitlab.grrfe.gradlebuild.common.PluginOption
 import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
 import com.gitlab.grrfe.gradlebuild.extension.addPluginOptions
-import com.gitlab.grrfe.gradlebuild.extension.getOrSystemEnv
-import com.gitlab.grrfe.gradlebuild.extension.readPropertiesOrNull
+import com.gitlab.grrfe.gradlebuild.util.PropertiesFile
+import com.gitlab.grrfe.gradlebuild.util.SystemEnvironment
+import com.gitlab.grrfe.gradlebuild.util.withProviders
 import com.gitlab.grrfe.gradlebuild.version.CurrentTagMode
 import com.gitlab.grrfe.gradlebuild.version.TagReleaseParser
 import com.gitlab.grrfe.gradlebuild.version.asProvider
@@ -18,6 +19,7 @@ import com.gitlab.grrfe.gradlebuild.version.closure
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildlogic.version.AndroidVersionStrategy
+import java.util.*
 
 plugins {
     kotlin("android")
@@ -41,6 +43,15 @@ versioning {
 }
 
 val appName = "LinkSheet"
+fun Properties?.getOrSystemEnv2(key: String): String? {
+    return getOrSystemEnv2(this, key)
+}
+private fun getOrSystemEnv2(properties: Properties?, key: String, default: String? = null): String? {
+    val value = if (properties == null || !properties.containsKey(key)) System.getenv(key)
+    else properties.getProperty(key)
+
+    return value ?: default
+}
 
 android {
     namespace = "fe.linksheet"
@@ -61,11 +72,16 @@ android {
         versionName = name
 
         with(ArchiveBaseName) { project.setArchivesBaseName(appName, name, now) }
+        val localProperties = with(PropertiesFile) {
+            rootProject.file("local.properties").readPropertiesOrNull()
+        }
+        val publicLocalProperties = with(PropertiesFile) {
+            rootProject.file("public.local.properties").readPropertiesOrNull()
+        }
+        val localProviders = withProviders(localProperties, SystemEnvironment)
+        val publicLocalProviders = withProviders(publicLocalProperties, SystemEnvironment)
 
-        val localProperties = rootProject.file("local.properties").readPropertiesOrNull()
-        val publicLocalProperties = rootProject.file("public.local.properties").readPropertiesOrNull()
-
-        val supportedLocales = publicLocalProperties.getOrSystemEnv("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
+        val supportedLocales = publicLocalProviders.get("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
         androidResources {
             @Suppress("UnstableApiUsage")
             localeFilters += supportedLocales
@@ -86,10 +102,10 @@ android {
 
         buildConfig {
             stringArray("SUPPORTED_LOCALES", supportedLocales)
-            int("DONATION_BANNER_MIN", localProperties.getOrSystemEnv("DONATION_BANNER_MIN")?.toIntOrNull() ?: 20)
+            int("DONATION_BANNER_MIN", localProviders.get("DONATION_BANNER_MIN")?.toIntOrNull() ?: 20)
 
             arrayOf("LINK_DISCORD", "LINK_BUY_ME_A_COFFEE", "LINK_CRYPTO").forEach {
-                string(it, publicLocalProperties.getOrSystemEnv(it))
+                string(it, publicLocalProviders.get(it))
             }
 
             long("BUILT_AT", now)
@@ -97,14 +113,14 @@ android {
             string("BRANCH", branch)
             boolean("IS_CI", System.getenv("CI")?.toBooleanStrictOrNull() == true)
             string("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
-            string("APTABASE_API_KEY", localProperties.getOrSystemEnv("APTABASE_API_KEY"))
+            string("APTABASE_API_KEY", localProviders.get("APTABASE_API_KEY"))
             boolean(
                 "ANALYTICS_SUPPORTED",
-                localProperties.getOrSystemEnv("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
+                localProviders.get("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
             )
 
             string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
-            string("API_HOST", localProperties.getOrSystemEnv("API_HOST"))
+            string("API_HOST", localProviders.get("API_HOST"))
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -123,12 +139,14 @@ android {
 
     signingConfigs {
         register("env") {
-            val properties = rootProject.file(".ignored/keystore.properties").readPropertiesOrNull()
-
-            storeFile = properties.getOrSystemEnv("KEYSTORE_FILE_PATH")?.let { rootProject.file(it) }
-            storePassword = properties.getOrSystemEnv("KEYSTORE_PASSWORD")
-            keyAlias = properties.getOrSystemEnv("KEY_ALIAS")
-            keyPassword = properties.getOrSystemEnv("KEY_PASSWORD")
+            val properties = with(PropertiesFile) {
+                rootProject.file(".ignored/keystore.properties").readPropertiesOrNull()
+            }
+            val provider = withProviders(properties, SystemEnvironment)
+            storeFile = provider.get("KEYSTORE_FILE_PATH")?.let { rootProject.file(it) }
+            storePassword = provider.get("KEYSTORE_PASSWORD")
+            keyAlias = provider.get("KEY_ALIAS")
+            keyPassword = provider.get("KEY_PASSWORD")
         }
     }
 
@@ -218,6 +236,10 @@ android {
     buildFeatures {
         aidl = true
         buildConfig = true
+    }
+
+    packaging {
+       resources.pickFirsts += "**/google/protobuf/**"
     }
 
     lint {

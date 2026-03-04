@@ -33,7 +33,12 @@ pluginManagement {
         }
     }
 
-    when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
+
+    val gradleBuildDir = when {
+        extra.properties["gradle.build.dir.disabled"] as? Boolean ?: false -> null
+        else -> extra.properties["gradle.build.dir"]
+    }
+    when (gradleBuildDir) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]
             val plugins = extra.properties["gradle.build.plugins"]

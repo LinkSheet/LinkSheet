@@ -562,4 +562,5 @@
     <string name="settings_follow_redirects__title_aggressive">アグレッシブモード</string>
     <string name="settings_follow_redirects__subtitle_aggressive">HTTP リダイレクトを使用しないサイトとの互換性を高めるために、ページ全体の本文を取得します</string>
     <string name="handler_target__label_switch_profile_view_intent">プロファイルを切り替える</string>
+    <string name="generic__label_arrow_rotation">矢印の回転</string>
 </resources>

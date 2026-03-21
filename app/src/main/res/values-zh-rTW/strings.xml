@@ -6,7 +6,7 @@
     <string name="open_with_app">透過「%s」開啟</string>
     <string name="use_a_different_app">使用其他應用程式</string>
     <string name="opening_with_app">正在透過「%s」開啟</string>
-    <string name="default_apps">偏好應用程式</string>
+    <string name="default_apps">預設應用程式</string>
     <string name="set_as_browser">設為瀏覽器</string>
     <string name="set_as_browser_explainer">輕觸此處以將 LinkSheet 設為預設的瀏覽器</string>
     <string name="apps_which_can_open_links_explainer">點擊應用程式以打開「預設開啟方式」選單，允許您停用自動連結開啟功能</string>
@@ -18,7 +18,7 @@
     <string name="confirm">確認</string>
     <string name="clear">清除</string>
     <string name="usage_stats_sorting">依使用頻率排序應用程式</string>
-    <string name="browser_mode">偏好瀏覽器</string>
+    <string name="browser_mode">瀏覽器模式</string>
     <string name="browser_mode_subtitle">選擇欲列出的瀏覽器</string>
     <string name="always_ask">每次都詢問</string>
     <string name="none">無</string>

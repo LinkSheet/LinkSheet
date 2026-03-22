@@ -121,7 +121,7 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
     }
 
     @org.junit.Test
-    fun `selected browser`() {
+    fun `selected browser, multiple browsers, multiple native apps`() {
         val config = BrowserModeConfigHelper.SelectedBrowser(PackageInfoFakes.MiBrowser.packageInfo.packageName)
 
         val result = handler.filterBrowsers(config, false,allBrowsersResolveInfos, allResolvedInfoList)
@@ -130,6 +130,22 @@ internal class ImprovedBrowserHandlerTest : BaseUnitTest  {
                 browserMode = config.mode,
                 browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
                 apps = allAppsInfoList,
+                isSingleOption = false,
+                noBrowsersOnlySingleApp = false
+            )
+        )
+    }
+
+    @org.junit.Test
+    fun `selected browser, multiple browsers, no native apps`() {
+        val config = BrowserModeConfigHelper.SelectedBrowser(PackageInfoFakes.MiBrowser.packageInfo.packageName)
+
+        val result = handler.filterBrowsers(config, false,allBrowsersResolveInfos, allBrowsersResolveInfos)
+        assertThat(result).isDataClassEqualTo(
+            FilteredBrowserList(
+                browserMode = config.mode,
+                browsers = listOfFirstActivityResolveInfo(PackageInfoFakes.MiBrowser),
+                apps = emptyList(),
                 isSingleOption = true,
                 noBrowsersOnlySingleApp = false
             )

@@ -1,11 +1,11 @@
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.PluginOption
-import fe.buildlogic.common.extension.addCompilerOptions
-import fe.buildlogic.common.extension.addPluginOptions
+import com.gitlab.grrfe.gradlebuild.Version
+import com.gitlab.grrfe.gradlebuild.common.CompilerOption
+import com.gitlab.grrfe.gradlebuild.common.PluginOption
+import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
+import com.gitlab.grrfe.gradlebuild.extension.addPluginOptions
 
 plugins {
     kotlin("android")
@@ -13,7 +13,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("kotlin-parcelize")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {

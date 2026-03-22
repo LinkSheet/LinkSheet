@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {

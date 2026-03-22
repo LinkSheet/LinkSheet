@@ -1,12 +1,12 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.gitlab.grrfe.gradlebuild.config.GradlePluginPortalRepository
+import com.gitlab.grrfe.gradlebuild.config.MavenRepository
+import com.gitlab.grrfe.gradlebuild.config.configureRepositories
+import com.gitlab.grrfe.gradlebuild.extension.includeProject
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
 import fe.build.dependencies._1fexd
-import fe.buildsettings.config.GradlePluginPortalRepository
-import fe.buildsettings.config.MavenRepository
-import fe.buildsettings.config.configureRepositories
-import fe.buildsettings.extension.includeProject
 
 rootProject.name = "LinkSheet"
 
@@ -33,7 +33,12 @@ pluginManagement {
         }
     }
 
-    when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
+
+    val gradleBuildDir = when {
+        extra.properties["gradle.build.dir.disabled"] as? Boolean ?: false -> null
+        else -> extra.properties["gradle.build.dir"]
+    }
+    when (gradleBuildDir) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]
             val plugins = extra.properties["gradle.build.plugins"]
@@ -55,7 +60,7 @@ pluginManagement {
 plugins {
     id("de.fayard.refreshVersions")
     id("org.gradle.toolchains.foojay-resolver-convention")
-    id("com.gitlab.grrfe.build-settings-plugin")
+    id("com.gitlab.grrfe.settings-build-plugin")
 }
 
 configureRepositories(

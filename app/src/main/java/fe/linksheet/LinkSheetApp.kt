@@ -21,6 +21,8 @@ import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.profile.ProfileFeatureModule
 import app.linksheet.feature.shizuku.ShizukuModule
 import app.linksheet.feature.wiki.WikiFeatureModule
+import app.linksheet.mozilla.components.support.base.log.Log
+import app.linksheet.mozilla.components.support.base.log.sink.AndroidLogSink
 import app.linksheet.testing.Testing
 import com.google.android.material.color.DynamicColors
 import fe.android.lifecycle.CurrentActivityObserver
@@ -60,8 +62,6 @@ import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
-import app.linksheet.mozilla.components.support.base.log.Log
-import app.linksheet.mozilla.components.support.base.log.sink.AndroidLogSink
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin

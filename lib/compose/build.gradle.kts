@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.compose")
     id("com.android.library")
     id("androidx.navigation.safeargs.kotlin")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {

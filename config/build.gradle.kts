@@ -4,7 +4,7 @@ import fe.buildlogic.Version
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 group = "fe.linksheet.config"

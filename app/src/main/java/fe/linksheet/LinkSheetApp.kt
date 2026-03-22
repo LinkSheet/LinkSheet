@@ -62,8 +62,6 @@ import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
-import app.linksheet.mozilla.components.support.base.log.Log
-import app.linksheet.mozilla.components.support.base.log.sink.AndroidLogSink
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin

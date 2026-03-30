@@ -15,7 +15,13 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven { url = uri("https://jitpack.io") }
+        maven {
+            url = uri("https://jitpack.io")
+            content {
+                includeGroupAndSubgroups("com.gitlab.grrfe")
+                includeGroupAndSubgroups("com.github.1fexd")
+            }
+        }
     }
 
     plugins {
@@ -26,13 +32,6 @@ pluginManagement {
         id("net.nemerosa.versioning")
         id("androidx.navigation.safeargs") version "2.8.2"
     }
-
-    buildscript {
-        dependencies {
-            classpath("com.android.tools:r8:9.0.32")
-        }
-    }
-
 
     val gradleBuildDir = when {
         extra.properties["gradle.build.dir.disabled"] as? Boolean ?: false -> null

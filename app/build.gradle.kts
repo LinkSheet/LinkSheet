@@ -5,10 +5,10 @@ import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import com.gitlab.grrfe.gradlebuild.android.ArchiveBaseName
 import com.gitlab.grrfe.gradlebuild.android.extension.buildConfig
 import com.gitlab.grrfe.gradlebuild.android.extension.buildStringConfigField
+import com.gitlab.grrfe.gradlebuild.android.version.AndroidVersionStrategy
 import com.gitlab.grrfe.gradlebuild.common.CompilerOption
+import com.gitlab.grrfe.gradlebuild.common.KotlinCompilerArgs
 import com.gitlab.grrfe.gradlebuild.common.PluginOption
-import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
-import com.gitlab.grrfe.gradlebuild.extension.addPluginOptions
 import com.gitlab.grrfe.gradlebuild.util.PropertiesFile
 import com.gitlab.grrfe.gradlebuild.util.SystemEnvironment
 import com.gitlab.grrfe.gradlebuild.util.withProviders
@@ -18,11 +18,8 @@ import com.gitlab.grrfe.gradlebuild.version.asProvider
 import com.gitlab.grrfe.gradlebuild.version.closure
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.version.AndroidVersionStrategy
-import java.util.*
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.application")
@@ -34,6 +31,8 @@ plugins {
     id("dev.rikka.tools.refine")
     id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit5")
+//    id("io.github.gmazzo.gitversion")
+
 }
 
 // Must be defined before the android block, or else it won't work
@@ -42,16 +41,14 @@ versioning {
     releaseParser = TagReleaseParser.closure
 }
 
-val appName = "LinkSheet"
-fun Properties?.getOrSystemEnv2(key: String): String? {
-    return getOrSystemEnv2(this, key)
-}
-private fun getOrSystemEnv2(properties: Properties?, key: String, default: String? = null): String? {
-    val value = if (properties == null || !properties.containsKey(key)) System.getenv(key)
-    else properties.getProperty(key)
+//
+//gitVersion {
+//    tagPrefix = "" // Optional, default is "v"
+//    initialVersion = "0.1.0-SNAPSHOT" // Optional, default is "0.1.0-SNAPSHOT"
+//}
 
-    return value ?: default
-}
+
+val appName = "LinkSheet"
 
 android {
     namespace = "fe.linksheet"
@@ -65,13 +62,16 @@ android {
         val now = System.currentTimeMillis()
         val provider = AndroidVersionStrategy(now)
 
+//        val version = gitVersion.from(AndroidVersionStrategy2(now))
         val versionProvider = versioning.asProvider(project, provider)
         val (name, code, commit, branch) = versionProvider.get()
 
         versionCode = code
         versionName = name
 
-        with(ArchiveBaseName) { project.setArchivesBaseName(appName, name, now) }
+        with(ArchiveBaseName) {
+            project.base.setArchivesName(appName, name, now)
+        }
         val localProperties = with(PropertiesFile) {
             rootProject.file("local.properties").readPropertiesOrNull()
         }
@@ -130,11 +130,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-    }
-
-    room {
-        schemaDirectory("$projectDir/schemas")
-        generateKotlin = true
     }
 
     signingConfigs {
@@ -227,15 +222,10 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
 
-    kotlin {
-        jvmToolchain(Version.JVM)
-        addCompilerOptions(CompilerOption.WhenGuards, CompilerOption.NestedTypeAliases, CompilerOption.SkipPreReleaseCheck)
-        addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
-    }
-
     buildFeatures {
         aidl = true
         buildConfig = true
+        resValues = true
     }
 
     packaging {
@@ -270,9 +260,23 @@ android {
 
     val main by sourceSets
     for (it in arrayOf("compat", "experiment", "testing")) {
-        main.java.srcDir("src/main/$it")
+        main.kotlin.srcDir("src/main/$it")
     }
 }
+
+kotlin {
+    jvmToolchain(Version.JVM)
+//    addCompilerOptions()
+//    addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
+    compilerOptions.freeCompilerArgs.addAll(KotlinCompilerArgs.createCompilerOptions(CompilerOption.WhenGuards, CompilerOption.NestedTypeAliases, CompilerOption.SkipPreReleaseCheck))
+    compilerOptions.freeCompilerArgs.addAll(KotlinCompilerArgs.createPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true))
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
+    generateKotlin = true
+}
+
 
 junitPlatform {
     instrumentationTests {
@@ -371,8 +375,8 @@ dependencies {
 
 //    implementation(LinkSheet.flavors.core)
 //    implementation(LinkSheet.flavors.interconnect.core)
-    implementation("com.github.LinkSheet.flavors:interconnect-core:0.0.18")
-    implementation("com.github.LinkSheet.flavors:core:0.0.18")
+    implementation("com.github.LinkSheet.flavors:interconnect-core:_")
+    implementation("com.github.LinkSheet.flavors:core:_")
 
     implementation(JetBrains.ktor.client.core)
     implementation(JetBrains.ktor.client.gson)

@@ -1,9 +1,8 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
-import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
-    kotlin("android")
     id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit5")
 }
@@ -21,10 +20,10 @@ android {
     buildFeatures {
         buildConfig = true
     }
-}
 
-kotlin {
-    jvmToolchain(Version.JVM)
+    kotlin {
+        jvmToolchain(Version.JVM)
+    }
 }
 
 dependencies {

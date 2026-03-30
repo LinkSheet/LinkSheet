@@ -1,10 +1,10 @@
+
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import com.gitlab.grrfe.gradlebuild.common.CompilerOption
-import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
+import com.gitlab.grrfe.gradlebuild.common.KotlinCompilerArgs
 
 plugins {
     id("com.android.library")
-    kotlin("android")
     id("com.gitlab.grrfe.android-build-plugin")
 }
 
@@ -20,7 +20,7 @@ android {
 
     kotlin {
         jvmToolchain(com.gitlab.grrfe.gradlebuild.Version.JVM)
-        addCompilerOptions(CompilerOption.AllowKotlinPackage)
+        compilerOptions.freeCompilerArgs.addAll(KotlinCompilerArgs.createCompilerOptions(CompilerOption.AllowKotlinPackage))
     }
 
     buildFeatures {

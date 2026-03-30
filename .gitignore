@@ -7,3 +7,5 @@ app/release
 app/*.txt
 .kotlin/
 /.idea2/
+mise.local.toml
+fnox.local.toml

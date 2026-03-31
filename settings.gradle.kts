@@ -30,7 +30,7 @@ pluginManagement {
         id("com.android.library")
         id("org.jetbrains.kotlin.android")
         id("net.nemerosa.versioning")
-        id("androidx.navigation.safeargs") version "2.8.2"
+        id("androidx.navigation.safeargs") version "2.9.6"
     }
 
     val gradleBuildDir = when {
@@ -69,7 +69,6 @@ configureRepositories(
     MavenRepository.Mozilla,
     MavenRepository("https://oss.sonatype.org/content/repositories/snapshots"),
     GradlePluginPortalRepository,
-    MavenRepository("https://storage.googleapis.com/r8-releases/raw"),
     mode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 )
 

@@ -172,6 +172,7 @@ android {
 
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -268,8 +269,10 @@ kotlin {
     jvmToolchain(Version.JVM)
 //    addCompilerOptions()
 //    addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
-    compilerOptions.freeCompilerArgs.addAll(KotlinCompilerArgs.createCompilerOptions(CompilerOption.WhenGuards, CompilerOption.NestedTypeAliases, CompilerOption.SkipPreReleaseCheck))
-    compilerOptions.freeCompilerArgs.addAll(KotlinCompilerArgs.createPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true))
+    with(compilerOptions.freeCompilerArgs) {
+        addAll(KotlinCompilerArgs.createCompilerOptions(CompilerOption.SkipPreReleaseCheck))
+        addAll(KotlinCompilerArgs.createPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true))
+    }
 }
 
 room {

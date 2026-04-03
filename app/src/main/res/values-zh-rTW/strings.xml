@@ -23,7 +23,7 @@
     <string name="always_ask">每次都詢問</string>
     <string name="none">無</string>
     <string name="always_ask_explainer">一律列出所有瀏覽器</string>
-    <string name="send_to">分享</string>
+    <string name="send_to">分享至</string>
     <string name="default_apps_subtitle">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
     <string name="always_show_package_name">一律顯示套件名稱</string>
     <string name="always_show_package_name_explainer">一律顯示套件名稱而非僅是應用程式名稱，此選項適用於整個應用程式。</string>
@@ -33,7 +33,7 @@
     <string name="hide_after_copying_explainer">當輕觸諸如「複製連結」或「下載」等按鈕後自動隱藏底部功能表</string>
     <string name="display_grid_layout">格狀版面配置</string>
     <string name="display_grid_layout_explainer">在底部功能表以格狀檢視而非清單</string>
-    <string name="set_as_browser_done">已將 LinkSheet 設為預設瀏覽器！</string>
+    <string name="set_as_browser_done">LinkSheet 已被設為預設瀏覽器！</string>
     <string name="browser_status">瀏覽器狀態</string>
     <string name="app_browsers">應用程式與瀏覽器</string>
     <string name="bottom_sheet">底部功能表</string>
@@ -49,7 +49,7 @@
     <string name="about">關於</string>
     <string name="about_explainer">鳴謝、授權、連結、版本</string>
     <string name="credits">鳴謝</string>
-    <string name="credits_explainer">謝辭、開放原始碼授權</string>
+    <string name="credits_explainer">感謝、軟體授權</string>
     <string name="version">LinkSheet 版本</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github">GitHub</string>

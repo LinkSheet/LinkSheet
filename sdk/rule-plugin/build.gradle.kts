@@ -1,11 +1,9 @@
+
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies.MozillaComponents
-import fe.build.dependencies._1fexd
 import fe.buildlogic.Version
 
 plugins {
-    kotlin("android")
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
 }

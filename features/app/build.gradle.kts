@@ -1,14 +1,12 @@
+
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import com.gitlab.grrfe.gradlebuild.common.KotlinCompilerArgs
+import com.gitlab.grrfe.gradlebuild.common.PluginOption
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import com.gitlab.grrfe.gradlebuild.Version
-import com.gitlab.grrfe.gradlebuild.common.CompilerOption
-import com.gitlab.grrfe.gradlebuild.common.PluginOption
-import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
-import com.gitlab.grrfe.gradlebuild.extension.addPluginOptions
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
@@ -26,8 +24,7 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addCompilerOptions(CompilerOption.WhenGuards)
-        addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
+        compilerOptions.freeCompilerArgs.addAll(KotlinCompilerArgs.createPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true))
     }
 }
 

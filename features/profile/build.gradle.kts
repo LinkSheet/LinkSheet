@@ -1,10 +1,9 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
@@ -43,6 +42,8 @@ dependencies {
     implementation(_1fexd.composeKit.preference.compose.mock2)
     implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.compose.component)
+    implementation(_1fexd.composeKit.lifecycle.core)
+    implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)

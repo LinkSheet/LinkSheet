@@ -2,6 +2,7 @@ package fe.linksheet.module.viewmodel
 
 
 import android.content.ComponentName
+import androidx.annotation.Keep
 import androidx.lifecycle.viewModelScope
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.usecase.BrowsersUseCase
@@ -66,6 +67,7 @@ class PreferredBrowserViewModel(
     }
 
 
+    @Keep
     enum class BrowserType {
         Normal, InApp
     }

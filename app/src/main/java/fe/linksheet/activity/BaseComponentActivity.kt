@@ -1,15 +1,15 @@
 package fe.linksheet.activity
 
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.util.UiEventReceiver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-open class BaseComponentActivity : AppCompatActivity() {
+open class BaseComponentActivity : ComponentActivity() {
     var edgeToEdge: Boolean = false
         private set
 

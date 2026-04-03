@@ -31,7 +31,7 @@ jobs:
     - id: 'step-3'
       uses: 'gradle/actions/setup-gradle@v3'
     - id: 'step-4'
-      run: './gradlew testFossReleaseUnitTest'
+      run: './gradlew test'
   integration-tests:
     name: 'Integration tests'
     runs-on: 'ubuntu-latest'

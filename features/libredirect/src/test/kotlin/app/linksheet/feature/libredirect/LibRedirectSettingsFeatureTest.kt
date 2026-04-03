@@ -27,11 +27,11 @@ internal class LibRedirectSettingsFeatureTest : BaseUnitTest {
         )
         val settings = feature.loadSettings("reddit")
         assertThat(settings).isNotNull().all {
-            prop(ServiceSettings::defaultFrontend).isNotNull().prop(FrontendState::frontendKey).isEqualTo("libreddit")
+            prop(ServiceSettings::defaultFrontend).isNotNull().prop(FrontendState::frontendKey).isEqualTo("redlib")
             prop(ServiceSettings::fallback).isNotNull().all {
                 prop(LibRedirectDefault::serviceKey).isEqualTo("reddit")
-                prop(LibRedirectDefault::frontendKey).isEqualTo("libreddit")
-                prop(LibRedirectDefault::instanceUrl).isEqualTo("https://redlib.catsarch.com")
+                prop(LibRedirectDefault::frontendKey).isEqualTo("redlib")
+                prop(LibRedirectDefault::instanceUrl).isEqualTo("https://l.opnxng.com")
             }
         }
     }

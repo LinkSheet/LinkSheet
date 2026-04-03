@@ -330,7 +330,7 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
         runsOn = UbuntuLatest
     ) {
         setupAndroid()
-        run(command = "./gradlew testFossReleaseUnitTest")
+        run(command = "./gradlew test")
     }
     val integrationTestJob = job(
         id = "integration-tests",

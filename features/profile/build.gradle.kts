@@ -42,6 +42,8 @@ dependencies {
     implementation(_1fexd.composeKit.preference.compose.mock2)
     implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.compose.component)
+    implementation(_1fexd.composeKit.lifecycle.core)
+    implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)

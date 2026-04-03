@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageInfo
 import android.os.Bundle
+import fe.composekit.extension.componentName
 import fe.linksheet.util.ComponentEnabledFlags
 import fe.linksheet.util.ComponentEnabledStateFlags
 import fe.linksheet.util.ComponentInfoFlags
@@ -68,5 +69,15 @@ class DefaultMetaDataHandler(
         flags: ComponentEnabledFlags
     ) = withContext(dispatcher){
         setComponentEnabledSetting(componentName, state, flags)
+    }
+}
+
+suspend fun MetaDataHandler.setForwardProfileActivities(state: Boolean) {
+    val activities = getForwardProfileActivities()
+    for (info in activities) {
+        setComponentEnabled(
+            info.componentName,
+            if (state) ComponentEnabledStateFlags.COMPONENT_ENABLED_STATE_ENABLED else ComponentEnabledStateFlags.COMPONENT_ENABLED_STATE_DISABLED,
+        )
     }
 }

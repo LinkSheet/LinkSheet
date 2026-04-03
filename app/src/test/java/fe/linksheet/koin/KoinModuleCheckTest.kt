@@ -36,12 +36,14 @@ import app.linksheet.feature.libredirect.database.repository.LibRedirectUserInst
 import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
+import app.linksheet.feature.profile.service.ProfileService
 import app.linksheet.feature.shizuku.ShizukuService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.testlib.koin.definition
 import app.linksheet.testlib.koin.injectedParameters
 import app.linksheet.testlib.koin.verifyAll
@@ -87,14 +89,30 @@ import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.shizuku.ShizukuServiceConnection
 import fe.linksheet.module.statistic.StatisticsService
 import fe.linksheet.module.versiontracker.VersionTracker
-import fe.linksheet.module.viewmodel.*
+import fe.linksheet.module.viewmodel.AboutSettingsViewModel
+import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import fe.linksheet.module.viewmodel.DevSettingsViewModel
+import fe.linksheet.module.viewmodel.ExportSettingsViewModel
+import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
+import fe.linksheet.module.viewmodel.LanguageSettingsViewModel
+import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
+import fe.linksheet.module.viewmodel.MainViewModel
+import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
+import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
+import fe.linksheet.module.viewmodel.SelectDomainsConfirmationViewModel
+import fe.linksheet.module.viewmodel.SettingsViewModel
+import fe.linksheet.module.viewmodel.SingleBrowserViewModel
+import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
+import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
+import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.module.workmanager.WorkDelegatorService
 import fe.linksheet.testlib.core.BaseUnitTest
-import io.ktor.client.*
-import io.ktor.client.engine.*
+import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
+import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.CoroutineDispatcher
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -163,7 +181,10 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<ResolvedRedirectRepository>(ResolvedRedirectDao::class),
         definition<Amp2HtmlRepository>(Amp2HtmlMappingDao::class),
         definition<WikiCacheRepository>(WikiCacheDao::class),
-        definition<LibRedirectSettingsViewModel>(AppPreferenceRepository::class, LibRedirectPreferences::class),
+        definition<LibRedirectSettingsViewModel>(
+            AppPreferenceRepository::class,
+            LibRedirectPreferences::class
+        ),
         definition<LibRedirectResolver>(
             LibRedirectDefaultRepository::class,
             LibRedirectStateRepository::class
@@ -173,7 +194,11 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             Gson::class,
             SystemInfoService::class
         ),
-        definition<UrlResolver>(LocalTask.Redirector::class, LocalTask.Amp2Html::class, RemoteResolver::class),
+        definition<UrlResolver>(
+            LocalTask.Redirector::class,
+            LocalTask.Amp2Html::class,
+            RemoteResolver::class
+        ),
         definition<VersionTracker>(BaseAnalyticsService::class, SystemInfoService::class),
         definition<MainViewModel>(
             BaseAnalyticsService::class,
@@ -213,7 +238,12 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             MetaDataHandler::class,
             PrivateBrowserUseCase::class
         ),
-        definition<Request>(HttpData.Builder::class, HttpData::class, HttpInternals::class, HttpData::class),
+        definition<Request>(
+            HttpData.Builder::class,
+            HttpData::class,
+            HttpInternals::class,
+            HttpData::class
+        ),
         definition<Downloader>(HttpClient::class),
         definition<StatisticsService>(AppPreferenceRepository::class),
         definition<AppLocaleService>(List::class),
@@ -223,14 +253,20 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<WorkDelegatorService>(WorkManager::class),
         definition<RedirectResolveRequest>(HttpClient::class),
         definition<Amp2HtmlResolveRequest>(HttpClient::class),
-        definition<VerifiedLinkHandlerViewModel>(DomainVerificationUseCase::class, OneUiCompat::class),
+        definition<VerifiedLinkHandlerViewModel>(
+            DomainVerificationUseCase::class,
+            OneUiCompat::class
+        ),
         definition<ShizukuSettingsViewModel>(
             ShizukuService::class,
             AppPreferenceRepository::class,
             ShizukuPreferences::class
         ),
         definition<InAppBrowserSettingsViewModel>(AllAppsUseCase::class),
-        definition<WhitelistedBrowsersViewModel>(PreferredBrowserViewModel.BrowserType::class, BrowsersUseCase::class),
+        definition<WhitelistedBrowsersViewModel>(
+            PreferredBrowserViewModel.BrowserType::class,
+            BrowsersUseCase::class
+        ),
         definition<SingleBrowserViewModel>(
             PreferredBrowserViewModel.BrowserType::class,
             BrowsersUseCase::class
@@ -238,7 +274,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<SelectDomainsConfirmationViewModel>(
             AllAppsUseCase::class
         ),
-        definition<LibRedirectUserInstanceRepository>(LibRedirectUserInstanceDao::class)
+        definition<LibRedirectUserInstanceRepository>(LibRedirectUserInstanceDao::class),
+        definition<ProfileService>(app.linksheet.feature.app.core.MetaDataHandler::class)
     )
 
     @Test

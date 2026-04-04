@@ -83,6 +83,7 @@ class BottomSheetViewModel(
     val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideBottomSheetChoiceButtons)
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enable)
+    val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enableIgnoreLibRedirectButton)
     val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.profileSwitcher.enable)
     val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.single)
     val tapConfigDouble = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.double)

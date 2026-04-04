@@ -59,6 +59,8 @@ import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.ViewModelModule
 import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
+import fe.linksheet.util.LinkSheetLogSink
+import fe.linksheet.util.buildconfig.Build
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
 import kotlinx.coroutines.flow.StateFlow
@@ -81,7 +83,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(currentActivityObserver)
-        Log.addSink(AndroidLogSink())
+        Log.addSink(LinkSheetLogSink(logsDebug = Build.IsDebug, AndroidLogSink()))
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             CrashHandlerActivity.start(this, throwable)

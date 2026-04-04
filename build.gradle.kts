@@ -29,6 +29,7 @@ subprojects {
                 implementation(platform(Grrfe.httpkt.bom))
                 implementation(platform(Grrfe.gsonExt.bom))
                 implementation(platform(_1fexd.composeKit.bom))
+                implementation(platform(KotlinX.serialization.bom))
             }
         }
     }

@@ -40,7 +40,7 @@
     <string name="download_started_toast">डाउनलोड प्रारंभ टोस्ट</string>
     <string name="notifications">नोटीफिकेशन</string>
     <string name="export_include_recommendation">हम अनुशंसा करते हैं कि आप निम्नलिखित सेटिंग्स तभी चालू करें जब आप अपना निर्यात किसी और के साथ साझा करने की योजना नहीं बनाते हैं!</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="resolve_via_toast_explainer">जब किसी URL का समाधान किसी बाहरी सेवा के माध्यम से किया जाता है तो एक टोस्ट दिखाएं</string>
     <string name="confirm_import">पुष्टि करें</string>
     <string name="dev">डेवलपर</string>

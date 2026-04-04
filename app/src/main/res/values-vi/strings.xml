@@ -212,7 +212,7 @@
     <string name="include_log_hash_key">Bao gồm khóa băm nhật ký (khóa được sử dụng để sắp xếp lại nhật ký của bạn)</string>
     <string name="misc_settings">Điều khoản khác</string>
     <string name="export_to_file">Xuất sang tập tin</string>
-    <string name="export_file_name">Xuất_thiết_đặt_linksheet_%s.json</string>
+    <string name="export_file_name">Xuất_thiết_đặt_linksheet_%s</string>
     <string name="import_headline">Nhập</string>
     <string name="import_explainer">Nhập bản xuất trước đó từ một tệp</string>
     <string name="include_history">Bao gồm lịch sử (lịch sử nhấp vào liên kết và ứng dụng của bạn)</string>

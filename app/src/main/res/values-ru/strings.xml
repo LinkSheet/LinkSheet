@@ -195,7 +195,7 @@
     <string name="import_headline">Импорт</string>
     <string name="export_include_recommendation">Мы рекомендуем вам включить следующие настройки, только если вы не планируете делиться экспортированными данными с кем-то ещё!</string>
     <string name="no_handlers_found">Ни браузер, ни нативное приложение не найдены!</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="thanks_for_donating">Спасибо за пожертвование!</string>
     <string name="app_setup">Настройка приложения</string>
     <string name="confirm_import">Подтвердить</string>

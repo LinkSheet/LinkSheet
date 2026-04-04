@@ -5,6 +5,7 @@ import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 
 plugins {
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
 }
@@ -33,6 +34,8 @@ dependencies {
     implementation(platform(_1fexd.composeKit.bom))
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.process)
+
+    implementation(KotlinX.serialization.core)
 
     implementation(Grrfe.gsonExt.core)
 

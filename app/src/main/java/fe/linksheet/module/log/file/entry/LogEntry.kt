@@ -7,7 +7,17 @@ import fe.kotlin.extension.string.decodeBase64Throw
 import fe.kotlin.extension.string.encodeBase64Throw
 import fe.std.javatime.extension.unixMillisUtc
 import fe.stringbuilder.util.buildSeparatedString
+import kotlinx.serialization.Serializable
+import java.time.format.DateTimeFormatter
 import kotlin.io.encoding.ExperimentalEncodingApi
+
+@Serializable
+data class SerializableLogEntry(
+    val type: String,
+    val time: String,
+    val prefix: String,
+    val message: String,
+)
 
 @OptIn(ExperimentalEncodingApi::class)
 @Keep
@@ -24,6 +34,21 @@ sealed class LogEntry(
         itemNotNull(prefix, prefix = null) { append(prefix) }
         item(prefix = null) { append(message.encodeBase64Throw()) }
         itemNotNull(redactedMessage, prefix = null) { append(redactedMessage!!.encodeBase64Throw()) }
+    }
+
+    fun toSerializable(redact: Boolean, includeThrowable: Boolean): SerializableLogEntry {
+        val throwableNotIncluded = !includeThrowable && this@LogEntry is FatalEntry
+        val isRedacted = redact && this@LogEntry is DefaultLogEntry
+        return SerializableLogEntry(
+            type = type,
+            time = unixMillis.unixMillisUtc.value.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+            prefix = prefix ?: "<none>",
+            message = when {
+                throwableNotIncluded -> "<not_included>"
+                isRedacted -> redactedMessage ?: "<no_message>"
+                else -> message
+            }
+        )
     }
 
     fun toCopyLogJson(redact: Boolean, includeThrowable: Boolean): JsonObject {

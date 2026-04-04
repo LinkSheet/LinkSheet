@@ -162,7 +162,7 @@
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">已啟用</string>
     <string name="experiments_explainer">試用開發中的功能</string>
     <string name="import_headline">匯入</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="feature_flags">功能標記</string>
     <string name="amp2html_short">Amp2Html</string>
     <string name="nightly_experiments_card">每日建構版實驗功能</string>

@@ -49,7 +49,7 @@
     <string name="donate">Toeta meid rahaliselt</string>
     <string name="other">Muu</string>
     <string name="import_headline">Impordi</string>
-    <string name="export_file_name">linksheet_seadistused_%s.json</string>
+    <string name="export_file_name">linksheet_seadistused_%s</string>
     <string name="confirm_import">Kinnita</string>
     <string name="dev">Arendaja</string>
     <string name="libredirect_version">LibRedirect</string>

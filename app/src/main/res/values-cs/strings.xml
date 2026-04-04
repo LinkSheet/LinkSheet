@@ -223,7 +223,7 @@
     <string name="notifications">Vyskakovací zprávy a oznámení</string>
     <string name="amp2html_short">Amp2Html</string>
     <string name="dev_explainer">Vývojářská nastavení</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="show_linksheet_referrer">Zobrazit odkazovatele LinkSheet</string>
     <string name="export_import_settings">Exportovat nebo importovat nastavení</string>
     <string name="export_import_settings_explainer">Exportujte svá aktuální nastavení nebo importujte předchozí export nastavení</string>

@@ -230,7 +230,7 @@
     <string name="export_privacy">Dışa aktarma gizliliği hakkında daha fazla bilgi edinmek için bu <annotation url-id="privacy-exports">bağlantıyı</annotation> ziyaret edin</string>
     <string name="export_to_file">Dosyaya aktar</string>
     <string name="import_settings">İçe aktarma ayarları</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="import_settings_override_preferences">Bu, şu anki bütün tercihlerinizin üzerine yazacaktır. Devam et?</string>
     <string name="launch_onboarding_new">Yeni ilk başlatmayı başlat</string>
     <string name="launch_onboarding__now_explainer">Yeni ilk başlatma sürecini test edin</string>

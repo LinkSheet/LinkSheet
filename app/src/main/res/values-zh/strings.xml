@@ -165,7 +165,7 @@
     <string name="use_unified_preferred_browser">使用统一设置</string>
     <string name="amp2html_external_service">尝试从外部服务获取非AMP版本页面</string>
     <string name="no_handlers_found">未找到浏览器或原生应用！</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="thanks_for_donating">感谢您的捐赠！</string>
     <string name="feature_flags_explainer">启用或禁用实验性功能</string>
     <string name="options">选项</string>

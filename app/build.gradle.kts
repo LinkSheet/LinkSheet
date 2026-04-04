@@ -441,7 +441,6 @@ dependencies {
 
     runtimeOnly(AndroidX.annotation)
 
-
     implementation("app.cash.zipline:zipline-android:_")
     implementation("app.cash.zipline:zipline-loader-android:_")
 
@@ -455,10 +454,12 @@ dependencies {
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
     implementation("dev.rikka.tools.refine:runtime:_")
 
-    implementation(platform(KotlinX.serialization.bom))
     implementation(KotlinX.serialization.json)
     implementation(KotlinX.serialization.protobuf)
     implementation(KotlinX.serialization.cbor)
+    implementation("com.akuleshov7:ktoml-core:0.7.1")
+    implementation("com.akuleshov7:ktoml-file:0.7.1")
+    implementation("com.akuleshov7:ktoml-source:0.7.1")
 
     val commonTestDependencies = arrayOf(
         Koin.test,

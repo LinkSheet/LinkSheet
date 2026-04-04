@@ -225,7 +225,7 @@
     <string name="include_log_hash_key">Hash-sleutel waarmee gevoelige informatie in het logboek wordt afgeschermd bijvoegen</string>
     <string name="include_history">Geschiedenis van verwerkte links en apps bijvoegen</string>
     <string name="export_privacy"><annotation url-id="privacy-exports">Lees meer</annotation> over het privacybeleid bij exporteren.</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="import_settings">Instellingen importeren</string>
     <string name="import_settings_override_preferences">Dit zal de huidige instellingen overschrijven. Doorgaan?</string>
     <string name="confirm_import">OK</string>

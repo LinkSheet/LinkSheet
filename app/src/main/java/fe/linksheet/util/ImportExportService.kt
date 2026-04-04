@@ -6,19 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.ParcelFileDescriptor
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import fe.composekit.intent.buildIntent
-import fe.gson.extension.json.`object`.asArray
-import fe.gson.extension.json.`object`.asStringOrNull
 import fe.linksheet.R
-import fe.linksheet.extension.android.bufferedReader
 import fe.linksheet.extension.android.bufferedWriter
-import fe.std.result.StdResult
-import fe.std.result.isFailure
 import fe.std.result.tryCatch
-import fe.std.result.unaryPlus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.ZoneId
@@ -30,30 +21,42 @@ import kotlin.time.toJavaInstant
 
 class ImportExportService(val context: Context, val clock: Clock, val zoneId: ZoneId) {
     companion object {
-        val ImportIntent = buildIntent(Intent.ACTION_OPEN_DOCUMENT) {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "application/json"
-        }
-
-        private val exportIntent = buildIntent(Intent.ACTION_CREATE_DOCUMENT) {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "application/json"
-        }
-
         private val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm")
     }
 
-    fun createExportIntent(now: Instant = clock.now()): Intent {
+    fun createImportIntent(format: ExportImportUseCase.Format): Intent {
+        return buildIntent(Intent.ACTION_OPEN_DOCUMENT) {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = format.mimeType
+        }
+    }
+
+    private val ExportImportUseCase.Format.mimeType: String
+        get() = when(this) {
+            ExportImportUseCase.Format.Json -> "application/json"
+            ExportImportUseCase.Format.Toml -> "application/toml"
+        }
+
+    fun createExportIntent(format: ExportImportUseCase.Format, now: Instant = clock.now()): Intent {
         val nowString = now.toJavaInstant().atZone(zoneId).format(dateTimeFormatter)
-        return Intent(exportIntent)
-            .putExtra(
+        val fileName = context.getString(R.string.export_file_name, nowString)
+        val extension = when(format){
+            ExportImportUseCase.Format.Json -> ".json"
+            ExportImportUseCase.Format.Toml -> ".toml"
+        }
+
+        return buildIntent(Intent.ACTION_CREATE_DOCUMENT) {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = format.mimeType
+            putExtra(
                 Intent.EXTRA_TITLE,
-                context.getString(R.string.export_file_name, nowString)
+                fileName + extension
             )
+        }
     }
 
     @Throws(Exception::class)
-    private fun openDescriptor(uri: Uri, mode: String): ParcelFileDescriptor? {
+    fun openDescriptor(uri: Uri, mode: String): ParcelFileDescriptor? {
         return context.contentResolver.openFileDescriptor(uri, mode)
     }
 
@@ -66,42 +69,11 @@ class ImportExportService(val context: Context, val clock: Clock, val zoneId: Zo
         }
     }
 
-    suspend fun importPreferencesFromUri(uri: Uri): StdResult<Map<String, String>> = withContext(Dispatchers.IO) {
-        val parseResult = tryCatch {
-            openDescriptor(uri, "r")
-                ?.bufferedReader()
-                ?.use { JsonParser.parseReader(it) }
-        }
-
-        if (parseResult.isFailure()) {
-            return@withContext +parseResult
-        }
-
-        val result = parseResult.value
-        if (result == null) {
-            return@withContext +Exception("Failed to read file!")
-        }
-
-        val jsonElement = result
-        val isLinkSheetPreferencesFile = jsonElement is JsonObject
-                && jsonElement.keySet().size == 1
-                && jsonElement.get("preferences") is JsonArray
-
-        if (!isLinkSheetPreferencesFile) {
-            return@withContext +Exception("Provided file is not a LinkSheet preferences export!")
-        }
-
-        val preferences = jsonElement.asArray("preferences")
-        val map = preferences.mapNotNull { preference ->
-            if (preference !is JsonObject) return@mapNotNull null
-
-            val name = preference.asStringOrNull("name")
-            val value = preference.asStringOrNull("value")
-
-            if (name == null || value == null) return@mapNotNull null
-            name to value
-        }.toMap()
-
-        +map
-    }
+//    suspend fun importPreferencesFromUri(uri: Uri): StdResult<Map<String, String>> = withContext(Dispatchers.IO) {
+//        val parseResult = tryCatch {
+//            openDescriptor(uri, "r")
+//                ?.bufferedReader()
+//                ?.use { JsonParser.parseReader(it) }
+//        }
+//    }
 }

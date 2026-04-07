@@ -22,7 +22,7 @@ android {
 
     val main by sourceSets
     for (it in arrayOf("compat")) {
-        main.kotlin.srcDir("src/main/$it")
+        main.kotlin.directories.add("src/main/$it")
     }
 }
 

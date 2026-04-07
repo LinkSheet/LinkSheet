@@ -244,14 +244,14 @@ android {
     }
 
     val androidTest by sourceSets
-    androidTest.assets.srcDir("$projectDir/schemas")
+    androidTest.assets.directories.add("$projectDir/schemas")
     rootProject.findProject(":feature-libredirect")?.projectDir?.resolve("schemas")?.let {
-        androidTest.assets.srcDir(it)
+        androidTest.assets.directories.add(it.absolutePath)
     }
 
     val main by sourceSets
     for (it in arrayOf("compat", "experiment", "testing")) {
-        main.kotlin.srcDir("src/main/$it")
+        main.kotlin.directories.add("src/main/$it")
     }
 }
 

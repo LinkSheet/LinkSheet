@@ -29,15 +29,10 @@ pluginManagement {
         id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
         id("com.android.library")
         id("org.jetbrains.kotlin.android")
-        id("net.nemerosa.versioning")
         id("androidx.navigation.safeargs") version "2.9.6"
     }
 
-    val gradleBuildDir = when {
-        extra.properties["gradle.build.dir.disabled"] as? Boolean ?: false -> null
-        else -> extra.properties["gradle.build.dir"]
-    }
-    when (gradleBuildDir) {
+    when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]
             val plugins = extra.properties["gradle.build.plugins"]

@@ -5,6 +5,7 @@ import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import com.gitlab.grrfe.gradlebuild.android.ArchiveBaseName
 import com.gitlab.grrfe.gradlebuild.android.extension.buildConfig
 import com.gitlab.grrfe.gradlebuild.android.extension.buildStringConfigField
+import com.gitlab.grrfe.gradlebuild.android.version.AndroidVersion
 import com.gitlab.grrfe.gradlebuild.android.version.AndroidVersionStrategy
 import com.gitlab.grrfe.gradlebuild.common.CompilerOption
 import com.gitlab.grrfe.gradlebuild.common.KotlinCompilerArgs
@@ -12,10 +13,6 @@ import com.gitlab.grrfe.gradlebuild.common.PluginOption
 import com.gitlab.grrfe.gradlebuild.util.PropertiesFile
 import com.gitlab.grrfe.gradlebuild.util.SystemEnvironment
 import com.gitlab.grrfe.gradlebuild.util.withProviders
-import com.gitlab.grrfe.gradlebuild.version.CurrentTagMode
-import com.gitlab.grrfe.gradlebuild.version.TagReleaseParser
-import com.gitlab.grrfe.gradlebuild.version.asProvider
-import com.gitlab.grrfe.gradlebuild.version.closure
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 
@@ -25,28 +22,19 @@ plugins {
     id("com.android.application")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
-    id("net.nemerosa.versioning")
     id("androidx.room")
     id("com.google.devtools.ksp")
     id("dev.rikka.tools.refine")
     id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit5")
-//    id("io.github.gmazzo.gitversion")
-
 }
 
-// Must be defined before the android block, or else it won't work
-versioning {
-    releaseMode = CurrentTagMode.closure
-    releaseParser = TagReleaseParser.closure
-}
 
-//
+
 //gitVersion {
 //    tagPrefix = "" // Optional, default is "v"
 //    initialVersion = "0.1.0-SNAPSHOT" // Optional, default is "0.1.0-SNAPSHOT"
 //}
-
 
 val appName = "LinkSheet"
 
@@ -60,14 +48,16 @@ android {
         targetSdk = AndroidSdk.COMPILE_SDK
 
         val now = System.currentTimeMillis()
-        val provider = AndroidVersionStrategy(now)
+//        val provider = AndroidVersionStrategy(now)
+//        gitVersion.versionProducer {  }
 
-//        val version = gitVersion.from(AndroidVersionStrategy2(now))
-        val versionProvider = versioning.asProvider(project, provider)
-        val (name, code, commit, branch) = versionProvider.get()
-
+        gitVersion.versionProducer(AndroidVersionStrategy)
+        val (name, code, commit, branch) = gitVersion.version.get() as AndroidVersion
         versionCode = code
         versionName = name
+
+//        versionCode = gitVersion.provider { tagsCount().toString() }.get().toInt()
+//        versionName = gitVersion.toString()
 
         with(ArchiveBaseName) {
             project.base.setArchivesName(appName, name, now)

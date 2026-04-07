@@ -18,6 +18,8 @@ import app.linksheet.feature.engine.database.entity.ResolveType
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.utils.SafeIntent
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
 import fe.composekit.lifecycle.network.core.NetworkStateService
@@ -52,14 +54,22 @@ import fe.linksheet.util.intent.parser.UriException
 import fe.linksheet.util.intent.parser.UriParseException
 import fe.std.result.getOrNull
 import fe.std.result.isFailure
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.withContext
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
-import app.linksheet.mozilla.components.support.utils.SafeIntent
 
 @Stable
 class ImprovedIntentResolver(
@@ -268,7 +278,7 @@ class ImprovedIntentResolver(
         }
 
         val enabledDownloader = downloaderSettings.enableDownloader()
-        var downloadable: DownloadCheckResult = DownloadCheckResult.NonDownloadable
+        var downloadable: DownloadCheckResult? = null
         if (enabledDownloader) {
             downloadable = cancelable(ResolveEvent.CheckingDownloader) {
                 checkDownloadable(

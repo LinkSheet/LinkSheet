@@ -5,7 +5,7 @@ import fe.build.dependencies.Grrfe
 
 plugins {
     id("com.android.library")
-    id("com.gitlab.grrfe.library-build-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
     id("kotlin-parcelize")
 }
 android {

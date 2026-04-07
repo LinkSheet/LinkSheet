@@ -39,7 +39,15 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
 import fe.linksheet.R
 import fe.linksheet.activity.TextEditorActivity
-import fe.linksheet.activity.bottomsheet.*
+import fe.linksheet.activity.bottomsheet.BottomSheetStateController
+import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.CopyUrlInteraction
+import fe.linksheet.activity.bottomsheet.IgnoreLibRedirectInteraction
+import fe.linksheet.activity.bottomsheet.ManualRedirectInteraction
+import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
+import fe.linksheet.activity.bottomsheet.ShareUrlInteraction
+import fe.linksheet.activity.bottomsheet.StartDownloadInteraction
+import fe.linksheet.activity.bottomsheet.SwitchProfileInteraction
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.util.intent.StandardIntents
 import me.saket.unfurl.UnfurlResult
@@ -49,6 +57,7 @@ import me.saket.unfurl.UnfurlResult
 fun UrlBarWrapper(
     result: IntentResolveResult.Default,
     imageLoader: ImageLoader?,
+    enableDownloader: Boolean,
     enableIgnoreLibRedirectButton: Boolean,
     enableUrlCardDoubleTap: Boolean,
     enableManualRedirect: Boolean,
@@ -62,7 +71,7 @@ fun UrlBarWrapper(
         uri = uriString,
         imageLoader = imageLoader,
         profiles = profiles,
-        switchProfile = { crossProfile, url ->
+        switchProfile = profiles?.isNotEmpty()?.if2 { crossProfile, url ->
             controller.dispatch(SwitchProfileInteraction(url, crossProfile))
         },
         unfurlResult = result.unfurlResult,
@@ -88,25 +97,27 @@ fun UrlBarWrapper(
 //            controller.editorLauncher.launch(intent)
             text
         },
-        downloadUri = { uri, downloadResult ->
+        downloadUri = enableDownloader.if2 { uri, downloadResult ->
             controller.dispatch(StartDownloadInteraction(uri, downloadResult))
         },
-        ignoreLibRedirect = { redirectedResult ->
+        ignoreLibRedirect = enableIgnoreLibRedirectButton.if2 { redirectedResult ->
             controller.dispatch(IgnoreLibRedirectInteraction(redirectedResult))
         },
-        manualRedirect = if (enableManualRedirect) { uri ->
+        manualRedirect = enableManualRedirect.if2 { uri ->
             controller.dispatch(ManualRedirectInteraction(uri))
-        } else null,
-        onDoubleClick = {
+        },
+        onDoubleClick = enableUrlCardDoubleTap.if2 {
             if (result.app != null) {
                 controller.dispatch(PreferredAppChoiceButtonInteraction(result.app, ClickModifier.None, result.intent))
             }
-
-            Unit
-        }.takeIf { enableUrlCardDoubleTap }
+        }
     )
 }
 
+@Suppress("NOTHING_TO_INLINE")
+inline fun <T> Boolean.if2(fn: T): T? {
+    return if(this) fn else null
+}
 
 @Composable
 fun UrlBar(

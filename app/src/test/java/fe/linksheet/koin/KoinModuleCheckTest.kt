@@ -48,7 +48,9 @@ import app.linksheet.testlib.koin.definition
 import app.linksheet.testlib.koin.injectedParameters
 import app.linksheet.testlib.koin.verifyAll
 import coil3.ImageLoader
+import com.akuleshov7.ktoml.Toml
 import com.google.gson.Gson
+import fe.android.preference.helper.PreferenceRepository
 import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
@@ -109,6 +111,7 @@ import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.module.workmanager.WorkDelegatorService
 import fe.linksheet.testlib.core.BaseUnitTest
+import fe.linksheet.util.ExportImportUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
@@ -192,7 +195,9 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<LogViewCommon>(
             PasteService::class,
             Gson::class,
-            SystemInfoService::class
+            Toml::class,
+            SystemInfoService::class,
+            ExportImportUseCase::class
         ),
         definition<UrlResolver>(
             LocalTask.Redirector::class,
@@ -275,7 +280,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             AllAppsUseCase::class
         ),
         definition<LibRedirectUserInstanceRepository>(LibRedirectUserInstanceDao::class),
-        definition<ProfileService>(app.linksheet.feature.app.core.MetaDataHandler::class)
+        definition<ProfileService>(MetaDataHandler::class),
+        definition<ExportImportUseCase>(PreferenceRepository::class)
     )
 
     @Test

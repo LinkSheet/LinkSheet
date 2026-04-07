@@ -2,6 +2,7 @@
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
 import fe.build.dependencies._1fexd
+import io.github.gmazzo.gitversion.GitVersionPlugin
 
 plugins {
     kotlin("plugin.compose") apply false
@@ -14,6 +15,10 @@ plugins {
 }
 
 subprojects {
+    if (name == "app") {
+        pluginManager.apply(GitVersionPlugin::class.java)
+    }
+//
     afterEvaluate {
 //        if (plugins.hasPlugin("com.android.application")) {
 //            extensions.findByType<ApplicationExtension>()?.configurePickFirsts()

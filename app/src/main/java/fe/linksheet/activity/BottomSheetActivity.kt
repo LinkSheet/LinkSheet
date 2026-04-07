@@ -7,7 +7,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -21,29 +25,52 @@ import app.linksheet.compose.debugBorder
 import app.linksheet.compose.extension.collectOnIO
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.profile.core.switchTo
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.utils.toSafeIntent
 import fe.composekit.extension.setText
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.*
+import fe.linksheet.activity.bottomsheet.AppInteraction
+import fe.linksheet.activity.bottomsheet.BottomSheetApps
+import fe.linksheet.activity.bottomsheet.BottomSheetInteraction
+import fe.linksheet.activity.bottomsheet.BottomSheetStateController
+import fe.linksheet.activity.bottomsheet.CopyUrlInteraction
+import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
+import fe.linksheet.activity.bottomsheet.IgnoreLibRedirectInteraction
+import fe.linksheet.activity.bottomsheet.LaunchFailure
+import fe.linksheet.activity.bottomsheet.LaunchHandler
+import fe.linksheet.activity.bottomsheet.LaunchResult
+import fe.linksheet.activity.bottomsheet.ManualRedirectInteraction
+import fe.linksheet.activity.bottomsheet.ShareUrlInteraction
+import fe.linksheet.activity.bottomsheet.StartDownloadInteraction
+import fe.linksheet.activity.bottomsheet.SwitchProfileInteraction
 import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
 import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheet
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
 import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
 import fe.linksheet.activity.bottomsheet.content.pending.LoadingIndicatorWrapper
+import fe.linksheet.activity.bottomsheet.hideAndFinish
 import fe.linksheet.composable.ui.AppTheme
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.module.resolver.*
+import fe.linksheet.module.resolver.FollowRedirectsMode
+import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.module.resolver.IntentResolveResult
+import fe.linksheet.module.resolver.ResolveEvent
+import fe.linksheet.module.resolver.ResolveOptions
+import fe.linksheet.module.resolver.ResolverInteraction
 import fe.linksheet.module.resolver.util.LaunchIntent
 import fe.linksheet.module.resolver.util.LaunchOtherProfileIntent
 import fe.linksheet.module.resolver.util.Launchable
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.util.intent.Intents
 import fe.linksheet.util.intent.StandardIntents
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.mapNotNull
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
-import app.linksheet.mozilla.components.support.utils.toSafeIntent
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 
@@ -204,6 +231,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             }
 
             is IntentResolveResult.Default -> {
+                val enableDownloader by viewModel.enableDownloader.collectAsStateWithLifecycle()
                 val enableIgnoreLibRedirectButton by viewModel.enableIgnoreLibRedirectButton.collectAsStateWithLifecycle()
                 val bottomSheetProfileSwitcher by viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
                 val bottomSheetNativeLabel by viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
@@ -218,6 +246,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     modifier = modifier,
                     result = resolveResult,
                     imageLoader = viewModel.imageLoader,
+                    enableDownloader = enableDownloader,
                     enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
                     profiles = if (bottomSheetProfileSwitcher) viewModel.profileSwitcher.getProfiles() else null,
                     enableManualRedirect = followRedirectsMode == FollowRedirectsMode.Manual,
@@ -280,14 +309,13 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 val intent = StandardIntents.createSelfIntent(
                     uri = interaction.uri.toUri(),
                     extras = Bundle().apply {
-                        putBoolean(ImprovedIntentResolver.IntentKeyResolveRedirects , true)
+                        putBoolean(ImprovedIntentResolver.IntentKeyResolveRedirects, true)
                     }
                 )
                 onNewIntent(intent)
             }
 
             is IgnoreLibRedirectInteraction -> {
-
                 val intent = StandardIntents.createSelfIntent(
                     uri = interaction.result.originalUri,
                     extras = Bundle().apply {

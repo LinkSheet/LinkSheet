@@ -20,11 +20,19 @@ import app.linksheet.feature.browser.core.Browser
 import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.downloader.DownloadCheckResult
 import app.linksheet.feature.profile.core.ProfileSwitcher
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import app.linksheet.mozilla.components.support.utils.SafeIntent
 import coil3.ImageLoader
 import fe.composekit.preference.asFunction
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.activity.bottomsheet.*
+import fe.linksheet.activity.bottomsheet.AppClickInteraction
+import fe.linksheet.activity.bottomsheet.AppInteraction
+import fe.linksheet.activity.bottomsheet.ChoiceButtonInteraction
+import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.ClickType
+import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
+import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -36,7 +44,12 @@ import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.ResolveOptions
-import fe.linksheet.module.resolver.util.*
+import fe.linksheet.module.resolver.util.IntentLauncher
+import fe.linksheet.module.resolver.util.LaunchIntent
+import fe.linksheet.module.resolver.util.LaunchMainIntent
+import fe.linksheet.module.resolver.util.LaunchOtherProfileIntent
+import fe.linksheet.module.resolver.util.LaunchRawIntent
+import fe.linksheet.module.resolver.util.Launchable
 import fe.linksheet.module.resolver.workaround.GithubWorkaround
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.extension.android.getSystemServiceOrThrow
@@ -48,11 +61,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
-import app.linksheet.mozilla.components.support.utils.SafeIntent
 import org.koin.core.component.KoinComponent
 import java.io.File
-import java.util.*
+import java.util.Locale
 
 class BottomSheetViewModel(
     val context: Application,
@@ -82,7 +93,7 @@ class BottomSheetViewModel(
     val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.browser.enable)
     val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideBottomSheetChoiceButtons)
-    val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enable)
+    val enableDownloader = preferenceRepository.asViewModelState(AppPreferences.downloader.enable)
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enableIgnoreLibRedirectButton)
     val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.profileSwitcher.enable)
     val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.single)

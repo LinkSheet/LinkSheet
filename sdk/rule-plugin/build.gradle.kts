@@ -1,7 +1,7 @@
 
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
-import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")

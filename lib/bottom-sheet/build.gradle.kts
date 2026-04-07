@@ -4,7 +4,7 @@ import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 plugins {
     id("com.android.library")
     kotlin("plugin.compose")
-    id("com.gitlab.grrfe.library-build-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 group = "fe.linksheet.bottom.sheet"

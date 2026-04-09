@@ -3,9 +3,16 @@ package app.linksheet.compose.util
 
 import android.graphics.Path
 import android.view.animation.PathInterpolator
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.Easing
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavBackStackEntry
@@ -33,19 +40,27 @@ const val initialOffset = 0.10f
 val slidePositiveOffset: (fullWidth: Int) -> Int = { (it * initialOffset).toInt() }
 val slideNegativeOffset: (fullWidth: Int) -> Int = { -(it * initialOffset).toInt() }
 
-val enterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition? = {
+val enterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition = {
     slideInHorizontally(enterTween, slidePositiveOffset) + fadeIn(fadeTween)
 }
 
-val exitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition? = {
+val exitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition = {
     slideOutHorizontally(exitTween, slideNegativeOffset) + fadeOut(fadeTween)
 }
 
-val popEnterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition? = {
+val predictivePopEnterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.(Int) -> EnterTransition = {
+    slideInHorizontally(enterTween) { -it } + fadeIn(fadeTween)
+}
+
+val predictivePopExitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.(Int) -> ExitTransition = {
+    slideOutHorizontally(exitTween) { it } + fadeOut(fadeTween)
+}
+
+val popEnterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition = {
     slideInHorizontally(enterTween, slideNegativeOffset) + fadeIn(fadeTween)
 }
 
-val popExitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition? = {
+val popExitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition = {
     slideOutHorizontally(exitTween, slidePositiveOffset) + fadeOut(fadeTween)
 }
 

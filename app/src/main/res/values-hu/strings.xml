@@ -147,16 +147,16 @@
     <string name="github_explainer">Forráskód tároló</string>
     <string name="use_clear_urls_explainer">Kísérleti <annotation url-id="clearurls-github">ClearURLs</annotation> integráció használata (törli a követési paramétereket az URL-ekből)</string>
     <string name="follow_redirects_explainer">Automatikusan követi az összes átirányítást az alsó panel megnyitása előtt. Ennek lehetnek <annotation url-id="privacy-follow-redirects">adatvédelemre vonatkozó következményei</annotation></string>
-    <string name="follow_only_known_trackers_explainer">Csak akkor próbálja követni az átirányításokat, ha a fogadóról ismert, hogy nyomkövető/átirányító. Ha a \"Kövesse az átirányításokat külső szolgáltatáson keresztül\" opció be van kapcsolva, akkor ez mindig engedélyezve lesz.</string>
-    <string name="fastfoward_rules_explainer">Kísérleti <annotation url-id="fastforward-github">FastForward</annotation> szabály integrálása (egyes hostok átirányításainak megkerülése a linkből történő átirányítás kivonásával).</string>
+    <string name="follow_only_known_trackers_explainer">Csak akkor próbálja követni az átirányításokat, ha a fogadóról ismert, hogy nyomkövető/átirányító. Ha a \"Kövesse az átirányításokat külső szolgáltatáson keresztül\" opció be van kapcsolva, akkor ez mindig engedélyezve lesz</string>
+    <string name="fastfoward_rules_explainer">Kísérleti <annotation url-id="fastforward-github">FastForward</annotation> szabály integrálása (egyes hostok átirányításainak megkerülése a linkből történő átirányítás kivonásával)</string>
     <string name="ignore_libredirect">LibRedirect figyelmen kívül hagyása</string>
-    <string name="enable_downloader_explainer">Hozzáad egy \"Letöltés\" gombot az alsó panelhez, ha az URL közvetlen linket tartalmaz a fájlra. Ennek lehetnek <annotation url-id="privacy-downloader">adatvédelmre vonatkozó következményei</annotation>.</string>
+    <string name="enable_downloader_explainer">Hozzáad egy \"Letöltés\" gombot az alsó panelhez, ha az URL közvetlen linket tartalmaz a fájlra. Ennek lehetnek <annotation url-id="privacy-downloader">adatvédelmre vonatkozó következményei</annotation></string>
     <string name="downloader_url_mime_type_explainer">Ellenőrzi, hogy az URL fájlkiterjesztéssel végződik-e (pl. \".jpg\"); Ha igen, akkor a rendszer ezt a típust használja a letöltött fájlhoz.</string>
     <string name="in_app_browser">Alkalmazáson belüli böngésző</string>
-    <string name="disable_in_selected_explainer">Az alkalmazáson belüli böngésző letiltása a kiválasztott alkalmazásokban.</string>
+    <string name="disable_in_selected_explainer">Az alkalmazáson belüli böngésző letiltása a kiválasztott alkalmazásokban</string>
     <string name="enable_ignore_libredirect_button_explainer">Megjelenít egy gombot az alsó panelen, ha az URL-t a LibRedirect segítségével irányították át, ami helyette az eredeti URL-t nyitja meg</string>
     <string name="amp2html_external_service">Kísérlet a nem AMP-oldalverzió beszerzésére külső szolgáltatáson keresztül</string>
-    <string name="enable_amp2html_explainer">Átirányítja az AMP oldalakat a normál webes verzióra. Ennek lehetnek <annotation url-id="privacy-amp2html">adatvédelemre vonatkozó következményei</annotation>.</string>
+    <string name="enable_amp2html_explainer">Átirányítja az AMP oldalakat a normál webes verzióra. Ennek lehetnek <annotation url-id="privacy-amp2html">adatvédelemre vonatkozó következményei</annotation></string>
     <string name="mastodon_redirect_subtitle_2">A Mastodon Redirect forráskódja referenciaként volt használva a Shizuku interakcióhoz</string>
     <string name="version_name"><b>Verzió:</b> <font face="monospace">%s</font></string>
     <string name="pretend_to_be_app_explainer">Tegyen úgy, mintha egy natív alkalmazás lenne a támogatott tartományokhoz a LinkSheetCompat segítségével</string>
@@ -208,7 +208,7 @@
     <string name="donate_card_subtitle">Ha tetszik a LinkSheet, fontolja meg, hogy csillagot ad a Githubon és/vagy adományoz. \nAzok az adományozók, akik több mint <b>5 eurót</b> adományoznak, jogosultak a <b>LinkSheet Pro</b> szolgáltatásaira, amely exkluzív funkciókkal rendelkezik.</string>
     <string name="discord_explainer">Csevegés a Discord szerverünkön a LinkSheet-ről</string>
     <string name="donate_explainer_crypto">Kriptóban történő adományozáskor küldjö emailt az <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> címre.</string>
-    <string name="flavor"><b>Flavor:</b> <font face="monospace">%s</font></string>
+    <string name="flavor"><b>Jellemző:</b> <font face="monospace">%s</font></string>
     <string name="app_setup">Alkalmazás beállítása</string>
     <string name="other">Egyebek</string>
     <string name="download_started_toast_explainer">Felugrij egy üzenet, amikor a letöltés elindul</string>
@@ -482,6 +482,91 @@
     <string name="generic__button_dismiss">Elvetés</string>
     <string name="settings_main_experiment_changelog__title_changelog">Kísérleti funkciók változásnaplója</string>
     <string name="settings__subtitle_advanced"><![CDATA[Kísérleti funkciók & Export/Import]]></string>
-    <string name="settings_main_experiment_news__title_experiment_state_updated">Új alapértékek</string>
-    <string name="settings_main_experiment_news__text_experiment_state_updated">Néhány korábban letiltott kísérleti funkció engedélyezve lett ebben a buildben.</string>
+    <string name="settings_main_experiment_news__title_experiment_state_updated">Működésbeli változások</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">"Néhány kísérleti funkciót  eltávolítottunk, mostantól ez az alapértelmezett működés."</string>
+    <string name="browser_mode_divider">Mód</string>
+    <string name="tap_customization__action_always_open_app">Alkalmazás beállítása alapértelmezettként a gazdagéphez és megnyitáshoz</string>
+    <string name="resolve_event__checking_browsers">Böngészők ellenőrzése</string>
+    <string name="bottom_sheet__button_manual_redirect">Kövesse az átirányításokat</string>
+    <string name="app_host_dialog__title_hosts">Alapértelmezett gazdagépek</string>
+    <string name="generic__button_text_save">Mentés</string>
+    <string name="app_host_dialog__text_no_hosts">Ebben az alkalmazásban megnyitáshoz nincs beállítva alapértelmezett gazdagép!</string>
+    <string name="generic__button_text_close">Bezárás</string>
+    <string name="settings_verified_link_handlers__text_browser">Böngésző</string>
+    <string name="generic__button_text_share">Megosztás</string>
+    <string name="resolve_event__idle">Tétlen</string>
+    <string name="settings_home__title_clipboard_card">Vágólap kártya</string>
+    <string name="settings_home__text_clipboard_card">Az aktuális vágólap-tartalom megjelenítése a kezdőlapon, ha az URL-cím</string>
+    <plurals name="settings_verified_link_handlers__text_app_host_default_host">
+        <item quantity="one">%d alapértelmezett gazdagép</item>
+        <item quantity="other">%d alapértelmezett gazdagép</item>
+    </plurals>
+    <string name="settings_language__dialog_title">Alkalmazás nyelve</string>
+    <string name="settings_language__text_system_language_with_language">%s (rendszernyelv)</string>
+    <string name="settings_language__text_system_language">Rendszernyelv</string>
+    <string name="export_settings__text_success">Exportálva!</string>
+    <string name="export_settings__text_failure">Nem sikerült exportálni a beállításokat!</string>
+    <string name="import_settings__text_success">Importálva!</string>
+    <string name="import_settings__text_failure">Nem sikerült importálni a beállításokat!</string>
+    <string name="settings_remote_config__title_dialog">Engedélyezi a távoli konfigurációt?</string>
+    <string name="settings_remote_config__text_content">A LinkSheet automatikusan frissítheti a belső konfigurációs és dokumentációs erőforrásokat, ha csatlakozik konfigurációs kiszolgálójához. További információért koppintson <annotation url-id="github.linksheet.wiki.privacy.remote-config">ide</annotation>.</string>
+    <string name="generic__button_text_enable">Engedélyezés</string>
+    <string name="generic__button_text_disable">Letiltás</string>
+    <string name="bottom_sheet__text_launch_illegal">Illegális indítási próbálkozás!</string>
+    <string name="bottom_sheet__text_launch_not_allowed">Az indítás nem engedélyezett!</string>
+    <string name="bottom_sheet__text_launch_failure_unknown">Ismeretlen indítási hiba!</string>
+    <string name="bottom_sheet__text_launch_failure_other">Az indítás nem sikerült!</string>
+    <string name="settings_verified_link_handler__text_hosts">Gazdagép</string>
+    <string name="settings_verified_link_handler__title_details">Részletek</string>
+    <string name="generic__button_text_settings">Beállítások</string>
+    <string name="settings__title_sql">Sql lekérdezés</string>
+    <string name="settings_sql__text_query">Lekérdezés</string>
+    <string name="generic__title_sort_by">Rendezés</string>
+    <string name="generic__title_filter">Szűrő</string>
+    <string name="settings_verified_link_handlers__text_sort_by_a_z">A-Z</string>
+    <string name="settings_verified_link_handlers__text_sort_by_installation_time">Telepítési idő</string>
+    <string name="settings_verified_link_handlers__text_ascending">Növekvő</string>
+    <string name="generic__label_arrow_rotation">Nyíl forgatás</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"><![CDATA[All apps]]></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_browser">Böngészők</string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_native">Natív alkalmazások</string>
+    <string name="settings_verified_link_handlers__text_system_apps">Rendszeralkalmazások</string>
+    <string name="settings_links_amp2html__title_local_network">Helyi hálózat engedélyezése</string>
+    <string name="settings_links_amp2html__text_local_network">Az Amp2Html futtatásának engedélyezése nem nyilvános gazdagépeken</string>
+    <string name="settings_links_follow_redirects__title_local_network">Helyi hálózat engedélyezése</string>
+    <string name="settings_links_follow_redirects__text_local_network">A következő átirányítások engedélyezése nem nyilvános gazdagépek számára</string>
+    <string name="settings_links_preview__title_preview">URL előnézetének megjelenítése</string>
+    <string name="settings_links_preview__subtitle_preview">Próbálja meg betölteni és megjeleníteni az OpenGraph előnézetét a lap alján. Ennek <annotation url-id="github.linksheet.wiki.privacy.preview">adatvédelmi vonatkozásai lehetnek</annotation></string>
+    <string name="settings_links_preview__title_preview_skip_browser">A böngésző előnézetének letiltása</string>
+    <string name="settings_links_preview__subtitle_preview_skip_browser">Az előnézet letiltása, ha a hivatkozó egy böngésző</string>
+    <string name="settings_scenario__title_scenarios">Forgatókönyvek</string>
+    <string name="settings_scenario__text_scenarios">Forgatókönyvek konfigurálása</string>
+    <string name="settings_scenario__text_data_type">Adattípus</string>
+    <string name="settings_scenario__text_value">Érték</string>
+    <string name="settings_apps_browsers_mode__title_selected">Egyetlen böngésző</string>
+    <string name="settings_apps_browsers_mode__subtitle_selected">Kiválasztott</string>
+    <string name="settings_apps_browsers_mode__text_none">Nincs</string>
+    <string name="generic__label_permission_interconnect">linkSheet konfigurálás</string>
+    <string name="generic__description_permission_interconnect">linkSheet konfigurálás</string>
+    <string name="notification__channel_interconnect_name">Összekapcsolás</string>
+    <string name="notification__channel_interconnect_description">Előugró értesítés, ha az összekapcsolás szolgáltatás aktív</string>
+    <string name="notification_interconnect_name">Összekapcsolás</string>
+    <string name="notification_interconnect_description">Az összekapcsolás aktív</string>
+    <string name="settings_bottom_sheet__title_hide_referring_app">Hivatkozó alkalmazás elrejtése</string>
+    <string name="settings_bottom_sheet__subtitle_hide_referring_app">Ne jelenítse meg a hivatkozó-/forrásalkalmazást, még akkor sem, ha képes kezelni a hivatkozást</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">Dupla kattintás az URL-re</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">A javasolt alkalmazás megnyitása, ha duplán megérinti az URL-t</string>
+    <string name="settings_bottom_sheet__title_expand_fully">Teljesen bontsa ki</string>
+    <string name="settings_bottom_sheet__subtitle_expand_fully">A lap alsó részének automatikus kibontása teljes magasságára</string>
+    <string name="settings_browser_mode__title_auto_launch_single_browser">Automatikusan indítson egy böngészőt</string>
+    <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Ha csak egyetlen alkalmazás érhető el, amely egy böngésző, indítsa el automatikusan</string>
+    <string name="generic__text_mode">Mód</string>
+    <string name="settings_follow_redirects__title_mode_auto">Automatikus</string>
+    <string name="settings_follow_redirects__subtitle_mode_auto">Automatikusan kövesse az összes átirányítást</string>
+    <string name="settings_follow_redirects__title_mode_manual">Manuális</string>
+    <string name="settings_follow_redirects__subtitle_mode_manual">A lap alján jelenítse meg az \"Átirányítások követése\" gombot</string>
+    <string name="settings_follow_redirects__title_aggressive">Agresszív mód</string>
+    <string name="settings_follow_redirects__subtitle_aggressive">Töltse le a teljes oldal törzset, hogy növelje a kompatibilitást azokkal a webhelyekkel, amelyek nem használnak HTTP-átirányítást</string>
+    <string name="handler_target__label_switch_profile_view_intent">Profilváltás</string>
+    <string name="import_dumped_preference">Exportált preferenciák importálása</string>
 </resources>

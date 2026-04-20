@@ -5,7 +5,7 @@
     <string name="always_show_package_name">Mindig megjeleníti a csomag nevét</string>
     <string name="add_all">Összes hozzáadása</string>
     <string name="hide_after_copying">Automatikus elrejtés művelet közben</string>
-    <string name="hide_after_copying_explainer">Automatikusan elrejti az alsó lapot, amikor egy műveletgombot, például a \"Hivatkozás másolása\" vagy a \"Letöltés\"-t megérint</string>
+    <string name="hide_after_copying_explainer">Automatikusan elrejti az alsó panelt, amikor egy műveletgombot, például a \"Hivatkozás másolása\" vagy a \"Letöltés\"-t megérint</string>
     <string name="display_grid_layout_explainer">Rácsos megjelenítés lista helyett az alsó panelen</string>
     <string name="set_as_browser_done">A LinkSheet alapértelmezett böngészőként lett beállítva!</string>
     <string name="disabled">Letiltva</string>
@@ -253,7 +253,7 @@
     <string name="onboarding_4_card_explainer">Letiltja a linkkezelést minden olyan tartományban, amelyet a LinkSheetnek kezelnie kell.</string>
     <string name="onboarding_5_card_explainer">A LinkSheet működéséhez szükséges alapkonfiguráció elkészült. Menjen a beállításokhoz, és fedezze fel, mit kínálunk még!</string>
     <string name="resolve_embeds_explainer">Az olyan beágyazott tükröket, mint pl. az fxtwitter.com, oldja fel a valódi host-ra</string>
-    <string name="hide_bottom_sheet_choice_buttons_explainer">Elrejti az \"Egyszer\" és a \"Mindig\" gombokat az alsó lapon</string>
+    <string name="hide_bottom_sheet_choice_buttons_explainer">Elrejti az \"Egyszer\" és a \"Mindig\" gombokat az alsó panelen</string>
     <string name="base_config">Kiegészítő konfiguráció</string>
     <string name="urlbar_settings">Url-sáv</string>
     <string name="permission_required">Engedély szükséges</string>
@@ -536,7 +536,7 @@
     <string name="settings_links_follow_redirects__title_local_network">Helyi hálózat engedélyezése</string>
     <string name="settings_links_follow_redirects__text_local_network">A következő átirányítások engedélyezése nem nyilvános gazdagépek számára</string>
     <string name="settings_links_preview__title_preview">URL előnézetének megjelenítése</string>
-    <string name="settings_links_preview__subtitle_preview">Próbálja meg betölteni és megjeleníteni az OpenGraph előnézetét a lap alján. Ennek <annotation url-id="github.linksheet.wiki.privacy.preview">adatvédelmi vonatkozásai lehetnek</annotation></string>
+    <string name="settings_links_preview__subtitle_preview">Próbálja meg betölteni és megjeleníteni az OpenGraph előnézetét az alsó panelen. Ennek <annotation url-id="github.linksheet.wiki.privacy.preview">adatvédelmi vonatkozásai lehetnek</annotation></string>
     <string name="settings_links_preview__title_preview_skip_browser">A böngésző előnézetének letiltása</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">Az előnézet letiltása, ha a hivatkozó egy böngésző</string>
     <string name="settings_scenario__title_scenarios">Forgatókönyvek</string>
@@ -557,14 +557,14 @@
     <string name="settings_bottom_sheet__title_double_tap_url">Dupla kattintás az URL-re</string>
     <string name="settings_bottom_sheet__subtitle_double_tap_url">A javasolt alkalmazás megnyitása, ha duplán megérinti az URL-t</string>
     <string name="settings_bottom_sheet__title_expand_fully">Teljesen bontsa ki</string>
-    <string name="settings_bottom_sheet__subtitle_expand_fully">A lap alsó részének automatikus kibontása teljes magasságára</string>
+    <string name="settings_bottom_sheet__subtitle_expand_fully">Az alsó panel automatikus kibontása teljes magasságúra</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">Automatikusan indítson egy böngészőt</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Ha csak egyetlen alkalmazás érhető el, amely egy böngésző, indítsa el automatikusan</string>
     <string name="generic__text_mode">Mód</string>
     <string name="settings_follow_redirects__title_mode_auto">Automatikus</string>
     <string name="settings_follow_redirects__subtitle_mode_auto">Automatikusan kövesse az összes átirányítást</string>
     <string name="settings_follow_redirects__title_mode_manual">Manuális</string>
-    <string name="settings_follow_redirects__subtitle_mode_manual">A lap alján jelenítse meg az \"Átirányítások követése\" gombot</string>
+    <string name="settings_follow_redirects__subtitle_mode_manual">Az alsó panelen jelenítse meg az \"Átirányítások követése\" gombot</string>
     <string name="settings_follow_redirects__title_aggressive">Agresszív mód</string>
     <string name="settings_follow_redirects__subtitle_aggressive">Töltse le a teljes oldal törzset, hogy növelje a kompatibilitást azokkal a webhelyekkel, amelyek nem használnak HTTP-átirányítást</string>
     <string name="handler_target__label_switch_profile_view_intent">Profilváltás</string>

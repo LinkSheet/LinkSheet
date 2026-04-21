@@ -30,9 +30,9 @@ import okio.BufferedSource
 
 
 class ExportImportUseCase(
-    val repository: PreferenceRepository,
-    val gson: Gson,
-    val toml: Toml,
+    private val repository: PreferenceRepository,
+    private val gson: Gson,
+    private val toml: Toml,
 ) {
     private val logger = Logger("ExportImportUseCase")
 

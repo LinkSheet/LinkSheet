@@ -281,7 +281,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<LibRedirectUserInstanceRepository>(LibRedirectUserInstanceDao::class),
         definition<ProfileService>(MetaDataHandler::class),
-        definition<ExportImportUseCase>(PreferenceRepository::class)
+        definition<ExportImportUseCase>(PreferenceRepository::class, Gson::class, Toml::class)
     )
 
     @Test

@@ -119,4 +119,12 @@
     <string name="just_once">Vaid üks kord</string>
     <string name="default_apps">Vaikimisi rakendused</string>
     <string name="copy_url">Kopeeri link</string>
+    <string name="settings_scenario__title_scenarios">Stsenaariumid</string>
+    <string name="settings_scenario__text_scenarios">Seadista stsenaariume</string>
+    <string name="settings_scenario__text_data_type">Andmetüüp</string>
+    <string name="open_with_app">Ava rakendusega %s</string>
+    <string name="use_a_different_app">Ava muu rakendusega</string>
+    <string name="opening_with_app">Avan rakendusega %s</string>
+    <string name="always_ask">Alati küsi</string>
+    <string name="whitelisted_explainer">Näita vaid lubatud brausereid</string>
 </resources>

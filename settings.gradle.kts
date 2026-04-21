@@ -35,18 +35,16 @@ pluginManagement {
     when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]
-            val plugins = extra.properties["gradle.build.plugins"]
-                .toString().trim().split(",")
-                .map { it.trim().split("=") }
-                .filter { it.size == 2 }
-                .associate { it[0] to it[1] }
             resolutionStrategy {
                 eachPlugin {
-                    plugins[requested.id.id]?.let { useModule("$it:$gradleBuildVersion") }
+                    with(requested.id) {
+                        if (namespace == "com.gitlab.grrfe") {
+                            useModule("com.gitlab.grrfe.gradle-build:$name:$gradleBuildVersion")
+                        }
+                    }
                 }
             }
         }
-
         else -> includeBuild(gradleBuildDir.toString())
     }
 }

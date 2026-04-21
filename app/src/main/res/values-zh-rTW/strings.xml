@@ -434,4 +434,5 @@
     <string name="settings_browser_mode__title_auto_launch_single_browser">自動採用唯一瀏覽器</string>
     <string name="settings_bottom_sheet__subtitle_expand_fully">自動將底部功能表完全展開</string>
     <string name="settings_bottom_sheet__title_expand_fully">完全展開</string>
+    <string name="debug_build">偵錯建置</string>
 </resources>

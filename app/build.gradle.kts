@@ -13,6 +13,7 @@ import com.gitlab.grrfe.gradlebuild.common.PluginOption
 import com.gitlab.grrfe.gradlebuild.util.PropertiesFile
 import com.gitlab.grrfe.gradlebuild.util.SystemEnvironment
 import com.gitlab.grrfe.gradlebuild.util.withProviders
+import com.gitlab.grrfe.gradlebuild.version.createVersionProvider
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 
@@ -29,13 +30,6 @@ plugins {
     id("de.mannodermaus.android-junit5")
 }
 
-
-
-//gitVersion {
-//    tagPrefix = "" // Optional, default is "v"
-//    initialVersion = "0.1.0-SNAPSHOT" // Optional, default is "0.1.0-SNAPSHOT"
-//}
-
 val appName = "LinkSheet"
 
 android {
@@ -48,17 +42,11 @@ android {
         targetSdk = AndroidSdk.COMPILE_SDK
 
         val now = System.currentTimeMillis()
-//        val provider = AndroidVersionStrategy(now)
-//        gitVersion.versionProducer {  }
 
-        gitVersion.versionProducer(AndroidVersionStrategy)
-        val (name, code, commit, branch) = gitVersion.version.get() as AndroidVersion
+        val versionProvider = createVersionProvider(AndroidVersionStrategy)
+        val (name, code, commit, branch) = versionProvider.get() as AndroidVersion
         versionCode = code
-        logger.warn("Setting code to $code")
         versionName = name
-
-//        versionCode = gitVersion.provider { tagsCount().toString() }.get().toInt()
-//        versionName = gitVersion.toString()
 
         with(ArchiveBaseName) {
             project.base.setArchivesName(appName, name, now)

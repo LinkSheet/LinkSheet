@@ -54,6 +54,7 @@ android {
         gitVersion.versionProducer(AndroidVersionStrategy)
         val (name, code, commit, branch) = gitVersion.version.get() as AndroidVersion
         versionCode = code
+        logger.warn("Setting code to $code")
         versionName = name
 
 //        versionCode = gitVersion.provider { tagsCount().toString() }.get().toInt()

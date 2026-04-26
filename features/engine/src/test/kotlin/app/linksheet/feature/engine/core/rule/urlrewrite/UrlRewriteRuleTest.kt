@@ -13,7 +13,6 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
@@ -25,7 +24,8 @@ internal class UrlRewriteRuleTest : BaseUnitTest {
         private val hosts = setOf("reddit.com", "www.reddit.com")
         private val newHost = "old.reddit.com"
 
-        override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
+        context(context: EngineRunContext)
+        override suspend fun checkRule(input: PostProcessorInput): EngineResult {
             val url = input.resultUrl
             if (url.host !in hosts) return UrlEngineResult(url)
 

@@ -72,7 +72,7 @@ internal class FollowRedirectsLinkResolverTest : BaseUnitTest {
             enabled = { true }
         )
 
-        val result = withTestRunContext(resolver) { it.runStep(SHORT_URL) }
+        val result = withTestRunContext { resolver.runStep(SHORT_URL) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)

@@ -21,13 +21,14 @@ internal class EngineExtraTest : BaseUnitTest {
     private val rule = object : PreProcessorRule {
         private val chromePackage = AndroidAppPackage("com.google.chrome")
 
-        override suspend fun EngineRunContext.checkRule(input: PreProcessorInput): EngineResult? {
-            val extra = findExtraOrNull<SourceAppExtra>()
+        context(context: EngineRunContext)
+        override suspend fun checkRule(input: PreProcessorInput): EngineResult? {
+            val extra = context.findExtraOrNull<SourceAppExtra>()
             if (extra?.appPackage == chromePackage.packageName) {
-                flags.add(EngineFlag.DisablePreview)
+                context.flags.add(EngineFlag.DisablePreview)
             }
 
-            return empty()
+            return context.empty()
         }
     }
 

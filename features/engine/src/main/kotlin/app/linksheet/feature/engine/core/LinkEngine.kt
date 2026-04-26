@@ -3,13 +3,37 @@ package app.linksheet.feature.engine.core
 import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
 import app.linksheet.feature.engine.core.context.EngineRunContext
 import app.linksheet.feature.engine.core.fetcher.LinkFetcher
-import app.linksheet.feature.engine.core.rule.*
-import app.linksheet.feature.engine.core.step.*
+import app.linksheet.feature.engine.core.rule.PostProcessorInput
+import app.linksheet.feature.engine.core.rule.PostProcessorRule
+import app.linksheet.feature.engine.core.rule.PreProcessorInput
+import app.linksheet.feature.engine.core.rule.PreProcessorRule
+import app.linksheet.feature.engine.core.rule.Rule
+import app.linksheet.feature.engine.core.rule.RuleInput
+import app.linksheet.feature.engine.core.step.AfterStepRule
+import app.linksheet.feature.engine.core.step.BeforeStepRule
+import app.linksheet.feature.engine.core.step.EngineStep
+import app.linksheet.feature.engine.core.step.EngineStepId
+import app.linksheet.feature.engine.core.step.InPlaceStep
+import app.linksheet.feature.engine.core.step.SkipStep
+import app.linksheet.feature.engine.core.step.StepEnd
+import app.linksheet.feature.engine.core.step.StepResult
+import app.linksheet.feature.engine.core.step.StepRule
+import app.linksheet.feature.engine.core.step.StepRuleInput
+import app.linksheet.feature.engine.core.step.StepRuleResult
+import app.linksheet.feature.engine.core.step.StepStart
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.std.uri.StdUrl
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 
 class LinkEngine(
     private val steps: List<EngineStep<*>>,
@@ -24,8 +48,8 @@ class LinkEngine(
     private val preProcessorRules = rules.filterIsInstance<PreProcessorRule>()
     private val postProcessorRules = rules.filterIsInstance<PostProcessorRule>()
 
+    context(context: EngineRunContext)
     private suspend inline fun <I : StepRuleInput, R : StepRuleResult, reified SR : StepRule<I, R>> findStepRule(
-        context: EngineRunContext,
         stepId: EngineStepId,
         input: I,
     ): R? {
@@ -35,17 +59,17 @@ class LinkEngine(
             .filterIsInstance<SR>()
             .filter { stepId in it.steps }
             .asIterable()
-        return processRules(context, filteredRules, input)
+        return processRules(filteredRules, input)
     }
 
+    context(context: EngineRunContext)
     private suspend inline fun <I : RuleInput, R : EngineResult, reified SR : Rule<I, R>> processRules(
-        context: EngineRunContext,
         filteredRules: Iterable<SR>,
         input: I,
     ): R? {
         for (rule in filteredRules) {
             logger.debug("Checking rule $rule with input $input")
-            val result = with(rule) { context.checkRule(input) }
+            val result = rule.checkRule(input)
             logger.debug("Rule result is $result")
             if (result == null) continue
             return result
@@ -67,15 +91,15 @@ class LinkEngine(
         step: EngineStep<R>,
         url: StdUrl,
     ): Pair<Boolean, StdUrl> {
-        val result = with(step) { context.runStep(url) }
+        val result = context(context) { step.runStep(url) }
         val hasNewUrl = result != null && result.url != url
 
         if (!hasNewUrl) return false to url
         return true to result.url
     }
 
+    context(context: EngineRunContext)
     private suspend fun processSteps(
-        context: EngineRunContext,
         url: StdUrl,
         depth: Int = 0,
     ): EngineResult = coroutineScope scope@{
@@ -84,51 +108,45 @@ class LinkEngine(
             if (!isActive) break
             if (!step.enabled()) continue
             val stepStart = StepStart(depth, step, mutUrl)
-            val beforeStepResult = findStepRule<StepStart<*>, StepRuleResult, BeforeStepRule>(
-                context, step.id, stepStart
-            )
+            val beforeStepResult =
+                findStepRule<StepStart<*>, StepRuleResult, BeforeStepRule>(step.id, stepStart)
             if (beforeStepResult is SkipStep) continue
 
             emitEvent(stepStart)
             val (hasNewUrl, resultUrl) = runStep(context, step, mutUrl)
 
             val stepEnd = StepEnd(depth, step, url, hasNewUrl, resultUrl)
-            val afterStepResult = findStepRule<StepEnd<*>, StepRuleResult, AfterStepRule>(
-                context, step.id, stepEnd
-            )
+            val afterStepResult =
+                findStepRule<StepEnd<*>, StepRuleResult, AfterStepRule>(step.id, stepEnd)
             if (afterStepResult is SkipStep) continue
 
             emitEvent(stepEnd)
             if (!hasNewUrl) continue
 
-            if (step !is InPlaceStep) return@scope processSteps(context, resultUrl, depth + 1)
+            if (step !is InPlaceStep) return@scope processSteps(resultUrl, depth + 1)
             mutUrl = resultUrl
         }
 
         UrlEngineResult(mutUrl)
     }
 
+    context(context: EngineRunContext)
     private suspend fun process(
-        context: EngineRunContext,
         url: StdUrl,
     ): EngineResult = coroutineScope scope@{
-        val preResult = processRules(
-            context,
-            preProcessorRules,
-            PreProcessorInput(url)
-        )
+        val preResult = processRules(preProcessorRules, PreProcessorInput(url))
         if (preResult != null) return@scope preResult
 
-        val result = processSteps(context, url, 0)
+        val result = processSteps(url, 0)
         val resultUrl = (result as? UrlEngineResult)?.url ?: url
 
-        val postResult = processRules(context, postProcessorRules, PostProcessorInput(resultUrl, url))
+        val postResult = processRules(postProcessorRules, PostProcessorInput(resultUrl, url))
         if (postResult != null) return@scope postResult
         result
     }
 
+    context(context: EngineRunContext)
     private suspend fun fetch(
-        context: EngineRunContext,
         resultUrl: StdUrl
     ) = coroutineScope scope@{
         for (fetcher in fetchers) {
@@ -147,12 +165,13 @@ class LinkEngine(
         url: StdUrl,
         context: EngineRunContext = DefaultEngineRunContext()
     ): ContextualEngineResult = coroutineScope scope@{
-        val result = process(context, url)
-        if (result is UrlEngineResult) {
-            fetch(context, result.url)
+        context(context) {
+            val result = process(url)
+            if (result is UrlEngineResult) {
+                fetch(result.url)
+            }
+            val sealedContext = context.seal()
+            sealedContext to result
         }
-
-        val sealedContext = context.seal()
-        sealedContext to result
     }
 }

@@ -33,7 +33,9 @@ class ClearURLsLinkModifier(
         Unit
     }
 
-    override suspend fun EngineRunContext.runStep(url: StdUrl) = withContext(ioDispatcher) {
+
+    context(context: EngineRunContext)
+    override suspend fun runStep(url: StdUrl) = withContext(ioDispatcher) {
         val result = clearUrls?.clearUrl(url.toString())
         result?.let { (url, operations) -> ClearURLsModifyOutput(url.toStdUrlOrThrow(), operations) }
     }

@@ -22,7 +22,7 @@ import fe.linksheet.util.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher
-import java.util.*
+import java.util.EnumSet
 
 //abstract class BaseRuleEngineTest(closeDb: Boolean = true) : DatabaseTest(closeDb) {
 
@@ -58,13 +58,14 @@ fun assertContext(result: ContextualEngineResult): Assert<SealedRunContext> {
 
 fun TestLinkModifier(
     id: EngineStepId,
-    block: suspend EngineRunContext.(StdUrl) -> StepTestResult? = { null },
+    block: suspend context(EngineRunContext)(StdUrl) -> StepTestResult? = { null },
 ): LinkModifier<StepTestResult> {
     return object : LinkModifier<StepTestResult> {
         override val enabled: () -> Boolean = { true }
         override val id = id
         override suspend fun warmup() {}
-        override suspend fun EngineRunContext.runStep(url: StdUrl) = block(url)
+        context(context: EngineRunContext)
+        override suspend fun runStep(url: StdUrl) = block(url)
         override fun toString() = "TestLinkModifier(id=$id)"
     }
 }
@@ -85,6 +86,6 @@ object TestEngineRunContext : EngineRunContext {
     override fun seal(): SealedRunContext = SealedRunContext(flags, roles, allowCustomTab, emptyMap())
 }
 
-suspend fun <T, R> withTestRunContext(it: T, block: suspend T.(EngineRunContext) -> R): R {
-    return it.block(TestEngineRunContext)
+suspend fun <R> withTestRunContext(block: suspend context(EngineRunContext)() -> R): R {
+    return context(TestEngineRunContext) { block() }
 }

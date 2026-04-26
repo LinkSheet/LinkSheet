@@ -9,6 +9,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 
+sealed interface StringOperationExpression
+
 @Keep
 @Serializable
 @SerialName(OpCodes.STRING_EQUALS)
@@ -19,7 +21,7 @@ class StringEqualsExpression(
     val right: Expression<String?>,
     @ProtoNumber(3)
     val ignoreCase: Boolean
-) : Expression<Boolean> {
+) : Expression<Boolean>, StringOperationExpression {
     override fun eval(ctx: EvalContext): Boolean {
         return left.eval(ctx)?.equals(right.eval(ctx), ignoreCase) == true
     }
@@ -35,7 +37,7 @@ class StringContainsExpression(
     val right: Expression<String?>,
     @ProtoNumber(3)
     val ignoreCase: Boolean
-) : Expression<Boolean> {
+) : Expression<Boolean>, StringOperationExpression {
     override fun eval(ctx: EvalContext): Boolean {
         val other = right.eval(ctx) ?: return false
         return left.eval(ctx)?.contains(other, ignoreCase) == true

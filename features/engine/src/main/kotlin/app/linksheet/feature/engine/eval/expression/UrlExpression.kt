@@ -14,6 +14,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 
+sealed interface UrlOperationExpression
+
 @Keep
 @Serializable
 @SerialName(OpCodes.URL_GET_COMPONENT)
@@ -22,7 +24,7 @@ class UrlGetComponentExpression(
     val expression: Expression<@Contextual StdUrl>,
     @ProtoNumber(2)
     val component: Expression<Component>
-) : Expression<String> {
+) : Expression<String>, UrlOperationExpression {
     override fun eval(ctx: EvalContext): String {
         val url = expression.eval(ctx)
         return when (component.eval(ctx)) {
@@ -43,7 +45,7 @@ class UrlSetComponentExpression(
     val component: Expression<Component>,
     @ProtoNumber(3)
     val value: Expression<String>,
-) : Expression<StdUrl> {
+) : Expression<StdUrl>, UrlOperationExpression {
     override fun eval(ctx: EvalContext): StdUrl {
         val url = expression.eval(ctx)
         val component = component.eval(ctx)
@@ -72,7 +74,7 @@ class UrlQueryParamExpression(
     val op: Expression<@Contextual StdUrl>,
     @ProtoNumber(2)
     val key: Expression<String>
-) : Expression<String?> {
+) : Expression<String?>, UrlOperationExpression {
     override fun eval(ctx: EvalContext): String? {
         return op.eval(ctx).firstQueryParamOrNull(key.eval(ctx))
     }
@@ -84,7 +86,7 @@ class UrlQueryParamExpression(
 class UrlStringExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual StdUrl>,
-) : Expression<String> {
+) : Expression<String>, UrlOperationExpression {
     override fun eval(ctx: EvalContext): String {
         return expression.eval(ctx).toString()
     }
@@ -96,7 +98,7 @@ class UrlStringExpression(
 class UrlToAndroidUriExpression(
     @ProtoNumber(1)
     val expression: Expression<@Contextual StdUrl>,
-) : Expression<Uri> {
+) : Expression<Uri>, UrlOperationExpression {
     override fun eval(ctx: EvalContext): Uri {
         return expression.eval(ctx).toAndroidUri()
     }

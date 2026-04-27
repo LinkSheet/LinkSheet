@@ -574,4 +574,5 @@
     <string name="settings_follow_redirects__title_aggressive">Агресивен режим</string>
     <string name="settings_follow_redirects__subtitle_aggressive">Изтегляне на цялата страница с цел съвместимост със страници, не използващи пренасочвания по HTTP</string>
     <string name="handler_target__label_switch_profile_view_intent">Смяна на профила</string>
+    <string name="settings_remote_config__title">Отдалечена настройка</string>
 </resources>

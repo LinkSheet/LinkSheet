@@ -1,5 +1,6 @@
-package app.linksheet.feature.engine.ui
+package app.linksheet.feature.engine.ui.route
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -38,6 +39,7 @@ fun rememberNewScenarioDialog(onConfirm: (String) -> Unit): ResultDialogState<St
         NewScenarioDialog(
             onDismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
             onConfirm = { name ->
+                Log.d("NewScenarioDialog", name)
                 interaction.perform(FeedbackType.Confirm)
                 state.close(name)
             }

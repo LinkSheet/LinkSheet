@@ -21,16 +21,20 @@ interface ScenarioExpressionDao : BaseDao<ScenarioExpression> {
     """)
     fun getAllScenarioExpressions(): Flow<Map<Scenario, List<ExpressionRule>>>
 
-    @RewriteQueriesToDropUnusedColumns
-    @Query(
-        """
-        SELECT * 
-        FROM scenario s
-            JOIN scenario_expression se ON s.id = se.scenarioId
-            JOIN expression_rule e ON se.expressionId = e.id
-        WHERE s.id = :id
-        ORDER BY position ASC
-    """
-    )
-    fun getScenarioExpressions(id: Long): Flow<Map<Scenario, List<ExpressionRule>>>
+//    @RewriteQueriesToDropUnusedColumns
+//    @Query(
+//        """
+//        SELECT *
+//        FROM scenario s
+//            JOIN scenario_expression se ON s.id = se.scenarioId
+//            JOIN expression_rule e ON se.expressionId = e.id
+//        WHERE s.id = :id
+//        ORDER BY position ASC
+//    """)
+//    fun getScenarioExpressions(id: Long): Flow<ScenarioInfo?>
 }
+
+data class ScenarioInfo(
+    val scenario: Scenario,
+    val rules: List<ExpressionRule>
+)

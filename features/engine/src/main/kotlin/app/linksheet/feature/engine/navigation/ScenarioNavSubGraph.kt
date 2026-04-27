@@ -9,8 +9,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import app.linksheet.compose.util.animatedComposable
 import app.linksheet.feature.engine.R
-import app.linksheet.feature.engine.ui.ScenarioOverviewRoute
-import app.linksheet.feature.engine.ui.ScenarioRoute
+import app.linksheet.feature.engine.ui.route.ScenarioOverviewRoute
+import app.linksheet.feature.engine.ui.route.ScenarioRoute
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.route.NavSubGraph
@@ -19,6 +19,7 @@ import fe.composekit.route.RouteNavItemNew
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 
+@Keep
 @Serializable
 object ScenarioNavSubGraph : NavSubGraph<ScenarioOverviewRoute> {
     override val startDestination = ScenarioOverviewRoute

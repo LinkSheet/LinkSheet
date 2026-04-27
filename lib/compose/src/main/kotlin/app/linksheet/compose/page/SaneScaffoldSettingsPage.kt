@@ -1,5 +1,6 @@
 package app.linksheet.compose.page
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,6 +20,7 @@ fun SaneScaffoldSettingsPage(
     modifier: Modifier = Modifier,
     headline: String,
     onBackPressed: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {},
     enableBackButton: Boolean = true,
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
@@ -37,6 +39,7 @@ fun SaneScaffoldSettingsPage(
                 headline = headline,
                 enableBackButton = enableBackButton,
                 onBackPressed = onBackPressed,
+                actions = actions,
                 scrollBehavior = scrollBehavior
             )
         },

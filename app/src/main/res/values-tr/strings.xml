@@ -570,4 +570,5 @@
     <string name="settings_follow_redirects__title_aggressive">Agresif mod</string>
     <string name="settings_follow_redirects__subtitle_aggressive">HTTP yönlendirmelerini kullanmayan sitelerle daha iyi uyumluluk için tam içeriği yükle</string>
     <string name="handler_target__label_switch_profile_view_intent">Profil değiştir</string>
+    <string name="settings_remote_config__title">Uzak yapılandırma</string>
 </resources>

@@ -61,6 +61,12 @@ class NewDefaults20251215(private val preferenceRepository: AppPreferenceReposit
     }
 }
 
+object NewDefaults20260427 : AppStateUpdate {
+    override fun execute(experimentsRepository: ExperimentRepository) {
+        experimentsRepository.put(Experiments.newVlh, false)
+    }
+}
+
 private fun migrate(
     experimentsRepository: ExperimentRepository,
     preferenceRepository: AppPreferenceRepository,

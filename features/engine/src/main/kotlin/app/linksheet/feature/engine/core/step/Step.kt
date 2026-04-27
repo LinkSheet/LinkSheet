@@ -8,7 +8,8 @@ interface EngineStep<out R : StepResult> {
 
     val id: EngineStepId
 
-    suspend fun EngineRunContext.runStep(url: StdUrl): R?
+    context(context: EngineRunContext)
+    suspend fun runStep(url: StdUrl): R?
 }
 
 interface InPlaceStep

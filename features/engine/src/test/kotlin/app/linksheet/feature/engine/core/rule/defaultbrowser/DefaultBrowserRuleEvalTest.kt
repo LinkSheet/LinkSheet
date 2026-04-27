@@ -24,7 +24,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
@@ -32,15 +31,16 @@ internal class DefaultBrowserRuleEvalTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
     class ExpressionPostprocessorRule(val expression: Expression<*>) : PostProcessorRule {
-        override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
+        context(context: EngineRunContext)
+        override suspend fun checkRule(input: PostProcessorInput): EngineResult? {
             val ctx = EvalContextImpl(
-                KnownTokens.EngineRunContext.toInput(this),
+                KnownTokens.EngineRunContext.toInput(context),
                 KnownTokens.ResultUrl.toInput(input.resultUrl)
             )
 
             val result = expression.eval(ctx)
             if (result is EngineResult) return result
-            return empty()
+            return context.empty()
         }
     }
     private val expression by lazy {

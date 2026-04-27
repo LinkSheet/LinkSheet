@@ -1,9 +1,20 @@
 package fe.linksheet.composable.page.settings
 
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
+import androidx.compose.material.icons.outlined.Apps
+import androidx.compose.material.icons.outlined.BugReport
+import androidx.compose.material.icons.outlined.DeveloperMode
+import androidx.compose.material.icons.outlined.DomainVerification
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Language
+import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.PrivacyTip
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.SwipeUp
+import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -11,6 +22,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.feature.engine.navigation.ScenarioOverviewRoute
 import app.linksheet.feature.shizuku.navigation.ShizukuRoute
 import fe.android.compose.icon.iconPainter
@@ -28,7 +40,19 @@ import fe.linksheet.R
 import fe.linksheet.composable.page.settings.language.rememberLanguageDialog
 import fe.linksheet.module.language.LocaleItem
 import fe.linksheet.module.viewmodel.SettingsViewModel
-import fe.linksheet.navigation.*
+import fe.linksheet.navigation.AdvancedRoute
+import fe.linksheet.navigation.AppsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.navigation.DebugRoute
+import fe.linksheet.navigation.LanguageRoute
+import fe.linksheet.navigation.aboutSettingsRoute
+import fe.linksheet.navigation.bottomSheetSettingsRoute
+import fe.linksheet.navigation.browserSettingsRoute
+import fe.linksheet.navigation.devModeRoute
+import fe.linksheet.navigation.generalSettingsRoute
+import fe.linksheet.navigation.linksSettingsRoute
+import fe.linksheet.navigation.notificationSettingsRoute
+import fe.linksheet.navigation.privacySettingsRoute
+import fe.linksheet.navigation.themeSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 
 internal object SettingsRouteData {
@@ -162,7 +186,7 @@ fun SettingsRoute(
 ) {
     val devMode by viewModel.devModeEnabled.collectAsStateWithLifecycle()
     val newShizuku by viewModel.newShizuku.collectAsStateWithLifecycle()
-    val scenario by viewModel.scenario.collectAsStateWithLifecycle()
+    val scenario by viewModel.scenario.collectAsStateWithLifecycle(minActiveState = Lifecycle.State.RESUMED)
     val vlh = remember(newShizuku, scenario) {
         SettingsRouteData.section1(newShizuku, scenario)
     }

@@ -3,6 +3,7 @@
 package fe.linksheet.module.preference.state
 
 import androidx.lifecycle.LifecycleOwner
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
 import fe.linksheet.extension.kotlin.nowMillis
@@ -12,7 +13,6 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import org.koin.dsl.module
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -42,6 +42,7 @@ internal class AppStateService(
         AppStatePreferences.newDefaults.`2025-07-29` to NewDefaults20250729(preferenceRepository),
         AppStatePreferences.newDefaults.`2025-08-03` to NewDefaults20250803,
         AppStatePreferences.newDefaults.`2025-12-15` to NewDefaults20251215(preferenceRepository),
+        AppStatePreferences.newDefaults.`2026-04-27` to NewDefaults20260427,
     )
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {

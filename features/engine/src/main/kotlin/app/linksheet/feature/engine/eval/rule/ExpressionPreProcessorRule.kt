@@ -10,14 +10,15 @@ import app.linksheet.feature.engine.eval.expression.Expression
 import app.linksheet.feature.engine.eval.expression.toInput
 
 class ExpressionPreProcessorRule(val expression: Expression<*>) : PreProcessorRule {
-    override suspend fun EngineRunContext.checkRule(input: PreProcessorInput): EngineResult? {
+    context(context: EngineRunContext)
+    override suspend fun checkRule(input: PreProcessorInput): EngineResult? {
         val ctx = EvalContextImpl(
-            KnownTokens.EngineRunContext.toInput(this),
+            KnownTokens.EngineRunContext.toInput(context),
             KnownTokens.OriginalUrl.toInput(input.url)
         )
 
         val result = expression.eval(ctx)
         if (result is EngineResult) return result
-        return empty()
+        return context.empty()
     }
 }

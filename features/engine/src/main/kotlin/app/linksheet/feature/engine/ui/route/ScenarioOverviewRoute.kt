@@ -1,23 +1,55 @@
 @file:OptIn(ExperimentalUuidApi::class, ExperimentalMaterial3Api::class)
 
-package app.linksheet.feature.engine.ui
+package app.linksheet.feature.engine.ui.route
 
 import android.content.res.Resources
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.DragHandle
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.rounded.SelectAll
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
@@ -31,7 +63,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.linksheet.compose.extension.collectOnIO
 import app.linksheet.compose.extension.listIndexedHelper
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.util.ListState
 import app.linksheet.feature.engine.R
 import app.linksheet.feature.engine.database.entity.Scenario
@@ -44,6 +75,7 @@ import fe.android.compose.text.DefaultContent.Companion.text
 import fe.composekit.component.CommonDefaults
 import fe.composekit.component.PreviewThemeNew
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
+import fe.composekit.component.page.SaneScaffoldSettingsPageInternal
 import fe.composekit.component.shape.CustomShapeDefaults
 import fe.composekit.route.Route
 import org.koin.androidx.compose.koinViewModel
@@ -95,7 +127,8 @@ private fun ScenarioOverviewRouteInternal(
         ListState.Items
     }
 
-    var selectedIdx by remember { mutableIntStateOf(-1) }
+    var selectedItems by rememberSaveable { mutableStateOf(setOf<Int>()) }
+    val hasSelection = rememberSaveable(selectedItems) { selectedItems.isNotEmpty() }
     var pinnedCount by remember {
         mutableIntStateOf(0)
     }
@@ -111,10 +144,45 @@ private fun ScenarioOverviewRouteInternal(
     val resources = LocalResources.current
 
     val newScenarioDialog = rememberNewScenarioDialog(onCreate)
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        rememberTopAppBarState(),
+        canScroll = { true }
+    )
 
-    SaneScaffoldSettingsPage(
-        headline = stringResource(id = R.string.settings_scenario__title_scenarios),
-        onBackPressed = onBackPressed,
+
+    SaneScaffoldSettingsPageInternal(
+//        headline = stringResource(id = R.string.settings_scenario__title_scenarios),
+//        onBackPressed = onBackPressed,
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = if (hasSelection) {
+                            stringResource(id = CommonR.string.generic__n_selected, selectedItems.size)
+                        } else {
+                            stringResource(id = R.string.settings_scenario__title_scenarios)
+                        }
+                    )
+                },
+                actions = {
+                    if (hasSelection) {
+                        IconButton(onClick = {}) {
+                            Icon(
+                                imageVector = Icons.Rounded.SelectAll,
+                                contentDescription = null
+                            )
+                        }
+                        IconButton(onClick = {}) {
+                            Icon(
+                                imageVector = Icons.Rounded.Delete,
+                                contentDescription = null
+                            )
+                        }
+                    }
+                },
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
@@ -144,6 +212,7 @@ private fun ScenarioOverviewRouteInternal(
                 key = item.hashCode(),
                 enabled = !isPinned
             ) {
+                val isSelected = index in selectedItems
                 ScenarioListItem(
                     scenario = item,
                     shape = shape,
@@ -156,11 +225,16 @@ private fun ScenarioOverviewRouteInternal(
                             if (index < localScenarios.size - 1) move(item, localScenarios[index + 1]) else false
                         },
                     ),
-                    isSelected = selectedIdx == index,
+                    isSelected = isSelected,
                     onClick = { navigateScenario(item) },
                     onLongClick = {
-                        Log.d("OnLongClick", "onLongClick $selectedIdx $index")
-                        selectedIdx = if (selectedIdx == index) -1 else index
+                        if(isSelected) {
+                            selectedItems -= index
+                        } else {
+                            selectedItems += index
+                        }
+//                        Log.d("OnLongClick", "onLongClick $selectedIdx $index")
+//                        selectedIdx = if (selectedIdx == index) -1 else index
                     },
                     onRemoveRequested = {
 //                        selectedIdx = -1
@@ -172,7 +246,7 @@ private fun ScenarioOverviewRouteInternal(
                     },
                     isPinned = isPinned,
                     onPinRequested = {
-                        selectedIdx = -1
+//                        selectedIdx = -1
 //                        if (isPinned) {
 //                            list.add(--pinnedCount, list.removeAt(index))
 //                        } else {
@@ -258,8 +332,7 @@ private fun ReorderableCollectionItemScope.ScenarioListItem(
                             Icon(
                                 modifier = Modifier.size(24.dp),
                                 imageVector = ImageVector.vectorResource(
-                                    id = if (isPinned)
-                                        R.drawable.keep_filled_24px else R.drawable.keep_24px
+                                    id = if (isPinned) R.drawable.keep_filled_24px else R.drawable.keep_24px
                                 ),
                                 contentDescription = null
                             )
@@ -333,5 +406,29 @@ private fun ScenarioRoutePreview() {
             onBackPressed = {},
             move = { from, to -> false }
         )
+    }
+}
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Preview
+@Composable
+fun Test() {
+    Column(Modifier.selectableGroup()) {
+        HorizontalDivider()
+
+        var selectedIndex: Int? by rememberSaveable { mutableStateOf(null) }
+        repeat(3) { idx ->
+            val selected = selectedIndex == idx
+            ListItem(
+                selected = selected,
+                onClick = { selectedIndex = if (selected) null else idx },
+                leadingContent = { RadioButton(selected = selected, onClick = null) },
+                trailingContent = { Icon(Icons.Default.Favorite, contentDescription = null) },
+                supportingContent = { Text("Additional info") },
+                content = { Text("Item ${idx + 1}") },
+            )
+
+            HorizontalDivider()
+        }
     }
 }

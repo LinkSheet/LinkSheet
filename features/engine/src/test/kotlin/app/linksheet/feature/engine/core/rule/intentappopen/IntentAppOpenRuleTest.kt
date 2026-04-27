@@ -4,12 +4,12 @@ import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.composekit.intent.buildIntent
 import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.core.IntentEngineResult
 import app.linksheet.feature.engine.core.context.EngineRunContext
 import app.linksheet.feature.engine.core.rule.PostProcessorInput
 import app.linksheet.feature.engine.core.rule.PostProcessorRule
+import fe.composekit.intent.buildIntent
 import fe.linksheet.extension.toAndroidUri
 import fe.linksheet.testlib.core.BaseUnitTest
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -27,7 +27,8 @@ internal class IntentAppOpenRuleTest : BaseUnitTest {
         private val regex = """https?://.*\.(mp3|wav|flac|m4a|aac|oog|mp4)(/.*|\?.*)?$""".toRegex()
         private val cmp = ComponentName("com.dv.adm", "com.dv.adm.AEditor")
 
-        override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
+        context(context: EngineRunContext)
+        override suspend fun checkRule(input: PostProcessorInput): EngineResult? {
             val match = regex.matchEntire(input.resultUrl.toString()) ?: return null
 
             val uri = input.resultUrl.toAndroidUri()

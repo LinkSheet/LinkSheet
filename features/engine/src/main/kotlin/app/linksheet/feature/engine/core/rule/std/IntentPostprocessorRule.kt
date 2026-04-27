@@ -14,9 +14,11 @@ class IntentPostprocessorRule(
     private val matcher: UrlMatcher,
     private val definition: IntentRuleDefinition,
 ) : PostProcessorRule {
-    override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
+
+    context(context: EngineRunContext)
+    override suspend fun checkRule(input: PostProcessorInput): EngineResult? {
         return when {
-            !matcher.matches(input.resultUrl) -> empty()
+            !matcher.matches(input.resultUrl) -> context.empty()
             else -> IntentEngineResult(
                 intent = buildIntent(definition.action, input.resultUrl.toAndroidUri()) {
                     if (definition.cls != null) component = ComponentName(definition.packageName, definition.cls)

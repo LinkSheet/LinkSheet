@@ -21,6 +21,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 import kotlin.reflect.KClass
 
+sealed interface EngineRunContextExpression
+
 @Keep
 @Serializable
 @SerialName(OpCodes.HAS_EXTRA)
@@ -29,7 +31,7 @@ class HasExtraExpression(
     val op: Expression<EngineRunContext>,
     @ProtoNumber(2)
     val extra: Expression<Extra>
-) : Expression<Boolean> {
+) : Expression<Boolean>, EngineRunContextExpression {
     override fun eval(ctx: EvalContext): Boolean {
         return op.eval(ctx).hasExtra(extra.eval(ctx).toEngineExtra())
     }
@@ -41,7 +43,7 @@ class HasExtraExpression(
 class GetSourceAppExtraExpression(
     @ProtoNumber(1)
     val expression: Expression<EngineRunContext>
-) : Expression<String?> {
+) : Expression<String?>, EngineRunContextExpression {
     override fun eval(ctx: EvalContext): String? {
         return expression.eval(ctx).findExtraOrNull<SourceAppExtra>()?.appPackage
     }
@@ -55,7 +57,7 @@ class AddFlagExpression(
     val expression: Expression<EngineRunContext>,
     @ProtoNumber(2)
     val flag: Expression<EngineFlag>
-) : Expression<Boolean> {
+) : Expression<Boolean>, EngineRunContextExpression {
     override fun eval(ctx: EvalContext): Boolean {
         return expression.eval(ctx).flags.add(flag.eval(ctx))
     }
@@ -71,7 +73,7 @@ class PutAppRoleExpression(
     val id: Expression<AppRoleId>,
     @ProtoNumber(3)
     val packageName: Expression<String>
-) : Expression<Boolean> {
+) : Expression<Boolean>, EngineRunContextExpression {
     override fun eval(ctx: EvalContext): Boolean {
         val appPackage = AndroidAppPackage(packageName.eval(ctx))
         return expression.eval(ctx).put(id.eval(ctx), appPackage)

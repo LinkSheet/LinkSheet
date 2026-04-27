@@ -13,7 +13,6 @@ import app.linksheet.feature.engine.eval.BundleSerializer
 import app.linksheet.feature.engine.eval.ExpressionBundle
 import app.linksheet.feature.engine.eval.ExpressionStringifier
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlin.uuid.ExperimentalUuidApi
 
 class ScenarioRepository internal constructor(
@@ -50,11 +49,9 @@ class ScenarioRepository internal constructor(
         return true
     }
 
-    fun getScenarioExpressionsById(id: Long): Flow<Pair<Scenario, List<ExpressionRule>>?> {
-        return scenarioExpressionDao.getScenarioExpressions(id).map {
-            it.entries.firstOrNull()?.let {  entry -> entry.key to entry.value }
-        }
-    }
+//    fun getScenarioExpressionsById(id: Long): Flow<ScenarioInfo?> {
+//        return scenarioExpressionDao.getScenarioExpressions(id)
+//    }
 
     fun getById(id: Long): Flow<Scenario> {
         return scenarioDao.getById(id)

@@ -10,13 +10,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 
+sealed interface RegexOperationExpression
+
 @Keep
 @Serializable
 @SerialName(OpCodes.REGEX)
 class RegexExpression(
     @ProtoNumber(1)
     val expression: Expression<String>
-) : Expression<Regex> {
+) : Expression<Regex>, RegexOperationExpression {
     override fun eval(ctx: EvalContext): Regex {
         return Regex(expression.eval(ctx))
     }
@@ -30,7 +32,7 @@ class RegexMatchEntireExpression(
     val regex: Expression<@Contextual Regex>,
     @ProtoNumber(2)
     val string: Expression<String>
-) : Expression<Boolean> {
+) : Expression<Boolean>, RegexOperationExpression {
     override fun eval(ctx: EvalContext): Boolean {
         return regex.eval(ctx).matchEntire(string.eval(ctx)) != null
     }

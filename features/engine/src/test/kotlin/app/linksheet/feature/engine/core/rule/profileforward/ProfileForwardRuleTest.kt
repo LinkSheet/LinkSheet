@@ -12,7 +12,6 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 
 @RunWith(AndroidJUnit4::class)
@@ -22,7 +21,8 @@ internal class ProfileForwardRuleTest : BaseUnitTest  {
 
     private val rule = object : PreProcessorRule {
         private val workRelatedHost = "sso.mycompany.com"
-        override suspend fun EngineRunContext.checkRule(input: PreProcessorInput): EngineResult? {
+        context(context: EngineRunContext)
+        override suspend fun checkRule(input: PreProcessorInput): EngineResult? {
             if (input.url.host == workRelatedHost) {
                 return ForwardOtherProfileResult(input.url)
             }

@@ -27,8 +27,9 @@ class LibRedirectLinkModifier(
         resolver.warmup()
     }
 
-    override suspend fun EngineRunContext.runStep(url: StdUrl): LibRedirectModifyOutput = withContext(ioDispatcher) {
-        if (hasExtra<IgnoreLibRedirectExtra>()) {
+    context(context: EngineRunContext)
+    override suspend fun runStep(url: StdUrl): LibRedirectModifyOutput = withContext(ioDispatcher) {
+        if (context.hasExtra<IgnoreLibRedirectExtra>()) {
             return@withContext LibRedirectModifyOutput.Ignored(url)
         }
 
@@ -36,7 +37,7 @@ class LibRedirectLinkModifier(
         val result = resolver.resolve(url.toString(), jsEngine)
         val output = result.toModifyOutput(url)
         val contextResult = result.wrapInContextResult()
-        put(ContextResultId.LibRedirect, contextResult)
+        context.put(ContextResultId.LibRedirect, contextResult)
 
         output
     }

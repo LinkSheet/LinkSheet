@@ -48,6 +48,7 @@ object Experiments : PreferenceDefinition(
 
     val newVlh = boolean(
         key = "experiment_new_vlh",
+        default = false
     )
 
     val newShizuku = boolean(
@@ -79,11 +80,12 @@ object Experiments : PreferenceDefinition(
             displayName = "Link engine",
             experiment("Use LinkEngine", linkEngine)
         ),
-        group(
-            name = "new_vlh",
-            displayName = "New verified link handlers page",
-            experiment("Enable new VLH page", newVlh)
-        ),
+        // TODO: New VLH page is still broken
+//        group(
+//            name = "new_vlh",
+//            displayName = "New verified link handlers page",
+//            experiment("Enable new VLH page", newVlh)
+//        ),
         group(
             name = "libredirect",
             displayName = "LibRedirect",

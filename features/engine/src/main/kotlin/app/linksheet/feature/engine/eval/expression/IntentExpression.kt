@@ -14,6 +14,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 
+sealed interface IntentExpression
+
 @Keep
 @Serializable
 @SerialName(OpCodes.COMPONENT_NAME)
@@ -22,7 +24,7 @@ class ComponentNameExpression(
     val pkg: Expression<String>,
     @ProtoNumber(2)
     val cls: Expression<String>
-) : Expression<ComponentName> {
+) : Expression<ComponentName>, IntentExpression {
     override fun eval(ctx: EvalContext): ComponentName {
         return ComponentName(pkg.eval(ctx), cls.eval(ctx))
     }
@@ -38,7 +40,7 @@ class IntentComponentNameExpression(
     val data: Expression<@Contextual Uri>,
     @ProtoNumber(3)
     val componentName: Expression<@Contextual ComponentName>
-) : Expression<Intent> {
+) : Expression<Intent>, IntentExpression {
     override fun eval(ctx: EvalContext): Intent {
         return buildIntent(action.eval(ctx), data.eval(ctx), componentName.eval(ctx))
     }
@@ -54,7 +56,7 @@ class IntentPackageExpression(
     val data: Expression<@Contextual Uri>,
     @ProtoNumber(3)
     val packageName: Expression<String>
-) : Expression<Intent> {
+) : Expression<Intent>, IntentExpression {
     override fun eval(ctx: EvalContext): Intent {
         return buildIntent(action.eval(ctx), data.eval(ctx)) {
             `package` = packageName.eval(ctx)

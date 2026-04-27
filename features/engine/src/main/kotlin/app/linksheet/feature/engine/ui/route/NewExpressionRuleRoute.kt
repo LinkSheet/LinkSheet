@@ -1,21 +1,31 @@
-@file:OptIn(ExperimentalUuidApi::class)
-
-package app.linksheet.feature.engine.ui
+package app.linksheet.feature.engine.ui.route
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import app.linksheet.compose.extension.collectOnIO
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import app.linksheet.feature.engine.R
 import app.linksheet.feature.engine.database.entity.ExpressionRule
 import app.linksheet.feature.engine.database.entity.ExpressionRuleType
 import app.linksheet.feature.engine.database.entity.Scenario
@@ -27,25 +37,24 @@ import fe.android.compose.text.DefaultContent.Companion.text
 import fe.composekit.component.PreviewThemeNew
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.list.item.ContentPosition
-import fe.composekit.layout.column.group
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
-import kotlin.uuid.ExperimentalUuidApi
+import app.linksheet.compose.R as CommonR
 
 @Composable
-fun ScenarioRoute(
+fun NewExpressionRule(
     id: Long,
     onBackPressed: () -> Unit,
     viewModel: ScenarioViewModel = koinViewModel(
         parameters = { parametersOf(id) }
     ),
 ) {
-//    val scenario by viewModel.getScenario().collectOnIO(null)
-    val scenario by viewModel.getScenarioExpressions().collectOnIO(null)
-    scenario?.let { (scenario, rules) ->
-        ScenarioRouteInternal(
-            scenario = scenario,
-            rules = rules,
+    val scenario by viewModel.getScenario().collectOnIO(null)
+//    val scenarioInfo by viewModel.getScenarioExpressions().collectOnIO(null)
+    scenario?.let {
+        NewExpressionRuleInternal(
+            scenario = it,
+            rules = emptyList(),
             onBackPressed = onBackPressed,
             toString = viewModel::toString,
             onSave = { rule ->
@@ -56,7 +65,7 @@ fun ScenarioRoute(
 }
 
 @Composable
-private fun ScenarioRouteInternal(
+private fun NewExpressionRuleInternal(
     scenario: Scenario,
     rules: List<ExpressionRule>,
     toString: (ExpressionRule) -> String,
@@ -68,12 +77,27 @@ private fun ScenarioRouteInternal(
         headline = scenario.name,
 //        headline = stringResource(id = R.string.settings_scenarios__title_scenarios),
         onBackPressed = onBackPressed,
+        floatingActionButton = {
+            FloatingActionButton(
+                modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
+                onClick = {
+
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Save,
+                    contentDescription = stringResource(id = CommonR.string.generic__button_text_save)
+                )
+            }
+        },
         state = lazyListState
     ) {
-        divider(id = R.string.settings_scenario__divider_rules)
-
-        group(list = rules, key = { it.id }) { data, padding, shape ->
-            ExpressionRuleListItem(data = data, padding = padding, shape = shape, toString = toString)
+        item {
+            OutlinedTextField(
+                state = rememberTextFieldState(),
+                lineLimits = TextFieldLineLimits.SingleLine,
+                label = { Text("Label") },
+            )
         }
 
 //        item(key = 1, contentType = ContentType.SingleGroupItem) {
@@ -127,9 +151,9 @@ private fun ExpressionRuleListItemPreview(
 
 @Preview
 @Composable
-private fun ScenarioRoutePreview() {
+private fun NewExpressionRulePreview() {
     PreviewThemeNew {
-        ScenarioRouteInternal(
+        NewExpressionRuleInternal(
             scenario = Scenario(
                 name = "Default scenario",
                 position = 1,

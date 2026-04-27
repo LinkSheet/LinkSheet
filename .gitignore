@@ -9,3 +9,4 @@ app/*.txt
 /.idea2/
 mise.local.toml
 fnox.local.toml
+/mise-tasks/

@@ -32,13 +32,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":util"))
-    implementation(project(":api"))
-    implementation(project(":compose"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-compose"))
     implementation(project(":test-core"))
-    implementation(project(":log"))
-    compileOnly(project(":hidden-api"))
+    implementation(project(":lib-log"))
+    compileOnly(project(":lib-hidden-api"))
     implementation(AndroidX.room.common)
     implementation(AndroidX.room.runtime)
     implementation(AndroidX.room.ktx)

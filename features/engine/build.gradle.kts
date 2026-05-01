@@ -34,11 +34,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":util"))
-    implementation(project(":api"))
-    implementation(project(":log"))
-    implementation(project(":compose"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-log"))
+    implementation(project(":lib-compose"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
     implementation(project(":feature-downloader"))

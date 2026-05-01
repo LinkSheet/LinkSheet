@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":util"))
+    implementation(project(":lib-util"))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
 

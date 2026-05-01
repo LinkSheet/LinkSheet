@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    api(project(":api"))
+    api(project(":lib-api"))
     api(AndroidX.test.runner)
     api(AndroidX.test.coreKtx)
     api(Testing.junit.jupiter.api)

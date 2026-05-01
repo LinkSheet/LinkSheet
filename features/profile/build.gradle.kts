@@ -25,10 +25,10 @@ android {
 
 dependencies {
     implementation(project(":feature-app"))
-    implementation(project(":api"))
-    implementation(project(":common"))
-    implementation(project(":compose"))
-    implementation(project(":util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-compose"))
+    implementation(project(":lib-util"))
 
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)

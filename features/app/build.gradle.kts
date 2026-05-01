@@ -29,11 +29,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":compose"))
-    implementation(project(":util"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-compose"))
+    implementation(project(":lib-util"))
     implementation(project(":test-fake"))
-    compileOnly(project(":hidden-api"))
+    compileOnly(project(":lib-hidden-api"))
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.foundation)

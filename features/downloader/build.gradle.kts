@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":util"))
-    implementation(project(":api"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-api"))
     implementation(project(":integration-mime-types"))
 
     implementation(Grrfe.std.core)

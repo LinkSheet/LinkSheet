@@ -31,10 +31,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":util"))
-    implementation(project(":common"))
-    implementation(project(":compose"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-compose"))
     implementation(project(":feature-app"))
 
     implementation(AndroidX.room.runtime)

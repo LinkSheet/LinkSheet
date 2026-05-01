@@ -24,11 +24,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":util"))
-    implementation(project(":common"))
-    implementation(project(":compose"))
-    compileOnly(project(":hidden-api"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-compose"))
+    compileOnly(project(":lib-hidden-api"))
     implementation(AndroidX.lifecycle.viewModelKtx)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)

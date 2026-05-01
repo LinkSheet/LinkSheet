@@ -24,9 +24,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":common"))
-    implementation(project(":util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-util"))
     implementation(project(":feature-systeminfo"))
 
     implementation(AndroidX.core.ktx)

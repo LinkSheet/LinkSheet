@@ -192,4 +192,89 @@
     <string name="donate_card_headline">Faça uma doação para apoiar o LinkSheet</string>
     <string name="import_dumped_preference">Importar preferências despejadas</string>
     <string name="compat_installed">LinkSheetCompat já está instalado</string>
+    <string name="browser_mode_divider">Modo</string>
+    <string name="mastodon_redirect_subtitle_2">Código fonte do Mastodon Redirect foi usado como referência para interação com Shizuku</string>
+    <string name="version_name"><b>Versão:</b> <font face="monospace">%s</font></string>
+    <string name="built_at"><b>Construído em:</b> <font face="monospace">%s</font></string>
+    <string name="thanks_for_donating">Obrigado pela doação!</string>
+    <string name="discord">Discord</string>
+    <string name="discord_explainer">Fale sobre LinkSheet no Discord</string>
+    <string name="dismiss">Dispensar</string>
+    <string name="join">Juntar-se</string>
+    <string name="github_workflow_run_id"><b>ID do Workflow:</b> <font face="monospace">%s</font></string>
+    <string name="flavor"><b>Título:</b> <font face="monospace">%s</font></string>
+    <string name="show_linksheet_referrer">Mostrar referenciador do LinkSheet</string>
+    <string name="show_linksheet_referrer_explainer">Quando um app é aberto, ele pode verificar qual app o abriu, ou o referenciou. Por padrão, o LinkSheet se esconde para que o app de destino pense que foi aberto pelo app original. Habilite isso para reinserir o LinkSheet como o referenciador para os app que ele abrir.</string>
+    <string name="privacy_settings_explainer">Privacidade de referenciador, Telemetria</string>
+    <string name="donate_crypto">Doar via cripto</string>
+    <string name="donate_card">Doar com cartão (via BuyMeACoffee)</string>
+    <string name="donate_explainer_crypto">Quando doar com cripto, mande um email para <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
+    <string name="donate_learn_more">Saiba mais</string>
+    <string name="donate">Doar</string>
+    <string name="built_by_error">Essa build não foi assinada por 1fexd nem pelo workflow do Github.</string>
+    <string name="linksheet_donation_explainer_2">Uma doação de mais de <b>5€</b> permite acesso ao <b>LinkSheet Pro</b>, que inclui <b>recursos Pro exclusivos</b> como: seguir redirecionamentos externamente, obter páginas não-AMP externamente e mais por vir!</string>
+    <string name="manual_build">Manualmente construído e assinado por 1fexd</string>
+    <string name="github_pipeline_build">Construído e assinado por CI</string>
+    <string name="app_setup">Configuração do app</string>
+    <string name="other">Outros</string>
+    <string name="export_import_settings">Exportar ou importar configurações</string>
+    <string name="export_import_settings_explainer">Exportar suas configurações atuais ou importar uma configuração anterior</string>
+    <string name="export_explainer">Exportar suas configurações atuais para um arquivo</string>
+    <string name="import_headline">Importar</string>
+    <string name="import_explainer">Importar uma configuração anterior de um arquivo</string>
+    <string name="export_settings">Exportar configurações</string>
+    <string name="include_log_hash_key">Incluir chave hash do log (chave usada para ocultar seus logs)</string>
+    <string name="include_history">Incluir histórico (seus cliques em links e histórico de apps)</string>
+    <string name="export_include_recommendation">Nós recomendamos que você habilite as seguintes configurações somente se você planeja compartilhar sua exportação com alguém!</string>
+    <string name="export_privacy">Para saber mais sobre a privacidade da exportação, visite <annotation url-id="privacy-exports">link</annotation>.</string>
+    <string name="export_to_file">Exportar para arquivo</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Importar configurações</string>
+    <string name="import_settings_override_preferences">Isso vai sobrescrever todas configurações existentes. Continuar?</string>
+    <string name="confirm_import">Confirmar</string>
+    <string name="clear_urls_version">Regras ClearURLs</string>
+    <string name="dev_mode_enabled">Parabéns, você habilitou o modo Dev. Tome cuidado.</string>
+    <string name="fastforward_version">Regras FastForward</string>
+    <string name="running_unofficial_build">Build não-oficial</string>
+    <string name="debug_build">Build de debug</string>
+    <string name="dev">Desenvolvedor</string>
+    <string name="dev_explainer">Configurações de desenvolvedor</string>
+    <string name="notifications">Notificações</string>
+    <string name="notifications_explainer">URL copiada, Download iniciado</string>
+    <string name="url_copied_toast">URL copiada</string>
+    <string name="url_copied_toast_explainer">Mostrar uma notificação flutuante quando a URL for copiada pelo usuário</string>
+    <string name="download_started_toast">Download iniciado</string>
+    <string name="download_started_toast_explainer">Mostrar uma notificação flutuante quando um download iniciar</string>
+    <string name="opening_with_app_toast">App aberto automaticamente</string>
+    <string name="opening_with_app_toast_explainer">Mostrar uma notificação flutuante quando um app que for o padrão para um domínio for aberto</string>
+    <string name="resolve_via_toast">Resolução com sucesso</string>
+    <string name="resolve_via_toast_explainer">Mostrar uma notificação flutuante quando um URL é resolvido por um serviço externo</string>
+    <string name="resolve_via_failed_toast">Resolução falhou</string>
+    <string name="resolve_via_failed_toast_explainer">Mostrar uma notificação flutuante quando um URL falha ao ser resolvido por um serviço externo</string>
+    <string name="last_updated"><b>Versão:</b> <font face="monospace">%s</font></string>
+    <string name="libredirect_version">LibRedirect</string>
+    <string name="enable_linksheet_compat">Habilitar o menu experimental LinkSheet Compat</string>
+    <string name="enable_linksheet_compat_explainer">O menu pode ser achado no sub-menu \"Apps\" e quando instalado, é possível interceptar pedidos a certos apps nativos.</string>
+    <string name="shizuku_manager_start_failed">Falha ao iniciar Shizuku Manager, por favor inicie-o manualmente!</string>
+    <string name="include_throwable">Incluir logs de crash (recomendável, mas não podem ser ocultados)</string>
+    <string name="no_internet_connection">Sem conexão com internet</string>
+    <string name="amp2html_short">Amp2Html</string>
+    <string name="follow_redirects_short">Redirecionamentos</string>
+    <string name="online_services">Serviços online</string>
+    <string name="unknown_host">%s está bloqueado ou não existe</string>
+    <string name="onboarding_0_title">Bem vindo ao\nLinkSheet</string>
+    <string name="onboarding_0_subtitle">Escolha sempre ser perguntado ao abrir links, configure navegadores padrão e muito mais</string>
+    <string name="start_setup">Continuar</string>
+    <string name="start_setup_explainer">A funcionalidade do LinkSheet requer configurações personalizadas do Android. A seguir você será guiado pelos passos do processo de configuração.</string>
+    <string name="onboarding_setup">Configurar LinkSheet</string>
+    <string name="launch_onboarding_new">Abrir nova configuração inicial</string>
+    <string name="launch_onboarding__now_explainer">Testar a nova configuração inicial</string>
+    <string name="onboarding_1_title">Definir LinkSheet como navegador padrão</string>
+    <string name="onboarding_1_subtitle">LinkSheet deve ser definido como navegador padrão para gerenciar links clicados</string>
+    <string name="onboarding_1_card_title">Navegador padrão</string>
+    <string name="onboarding_1_button">Definir como navegador padrão</string>
+    <string name="onboarding_1_card_explainer">LinkSheet não funciona sem ser o navegador padrão.</string>
+    <string name="onboarding_2_title">Você quer usar Shizuku?</string>
+    <string name="onboarding_2_subtitle">Se você tem muitos apps instalados, Shizuku pode melhor sua experiência significativamente</string>
+    <string name="onboarding_2_card_explainer">Shizuku permite que o LinkSheet desabilite o gerenciamento de links padrão de todos apps ao mesmo tempo, ao invés de ter que desabilitar manualmente para cada app (que é o próximo passo).</string>
 </resources>

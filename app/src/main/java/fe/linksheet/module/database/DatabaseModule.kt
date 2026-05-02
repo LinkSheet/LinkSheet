@@ -1,14 +1,15 @@
 package fe.linksheet.module.database
 
 import android.content.Context
-import androidx.room.AutoMigration
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
+import androidx.room3.AutoMigration
+import androidx.room3.Database
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
+import androidx.room3.migration.Migration
 import app.linksheet.api.database.CrossDatabaseMigration
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.libredirect.database.LibRedirectDatabase
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
 import fe.linksheet.module.database.dao.PreferredAppDao
@@ -23,8 +24,12 @@ import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
-import fe.linksheet.module.database.migrations.*
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.linksheet.module.database.migrations.Migration12to17
+import fe.linksheet.module.database.migrations.Migration18to19
+import fe.linksheet.module.database.migrations.Migration19to20
+import fe.linksheet.module.database.migrations.Migration1to2
+import fe.linksheet.module.database.migrations.Migration20to21
+import fe.linksheet.module.database.migrations.Migration21to23
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
@@ -93,7 +98,7 @@ abstract class LinkSheetDatabase : RoomDatabase() {
             migrator: CrossDatabaseMigration
         ): LinkSheetDatabase {
             val migration = Migration21to23(logger, migrator).create()
-            return addMigrations(*buildMigrations(logger)).addMigrations(*migration).build()
+            return addMigrations(*buildMigrations(logger)).addMigrations(*migration.toTypedArray()).build()
         }
 
         fun create(

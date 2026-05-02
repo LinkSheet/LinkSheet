@@ -1,11 +1,13 @@
 package fe.linksheet.module.database.migrations
 
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room3.migration.Migration
+import androidx.sqlite.SQLiteConnection
+import androidx.sqlite.execSQL
+import app.linksheet.api.database.query
 
 object Migration18to19 : Migration(18, 19) {
 
-    override fun migrate(db: SupportSQLiteDatabase) = db.run {
+    override suspend fun migrate(connection: SQLiteConnection) = connection.run {
         execSQL("CREATE TABLE IF NOT EXISTS `html_cache` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
         execSQL("CREATE TABLE IF NOT EXISTS `preview_cache` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `faviconUrl` TEXT, `thumbnailUrl` TEXT, `resultId` INTEGER NOT NULL, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
         execSQL("CREATE TABLE IF NOT EXISTS `resolved_url` (`urlId` INTEGER NOT NULL, `typeId` INTEGER NOT NULL, `result` TEXT, PRIMARY KEY(`urlId`, `typeId`), FOREIGN KEY(`urlId`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`typeId`) REFERENCES `resolve_type`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")

@@ -1,8 +1,8 @@
 package fe.linksheet.module.database.entity.resolver
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
+import androidx.room3.ColumnInfo
+import androidx.room3.Entity
+import androidx.room3.Ignore
 
 @Entity(
     tableName = "amp2html_mapping",

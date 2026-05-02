@@ -1,7 +1,7 @@
 package fe.linksheet.module.database.entity
 
 import android.content.ComponentName
-import androidx.room.*
+import androidx.room3.*
 
 @Entity(
     tableName = "openwith",

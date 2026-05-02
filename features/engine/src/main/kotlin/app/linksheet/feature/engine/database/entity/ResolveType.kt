@@ -2,11 +2,13 @@ package app.linksheet.feature.engine.database.entity
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
+import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.linksheet.api.database.IKnown
 import app.linksheet.api.database.KnownHolder
+import app.linksheet.api.database.insert
 
 @Entity(tableName = "resolve_type")
 data class ResolveType(
@@ -23,6 +25,12 @@ data class ResolveType(
         override fun initialize(db: SupportSQLiteDatabase) {
             for (item in items) {
                 db.insert("resolve_type", SQLiteDatabase.CONFLICT_IGNORE, item.toContentValues())
+            }
+        }
+
+        override fun initialize(connection: SQLiteConnection) {
+            for (item in items) {
+                connection.insert("resolve_type", SQLiteDatabase.CONFLICT_IGNORE, item.toContentValues())
             }
         }
     }

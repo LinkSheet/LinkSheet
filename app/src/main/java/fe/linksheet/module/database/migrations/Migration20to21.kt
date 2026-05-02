@@ -1,11 +1,12 @@
 package fe.linksheet.module.database.migrations
 
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room3.migration.Migration
+import androidx.sqlite.SQLiteConnection
+import androidx.sqlite.execSQL
 
 object Migration20to21 : Migration(20, 21) {
 
-    override fun migrate(db: SupportSQLiteDatabase) = db.run {
+    override suspend fun migrate(connection: SQLiteConnection) = connection.run {
         execSQL("DROP TABLE `wiki_cache`")
     }
 }

@@ -2,8 +2,8 @@ package app.linksheet.api.database
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room3.RoomDatabase
+import androidx.sqlite.SQLiteConnection
 
 interface CrossDatabaseMigration {
     fun put(table: String, contentValueLists: List<ContentValues>)
@@ -31,18 +31,18 @@ class CrossDatabaseMigrationCallback(
     private vararg val migrators: CrossDatabaseMigration
 ) : RoomDatabase.Callback() {
 
-    override fun onOpen(db: SupportSQLiteDatabase) {
+    override suspend fun onOpen(connection: SQLiteConnection) {
         for (migrator in migrators) {
-            migrate(db, migrator)
+            migrate(connection, migrator)
         }
     }
 
-    private fun migrate(db: SupportSQLiteDatabase, migrator: CrossDatabaseMigration) {
+    private fun migrate(connection: SQLiteConnection, migrator: CrossDatabaseMigration) {
         val tables = migrator.getTables()
         for (table in tables) {
             val contentValues = migrator.get(table) ?: continue
             for (values in contentValues) {
-                db.insert(table, SQLiteDatabase.CONFLICT_REPLACE, values)
+                connection.insert(table, SQLiteDatabase.CONFLICT_REPLACE, values)
             }
         }
     }

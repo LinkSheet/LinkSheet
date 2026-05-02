@@ -2,8 +2,8 @@
 
 package app.linksheet.feature.engine.database.dao
 
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room3.Dao
+import androidx.room3.Query
 import app.linksheet.api.database.BaseDao
 import app.linksheet.feature.engine.database.entity.Scenario
 import kotlinx.coroutines.flow.Flow

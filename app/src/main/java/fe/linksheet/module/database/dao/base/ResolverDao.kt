@@ -1,6 +1,6 @@
 package fe.linksheet.module.database.dao.base
 
-import androidx.room.Query
+import androidx.room3.Query
 import app.linksheet.api.database.BaseDao
 import fe.linksheet.module.database.entity.resolver.ResolverEntity
 

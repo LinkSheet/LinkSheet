@@ -1,9 +1,9 @@
 package app.linksheet.feature.engine.database.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
+import androidx.room3.TypeConverter
+import androidx.room3.TypeConverters
 
 @Entity(tableName = "expression_rule")
 @TypeConverters(value = [ExpressionRuleType.Converter::class])

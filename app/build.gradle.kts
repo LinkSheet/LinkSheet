@@ -23,7 +23,7 @@ plugins {
     id("com.android.application")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
-    id("androidx.room")
+    id("androidx.room3")
     id("com.google.devtools.ksp")
     id("dev.rikka.tools.refine")
     id("com.gitlab.grrfe.android-build-plugin")
@@ -254,9 +254,8 @@ kotlin {
     }
 }
 
-room {
+room3 {
     schemaDirectory("$projectDir/schemas")
-    generateKotlin = true
 }
 
 
@@ -280,6 +279,7 @@ dependencies {
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
+    implementation("androidx.sqlite:sqlite-bundled:2.6.2")
 
     compileOnly(project(":lib-hidden-api"))
     implementation(project(":config"))
@@ -330,9 +330,9 @@ dependencies {
     implementation(AndroidX.work.runtimeKtx)
     testImplementation(AndroidX.work.testing)
 
-    implementation(AndroidX.room.runtime)
-    implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
+    implementation("androidx.room3:room3-runtime:3.0.0-alpha03")
+    implementation("androidx.room3:room3-sqlite-wrapper:3.0.0-alpha03")
+    ksp("androidx.room3:room3-compiler:3.0.0-alpha03")
 
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
@@ -449,7 +449,7 @@ dependencies {
         Grrfe.std.result.assert,
         Testing.robolectric,
         CashApp.turbine,
-        AndroidX.room.testing,
+        "androidx.room3:room3-testing:3.0.0-alpha03",
         AndroidX.test.ext.junit.ktx,
         AndroidX.compose.ui.test,
         AndroidX.compose.ui.testJunit4,

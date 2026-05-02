@@ -1,8 +1,8 @@
 package app.linksheet.testlib.rule
 
 import android.content.Context
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import kotlin.reflect.KClass

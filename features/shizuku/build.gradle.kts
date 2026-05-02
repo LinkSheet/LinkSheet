@@ -56,7 +56,6 @@ dependencies {
 
     implementation(Koin.android)
     implementation(Koin.compose)
-    implementation(AndroidX.room.common)
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.coroutines)

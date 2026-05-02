@@ -1,7 +1,7 @@
 package fe.linksheet.module.database.dao.resolver
 
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room3.Dao
+import androidx.room3.Query
 import fe.linksheet.module.database.dao.base.ResolverDao
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
 

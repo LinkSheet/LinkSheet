@@ -1,8 +1,8 @@
 package app.linksheet.feature.engine.database.dao
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.RewriteQueriesToDropUnusedColumns
+import androidx.room3.Dao
+import androidx.room3.Query
+import androidx.room3.RewriteQueriesToDropUnusedColumns
 import app.linksheet.api.database.BaseDao
 import app.linksheet.feature.engine.database.entity.ExpressionRule
 import app.linksheet.feature.engine.database.entity.Scenario

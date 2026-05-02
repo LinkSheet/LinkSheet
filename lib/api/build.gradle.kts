@@ -22,9 +22,9 @@ android {
 
 dependencies {
     implementation(_1fexd.composeKit.preference.compose.core2)
-    implementation(AndroidX.room.common)
+    implementation("androidx.room3:room3-common:3.0.0-alpha03")
+    implementation("androidx.room3:room3-sqlite-wrapper:3.0.0-alpha03")
     implementation(AndroidX.sqlite.ktx)
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)
-    implementation(AndroidX.room.ktx)
 }

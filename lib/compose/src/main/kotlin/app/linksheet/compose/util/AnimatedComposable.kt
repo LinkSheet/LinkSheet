@@ -48,13 +48,19 @@ val exitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> Exit
     slideOutHorizontally(exitTween, slideNegativeOffset) + fadeOut(fadeTween)
 }
 
-val predictivePopEnterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.(Int) -> EnterTransition = {
-    slideInHorizontally(enterTween) { -it } + fadeIn(fadeTween)
-}
+val predictivePopEnterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.(Int) -> EnterTransition =
+    {
+        slideInHorizontally(enterTween) { -it } + fadeIn(fadeTween)
+    }
 
-val predictivePopExitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.(Int) -> ExitTransition = {
-    slideOutHorizontally(exitTween) { it } + fadeOut(fadeTween)
-}
+val predictivePopExitTransition: AnimatedContentTransitionScope<NavBackStackEntry>.(Int) -> ExitTransition =
+    {
+//        scaleOut(
+//            targetScale = 0.9f,
+//            transformOrigin = TransformOrigin(pivotFractionX = 0.5f, pivotFractionY = 0.5f)
+//        )
+        slideOutHorizontally(exitTween) { it } + fadeOut(fadeTween)
+    }
 
 val popEnterTransition: AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition = {
     slideInHorizontally(enterTween, slideNegativeOffset) + fadeIn(fadeTween)

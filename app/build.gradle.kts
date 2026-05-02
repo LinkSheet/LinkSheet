@@ -258,7 +258,6 @@ room3 {
     schemaDirectory("$projectDir/schemas")
 }
 
-
 junitPlatform {
     instrumentationTests {
         includeExtensions.set(true)

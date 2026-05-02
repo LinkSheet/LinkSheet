@@ -28,7 +28,6 @@ pluginManagement {
         id("de.fayard.refreshVersions") version "0.60.6"
         id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
         id("com.android.library")
-        id("org.jetbrains.kotlin.android")
         id("androidx.navigation.safeargs") version "2.9.6"
     }
 
@@ -70,8 +69,6 @@ extra.properties["gradle.build.dir"]
     ?.let { includeBuild(it.toString()) }
 
 include(":app", ":config")
-
-
 
 
 includeProject(":sdk-rule-plugin", "sdk/rule-plugin")

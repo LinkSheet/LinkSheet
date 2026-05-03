@@ -127,4 +127,55 @@
     <string name="opening_with_app">Avan rakendusega %s</string>
     <string name="always_ask">Alati küsi</string>
     <string name="whitelisted_explainer">Näita vaid lubatud brausereid</string>
+    <string name="usage_stats_sorting">Järjesta rakendusi kasutuse alusel</string>
+    <string name="default_apps_subtitle">Seadista vaikimisi rakendused konkreetsete hostide jaoks</string>
+    <string name="always_show_package_name">Näita alati paketi nime</string>
+    <string name="always_show_package_name_explainer">Rakenduse nime asemel näita alati paketi nime. See kehtib tervele rakendusele.</string>
+    <string name="remove_all">Eemalda kõik</string>
+    <string name="add_all">Lisa kõik</string>
+    <string name="display_grid_layout">Paigutus ruudustikuna</string>
+    <string name="display_grid_layout_explainer">Näita alumisel lehel loendi asemel kirjete ruudustikku</string>
+    <string name="set_as_browser_done">LinkSheet on määratud sinu vaikimisi brauseriks!</string>
+    <string name="browser_status">Brauseri olek</string>
+    <string name="app_browsers">Rakendused ja brauserid</string>
+    <string name="bottom_sheet">Alumine leht</string>
+    <string name="open_with_linksheet">Ava rakenduses LinkSheet</string>
+    <string name="about_explainer">Tänuavaldused, litsents, lingid, versioon</string>
+    <string name="credits_explainer">Tänuavaldused, litsentseerimine</string>
+    <string name="version">LinkSheeti versioon</string>
+    <string name="github_explainer">Lähtekoodi hoidla</string>
+    <string name="donate_subtitle">Uuenda <b>LinkSheet Pro</b> versiooniks</string>
+    <string name="open_copied_link">Lõikelaualt</string>
+    <string name="select_an_app">Vali rakendus</string>
+    <string name="dont_show_filtered_item">Ära näita valikut „viimati valitud rakendus“</string>
+    <string name="download_started">Allalaadimine algas</string>
+    <string name="request_timeout">Päring aegus</string>
+    <string name="url_copied">Võrguaadress on kopeeritud lõikelauale</string>
+    <string name="usage_stats_sorting_explainer">Kaasta järjestusalgoritmi Androidi süsteemikasutuse statistika. Esimese sisselülitamisel korral pead lubama ka vastavad õigused.</string>
+    <string name="app_browsers_subtitle">Eelistatud rakendused, brauseri seadistused</string>
+    <string name="bottom_sheet_explainer">Seadistamine ja kohendamine</string>
+    <string name="loading_link">Töötlen linki…</string>
+    <string name="follow_redirects_external_service">Järgi välise teenuse edasisuunamisi</string>
+    <string name="shizuku_integration_enabled_explainer">Shizuku lõimingu sisselülitamine õnnestus!</string>
+    <string name="shizuku_not_running_explainer">Shizuku ei tööta. Shizuku avamiseks klõpsa siin ja seejärel järgi käivitusjuhendit.</string>
+    <string name="shizuku_integration">Shizuku lõiming</string>
+    <string name="shizuku_integration_not_setup_explainer">Kuigi Shizuku pole LinkSheeti tööks otseselt vajalik, on ta siiski soovitatav. Paigaldamiseks klõpsa siia.</string>
+    <string name="shizuku_integration_no_permission_explainer">Klõpsa siin Shizuku õiguste seadistamiseks.</string>
+    <string name="launch_onboarding">Käivita tervitusvaade</string>
+    <string name="feature_flags_explainer">Lülita katselised funktsionaalsused sisse/välja</string>
+    <string name="compat_installed">LinkSheetCompat on juba paigaldatud</string>
+    <string name="configure_explainer">Klõpsa siin LinkSheetCompati seadistamiseks</string>
+    <string name="general_settings_explainer">Näita alati pakettide nimesid</string>
+    <string name="no_handlers_found_explainer">LinkSheet ei saa seda linki avada.</string>
+    <string name="version_name"><b>Versioon:</b> <font face="monospace">%s</font></string>
+    <string name="built_at"><b>Kompileeritud:</b> <font face="monospace">%s</font></string>
+    <string name="flavor"><b>Variatsioon:</b> <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>Töövoo tunnus:</b> <font face="monospace">%s</font></string>
+    <string name="discord_explainer">Räägi LinkSheetist Discordis</string>
+    <string name="donate_crypto">Toeta kasutades krüptoraha</string>
+    <string name="donate_card">Toeta kaardimaksega (BuyMeACoffee vahendusel)</string>
+    <string name="donate_learn_more">Lisateave</string>
+    <string name="donate_explainer_crypto">Toetuse saatmisel krüptorahas saada e-kiri aadressile <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
+    <string name="thanks_for_donating">Tänud rahalise toetuse eest!</string>
+    <string name="app_setup">Rakenduse seadistus</string>
 </resources>

@@ -2,10 +2,10 @@ package fe.linksheet.module.viewmodel.util
 
 import android.content.Context
 import android.os.Parcelable
+import app.linksheet.api.SystemInfoService
 import com.akuleshov7.ktoml.Toml
 import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
-import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.SensitivePreference

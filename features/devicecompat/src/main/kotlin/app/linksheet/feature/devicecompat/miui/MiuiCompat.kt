@@ -6,9 +6,9 @@ import android.content.Context
 import android.os.Process
 import androidx.core.content.getSystemService
 import app.linksheet.api.RefineWrapper
+import app.linksheet.api.SystemInfoService
 import app.linksheet.api.WrappedAppOpsManagerHidden
 import fe.composekit.intent.buildIntent
-import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
 
@@ -33,7 +33,7 @@ class RealMiuiCompatProvider(
     }
 
     override val isRequired = resettableLazy {
-        isXiaomiDevice && !infoService.isCustomRom && readMiuiVersion() != null
+        isXiaomiDevice && !infoService.isCustomRom() && readMiuiVersion() != null
     }
 
     override fun provideCompat(context: Context): MiuiCompat {

@@ -1,9 +1,26 @@
-package fe.linksheet.feature.systeminfo
+package app.linksheet.api
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
+interface SystemInfoService {
+    val properties: SystemProperties
+    val build: BuildConstants
+    val buildInfo: BuildInfo
+    val deviceInfo: DeviceInfo
+    fun isCustomRom() : Boolean
+    fun getApplicationId(): String
+}
+
+interface BuildConstants {
+    val manufacturer: String
+    val fingerprint: String
+    val release: String
+    val model: String
+    val sdk: Int
+}
 
 @Keep
 @Serializable
@@ -23,6 +40,7 @@ data class BuildInfo(
     @SerializedName("workflow_id")
     @SerialName("workflowId")
     val workflowId: String? = null,
+    val applicationId: String
 )
 
 @Keep

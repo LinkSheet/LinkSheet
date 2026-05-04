@@ -43,7 +43,7 @@ fun DefaultMetaDataHandler(context: Context, applicationId: String): MetaDataHan
     )
 }
 
-internal class DefaultMetaDataHandler(
+class DefaultMetaDataHandler(
     private val getActivityInfoCompatOrNull: (ComponentName, ComponentInfoFlags) -> ActivityInfo?,
     private val getPackageInfoCompatOrNull: (String, PackageInfoFlags) -> PackageInfo?,
     private val setComponentEnabledSetting: (ComponentName, ComponentEnabledStateFlags, ComponentEnabledFlags) -> Unit,

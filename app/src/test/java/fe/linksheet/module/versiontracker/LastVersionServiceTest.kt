@@ -1,14 +1,13 @@
 package fe.linksheet.module.versiontracker
 
+import app.linksheet.api.BuildInfo
 import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNull
 import com.google.gson.GsonBuilder
 import fe.gson.typeadapter.ExtendedTypeAdapter
-import fe.linksheet.feature.systeminfo.BuildInfo
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.testlib.core.JunitTest
 
 
 internal class LastVersionServiceTest : BaseUnitTest {
@@ -19,7 +18,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
             ExtendedTypeAdapter.register(this)
         }.create()
 
-        private val buildInfoV1 = BuildInfo("1", 1, "2024-10-29 12:00:00", "foss")
+        private val buildInfoV1 = BuildInfo("1", 1, "2024-10-29 12:00:00", "foss", applicationId = "fe.linksheet")
         private val buildInfoV1Json = """
             {"version_name":"1","version_code":1,"built_at":"2024-10-29 12:00:00","flavor":"foss"}
         """.trimIndent()
@@ -28,7 +27,7 @@ internal class LastVersionServiceTest : BaseUnitTest {
             {"version_name":"2","version_code":2,"built_at":"2024-10-30 12:00:00","flavor":"foss"}
         """.trimIndent()
 
-        private val buildInfoV2 = BuildInfo("2", 2, "2024-10-30 12:00:00", "foss")
+        private val buildInfoV2 = BuildInfo("2", 2, "2024-10-30 12:00:00", "foss", applicationId = "fe.linksheet")
     }
 
     @org.junit.Test

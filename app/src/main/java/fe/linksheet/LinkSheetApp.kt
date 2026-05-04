@@ -8,6 +8,7 @@ import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.compose.debug.NoOpDebugMenuSlotProvider
 import app.linksheet.compose.debug.NoOpDebugPreferenceProvider
+import app.linksheet.feature.app.AppModule
 import app.linksheet.feature.browser.PrivateBrowsingModule
 import app.linksheet.feature.devicecompat.CompatModule
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
@@ -34,7 +35,6 @@ import fe.droidkit.koin.androidApplicationContext
 import fe.gson.GlobalGsonModule
 import fe.gson.context.GlobalGsonContext
 import fe.linksheet.activity.CrashHandlerActivity
-import fe.linksheet.feature.app.AppFeatureModule
 import fe.linksheet.module.analytics.AnalyticsServiceModule
 import fe.linksheet.module.analytics.client.DebugLogAnalyticsClient
 import fe.linksheet.module.clock.ClockModule
@@ -104,6 +104,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
         val koinModules = provideKoinModules()
         startKoin {
+            allowOverride(Build.IsDebug)
             androidLogger()
             androidApplicationContext(this@LinkSheetApp)
             applicationLifecycle(lifecycleObserver)
@@ -122,7 +123,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             ClockModule,
             SystemInfoServiceModule,
             PrivateBrowsingModule,
-            AppFeatureModule,
+            provideAppModule(),
             AppLocaleModule,
             NetworkStateServiceModule,
             ShizukuServiceModule,
@@ -175,6 +176,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             single<DebugPreferenceProvider> { NoOpDebugPreferenceProvider }
         }
     }
+
+    override fun provideAppModule(): Module = AppModule
 
     fun currentActivity(): StateFlow<Activity?> {
         return currentActivityObserver.current

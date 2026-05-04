@@ -1,12 +1,28 @@
+@file:Suppress("FunctionName")
+
 package fe.linksheet.feature.systeminfo
 
+import app.linksheet.api.BuildConstants
+import app.linksheet.api.BuildInfo
+import app.linksheet.api.DeviceInfo
+import app.linksheet.api.RefineWrapper
+import app.linksheet.api.SystemInfoService
 import app.linksheet.api.SystemProperties
 
-class SystemInfoService(
-    val properties: SystemProperties,
-    val build: BuildConstants = InjectedBuildConstants(properties),
-    val buildInfo: BuildInfo
-) {
+fun RealSystemInfoService(refineWrapper: RefineWrapper, buildInfo: BuildInfo): SystemInfoService {
+    return RealSystemInfoService(
+        properties = RealSystemProperties(refineWrapper = refineWrapper),
+        build = StaticBuildConstants,
+        buildInfo = buildInfo
+    )
+}
+
+class RealSystemInfoService(
+    override val properties: SystemProperties,
+    override val build: BuildConstants = InjectedBuildConstants(properties),
+    override val buildInfo: BuildInfo
+) : SystemInfoService {
+
     // Via https://github.com/godotengine/godot/blob/master/platform/android/os_android.cpp#L297
     private val knownRoms = setOf(
         "ro.havoc.version",
@@ -25,11 +41,19 @@ class SystemInfoService(
         "ro.modversion"
     )
 
-    val isCustomRom by lazy {
+    private val customRom by lazy {
         knownRoms.any { properties.get(it) != null }
     }
 
-    val deviceInfo by lazy {
+    override val deviceInfo by lazy {
         DeviceInfo(build.release, build.manufacturer, build.model)
+    }
+
+    override fun isCustomRom(): Boolean {
+        return customRom
+    }
+
+    override fun getApplicationId(): String {
+        return buildInfo.applicationId
     }
 }

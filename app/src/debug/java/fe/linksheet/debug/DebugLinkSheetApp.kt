@@ -3,6 +3,7 @@ package fe.linksheet.debug
 import android.os.StrictMode
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.compose.debug.DebugPreferenceProvider
+import app.linksheet.feature.app.DebugAppModule
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.devicecompat.oneui.OneUiCompatProvider
 import app.linksheet.feature.devicecompat.oneui.RealOneUiCompatProvider
@@ -39,7 +40,7 @@ class DebugLinkSheetApp : LinkSheetApp() {
     }
 
     override fun provideKoinModules(): List<Module> {
-        return super.provideKoinModules() + DebugViewModelModule
+        return super.provideKoinModules() + DebugViewModelModule + DebugAppModule
     }
 
     override fun provideCompatProvider(): Module {

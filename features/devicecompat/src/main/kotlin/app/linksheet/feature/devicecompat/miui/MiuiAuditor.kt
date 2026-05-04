@@ -5,10 +5,10 @@ import android.content.Context
 import android.os.Process
 import androidx.annotation.Keep
 import androidx.core.content.getSystemService
+import app.linksheet.api.BuildInfo
+import app.linksheet.api.DeviceInfo
 import app.linksheet.api.RefineWrapper
-import fe.linksheet.feature.systeminfo.BuildInfo
-import fe.linksheet.feature.systeminfo.DeviceInfo
-import fe.linksheet.feature.systeminfo.SystemInfoService
+import app.linksheet.api.SystemInfoService
 
 class MiuiAuditor(
     private val service: SystemInfoService,

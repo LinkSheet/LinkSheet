@@ -1,13 +1,13 @@
 package fe.linksheet.module.versiontracker
 
 import androidx.lifecycle.LifecycleOwner
+import app.linksheet.api.SystemInfoService
 import com.google.gson.Gson
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
 import fe.gson.GlobalGsonModule
 import fe.gson.GsonQualifier
 import fe.linksheet.BuildConfig
-import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.AppStart
 import fe.linksheet.module.analytics.BaseAnalyticsService

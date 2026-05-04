@@ -2,6 +2,8 @@
 
 package fe.linksheet.util
 
+import app.linksheet.api.BuildInfo
+import app.linksheet.api.DeviceInfo
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import com.akuleshov7.ktoml.Toml
 import com.akuleshov7.ktoml.annotations.TomlInlineTable
@@ -15,8 +17,6 @@ import fe.android.preference.helper.PreferenceRepository
 import fe.gson.dsl.jsonObject
 import fe.gson.extension.json.`object`.asArray
 import fe.gson.extension.json.`object`.asStringOrNull
-import fe.linksheet.feature.systeminfo.BuildInfo
-import fe.linksheet.feature.systeminfo.DeviceInfo
 import fe.linksheet.module.log.file.entry.SerializableLogEntry
 import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferences

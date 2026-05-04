@@ -2,14 +2,21 @@ package app.linksheet.feature.devicecompat.miui
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.api.DeviceInfo
 import app.linksheet.feature.devicecompat.util.BuildInfoFake
 import app.linksheet.feature.devicecompat.util.RefineWrapperDummy
-import app.linksheet.testing.fake.device.*
+import app.linksheet.testing.fake.device.Device
+import app.linksheet.testing.fake.device.Xiaomi11TPro_A13
+import app.linksheet.testing.fake.device.XiaomiMi5C
+import app.linksheet.testing.fake.device.XiaomiRedmi2a
+import app.linksheet.testing.fake.device.XiaomiRedmiNote13_A14
+import app.linksheet.testing.fake.device.XiaomiRedmiNote13_A15
+import app.linksheet.testing.fake.device.XiaomiRedmiNote3
+import app.linksheet.testing.fake.device.XiaomiRedmiNote4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.tableOf
-import fe.linksheet.feature.systeminfo.DeviceInfo
-import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.RealSystemInfoService
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -64,7 +71,7 @@ internal class MiuiAuditorTest : BaseUnitTest  {
 
     @Test
     fun test() = table.forAll { device, expectedDeviceInfo, expectedMiui, expectedFingerprint ->
-        val infoService = SystemInfoService(device, buildInfo = BuildInfoFake.Info)
+        val infoService = RealSystemInfoService(device, buildInfo = BuildInfoFake.Info)
 
         val auditor = MiuiAuditor(infoService, RefineWrapperDummy)
         val audit = auditor.audit(applicationContext)

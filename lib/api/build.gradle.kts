@@ -1,8 +1,10 @@
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 
 plugins {
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
 }
@@ -27,4 +29,5 @@ dependencies {
     implementation(AndroidX.sqlite.ktx)
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)
+    implementation(Grrfe.gsonExt.core)
 }

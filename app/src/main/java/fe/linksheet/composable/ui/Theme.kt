@@ -30,7 +30,6 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
 import fe.linksheet.util.LinkSheetLinkTags
-import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -132,19 +131,17 @@ fun AppTheme(
     val hapticFeedbackInteraction = rememberHapticFeedbackInteraction(context = context)
 
     val linkAssets by themeSettingsViewModel.linkAssets.collectAsStateWithLifecycle()
-    KoinAndroidContext {
-        CompositionLocalProvider(
-            LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
-            LocalLinkAnnotationStyle provides linkAnnotationStyle,
-            LocalLinkTags provides LinkSheetLinkTags(urlIds = linkAssets),
-            LocalUiDebug provides debugPreferenceProvider
-        ) {
-            MaterialTheme(
-                colorScheme = colorScheme,
-                typography = NewTypography,
-                content = content
-            )
-        }
+    CompositionLocalProvider(
+        LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
+        LocalLinkAnnotationStyle provides linkAnnotationStyle,
+        LocalLinkTags provides LinkSheetLinkTags(urlIds = linkAssets),
+        LocalUiDebug provides debugPreferenceProvider
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = NewTypography,
+            content = content
+        )
     }
 }
 

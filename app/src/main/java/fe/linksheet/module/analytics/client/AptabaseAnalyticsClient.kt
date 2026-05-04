@@ -1,11 +1,13 @@
 package fe.linksheet.module.analytics.client
 
 import android.os.Build
+import androidx.lifecycle.LifecycleOwner
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.android.lifecycle.koin.extension.service
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString
 import fe.httpkt.json.JsonBody
 import fe.linksheet.BuildConfig
-import fe.linksheet.LinkSheetApp
 import fe.linksheet.module.analytics.AnalyticsClient
 import fe.linksheet.module.analytics.AnalyticsEvent
 import fe.linksheet.module.analytics.TelemetryIdentityData
@@ -15,33 +17,37 @@ import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.util.buildconfig.BuildType
 import fe.std.javatime.extension.unixMillisAtZone
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.dsl.module
 import java.io.IOException
 import java.time.format.DateTimeFormatter
 
 @OptIn(SensitivePreference::class)
 val aptabaseAnalyticsClientModule = module {
-    single<AnalyticsClient> {
-        val applicationContext = get<LinkSheetApp>()
-        val preferences = get<AppPreferenceRepository>()
-        val id = preferences.getOrPutInit(AppPreferences.telemetryId)
-        val identity = preferences.get(AppPreferences.telemetryIdentity)
+    service<AnalyticsClient> {
+        val preferences = scope.get<AppPreferenceRepository>()
 
         AptabaseAnalyticsClient(
-            identity.create(applicationContext, id),
-            Logger("AptabaseAnalyticsClient"),
-            BuildConfig.APTABASE_API_KEY
+            fnIdentityData = {
+                withContext(Dispatchers.IO) {
+                    val identity = preferences.get(AppPreferences.telemetryIdentity)
+                    val id = preferences.getOrPutInit(AppPreferences.telemetryId)
+                    identity.create(applicationContext, id)
+                }
+            },
+            apiKey = BuildConfig.APTABASE_API_KEY
         )
     }
 }
 
 internal class AptabaseAnalyticsClient(
-    private val identityData: TelemetryIdentityData,
-    logger: Logger,
+    private val fnIdentityData: suspend () -> TelemetryIdentityData,
+    logger: Logger = Logger("AptabaseAnalyticsClient"),
     private val apiKey: String?,
 ) : AnalyticsClient(logger = logger) {
-    private val environmentInfo = EnvironmentInfo.from(identityData)
+    private var identityData: TelemetryIdentityData? = null
+    private lateinit var environmentInfo: EnvironmentInfo
 
     companion object {
         const val SDK_VERSION = "aptabase-kotlin@0.0.8"
@@ -106,11 +112,18 @@ internal class AptabaseAnalyticsClient(
         apiEvents = "$baseUrl/api/v0/events"
     }
 
+    override suspend fun onAppInitialized(owner: LifecycleOwner) {
+        identityData = fnIdentityData()
+        environmentInfo = EnvironmentInfo.from(identityData!!)
+    }
+
     private fun buildEvent(event: AnalyticsEvent): AptabaseEvent {
-        val timestamp = event.unixMillis.unixMillisAtZone().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        val timestamp = event.unixMillis
+            .unixMillisAtZone()
+            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         return AptabaseEvent(
             timestamp,
-            identityData.data["sessionId"] ?: "<null>",
+            identityData?.data["sessionId"] ?: "<null>",
             event.name,
             environmentInfo,
             event.data

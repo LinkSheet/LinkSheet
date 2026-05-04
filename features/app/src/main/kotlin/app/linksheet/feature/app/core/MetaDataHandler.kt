@@ -2,8 +2,12 @@ package app.linksheet.feature.app.core
 
 import android.app.Activity
 import android.content.ComponentName
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageInfo
+import android.content.pm.getActivityInfoCompatOrNull
+import android.content.pm.getPackageInfoCompatOrNull
+import android.content.pm.setComponentEnabledSettingCompat
 import android.os.Bundle
 import fe.composekit.extension.componentName
 import fe.linksheet.util.ComponentEnabledFlags
@@ -29,7 +33,17 @@ interface MetaDataHandler {
     }
 }
 
-class DefaultMetaDataHandler(
+fun DefaultMetaDataHandler(context: Context, applicationId: String): MetaDataHandler {
+    val pm = context.packageManager
+    return DefaultMetaDataHandler(
+        getActivityInfoCompatOrNull = pm::getActivityInfoCompatOrNull,
+        getPackageInfoCompatOrNull = pm::getPackageInfoCompatOrNull,
+        setComponentEnabledSetting = pm::setComponentEnabledSettingCompat,
+        selfPackage = applicationId
+    )
+}
+
+internal class DefaultMetaDataHandler(
     private val getActivityInfoCompatOrNull: (ComponentName, ComponentInfoFlags) -> ActivityInfo?,
     private val getPackageInfoCompatOrNull: (String, PackageInfoFlags) -> PackageInfo?,
     private val setComponentEnabledSetting: (ComponentName, ComponentEnabledStateFlags, ComponentEnabledFlags) -> Unit,

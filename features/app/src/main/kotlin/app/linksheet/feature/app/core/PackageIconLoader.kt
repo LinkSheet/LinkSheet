@@ -1,8 +1,11 @@
 package app.linksheet.feature.app.core
 
+import android.app.ActivityManager
+import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.ComponentInfo
 import android.graphics.drawable.Drawable
+import fe.composekit.extension.getSystemServiceOrThrow
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
 
@@ -11,7 +14,20 @@ interface PackageIconLoader {
     fun loadApplicationIcon(applicationInfo: ApplicationInfo): Drawable
 }
 
-class DefaultPackageIconLoader(
+fun DefaultPackageIconLoader(context: Context): PackageIconLoader {
+    val pm = context.packageManager
+    val launcherLargeIconDensity = context.getSystemServiceOrThrow<ActivityManager>().launcherLargeIconDensity
+
+    return DefaultPackageIconLoader(
+        defaultIcon = pm.defaultActivityIcon,
+        getDrawableForDensity = { packageName, resId ->
+            pm.getResourcesForApplication(packageName).getDrawableForDensity(resId, launcherLargeIconDensity, null)
+        },
+        loadActivityIcon = { it.loadIcon(pm) },
+    )
+}
+
+internal class DefaultPackageIconLoader(
     val defaultIcon: Drawable,
     val getDrawableForDensity: (String, Int) -> Drawable?,
     private val loadActivityIcon: (ComponentInfo) -> Drawable,

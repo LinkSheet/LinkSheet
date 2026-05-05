@@ -12,6 +12,7 @@ import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.util.UiEventReceiver
 import fe.linksheet.debug.DebugBroadcastReceiver
 import fe.linksheet.debug.module.debug.MergedPreferenceRepository
+import fe.linksheet.debug.module.preference.DebugPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
@@ -30,7 +31,8 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
             appPreferenceRepository = get<AppPreferenceRepository>(),
             featureFlagRepository = get<FeatureFlagRepository>(),
             experimentRepository = get<ExperimentRepository>(),
-            appStateRepository = get<AppStateRepository>()
+            appStateRepository = get<AppStateRepository>(),
+            debugRepository = get<DebugPreferenceRepository>()
         )
     }
 

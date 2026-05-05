@@ -10,8 +10,11 @@ import com.gitlab.grrfe.gradlebuild.android.version.AndroidVersionStrategy
 import com.gitlab.grrfe.gradlebuild.common.CompilerOption
 import com.gitlab.grrfe.gradlebuild.common.KotlinCompilerArgs
 import com.gitlab.grrfe.gradlebuild.common.PluginOption
+import com.gitlab.grrfe.gradlebuild.util.LocalPropertiesFile
 import com.gitlab.grrfe.gradlebuild.util.PropertiesFile
+import com.gitlab.grrfe.gradlebuild.util.PublicLocalPropertiesFile
 import com.gitlab.grrfe.gradlebuild.util.SystemEnvironment
+import com.gitlab.grrfe.gradlebuild.util.propertiesProvider
 import com.gitlab.grrfe.gradlebuild.util.withProviders
 import com.gitlab.grrfe.gradlebuild.version.createVersionProvider
 import fe.build.dependencies.Grrfe
@@ -51,12 +54,8 @@ android {
         with(ArchiveBaseName) {
             project.base.setArchivesName(appName, name, now)
         }
-        val localProperties = with(PropertiesFile) {
-            rootProject.file("local.properties").readPropertiesOrNull()
-        }
-        val publicLocalProperties = with(PropertiesFile) {
-            rootProject.file("public.local.properties").readPropertiesOrNull()
-        }
+        val localProperties = rootProject.propertiesProvider(LocalPropertiesFile)
+        val publicLocalProperties = rootProject.propertiesProvider(PublicLocalPropertiesFile)
         val localProviders = withProviders(localProperties, SystemEnvironment)
         val publicLocalProviders = withProviders(publicLocalProperties, SystemEnvironment)
 
@@ -265,6 +264,8 @@ junitPlatform {
 }
 
 dependencies {
+    implementation(project(":feature-analytics-service"))
+    debugImplementation(project(":feature-analytics-aptabase"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
     implementation(project(":feature-devicecompat"))
@@ -283,6 +284,7 @@ dependencies {
     compileOnly(project(":lib-hidden-api"))
     implementation(project(":config"))
     implementation(project(":lib-log"))
+    implementation(project(":lib-http"))
     implementation(project(":lib-util"))
     implementation(project(":lib-api"))
     implementation(project(":lib-common"))

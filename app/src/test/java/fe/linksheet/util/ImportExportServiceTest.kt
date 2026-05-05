@@ -5,7 +5,7 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.akuleshov7.ktoml.Toml
 import com.google.gson.Gson
-import fe.linksheet.module.preference.SensitivePreference
+import app.linksheet.api.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel

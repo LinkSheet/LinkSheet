@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_disabled">Pole kasutusel</string>
+    <string name="telemetry_level_minimal">Minimaalne</string>
+    <string name="telemetry_level_standard">Standardne</string>
+    <string name="telemetry_level_exhaustive">Väga mahukas</string>
+    <string name="telemetry_identity_basic">Lihtne</string>
+    <string name="telemetry_identity_full">Täismahuline</string>
+</resources>

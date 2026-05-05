@@ -18,7 +18,7 @@ import fe.gson.dsl.jsonObject
 import fe.gson.extension.json.`object`.asArray
 import fe.gson.extension.json.`object`.asStringOrNull
 import fe.linksheet.module.log.file.entry.SerializableLogEntry
-import fe.linksheet.module.preference.SensitivePreference
+import app.linksheet.api.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.std.result.StdResult
 import fe.std.result.isFailure

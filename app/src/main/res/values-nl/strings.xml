@@ -329,17 +329,8 @@
     <string name="tap_customization_dialog_title_long_tap">lang drukken</string>
     <string name="expand_on_app_select_explainer">Vouw het paneel automatisch uit wanneer een app is gekozen</string>
     <string name="expand_on_app_select">Uitvouwen wanneer een app is gekozen</string>
-    <string name="telemetry_level_disabled">Uitgeschakeld</string>
-    <string name="telemetry_level_minimal">Minimaal</string>
-    <string name="telemetry_level_standard">Standaard</string>
-    <string name="telemetry_level_exhaustive">Uitgebreid</string>
-    <string name="telemetry_identity_basic">Beperkt</string>
-    <string name="telemetry_identity_full">Volledig</string>
-    <string name="telemetry_level_disabled_description">Geen gegevensverzameling</string>
     <string name="onboarding_2_subtitle">Als je veel apps hebt geïnstalleerd, kan Shizuku de ervaring aanzienlijk verbeteren</string>
     <string name="experiments_explainer_3">Experimenten zijn nog in ontwikkeling en werken mogelijk niet goed of helemaal niet. Meld hiervoor geen bugs op Github. Als je feedback wilt geven, doe dat dan op Discord.</string>
-    <string name="telemetry_dialog_text">Kies het type gebruiksstatistieken waar jij je het beste bij voelt.</string>
-    <string name="telemetry_dialog_title">LinkSheet respecteert je privacy</string>
     <string name="select_app">App kiezen</string>
     <string name="allow_darknets">Darknets toestaan</string>
     <string name="open_app">App openen</string>
@@ -367,9 +358,6 @@
     <string name="onboarding_5_subtitle">LinkSheet is ingeschakeld</string>
     <string name="onboarding_5_title">Helemaal klaar!</string>
     <string name="onboarding_5_card_explainer">De basisconfiguratie die nodig is om LinkSheet te laten werken is voltooid. Ga naar de instellingen om te ontdekken wat LinkSheet nog meer te bieden heeft!</string>
-    <string name="telemetry_level_minimal_description">Statistieken geïnstalleerde versie</string>
-    <string name="telemetry_level_standard_description">Geaggregeerde gebruiksstatistieken</string>
-    <string name="telemetry_level_exhaustive_description">Gedetailleerde gebruiksstatistieken</string>
     <string name="telemetry_configure_title">Telemetrie</string>
     <string name="telemetry_configure_type">Niveau telemetrie</string>
     <string name="telemetry_identifier_reset">Uniek ID resetten</string>

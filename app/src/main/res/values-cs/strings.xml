@@ -294,16 +294,12 @@
     <string name="select_app">Vybrat aplikaci</string>
     <string name="follow_redirects_allow_darknets_explainer">Povolit následující přesměrování pro darknet (podporováno: %s)</string>
     <string name="experiments">Experimenty</string>
-    <string name="telemetry_level_disabled">Zakázáno</string>
-    <string name="telemetry_level_disabled_description">Žádný sběr dat</string>
-    <string name="telemetry_dialog_title">Aplikace LinkSheet respektuje vaše soukromí</string>
     <string name="nightly_experiments_card_explainer">Klepněte pro zobrazení funkcí, které jsou v současné době ve vývoji</string>
     <string name="experiments_explainer">Vyzkoušejte funkce ve vývoji</string>
     <string name="reset">Reset</string>
     <string name="experiments_explainer_2">Aktivní vývoj</string>
     <string name="theme_mode">Režim motivu</string>
     <string name="tap_customization_dialog_title">Nastavit %s</string>
-    <string name="telemetry_level_minimal">Minimální</string>
     <string name="resolve_embeds_explainer">Zpracovávat vložená zrcadla, jako je fxtwitter.com, na opravdového hostitele</string>
     <string name="hide_bottom_sheet_choice_buttons">Skrýt tlačítka volby</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Skrýt tlačítka „Jednou“ a „Vždy“ ve spodním listu</string>
@@ -322,10 +318,6 @@
     <string name="tap_customization_dialog_text">Vyberte akci, která má být provedena</string>
     <string name="expand_on_app_select">Rozšířit po vybrání aplikace</string>
     <string name="expand_on_app_select_explainer">Automaticky rozšířit spodní list po vybrání aplikace</string>
-    <string name="telemetry_level_standard">Běžná</string>
-    <string name="telemetry_level_exhaustive">Kompletní</string>
-    <string name="telemetry_identity_basic">Základní</string>
-    <string name="telemetry_identity_full">Plná</string>
     <string name="telemetry_dialog_text">Vyberte typ statistik o používání, se kterým jste nejvíce spokojeni.</string>
     <string name="telemetry_configure_title">Analytika</string>
     <string name="telemetry_identifier_reset">Resetovat identifikátor</string>
@@ -346,9 +338,6 @@
     <string name="open_app_settings_page">Otevřít nastavení aplikace</string>
     <string name="cancel">Zrušit</string>
     <string name="share">Sdílet odkaz</string>
-    <string name="telemetry_level_standard_description">Souhrnné statistiky používání</string>
-    <string name="telemetry_level_minimal_description">Informace o nainstalované verzi</string>
-    <string name="telemetry_level_exhaustive_description">Podrobné statistiky o používání</string>
     <string name="opening_with_app">Otevírání v aplikaci %s</string>
     <string name="launch_onboarding">Spustit úvod</string>
     <string name="telemetry_dialog_text_2" translatable="false">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url-id="aptabase">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url-id="privacy-telemetry">sem</annotation>.</string>

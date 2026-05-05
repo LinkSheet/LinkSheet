@@ -8,7 +8,7 @@ import android.net.Uri
 import com.google.gson.Gson
 import fe.linksheet.extension.android.bufferedSink
 import fe.linksheet.extension.android.bufferedSource
-import fe.linksheet.module.preference.SensitivePreference
+import app.linksheet.api.SensitivePreference
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.viewmodel.base.BaseViewModel

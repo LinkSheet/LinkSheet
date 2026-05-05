@@ -8,7 +8,7 @@ import com.google.gson.Gson
 import fe.gson.dsl.jsonObject
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.paste.PasteService
-import fe.linksheet.module.preference.SensitivePreference
+import app.linksheet.api.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository

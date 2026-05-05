@@ -2,29 +2,33 @@ package fe.linksheet.module.viewmodel
 
 
 import android.app.Application
-import fe.linksheet.module.analytics.BaseAnalyticsService
-import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.preference.SensitivePreference
+import androidx.lifecycle.viewModelScope
+import app.linksheet.api.SensitivePreference
+import app.linksheet.feature.analytics.preference.AnalyticsPreferences
+import app.linksheet.feature.analytics.service.BaseAnalyticsService
+import app.linksheet.feature.analytics.service.TelemetryLevel
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import kotlinx.coroutines.launch
 
 class PrivacySettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository,
     experimentsRepository: ExperimentRepository,
     private val analyticsService: BaseAnalyticsService,
+    private val analyticsPreferences: AnalyticsPreferences
 ) : BaseViewModel(preferenceRepository) {
     val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
     val enableAnalytics = experimentsRepository.asViewModelState(Experiments.enableAnalytics)
     val remoteConfig = experimentsRepository.asViewModelState(AppPreferences.remoteConfig)
 
     @OptIn(SensitivePreference::class)
-    val telemetryLevel = preferenceRepository.asViewModelState(AppPreferences.telemetryLevel)
+    val telemetryLevel = preferenceRepository.asViewModelState(analyticsPreferences.telemetryLevel)
 
-    fun updateTelemetryLevel(level: TelemetryLevel) {
+    fun updateTelemetryLevel(level: TelemetryLevel) = viewModelScope.launch {
         telemetryLevel(level)
         // TODO: Cancel old job?
         analyticsService.changeLevel(level)

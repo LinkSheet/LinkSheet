@@ -65,12 +65,6 @@
     <string name="experiments">Katsed</string>
     <string name="reset">Lähtesta</string>
     <string name="cancel">Katkesta</string>
-    <string name="telemetry_level_disabled">Pole kasutusel</string>
-    <string name="telemetry_level_minimal">Minimaalne</string>
-    <string name="telemetry_level_standard">Standardne</string>
-    <string name="telemetry_level_exhaustive">Väga mahukas</string>
-    <string name="telemetry_identity_basic">Lihtne</string>
-    <string name="telemetry_identity_full">Täismahuline</string>
     <string name="telemetry_configure_title">Analüütika</string>
     <string name="link_handle_failed_text_field_label">Päring</string>
     <string name="customization">Kohandamine</string>

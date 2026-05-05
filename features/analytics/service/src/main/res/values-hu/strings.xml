@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_minimal">Minimális</string>
+    <string name="telemetry_level_disabled_description">Nincs adatgyűjtés</string>
+    <string name="telemetry_level_standard_description">Összesített használati statisztikák</string>
+    <string name="telemetry_level_minimal_description">Telepített verzió mutatói</string>
+    <string name="telemetry_level_exhaustive_description">Részletes használati statisztikák</string>
+    <string name="telemetry_level_exhaustive">Részletes</string>
+    <string name="telemetry_identity_basic">Egyszerű</string>
+    <string name="telemetry_level_standard">Alapvető</string>
+    <string name="telemetry_level_disabled">Letiltva</string>
+    <string name="telemetry_identity_full">Teljes</string>
+    <string name="telemetry_dialog_title">A LinkSheet tiszteletben tartja az Ön személyes adatait</string>
+</resources>

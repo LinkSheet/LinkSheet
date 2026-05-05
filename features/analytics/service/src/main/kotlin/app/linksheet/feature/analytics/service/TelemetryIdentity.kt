@@ -1,0 +1,59 @@
+package app.linksheet.feature.analytics.service
+
+import android.content.Context
+import android.os.Build
+import androidx.annotation.StringRes
+import app.linksheet.feature.analytics.R
+import fe.android.preference.helper.OptionTypeMapper
+import fe.linksheet.util.extension.android.getCurrentLanguageTag
+
+@JvmInline
+value class TelemetryIdentityData(val data: Map<String, String>)
+
+sealed class TelemetryIdentity(
+    @param:StringRes val id: Int,
+    val data: Map<String, String>,
+    private vararg val mergeWith: TelemetryIdentity,
+) {
+    companion object : OptionTypeMapper<TelemetryIdentity, String>({ it.id.toString() }, {
+        arrayOf(Basic, Full)
+    })
+
+    @OptIn(ExperimentalStdlibApi::class)
+    fun create(
+        context: Context,
+        identity: String,
+        startMillis: Long = System.currentTimeMillis(),
+    ): TelemetryIdentityData {
+        val map = getRuntime(context)
+        for (it in mergeWith) map.putAll(it.data)
+
+        map.putAll(data)
+
+        // Unix seconds (e.g. 1711894875) => 10 chars as hex => 8
+        val session = (startMillis / 1000).toInt().toHexString()
+        // 21 + 8 => 29 < 36 max chars
+        map["sessionId"] = "$identity@$session"
+
+        return TelemetryIdentityData(map)
+    }
+
+    protected open fun getRuntime(context: Context): MutableMap<String, String> = mutableMapOf()
+
+
+    data object Basic : TelemetryIdentity(
+        R.string.telemetry_identity_basic,
+        mapOf(
+        )
+    )
+
+    data object Full : TelemetryIdentity(
+        R.string.telemetry_identity_full,
+        mapOf("manufacturer" to Build.MANUFACTURER, "model" to Build.MODEL),
+        Basic
+    ) {
+        override fun getRuntime(context: Context): MutableMap<String, String> {
+            return mutableMapOf("locale" to context.getCurrentLanguageTag())
+        }
+    }
+}

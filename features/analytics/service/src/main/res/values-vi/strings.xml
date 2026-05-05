@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_exhaustive">Toàn diện</string>
+    <string name="telemetry_level_disabled">Đã tắt</string>
+    <string name="telemetry_level_minimal">Tối thiểu</string>
+    <string name="telemetry_level_standard">Tiêu chuẩn</string>
+    <string name="telemetry_identity_basic">Cơ bản</string>
+    <string name="telemetry_identity_full">Đầy đủ</string>
+    <string name="telemetry_level_disabled_description">Không thu thập dữ liệu</string>
+    <string name="telemetry_level_minimal_description">Chỉ số phiên bản đã cài đặt</string>
+    <string name="telemetry_level_standard_description">Thống kê sử dụng tổng hợp</string>
+    <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
+    <string name="telemetry_dialog_title">LinkSheet tôn trọng quyền riêng tư của bạn</string>
+</resources>

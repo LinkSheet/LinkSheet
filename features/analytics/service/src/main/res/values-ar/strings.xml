@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_disabled_description">لا يوجد تجميع للبيانات</string>
+    <string name="telemetry_level_exhaustive_description">إحصائيات استخدام مفصلة</string>
+    <string name="telemetry_level_minimal">الحد الأدنى</string>
+    <string name="telemetry_level_exhaustive">شامل</string>
+    <string name="telemetry_identity_basic">أساسي</string>
+    <string name="telemetry_identity_full">كامل</string>
+    <string name="telemetry_level_minimal_description">مقاييس الإصدار المثبت</string>
+    <string name="telemetry_level_standard_description">إحصائيات استخدام مجمعة</string>
+    <string name="telemetry_level_disabled">مُعطَّل</string>
+    <string name="telemetry_level_standard">قياسي</string>
+    <string name="telemetry_dialog_title">LinkSheet يحترم خصوصيتك</string>
+</resources>

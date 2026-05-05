@@ -223,19 +223,16 @@
     <string name="pretend_to_be_app">拦截原生应用请求</string>
     <string name="start_setup">继续</string>
     <string name="onboarding_2_shizuku_enabled">下一步</string>
-    <string name="telemetry_identity_basic">基本</string>
     <string name="retry">重试</string>
     <string name="open_app">打开应用</string>
     <string name="link_handle_failed">发生了错误</string>
     <string name="select_app">选择应用</string>
     <string name="tap_customization_single_tap">单击操作</string>
-    <string name="telemetry_level_minimal">最小</string>
     <string name="onboarding_setup">配置 LinskSheet</string>
     <string name="onboarding_4_card_explainer">禁用所有应被 LinkSheet 处理的域名的链接处理功能。</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">已启用</string>
     <string name="onboarding_5_button">结束</string>
     <string name="notifications_explainer">链接已复制，并已开始下载</string>
-    <string name="telemetry_identity_full">完全</string>
     <string name="tap_customization_double_tap">双击操作</string>
     <string name="onboarding_4_card_title">禁用链接处理器</string>
     <string name="download_started_toast">下载开始</string>
@@ -245,7 +242,6 @@
     <string name="shizuku_manager_start_failed">无法启动 Shizuku 管理器，请手动启动！</string>
     <string name="tap_customization_long_tap">长按操作</string>
     <string name="link_handle_failed_text_field_label">询问</string>
-    <string name="telemetry_level_minimal_description">已安装版本指标</string>
     <string name="url_copied_toast">已复制链接</string>
     <string name="onboarding_0_title">欢迎使用 \nLinkSheet</string>
     <string name="show_linksheet_referrer">显示 LinkSheet 引用来源</string>
@@ -283,11 +279,9 @@
     <string name="something_went_wrong">发生了问题，请重试。</string>
     <string name="include_throwable">包含崩溃日志（推荐，但无法删减）</string>
     <string name="tap_customization">点击操作自定义</string>
-    <string name="telemetry_dialog_title">LinkSheet 尊重你的隐私</string>
     <string name="enable_linksheet_compat_explainer">此菜单可在“应用”子菜单中找到，当安装后可拦截部分原生应用的请求。</string>
     <string name="onboarding_3_card_title">链接处理器</string>
     <string name="settings_notifications__divider_toasts">提示语</string>
-    <string name="telemetry_level_exhaustive">详尽</string>
     <string name="onboarding_4_button">下一步</string>
     <string name="reset_app_link_verification_status">重置应用链接验证状态</string>
     <string name="resolve_activity_failure">无法解析活动！</string>
@@ -309,7 +303,6 @@
     <string name="cancel">取消</string>
     <string name="export_log_dialog__title_redact_log">删减日志</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">隐藏底栏中的“仅一次”与“始终”按钮</string>
-    <string name="telemetry_level_standard_description">使用情况汇总数据</string>
     <string name="crash_viewer__subtitle_app_crashed">哦天哪，这不该发生的！</string>
     <string name="resolve_event__resolving_redirects">解析重定向中</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet 尚未配置就绪</string>
@@ -325,9 +318,7 @@
     <string name="tap_customization_dialog_title_single_tap">单击</string>
     <string name="settings_app_config__button_add_item">添加项目</string>
     <string name="settings_main_news__title_ui_overhaul">新界面</string>
-    <string name="telemetry_level_disabled">禁用</string>
     <string name="export_log_dialog__subtitle_include_settings">推荐</string>
-    <string name="telemetry_level_standard">标准</string>
     <string name="onboarding_2_request_shizuku_permission">请求权限</string>
     <string name="settings_app_config_rules__text_custom_rules">自定义规则</string>
     <string name="settings_app_config_rules__subtitle_default_rule">当其他规则不匹配时，则使用此规则</string>
@@ -357,7 +348,6 @@
     <string name="theme_enable_amoled">纯黑</string>
     <string name="tap_customization_dialog_title_double_tap">双击</string>
     <string name="tap_customization_dialog_title_long_tap">长按</string>
-    <string name="telemetry_level_disabled_description">不收集数据</string>
     <string name="tap_customization_dialog_title">配置 %s</string>
     <string name="link_handle_failed_text">此链接似乎已损坏，LinkSheet 无法处理。你可以在下方编辑，然后重试。你也可以在网上搜索。</string>
     <string name="settings_verified_link_handlers__text_user_apps">用户应用</string>
@@ -450,7 +440,6 @@
     <string name="telemetry_dialog_text_2" translatable="false">使用指标包括随安装而定、用户可重置的随机标识符，以及你的 Android 版本，会被存放在 <annotation url-id="aptabase">Aptabase (EU)</annotation>。我们<b>从不</b>会收集诸如已安装应用、点击的链接一类的敏感数据。要了解更多，请点击<annotation url-id="privacy-telemetry">这里</annotation>。</string>
     <string name="export_log_dialog__text_log_privacy">要了解共享日志文件中可能存有的敏感数据，请点击<annotation url-id="privacy-logs">这里</annotation>。</string>
     <string name="resolve_embeds">解析短链接</string>
-    <string name="telemetry_level_exhaustive_description">详细的使用统计数据</string>
     <string name="telemetry_identifier_reset">重置标识符</string>
     <string name="telemetry_configure_title">分析</string>
     <string name="telemetry_configure_type">分析类型</string>

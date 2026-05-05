@@ -1,9 +1,12 @@
 @file:Suppress("UnstableApiUsage")
 
-import com.gitlab.grrfe.gradlebuild.config.GradlePluginPortalRepository
-import com.gitlab.grrfe.gradlebuild.config.MavenRepository
 import com.gitlab.grrfe.gradlebuild.config.configureRepositories
-import com.gitlab.grrfe.gradlebuild.extension.includeProject
+import com.gitlab.grrfe.gradlebuild.repository.GradlePluginPortalRepository
+import com.gitlab.grrfe.gradlebuild.repository.MavenRepository
+import com.gitlab.grrfe.gradlebuild.repository.google
+import com.gitlab.grrfe.gradlebuild.repository.jitpack
+import com.gitlab.grrfe.gradlebuild.repository.mavenCentral
+import com.gitlab.grrfe.gradlebuild.repository.mozilla
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
 import fe.build.dependencies._1fexd
@@ -55,10 +58,10 @@ plugins {
 }
 
 configureRepositories(
-    MavenRepository.Google,
-    MavenRepository.MavenCentral,
-    MavenRepository.Jitpack,
-    MavenRepository.Mozilla,
+    MavenRepository.google(),
+    MavenRepository.mavenCentral(),
+    MavenRepository.jitpack(),
+    MavenRepository.mozilla(),
     MavenRepository("https://oss.sonatype.org/content/repositories/snapshots"),
     GradlePluginPortalRepository,
 //    MavenRepository.local(),
@@ -71,11 +74,14 @@ extra.properties["gradle.build.dir"]
 include(":app", ":config")
 
 
-includeProject(":sdk-rule-plugin", "sdk/rule-plugin")
-includeProject(":sdk-common", "sdk/common")
+
 
 buildSettings {
     projects("features") {
+        projects("analytics") {
+            includeProject(":feature-analytics-service", "service")
+            includeProject(":feature-analytics-aptabase", "aptabase")
+        }
         includeProject(":feature-app", "app")
         includeProject(":feature-browser", "browser")
         includeProject(":feature-engine", "engine")
@@ -98,6 +104,7 @@ buildSettings {
         includeProject(":lib-bottom-sheet", "bottom-sheet")
         includeProject(":lib-bottom-sheet-new", "bottom-sheet-new")
         includeProject(":lib-hidden-api", "hidden-api")
+        includeProject(":lib-http", "http")
         includeProject(":lib-util", "util")
         includeProject(":lib-api", "api")
         includeProject(":lib-log", "log")
@@ -109,6 +116,10 @@ buildSettings {
         includeProject(":test-core", "core")
         includeProject(":test-fake", "fake")
         includeProject(":test-koin", "koin")
+    }
+    projects("sdk") {
+        includeProject(":sdk-rule-plugin", "rule-plugin")
+        includeProject(":sdk-common", "common")
     }
 
     substitutes {

@@ -263,8 +263,6 @@
     <string name="follow_redirects_allow_darknets_explainer">السماح بتتبع عمليات إعادة التوجيه للشبكات المظلمة (مدعوم: %s)</string>
     <string name="experiments_explainer">جرب الميزات قيد التطوير حاليًا</string>
     <string name="expand_on_app_select">التوسيع عند تحديد تطبيق</string>
-    <string name="telemetry_level_disabled_description">لا يوجد تجميع للبيانات</string>
-    <string name="telemetry_level_exhaustive_description">إحصائيات استخدام مفصلة</string>
     <string name="resolve_activity_failure">فشل حل النشاط!</string>
     <string name="reset_app_link_verification_status">إعادة تعيين حالة التحقق من رابط التطبيق</string>
     <string name="reset_app_link_verification_status_subtitle">انقر هنا لإعادة تعيين حالة التحقق من رابط التطبيق لجميع التطبيقات، ثم انتظر بضع دقائق بينما يقوم Android بإعادة التحقق منها. لن تتلقى تأكيدًا. يتطلب Shizuku.</string>
@@ -359,10 +357,7 @@
     <string name="telemetry_identifier_reset">إعادة تعيين المعرف</string>
     <string name="tap_customization">تخصيص النقر</string>
     <string name="tap_customization_dialog_title">تكوين %s</string>
-    <string name="telemetry_level_minimal">الحد الأدنى</string>
     <string name="tap_customization_dialog_title_double_tap">نقرة مزدوجة</string>
-    <string name="telemetry_level_exhaustive">شامل</string>
-    <string name="telemetry_identity_basic">أساسي</string>
     <string name="telemetry_configure_title">التحليلات</string>
     <string name="settings_shortcuts__subtitle_default_browser">فتح صفحة إعدادات المتصفح الافتراضي</string>
     <string name="settings_app_config__title_native_apps">التطبيقات</string>
@@ -387,7 +382,6 @@
     <string name="resolve_event__checking_browsers">جاري التحقق من وجود المتصفحات</string>
     <string name="no_internet_connection">لا يوجد اتصال بالإنترنت</string>
     <string name="urlbar_settings">شريط URL</string>
-    <string name="telemetry_identity_full">كامل</string>
     <string name="settings__title_shortcuts">الاختصارات</string>
     <string name="settings_shortcuts__title_link_handlers">معالجات الروابط</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none">
@@ -464,8 +458,6 @@
     </plurals>
     <string name="bottom_sheet__button_manual_redirect">تتبع عمليات إعادة التوجيه</string>
     <string name="telemetry_dialog_text">اختر نوع مقاييس الاستخدام الذي ترتاح له أكثر.</string>
-    <string name="telemetry_level_minimal_description">مقاييس الإصدار المثبت</string>
-    <string name="telemetry_level_standard_description">إحصائيات استخدام مجمعة</string>
     <string name="link_handle_failed_text_field_label">استعلام</string>
     <string name="verified_link_handlers_subtitle">التحكم في حالة التحقق من التطبيق والمجال</string>
     <string name="settings_shortcuts__title_connected_apps">التطبيقات المتصلة</string>
@@ -510,9 +502,6 @@
     <string name="nightly_experiments_card">تجارب ليلية</string>
     <string name="open_app">فتح تطبيق</string>
     <string name="tap_customization_dialog_title_long_tap">نقرة طويلة</string>
-    <string name="telemetry_level_disabled">مُعطَّل</string>
-    <string name="telemetry_level_standard">قياسي</string>
-    <string name="telemetry_dialog_title">LinkSheet يحترم خصوصيتك</string>
     <string name="generic__button_text_share">شارك</string>
     <string name="settings_home__title_clipboard_card">بطاقة الحافظة</string>
     <string name="settings_home__text_clipboard_card">اعرض محتوى الحافظة الحالي على الصفحة الرئيسية إذا كان رابطًا</string>

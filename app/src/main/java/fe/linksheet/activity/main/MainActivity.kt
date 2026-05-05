@@ -18,7 +18,7 @@ import fe.linksheet.activity.util.DebugStatePublisher
 import fe.linksheet.activity.util.NavGraphDebugState
 import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
-import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
+import app.linksheet.feature.analytics.ui.rememberAnalyticDialog
 import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog
 import fe.linksheet.composable.ui.BoxAppHost
 import fe.linksheet.extension.compose.AddIntentDeepLinkHandler

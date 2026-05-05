@@ -91,12 +91,6 @@ android {
             string("BRANCH", branch)
             boolean("IS_CI", System.getenv("CI")?.toBooleanStrictOrNull() == true)
             string("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
-            string("APTABASE_API_KEY", localProviders.get("APTABASE_API_KEY"))
-            boolean(
-                "ANALYTICS_SUPPORTED",
-                localProviders.get("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
-            )
-
             string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
             string("API_HOST", localProviders.get("API_HOST"))
         }

@@ -40,6 +40,7 @@ data class BuildInfo(
     @SerializedName("workflow_id")
     @SerialName("workflowId")
     val workflowId: String? = null,
+    @Transient
     val applicationId: String
 )
 

@@ -15,6 +15,7 @@ import app.linksheet.api.RefineWrapper
 import app.linksheet.api.SystemInfoService
 import app.linksheet.api.SystemProperties
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.feature.analytics.service.BaseAnalyticsService
 import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLabelService
@@ -58,7 +59,6 @@ import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
 import fe.linksheet.module.database.dao.PreferredAppDao

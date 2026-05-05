@@ -83,7 +83,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
     val startupTime: LocalDateTime = LocalDateTime.now()
 
     private val currentActivityObserver = CurrentActivityObserver()
-    private val owner by lazy { ProcessLifecycleOwner.get() }
+    protected val owner by lazy { ProcessLifecycleOwner.get() }
     private val lifecycleObserver by lazy { ProcessServiceRegistry(owner) }
 
     override fun onCreate() {

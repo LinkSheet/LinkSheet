@@ -8,11 +8,13 @@ import kotlinx.coroutines.flow.StateFlow
 interface DebugPreferenceProvider {
     val drawBorders: StateFlow<Boolean>
     val bottomSheetLog: StateFlow<Boolean>
+    val m3Log: StateFlow<Boolean>
 }
 
 object NoOpDebugPreferenceProvider : DebugPreferenceProvider {
     override val drawBorders = MutableStateFlow(false)
     override val bottomSheetLog = MutableStateFlow(false)
+    override val m3Log = MutableStateFlow(false)
 }
 
 val LocalUiDebug: ProvidableCompositionLocal<DebugPreferenceProvider> = staticCompositionLocalOf {

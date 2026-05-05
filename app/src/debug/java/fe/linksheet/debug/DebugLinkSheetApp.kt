@@ -1,6 +1,7 @@
 package fe.linksheet.debug
 
 import android.os.StrictMode
+import androidx.lifecycle.lifecycleScope
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.feature.analytics.aptabase.aptabaseAnalyticsClientModule
@@ -59,7 +60,7 @@ class DebugLinkSheetApp : LinkSheetApp() {
         return module {
             single<DebugPreferenceRepository> { DebugPreferenceRepository(get()) }
             single<DebugMenuSlotProvider> { RealDebugMenuSlotProvider(get()) }
-            single<DebugPreferenceProvider> { RealDebugPreferenceProvider(get()) }
+            single<DebugPreferenceProvider> { RealDebugPreferenceProvider(repository = get(), owner.lifecycleScope) }
         }
     }
 }

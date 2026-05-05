@@ -1,15 +1,14 @@
-package fe.linksheet.module.resolver
+package app.linksheet.feature.app.core
 
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.PatternMatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.app.core.DefaultPackageIntentHandler
-import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.testing.util.addDataPaths
 import app.linksheet.testing.util.buildIntentFilter
 import fe.linksheet.testlib.core.BaseUnitTest
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.test.assertFalse
@@ -17,7 +16,7 @@ import kotlin.test.assertTrue
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
-internal class PackageHandlerIntentFilterTest : BaseUnitTest  {
+internal class PackageHandlerIntentFilterTest : BaseUnitTest {
     companion object {
         private val handler: PackageIntentHandler = DefaultPackageIntentHandler(
             queryIntentActivities = { _, _ -> listOf() },
@@ -44,7 +43,7 @@ internal class PackageHandlerIntentFilterTest : BaseUnitTest  {
         }
     }
 
-    @org.junit.Test
+    @Test
     fun test() {
         assertFalse(isLinkHandler("https://google.com", IntentFilter()))
 
@@ -59,7 +58,12 @@ internal class PackageHandlerIntentFilterTest : BaseUnitTest  {
 
         assertTrue(isLinkHandler("https://github.com", githubIntentFilter))
         assertTrue(isLinkHandler("https://github.com/LinkSheet/LinkSheet", githubIntentFilter))
-        assertTrue(isLinkHandler("https://github.com/KieronQuinn/DarQ/releases/latest", githubIntentFilter))
+        assertTrue(
+            isLinkHandler(
+                "https://github.com/KieronQuinn/DarQ/releases/latest",
+                githubIntentFilter
+            )
+        )
 
         assertFalse(isLinkHandler("https://google.com", githubIntentFilter))
     }

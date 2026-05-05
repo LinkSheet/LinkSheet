@@ -10,21 +10,13 @@ import kotlin.properties.Delegates
 
 enum class BuildType {
     Debug, Nightly, ReleaseDebug, Release, Unknown;
-
-    companion object {
-        @Deprecated(
-            "Use new API",
-            replaceWith = ReplaceWith(
-                "StaticBuildInfo.CurrentType",
-                imports = ["app.linksheet.util.buildconfig"]
-            )
-        )
-        val current by lazy { StaticBuildInfo.CurrentType }
-    }
 }
 
 object StaticBuildInfo {
     private var setup = AtomicBoolean(false)
+
+    lateinit var CurrentType: BuildType
+    var IsDebug by Delegates.notNull<Boolean>()
 
     fun init(isDebug: Boolean, type: String) {
         if (!setup.compareAndSet(expectedValue = false, newValue = true)) return
@@ -32,6 +24,7 @@ object StaticBuildInfo {
         CurrentType = BuildType.entries.find { it.name.equals(type, ignoreCase = true) } ?: Unknown
     }
 
-    lateinit var CurrentType: BuildType
-    var IsDebug by Delegates.notNull<Boolean>()
+    fun isType(vararg types: BuildType): Boolean {
+        return types.any { CurrentType == it }
+    }
 }

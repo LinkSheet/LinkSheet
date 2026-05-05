@@ -1,14 +1,13 @@
 package fe.linksheet.material3
 
-import android.util.Log
-import fe.linksheet.bottom.sheet.BuildConfig
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 
 object M3Log {
-    private val disabled = true
+    private val logger = Logger("M3Log")
+    private val enabled = System.getProperty("logging.m3log") == "true"
 
     fun d(tag: String, msg: String) {
-        if (disabled) return
-        if (!BuildConfig.DEBUG) return
-        Log.d(tag, msg)
+        if (!enabled) return
+        logger.debug(msg)
     }
 }

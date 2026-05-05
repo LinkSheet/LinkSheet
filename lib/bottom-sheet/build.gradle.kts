@@ -7,10 +7,8 @@ plugins {
     id("com.gitlab.grrfe.android-build-plugin")
 }
 
-group = "fe.linksheet.bottom.sheet"
-
 android {
-    namespace = group.toString()
+    namespace = "app.linksheet.lib.bottomsheet"
     compileSdk = AndroidSdk.COMPILE_SDK
 
     defaultConfig {
@@ -27,6 +25,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":lib-log"))
     implementation(platform("androidx.compose:compose-bom-alpha:_"))
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.material3)

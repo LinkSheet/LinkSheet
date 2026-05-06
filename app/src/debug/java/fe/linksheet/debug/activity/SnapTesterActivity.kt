@@ -1,32 +1,44 @@
 package fe.linksheet.debug.activity
 
-import androidx.compose.material3.fix.ModalBottomSheet
-import androidx.compose.material3.fix.rememberModalBottomSheetState
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.material3.fix.ModalBottomSheet
+import androidx.compose.material3.fix.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.composable.ui.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 
-class DebugActivity : ComponentActivity(), KoinComponent {
+class SnapTesterActivity : BaseComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent {
+        setContent(edgeToEdge = true) {
             AppTheme {
-                BottomSheetSnapTester()
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .systemBarsPadding()
+                ) {
+                    BottomSheetSnapTester()
+                }
             }
         }
     }
@@ -60,7 +72,10 @@ class DebugActivity : ComponentActivity(), KoinComponent {
                 }
             ) {
                 if (loading) {
-                    Column(modifier = Modifier.height(200.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(
+                        modifier = Modifier.height(200.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         CircularProgressIndicator()
                     }
                 } else {

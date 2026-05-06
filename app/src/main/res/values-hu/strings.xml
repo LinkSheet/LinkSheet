@@ -516,7 +516,7 @@
     <string name="settings_verified_link_handlers__text_sort_by_installation_time">Telepítési idő</string>
     <string name="settings_verified_link_handlers__text_ascending">Növekvő</string>
     <string name="generic__label_arrow_rotation">Nyíl forgatás</string>
-    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"><![CDATA[All apps]]></string>
+    <string name="settings_verified_link_handlers__text_vlh_type_filter_all"><![CDATA[Összes app]]></string>
     <string name="settings_verified_link_handlers__text_vlh_type_filter_browser">Böngészők</string>
     <string name="settings_verified_link_handlers__text_vlh_type_filter_native">Natív alkalmazások</string>
     <string name="settings_verified_link_handlers__text_system_apps">Rendszeralkalmazások</string>
@@ -558,4 +558,5 @@
     <string name="settings_follow_redirects__subtitle_aggressive">Töltse le a teljes oldal törzset, hogy növelje a kompatibilitást azokkal a webhelyekkel, amelyek nem használnak HTTP-átirányítást</string>
     <string name="handler_target__label_switch_profile_view_intent">Profilváltás</string>
     <string name="import_dumped_preference">Exportált preferenciák importálása</string>
+    <string name="settings_remote_config__title">Távoli konfiguráció</string>
 </resources>

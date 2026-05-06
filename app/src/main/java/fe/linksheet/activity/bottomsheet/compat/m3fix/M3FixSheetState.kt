@@ -10,9 +10,10 @@ import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun rememberM3FixModalBottomSheetState(): M3FixSheetState {
-//    val isReducedMotionEnabled = LocalContext.current.isReducedMotionEnabled()
-    val state = rememberModalBottomSheetState()
+fun rememberM3FixModalBottomSheetState(
+    isReducedMotionEnabled: () -> Boolean = { false }
+): M3FixSheetState {
+    val state = rememberModalBottomSheetState(isReducedMotionEnabled = isReducedMotionEnabled)
     return M3FixSheetState(state)
 }
 

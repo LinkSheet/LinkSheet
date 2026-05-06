@@ -2,6 +2,7 @@ package fe.linksheet.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -44,7 +45,7 @@ import fe.linksheet.activity.bottomsheet.ManualRedirectInteraction
 import fe.linksheet.activity.bottomsheet.ShareUrlInteraction
 import fe.linksheet.activity.bottomsheet.StartDownloadInteraction
 import fe.linksheet.activity.bottomsheet.SwitchProfileInteraction
-import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
+import fe.linksheet.activity.bottomsheet.compat.SettingsObserver
 import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheet
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
 import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
@@ -64,11 +65,13 @@ import fe.linksheet.module.resolver.util.Launchable
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.util.intent.Intents
 import fe.linksheet.util.intent.StandardIntents
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -112,6 +115,23 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         onNewIntent(intent!!)
     }
 
+    private val isReducedMotionEnabledFlow by lazy {
+        val settingsObserver = SettingsObserver(
+            applicationContext = applicationContext,
+            settingName = Settings.Global.ANIMATOR_DURATION_SCALE,
+            getValue = { ctx, name -> Settings.Global.getFloat(ctx.contentResolver, name, 1.0f) },
+            getUri = Settings.Global::getUriFor,
+        )
+
+        settingsObserver
+            .createFlow()
+            .map { it == 0.0f }
+            .stateIn(
+                scope = lifecycleScope,
+                started = SharingStarted.WhileSubscribed(),
+                initialValue = settingsObserver.readValue() == 0.0f
+            )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,7 +163,9 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val currentIntent by viewModel.intentFlow.collectAsStateWithLifecycle()
 
         val coroutineScope = rememberCoroutineScope()
-        val sheetState = rememberM3FixModalBottomSheetState()
+        val sheetState = rememberM3FixModalBottomSheetState(
+            isReducedMotionEnabled = isReducedMotionEnabledFlow::value
+        )
 //        val sheetState = rememberModalBottomSheetState(
 ////            confirmValueChange = {
 ////                if(it == SheetValue.Hidden) true else true

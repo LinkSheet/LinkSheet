@@ -10,6 +10,10 @@ object M3Log {
         if (!enabled) return
         logger.debug(msg)
     }
+    fun d(msg: String) {
+        if (!enabled) return
+        logger.debug(msg)
+    }
 
     fun setEnabled(it: Boolean) {
         this.enabled = it

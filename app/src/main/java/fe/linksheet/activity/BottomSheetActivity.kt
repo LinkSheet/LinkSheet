@@ -162,6 +162,18 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             }
         }
 
+        LaunchedEffect(key1 = interaction) {
+            Log.d(
+                "LoadingIndicatorSheetContent",
+                "Interaction=$interaction, isClear=${interaction == ResolverInteraction.Clear}, " +
+                        "isInitialized=${interaction == ResolverInteraction.Initialized}"
+            )
+            if (interaction != ResolverInteraction.Initialized) {
+                // Request resize on interaction change to accommodate interaction UI
+                sheetState.expand()
+            }
+        }
+
         LaunchedEffect(key1 = event) {
             logger.debug("Latest event: $event")
         }
@@ -200,7 +212,13 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 finish()
             },
             sheetContent = { modifier ->
-                SheetContent(resolveResult, modifier, event, interaction, coroutineScope, sheetState, controller)
+                SheetContent(
+                    resolveResult = resolveResult,
+                    modifier = modifier,
+                    event = event,
+                    interaction = interaction,
+                    controller = controller
+                )
             }
         )
     }
@@ -211,8 +229,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         modifier: Modifier,
         event: ResolveEvent,
         interaction: ResolverInteraction,
-        coroutineScope: CoroutineScope,
-        sheetState: CompatSheetState,
         controller: BottomSheetStateController,
     ) {
         when (resolveResult) {
@@ -220,13 +236,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 LoadingIndicatorWrapper(
                     event = event,
                     interaction = interaction,
-                    requestExpand = {
-                        logger.debug("Loading indicator: Pre-Request expand")
-                        coroutineScope.launch {
-                            logger.debug("Loading indicator: Request expand")
-                            sheetState.expand()
-                        }
-                    }
                 )
             }
 

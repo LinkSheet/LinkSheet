@@ -1,10 +1,19 @@
 package fe.linksheet.activity.bottomsheet.content.pending
 
 import android.util.Log
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ContainedLoadingIndicator
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,20 +33,7 @@ fun M3ELoadingIndicatorSheetContent(
     modifier: Modifier = Modifier,
     event: ResolveEvent,
     interaction: ResolverInteraction,
-    requestExpand: () -> Unit,
 ) {
-    LaunchedEffect(key1 = interaction) {
-        Log.d(
-            "LoadingIndicatorSheetContent",
-            "Interaction=$interaction, isClear=${interaction == ResolverInteraction.Clear}, " +
-                    "isInitialized=${interaction == ResolverInteraction.Initialized}"
-        )
-        if (interaction != ResolverInteraction.Initialized) {
-            // Request resize on interaction change to accommodate interaction UI
-            requestExpand()
-        }
-    }
-
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -121,7 +117,6 @@ private fun M3ELoadingIndicatorPreviewBase(event: ResolveEvent, interaction: Res
         M3ELoadingIndicatorSheetContent(
             event = event,
             interaction = interaction,
-            requestExpand = {}
         )
     }
 }

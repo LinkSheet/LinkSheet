@@ -338,19 +338,6 @@
     <string name="cancel">Cancel</string>
     <string name="expand_on_app_select">Expand when an app is selected</string>
     <string name="expand_on_app_select_explainer">Automatically expand the bottom sheet when an app is selected</string>
-    <string name="telemetry_level_disabled">Disabled</string>
-    <string name="telemetry_level_minimal">Minimal</string>
-    <string name="telemetry_level_standard">Standard</string>
-    <string name="telemetry_level_exhaustive">Exhaustive</string>
-    <string name="telemetry_identity_basic">Basic</string>
-    <string name="telemetry_identity_full">Full</string>
-    <string name="telemetry_dialog_title">LinkSheet respects your privacy</string>
-    <string name="telemetry_dialog_text">Choose the type of usage metrics you are most comfortable with.</string>
-    <string name="telemetry_level_disabled_description">No data collection</string>
-    <string name="telemetry_level_minimal_description">Installed version metrics</string>
-    <string name="telemetry_level_standard_description">Aggregated usage statistics</string>
-    <string name="telemetry_level_exhaustive_description">Detailed usage statistics</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Usage metrics include a random, user-resettable installation-bound identifier, as well as your Android version, and are stored at <annotation url-id="aptabase">Aptabase (EU)</annotation>. Sensitive data, such as installed apps and clicked links will <b>never</b> be collected. To learn more, tap <annotation url-id="privacy-telemetry">here</annotation>.</string>
     <string name="telemetry_configure_title">Analytics</string>
     <string name="telemetry_identifier_reset">Reset identifier</string>
     <string name="telemetry_configure_type">Analytics type</string>

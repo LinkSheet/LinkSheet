@@ -3,6 +3,8 @@ package fe.linksheet.debug.command
 import android.content.Context
 import android.content.Intent
 import fe.linksheet.debug.DebugBroadcastReceiver
+import fe.linksheet.debug.module.preference.DebugPreferenceRepository
+import fe.linksheet.debug.module.preference.DebugPreferences
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
@@ -21,6 +23,7 @@ object DumpPreferencesCommand : DebugCommand<DumpPreferencesCommand>(
         Triple("Experiments", Experiments.all, get<ExperimentRepository>()),
         Triple("Feature flags", FeatureFlags.all, get<FeatureFlagRepository>()),
         Triple("App state", AppStatePreferences.all, get<AppStateRepository>()),
+        Triple("Debug preferences", DebugPreferences.all, get<DebugPreferenceRepository>()),
     )
 
     override fun handle(context: Context, intent: Intent) {

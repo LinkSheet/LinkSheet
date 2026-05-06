@@ -326,7 +326,6 @@
         <item quantity="other">%d hôtes désactivés</item>
     </plurals>
     <string name="settings_verified_link_handlers__text_browser">Navigateur</string>
-    <string name="telemetry_level_exhaustive">Exhaustive</string>
     <string name="cancel">Annuler</string>
     <string name="tap_customization_dialog_title_long_tap">Long tapotement</string>
     <string name="telemetry_dialog_text">Choisissez le type de suivi d’utilisation avec lequel vous êtes le plus à l’aise.</string>
@@ -372,14 +371,6 @@
     <string name="tap_customization_dialog_title_double_tap">Double tapotement</string>
     <string name="tap_customization_dialog_text">Choisissez l\'action à effectuer</string>
     <string name="expand_on_app_select_explainer">Développer automatiquement la partie inférieure de l\'écran lorsqu\'une application est sélectionnée</string>
-    <string name="telemetry_level_disabled">Désactivé</string>
-    <string name="telemetry_level_minimal">Minimal</string>
-    <string name="telemetry_level_standard">Standard</string>
-    <string name="telemetry_identity_basic">Basique</string>
-    <string name="telemetry_identity_full">Complet</string>
-    <string name="telemetry_dialog_title">LinkSheet respecte votre vie privée</string>
-    <string name="telemetry_level_disabled_description">Pas de collecte de données</string>
-    <string name="telemetry_level_exhaustive_description">Statistiques d\'utilisation détaillées</string>
     <string name="telemetry_identifier_reset">Réinitialiser l\'identifiant</string>
     <string name="link_handle_failed">Une erreur est survenue</string>
     <string name="link_handle_failed_text_field_label">Requête</string>
@@ -394,7 +385,6 @@
     <string name="settings_shortcuts__subtitle_default_browser">Ouvrir la page des paramètres de sélection du navigateur par défaut</string>
     <string name="build_info">Info de production</string>
     <string name="telemetry_configure_type">Type d\'analyse de donnée</string>
-    <string name="telemetry_level_standard_description">Statistiques d\'utilisation agrégées</string>
     <string name="telemetry_configure_title">Analyse de données</string>
     <string name="verified_link_handlers">Gestionnaires de liens vérifiés</string>
     <string name="settings_shortcuts__title_connected_apps">Applications liées</string>
@@ -475,7 +465,6 @@
     <string name="resolve_embeds_explainer">Résoudre les miroirs d\'intégration comme fxtwitter.com vers l\'hôte réel</string>
     <string name="resolve_embeds">Résoudre les intégrations</string>
     <string name="settings_shortcuts__title_link_handlers">Gestionnaires de liens</string>
-    <string name="telemetry_level_minimal_description">Statistiques de la version installée</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Gestion des liens autorisée</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Traitement des liens non autorisé</string>
     <string name="settings_credits__app_credit_reason_gmsflags">Inspiration de conception</string>

@@ -6,14 +6,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.analytics.ui.rememberAnalyticDialog
+import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
-import fe.linksheet.util.buildconfig.Build
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -53,7 +53,7 @@ fun PrivacySettingsRoute(
             }
         }
 
-        if (Build.IsDebug || enableAnalytics) {
+        if (StaticBuildInfo.IsDebug || enableAnalytics) {
             divider(key = R.string.telemetry_configure_title, id = R.string.telemetry_configure_title)
 
             group(2) {

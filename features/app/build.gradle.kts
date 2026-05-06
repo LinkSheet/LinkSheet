@@ -29,11 +29,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":compose"))
-    implementation(project(":util"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-compose"))
+    implementation(project(":lib-util"))
     implementation(project(":test-fake"))
-    compileOnly(project(":hidden-api"))
+    compileOnly(project(":lib-hidden-api"))
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.foundation)
@@ -44,6 +44,8 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.compose.core)
     implementation(_1fexd.composeKit.compose.component)
+    implementation(_1fexd.composeKit.koin)
+    implementation("com.github.LinkSheet.flavors:core:_")
 
     implementation(Grrfe.gsonExt.core)
     implementation("io.github.reandroid:ARSCLib:_")

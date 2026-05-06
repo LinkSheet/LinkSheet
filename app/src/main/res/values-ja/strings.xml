@@ -185,7 +185,6 @@
     <string name="resolve_event__sorting_apps">アプリリストの並べ替え</string>
     <string name="follow_redirects_allow_darknets_explainer">ダークネットの次のリダイレクトを許可する (サポート対象: %s)</string>
     <string name="donate_card_headline">LinkSheetをサポートするために寄付する</string>
-    <string name="telemetry_level_exhaustive">徹底的</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified">
         <item quantity="other">%d 確認済み</item>
     </plurals>
@@ -210,8 +209,6 @@
     <string name="include_throwable">クラッシュログを含める（推奨、ただし編集は不可）</string>
     <string name="no_internet_connection">インターネット接続なし</string>
     <string name="onboarding_setup">LinkSheet を設定する</string>
-    <string name="telemetry_level_standard">標準</string>
-    <string name="telemetry_identity_basic">基本</string>
     <string name="verified_link_handlers">デフォルトで開く</string>
     <string name="verified_link_handlers_subtitle">各アプリの対応リンクの設定</string>
     <string name="shizuku_integration">Shizuku 統合</string>
@@ -269,13 +266,6 @@
     <string name="hide_bottom_sheet_choice_buttons">選択ボタンを非表示にする</string>
     <string name="urlbar_settings">URL バー</string>
     <string name="theme_enable_amoled">ピュアブラック</string>
-    <string name="telemetry_dialog_title">LinkSheet はあなたのプライバシーを尊重します</string>
-    <string name="telemetry_dialog_text">最も使いやすい利用状況の指標を選択してください。</string>
-    <string name="telemetry_level_disabled_description">データ収集なし</string>
-    <string name="telemetry_level_minimal_description">インストール済みバージョンに関する指標</string>
-    <string name="telemetry_level_standard_description">集計された使用統計</string>
-    <string name="telemetry_level_exhaustive_description">詳細な使用統計</string>
-    <string name="telemetry_dialog_text_2" translatable="false">使用状況の指標には、ランダムでユーザーがリセット可能なインストール時の識別子と Android バージョンが含まれ、<annotation url-id="aptabase">Aptabase (EU)</annotation> に保存されます。</string>
     <string name="telemetry_configure_title">アナリティクス</string>
     <string name="telemetry_identifier_reset">識別子をリセット</string>
     <string name="telemetry_configure_type">アナリティクスタイプ</string>
@@ -425,9 +415,6 @@
     <string name="tap_customization_single_tap">シングルタップアクション</string>
     <string name="expand_on_app_select">アプリを選択すると展開します</string>
     <string name="expand_on_app_select_explainer">アプリを選択すると、ボトムシートが自動的に展開されます</string>
-    <string name="telemetry_level_disabled">無効</string>
-    <string name="telemetry_level_minimal">最小限</string>
-    <string name="telemetry_identity_full">フル</string>
     <string name="amp2html_short">Amp2Html</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="other">%d 確認済みウェブリンク</item>

@@ -22,8 +22,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":common"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-common"))
 
     api(KotlinX.coroutines.android)
     implementation(Koin.android)

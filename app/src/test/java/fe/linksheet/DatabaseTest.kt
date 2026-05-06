@@ -1,7 +1,7 @@
 package fe.linksheet
 
 import android.content.Context
-import androidx.room.Room
+import androidx.room3.Room
 import app.linksheet.api.database.DefaultCrossDatabaseMigration
 import fe.linksheet.module.database.LinkSheetDatabase
 import fe.linksheet.module.database.LinkSheetDatabase.Companion.configureAndBuild

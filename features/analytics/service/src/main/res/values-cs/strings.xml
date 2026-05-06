@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_disabled">Zakázáno</string>
+    <string name="telemetry_level_disabled_description">Žádný sběr dat</string>
+    <string name="telemetry_level_minimal">Minimální</string>
+    <string name="telemetry_level_standard">Běžná</string>
+    <string name="telemetry_level_exhaustive">Kompletní</string>
+    <string name="telemetry_identity_basic">Základní</string>
+    <string name="telemetry_identity_full">Plná</string>
+    <string name="telemetry_level_standard_description">Souhrnné statistiky používání</string>
+    <string name="telemetry_level_minimal_description">Informace o nainstalované verzi</string>
+    <string name="telemetry_level_exhaustive_description">Podrobné statistiky o používání</string>
+    <string name="telemetry_dialog_title">Aplikace LinkSheet respektuje vaše soukromí</string>
+</resources>

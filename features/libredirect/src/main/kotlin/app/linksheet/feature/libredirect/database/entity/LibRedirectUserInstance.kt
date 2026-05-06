@@ -1,6 +1,6 @@
 package app.linksheet.feature.libredirect.database.entity
 
-import androidx.room.Entity
+import androidx.room3.Entity
 
 @Entity(tableName = "lib_redirect_user_instance", primaryKeys = ["serviceKey", "frontendKey", "instanceUrl"])
 data class LibRedirectUserInstance(

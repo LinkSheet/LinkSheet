@@ -8,7 +8,7 @@
                 android:label="@string/title_activity_composable_renderer"
                 android:theme="@style/AppTheme"/>
         <activity
-                android:name=".debug.activity.DebugActivity"
+                android:name=".debug.activity.SnapTesterActivity"
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
         <activity

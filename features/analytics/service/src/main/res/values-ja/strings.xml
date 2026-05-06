@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_exhaustive">徹底的</string>
+    <string name="telemetry_level_standard">標準</string>
+    <string name="telemetry_identity_basic">基本</string>
+    <string name="telemetry_level_disabled_description">データ収集なし</string>
+    <string name="telemetry_level_minimal_description">インストール済みバージョンに関する指標</string>
+    <string name="telemetry_level_standard_description">集計された使用統計</string>
+    <string name="telemetry_level_exhaustive_description">詳細な使用統計</string>
+    <string name="telemetry_level_disabled">無効</string>
+    <string name="telemetry_level_minimal">最小限</string>
+    <string name="telemetry_identity_full">フル</string>
+    <string name="telemetry_dialog_title">LinkSheet はあなたのプライバシーを尊重します</string>
+    <string name="telemetry_dialog_text">最も使いやすい利用状況の指標を選択してください。</string>
+    <string name="telemetry_dialog_text_2" translatable="false">使用状況の指標には、ランダムでユーザーがリセット可能なインストール時の識別子と Android バージョンが含まれ、<annotation url-id="aptabase">Aptabase (EU)</annotation> に保存されます。</string>
+</resources>

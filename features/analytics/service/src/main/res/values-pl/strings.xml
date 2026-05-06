@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_minimal_description">Metryki wersji zainstalowanej</string>
+    <string name="telemetry_level_disabled">Wyłączone</string>
+    <string name="telemetry_level_disabled_description">Brak zbierania danych</string>
+    <string name="telemetry_level_standard">Standardowe</string>
+    <string name="telemetry_level_standard_description">Zbiorcze statystyki użycia</string>
+    <string name="telemetry_identity_full">Pełne</string>
+    <string name="telemetry_level_exhaustive_description">Szczegółowe statystyki użycia</string>
+    <string name="telemetry_level_minimal">Minimalne</string>
+    <string name="telemetry_identity_basic">Podstawowe</string>
+    <string name="telemetry_level_exhaustive">Wyjątkowe</string>
+    <string name="telemetry_dialog_title">LinkSheet szanuje Twoją prywatność</string>
+</resources>

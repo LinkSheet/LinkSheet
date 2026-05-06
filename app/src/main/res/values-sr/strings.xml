@@ -337,18 +337,6 @@
     <string name="open_app">Отвори апликацију</string>
     <string name="telemetry_dialog_text_2" translatable="false">Показатељи коришћења укључују насумични \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url-id="aptabase">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url-id="privacy-telemetry">овде</annotation>.</string>
     <string name="something_went_wrong">Дошло је до грешке, покушајте поново.</string>
-    <string name="telemetry_level_disabled">Онемогућено</string>
-    <string name="telemetry_level_minimal">Минимално</string>
-    <string name="telemetry_level_standard">Стандардно</string>
-    <string name="telemetry_level_exhaustive">Исцрпно</string>
-    <string name="telemetry_identity_basic">Основно</string>
-    <string name="telemetry_identity_full">Потпуно</string>
-    <string name="telemetry_dialog_title">LinkSheet поштује вашу приватност</string>
-    <string name="telemetry_level_disabled_description">Без прикупљања података</string>
-    <string name="telemetry_level_standard_description">Збирна статистика коришћења</string>
-    <string name="telemetry_level_exhaustive_description">Детаљна статистика коришћења</string>
-    <string name="telemetry_level_minimal_description">Показатељи инсталиране верзије</string>
-    <string name="telemetry_dialog_text">Одаберите тип показатеља коришћења који вам највише одговара.</string>
     <string name="telemetry_configure_title">Аналитика</string>
     <string name="telemetry_identifier_reset">Ресетуј идентификатор</string>
     <string name="telemetry_configure_type">Тип аналитике</string>

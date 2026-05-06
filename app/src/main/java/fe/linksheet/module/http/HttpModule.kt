@@ -3,18 +3,25 @@ package fe.linksheet.module.http
 import android.content.Context
 import android.net.TrafficStats
 import app.linksheet.api.CachedRequest
+import app.linksheet.lib.http.DefaultHeaders
+import app.linksheet.lib.http.TaggedRequest
+import app.linksheet.util.buildconfig.StaticBuildInfo
 import coil3.ImageLoader
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import fe.httpkt.Request
 import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
-import fe.linksheet.util.buildconfig.Build
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
-import io.ktor.client.plugins.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.serialization.gson.*
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.HttpTimeoutConfig
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.gson.gson
 import me.saket.unfurl.Unfurler
-import okhttp3.*
+import okhttp3.Cache
+import okhttp3.Call
+import okhttp3.EventListener
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import org.koin.dsl.module
 import java.net.InetSocketAddress
 import java.net.Proxy
@@ -68,7 +75,7 @@ val HttpModule = module {
         val context = get<Context>()
         val okHttp = get<OkHttpClient>()
         // There's probably a better way to do this
-        val logger = if (Build.IsDebug) CoilLoggerAdapter() else null
+        val logger = if (StaticBuildInfo.IsDebug) CoilLoggerAdapter() else null
         ImageLoader.Builder(context)
             .components {
                 add(OkHttpNetworkFetcherFactory(callFactory = okHttp))

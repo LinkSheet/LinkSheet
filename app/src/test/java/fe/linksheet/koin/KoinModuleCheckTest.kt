@@ -8,10 +8,14 @@ import android.os.Build
 import androidx.lifecycle.SavedStateHandle
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import app.linksheet.api.BuildConstants
+import app.linksheet.api.BuildInfo
 import app.linksheet.api.CachedRequest
 import app.linksheet.api.RefineWrapper
+import app.linksheet.api.SystemInfoService
 import app.linksheet.api.SystemProperties
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.feature.analytics.service.BaseAnalyticsService
 import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLabelService
@@ -55,10 +59,6 @@ import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
 import fe.linksheet.LinkSheetApp
-import fe.linksheet.feature.systeminfo.BuildConstants
-import fe.linksheet.feature.systeminfo.BuildInfo
-import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.module.analytics.BaseAnalyticsService
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
 import fe.linksheet.module.database.dao.PreferredAppDao

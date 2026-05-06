@@ -1,5 +1,6 @@
 package app.linksheet.feature.app.core
 
+import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.ComponentInfo
 import android.content.pm.ResolveInfo
@@ -12,7 +13,15 @@ interface PackageLabelService {
     fun findApplicationLabel(applicationInfo: ApplicationInfo): String
 }
 
-class DefaultPackageLabelService(
+fun DefaultPackageLabelService(context: Context): PackageLabelService {
+    val pm = context.packageManager
+    return DefaultPackageLabelService(
+        loadComponentInfoLabelInternal = { it.loadLabel(pm) },
+        getApplicationLabel = pm::getApplicationLabel,
+    )
+}
+
+internal class DefaultPackageLabelService(
     private val loadComponentInfoLabelInternal: (ComponentInfo) -> CharSequence,
     private val getApplicationLabel: (ApplicationInfo) -> CharSequence,
 ) : PackageLabelService {

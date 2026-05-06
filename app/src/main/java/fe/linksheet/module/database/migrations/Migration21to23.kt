@@ -2,12 +2,14 @@ package fe.linksheet.module.database.migrations
 
 import android.content.ContentValues
 import android.database.Cursor
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room3.migration.Migration
+import androidx.sqlite.SQLiteConnection
+import androidx.sqlite.execSQL
 import app.linksheet.api.database.CrossDatabaseMigration
+import app.linksheet.api.database.query
+import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
 
 class Migration21to23(
     private val logger: Logger,
@@ -18,18 +20,18 @@ class Migration21to23(
         private const val END = 23
     }
 
-    fun create(): Array<Migration> {
-        return Array(END - START) { idx ->
+    fun create(): List<Migration> {
+        return List(END - START) { idx ->
             createMigration(START + idx)
         }
     }
 
     private fun createMigration(start: Int): Migration {
-        return Migration(start, start + 1) { db ->
+        return Migration(start, start + 1) { connection ->
             logger.info("Running migration from $start to ${start + 1}")
             val result = tryCatch {
-                migrateTable(db, "lib_redirect_default")
-                migrateTable(db, "lib_redirect_service_state")
+                migrateTable(connection, "lib_redirect_default")
+                migrateTable(connection, "lib_redirect_service_state")
             }
             if (result.isFailure()) {
                 logger.error("Error", result.exception)
@@ -37,10 +39,10 @@ class Migration21to23(
         }
     }
 
-    private fun migrateTable(db: SupportSQLiteDatabase, table: String) {
-        val cursor = db.query("SELECT * FROM `$table`")
+    private fun migrateTable(connection: SQLiteConnection, table: String) {
+        val cursor = connection.query("SELECT * FROM `$table`")
         migrator.put(table, cursor.toContentValues())
-        db.execSQL("DROP TABLE IF EXISTS `$table`")
+        connection.execSQL("DROP TABLE IF EXISTS `$table`")
     }
 }
 

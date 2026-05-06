@@ -8,13 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboard
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
@@ -24,6 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import app.linksheet.compose.theme.HeadlineAlmostLargeStyle
 import app.linksheet.feature.wiki.navigation.MarkdownViewerRoute
+import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
@@ -41,8 +46,6 @@ import fe.linksheet.extension.compose.OnFocused
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.navigation.settingsRoute
 import fe.linksheet.util.LinkSheet
-import fe.linksheet.util.buildconfig.Build
-import fe.linksheet.util.buildconfig.BuildType
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -121,7 +124,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             item(key = R.string.thanks_for_donating, contentType = ContentType.TextItem) {
                 if (!LinkSheetAppConfig.showDonationBanner()) {
                     Text(text = stringResource(id = R.string.thanks_for_donating))
-                } else if (!Build.IsDebug) {
+                } else if (!StaticBuildInfo.IsDebug) {
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }
@@ -159,13 +162,13 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 )
             }
 
-            if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
+            if (StaticBuildInfo.isType(app.linksheet.util.buildconfig.BuildType.Debug, app.linksheet.util.buildconfig.BuildType.Nightly)) {
                 item(key = R.string.nightly_experiments_card, contentType = ContentType.ClickableAlert) {
                     NightlyExperimentsCard(navigate = { navController.navigate(it) })
                 }
             }
 
-            if (BuildType.current == BuildType.Debug) {
+            if (StaticBuildInfo.CurrentType == app.linksheet.util.buildconfig.BuildType.Debug) {
                 item {
                     ShizukuCard(
                         activity = activity!!,

@@ -1,7 +1,7 @@
 package app.linksheet.feature.wiki.database.dao
 
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room3.Dao
+import androidx.room3.Query
 import app.linksheet.api.database.BaseDao
 import app.linksheet.feature.wiki.database.entity.WikiCache
 

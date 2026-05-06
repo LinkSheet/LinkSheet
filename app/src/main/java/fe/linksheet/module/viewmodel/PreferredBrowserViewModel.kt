@@ -6,7 +6,7 @@ import androidx.annotation.Keep
 import androidx.lifecycle.viewModelScope
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.usecase.BrowsersUseCase
-import fe.linksheet.module.preference.SensitivePreference
+import app.linksheet.api.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel

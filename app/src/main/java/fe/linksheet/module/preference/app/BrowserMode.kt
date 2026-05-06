@@ -2,7 +2,7 @@ package fe.linksheet.module.preference.app
 
 import app.linksheet.api.PreferenceRegistry
 import app.linksheet.api.mapped
-import fe.linksheet.module.preference.SensitivePreference
+import app.linksheet.api.SensitivePreference
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.browser.BrowserMode
 

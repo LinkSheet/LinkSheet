@@ -4,10 +4,9 @@ import androidx.lifecycle.LifecycleOwner
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
 import fe.linksheet.module.preference.PreferenceRepositoryModule
-import fe.linksheet.module.preference.SensitivePreference
+import app.linksheet.api.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
 import org.koin.dsl.module
 
 val StatisticsModule = module {

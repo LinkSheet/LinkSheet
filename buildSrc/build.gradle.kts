@@ -8,7 +8,6 @@ dependencies {
     implementation("com.squareup:javapoet:_")
     implementation(Square.kotlinPoet)
     implementation("com.google.code.gson:gson:_")
-    implementation("net.nemerosa.versioning:net.nemerosa.versioning.gradle.plugin:_")
     implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.extension.dom)
 

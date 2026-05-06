@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_disabled">Uitgeschakeld</string>
+    <string name="telemetry_level_minimal">Minimaal</string>
+    <string name="telemetry_level_standard">Standaard</string>
+    <string name="telemetry_level_exhaustive">Uitgebreid</string>
+    <string name="telemetry_identity_basic">Beperkt</string>
+    <string name="telemetry_identity_full">Volledig</string>
+    <string name="telemetry_level_disabled_description">Geen gegevensverzameling</string>
+    <string name="telemetry_level_minimal_description">Statistieken geïnstalleerde versie</string>
+    <string name="telemetry_level_standard_description">Geaggregeerde gebruiksstatistieken</string>
+    <string name="telemetry_level_exhaustive_description">Gedetailleerde gebruiksstatistieken</string>
+    <string name="telemetry_dialog_title">LinkSheet respecteert je privacy</string>
+    <string name="telemetry_dialog_text">Kies het type gebruiksstatistieken waar jij je het beste bij voelt.</string>
+</resources>

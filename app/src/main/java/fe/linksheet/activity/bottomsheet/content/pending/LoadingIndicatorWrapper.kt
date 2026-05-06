@@ -10,12 +10,10 @@ fun LoadingIndicatorWrapper(
     modifier: Modifier = Modifier,
     event: ResolveEvent,
     interaction: ResolverInteraction,
-    requestExpand: () -> Unit,
 ) {
     M3ELoadingIndicatorSheetContent(
         modifier = modifier,
         event = event,
         interaction = interaction,
-        requestExpand = requestExpand
     )
 }

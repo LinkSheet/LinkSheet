@@ -1,11 +1,15 @@
 package app.linksheet.feature.app.core
 
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ResolveInfo
+import android.content.pm.queryIntentActivitiesCompat
+import android.content.pm.resolveActivityCompat
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import app.linksheet.feature.app.extension.activityDescriptor
+import app.linksheet.lib.flavors.LinkSheetApp
 import fe.composekit.extension.packageName
 import fe.linksheet.util.ResolveInfoFlags
 
@@ -18,7 +22,17 @@ interface PackageIntentHandler {
     fun isLinkHandler(filter: IntentFilter, uri: Uri): Boolean
 }
 
-class DefaultPackageIntentHandler(
+fun DefaultPackageIntentHandler(context: Context, applicationId: String): PackageIntentHandler {
+    val pm = context.packageManager
+    return DefaultPackageIntentHandler(
+        queryIntentActivities = pm::queryIntentActivitiesCompat,
+        resolveActivity = pm::resolveActivityCompat,
+        isLinkSheetCompat = { LinkSheetApp.Compat.isApp(it) != null },
+        isSelf = { applicationId == it },
+    )
+}
+
+internal class DefaultPackageIntentHandler(
     private val queryIntentActivities: (Intent, ResolveInfoFlags) -> List<ResolveInfo>,
     private val resolveActivity: (Intent, ResolveInfoFlags) -> ResolveInfo?,
     private val isLinkSheetCompat: (String) -> Boolean,

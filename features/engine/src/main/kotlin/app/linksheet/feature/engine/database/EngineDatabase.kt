@@ -1,11 +1,11 @@
 package app.linksheet.feature.engine.database
 
 import android.content.Context
-import androidx.room.AutoMigration
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
+import androidx.room3.AutoMigration
+import androidx.room3.Database
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
+import androidx.room3.migration.Migration
 import app.linksheet.api.database.KnownInitCallback
 import app.linksheet.feature.engine.database.dao.*
 import app.linksheet.feature.engine.database.entity.*

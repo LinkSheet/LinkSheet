@@ -31,9 +31,9 @@ android {
 
 
 dependencies {
-    implementation(AndroidX.room.ktx)
     api(AndroidX.test.runner)
     api(AndroidX.test.coreKtx)
     api(Testing.junit.jupiter.api)
     api(Koin.test)
+    implementation("androidx.room3:room3-runtime:3.0.0-alpha03")
 }

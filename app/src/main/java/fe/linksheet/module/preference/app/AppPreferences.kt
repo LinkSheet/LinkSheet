@@ -2,6 +2,8 @@ package fe.linksheet.module.preference.app
 
 
 import app.linksheet.api.PreferenceRegistry
+import app.linksheet.api.SensitivePreference
+import app.linksheet.feature.analytics.preference.analyticsPreferences
 import app.linksheet.feature.browser.preference.browserPreferences
 import app.linksheet.feature.libredirect.preference.libRedirectPreferences
 import app.linksheet.feature.profile.preference.profilePreferences
@@ -13,11 +15,7 @@ import fe.android.preference.helper.TypeMapper
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.composable.ui.Theme
-import fe.linksheet.module.analytics.TelemetryIdentity
-import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.preference.SensitivePreference
-import io.viascom.nanoid.NanoId
-import java.util.*
+import java.util.UUID
 import kotlin.reflect.KClass
 
 object AppPreferences : PreferenceDefinition(
@@ -47,6 +45,13 @@ object AppPreferences : PreferenceDefinition(
             return this@AppPreferences.string(key, default)
         }
 
+        override fun string(
+            key: String,
+            initial: () -> String
+        ): Preference.Init {
+            return this@AppPreferences.string(key, initial)
+        }
+
         override fun <T : Any, M : Any> mapped(
             key: String,
             default: T,
@@ -73,16 +78,6 @@ object AppPreferences : PreferenceDefinition(
 
     val resolveEmbeds = boolean("resolve_embeds")
 
-    @SensitivePreference
-    val telemetryId = string("telemetry_id") { NanoId.generate() }
-
-    @SensitivePreference
-    val telemetryIdentity = mapped("telemetry_identity_2", TelemetryIdentity.Basic, TelemetryIdentity)
-
-    @SensitivePreference
-    val telemetryLevel = mapped("telemetry_level", TelemetryLevel.Standard, TelemetryLevel)
-    val telemetryShowInfoDialog = boolean("telemetry_dialog", true)
-
     val lastVersion = int("last_version", -1)
 
     @SensitivePreference
@@ -108,6 +103,7 @@ object AppPreferences : PreferenceDefinition(
     val shizuku = shizukuPreferences(registry)
     val browser = browserPreferences(registry)
     val profileSwitcher = profilePreferences(registry)
+    val analytics = analyticsPreferences(registry)
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->
@@ -124,7 +120,7 @@ object AppPreferences : PreferenceDefinition(
     }
 
     @SensitivePreference
-    val sensitivePreferences = setOf(useTimeMs, telemetryIdentity, telemetryLevel, telemetryId)
+    val sensitivePreferences = setOf(useTimeMs, analytics.telemetryIdentity, analytics.telemetryLevel, analytics.telemetryId)
 
     fun toJsonArray(preferences: Map<String, String?>): JsonArray {
         val objs = preferences.map { (key, value) ->

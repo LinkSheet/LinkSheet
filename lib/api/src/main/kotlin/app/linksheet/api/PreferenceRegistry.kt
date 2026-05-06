@@ -6,7 +6,8 @@ import kotlin.reflect.KClass
 
 interface PreferenceRegistry {
     fun boolean(key: String, default: Boolean = false): Preference.Boolean
-    fun string(key: String, default: String?=null) : Preference.Nullable<String>
+    fun string(key: String, default: String? = null): Preference.Nullable<String>
+    fun string(key: String, initial: () -> String): Preference.Init
     fun <T : Any, M : Any> mapped(
         key: String,
         default: T,

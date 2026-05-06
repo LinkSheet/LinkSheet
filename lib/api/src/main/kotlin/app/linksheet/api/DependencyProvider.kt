@@ -7,4 +7,5 @@ interface DependencyProvider {
     fun provideCompatProvider(): Module
     fun provideAnalyticsClient(): Module
     fun provideDebugModule(): Module
+    fun provideAppModule(): Module
 }

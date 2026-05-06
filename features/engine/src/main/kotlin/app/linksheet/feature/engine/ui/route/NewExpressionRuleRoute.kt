@@ -3,6 +3,7 @@ package app.linksheet.feature.engine.ui.route
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -14,6 +15,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldLabelPosition
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -94,9 +96,20 @@ private fun NewExpressionRuleInternal(
     ) {
         item {
             OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 state = rememberTextFieldState(),
                 lineLimits = TextFieldLineLimits.SingleLine,
                 label = { Text("Label") },
+            )
+        }
+
+        item {
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                state = rememberTextFieldState(),
+                lineLimits = TextFieldLineLimits.MultiLine(minHeightInLines = 5),
+                label = { Text("Label") },
+                labelPosition = TextFieldLabelPosition.Above(),
             )
         }
 

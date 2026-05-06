@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_identity_basic">基本</string>
+    <string name="telemetry_level_minimal">最小</string>
+    <string name="telemetry_identity_full">完全</string>
+    <string name="telemetry_level_minimal_description">已安装版本指标</string>
+    <string name="telemetry_level_exhaustive">详尽</string>
+    <string name="telemetry_level_standard_description">使用情况汇总数据</string>
+    <string name="telemetry_level_disabled">禁用</string>
+    <string name="telemetry_level_standard">标准</string>
+    <string name="telemetry_level_disabled_description">不收集数据</string>
+    <string name="telemetry_dialog_title">LinkSheet 尊重你的隐私</string>
+</resources>

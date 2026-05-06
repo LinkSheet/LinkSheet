@@ -1,8 +1,8 @@
 package app.linksheet.feature.engine.database.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
+import androidx.room3.ColumnInfo
+import androidx.room3.Entity
+import androidx.room3.ForeignKey
 
 @Entity(
     tableName = "resolved_url", primaryKeys = ["urlId", "typeId"],

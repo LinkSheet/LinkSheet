@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_minimal_description">Обща статистика</string>
+    <string name="telemetry_identity_basic">Основна</string>
+    <string name="telemetry_level_standard_description">Обобщена статистика за използването</string>
+    <string name="telemetry_level_standard">Стандартна</string>
+    <string name="telemetry_level_disabled_description">Не се събират сведения</string>
+    <string name="telemetry_identity_full">Пълна</string>
+    <string name="telemetry_level_exhaustive_description">Подробна статистика за използването</string>
+    <string name="telemetry_level_disabled">Изключена</string>
+    <string name="telemetry_level_minimal">Минимална</string>
+    <string name="telemetry_level_exhaustive">Подробна</string>
+    <string name="telemetry_dialog_title">LinkSheet уважава поверителността ви</string>
+</resources>

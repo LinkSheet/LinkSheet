@@ -1,5 +1,6 @@
 package fe.linksheet.module.preference
 
+import app.linksheet.feature.analytics.preference.AnalyticsPreferences
 import app.linksheet.feature.browser.preference.BrowserPreferences
 import app.linksheet.feature.libredirect.preference.Experiment
 import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
@@ -30,4 +31,5 @@ val PreferenceRepositoryModule = module {
     }
     single<BrowserPreferences> { AppPreferences.browser }
     single<ProfilePreferences> { AppPreferences.profileSwitcher }
+    single<AnalyticsPreferences> { AppPreferences.analytics }
 }

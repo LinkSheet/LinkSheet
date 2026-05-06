@@ -2,8 +2,12 @@ package app.linksheet.feature.app.core
 
 import android.app.Activity
 import android.content.ComponentName
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageInfo
+import android.content.pm.getActivityInfoCompatOrNull
+import android.content.pm.getPackageInfoCompatOrNull
+import android.content.pm.setComponentEnabledSettingCompat
 import android.os.Bundle
 import fe.composekit.extension.componentName
 import fe.linksheet.util.ComponentEnabledFlags
@@ -27,6 +31,16 @@ interface MetaDataHandler {
     companion object {
         const val METADATA_KEY_FORWARD_PROFILE = "app.linksheet.profile.FORWARD"
     }
+}
+
+fun DefaultMetaDataHandler(context: Context, applicationId: String): MetaDataHandler {
+    val pm = context.packageManager
+    return DefaultMetaDataHandler(
+        getActivityInfoCompatOrNull = pm::getActivityInfoCompatOrNull,
+        getPackageInfoCompatOrNull = pm::getPackageInfoCompatOrNull,
+        setComponentEnabledSetting = pm::setComponentEnabledSettingCompat,
+        selfPackage = applicationId
+    )
 }
 
 class DefaultMetaDataHandler(

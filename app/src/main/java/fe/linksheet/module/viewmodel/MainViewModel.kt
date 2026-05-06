@@ -9,19 +9,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import androidx.core.content.getSystemService
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDestination
+import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.feature.analytics.preference.AnalyticsPreferences
+import app.linksheet.feature.analytics.service.AnalyticsEvent
+import app.linksheet.feature.analytics.service.BaseAnalyticsService
+import app.linksheet.feature.analytics.service.TelemetryLevel
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getFirstText
 import fe.composekit.extension.setText
-import fe.linksheet.module.analytics.AnalyticsEvent
-import fe.linksheet.module.analytics.BaseAnalyticsService
-import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.preference.SensitivePreference
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.state.AppStatePreferences
@@ -35,6 +37,7 @@ import fe.std.result.isSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 
 class MainViewModel(
@@ -42,6 +45,7 @@ class MainViewModel(
     val appStateRepository: AppStateRepository,
     val preferenceRepository: AppPreferenceRepository,
     val experimentRepository: ExperimentRepository,
+    private val analyticsPreferences: AnalyticsPreferences,
     private val analyticsService: BaseAnalyticsService,
     private val miuiCompatProvider: MiuiCompatProvider,
     private val miuiCompat: MiuiCompat,
@@ -49,12 +53,12 @@ class MainViewModel(
     private val intentHandler: PackageIntentHandler,
     private val workDelegatorService: WorkDelegatorService,
 ) : BaseViewModel(preferenceRepository) {
-    val newDefaultsDismissed = appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2025_12_15_InfoDismissed)
+    val newDefaultsDismissed =
+        appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2025_12_15_InfoDismissed)
 
     @OptIn(SensitivePreference::class)
-    val telemetryLevel = experimentRepository.asViewModelState(AppPreferences.telemetryLevel)
-
-    val telemetryShowInfoDialog = experimentRepository.asViewModelState(AppPreferences.telemetryShowInfoDialog)
+    val telemetryLevel = preferenceRepository.asViewModelState(analyticsPreferences.telemetryLevel)
+    val telemetryShowInfoDialog = preferenceRepository.asViewModelState(analyticsPreferences.telemetryShowInfoDialog)
     val remoteConfigDialogDismissed = appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
     val remoteConfig = preferenceRepository.asViewModelState(AppPreferences.remoteConfig)
     val homeClipboardCard = experimentRepository.asViewModelState(AppPreferences.homeClipboardCard)
@@ -121,11 +125,11 @@ class MainViewModel(
         return UriUtil.parseWebUriStrict(uriStr)
     }
 
-    fun enqueueNavEvent(destination: NavDestination, args: Bundle?) {
+    fun enqueueNavEvent(destination: NavDestination, args: Bundle?) = viewModelScope.launch {
         analyticsService.enqueue(AnalyticsEvent.Navigate(destination.route ?: "<no_route>"))
     }
 
-    fun updateTelemetryLevel(level: TelemetryLevel) {
+    fun updateTelemetryLevel(level: TelemetryLevel) = viewModelScope.launch {
         telemetryLevel(level)
         telemetryShowInfoDialog(false)
         analyticsService.changeLevel(level)

@@ -10,8 +10,11 @@ import com.gitlab.grrfe.gradlebuild.android.version.AndroidVersionStrategy
 import com.gitlab.grrfe.gradlebuild.common.CompilerOption
 import com.gitlab.grrfe.gradlebuild.common.KotlinCompilerArgs
 import com.gitlab.grrfe.gradlebuild.common.PluginOption
+import com.gitlab.grrfe.gradlebuild.util.LocalPropertiesFile
 import com.gitlab.grrfe.gradlebuild.util.PropertiesFile
+import com.gitlab.grrfe.gradlebuild.util.PublicLocalPropertiesFile
 import com.gitlab.grrfe.gradlebuild.util.SystemEnvironment
+import com.gitlab.grrfe.gradlebuild.util.propertiesProvider
 import com.gitlab.grrfe.gradlebuild.util.withProviders
 import com.gitlab.grrfe.gradlebuild.version.createVersionProvider
 import fe.build.dependencies.Grrfe
@@ -23,7 +26,7 @@ plugins {
     id("com.android.application")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
-    id("androidx.room")
+    id("androidx.room3")
     id("com.google.devtools.ksp")
     id("dev.rikka.tools.refine")
     id("com.gitlab.grrfe.android-build-plugin")
@@ -51,12 +54,8 @@ android {
         with(ArchiveBaseName) {
             project.base.setArchivesName(appName, name, now)
         }
-        val localProperties = with(PropertiesFile) {
-            rootProject.file("local.properties").readPropertiesOrNull()
-        }
-        val publicLocalProperties = with(PropertiesFile) {
-            rootProject.file("public.local.properties").readPropertiesOrNull()
-        }
+        val localProperties = rootProject.propertiesProvider(LocalPropertiesFile)
+        val publicLocalProperties = rootProject.propertiesProvider(PublicLocalPropertiesFile)
         val localProviders = withProviders(localProperties, SystemEnvironment)
         val publicLocalProviders = withProviders(publicLocalProperties, SystemEnvironment)
 
@@ -92,12 +91,6 @@ android {
             string("BRANCH", branch)
             boolean("IS_CI", System.getenv("CI")?.toBooleanStrictOrNull() == true)
             string("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
-            string("APTABASE_API_KEY", localProviders.get("APTABASE_API_KEY"))
-            boolean(
-                "ANALYTICS_SUPPORTED",
-                localProviders.get("ANALYTICS_SUPPORTED")?.toBooleanStrictOrNull() != false
-            )
-
             string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
             string("API_HOST", localProviders.get("API_HOST"))
         }
@@ -254,11 +247,9 @@ kotlin {
     }
 }
 
-room {
+room3 {
     schemaDirectory("$projectDir/schemas")
-    generateKotlin = true
 }
-
 
 junitPlatform {
     instrumentationTests {
@@ -267,6 +258,8 @@ junitPlatform {
 }
 
 dependencies {
+    implementation(project(":feature-analytics-service"))
+    debugImplementation(project(":feature-analytics-aptabase"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
     implementation(project(":feature-devicecompat"))
@@ -280,18 +273,20 @@ dependencies {
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
+    implementation("androidx.sqlite:sqlite-bundled:2.6.2")
 
-    compileOnly(project(":hidden-api"))
+    compileOnly(project(":lib-hidden-api"))
     implementation(project(":config"))
-    implementation(project(":log"))
-    implementation(project(":util"))
-    implementation(project(":api"))
-    implementation(project(":common"))
-    implementation(project(":compose"))
+    implementation(project(":lib-log"))
+    implementation(project(":lib-http"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-compose"))
 
-    implementation(project(":bottom-sheet"))
-    implementation(project(":bottom-sheet-new"))
-    implementation(project(":scaffold"))
+    implementation(project(":lib-bottom-sheet"))
+    implementation(project(":lib-bottom-sheet-new"))
+    implementation(project(":lib-scaffold"))
     implementation(project(":test-fake"))
 
     testImplementation(project(":test-core"))
@@ -330,9 +325,9 @@ dependencies {
     implementation(AndroidX.work.runtimeKtx)
     testImplementation(AndroidX.work.testing)
 
-    implementation(AndroidX.room.runtime)
-    implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
+    implementation("androidx.room3:room3-runtime:3.0.0-alpha03")
+    implementation("androidx.room3:room3-sqlite-wrapper:3.0.0-alpha03")
+    ksp("androidx.room3:room3-compiler:3.0.0-alpha03")
 
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
@@ -449,7 +444,7 @@ dependencies {
         Grrfe.std.result.assert,
         Testing.robolectric,
         CashApp.turbine,
-        AndroidX.room.testing,
+        "androidx.room3:room3-testing:3.0.0-alpha03",
         AndroidX.test.ext.junit.ktx,
         AndroidX.compose.ui.test,
         AndroidX.compose.ui.testJunit4,

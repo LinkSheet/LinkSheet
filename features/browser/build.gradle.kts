@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("androidx.room")
+    id("androidx.room3")
     id("com.google.devtools.ksp")
     id("com.gitlab.grrfe.android-build-plugin")
 }
@@ -24,22 +24,20 @@ android {
         jvmToolchain(Version.JVM)
     }
 
-    room {
+    room3 {
         schemaDirectory("$projectDir/schemas")
-        generateKotlin = true
     }
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":util"))
-    implementation(project(":common"))
-    implementation(project(":compose"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-compose"))
     implementation(project(":feature-app"))
 
-    implementation(AndroidX.room.runtime)
-    implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
+    implementation("androidx.room3:room3-runtime:3.0.0-alpha03")
+    ksp("androidx.room3:room3-compiler:3.0.0-alpha03")
 
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)

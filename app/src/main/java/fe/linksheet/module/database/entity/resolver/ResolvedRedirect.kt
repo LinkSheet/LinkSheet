@@ -1,7 +1,7 @@
 package fe.linksheet.module.database.entity.resolver
 
-import androidx.room.Entity
-import androidx.room.Ignore
+import androidx.room3.Entity
+import androidx.room3.Ignore
 
 @Entity(tableName = "resolved_redirect", primaryKeys = ["shortUrl"])
 data class ResolvedRedirect(

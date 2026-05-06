@@ -1,5 +1,7 @@
 package app.linksheet.compose.page
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -11,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import app.linksheet.compose.appbar.SaneLargeTopAppBar
+import fe.composekit.component.list.column.SaneLazyColumnDefaults
 import fe.composekit.component.page.SaneScaffoldSettingsPageInternal
 import fe.composekit.layout.column.SaneLazyListScope
 
@@ -25,6 +28,8 @@ fun SaneScaffoldSettingsPage(
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
     state: LazyListState = rememberLazyListState(),
+    contentPadding: PaddingValues = SaneLazyColumnDefaults.ContentPadding,
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     content: SaneLazyListScope.() -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
@@ -46,6 +51,8 @@ fun SaneScaffoldSettingsPage(
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition,
         state = state,
+        contentPadding = contentPadding,
+        verticalArrangement = verticalArrangement,
         content = content
     )
 }

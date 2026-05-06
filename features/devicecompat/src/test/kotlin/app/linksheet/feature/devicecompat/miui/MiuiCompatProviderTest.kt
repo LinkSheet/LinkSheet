@@ -8,7 +8,7 @@ import app.linksheet.testing.fake.device.*
 import assertk.assertThat
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
-import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.RealSystemInfoService
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +18,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
 internal class MiuiCompatProviderTest : BaseUnitTest {
     private fun Device.isProviderRequired(): Boolean {
-        val service = SystemInfoService(this, buildInfo = BuildInfoFake.Info)
+        val service = RealSystemInfoService(this, buildInfo = BuildInfoFake.Info)
         val provider = RealMiuiCompatProvider(service, RefineWrapperDummy)
 
         return provider.isRequired.value

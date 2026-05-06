@@ -24,8 +24,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-util"))
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)

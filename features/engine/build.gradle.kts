@@ -9,7 +9,7 @@ plugins {
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("androidx.room")
+    id("androidx.room3")
     id("com.google.devtools.ksp")
     id("com.gitlab.grrfe.android-build-plugin")
 }
@@ -26,19 +26,19 @@ android {
         jvmToolchain(Version.JVM)
         compilerOptions.freeCompilerArgs.addCompilerOptions(CompilerOption.ContextParameters)
     }
+}
 
-    room {
-        schemaDirectory("$projectDir/schemas")
-        generateKotlin = true
-    }
+room3 {
+    schemaDirectory("$projectDir/schemas")
+
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":util"))
-    implementation(project(":api"))
-    implementation(project(":log"))
-    implementation(project(":compose"))
+    implementation(project(":lib-common"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-log"))
+    implementation(project(":lib-compose"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
     implementation(project(":feature-downloader"))
@@ -47,9 +47,9 @@ dependencies {
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
     implementation(project(":sdk-common"))
-    implementation(AndroidX.room.runtime)
-    implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
+
+    implementation("androidx.room3:room3-runtime:3.0.0-alpha03")
+    ksp("androidx.room3:room3-compiler:3.0.0-alpha03")
 
 
     implementation("sh.calvin.reorderable:reorderable:_")
@@ -92,7 +92,6 @@ dependencies {
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.sqlite.ktx)
 
-    implementation(platform(KotlinX.serialization.bom))
     implementation(KotlinX.serialization.json)
     implementation(KotlinX.serialization.protobuf)
     implementation(KotlinX.serialization.cbor)

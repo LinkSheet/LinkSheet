@@ -12,4 +12,5 @@
     <string name="telemetry_level_minimal_description">Показатељи инсталиране верзије</string>
     <string name="telemetry_dialog_title">LinkSheet поштује вашу приватност</string>
     <string name="telemetry_dialog_text">Одаберите тип показатеља коришћења који вам највише одговара.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Показатељи коришћења укључују насумични \n идентификатор везани за инсталацију који може да се ресетује, као и вашу Android верзију и чувају се на<annotation url-id="aptabase">Aptabase (ЕУ)</annotation>. Осетљиви подаци,као што су инсталиране апликације и линкови на које сте кликнули, <b>никада</b> неће бити прикупљани. Да бисте сазнали више, додирните <annotation url-id="privacy-telemetry">овде</annotation>.</string>
 </resources>

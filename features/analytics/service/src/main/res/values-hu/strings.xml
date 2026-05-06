@@ -11,4 +11,5 @@
     <string name="telemetry_level_disabled">Letiltva</string>
     <string name="telemetry_identity_full">Teljes</string>
     <string name="telemetry_dialog_title">A LinkSheet tiszteletben tartja az Ön személyes adatait</string>
+    <string name="telemetry_dialog_text">Válassza ki az Ön számára legmegfelelőbb használati mutatók típusát.</string>
 </resources>

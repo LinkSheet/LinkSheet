@@ -328,7 +328,6 @@
     <string name="settings_verified_link_handlers__text_browser">Navigateur</string>
     <string name="cancel">Annuler</string>
     <string name="tap_customization_dialog_title_long_tap">Long tapotement</string>
-    <string name="telemetry_dialog_text">Choisissez le type de suivi d’utilisation avec lequel vous êtes le plus à l’aise.</string>
     <string name="link_handle_failed_text">LinkSheet ne peut pas gérer ce lien car il semble incorrect. Vous pouvez le modifier ci-dessous, puis réessayer. Vous pouvez également effectuer une recherche sur le Web.</string>
     <string name="reset_app_link_verification_status_subtitle">Tapez ici pour réinitialiser le statut de vérification du lien avec l\'application pour toutes les applications, puis attendez quelques minutes pendant qu\'Android les revérifie. Vous ne recevrez pas de confirmation. Nécessite Shizuku.</string>
     <string name="settings_main_setup_success__button_change_browser">Navigateur par défaut</string>

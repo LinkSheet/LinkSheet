@@ -11,4 +11,5 @@
     <string name="telemetry_level_disabled">مُعطَّل</string>
     <string name="telemetry_level_standard">قياسي</string>
     <string name="telemetry_dialog_title">LinkSheet يحترم خصوصيتك</string>
+    <string name="telemetry_dialog_text">اختر نوع مقاييس الاستخدام الذي ترتاح له أكثر.</string>
 </resources>

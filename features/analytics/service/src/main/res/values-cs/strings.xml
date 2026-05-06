@@ -11,4 +11,6 @@
     <string name="telemetry_level_minimal_description">Informace o nainstalované verzi</string>
     <string name="telemetry_level_exhaustive_description">Podrobné statistiky o používání</string>
     <string name="telemetry_dialog_title">Aplikace LinkSheet respektuje vaše soukromí</string>
+    <string name="telemetry_dialog_text">Vyberte typ statistik o používání, se kterým jste nejvíce spokojeni.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url-id="aptabase">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url-id="privacy-telemetry">sem</annotation>.</string>
 </resources>

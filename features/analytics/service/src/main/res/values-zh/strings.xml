@@ -10,4 +10,6 @@
     <string name="telemetry_level_standard">标准</string>
     <string name="telemetry_level_disabled_description">不收集数据</string>
     <string name="telemetry_dialog_title">LinkSheet 尊重你的隐私</string>
+    <string name="telemetry_dialog_text">选择最适合你的使用指标类型。</string>
+    <string name="telemetry_dialog_text_2" translatable="false">使用指标包括随安装而定、用户可重置的随机标识符，以及你的 Android 版本，会被存放在 <annotation url-id="aptabase">Aptabase (EU)</annotation>。我们<b>从不</b>会收集诸如已安装应用、点击的链接一类的敏感数据。要了解更多，请点击<annotation url-id="privacy-telemetry">这里</annotation>。</string>
 </resources>

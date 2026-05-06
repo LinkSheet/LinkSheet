@@ -457,7 +457,6 @@
         <item quantity="other"/>
     </plurals>
     <string name="bottom_sheet__button_manual_redirect">تتبع عمليات إعادة التوجيه</string>
-    <string name="telemetry_dialog_text">اختر نوع مقاييس الاستخدام الذي ترتاح له أكثر.</string>
     <string name="link_handle_failed_text_field_label">استعلام</string>
     <string name="verified_link_handlers_subtitle">التحكم في حالة التحقق من التطبيق والمجال</string>
     <string name="settings_shortcuts__title_connected_apps">التطبيقات المتصلة</string>

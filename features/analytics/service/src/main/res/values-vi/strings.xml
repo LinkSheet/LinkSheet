@@ -11,4 +11,6 @@
     <string name="telemetry_level_standard_description">Thống kê sử dụng tổng hợp</string>
     <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
     <string name="telemetry_dialog_title">LinkSheet tôn trọng quyền riêng tư của bạn</string>
+    <string name="telemetry_dialog_text">Chọn loại số liệu sử dụng mà bạn cảm thấy thoải mái nhất.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Các chỉ số sử dụng bao gồm giá trị nhận dạng ngẫu nhiên, do người dùng đặt lại trong quá trình cài đặt, cũng như phiên bản Android của bạn và được lưu trữ tại <annotation url-id="aptabase">Aptabase (EU)</annotation>. Dữ liệu nhạy cảm, chẳng hạn như các ứng dụng đã cài đặt và các liên kết đã nhấp vào sẽ <b>không bao giờ</b> bị thu thập. Để tìm hiểu thêm, hãy nhấn vào <annotation url-id="privacy-telemetry">đây</annotation>.</string>
 </resources>

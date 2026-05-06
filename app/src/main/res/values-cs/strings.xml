@@ -318,7 +318,6 @@
     <string name="tap_customization_dialog_text">Vyberte akci, která má být provedena</string>
     <string name="expand_on_app_select">Rozšířit po vybrání aplikace</string>
     <string name="expand_on_app_select_explainer">Automaticky rozšířit spodní list po vybrání aplikace</string>
-    <string name="telemetry_dialog_text">Vyberte typ statistik o používání, se kterým jste nejvíce spokojeni.</string>
     <string name="telemetry_configure_title">Analytika</string>
     <string name="telemetry_identifier_reset">Resetovat identifikátor</string>
     <string name="telemetry_configure_type">Typ analytik</string>
@@ -340,7 +339,6 @@
     <string name="share">Sdílet odkaz</string>
     <string name="opening_with_app">Otevírání v aplikaci %s</string>
     <string name="launch_onboarding">Spustit úvod</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url-id="aptabase">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url-id="privacy-telemetry">sem</annotation>.</string>
     <string name="settings_verified_link_handlers__text_user_apps">Uživatelské aplikace</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Vše</string>
     <string name="settings_notifications__divider_toasts">Vyskakovací zprávy</string>

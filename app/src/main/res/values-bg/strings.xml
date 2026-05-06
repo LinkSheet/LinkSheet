@@ -278,7 +278,6 @@
     <string name="onboarding_1_card_explainer">LinkSheet не може да работи ако не е зададен като подразбиран мрежов четец.</string>
     <string name="onboarding_2_title">Желаете ли да използвате Shizuku?</string>
     <string name="start_setup_explainer">Възможностите на LinkSheet изискват определена настройка на Андроид. Помощникът ще ви преведе през стъпките на процеса.</string>
-    <string name="telemetry_dialog_text">Изберете вида на статистиките за използване, които смятате за най-удачни.</string>
     <string name="reset_app_link_verification_status">Нулиране на проверените препратки</string>
     <string name="base_config">Допълнителни настройки</string>
     <string name="tap_customization_dialog_text">Изберете действието, което да бъде изпълнено</string>
@@ -303,7 +302,6 @@
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Включени</string>
     <string name="customization">Нагласяне</string>
     <string name="onboarding_2_request_shizuku_permission">Искане на права</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url-id="aptabase">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url-id="privacy-telemetry">докоснете тук</annotation>.</string>
     <string name="telemetry_configure_title">Статистики</string>
     <string name="nightly_experiments_card">Нощни експерименти</string>
     <string name="onboarding_3_card_explainer">В Андроид 12 Гугъл въведе т.нар. проверени препратки, които дават възможност на приложенията по криптографски начин да докажат собственост върху даден домейн. За да може LinkSheet да прехваща препратки, това поведение трябва да бъде изключено ръчно.</string>

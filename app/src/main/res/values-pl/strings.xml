@@ -307,7 +307,6 @@
     <string name="resolve_embeds">Rozwiąż osadzenia</string>
     <string name="resolve_embeds_explainer">Rozwiązuj lustra osadzeń, takie jak fxtwitter.com, aby prowadziły do rzeczywistego hosta</string>
     <string name="tap_customization">Personalizacja dotknięć</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Metryki użycia obejmują losowy, możliwy do zresetowania przez użytkownika identyfikator związany z instalacją, a także wersję Androida i są przechowywane w <annotation url-id="aptabase">Aptabase (UE)</annotation>. Wrażliwe dane, takie jak zainstalowane aplikacje i kliknięte linki, <b>nigdy</b> nie będą zbierane. Aby dowiedzieć się więcej, naciśnij <annotation url-id="privacy-telemetry">tutaj</annotation>.</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Włączone</string>
     <string name="switch_profile">Włącz przełączanie profili</string>
     <string name="something_went_wrong">Coś poszło nie tak, proszę spróbuj ponownie.</string>
@@ -315,7 +314,6 @@
     <string name="customization">Personalizacja</string>
     <string name="reset_app_link_verification_status_subtitle">Naciśnij tutaj, aby zresetować status weryfikacji linków aplikacji we wszystkich aplikacjach, a następnie poczekaj kilka minut, podczas gdy Android ponownie je weryfikuje. Nie otrzymasz potwierdzenia. Wymaga Shizuku.</string>
     <string name="open_app_settings_page">Otwórz stronę ustawień aplikacji</string>
-    <string name="telemetry_dialog_text">Wybierz typ metryk użycia, z którym czujesz się najbardziej komfortowo.</string>
     <string name="theme_enable_amoled_explainer">Użyj motywu czystej czerni, jeśli włączony jest tryb ciemny</string>
     <string name="experiments_explainer_2">Aktywne prace rozwojowe</string>
     <string name="retry">Spróbuj ponownie</string>

@@ -11,4 +11,6 @@
     <string name="telemetry_level_minimal">Минимална</string>
     <string name="telemetry_level_exhaustive">Подробна</string>
     <string name="telemetry_dialog_title">LinkSheet уважава поверителността ви</string>
+    <string name="telemetry_dialog_text">Изберете вида на статистиките за използване, които смятате за най-удачни.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url-id="aptabase">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url-id="privacy-telemetry">докоснете тук</annotation>.</string>
 </resources>

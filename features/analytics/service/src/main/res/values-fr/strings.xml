@@ -11,4 +11,5 @@
     <string name="telemetry_level_standard_description">Statistiques d\'utilisation agrégées</string>
     <string name="telemetry_level_minimal_description">Statistiques de la version installée</string>
     <string name="telemetry_dialog_title">LinkSheet respecte votre vie privée</string>
+    <string name="telemetry_dialog_text">Choisissez le type de suivi d’utilisation avec lequel vous êtes le plus à l’aise.</string>
 </resources>

@@ -201,14 +201,16 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
 
         val controller = remember {
-            val hideSheet = {
-                coroutineScope.launch { sheetState.hide() }
-            }
-
             DefaultBottomSheetStateController(
                 editorLauncher = editorLauncher,
                 dispatch = { interaction ->
-                    handleInteraction(interaction, resolveResult, hideSheet)
+                    handleInteraction(
+                        interaction = interaction,
+                        resolveResult = resolveResult,
+                        hideSheet = {
+                            coroutineScope.launch { sheetState.hide() }
+                        }
+                    )
                 },
             )
         }

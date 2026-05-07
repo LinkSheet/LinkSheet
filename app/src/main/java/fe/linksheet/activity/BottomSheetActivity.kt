@@ -190,7 +190,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 "Interaction=$interaction, isClear=${interaction == ResolverInteraction.Clear}, " +
                         "isInitialized=${interaction == ResolverInteraction.Initialized}"
             )
-            if (interaction != ResolverInteraction.Initialized) {
+            if (resolveResult == IntentResolveResult.Pending && interaction != ResolverInteraction.Initialized) {
                 // Request resize on interaction change to accommodate interaction UI
                 sheetState.expand()
             }

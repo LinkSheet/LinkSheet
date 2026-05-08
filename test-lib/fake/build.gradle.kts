@@ -4,7 +4,7 @@ import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 plugins {
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
-    id("de.mannodermaus.android-junit5")
+    id("de.mannodermaus.android-junit")
 }
 
 group = "fe.linksheet.testlib.fake"

@@ -15,16 +15,21 @@ import org.junit.runner.RunWith
 internal class MigrationTest : InstrumentationTest {
     private val testDb = "migration-test"
     private val sqliteDriver = BundledSQLiteDriver()
+    private val dbFile = instrumentation.targetContext.getDatabasePath(testDb)
 
     @get:Rule
     val helper: MigrationTestHelper = MigrationTestHelper(
         instrumentation = instrumentation,
-        file = instrumentation.targetContext.getDatabasePath(testDb),
+        file = dbFile,
         driver = sqliteDriver,
         databaseClass = LinkSheetDatabase::class
     )
 
-    private suspend fun test(version: Int, migration: CrossDatabaseMigration = DefaultCrossDatabaseMigration()) {
+    private suspend fun test(
+        version: Int,
+        migration: CrossDatabaseMigration = DefaultCrossDatabaseMigration()
+    ) {
+        if (dbFile.exists()) dbFile.delete()
         helper.createDatabase(version).apply {
             close()
         }
@@ -38,7 +43,7 @@ internal class MigrationTest : InstrumentationTest {
 
     @org.junit.Test
     fun testMigrateFull() = runTest {
-         test(2)
+        test(2)
     }
 
     @org.junit.Test

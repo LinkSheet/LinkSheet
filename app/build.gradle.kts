@@ -30,7 +30,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("dev.rikka.tools.refine")
     id("com.gitlab.grrfe.android-build-plugin")
-    id("de.mannodermaus.android-junit5")
+    id("de.mannodermaus.android-junit")
 }
 
 val appName = "LinkSheet"
@@ -273,7 +273,7 @@ dependencies {
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
-    implementation("androidx.sqlite:sqlite-bundled:2.6.2")
+    implementation("androidx.sqlite:sqlite-bundled:_")
 
     compileOnly(project(":lib-hidden-api"))
     implementation(project(":config"))
@@ -325,9 +325,9 @@ dependencies {
     implementation(AndroidX.work.runtimeKtx)
     testImplementation(AndroidX.work.testing)
 
-    implementation("androidx.room3:room3-runtime:3.0.0-alpha03")
-    implementation("androidx.room3:room3-sqlite-wrapper:3.0.0-alpha03")
-    ksp("androidx.room3:room3-compiler:3.0.0-alpha03")
+    implementation("androidx.room3:room3-runtime:_")
+    implementation("androidx.room3:room3-sqlite-wrapper:_")
+    ksp("androidx.room3:room3-compiler:_")
 
     implementation(Google.android.material)
     implementation(Google.accompanist.permissions)
@@ -431,9 +431,9 @@ dependencies {
     implementation(KotlinX.serialization.json)
     implementation(KotlinX.serialization.protobuf)
     implementation(KotlinX.serialization.cbor)
-    implementation("com.akuleshov7:ktoml-core:0.7.1")
-    implementation("com.akuleshov7:ktoml-file:0.7.1")
-    implementation("com.akuleshov7:ktoml-source:0.7.1")
+    implementation("com.akuleshov7:ktoml-core:_")
+    implementation("com.akuleshov7:ktoml-file:_")
+    implementation("com.akuleshov7:ktoml-source:_")
 
     val commonTestDependencies = arrayOf(
         Koin.test,
@@ -444,7 +444,7 @@ dependencies {
         Grrfe.std.result.assert,
         Testing.robolectric,
         CashApp.turbine,
-        "androidx.room3:room3-testing:3.0.0-alpha03",
+        "androidx.room3:room3-testing:_",
         AndroidX.test.ext.junit.ktx,
         AndroidX.compose.ui.test,
         AndroidX.compose.ui.testJunit4,
@@ -475,7 +475,6 @@ dependencies {
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.espresso.core)
     androidTestImplementation(Testing.junit.jupiter.params)
-    androidTestImplementation("de.mannodermaus.junit5:android-test-compose:_")
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
     debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)

@@ -6,4 +6,10 @@
     <string name="telemetry_level_exhaustive">Väga mahukas</string>
     <string name="telemetry_identity_basic">Lihtne</string>
     <string name="telemetry_identity_full">Täismahuline</string>
+    <string name="telemetry_level_disabled_description">Pole andmekogumist</string>
+    <string name="telemetry_level_minimal_description">Paigaldatud versiooni teave</string>
+    <string name="telemetry_level_standard_description">Kasutuse koondandmed</string>
+    <string name="telemetry_level_exhaustive_description">Kasutuse üksikasjalikud andmed</string>
+    <string name="telemetry_dialog_title">LinkSheet austab sinu privatsust</string>
+    <string name="telemetry_dialog_text">Vali andmekogumise viis, mis sulle sobib.</string>
 </resources>

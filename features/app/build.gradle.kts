@@ -1,7 +1,9 @@
 
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import com.gitlab.grrfe.gradlebuild.common.CompilerOption
 import com.gitlab.grrfe.gradlebuild.common.PluginOption
+import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
 import com.gitlab.grrfe.gradlebuild.extension.addPluginOptions
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
@@ -24,6 +26,7 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
+        compilerOptions.freeCompilerArgs.addCompilerOptions(CompilerOption.SkipPreReleaseCheck)
         compilerOptions.freeCompilerArgs.addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
     }
 }

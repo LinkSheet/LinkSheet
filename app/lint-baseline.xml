@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 8.10.0" type="baseline" client="gradle" dependencies="false" name="AGP (8.10.0)" variant="all" version="8.10.0">
+<issues format="6" by="lint 9.2.0" type="baseline" client="gradle" dependencies="false" name="AGP (9.2.0)" variant="all" version="9.2.0">
 
     <issue
         id="MissingTvBanner"
@@ -43,6 +43,17 @@
             file="src/main/java/fe/linksheet/feature/engine/LinkEngineService.kt"
             line="18"
             column="16"/>
+    </issue>
+
+    <issue
+        id="DefaultUncaughtExceptionDelegation"
+        message="Must call `getDefaultUncaughtExceptionHandler()` to get the existing handler, and call `existingHandler.uncaughtException(thread, throwable)` from your new handler"
+        errorLine1="        Thread.setDefaultUncaughtExceptionHandler { _, throwable ->"
+        errorLine2="        ^">
+        <location
+            file="src/main/java/fe/linksheet/LinkSheetApp.kt"
+            line="98"
+            column="9"/>
     </issue>
 
     <issue
@@ -118,7 +129,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetApi30.kt"
-            line="29"
+            line="30"
             column="5"/>
     </issue>
 
@@ -135,7 +146,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x1&quot; type=&quot;dimen&quot;>0.3&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -146,7 +157,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x2&quot; type=&quot;dimen&quot;>0.8&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -157,7 +168,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y1&quot; type=&quot;dimen&quot;>0&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -168,7 +179,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y2&quot; type=&quot;dimen&quot;>0.2&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -179,7 +190,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x1&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -190,7 +201,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x2&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -201,7 +212,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y1&quot; type=&quot;dimen&quot;>0.7&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -212,7 +223,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-alpha09. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y2&quot; type=&quot;dimen&quot;>1&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -223,7 +234,7 @@
 
     <issue
         id="DiscouragedApi"
-        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
+        message="Fixed screen orientations will be ignored in most cases, starting from Android 16. Android is moving toward a model where apps are expected to adapt to various orientations, display sizes, and aspect ratios."
         errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -234,7 +245,7 @@
 
     <issue
         id="DiscouragedApi"
-        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
+        message="Fixed screen orientations will be ignored in most cases, starting from Android 16. Android is moving toward a model where apps are expected to adapt to various orientations, display sizes, and aspect ratios."
         errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -245,7 +256,7 @@
 
     <issue
         id="DiscouragedApi"
-        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
+        message="Fixed screen orientations will be ignored in most cases, starting from Android 16. Android is moving toward a model where apps are expected to adapt to various orientations, display sizes, and aspect ratios."
         errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -256,7 +267,7 @@
 
     <issue
         id="DiscouragedApi"
-        message="Should not restrict activity to fixed orientation. This may not be suitable for different form factors, causing the app to be letterboxed."
+        message="Fixed screen orientations will be ignored in most cases, starting from Android 16. Android is moving toward a model where apps are expected to adapt to various orientations, display sizes, and aspect ratios."
         errorLine1="                android:screenOrientation=&quot;unspecified&quot;"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -267,20 +278,20 @@
 
     <issue
         id="Typos"
-        message="Repeated word &quot;die&quot; in message: possible typo"
-        errorLine1="    &lt;string name=&quot;general_settings_explainer&quot;>Einstellungen, die die gesamte App betreffen&lt;/string>"
-        errorLine2="                                                             ^">
+        message="&quot;Bem vindo&quot; is a common misspelling; did you mean &quot;Bem-vindo&quot;?"
+        errorLine1="    &lt;string name=&quot;onboarding_0_title&quot;>Bem vindo ao\nLinkSheet&lt;/string>"
+        errorLine2="                                      ~~~~~~~~~">
         <location
-            file="src/main/res/values-de/strings.xml"
-            line="191"
-            column="62"/>
+            file="src/main/res/values-pt-rBR/strings.xml"
+            line="265"
+            column="39"/>
     </issue>
 
     <issue
         id="Typos"
         message="Repeated word &quot;tek&quot; in message: possible typo"
         errorLine1="    &lt;string name=&quot;onboarding_2_card_explainer&quot;>Shizuku, LinkSheet\&apos;in (bir sonraki adım olan) bütün uygulamaların varsayılan bağlantı açma davranışını tek tek kapatmak yerine, tek seferde kapatmasına izin verir.&lt;/string>"
-        errorLine2="                                                                                                                                                       ^">
+        errorLine2="                                                                                                                                                       ~~~~~~~">
         <location
             file="src/main/res/values-tr/strings.xml"
             line="305"
@@ -360,7 +371,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-zh/strings.xml"
-            line="302"
+            line="296"
             column="13"/>
     </issue>
 
@@ -371,7 +382,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pl/strings.xml"
-            line="312"
+            line="311"
             column="13"/>
     </issue>
 
@@ -382,7 +393,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-zh/strings.xml"
-            line="318"
+            line="311"
             column="13"/>
     </issue>
 
@@ -393,7 +404,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="333"
+            line="324"
             column="13"/>
     </issue>
 
@@ -404,7 +415,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pl/strings.xml"
-            line="338"
+            line="329"
             column="13"/>
     </issue>
 
@@ -415,7 +426,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-vi/strings.xml"
-            line="352"
+            line="350"
             column="13"/>
     </issue>
 
@@ -426,7 +437,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-vi/strings.xml"
-            line="353"
+            line="351"
             column="13"/>
     </issue>
 
@@ -437,7 +448,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-nl/strings.xml"
-            line="418"
+            line="406"
             column="13"/>
     </issue>
 
@@ -2122,7 +2133,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="333"
+            line="324"
             column="13"/>
     </issue>
 
@@ -2133,7 +2144,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="359"
+            line="346"
             column="13"/>
     </issue>
 
@@ -2144,7 +2155,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="375"
+            line="362"
             column="13"/>
     </issue>
 
@@ -2155,7 +2166,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="379"
+            line="366"
             column="13"/>
     </issue>
 
@@ -2166,7 +2177,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="481"
+            line="468"
             column="13"/>
     </issue>
 
@@ -2177,7 +2188,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="545"
+            line="533"
             column="13"/>
     </issue>
 
@@ -2188,7 +2199,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="546"
+            line="534"
             column="13"/>
     </issue>
 
@@ -2199,7 +2210,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="547"
+            line="535"
             column="13"/>
     </issue>
 
@@ -2210,7 +2221,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="548"
+            line="536"
             column="13"/>
     </issue>
 
@@ -2221,7 +2232,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="550"
+            line="538"
             column="13"/>
     </issue>
 
@@ -2232,7 +2243,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="558"
+            line="546"
             column="13"/>
     </issue>
 
@@ -2588,28 +2599,6 @@
     <issue
         id="UseKtx"
         message="Use the KTX extension function `String.toUri` instead?"
-        errorLine1="        this.data = Uri.parse(&quot;package:${info.packageName}&quot;)"
-        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/fe/linksheet/extension/android/ActivityExt.kt"
-            line="27"
-            column="21"/>
-    </issue>
-
-    <issue
-        id="UseKtx"
-        message="Use the KTX extension function `String.toUri` instead?"
-        errorLine1="        this.data = Uri.parse(&quot;package:${info.packageName}&quot;)"
-        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/fe/linksheet/extension/android/ActivityExt.kt"
-            line="34"
-            column="21"/>
-    </issue>
-
-    <issue
-        id="UseKtx"
-        message="Use the KTX extension function `String.toUri` instead?"
         errorLine1="            Uri.parse(&quot;package:${packageName}&quot;)"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -2625,7 +2614,7 @@
         errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/activity/bottomsheet/BottomSheetApps.kt"
-            line="301"
+            line="308"
             column="15"/>
     </issue>
 
@@ -2647,7 +2636,7 @@
         errorLine2="                             ~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/module/resolver/ImprovedIntentResolver.kt"
-            line="555"
+            line="565"
             column="30"/>
     </issue>
 

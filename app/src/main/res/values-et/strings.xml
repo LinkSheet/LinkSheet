@@ -172,4 +172,14 @@
     <string name="donate_explainer_crypto">Toetuse saatmisel krüptorahas saada e-kiri aadressile <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="thanks_for_donating">Tänud rahalise toetuse eest!</string>
     <string name="app_setup">Rakenduse seadistus</string>
+    <string name="set_as_browser">Määra veebibrauseriks</string>
+    <string name="set_as_browser_explainer">Klõpsi siin ja määra LinkSheet vaikimisi veebibrauseriks</string>
+    <string name="apps_which_can_open_links">Kinnitatud linkidetöötlejad</string>
+    <string name="theme_explainer">Material You, tume kujundus, süsimust taust</string>
+    <string name="system">Järgi süsteemi kujundust</string>
+    <string name="theme_enable_material_you">Dünaamilised värvid</string>
+    <string name="theme_enable_amoled">Süsimust kujundus</string>
+    <string name="theme_mode">Kujunduse valik</string>
+    <string name="theme_enable_amoled_explainer">Tumeda kujunduse korral kasuta süsimusti värve</string>
+    <string name="theme_enable_material_you_explainer">Kasuta Android 12+ puhul Material You kohast seadme kujundust</string>
 </resources>

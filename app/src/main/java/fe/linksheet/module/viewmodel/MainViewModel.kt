@@ -61,7 +61,7 @@ class MainViewModel(
     val telemetryShowInfoDialog = preferenceRepository.asViewModelState(analyticsPreferences.telemetryShowInfoDialog)
     val remoteConfigDialogDismissed = appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
     val remoteConfig = preferenceRepository.asViewModelState(AppPreferences.remoteConfig)
-    val homeClipboardCard = experimentRepository.asViewModelState(AppPreferences.homeClipboardCard)
+    val homeClipboardCard = preferenceRepository.asViewModelState(AppPreferences.homeClipboardCard)
 
     private val clipboardManager by lazy { context.getSystemService<ClipboardManager>()!! }
 

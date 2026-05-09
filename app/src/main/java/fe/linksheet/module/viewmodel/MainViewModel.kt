@@ -22,8 +22,9 @@ import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import dev.zwander.shared.ShizukuUtil
-import fe.composekit.extension.getFirstText
+import fe.composekit.extension.getSystemServiceOrThrow
 import fe.composekit.extension.setText
+import fe.linksheet.module.ClipboardUseCase
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.state.AppStatePreferences
@@ -34,9 +35,7 @@ import fe.linksheet.util.extension.android.tryStartActivity
 import fe.linksheet.web.UriUtil
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.result.isSuccess
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 
@@ -53,32 +52,58 @@ class MainViewModel(
     private val intentHandler: PackageIntentHandler,
     private val workDelegatorService: WorkDelegatorService,
 ) : BaseViewModel(preferenceRepository) {
+    val clipboardUseCase: ClipboardUseCase = ClipboardUseCase(
+        repository = preferenceRepository,
+        clipboardManager = context.getSystemServiceOrThrow<ClipboardManager>(),
+        coroutineScope = viewModelScope
+    )
+
+    init {
+        clipboardUseCase.init()
+        addCloseable(clipboardUseCase)
+    }
+
     val newDefaultsDismissed =
         appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2025_12_15_InfoDismissed)
 
     @OptIn(SensitivePreference::class)
     val telemetryLevel = preferenceRepository.asViewModelState(analyticsPreferences.telemetryLevel)
-    val telemetryShowInfoDialog = preferenceRepository.asViewModelState(analyticsPreferences.telemetryShowInfoDialog)
-    val remoteConfigDialogDismissed = appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
+    val telemetryShowInfoDialog =
+        preferenceRepository.asViewModelState(analyticsPreferences.telemetryShowInfoDialog)
+    val remoteConfigDialogDismissed =
+        appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
     val remoteConfig = preferenceRepository.asViewModelState(AppPreferences.remoteConfig)
-    val homeClipboardCard = preferenceRepository.asViewModelState(AppPreferences.homeClipboardCard)
+//    val homeClipboardCard = preferenceRepository.asViewModelState(AppPreferences.homeClipboardCard)
 
     private val clipboardManager by lazy { context.getSystemService<ClipboardManager>()!! }
 
-    private val _clipboardContent = MutableStateFlow<Uri?>(null)
-    val clipboardContent = _clipboardContent.asStateFlow()
+//    private val _clipboardContent = MutableStateFlow<Uri?>(null)
+//    val clipboardContent = _clipboardContent.asStateFlow()
 
-    fun tryReadClipboard() {
-        if (!homeClipboardCard.value) {
-            _clipboardContent.tryEmit(null)
-            return
-        }
+//     fun init() = viewModelScope.launch {
+//        homeClipboardCard.stateFlow.collect {
+//            tryReadClipboard()
+//        }
+//    }
+//
+//    fun test() = flow {
+//        clipboardUseCase.contentFlow.collect {
+//            emit(it)
+//        }
+//    }
 
-        val clipboardUri = clipboardManager.getFirstText()?.let { tryParseUriString(it) }
-        if (clipboardUri != null && _clipboardContent.value != clipboardUri) {
-            _clipboardContent.tryEmit(clipboardUri)
-        }
-    }
+//    suspend fun tryReadClipboard() {
+//        clipboardUseCase.contentFlow.refresh()
+////        if (!homeClipboardCard.value) {
+////            _clipboardContent.tryEmit(null)
+////            return
+////        }
+////
+////        val clipboardUri = clipboardManager.getFirstText()?.let { tryParseUriString(it) }
+////        if (clipboardUri != null && _clipboardContent.value != clipboardUri) {
+////            _clipboardContent.tryEmit(clipboardUri)
+////        }
+//    }
 
     fun tryUpdateClipboard(label: String, uriStr: String) {
         val uri = tryParseUriString(uriStr)
@@ -147,3 +172,4 @@ class MainViewModel(
         CrossProfileAccess("android.settings.MANAGE_CROSS_PROFILE_ACCESS")
     }
 }
+

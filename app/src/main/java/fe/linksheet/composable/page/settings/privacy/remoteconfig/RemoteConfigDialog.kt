@@ -83,6 +83,7 @@ private fun RemoteConfigDialog(
         },
         dismissButton = {
             SaneAlertDialogTextButton(
+                modifier = Modifier.testTag(REMOTE_CONFIG_DIALOG__DISABLE_TEST_TAG),
                 content = textContent(R.string.generic__button_text_disable),
                 onClick = { onSelect(false) }
             )

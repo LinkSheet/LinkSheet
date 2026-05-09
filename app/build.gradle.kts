@@ -435,20 +435,21 @@ dependencies {
         KotlinX.coroutines.test,
         Grrfe.std.test,
         Grrfe.std.result.assert,
-        Testing.robolectric,
         CashApp.turbine,
         "androidx.room3:room3-testing:_",
         AndroidX.test.ext.junit.ktx,
-        AndroidX.compose.ui.test,
-        AndroidX.compose.ui.testJunit4,
         "com.willowtreeapps.assertk:assertk:_",
         AndroidX.test.espresso.core,
+        "io.mockk:mockk-android:1.14.9"
     )
 
     for (notation in commonTestDependencies) {
         androidTestImplementation(notation)
         testImplementation(notation)
     }
+
+    testImplementation(Testing.robolectric)
+
 
     testImplementation("org.mock-server:mockserver-client-java:_")
     testImplementation("org.testcontainers:mockserver:_")
@@ -459,15 +460,17 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:_")
     testImplementation(Testing.junit4)
 
-    testImplementation(Testing.junit.jupiter.params)
-
-    androidTestImplementation(Testing.junit.jupiter.api)
     androidTestImplementation(AndroidX.test.uiAutomator)
     androidTestImplementation(AndroidX.test.coreKtx)
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.espresso.core)
-    androidTestImplementation(Testing.junit.jupiter.params)
+//    androidTestImplementation("de.mannodermaus.junit5:android-test-compose-junit6:2.0.1")
+//    androidTestImplementation("de.mannodermaus.junit5:android-test-runner-junit6:2.0.1")
+    androidTestImplementation(platform("org.junit:junit-bom:5.14.1"))
+    androidTestImplementation("org.junit.jupiter:junit-jupiter-api")
+    androidTestImplementation(AndroidX.compose.ui.test)
+
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
     debugImplementation(Square.leakCanary.android)
     debugImplementation(AndroidX.compose.ui.tooling)

@@ -20,7 +20,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -41,8 +40,7 @@ import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.extension.compose.ObserveClipboard
-import fe.linksheet.extension.compose.OnFocused
+import fe.linksheet.module.ClipboardState
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.navigation.settingsRoute
 import fe.linksheet.util.LinkSheet
@@ -55,7 +53,8 @@ import org.koin.androidx.compose.koinViewModel
 fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinViewModel()) {
     val clipboardManager = LocalClipboard.current
 
-    val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
+    val clipboardContent by viewModel.clipboardUseCase.contentFlow.collectAsStateWithLifecycle()
+//    val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
     val newDefaultsDismissed by viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
 
     val showMiuiAlert by viewModel.showMiuiAlert.collectRefreshableAsStateWithLifecycle(
@@ -78,13 +77,13 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
         initialValue = false
     )
 
-    clipboardManager.ObserveClipboard {
-        viewModel.tryReadClipboard()
-    }
-
-    LocalWindowInfo.current.OnFocused {
-        viewModel.tryReadClipboard()
-    }
+//    clipboardManager.ObserveClipboard {
+//        viewModel.tryReadClipboard()
+//    }
+//
+//    LocalWindowInfo.current.OnFocused {
+//        viewModel.tryReadClipboard()
+//    }
 
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
@@ -195,10 +194,10 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (clipboardUri != null) {
+            if (clipboardContent is ClipboardState.Content) {
                 item(key = R.string.open_copied_link, contentType = ContentType.ClickableAlert) {
                     OpenCopiedLink(
-                        uri = clipboardUri!!,
+                        uri = (clipboardContent as? ClipboardState.Content)!!.content,
                         navigate = { navController.navigate(it) }
                     )
                 }

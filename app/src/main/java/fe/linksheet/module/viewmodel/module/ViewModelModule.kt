@@ -76,6 +76,12 @@ val ViewModelModule = module {
             toml = Toml.Default
         )
     }
+//    factory{
+//        ClipboardUseCase(
+//            repository = get<AppPreferenceRepository>(),
+//            clipboardManager = getSystemServiceOrThrow<ClipboardManager>(),
+//        )
+//    }
 
     viewModelOf(::MainViewModel)
     viewModelOf(::VerifiedLinkHandlersViewModel)

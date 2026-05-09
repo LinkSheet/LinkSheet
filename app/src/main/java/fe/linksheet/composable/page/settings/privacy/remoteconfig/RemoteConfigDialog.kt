@@ -10,15 +10,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.compose.theme.DialogTitleStyle
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
-import fe.android.compose.feedback.wrap
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -26,9 +27,10 @@ import fe.android.compose.text.TextContentWrapper
 import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.dialog.SaneIconAlertDialog
 import fe.linksheet.R
-import app.linksheet.compose.theme.DialogTitleStyle
 import my.nanihadesuka.compose.ScrollbarSettings
 
+const val REMOTE_CONFIG_DIALOG__DISABLE_TEST_TAG = "remote_config_dialog__disable_test_tag"
+const val REMOTE_CONFIG_DIALOG__ENABLE_TEST_TAG = "remote_config_dialog__enable_test_tag"
 
 @Composable
 fun rememberRemoteConfigDialog(onChanged: (Boolean) -> Unit): ResultDialogState<Boolean> {
@@ -36,10 +38,9 @@ fun rememberRemoteConfigDialog(onChanged: (Boolean) -> Unit): ResultDialogState<
     val state = rememberResultDialogState<Boolean>()
     ResultDialog(state = state, onClose = onChanged) {
         RemoteConfigDialog(
-            onDismiss = interaction.wrap(FeedbackType.Decline, state::dismiss),
-            onConfirm = {
-                interaction.perform(FeedbackType.Confirm)
-                state.close(true)
+            onSelect = {
+                interaction.perform(type = if (it) FeedbackType.Confirm else FeedbackType.Decline)
+                state.close(it)
             }
         )
     }
@@ -50,8 +51,7 @@ fun rememberRemoteConfigDialog(onChanged: (Boolean) -> Unit): ResultDialogState<
 
 @Composable
 private fun RemoteConfigDialog(
-    onDismiss: () -> Unit,
-    onConfirm: () -> Unit,
+    onSelect: (Boolean) -> Unit,
 ) {
     val state = rememberLazyListState()
     SaneIconAlertDialog(
@@ -74,14 +74,17 @@ private fun RemoteConfigDialog(
         },
         onDismiss = {},
         confirmButton = {
-            Button(onClick = onConfirm) {
+            Button(
+                modifier = Modifier.testTag(REMOTE_CONFIG_DIALOG__ENABLE_TEST_TAG),
+                onClick = { onSelect(true) }
+            ) {
                 textContent(R.string.generic__button_text_enable).content()
             }
         },
         dismissButton = {
             SaneAlertDialogTextButton(
                 content = textContent(R.string.generic__button_text_disable),
-                onClick = onDismiss
+                onClick = { onSelect(false) }
             )
         }
     ) {
@@ -95,7 +98,6 @@ private fun RemoteConfigDialog(
 @Composable
 private fun RemoteConfigDialogPreview() {
     RemoteConfigDialog(
-        onDismiss = {},
-        onConfirm = {},
+        onSelect = {},
     )
 }

@@ -1,4 +1,3 @@
-
 //import com.gitlab.grrfe.gradlebuild.common.version.asProvider
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
@@ -19,6 +18,7 @@ import com.gitlab.grrfe.gradlebuild.util.withProviders
 import com.gitlab.grrfe.gradlebuild.version.createVersionProvider
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
+import fe.buildsrc.LocaleConfigTask
 
 plugins {
     kotlin("plugin.compose")
@@ -34,6 +34,12 @@ plugins {
 }
 
 val appName = "LinkSheet"
+val localProperties = rootProject.propertiesProvider(LocalPropertiesFile)
+val publicLocalProperties = rootProject.propertiesProvider(PublicLocalPropertiesFile)
+
+val localProviders = withProviders(localProperties, SystemEnvironment)
+val publicLocalProviders = withProviders(publicLocalProperties, SystemEnvironment)
+val supportedLocales = publicLocalProviders.get("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
 
 android {
     namespace = "fe.linksheet"
@@ -54,28 +60,10 @@ android {
         with(ArchiveBaseName) {
             project.base.setArchivesName(appName, name, now)
         }
-        val localProperties = rootProject.propertiesProvider(LocalPropertiesFile)
-        val publicLocalProperties = rootProject.propertiesProvider(PublicLocalPropertiesFile)
-        val localProviders = withProviders(localProperties, SystemEnvironment)
-        val publicLocalProviders = withProviders(publicLocalProperties, SystemEnvironment)
 
-        val supportedLocales = publicLocalProviders.get("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
         androidResources {
             @Suppress("UnstableApiUsage")
             localeFilters += supportedLocales
-        }
-        tasks.register("createLocaleConfig") {
-            val localeString = supportedLocales.joinToString(
-                separator = System.lineSeparator(),
-            ) { "\t<locale android:name=\"$it\" />" }
-
-            val xml = """<?xml version="1.0" encoding="utf-8"?>
-            |<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
-            |$localeString 
-            |</locale-config>
-            """.trimMargin()
-
-            file("src/main/res/xml/locales_config.xml").writeText(xml)
         }
 
         buildConfig {
@@ -202,7 +190,7 @@ android {
     }
 
     packaging {
-       resources.pickFirsts += "**/google/protobuf/**"
+        resources.pickFirsts += "**/google/protobuf/**"
     }
 
     lint {
@@ -235,6 +223,11 @@ android {
     for (it in arrayOf("compat", "experiment", "testing")) {
         main.kotlin.directories.add("src/main/$it")
     }
+}
+
+tasks.register<LocaleConfigTask>("createLocaleConfig") {
+    locales.set(supportedLocales)
+    outputFile.set(file("src/main/res/xml/locales_config.xml"))
 }
 
 kotlin {

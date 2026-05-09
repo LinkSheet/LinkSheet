@@ -11,6 +11,7 @@ dependencies {
     implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.extension.dom)
 
+    compileOnly(gradleKotlinDsl())
     testImplementation("com.willowtreeapps.assertk:assertk:_")
     testImplementation(kotlin("test"))
 }

@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.DebugMenuButton
+import app.linksheet.feature.remoteconfig.ui.rememberRemoteConfigDialog
 import app.linksheet.feature.shizuku.shizukuDebugItem
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.onboarding.OnboardingActivity
-import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog
 import fe.linksheet.debug.activity.ComponentStateActivity
 import fe.linksheet.debug.activity.ComposableRendererActivity
 import fe.linksheet.debug.activity.ExportLogDialogTestActivity

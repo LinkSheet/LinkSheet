@@ -2,7 +2,12 @@ package fe.linksheet.debug.activity
 
 import android.content.Context
 import android.os.Bundle
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -27,6 +32,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import app.linksheet.feature.remoteconfig.worker.RemoteAssetFetcherWorker
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text
@@ -34,19 +41,16 @@ import fe.composekit.component.card.AlertCard
 import fe.kotlin.extension.string.capitalize
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.composable.ui.AppTheme
-import fe.linksheet.module.remoteconfig.RemoteAssetFetcherWorker
-import fe.linksheet.module.workmanager.WorkDelegatorService
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import java.util.UUID
 
 class WorkManagerActivity : BaseComponentActivity(), KoinComponent {
-    private val workService by inject<WorkDelegatorService>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         setContent(edgeToEdge = true) {
             AppTheme {
@@ -55,7 +59,10 @@ class WorkManagerActivity : BaseComponentActivity(), KoinComponent {
                         modifier = Modifier.padding(all = 12.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        WorkManagerScreen(this@WorkManagerActivity, workService)
+                        WorkManagerScreen(
+                            this@WorkManagerActivity,
+                            WorkManager.getInstance(applicationContext)
+                        )
                     }
                 }
             }
@@ -64,8 +71,8 @@ class WorkManagerActivity : BaseComponentActivity(), KoinComponent {
 }
 
 @Composable
-private fun WorkManagerScreen(context: Context, workService: WorkDelegatorService) {
-    val infos by workService.workManager.getWorkInfosForUniqueWorkFlow(RemoteAssetFetcherWorker.TAG)
+private fun WorkManagerScreen(context: Context, workManager: WorkManager) {
+    val infos by workManager.getWorkInfosForUniqueWorkFlow(RemoteAssetFetcherWorker.TAG)
         .collectAsStateWithLifecycle(
             initialValue = emptyList(),
         )
@@ -102,7 +109,12 @@ private fun WorkInfo.State.toIcon(): ImageVector {
 }
 
 @Composable
-private fun WorkInfoCard(id: UUID, state: WorkInfo.State, nextScheduleTimeMillis: Long, tags: Set<String>) {
+private fun WorkInfoCard(
+    id: UUID,
+    state: WorkInfo.State,
+    nextScheduleTimeMillis: Long,
+    tags: Set<String>
+) {
     val next = remember(nextScheduleTimeMillis) {
         nextScheduleTimeMillis.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat)
     }

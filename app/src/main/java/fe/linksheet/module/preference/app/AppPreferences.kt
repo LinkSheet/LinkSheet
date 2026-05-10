@@ -7,6 +7,7 @@ import app.linksheet.feature.analytics.preference.analyticsPreferences
 import app.linksheet.feature.browser.preference.browserPreferences
 import app.linksheet.feature.libredirect.preference.libRedirectPreferences
 import app.linksheet.feature.profile.preference.profilePreferences
+import app.linksheet.feature.remoteconfig.preference.remoteConfigPreferences
 import app.linksheet.feature.shizuku.preference.shizukuPreferences
 import com.google.gson.JsonArray
 import fe.android.preference.helper.Preference
@@ -88,7 +89,6 @@ object AppPreferences : PreferenceDefinition(
 //    val lastVersionsV1 = jsonMapped<LastVersion?>("last_versions", null)
 
     val homeClipboardCard = boolean("home_clipboard_card", true)
-    val remoteConfig = boolean("remote_config", false)
     val previewUrl = boolean("preview_url", true)
 
     val browserMode = BrowserMode(registry)
@@ -104,6 +104,7 @@ object AppPreferences : PreferenceDefinition(
     val browser = browserPreferences(registry)
     val profileSwitcher = profilePreferences(registry)
     val analytics = analyticsPreferences(registry)
+    val remoteConfig = remoteConfigPreferences(registry)
 
     init {
         mapped("theme", Theme.System, Theme).migrate { repository, theme ->

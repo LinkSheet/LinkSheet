@@ -496,10 +496,6 @@
     <string name="export_settings__text_failure">Nem sikerült exportálni a beállításokat!</string>
     <string name="import_settings__text_success">Importálva!</string>
     <string name="import_settings__text_failure">Nem sikerült importálni a beállításokat!</string>
-    <string name="settings_remote_config__title_dialog">Engedélyezi a távoli konfigurációt?</string>
-    <string name="settings_remote_config__text_content">A LinkSheet automatikusan frissítheti a belső konfigurációs és dokumentációs erőforrásokat, ha csatlakozik konfigurációs kiszolgálójához. További információért koppintson <annotation url-id="github.linksheet.wiki.privacy.remote-config">ide</annotation>.</string>
-    <string name="generic__button_text_enable">Engedélyezés</string>
-    <string name="generic__button_text_disable">Letiltás</string>
     <string name="bottom_sheet__text_launch_illegal">Illegális indítási próbálkozás!</string>
     <string name="bottom_sheet__text_launch_not_allowed">Az indítás nem engedélyezett!</string>
     <string name="bottom_sheet__text_launch_failure_unknown">Ismeretlen indítási hiba!</string>
@@ -557,5 +553,4 @@
     <string name="settings_follow_redirects__subtitle_aggressive">Töltse le a teljes oldal törzset, hogy növelje a kompatibilitást azokkal a webhelyekkel, amelyek nem használnak HTTP-átirányítást</string>
     <string name="handler_target__label_switch_profile_view_intent">Profilváltás</string>
     <string name="import_dumped_preference">Exportált preferenciák importálása</string>
-    <string name="settings_remote_config__title">Távoli konfiguráció</string>
 </resources>

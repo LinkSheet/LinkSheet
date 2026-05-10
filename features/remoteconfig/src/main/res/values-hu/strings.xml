@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_remote_config__title_dialog">Engedélyezi a távoli konfigurációt?</string>
+    <string name="settings_remote_config__text_content">A LinkSheet automatikusan frissítheti a belső konfigurációs és dokumentációs erőforrásokat, ha csatlakozik konfigurációs kiszolgálójához. További információért koppintson <annotation url-id="github.linksheet.wiki.privacy.remote-config">ide</annotation>.</string>
+    <string name="settings_remote_config__title">Távoli konfiguráció</string>
+</resources>

@@ -494,10 +494,6 @@
     <string name="export_settings__text_failure">Ayarlar dışa aktarılamadı!</string>
     <string name="import_settings__text_success">İçe aktarıldı!</string>
     <string name="import_settings__text_failure">Ayarlar içe aktarılamadı!</string>
-    <string name="generic__button_text_enable">Etkinleştir</string>
-    <string name="generic__button_text_disable">Devre dışı bırak</string>
-    <string name="settings_remote_config__text_content">LinkSheet, otomatik olarak yapılandırma sunucusuna bağlanarak dahili yapılandırmayı ve dokümantasyonu güncelleyebilir. Daha fazla bilgi için <annotation url-id="github.linksheet.wiki.privacy.remote-config">buraya</annotation> dokunun.</string>
-    <string name="settings_remote_config__title_dialog">Uzak yapılandırma etkinleştirilsin mi?</string>
     <string name="bottom_sheet__text_launch_not_allowed">Başlatmaya izin verilmiyor!</string>
     <string name="bottom_sheet__text_launch_failure_other">Başlatma başarısız!</string>
     <string name="bottom_sheet__text_launch_illegal">İzin verilmeyen başlatma girişimi!</string>
@@ -557,5 +553,4 @@
     <string name="settings_follow_redirects__title_aggressive">Agresif mod</string>
     <string name="settings_follow_redirects__subtitle_aggressive">HTTP yönlendirmelerini kullanmayan sitelerle daha iyi uyumluluk için tam içeriği yükle</string>
     <string name="handler_target__label_switch_profile_view_intent">Profil değiştir</string>
-    <string name="settings_remote_config__title">Uzak yapılandırma</string>
 </resources>

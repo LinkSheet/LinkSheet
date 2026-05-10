@@ -487,10 +487,6 @@
     <string name="export_settings__text_failure">Gagal mengekspor pengaturan!</string>
     <string name="import_settings__text_success">Berhasil diimpor!</string>
     <string name="import_settings__text_failure">Gagal mengimpor pengaturan!</string>
-    <string name="settings_remote_config__title_dialog">Aktifkan konfigurasi jarak jauh?</string>
-    <string name="settings_remote_config__text_content">LinkSheet dapat memperbarui konfigurasi internal dan sumber daya dokumentasi secara otomatis dengan terhubung ke server konfigurasinya. Untuk mempelajari lebih lanjut, ketuk <annotation url-id="github.linksheet.wiki.privacy.remote-config">di sini</annotation>.</string>
-    <string name="generic__button_text_enable">Aktifkan</string>
-    <string name="generic__button_text_disable">Nonaktifkan</string>
     <string name="bottom_sheet__text_launch_illegal">Upaya peluncuran ilegal!</string>
     <string name="bottom_sheet__text_launch_not_allowed">Peluncuran tidak diizinkan!</string>
     <string name="bottom_sheet__text_launch_failure_unknown">Kegagalan peluncuran tidak dikenal!</string>

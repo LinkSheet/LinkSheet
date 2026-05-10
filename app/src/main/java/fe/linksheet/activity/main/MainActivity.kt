@@ -14,13 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import app.linksheet.feature.analytics.ui.rememberAnalyticDialog
+import app.linksheet.feature.remoteconfig.ui.rememberRemoteConfigDialog
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
 import fe.linksheet.activity.util.DebugStatePublisher
 import fe.linksheet.activity.util.NavGraphDebugState
 import fe.linksheet.activity.util.UiEvent
-import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog
 import fe.linksheet.composable.ui.BoxAppHost
 import fe.linksheet.extension.compose.AddIntentDeepLinkHandler
 import fe.linksheet.extension.compose.ObserveDestination

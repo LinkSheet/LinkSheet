@@ -7,8 +7,8 @@ import androidx.compose.ui.semantics.Role
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.feature.analytics.ui.rememberAnalyticDialog
+import app.linksheet.feature.remoteconfig.ui.remoteConfigListItem
 import app.linksheet.util.buildconfig.StaticBuildInfo
-import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
@@ -42,15 +42,7 @@ fun PrivacySettingsRoute(
                 )
             }
 
-            item(key = R.string.settings_remote_config__title) { padding, shape ->
-                PreferenceSwitchListItem(
-                    statePreference = viewModel.remoteConfig,
-                    shape = shape,
-                    padding = padding,
-                    headlineContent = textContent(R.string.settings_remote_config__title),
-                    supportingContent = annotatedStringResource(R.string.settings_remote_config__text_content),
-                )
-            }
+            remoteConfigListItem(statePreference = viewModel.remoteConfig)
         }
 
         if (StaticBuildInfo.IsDebug || enableAnalytics) {

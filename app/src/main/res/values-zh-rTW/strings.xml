@@ -175,8 +175,6 @@
     <string name="bottom_sheet__button_manual_redirect">跟進重新導向</string>
     <string name="share">分享連結</string>
     <string name="generic__button_text_settings">設定</string>
-    <string name="generic__button_text_enable">啟用</string>
-    <string name="generic__button_text_disable">停用</string>
     <string name="generic__button_learn_more">瞭解詳情</string>
     <string name="amp2html_local_cache_explainer">在本機暫存獲取的非 AMP 版網頁</string>
     <string name="fastforward_version">FastForward 規則</string>
@@ -338,8 +336,6 @@
     <string name="export_log_dialog__text_log_privacy">如欲瞭解分享記錄檔時可能包含的私密資料，請參見<annotation url-id="privacy-logs">隱私權政策</annotation>。</string>
     <string name="general">其他</string>
     <string name="misc_settings">其他</string>
-    <string name="settings_remote_config__text_content">LinkSheet 能夠藉由連線至遠端設定伺服器來自動更新內部設定和文件資源。如欲瞭解詳情，請參見<annotation url-id="github.linksheet.wiki.privacy.remote-config">隱私權政策</annotation>。</string>
-    <string name="settings_remote_config__title_dialog">啟用遠端設定？</string>
     <string name="export_settings__text_success">已匯出！</string>
     <string name="import_settings__text_success">已匯入！</string>
     <string name="export_settings__text_failure">無法匯出設定！</string>

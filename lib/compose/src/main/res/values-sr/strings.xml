@@ -2,4 +2,6 @@
 <resources>
     <string name="generic__button_text_open_external">Отвори спољно</string>
     <string name="generic__button_text_back">Назад</string>
+    <string name="generic__button_text_enable">Омогући</string>
+    <string name="generic__button_text_disable">Онемогући</string>
 </resources>

@@ -525,10 +525,6 @@
     <string name="settings_verified_link_handler__text_hosts">المضيفات</string>
     <string name="settings_verified_link_handler__title_details">التفاصيل</string>
     <string name="generic__button_text_settings">اﻹعدادات</string>
-    <string name="settings_remote_config__title_dialog">تفعيل الإعدادات عن بُعد؟</string>
-    <string name="settings_remote_config__text_content">يمكن لـ LinkSheet تحديث التضبيطات الداخلية ومصادر التوثيق تلقائيًا عن طريق الاتصال بخادم التكوين الخاص به. لمعرفة المزيد، انقر <annotation url-id="github.linksheet.wiki.privacy.remote-config">هنا</annotation>.</string>
-    <string name="generic__button_text_enable">فعِّل</string>
-    <string name="generic__button_text_disable">عطِّل</string>
     <string name="settings_language__dialog_title">لغة التطبيق</string>
     <string name="settings_language__text_system_language">لغة النظام</string>
     <string name="bottom_sheet__text_launch_illegal">محاولة إطلاق غير قانونية!</string>

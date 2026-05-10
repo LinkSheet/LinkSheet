@@ -9,4 +9,6 @@
     <string name="generic__button_text_back">Back</string>
     <string name="generic__button_text_save">Save</string>
     <string name="generic__n_selected">%d selected</string>
+    <string name="generic__button_text_enable">Enable</string>
+    <string name="generic__button_text_disable">Disable</string>
 </resources>

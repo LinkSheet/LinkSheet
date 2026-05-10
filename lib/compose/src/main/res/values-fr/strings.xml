@@ -2,4 +2,6 @@
 <resources>
     <string name="generic__button_text_open_external">Ouverture externe</string>
     <string name="generic__button_text_back">Retour</string>
+    <string name="generic__button_text_enable">Activer</string>
+    <string name="generic__button_text_disable">Désactiver</string>
 </resources>

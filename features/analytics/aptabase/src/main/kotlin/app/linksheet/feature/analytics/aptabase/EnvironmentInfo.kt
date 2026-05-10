@@ -28,7 +28,7 @@ data class EnvironmentInfo(
                 osName = "Android",
                 osVersion = deviceInfo.androidVersion,
                 locale = data.data.getOrDefault("locale", "<null>"),
-                appVersion = (buildInfo.versionName + "-" + buildInfo.flavor + "-" + StaticBuildInfo.CurrentType.name).lowercase(),
+                appVersion = (buildInfo.versionName + "-" + buildInfo.flavor).lowercase(),
                 appBuildNumber = buildInfo.versionCode.toString(),
                 deviceModel = if (manufacturer != null && model != null) "$manufacturer/$model" else "<null>",
                 sdkVersion = SDK_VERSION

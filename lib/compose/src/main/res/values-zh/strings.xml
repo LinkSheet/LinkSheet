@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic__button_text_back">返回</string>
+    <string name="generic__button_text_enable">启用</string>
+    <string name="generic__button_text_disable">禁用</string>
 </resources>

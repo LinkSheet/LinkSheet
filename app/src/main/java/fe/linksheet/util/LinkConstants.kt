@@ -2,6 +2,7 @@ package fe.linksheet.util
 
 import android.util.Log
 import androidx.compose.runtime.Immutable
+import app.linksheet.feature.remoteconfig.util.LinkAssets
 import app.linksheet.feature.wiki.core.WikiPage
 import fe.android.span.helper.LinkTags
 import fe.linksheet.R
@@ -45,7 +46,6 @@ class LinkSheetLinkTags(
     }
 }
 
-typealias LinkAssets = Map<String, String>
 
 fun Github(user: String, repo: String? = null): String {
     val repoStr = repo?.let { "/$it" } ?: ""

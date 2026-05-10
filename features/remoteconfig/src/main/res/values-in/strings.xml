@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_remote_config__title_dialog">Aktifkan konfigurasi jarak jauh?</string>
+    <string name="settings_remote_config__text_content">LinkSheet dapat memperbarui konfigurasi internal dan sumber daya dokumentasi secara otomatis dengan terhubung ke server konfigurasinya. Untuk mempelajari lebih lanjut, ketuk <annotation url-id="github.linksheet.wiki.privacy.remote-config">di sini</annotation>.</string>
+</resources>

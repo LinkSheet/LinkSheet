@@ -24,6 +24,7 @@ import app.linksheet.feature.engine.LinkEngineFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.profile.ProfileFeatureModule
+import app.linksheet.feature.remoteconfig.RemoteConfigFeatureModule
 import app.linksheet.feature.shizuku.ShizukuModule
 import app.linksheet.feature.wiki.WikiFeatureModule
 import app.linksheet.mozilla.components.support.base.log.Log
@@ -53,7 +54,6 @@ import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.receiver.BroadcastEventBusModule
 import fe.linksheet.module.refine.RefineModule
-import fe.linksheet.module.remoteconfig.RemoteConfigClientModule
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.resolver.module.ResolverModule
 import fe.linksheet.module.resolver.urlresolver.UrlResolverModule
@@ -147,7 +147,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             RepositoryModule,
             HttpModule,
             DownloaderModule,
-            RemoteConfigClientModule,
+            RemoteConfigFeatureModule,
             UrlResolverModule,
             ResolverModule,
             ViewModelModule,

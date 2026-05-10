@@ -485,8 +485,6 @@
     <string name="export_settings__text_failure">設定のエクスポートに失敗しました！</string>
     <string name="import_settings__text_success">インポートされました！</string>
     <string name="import_settings__text_failure">設定のインポートに失敗しました！</string>
-    <string name="generic__button_text_enable">有効化</string>
-    <string name="generic__button_text_disable">無効化</string>
     <string name="bottom_sheet__text_launch_not_allowed">起動は許可されませんでした！</string>
     <string name="bottom_sheet__text_launch_illegal">不正な起動試行です！</string>
     <string name="bottom_sheet__text_launch_failure_other">起動に失敗しました！</string>
@@ -500,8 +498,6 @@
     <string name="settings_links_preview__subtitle_preview">ボトムシートに OpenGraph プレビューを読み込んで表示しようとします。<annotation url-id="github.linksheet.wiki.privacy.preview">プライバシーに悪影響</annotation>を及ぼす可能性があります</string>
     <string name="settings_home__title_clipboard_card">クリップボードカード</string>
     <string name="settings_home__text_clipboard_card">現在のクリップボードの内容が URL の場合、ホームページに表示します</string>
-    <string name="settings_remote_config__title_dialog">リモート設定を有効にしますか？</string>
-    <string name="settings_remote_config__text_content">LinkSheet は、設定サーバーに接続することで、内部設定やドキュメントリソースを自動的に更新できます。詳細については、<annotation url-id="github.linksheet.wiki.privacy.remote-config">こちら</annotation> をタップしてください。</string>
     <string name="bottom_sheet__text_launch_failure_unknown">原因が不明な起動失敗です！</string>
     <string name="settings__title_sql">SQL クエリ</string>
     <string name="generic__title_sort_by">並べ替え</string>

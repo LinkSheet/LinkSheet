@@ -21,11 +21,11 @@ import app.linksheet.feature.analytics.service.TelemetryLevel
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
+import app.linksheet.feature.remoteconfig.preference.RemoteConfigPreferences
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getSystemServiceOrThrow
 import fe.composekit.extension.setText
 import fe.linksheet.module.ClipboardUseCase
-import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
@@ -44,6 +44,7 @@ class MainViewModel(
     val appStateRepository: AppStateRepository,
     val preferenceRepository: AppPreferenceRepository,
     val experimentRepository: ExperimentRepository,
+    private val remoteConfigPreferences: RemoteConfigPreferences,
     private val analyticsPreferences: AnalyticsPreferences,
     private val analyticsService: BaseAnalyticsService,
     private val miuiCompatProvider: MiuiCompatProvider,
@@ -70,9 +71,8 @@ class MainViewModel(
     val telemetryLevel = preferenceRepository.asViewModelState(analyticsPreferences.telemetryLevel)
     val telemetryShowInfoDialog =
         preferenceRepository.asViewModelState(analyticsPreferences.telemetryShowInfoDialog)
-    val remoteConfigDialogDismissed =
-        appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
-    val remoteConfig = preferenceRepository.asViewModelState(AppPreferences.remoteConfig)
+    val remoteConfigDialogDismissed = appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
+    val remoteConfig = preferenceRepository.asViewModelState(remoteConfigPreferences.enable)
 //    val homeClipboardCard = preferenceRepository.asViewModelState(AppPreferences.homeClipboardCard)
 
     private val clipboardManager by lazy { context.getSystemService<ClipboardManager>()!! }
@@ -163,7 +163,7 @@ class MainViewModel(
     fun setRemoteConfig(enabled: Boolean) {
         remoteConfigDialogDismissed(true)
         remoteConfig(enabled)
-        workDelegatorService.setRemoteConfig(enabled)
+//        workDelegatorService.setRemoteConfig(enabled)
     }
 
     enum class SettingsIntent(val action: String) {

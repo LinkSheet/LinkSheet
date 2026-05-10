@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_remote_config__title_dialog">Activer la configuration à distance ?</string>
+    <string name="settings_remote_config__text_content">LinkSheet peut mettre à jour automatiquement les ressources de configuration et de documentation internes en se connectant à son serveur de configuration. Pour en savoir plus, cliquez <annotation url-id="github.linksheet.wiki.privacy.remote-config">ici</annotation>.</string>
+</resources>

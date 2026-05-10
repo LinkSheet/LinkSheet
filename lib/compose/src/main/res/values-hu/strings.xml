@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic__button_text_back">Vissza</string>
+    <string name="generic__button_text_enable">Engedélyezés</string>
+    <string name="generic__button_text_disable">Letiltás</string>
 </resources>

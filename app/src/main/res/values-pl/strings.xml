@@ -513,10 +513,6 @@
     <string name="import_settings__text_success">Przywrócono!</string>
     <string name="export_settings__text_success">Zapisano!</string>
     <string name="import_settings__text_failure">Nie udało się przywrócić ustawień!</string>
-    <string name="generic__button_text_enable">Włącz</string>
-    <string name="generic__button_text_disable">Wyłącz</string>
-    <string name="settings_remote_config__text_content">LinkSheet może automatycznie aktualizować wewnętrzne zasoby konfiguracji i dokumentacji, łącząc się ze swoim serwerem konfiguracji. Aby dowiedzieć się więcej, stuknij <annotation url-id="github.linksheet.wiki.privacy.remote-config">tutaj</annotation>.</string>
-    <string name="settings_remote_config__title_dialog">Włączyć zdalną konfigurację?</string>
     <string name="bottom_sheet__text_launch_not_allowed">Start niedozwolony!</string>
     <string name="bottom_sheet__text_launch_failure_unknown">Nieznany błąd startu!</string>
     <string name="bottom_sheet__text_launch_failure_other">Start nieudany!</string>
@@ -575,5 +571,4 @@
     <string name="settings_follow_redirects__title_aggressive">Tryb agresywny</string>
     <string name="settings_follow_redirects__subtitle_aggressive">Pobierz treść całej strony, aby zapewnić lepszą zgodność ze stronami, które nie korzystają z przekierowań HTTP</string>
     <string name="handler_target__label_switch_profile_view_intent">Przełącz profil</string>
-    <string name="settings_remote_config__title">Zdalna konfiguracja</string>
 </resources>

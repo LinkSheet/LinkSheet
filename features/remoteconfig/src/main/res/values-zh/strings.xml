@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_remote_config__title_dialog">启用远程配置？</string>
+    <string name="settings_remote_config__text_content">LinkSheet 可以通过连接配置服务器，自动更新内部配置和文档资源。欲了解更多信息，请 <annotation url-id="github.linksheet.wiki.privacy.remote-config">点此查看</annotation>.</string>
+</resources>

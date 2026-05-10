@@ -2,4 +2,6 @@
 <resources>
     <string name="generic__button_text_open_external">在外部開啟</string>
     <string name="generic__button_text_back">返回</string>
+    <string name="generic__button_text_enable">啟用</string>
+    <string name="generic__button_text_disable">停用</string>
 </resources>

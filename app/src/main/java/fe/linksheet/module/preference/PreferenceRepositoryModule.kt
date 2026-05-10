@@ -5,6 +5,7 @@ import app.linksheet.feature.browser.preference.BrowserPreferences
 import app.linksheet.feature.libredirect.preference.Experiment
 import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import app.linksheet.feature.profile.preference.ProfilePreferences
+import app.linksheet.feature.remoteconfig.preference.RemoteConfigPreferences
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import fe.composekit.preference.asFunction
 import fe.linksheet.module.preference.app.AppPreferenceRepository
@@ -32,4 +33,5 @@ val PreferenceRepositoryModule = module {
     single<BrowserPreferences> { AppPreferences.browser }
     single<ProfilePreferences> { AppPreferences.profileSwitcher }
     single<AnalyticsPreferences> { AppPreferences.analytics }
+    single<RemoteConfigPreferences> { AppPreferences.remoteConfig }
 }

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_remote_config__title_dialog">リモート設定を有効にしますか？</string>
+    <string name="settings_remote_config__text_content">LinkSheet は、設定サーバーに接続することで、内部設定やドキュメントリソースを自動的に更新できます。詳細については、<annotation url-id="github.linksheet.wiki.privacy.remote-config">こちら</annotation> をタップしてください。</string>
+</resources>

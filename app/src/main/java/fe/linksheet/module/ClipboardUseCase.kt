@@ -7,14 +7,11 @@ import fe.composekit.extension.getFirstText
 import fe.composekit.preference.asFlow
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.web.UriUtil
-import fe.std.coroutines.BaseRefreshableFlow
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.coroutines.asStateFlow
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class ClipboardUseCase(
@@ -61,21 +58,6 @@ class ClipboardUseCase(
 
     override fun close() {
         clipboardManager.removePrimaryClipChangedListener(listener)
-    }
-}
-
-fun <T> RefreshableStateFlow<T>.refreshOn(signal: Flow<Boolean>): BaseRefreshableFlow<T> {
-    val x = flow {
-        signal.collect { refresh() }
-        this@refreshOn.collect {
-            emit(it)
-        }
-    }
-
-    return object : BaseRefreshableFlow<T>, Flow<T> by x {
-        override suspend fun refresh() {
-            this@refreshOn.refresh()
-        }
     }
 }
 

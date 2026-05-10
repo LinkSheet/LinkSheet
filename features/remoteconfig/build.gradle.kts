@@ -13,6 +13,7 @@ plugins {
     kotlin("plugin.compose")
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
+    id("de.mannodermaus.android-junit")
 }
 
 android {
@@ -72,6 +73,17 @@ dependencies {
     implementation(Grrfe.gsonExt.core)
     implementation(AndroidX.core.ktx)
 
+    androidTestImplementation(AndroidX.test.uiAutomator)
+    androidTestImplementation(AndroidX.test.coreKtx)
+    androidTestImplementation(AndroidX.test.runner)
+    androidTestImplementation(AndroidX.test.rules)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(platform("org.junit:junit-bom:5.14.1"))
+    androidTestImplementation("org.junit.jupiter:junit-jupiter-api")
+    androidTestImplementation(AndroidX.compose.ui.test)
+    androidTestImplementation("io.mockk:mockk-android:1.14.9")
+    androidTestImplementation(project(":test-core"))
+
     testImplementation(KotlinX.coroutines.test)
     testImplementation(JetBrains.ktor.client.mock)
     testImplementation(Testing.robolectric)
@@ -80,4 +92,7 @@ dependencies {
     testImplementation(Grrfe.std.test)
     testImplementation(Grrfe.std.result.assert)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
+
+    debugImplementation(AndroidX.compose.ui.tooling)
+    debugImplementation(AndroidX.compose.ui.testManifest)
 }

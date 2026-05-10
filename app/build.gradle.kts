@@ -1,11 +1,12 @@
-//import com.gitlab.grrfe.gradlebuild.common.version.asProvider
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import com.gitlab.grrfe.gradlebuild.android.ArchiveBaseName
 import com.gitlab.grrfe.gradlebuild.android.extension.buildConfig
 import com.gitlab.grrfe.gradlebuild.android.extension.buildStringConfigField
-import com.gitlab.grrfe.gradlebuild.android.version.AndroidVersion
-import com.gitlab.grrfe.gradlebuild.android.version.AndroidVersionStrategy
+import com.gitlab.grrfe.gradlebuild.android.version.DefaultFallbackVersionCodeProducer
+import com.gitlab.grrfe.gradlebuild.android.version.SemverProducer
+import com.gitlab.grrfe.gradlebuild.android.version.VersionCodeProducer
+import com.gitlab.grrfe.gradlebuild.android.version.createAndroidVersionProvider
 import com.gitlab.grrfe.gradlebuild.common.CompilerOption
 import com.gitlab.grrfe.gradlebuild.common.KotlinCompilerArgs
 import com.gitlab.grrfe.gradlebuild.common.PluginOption
@@ -15,10 +16,11 @@ import com.gitlab.grrfe.gradlebuild.util.PublicLocalPropertiesFile
 import com.gitlab.grrfe.gradlebuild.util.SystemEnvironment
 import com.gitlab.grrfe.gradlebuild.util.propertiesProvider
 import com.gitlab.grrfe.gradlebuild.util.withProviders
-import com.gitlab.grrfe.gradlebuild.version.createVersionProvider
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildsrc.LocaleConfigTask
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 plugins {
     kotlin("plugin.compose")
@@ -41,6 +43,23 @@ val localProviders = withProviders(localProperties, SystemEnvironment)
 val publicLocalProviders = withProviders(publicLocalProperties, SystemEnvironment)
 val supportedLocales = publicLocalProviders.get("SUPPORTED_LOCALES")?.split(",") ?: emptyList()
 
+object NightlyTagVersionCodeProducer : VersionCodeProducer {
+    private fun readResolve(): Any = NightlyTagVersionCodeProducer
+    private val DTF: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+    private val NIGHTLY_TAG_REGEX = Regex("^nightly-(\\d{4})(\\d{2})(\\d{2})(\\d{2})$")
+
+    override fun produceVersionCode(tag: String): Int? {
+        println("Handling nightly tag $tag")
+        val match = NIGHTLY_TAG_REGEX.matchEntire(tag)?.groupValues ?: return null
+
+        val (_, year, month, day, buildNum) = match
+        val date = LocalDate.of(year.toInt(), month.toInt(), day.toInt())
+        val dateStr = date.format(DTF) + buildNum.padStart(1, '0')
+
+        return dateStr.toIntOrNull()
+    }
+}
+
 android {
     namespace = "fe.linksheet"
     compileSdk = AndroidSdk.COMPILE_SDK
@@ -52,8 +71,13 @@ android {
 
         val now = System.currentTimeMillis()
 
-        val versionProvider = createVersionProvider(AndroidVersionStrategy)
-        val (name, code, commit, branch) = versionProvider.get() as AndroidVersion
+        val versionProvider = createAndroidVersionProvider(
+            versionCodeProducer = { tag ->
+                NightlyTagVersionCodeProducer.produceVersionCode(tag) ?: SemverProducer.produceVersionCode(tag)
+            },
+            fallbackVersionCodeProducer = DefaultFallbackVersionCodeProducer
+        )
+        val (name, code, commit, branch) = versionProvider.get()
         versionCode = code
         versionName = name
 
@@ -261,6 +285,7 @@ dependencies {
     implementation(project(":feature-shizuku"))
     implementation(project(":feature-systeminfo"))
     implementation(project(":feature-profile"))
+    implementation(project(":feature-remoteconfig"))
     implementation(project(":feature-wiki"))
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
@@ -448,7 +473,6 @@ dependencies {
     }
 
     testImplementation(Testing.robolectric)
-
 
     testImplementation("org.mock-server:mockserver-client-java:_")
     testImplementation("org.testcontainers:mockserver:_")

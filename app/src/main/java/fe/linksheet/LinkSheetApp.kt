@@ -62,7 +62,6 @@ import fe.linksheet.module.statistic.StatisticsModule
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
 import fe.linksheet.module.viewmodel.module.ViewModelModule
-import fe.linksheet.module.workmanager.WorkDelegatorServiceModule
 import fe.linksheet.util.LinkSheetLogSink
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
@@ -159,7 +158,6 @@ open class LinkSheetApp : Application(), DependencyProvider {
             ProfileFeatureModule,
             AppStateServiceModule,
             provideDebugModule(),
-            WorkDelegatorServiceModule,
             BroadcastEventBusModule,
             ShizukuModule,
             LibRedirectFeatureModule,

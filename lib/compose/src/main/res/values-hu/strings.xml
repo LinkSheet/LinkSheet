@@ -3,4 +3,5 @@
     <string name="generic__button_text_back">Vissza</string>
     <string name="generic__button_text_enable">Engedélyezés</string>
     <string name="generic__button_text_disable">Letiltás</string>
+    <string name="generic__text_url">Url</string>
 </resources>

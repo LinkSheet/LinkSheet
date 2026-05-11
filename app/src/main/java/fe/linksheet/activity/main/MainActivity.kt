@@ -109,4 +109,10 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
             }
         }
     }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        if (hasFocus) {
+            viewModel.clipboardUseCase.refresh()
+        }
+    }
 }

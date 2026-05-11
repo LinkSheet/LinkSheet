@@ -4,4 +4,5 @@
     <string name="generic__button_text_back">Retour</string>
     <string name="generic__button_text_enable">Activer</string>
     <string name="generic__button_text_disable">Désactiver</string>
+    <string name="generic__text_url">Url</string>
 </resources>

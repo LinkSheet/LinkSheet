@@ -4,4 +4,5 @@
     <string name="generic__button_text_back">Назад</string>
     <string name="generic__button_text_enable">Включване</string>
     <string name="generic__button_text_disable">Изключване</string>
+    <string name="generic__text_url">Адрес</string>
 </resources>

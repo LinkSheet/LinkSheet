@@ -3,4 +3,5 @@
     <string name="generic__button_text_back">Cofnij</string>
     <string name="generic__button_text_enable">Włącz</string>
     <string name="generic__button_text_disable">Wyłącz</string>
+    <string name="generic__text_url">Adres</string>
 </resources>

@@ -462,7 +462,6 @@
         <item quantity="one">%d включено</item>
         <item quantity="other">%d включени</item>
     </plurals>
-    <string name="generic__text_url">Адрес</string>
     <string name="generic__text_edit">Променяне</string>
     <string name="generic__button_text_done">Готово</string>
     <string name="home__clipboard_card_source">От копираното</string>

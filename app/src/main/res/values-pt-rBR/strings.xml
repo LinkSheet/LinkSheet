@@ -475,7 +475,6 @@
     <string name="delete_log_dialog__title_delete_log">Excluir sessão?</string>
     <string name="delete_log_dialog__subtitle_delete_info">Você quer excluir essa sessão de log? Isso não pode ser desfeito!</string>
     <string name="generic__button_text_delete">Excluir</string>
-    <string name="generic__text_url">URL</string>
     <string name="generic__text_edit">Editar</string>
     <string name="generic__button_text_done">Feito</string>
     <string name="home__clipboard_card_source">Da área de transferência</string>

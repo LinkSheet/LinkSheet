@@ -4,4 +4,5 @@
     <string name="generic__button_text_back">返回</string>
     <string name="generic__button_text_enable">啟用</string>
     <string name="generic__button_text_disable">停用</string>
+    <string name="generic__text_url">網址</string>
 </resources>

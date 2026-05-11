@@ -3,4 +3,5 @@
     <string name="generic__button_text_back">Tagasi</string>
     <string name="generic__button_text_enable">Võta kasutusele</string>
     <string name="generic__button_text_disable">Eemalda kasutuselt</string>
+    <string name="generic__text_url">Võrguaadress</string>
 </resources>

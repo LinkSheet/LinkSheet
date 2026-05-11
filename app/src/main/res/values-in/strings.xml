@@ -451,7 +451,6 @@
     <string name="delete_log_dialog__title_delete_log">Hapus sesi?</string>
     <string name="delete_log_dialog__subtitle_delete_info">Apakah Anda ingin menghapus sesi log ini? Ini tidak dapat dibatalkan!</string>
     <string name="generic__button_text_delete">Hapus</string>
-    <string name="generic__text_url">Url</string>
     <string name="generic__text_edit">Edit</string>
     <string name="generic__button_text_done">Selesai</string>
     <string name="home__clipboard_card_source">Dari papan klip</string>

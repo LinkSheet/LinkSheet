@@ -3,7 +3,9 @@ package fe.linksheet.module
 import android.content.ClipboardManager
 import android.net.Uri
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.log.createLogger
 import fe.composekit.extension.getFirstText
+import fe.composekit.extension.setText
 import fe.composekit.preference.asFlow
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.web.UriUtil
@@ -20,18 +22,10 @@ class ClipboardUseCase(
     private val coroutineScope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : AutoCloseable {
+    private val logger = createLogger<ClipboardUseCase>()
     private val isPermittedFlow = repository.asFlow(AppPreferences.homeClipboardCard)
-
-    private fun readClipboard(): ClipboardState {
-        if (!isPermittedFlow.value) {
-            return ClipboardState.Disabled
-        }
-
-        return clipboardManager.getFirstText()
-            ?.let { UriUtil.parseWebUriStrict(it) }
-            ?.let { ClipboardState.Content(it) }
-            ?: ClipboardState.Empty
-    }
+    private val _contentFlow = RefreshableStateFlow { readClipboard() }
+    val contentFlow = _contentFlow.asStateFlow()
 
     private val listener = ClipboardManager.OnPrimaryClipChangedListener {
         coroutineScope.launch {
@@ -40,21 +34,42 @@ class ClipboardUseCase(
     }
 
     fun init() {
+        logger.debug("init")
         clipboardManager.addPrimaryClipChangedListener(listener)
         coroutineScope.launch {
             isPermittedFlow.collect {
+                logger.debug("Permission changed to $it, refreshing")
                 contentFlow.refresh()
             }
         }
     }
 
-    private val _contentFlow = RefreshableStateFlow { readClipboard() }
-    val contentFlow = _contentFlow.asStateFlow()
-//
-//    fun getContentFlow(): Flow<ClipboardState> {
-//        val contentFlow = TestFlow { readClipboard() }
-//        return contentFlow.make(isPermittedFlow)
-//    }
+    private fun readClipboard(): ClipboardState {
+        if (!isPermittedFlow.value) {
+            return ClipboardState.Disabled
+        }
+
+        return clipboardManager.getFirstText()
+            ?.let { tryParseUriString(it) }
+            ?.let { ClipboardState.Content(it) }
+            ?: ClipboardState.Empty
+    }
+
+    fun refresh() = coroutineScope.launch {
+        logger.debug("Received manual refresh request, refreshing")
+        contentFlow.refresh()
+    }
+
+    fun tryUpdateClipboard(label: String, uriStr: String) {
+        val uri = tryParseUriString(uriStr)
+        if (uri != null) {
+            clipboardManager.setText(label, uri.toString())
+        }
+    }
+
+    private fun tryParseUriString(uriStr: String): Uri? {
+        return UriUtil.parseWebUriStrict(uriStr)
+    }
 
     override fun close() {
         clipboardManager.removePrimaryClipChangedListener(listener)

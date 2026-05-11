@@ -3,4 +3,5 @@
     <string name="generic__button_text_back">Voltar</string>
     <string name="generic__button_text_enable">Ativar</string>
     <string name="generic__button_text_disable">Desativar</string>
+    <string name="generic__text_url">URL</string>
 </resources>

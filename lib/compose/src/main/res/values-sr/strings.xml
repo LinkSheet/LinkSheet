@@ -4,4 +4,5 @@
     <string name="generic__button_text_back">Назад</string>
     <string name="generic__button_text_enable">Омогући</string>
     <string name="generic__button_text_disable">Онемогући</string>
+    <string name="generic__text_url">URL</string>
 </resources>

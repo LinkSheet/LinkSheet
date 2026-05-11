@@ -11,4 +11,5 @@
     <string name="generic__n_selected">%d selected</string>
     <string name="generic__button_text_enable">Enable</string>
     <string name="generic__button_text_disable">Disable</string>
+    <string name="generic__text_url">Url</string>
 </resources>

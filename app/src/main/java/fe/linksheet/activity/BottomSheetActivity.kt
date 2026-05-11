@@ -76,6 +76,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
+import app.linksheet.compose.R as CommonR
 
 //import relocated.androidx.compose.material3.SheetValue
 //import relocated.androidx.compose.material3.rememberModalBottomSheetState
@@ -359,7 +360,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             }
 
             is CopyUrlInteraction -> {
-                val clipboardLabel = resources.getString(R.string.generic__text_url)
+                val clipboardLabel = resources.getString(CommonR.string.generic__text_url)
                 viewModel.clipboardManager.setText(clipboardLabel, interaction.url)
                 if (viewModel.urlCopiedToast()) {
                     lifecycleScope.launch { showToast(R.string.url_copied, Toast.LENGTH_SHORT) }

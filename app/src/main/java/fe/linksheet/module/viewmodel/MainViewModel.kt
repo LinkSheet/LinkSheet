@@ -5,10 +5,9 @@ import android.app.Activity
 import android.app.Application
 import android.content.ClipboardManager
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import androidx.core.content.getSystemService
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDestination
 import app.linksheet.api.SensitivePreference
@@ -24,15 +23,12 @@ import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.remoteconfig.preference.RemoteConfigPreferences
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getSystemServiceOrThrow
-import fe.composekit.extension.setText
 import fe.linksheet.module.ClipboardUseCase
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.AppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.module.workmanager.WorkDelegatorService
 import fe.linksheet.util.extension.android.tryStartActivity
-import fe.linksheet.web.UriUtil
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.result.isSuccess
 import kotlinx.coroutines.flow.asFlow
@@ -51,7 +47,6 @@ class MainViewModel(
     private val miuiCompat: MiuiCompat,
     val debugMenu: DebugMenuSlotProvider,
     private val intentHandler: PackageIntentHandler,
-    private val workDelegatorService: WorkDelegatorService,
 ) : BaseViewModel(preferenceRepository) {
     val clipboardUseCase: ClipboardUseCase = ClipboardUseCase(
         repository = preferenceRepository,
@@ -60,6 +55,7 @@ class MainViewModel(
     )
 
     init {
+        Log.d("MainViewModel", "init")
         clipboardUseCase.init()
         addCloseable(clipboardUseCase)
     }
@@ -73,44 +69,6 @@ class MainViewModel(
         preferenceRepository.asViewModelState(analyticsPreferences.telemetryShowInfoDialog)
     val remoteConfigDialogDismissed = appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
     val remoteConfig = preferenceRepository.asViewModelState(remoteConfigPreferences.enable)
-//    val homeClipboardCard = preferenceRepository.asViewModelState(AppPreferences.homeClipboardCard)
-
-    private val clipboardManager by lazy { context.getSystemService<ClipboardManager>()!! }
-
-//    private val _clipboardContent = MutableStateFlow<Uri?>(null)
-//    val clipboardContent = _clipboardContent.asStateFlow()
-
-//     fun init() = viewModelScope.launch {
-//        homeClipboardCard.stateFlow.collect {
-//            tryReadClipboard()
-//        }
-//    }
-//
-//    fun test() = flow {
-//        clipboardUseCase.contentFlow.collect {
-//            emit(it)
-//        }
-//    }
-
-//    suspend fun tryReadClipboard() {
-//        clipboardUseCase.contentFlow.refresh()
-////        if (!homeClipboardCard.value) {
-////            _clipboardContent.tryEmit(null)
-////            return
-////        }
-////
-////        val clipboardUri = clipboardManager.getFirstText()?.let { tryParseUriString(it) }
-////        if (clipboardUri != null && _clipboardContent.value != clipboardUri) {
-////            _clipboardContent.tryEmit(clipboardUri)
-////        }
-//    }
-
-    fun tryUpdateClipboard(label: String, uriStr: String) {
-        val uri = tryParseUriString(uriStr)
-        if (uri != null) {
-            clipboardManager.setText(label, uri.toString())
-        }
-    }
 
     private val _shizukuRunning = RefreshableStateFlow(false) {
         ShizukuUtil.isShizukuRunning()
@@ -146,10 +104,6 @@ class MainViewModel(
         return activity.tryStartActivity(Intent(intent.action)).isSuccess()
     }
 
-    private fun tryParseUriString(uriStr: String): Uri? {
-        return UriUtil.parseWebUriStrict(uriStr)
-    }
-
     fun enqueueNavEvent(destination: NavDestination, args: Bundle?) = viewModelScope.launch {
         analyticsService.enqueue(AnalyticsEvent.Navigate(destination.route ?: "<no_route>"))
     }
@@ -163,7 +117,6 @@ class MainViewModel(
     fun setRemoteConfig(enabled: Boolean) {
         remoteConfigDialogDismissed(true)
         remoteConfig(enabled)
-//        workDelegatorService.setRemoteConfig(enabled)
     }
 
     enum class SettingsIntent(val action: String) {

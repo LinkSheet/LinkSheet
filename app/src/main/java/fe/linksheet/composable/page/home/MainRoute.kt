@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -46,15 +45,12 @@ import fe.linksheet.navigation.settingsRoute
 import fe.linksheet.util.LinkSheet
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.viewmodel.koinActivityViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinViewModel()) {
-    val clipboardManager = LocalClipboard.current
-
+fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinActivityViewModel()) {
     val clipboardContent by viewModel.clipboardUseCase.contentFlow.collectAsStateWithLifecycle()
-//    val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
     val newDefaultsDismissed by viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
 
     val showMiuiAlert by viewModel.showMiuiAlert.collectRefreshableAsStateWithLifecycle(
@@ -76,14 +72,6 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
         minActiveState = Lifecycle.State.RESUMED,
         initialValue = false
     )
-
-//    clipboardManager.ObserveClipboard {
-//        viewModel.tryReadClipboard()
-//    }
-//
-//    LocalWindowInfo.current.OnFocused {
-//        viewModel.tryReadClipboard()
-//    }
 
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()

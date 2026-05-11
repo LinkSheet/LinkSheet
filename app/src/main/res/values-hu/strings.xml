@@ -408,7 +408,6 @@
     <string name="settings_main_setup_success__button_connected_apps">Csatlakozott alkalmazások</string>
     <string name="generic__button_text_done">Kész</string>
     <string name="settings_main_news__button_read_more">Olvasson tovább</string>
-    <string name="generic__text_url">Url</string>
     <string name="settings_app_config__title_native_apps">Alkalmazások</string>
     <string name="settings_app_config_rules__btn_new_rule">Új szabály</string>
     <string name="resolve_event__running_libredirect">Megpróbálja megtalálni a FOSS-frontendet</string>

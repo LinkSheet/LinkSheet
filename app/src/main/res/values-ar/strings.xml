@@ -475,7 +475,6 @@
     <string name="resolve_event__running_libredirect">محاولة العثور على واجهة أمامية FOSS</string>
     <string name="settings_app_config__button_add_item">إضافة عنصر</string>
     <string name="settings_edit_rule__title_edit_rule">جاري تحرير القاعدة</string>
-    <string name="generic__text_url">عنوان URL</string>
     <string name="generic__text_edit">تحرير</string>
     <string name="settings_main_miui_compat__text_linksheet_auto_start_info">من المعروف أن Xiaomi تقيد التطبيقات بشدة بطرق غير متوقعة، مما يؤدي إلى عدم عمل LinkSheet بشكل صحيح.\nانقر فوق الزر أدناه، ثم اسمح بإذن فتح نوافذ جديدة في الخلفية</string>
     <string name="generic__button_learn_more">تعرف على المزيد</string>

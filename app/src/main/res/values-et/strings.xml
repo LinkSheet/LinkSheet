@@ -84,7 +84,6 @@
     <string name="settings_app_config__title_native_apps">Rakendused</string>
     <string name="settings_app_config_rules__title_rules">Reeglid</string>
     <string name="generic__button_text_delete">Kustuta</string>
-    <string name="generic__text_url">Võrguaadress</string>
     <string name="generic__text_edit">Muuda</string>
     <string name="generic__button_text_done">Valmis</string>
     <string name="settings__hint_search">Otsi</string>

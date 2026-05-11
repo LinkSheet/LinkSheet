@@ -4,4 +4,5 @@
     <string name="generic__button_text_back">رجوع</string>
     <string name="generic__button_text_enable">فعِّل</string>
     <string name="generic__button_text_disable">عطِّل</string>
+    <string name="generic__text_url">عنوان URL</string>
 </resources>

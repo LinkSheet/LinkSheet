@@ -54,6 +54,8 @@ dependencies {
     implementation(JetBrains.ktor.client.core)
     implementation(JetBrains.ktor.client.contentNegotiation)
     implementation(JetBrains.ktor.client.gson)
+    implementation(JetBrains.ktor.client.json)
+    implementation(JetBrains.ktor.plugins.serialization.gson)
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
@@ -84,6 +86,11 @@ dependencies {
     androidTestImplementation("io.mockk:mockk-android:1.14.9")
     androidTestImplementation(project(":test-core"))
 
+    testImplementation(Testing.junit.jupiter.api)
+    testRuntimeOnly(Testing.junit.jupiter.engine)
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:_")
+    testImplementation(Testing.junit4)
+    testImplementation(AndroidX.test.ext.junit.ktx)
     testImplementation(KotlinX.coroutines.test)
     testImplementation(JetBrains.ktor.client.mock)
     testImplementation(Testing.robolectric)

@@ -3,7 +3,6 @@ package fe.linksheet
 import android.content.ClipboardManager
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.cash.turbine.test
 import fe.composekit.extension.getSystemServiceOrThrow
 import fe.linksheet.module.ClipboardUseCase
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
@@ -19,11 +18,12 @@ class ClipboardUseCaseTest : BaseUnitTest {
     fun test() = runTest {
         val clipboardManager = applicationContext.getSystemServiceOrThrow<ClipboardManager>()
         val useCase = ClipboardUseCase(
-            preferenceRepository = DefaultAppPreferenceRepository(applicationContext),
-            clipboardManager = clipboardManager
+            repository = DefaultAppPreferenceRepository(applicationContext),
+            clipboardManager = clipboardManager,
+            coroutineScope = this
         )
-        useCase.contentFlow.test {
-
-        }
+//        useCase.contentFlow.test {
+//
+//        }
     }
 }

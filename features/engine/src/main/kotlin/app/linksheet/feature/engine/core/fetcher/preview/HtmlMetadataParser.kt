@@ -2,7 +2,7 @@ package app.linksheet.feature.engine.core.fetcher.preview
 
 import fe.std.uri.StdUrl
 import fe.std.uri.extension.buildUrl
-import fe.std.uri.toUrlOrThrow
+import fe.std.uri.toStdUrlOrThrow
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
@@ -55,7 +55,7 @@ class HtmlMetadataParser {
     }
 
     fun parse(document: Document, htmlText: String): PreviewFetchResult {
-        val url = document.baseUri().toUrlOrThrow()
+        val url = document.baseUri().toStdUrlOrThrow()
         val urlStr = url.toString()
 
         val richTitle = parseTitle(document)

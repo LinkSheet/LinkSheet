@@ -26,6 +26,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import app.linksheet.compose.theme.HeadlineAlmostLargeStyle
 import app.linksheet.feature.wiki.navigation.MarkdownViewerRoute
+import app.linksheet.util.buildconfig.BuildType
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
@@ -149,13 +150,13 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 )
             }
 
-            if (StaticBuildInfo.isType(app.linksheet.util.buildconfig.BuildType.Debug, app.linksheet.util.buildconfig.BuildType.Nightly)) {
+            if (StaticBuildInfo.isType(BuildType.Debug, BuildType.Nightly)) {
                 item(key = R.string.nightly_experiments_card, contentType = ContentType.ClickableAlert) {
                     NightlyExperimentsCard(navigate = { navController.navigate(it) })
                 }
             }
 
-            if (StaticBuildInfo.CurrentType == app.linksheet.util.buildconfig.BuildType.Debug) {
+            if (StaticBuildInfo.CurrentType == BuildType.Debug) {
                 item {
                     ShizukuCard(
                         activity = activity!!,

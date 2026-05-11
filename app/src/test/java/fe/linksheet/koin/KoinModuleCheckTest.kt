@@ -41,6 +41,9 @@ import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
 import app.linksheet.feature.profile.service.ProfileService
+import app.linksheet.feature.remoteconfig.preference.RemoteConfigRepository
+import app.linksheet.feature.remoteconfig.service.RemoteConfigClient
+import app.linksheet.feature.remoteconfig.service.RemoteConfigService
 import app.linksheet.feature.shizuku.ShizukuService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
@@ -70,7 +73,6 @@ import fe.linksheet.module.language.AppLocaleService
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.paste.PasteService
 import fe.linksheet.module.preference.app.AppPreferenceRepository
-import app.linksheet.feature.remoteconfig.preference.RemoteConfigRepository
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -109,13 +111,13 @@ import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
-import fe.linksheet.module.workmanager.WorkDelegatorService
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.linksheet.util.ExportImportUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.StateFlow
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -211,7 +213,6 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             MiuiCompat::class,
             DebugMenuSlotProvider::class,
             PackageIntentHandler::class,
-            WorkDelegatorService::class
         ),
         definition<VerifiedLinkHandlersViewModel>(
             ShizukuServiceConnection::class,
@@ -255,7 +256,6 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<LanguageSettingsViewModel>(AppLocaleService::class),
         definition<SettingsViewModel>(AppLocaleService::class),
         definition<ThemeSettingsViewModel>(RemoteConfigRepository::class),
-        definition<WorkDelegatorService>(WorkManager::class),
         definition<RedirectResolveRequest>(HttpClient::class),
         definition<Amp2HtmlResolveRequest>(HttpClient::class),
         definition<VerifiedLinkHandlerViewModel>(
@@ -281,7 +281,9 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<LibRedirectUserInstanceRepository>(LibRedirectUserInstanceDao::class),
         definition<ProfileService>(MetaDataHandler::class),
-        definition<ExportImportUseCase>(PreferenceRepository::class, Gson::class, Toml::class)
+        definition<ExportImportUseCase>(PreferenceRepository::class, Gson::class, Toml::class),
+        definition<RemoteConfigClient>(HttpClient::class),
+        definition<RemoteConfigService>(WorkManager::class, StateFlow::class),
     )
 
     @Test

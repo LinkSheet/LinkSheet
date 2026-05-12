@@ -311,7 +311,7 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
         referringPackageName = null,
         resolved = sorted,
         filteredItem = filtered,
-        alwaysPreferred = state.lastChosen.alwaysPreferred,
+        isRegularPreferredApp = state.lastChosen.alwaysPreferred && filtered != null,
         hasSingleMatchingOption = state.hasSingleMatchingOption,
         resolveModuleStatus = ResolveModuleStatus(),
         libRedirectResult = null,

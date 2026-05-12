@@ -1,6 +1,7 @@
 package app.linksheet.feature.engine.core
 
 import android.content.Intent
+import app.linksheet.feature.engine.core.context.EngineRunContext
 import app.linksheet.feature.engine.core.context.SealedRunContext
 import fe.std.uri.StdUrl
 
@@ -11,4 +12,5 @@ class IntentEngineResult(val intent: Intent) : EngineResult
 class UrlEngineResult(val url: StdUrl) : EngineResult
 class ForwardOtherProfileResult(val url: StdUrl) : EngineResult
 
-typealias ContextualEngineResult = Pair<SealedRunContext, EngineResult>
+typealias SealedContextualEngineResult = Pair<SealedRunContext, EngineResult>
+typealias ContextualEngineResult = Pair<EngineRunContext, EngineResult>

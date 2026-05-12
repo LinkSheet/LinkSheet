@@ -137,7 +137,10 @@ class ImprovedIntentResolver(
 //
 //    }
 
-    override suspend fun resolve(intent: SafeIntent, options: ResolveOptions): IntentResolveResult = coroutineScope scope@{
+    override suspend fun resolve(
+        intent: SafeIntent,
+        options: ResolveOptions
+    ): IntentResolveResult = coroutineScope scope@{
         initState(ResolveEvent.Initialized, ResolverInteraction.Initialized)
         val canAccessInternet = networkStateService.isNetworkConnected
 
@@ -159,7 +162,8 @@ class ImprovedIntentResolver(
 
         var uri = uriResult.getOrNull()
         if (options.forwardProfile) {
-            val stdUrl = uri?.toStdUrl() ?: return@scope IntentResolveResult.IntentParseFailed(UriParseException())
+            val stdUrl = uri?.toStdUrl()
+                ?: return@scope IntentResolveResult.IntentParseFailed(UriParseException())
             return@scope IntentResolveResult.OtherProfile(stdUrl)
         }
 
@@ -186,7 +190,10 @@ class ImprovedIntentResolver(
         )
 
         if (uri == null) {
-            return@scope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
+            return@scope fail(
+                error = "Failed to run uri modifiers",
+                result = IntentResolveResult.UrlModificationFailed
+            )
         }
 
         val resolveStatus = ResolveModuleStatus()
@@ -277,21 +284,10 @@ class ImprovedIntentResolver(
             uri = libRedirectResult.redirectedUri
         }
 
-        val enabledDownloader = downloaderSettings.enableDownloader()
-        var downloadable: DownloadCheckResult? = null
-        if (enabledDownloader) {
-            downloadable = cancelable(ResolveEvent.CheckingDownloader) {
-                checkDownloadable(
-                    downloader = downloader,
-                    enabled = enabledDownloader,
-                    uri = uri,
-                    checkUrlMimeType = downloaderSettings.downloaderCheckUrlMimeType(),
-                    requestTimeout = settings.requestTimeout()
-                )
-            } ?: DownloadCheckResult.NonDownloadable
-        }
-
-        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(options.referrer, browserSettings.inAppBrowserSettings())
+        val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(
+            referrer = options.referrer,
+            inAppBrowserMode = browserSettings.inAppBrowserSettings()
+        )
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)
         val newIntent = IntentSanitizer.sanitize(intent, Intent.ACTION_VIEW, uri, dropExtras)
 
@@ -307,12 +303,21 @@ class ImprovedIntentResolver(
             uri = uri
         )
         var resolveList = packageIntentHandler.findHandlers(uri, referringPackage?.packageName)
-        resolveList = maybeFilterReferrer(resolveList, referringPackage, settings.bottomSheetSettings.hideReferringApp())
+        resolveList = maybeFilterReferrer(
+            resolveList,
+            referringPackage,
+            settings.bottomSheetSettings.hideReferringApp()
+        )
 
         emitEvent(ResolveEvent.CheckingBrowsers)
         val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
         val autoLaunchSingleBrowser = browserSettings.autoLaunchSingleBrowser()
-        val appList = browserHandler.filterBrowsers(browserModeConfigHelper, autoLaunchSingleBrowser, browsers, resolveList)
+        val appList = browserHandler.filterBrowsers(
+            browserModeConfigHelper,
+            autoLaunchSingleBrowser,
+            browsers,
+            resolveList
+        )
 
         emitEvent(ResolveEvent.SortingApps)
         val (sorted, filtered) = appSorter.sort(
@@ -322,10 +327,29 @@ class ImprovedIntentResolver(
             returnLastChosen = !settings.bottomSheetSettings.dontShowFilteredItem()
         )
 
-        val previewUrl = previewSettings.previewUrl()
+        val isRegularPreferredApp = app?.alwaysPreferred == true && filtered != null
+
+        val enabledDownloader = downloaderSettings.enableDownloader()
+        var downloadable: DownloadCheckResult? = null
+        if (enabledDownloader && !isRegularPreferredApp) {
+            downloadable = cancelable(ResolveEvent.CheckingDownloader) {
+                checkDownloadable(
+                    downloader = downloader,
+                    uri = uri,
+                    checkUrlMimeType = downloaderSettings.downloaderCheckUrlMimeType(),
+                    requestTimeout = settings.requestTimeout()
+                )
+            } ?: DownloadCheckResult.NonDownloadable
+        }
+
         var unfurl: UnfurlResult? = null
-        val shouldSkipPreviewUrl = previewSettings.previewUrlSkipBrowser() && isReferrerBrowser
-        if (previewUrl && !shouldSkipPreviewUrl) {
+        val shouldSkipPreviewUrl = shouldSkipPreviewUrl(
+            previewUrl = previewSettings.previewUrl(),
+            previewUrlSkipBrowser = previewSettings.previewUrlSkipBrowser(),
+            isReferrerBrowser = isReferrerBrowser,
+            isRegularPreferredApp = isRegularPreferredApp
+        )
+        if (!shouldSkipPreviewUrl) {
             unfurl = cancelable(ResolveEvent.GeneratingPreview) { tryUnfurl(uri = uri) }
         }
 
@@ -337,12 +361,24 @@ class ImprovedIntentResolver(
             referringPackageName = referringPackage?.packageName,
             resolved = sorted,
             filteredItem = filtered,
-            alwaysPreferred = app?.alwaysPreferred,
+            isRegularPreferredApp = isRegularPreferredApp,
             hasSingleMatchingOption = appList.isSingleOption || appList.noBrowsersOnlySingleApp,
             resolveModuleStatus = resolveStatus,
             libRedirectResult = libRedirectResult,
             downloadable = downloadable
         )
+    }
+
+    private fun shouldSkipPreviewUrl(
+        previewUrl: Boolean,
+        previewUrlSkipBrowser: Boolean,
+        isReferrerBrowser: Boolean,
+        isRegularPreferredApp: Boolean
+    ): Boolean {
+        if (!previewUrl) return true
+        if (previewUrlSkipBrowser && isReferrerBrowser) return true
+
+        return isRegularPreferredApp
     }
 
     private fun maybeFilterReferrer(
@@ -357,7 +393,10 @@ class ImprovedIntentResolver(
         return resolveList
     }
 
-    private suspend fun <R> CoroutineScope.cancelable(event: ResolveEvent, block: suspend () -> R): R? {
+    private suspend fun <R> CoroutineScope.cancelable(
+        event: ResolveEvent,
+        block: suspend () -> R
+    ): R? {
         emitEvent(event)
         val deferred = async { block() }
 
@@ -468,12 +507,10 @@ class ImprovedIntentResolver(
     private suspend fun checkDownloadable(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         downloader: Downloader,
-        enabled: Boolean,
         uri: Uri?,
         checkUrlMimeType: Boolean,
         requestTimeout: Int,
     ): DownloadCheckResult = withContext(dispatcher) {
-        if (!enabled) return@withContext DownloadCheckResult.NonDownloadable
         val url = uri?.toStdUrl() ?: return@withContext DownloadCheckResult.NonDownloadable
 
         if (checkUrlMimeType) {
@@ -512,7 +549,9 @@ class ImprovedIntentResolver(
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
         private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull() }
-        private val embedResolverConfig by lazy { BundledEmbedResolveConfigLoader.load().getOrNull() }
+        private val embedResolverConfig by lazy {
+            BundledEmbedResolveConfigLoader.load().getOrNull()
+        }
 
         const val IntentKeyResolveRedirects = "resolve_redirects"
 
@@ -567,7 +606,9 @@ class ImprovedIntentResolver(
 
     private inline fun <R> runUriModifier(condition: Boolean, block: () -> R): R? {
         if (!condition) return null
-        return runCatching(block).onFailure { logger.error("Uri modification failed", it) }.getOrNull()
+        return runCatching(block)
+            .onFailure { logger.error("Uri modification failed", it) }
+            .getOrNull()
     }
 
     private suspend fun runRedirectResolver(
@@ -587,11 +628,17 @@ class ImprovedIntentResolver(
     ): Uri? = withContext(dispatcher) {
         logger.debug("Executing runRedirectResolver on ${Thread.currentThread().name}")
         currentCoroutineContext().ensureActive()
-        resolveModuleStatus.resolveIfEnabled(followRedirects, ResolveModule.Redirect, uri) { uriToResolve ->
+        resolveModuleStatus.resolveIfEnabled(
+            enabled = followRedirects,
+            resolveModule = ResolveModule.Redirect,
+            uri = uri
+        ) { uriToResolve ->
             logger.debug("Inside redirect func, on ${Thread.currentThread().name}")
 
             val resolvePredicate: ResolvePredicate = { uri ->
-                (!followRedirectsExternalService && !followOnlyKnownTrackers) || FastForward.isTracker(uri.toString())
+                (!followRedirectsExternalService && !followOnlyKnownTrackers) || FastForward.isTracker(
+                    uri.toString()
+                )
             }
 
             resolver.resolveRedirect(
@@ -624,7 +671,11 @@ class ImprovedIntentResolver(
         logger.debug("Executing runAmp2HtmlResolver on ${Thread.currentThread().name}")
 
         currentCoroutineContext().ensureActive()
-        resolveModuleStatus.resolveIfEnabled(enableAmp2Html, ResolveModule.Amp2Html, uri) { uriToResolve ->
+        resolveModuleStatus.resolveIfEnabled(
+            enabled = enableAmp2Html,
+            resolveModule = ResolveModule.Amp2Html,
+            uri = uri
+        ) { uriToResolve ->
             logger.debug("Inside amp2html func, on ${Thread.currentThread().name}")
 
             resolver.resolve(

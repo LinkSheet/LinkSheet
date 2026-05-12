@@ -2,6 +2,8 @@ package app.linksheet.feature.engine.core
 
 import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
 import app.linksheet.feature.engine.core.context.EngineRunContext
+import app.linksheet.feature.engine.core.fetcher.ContextResultId
+import app.linksheet.feature.engine.core.fetcher.FetchResult
 import app.linksheet.feature.engine.core.fetcher.LinkFetcher
 import app.linksheet.feature.engine.core.rule.PostProcessorInput
 import app.linksheet.feature.engine.core.rule.PostProcessorRule
@@ -23,16 +25,19 @@ import app.linksheet.feature.engine.core.step.StepRuleResult
 import app.linksheet.feature.engine.core.step.StepStart
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.std.uri.StdUrl
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
 class LinkEngine(
@@ -145,18 +150,35 @@ class LinkEngine(
         result
     }
 
-    context(context: EngineRunContext)
-    private suspend fun fetch(
-        resultUrl: StdUrl
-    ) = coroutineScope scope@{
-        for (fetcher in fetchers) {
-            if (!isActive) break
-            if (!fetcher.enabled()) continue
+    fun fetch(
+        resultUrl: StdUrl,
+        context: EngineRunContext
+    ) = flow {
+        suspend fun <T : FetchResult> CoroutineScope.runFetcher(fetcher: LinkFetcher<T>) {
+            if (!fetcher.enabled()) return
             logger.debug("Fetching $fetcher")
-            if (!context.confirm(fetcher.id)) continue
-            launch {
-                val result = fetcher.fetch(resultUrl)
-                context.put(fetcher.id, result)
+            if (!context.confirm(fetcher.id)) return
+
+            val deferred = async { fetcher.fetch(resultUrl) }
+            val handle = FetchHandle(fetcher.id) { deferred.cancel() }
+            emit(handle)
+
+            var result: FetchResult? = null
+            try {
+                result = deferred.await()
+            } catch (e: CancellationException) {
+                ensureActive()
+                logger.error("Failed to cancel", e)
+            }
+
+            context.put(fetcher.id, result)
+            emit(null)
+        }
+
+        coroutineScope scope@{
+            for (fetcher in fetchers) {
+                if (!isActive) break
+                runFetcher(fetcher)
             }
         }
     }
@@ -167,11 +189,21 @@ class LinkEngine(
     ): ContextualEngineResult = coroutineScope scope@{
         context(context) {
             val result = process(url)
-            if (result is UrlEngineResult) {
-                fetch(result.url)
-            }
-            val sealedContext = context.seal()
-            sealedContext to result
+            context to result
+            // TODO: Reworked due to #634 -- needs some more work to clearly differentiate between "processing"
+            //  and "fetching" and everything that might happen in between (for example, we might not want to
+            //  fetch anything if an app is set to auto-open anyway)
+
+//            if (result is UrlEngineResult) {
+//                fetch(result.url)
+//            }
+//            val sealedContext = context.seal()
+//            sealedContext to result
         }
     }
 }
+
+class FetchHandle(
+    val id: ContextResultId<FetchResult>,
+    val cancel: () -> Unit
+)

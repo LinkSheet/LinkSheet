@@ -2,11 +2,12 @@
 
 package app.linksheet.feature.engine.core.rule
 
-import app.linksheet.feature.engine.core.ContextualEngineResult
 import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.core.LinkEngine
+import app.linksheet.feature.engine.core.SealedContextualEngineResult
 import app.linksheet.feature.engine.core.context.AppRole
 import app.linksheet.feature.engine.core.context.AppRoleId
+import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
 import app.linksheet.feature.engine.core.context.EngineExtra
 import app.linksheet.feature.engine.core.context.EngineFlag
 import app.linksheet.feature.engine.core.context.EngineRunContext
@@ -32,6 +33,17 @@ import java.util.EnumSet
 //        super.stop()
 //    }
 //}
+
+// TODO: Temporary helper to avoid breaking tests (or having to refactor them), should be removed once design is finished
+suspend fun LinkEngine.processTest(url: StdUrl, context: EngineRunContext = DefaultEngineRunContext()): Pair<SealedRunContext, EngineResult> {
+    val contextualResult = process(url, context)
+    val sealedContext = contextualResult.first.seal()
+    val engineResult = contextualResult.second
+    val result = sealedContext to engineResult
+
+    return result
+}
+
 fun LazyTestLinkEngine(dispatcher: CoroutineDispatcher, vararg rules: Rule<*, *>): Lazy<LinkEngine> {
     return lazy { TestLinkEngine(dispatcher, *rules) }
 }
@@ -47,11 +59,11 @@ fun TestLinkEngine(dispatcher: CoroutineDispatcher, vararg rules: Rule<*, *>): L
     )
 }
 
-fun assertResult(result: ContextualEngineResult): Assert<EngineResult> {
+fun assertResult(result: SealedContextualEngineResult): Assert<EngineResult> {
     return assertThat(result.second)
 }
 
-fun assertContext(result: ContextualEngineResult): Assert<SealedRunContext> {
+fun assertContext(result: SealedContextualEngineResult): Assert<SealedRunContext> {
     return assertThat(result.first)
 }
 

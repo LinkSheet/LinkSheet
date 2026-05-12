@@ -1,6 +1,6 @@
 package app.linksheet.feature.engine.core.rule.defaultbrowser
 
-import app.linksheet.feature.engine.core.ContextualEngineResult
+import app.linksheet.feature.engine.core.SealedContextualEngineResult
 import app.linksheet.feature.engine.core.UrlEngineResult
 import app.linksheet.feature.engine.core.context.AppRoleId
 import app.linksheet.feature.engine.core.context.SealedRunContext
@@ -9,6 +9,7 @@ import app.linksheet.feature.engine.core.rule.LazyTestLinkEngine
 import app.linksheet.feature.engine.core.rule.PostProcessorRule
 import app.linksheet.feature.engine.core.rule.assertContext
 import app.linksheet.feature.engine.core.rule.assertResult
+import app.linksheet.feature.engine.core.rule.processTest
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.isNull
@@ -44,8 +45,8 @@ class DefaultBrowserTestBase(dispatcher: CoroutineDispatcher, rule: PostProcesso
             .isNull()
     }
 
-    private suspend fun baseTest(url: StdUrl): ContextualEngineResult {
-        val result = engine.process(url)
+    private suspend fun baseTest(url: StdUrl): SealedContextualEngineResult {
+        val result = engine.processTest(url)
         assertResult(result)
             .isInstanceOf<UrlEngineResult>()
             .prop(UrlEngineResult::url)

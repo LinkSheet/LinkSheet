@@ -25,6 +25,10 @@ data class EngineScenario(
     suspend fun run(url: StdUrl, context: EngineRunContext): ContextualEngineResult {
         return engine.process(url, context)
     }
+
+    fun fetch(url: StdUrl, context: EngineRunContext): Flow<FetchHandle?> {
+        return engine.fetch(url, context)
+    }
 }
 
 fun interface EngineScenarioPredicate {

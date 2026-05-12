@@ -29,15 +29,13 @@ sealed interface IntentResolveResult {
         referringPackageName: String?,
         val resolved: List<ActivityAppInfo>,
         val filteredItem: ActivityAppInfo?,
-        alwaysPreferred: Boolean?,
+        // TODO: Make it more obvious that this refers to "always" / "auto-launch"
+        val isRegularPreferredApp: Boolean,
         hasSingleMatchingOption: Boolean = false,
         val resolveModuleStatus: ResolveModuleStatus,
         val libRedirectResult: LibRedirectResult? = null,
         val downloadable: DownloadCheckResult? = DownloadCheckResult.NonDownloadable,
     ) : IntentResolveResult {
-        private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
-
-        val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
         val app = filteredItem ?: resolved.firstOrNull()
 
         val hasAutoLaunchApp = (isRegularPreferredApp || hasSingleMatchingOption)

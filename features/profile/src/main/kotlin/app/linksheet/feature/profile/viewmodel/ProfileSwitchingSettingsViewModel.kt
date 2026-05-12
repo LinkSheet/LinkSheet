@@ -2,10 +2,8 @@ package app.linksheet.feature.profile.viewmodel
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.app.core.MetaDataHandler
-import app.linksheet.feature.app.core.setForwardProfileActivities
 import app.linksheet.feature.profile.core.CrossProfile
 import app.linksheet.feature.profile.core.ProfileStatus
 import app.linksheet.feature.profile.core.ProfileSwitcher
@@ -13,7 +11,6 @@ import app.linksheet.feature.profile.preference.ProfilePreferences
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.mapNotNull
-import kotlinx.coroutines.launch
 
 class ProfileSwitchingSettingsViewModel internal constructor(
     private val profileSwitcher: ProfileSwitcher,
@@ -43,9 +40,5 @@ class ProfileSwitchingSettingsViewModel internal constructor(
     fun startOther(crossProfile: CrossProfile, activity: Activity?) {
         if (activity == null) return
         profileSwitcher.startOther(crossProfile, activity)
-    }
-
-    fun setForwardProfileActivities(state: Boolean) = viewModelScope.launch {
-        metaDataHandler.setForwardProfileActivities(state)
     }
 }

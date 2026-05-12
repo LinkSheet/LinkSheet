@@ -7,7 +7,7 @@ import app.linksheet.feature.profile.preference.ProfilePreferences
 import app.linksheet.feature.profile.service.ProfileService
 import app.linksheet.feature.profile.viewmodel.ProfileSwitchingSettingsViewModel
 import fe.android.lifecycle.koin.extension.service
-import fe.composekit.preference.asFunction
+import fe.composekit.preference.asFlow
 import fe.droidkit.koin.getSystemServiceOrThrow
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -28,7 +28,7 @@ val ProfileFeatureModule = module {
     service<ProfileService> {
         ProfileService(
             metaDataHandler = scope.get(),
-            sendTarget = scope.get<AppPreferenceRepository>().asFunction(scope.get<ProfilePreferences>().sendTarget)
+            sendTarget = scope.get<AppPreferenceRepository>().asFlow(scope.get<ProfilePreferences>().sendTarget)
         )
     }
     viewModelOf(::ProfileSwitchingSettingsViewModel)

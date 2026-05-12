@@ -33,10 +33,8 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.card.AlertCard
 import fe.composekit.component.icon.IconOffset
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.group
 import fe.composekit.preference.BooleanVmPref
-import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.preference.fakeBooleanVM
 import org.koin.androidx.compose.koinViewModel
 
@@ -58,7 +56,6 @@ internal fun ProfileSwitchingSettings(
         onBackPressed = onBackPressed,
         launchCrossProfileInteractSettings = viewModel::launchCrossProfileInteractSettings,
         startOther = viewModel::startOther,
-        setForwardProfileActivities = viewModel::setForwardProfileActivities,
     )
 }
 
@@ -73,7 +70,6 @@ private fun ProfileSwitchingSettingsRouteInternal(
     onBackPressed: () -> Unit,
     launchCrossProfileInteractSettings: (Activity?) -> Unit,
     startOther: (CrossProfile, Activity?) -> Unit,
-    setForwardProfileActivities: (Boolean) -> Unit
 ) {
     val activity = LocalActivity.current
 
@@ -132,13 +128,8 @@ private fun ProfileSwitchingSettingsRouteInternal(
             divider(id = R.string.settings_profile_switcher__divider_options)
 
             item(key = R.string.settings_profile_switcher__title_send_target, contentType = ContentType.SingleGroupItem) {
-                val sendTarget by sendTargetPref.collectAsStateWithLifecycle()
-                SwitchListItem(
-                    checked = sendTarget,
-                    onCheckedChange = {
-                        sendTargetPref(it)
-                        setForwardProfileActivities(it)
-                    },
+                PreferenceSwitchListItem(
+                    statePreference = sendTargetPref,
                     headlineContent = textContent(R.string.settings_profile_switcher__title_send_target),
                     supportingContent = textContent(R.string.settings_profile_switcher__text_send_target),
                 )
@@ -254,9 +245,6 @@ private fun ProfileSwitchingSettingsRouteBase(status: ProfileStatus, userProfile
             launchCrossProfileInteractSettings = {
             },
             startOther = { _, _ ->
-            },
-            setForwardProfileActivities = {
-
             }
         )
     }

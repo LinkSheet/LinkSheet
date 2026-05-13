@@ -72,9 +72,7 @@
     <string name="always_show_package_name_explainer">Toon naast de app-namen ook altijd de pakketnamen. Dit geldt overal in LinkSheet.</string>
     <string name="hide_after_copying">Automatisch verbergen na een actie</string>
     <string name="whitelisted">Alleen gekozen</string>
-    <string name="error">Fout</string>
     <string name="open_with_linksheet">Openen met LinkSheet</string>
-    <string name="checkmark">Vinkje</string>
     <string name="download">Downloaden</string>
     <string name="export">Exporteren</string>
     <string name="save">Opslaan</string>
@@ -150,11 +148,7 @@
     <string name="domain_selection_confirmation_title">Domeinen kiezen?</string>
     <string name="shizuku_explainer_short">Schakel directe interactie met systeem-API\'s in</string>
     <string name="apps_which_can_open_links_shizuku_explainer">De Shizuku-modus is geactiveerd: klik op een app om de automatische linkverwerking in te stellen. Druk lang op een app voor het instellingenmenu \"Standaard openen\".</string>
-    <string name="shizuku_not_running_explainer">Shizuku wordt niet uitgevoerd. Klik hier om Shizuku te openen en volg de instructies om het te starten.</string>
     <string name="warning">Waarschuwing</string>
-    <string name="shizuku_integration_no_permission_explainer">Klik hier om toestemming te vragen in Shizuku.</string>
-    <string name="shizuku_integration_not_setup_explainer">Hoewel het niet strikt noodzakelijk is om LinkSheet te laten werken, wordt Shizuku wel aanbevolen. Klik hier om het te installeren.</string>
-    <string name="shizuku_integration">Integratie met Shizuku</string>
     <string name="no_browser_installed_explainer">LinkSheet heeft geen browser gevonden. Het wordt aanbevolen om eerst een browser te installeren.</string>
     <string name="feature_flags_explainer">Schakel experimentele functies in</string>
     <string name="pretend_to_be_app_explainer_2">Sommige apps, zoals Google Chrome, zoeken expliciet naar een native app om bijvoorbeeld een Youtube-link af te handelen wanneer deze wordt aangeklikt in de zoekresultaten. LinkSheetCompat doet zich voor als zo\'n native app voor ondersteunde hosts en stuurt het verzoek door naar LinkSheet.</string>
@@ -182,7 +176,6 @@
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="enable_all">Alles inschakelen</string>
     <string name="disable_all">Alles uitschakelen</string>
-    <string name="shizuku_integration_enabled_explainer">De integratie met Shizuku is ingeschakeld!</string>
     <string name="feature_flags">Extra functies</string>
     <string name="launch_onboarding">Introductie starten</string>
     <string name="pretend_to_be_app_explainer">Presenteer LinkSheet als een native app bij ondersteunde domeinen via LinkSheetCompat</string>

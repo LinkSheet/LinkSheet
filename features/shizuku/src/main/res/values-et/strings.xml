@@ -14,4 +14,9 @@
     <string name="settings_shizuku__divider_settings">Seadistused</string>
     <string name="settings_shizuku__title_auto_disable_link_handling">Lülita linkide töötlus automaatselt välja</string>
     <string name="settings_shizuku__text_auto_disable_link_handling">Linkide automaatne töötlus lülitatakse uute rakenduste jaoks välja.</string>
+    <string name="shizuku_integration_enabled_explainer">Shizuku lõimingu sisselülitamine õnnestus!</string>
+    <string name="shizuku_not_running_explainer">Shizuku ei tööta. Shizuku avamiseks klõpsa siin ja seejärel järgi käivitusjuhendit.</string>
+    <string name="shizuku_integration_no_permission_explainer">Klõpsa siin Shizuku õiguste seadistamiseks.</string>
+    <string name="shizuku_integration_not_setup_explainer">Kuigi Shizuku pole LinkSheeti tööks otseselt vajalik, on ta siiski soovitatav. Paigaldamiseks klõpsa siia.</string>
+    <string name="shizuku_integration">Shizuku lõiming</string>
 </resources>

@@ -4,4 +4,6 @@
     <string name="options">Opties</string>
     <string name="request_timeout">Time-out verbindingen</string>
     <string name="request_timeout_explainer">Bepaal hoeveel seconden LinkSheet wacht totdat een verbinding tot stand is gebracht. Bij de waarde 0 wordt de time-out uitgeschakeld, maar dit wordt niet aangeraden.</string>
+    <string name="checkmark">Vinkje</string>
+    <string name="error">Fout</string>
 </resources>

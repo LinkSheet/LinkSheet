@@ -15,7 +15,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
@@ -25,8 +24,7 @@ import androidx.lifecycle.Lifecycle
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewTheme
 import app.linksheet.feature.shizuku.R
-import app.linksheet.feature.shizuku.ShizukuDownload
-import app.linksheet.feature.shizuku.ShizukuStatus
+import app.linksheet.feature.shizuku.service.ShizukuStatus
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -42,23 +40,21 @@ import fe.composekit.preference.FakePreferences
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun ShizukuRoute(
+fun ShizukuSettings(
     onBackPressed: () -> Unit,
     viewModel: ShizukuSettingsViewModel = koinViewModel(),
 ) {
     val activity = LocalActivity.current
 
-    val status by viewModel.status.collectRefreshableAsStateWithLifecycle(
-        minActiveState = Lifecycle.State.RESUMED,
-        initialValue = remember { viewModel.status.value },
+    val status by viewModel.statusUseCase.status.collectRefreshableAsStateWithLifecycle(
+        minActiveState = Lifecycle.State.RESUMED
     )
 
-    ShizukuRouteInternal(
+    ShizukuSettingsInternal(
         status = status,
-        openManager = {
-            viewModel.startManager(activity)
-        },
-        requestPermission = viewModel::requestPermission,
+        openWeb = { viewModel.statusUseCase.openShizukuWeb(activity) },
+        openManager = { viewModel.statusUseCase.startManager(activity) },
+        requestPermission = viewModel.statusUseCase::requestPermission,
         onBackPressed = onBackPressed,
         content = {
             content(
@@ -70,8 +66,9 @@ fun ShizukuRoute(
 }
 
 @Composable
-private fun ShizukuRouteInternal(
+private fun ShizukuSettingsInternal(
     status: ShizukuStatus,
+    openWeb: () -> Unit,
     openManager: () -> Unit,
     requestPermission: () -> Unit,
     onBackPressed: () -> Unit,
@@ -82,7 +79,7 @@ private fun ShizukuRouteInternal(
         onBackPressed = onBackPressed
     ) {
         when {
-            !status.installed -> notInstalled()
+            !status.installed -> notInstalled(openWeb = openWeb)
             !status.running -> notRunning(openManager = openManager)
             !status.permission -> noPermission(requestPermission = requestPermission)
             else -> content()
@@ -98,7 +95,7 @@ private fun ShizukuRouteInternal(
     }
 }
 
-private fun SaneLazyListScope.notInstalled() {
+private fun SaneLazyListScope.notInstalled(openWeb: () -> Unit) {
     item(
         key = R.string.settings_shizuku__title_not_installed,
         contentType = ContentType.SingleGroupItem
@@ -111,9 +108,7 @@ private fun SaneLazyListScope.notInstalled() {
             iconContentDescription = stringResource(id = R.string.settings_shizuku__title_not_installed),
             headline = textContent(R.string.settings_shizuku__title_not_installed),
             subtitle = textContent(R.string.settings_shizuku__text_not_installed),
-            onClick = {
-                uriHandler.openUri(ShizukuDownload)
-            }
+            onClick = openWeb
         )
     }
 }
@@ -163,7 +158,13 @@ private fun ShizukuRouteInternalPreview() {
 @Preview
 @Composable
 private fun ShizukuRouteNotInstalledPreview() {
-    ShizukuPreviewBase(status = ShizukuStatus(installed = false, permission = false, running = false))
+    ShizukuPreviewBase(
+        status = ShizukuStatus(
+            installed = false,
+            permission = false,
+            running = false
+        )
+    )
 }
 
 @Preview
@@ -187,8 +188,9 @@ private fun ShizukuRouteContentPreview() {
 @Composable
 private fun ShizukuPreviewBase(status: ShizukuStatus) {
     PreviewTheme {
-        ShizukuRouteInternal(
+        ShizukuSettingsInternal(
             status = status,
+            openWeb = {},
             openManager = {},
             requestPermission = {},
             onBackPressed = {},

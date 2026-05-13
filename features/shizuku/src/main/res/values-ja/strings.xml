@@ -14,4 +14,9 @@
     <string name="settings_shizuku__divider_settings">設定</string>
     <string name="settings_shizuku__title_auto_disable_link_handling">リンク処理を自動で無効化</string>
     <string name="settings_shizuku__text_auto_disable_link_handling">新しくインストールされたアプリに対して、リンク処理を自動的に無効にします。</string>
+    <string name="shizuku_integration_enabled_explainer">Shizuku 統合が正常に有効化されました！</string>
+    <string name="shizuku_not_running_explainer">Shizuku は起動していません。ここをタップして Shizuku を開き、指示に従って起動してください。</string>
+    <string name="shizuku_integration_no_permission_explainer">Shizuku の許可を要求するにはここをタップしてください。</string>
+    <string name="shizuku_integration_not_setup_explainer">LinkSheet の動作に必須ではありませんが、Shizuku の使用を推奨します。こちらをタップしてインストールしてください。</string>
+    <string name="shizuku_integration">Shizuku 統合</string>
 </resources>

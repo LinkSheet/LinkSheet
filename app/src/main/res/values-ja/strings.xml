@@ -50,8 +50,6 @@
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github">Github</string>
     <string name="paste">貼り付け</string>
-    <string name="error">エラー</string>
-    <string name="checkmark">チェックマーク</string>
     <string name="links">リンク</string>
     <string name="theme">テーマ</string>
     <string name="system">システム設定に従う</string>
@@ -209,8 +207,6 @@
     <string name="onboarding_setup">LinkSheet を設定する</string>
     <string name="verified_link_handlers">デフォルトで開く</string>
     <string name="verified_link_handlers_subtitle">各アプリの対応リンクの設定</string>
-    <string name="shizuku_integration">Shizuku 統合</string>
-    <string name="shizuku_not_running_explainer">Shizuku は起動していません。ここをタップして Shizuku を開き、指示に従って起動してください。</string>
     <string name="enable_ignore_libredirect_button_explainer">URL が LibRedirect 経由でリダイレクトされている場合、ボトムシートにボタンを表示して、代わりに元の URL を開きます</string>
     <string name="settings__title_shortcuts">ショートカット</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">無効</string>
@@ -369,9 +365,6 @@
     <string name="amp2html_local_cache">ローカル Amp2Html キャッシュを有効にする</string>
     <string name="amp2html_local_cache_explainer">取得した非 AMP バージョンのウェブページをローカルにキャッシュします</string>
     <string name="shizuku_explainer_short">システム API と直接やり取りします</string>
-    <string name="shizuku_integration_enabled_explainer">Shizuku 統合が正常に有効化されました！</string>
-    <string name="shizuku_integration_no_permission_explainer">Shizuku の許可を要求するにはここをタップしてください。</string>
-    <string name="shizuku_integration_not_setup_explainer">LinkSheet の動作に必須ではありませんが、Shizuku の使用を推奨します。こちらをタップしてインストールしてください。</string>
     <string name="pretend_to_be_app">ネイティブアプリのリクエストを傍受する</string>
     <string name="pretend_to_be_app_explainer">LinkSheetCompat でサポートされているドメインのネイティブアプリを装います</string>
     <string name="no_handlers_found">ブラウザまたはネイティブ アプリが見つかりません！</string>

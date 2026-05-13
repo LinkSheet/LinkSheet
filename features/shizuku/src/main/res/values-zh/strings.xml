@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shizuku_integration_enabled_explainer">Shizuku 集成已成功启用！</string>
+    <string name="shizuku_not_running_explainer">Shizuku 未在运行。请点击此处打开 Shizuku，并按照指示将其启动。</string>
+    <string name="shizuku_integration_no_permission_explainer">点击此处请求 Shizuku 权限。</string>
+    <string name="shizuku_integration_not_setup_explainer">LinkSheet 可在不使用 Shizuku 的情况下工作，但仍然建议使用 Shizuku。点击此处安装。</string>
+    <string name="shizuku_integration">Shizuku集成</string>
+</resources>

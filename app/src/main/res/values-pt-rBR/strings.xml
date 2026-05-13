@@ -60,11 +60,9 @@
     <string name="always_show_package_name_explainer">Sempre mostrar os nomes dos pacotes em vez de apenas os nomes dos aplicativos. Isso se aplica a todo o aplicativo.</string>
     <string name="none_explainer">Listar apenas os aplicativos nativos, remover todos os navegadores. Se apenas um único aplicativo nativo estiver presente, ele será aberto automaticamente. Se nenhum aplicativo nativo estiver presente, todos os navegadores serão listados.</string>
     <string name="open_copied_link">Da área de transferência</string>
-    <string name="checkmark">Checado</string>
     <string name="hide_after_copying">Ocultar ao selecionar ação</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
     <string name="use_clear_urls_explainer">Usar a integração experimental com o <annotation url-id="clearurls-github">ClearURLs</annotation> (limpa parâmetros de rastreamento de URLs)</string>
-    <string name="error">Erro</string>
     <string name="selected_browser_explainer">Esse navegador será aberto automaticamente se nenhum aplicativo nativo puder lidar com o link clicado</string>
     <string name="display_grid_layout_explainer">Mostrar uma grade em vez de uma lista na folha inferior</string>
     <string name="follow_redirects_external_service">Seguir redirecionamentos via serviço externo</string>
@@ -147,14 +145,9 @@
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="enable_all">Habilitar todos</string>
     <string name="disable_all">Desabilitar todos</string>
-    <string name="shizuku_integration_enabled_explainer">A integração com o Shizuku foi ativada com sucesso!</string>
-    <string name="shizuku_integration_no_permission_explainer">Toque aqui para solicitar a permissão ao Shizuku.</string>
-    <string name="shizuku_integration_not_setup_explainer">Embora não seja estritamente necessário para que o LinkSheet funcione, o Shizuku é recomendado. Toque aqui para instalá-lo.</string>
-    <string name="shizuku_integration">Integração com o Shizuku</string>
     <string name="feature_flags">Sinalizadores de recursos</string>
     <string name="feature_flags_explainer">Ativar ou desativar recursos experimentais</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Modo Shizuku ativado, toque em um app para alternar seus recursos de manipulação automática de links. Pressione em um app para abrir o menu de configurações \"Abrir por padrão\".</string>
-    <string name="shizuku_not_running_explainer">O Shizuku não está em execução. Toque aqui para abrir o Shizuku e siga as instruções para iniciá-lo.</string>
     <string name="pretend_to_be_app">Interceptar solicitações de aplicativos nativos</string>
     <string name="pretend_to_be_app_explainer">Fingir ser um aplicativo nativo para domínios compatíveis com o LinkSheetCompat</string>
     <string name="general">Diversos</string>

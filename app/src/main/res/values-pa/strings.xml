@@ -38,7 +38,6 @@
     <string name="domain_selection_confirmation_title">ਡੋਮੇਨ ਚੁਣੋ?</string>
     <string name="log_files">ਪਿਛਲੀਆਂ ਲੌਗ ਫਾਈਲਾਂ</string>
     <string name="open_link_with_subtitle_2">ਲਿੰਕਸ਼ੀਟ ਸ਼ੁਰੂ ਵਿੱਚ OpenLinkWith \'ਤੇ ਅਧਾਰਤ ਸੀ</string>
-    <string name="shizuku_integration_enabled_explainer">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਇਨੇਬਲ ਕੀਤਾ ਗਿਆ!</string>
     <string name="warning">ਚੇਤਾਵਨੀ</string>
     <string name="logs_explainer">ਐਪ ਲੌਗ ਵੇਖੋ</string>
     <string name="enable_all">ਸਭ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
@@ -102,7 +101,6 @@
     <string name="amp2html_external_service_explainer">supabase.com (<annotation url-id="supabase-privacy">ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>) \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਗੈਰ-AMP ਪੰਨਾ ਸੰਸਕਰਣ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="github_explainer">ਸਰੋਤ ਕੋਡ ਰਿਪੌਜ਼ਟਰੀ</string>
     <string name="launch_onboarding">ਔਨਬੋਰਡਿੰਗ ਲਾਂਚ ਕਰੋ</string>
-    <string name="shizuku_integration">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
     <string name="debug">ਡੀਬੱਗ</string>
     <string name="credits_explainer">ਓਪਨ ਸੋਰਸ ਲਾਈਸੈਂਸਿੰਗ</string>
     <string name="remove_all">ਸਾਰੇ ਹਟਾਓ</string>
@@ -120,7 +118,6 @@
     <string name="add_all">ਸਭ ਸ਼ਾਮਿਲ ਕਰੋ</string>
     <string name="feature_flags_explainer">ਪ੍ਰਯੋਗਾਤਮਕ ਫੀਚਰਸ ਨੂੰ ਇਨੇਬਲ ਜਾਂ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="about_explainer">ਇਸ ਐਪ ਬਾਰੇ, ਲਾਈਸੈਂਸ</string>
-    <string name="shizuku_not_running_explainer">Shizuku ਨਹੀਂ ਚੱਲ ਰਿਹਾ ਹੈ। Shizuku ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ, ਫਿਰ ਇਸਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।</string>
     <string name="browser_status">ਬ੍ਰਾਊਜ਼ਰ ਸਥਿਤੀ</string>
     <string name="request_private_browsing">ਪ੍ਰਾਈਵੇਟ</string>
     <string name="always">ਹਮੇਸ਼ਾਂ</string>
@@ -134,7 +131,6 @@
     <string name="follow_redirects_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਖੋਲ੍ਹਣ ਤੋਂ ਪਹਿਲਾਂ ਆਟੋਮੈਟਿਕਲੀ ਸਾਰੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url-id="privacy-follow-redirects">ਗੋਪਨੀਯਤਾ-ਸਬੰਧਤ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="browser_mode">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="dark">ਗਹਿਰਾ</string>
-    <string name="shizuku_integration_not_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੇ ਕੰਮ ਕਰਨ ਲਈ ਸਖ਼ਤੀ ਨਾਲ ਜ਼ਰੂਰੀ ਨਾ ਹੋਣ ਦੇ ਬਾਵਜੂਦ, ਸ਼ਿਜ਼ੁਕੂ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
     <string name="fastfoward_rules_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url-id="fastforward-github">FastForward</annotation> ਨਿਯਮ ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਲਿੰਕ ਤੋਂ ਰੀਡਾਇਰੈਕਟ ਕੱਢ ਕੇ ਕੁਝ ਮੇਜ਼ਬਾਨਾਂ ਦੇ ਰੀਡਾਇਰੈਕਟਸ ਨੂੰ ਬਾਈਪਾਸ ਕਰੋ)</string>
     <string name="set_as_browser">ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="whitelisted">ਵ੍ਹਾਈਟਲਿਸਟਡ</string>
@@ -150,8 +146,6 @@
     <string name="search">ਖੋਜ ਕਰੋ</string>
     <string name="at_least_one_unknown_browser_installer">ਘੱਟੋ-ਘੱਟ ਇੱਕ (ਅਣਜਾਣ) ਬ੍ਰਾਊਜ਼ਰ ਸਥਾਪਤ ਕੀਤਾ ਗਿਆ ਹੈ</string>
     <string name="always_show_package_name">ਹਮੇਸ਼ਾਂ ਪੈਕੇਜ ਨਾਮ ਵਿਖਾਓ</string>
-    <string name="error">ਤਰੁੱਟੀ</string>
-    <string name="checkmark">ਚੈੱਕਮਾਰਕ</string>
     <string name="apps_which_can_open_links_explainer_2">ਉਹਨਾਂ ਸਾਰੀਆਂ ਐਪਾਂ ਨੂੰ ਸੂਚੀਬੱਧ ਕਰਦਾ ਹੈ ਜੋ ਲਿੰਕਸ਼ੀਟ ਦੇ ਵਿਹਾਰ ਵਿੱਚ ਦਖਲ ਦੇ ਸਕਦੀਆਂ ਹਨ</string>
     <string name="set_as_browser_explainer">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਬਣਾਉਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
     <string name="current_session">ਮੌਜੂਦਾ ਸੈਸ਼ਨ</string>
@@ -174,7 +168,6 @@
     <string name="no_browser_installed_explainer">ਲਿੰਕਸ਼ੀਟ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਪਤਾ ਲਗਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ ਰਹੀ। ਸਭ ਤੋਂ ਵਧੀਆ ਅਨੁਭਵ ਲਈ, ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕਰੋ।</string>
     <string name="no_logs_found">ਕੋਈ ਪਿਛਲੇ ਲੌਗ ਨਹੀਂ ਮਿਲੇ!</string>
     <string name="at_least_one_known_browser_installed">ਘੱਟੋ-ਘੱਟ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕੀਤਾ ਗਿਆ ਹੈ</string>
-    <string name="shizuku_integration_no_permission_explainer">Shizuku ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
     <string name="system">ਸਿਸਟਮ</string>
     <string name="no_log_entries">ਇਸ ਸੈਸ਼ਨ ਵਿੱਚ ਕੋਈ ਲੌਗ ਨਹੀਂ ਹਨ।</string>
     <string name="add">ਜੋੜ੍ਹੋ</string>

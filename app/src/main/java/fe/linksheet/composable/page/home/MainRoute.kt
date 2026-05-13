@@ -18,13 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import app.linksheet.compose.theme.HeadlineAlmostLargeStyle
+import app.linksheet.feature.shizuku.ui.ShizukuCard
 import app.linksheet.feature.wiki.navigation.MarkdownViewerRoute
 import app.linksheet.util.buildconfig.BuildType
 import app.linksheet.util.buildconfig.StaticBuildInfo
@@ -35,7 +35,6 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
-import fe.linksheet.composable.page.home.card.ShizukuCard
 import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
@@ -50,7 +49,7 @@ import org.koin.compose.viewmodel.koinActivityViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinActivityViewModel()) {
+fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinActivityViewModel()) {
     val clipboardContent by viewModel.clipboardUseCase.contentFlow.collectAsStateWithLifecycle()
     val newDefaultsDismissed by viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
 
@@ -160,9 +159,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 item {
                     ShizukuCard(
                         activity = activity!!,
-                        uriHandler = LocalUriHandler.current,
-                        shizukuInstalled = shizukuInstalled,
-                        shizukuRunning = shizukuRunning
+                        useCase = viewModel.shizukuStatusUseCase
                     )
                 }
             }

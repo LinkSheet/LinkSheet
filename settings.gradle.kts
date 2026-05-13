@@ -5,6 +5,7 @@ import com.gitlab.grrfe.gradlebuild.repository.GradlePluginPortalRepository
 import com.gitlab.grrfe.gradlebuild.repository.MavenRepository
 import com.gitlab.grrfe.gradlebuild.repository.google
 import com.gitlab.grrfe.gradlebuild.repository.jitpack
+import com.gitlab.grrfe.gradlebuild.repository.local
 import com.gitlab.grrfe.gradlebuild.repository.mavenCentral
 import com.gitlab.grrfe.gradlebuild.repository.mozilla
 import fe.build.dependencies.Grrfe
@@ -58,13 +59,13 @@ plugins {
 }
 
 configureRepositories(
+    MavenRepository.local(),
     MavenRepository.google(),
     MavenRepository.mavenCentral(),
     MavenRepository.jitpack(),
     MavenRepository.mozilla(),
     MavenRepository("https://oss.sonatype.org/content/repositories/snapshots"),
     GradlePluginPortalRepository,
-//    MavenRepository.local(),
     mode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 )
 

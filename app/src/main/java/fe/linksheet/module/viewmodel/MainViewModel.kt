@@ -20,6 +20,8 @@ import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.remoteconfig.usecase.RemoteConfigUseCase
+import app.linksheet.feature.shizuku.service.ShizukuService
+import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getSystemServiceOrThrow
 import fe.linksheet.module.ClipboardUseCase
@@ -45,6 +47,7 @@ class MainViewModel(
     private val miuiCompat: MiuiCompat,
     val debugMenu: DebugMenuSlotProvider,
     private val intentHandler: PackageIntentHandler,
+    private val shizukuService: ShizukuService,
 ) : BaseViewModel(preferenceRepository) {
     val clipboardUseCase: ClipboardUseCase = ClipboardUseCase(
         repository = preferenceRepository,
@@ -56,6 +59,9 @@ class MainViewModel(
         stateRepository = appStateRepository,
         remoteConfigPreferences = AppPreferences.remoteConfig,
         remoteConfigStatePreferences = AppStatePreferences.remoteConfig
+    )
+    val shizukuStatusUseCase = ShizukuStatusUseCase(
+        shizukuService = shizukuService
     )
 
     init {

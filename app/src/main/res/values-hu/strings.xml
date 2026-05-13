@@ -88,8 +88,6 @@
     <string name="github">Github</string>
     <string name="donate_subtitle">Frissítsen a <b>LinkSheet Pro</b>-ra</string>
     <string name="paste">Beillesztés</string>
-    <string name="checkmark">Pipa</string>
-    <string name="error">Hiba</string>
     <string name="links">Linkek</string>
     <string name="use_clear_urls">ClearURLs használata</string>
     <string name="loading_link">Link feldolgozása…</string>
@@ -131,9 +129,6 @@
     <string name="linksheet_download">LinkSheet letöltés</string>
     <string name="enable_all">Mind engedélyezése</string>
     <string name="disable_all">Mind letiltása</string>
-    <string name="shizuku_not_running_explainer">Shizuku nem fut. Koppintson ide a Shizuku megnyitásához, majd kövesse az utasításokat az indításhoz.</string>
-    <string name="shizuku_integration_no_permission_explainer">Koppintson ide a Shizuku engedélykéréséhez.</string>
-    <string name="shizuku_integration">Shizuku integráció</string>
     <string name="feature_flags">Funkció kapcsolók</string>
     <string name="feature_flags_explainer">Kísérleti funkciók engedélyezése vagy letiltása</string>
     <string name="apps_which_can_open_links_explainer">Koppintson egy alkalmazásra az \"Alapértelmezés szerinti megnyitás\" menüért, amely lehetővé teszi az automatikus link megnyitásának letiltását</string>
@@ -166,8 +161,6 @@
     <string name="donate">Támogatás</string>
     <string name="linksheet_donation_explainer_2">Több mint b <b>5 €</b> adomány lehetővé teszi a <b>LinkSheet Pro</b> elérését, amely <b>Pro exkluzív funkciókat</b> tartalmaz, mint például: külső átirányítások követése, nem-AMP oldalak külső megszerzése és még sok más!</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku mód aktiválva, koppintson egy alkalmazásra az automatikus linkkezelési képességekre váltáshoz. Érintsen meg hosszan egy alkalmazást az \"Alapértelmezés szerinti megnyitás\" beállítási menü megnyitásához.</string>
-    <string name="shizuku_integration_enabled_explainer">A Shizuku integráció sikeresen engedélyezve!</string>
-    <string name="shizuku_integration_not_setup_explainer">Bár nem feltétlenül szükséges a LinkSheet működéséhez, a Shizuku használata ajánlott. A telepítéshez koppints ide.</string>
     <string name="launch_onboarding">Beágyazás elindítása</string>
     <string name="compat_installed">A LinkSheetCompat már telepítve van</string>
     <string name="configure">Konfigurálás</string>

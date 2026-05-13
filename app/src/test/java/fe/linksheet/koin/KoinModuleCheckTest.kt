@@ -44,7 +44,7 @@ import app.linksheet.feature.profile.service.ProfileService
 import app.linksheet.feature.remoteconfig.preference.RemoteConfigRepository
 import app.linksheet.feature.remoteconfig.service.RemoteConfigClient
 import app.linksheet.feature.remoteconfig.service.RemoteConfigService
-import app.linksheet.feature.shizuku.ShizukuService
+import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao

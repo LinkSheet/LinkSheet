@@ -40,7 +40,6 @@
     <string name="dark">Dunkel</string>
     <string name="disabled">Deaktiviert</string>
     <string name="always_show_package_name">Paketname immer anzeigen</string>
-    <string name="error">Fehler</string>
     <string name="settings">Einstellungen</string>
     <string name="system">System folgen</string>
     <string name="credits">Danksagungen</string>
@@ -99,7 +98,6 @@
     <string name="domain_selection_confirmation_title">Domains auswählen?</string>
     <string name="manual_build">Manuell erstellt und signiert von 1fexd</string>
     <string name="open_link_with_subtitle_2">LinkSheet basiert ursprünglich auf OpenWith</string>
-    <string name="shizuku_integration_enabled_explainer">Shizuku-Integration wurde erfolgreich aktiviert!</string>
     <string name="warning">Warnung</string>
     <string name="enable_all">Alle aktivieren</string>
     <string name="selected_browser_explainer">Dieser Browser wird automatisch geöffnet, wenn keine native App den angetippten Link verarbeiten kann</string>
@@ -143,7 +141,6 @@
     <string name="amp2html_external_service_explainer">Versucht, die Nicht-AMP-Seitenversion über eine auf supabase.com bereitgestellte API zu erhalten (<annotation url-id="supabase-privacy">Datenschutzrichtlinie</annotation>)</string>
     <string name="github_explainer">Quellcode-Repository</string>
     <string name="launch_onboarding">Onboarding starten</string>
-    <string name="shizuku_integration">Shizuku-Integration</string>
     <string name="debug">Fehlersuche</string>
     <string name="other">Anderes</string>
     <string name="credits_explainer">Danksagungen, Lizenzierung</string>
@@ -153,7 +150,6 @@
     <string name="app_setup">App-Setup</string>
     <string name="feature_flags_explainer">Experimentelle Funktionen aktivieren oder deaktivieren</string>
     <string name="about_explainer">Danksagungen, Lizenz, Links, Version</string>
-    <string name="shizuku_not_running_explainer">Shizuku wird nicht ausgeführt. Tippen Sie hier, um Shizuku zu öffnen, und folgen Sie dann den Anweisungen, um es zu starten</string>
     <string name="browser_status">Browser-Status</string>
     <string name="request_private_browsing">Privat</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
@@ -162,7 +158,6 @@
     <string name="resolved_via">%s aufgelöst über %s</string>
     <string name="donate_crypto">Mit Krypto spenden</string>
     <string name="follow_redirects_explainer">Automatisch allen Weiterleitungen folgen, bevor das untere Fenster geöffnet wird. Dies kann <annotation url-id="privacy-follow-redirects">Auswirkungen auf die Privatsphäre</annotation> haben</string>
-    <string name="shizuku_integration_not_setup_explainer">Shizuku ist zwar nicht unbedingt notwendig, um LinkSheet zu nutzen, wird aber empfohlen. Tippen Sie hier, um es zu installieren</string>
     <string name="fastfoward_rules_explainer">Experimentelle Integration von <annotation url-id="fastforward-github">FastForward</annotation>-Regeln verwenden (umgeht Weiterleitungen einiger Hosts durch Extraktion der Weiterleitung aus dem Link)</string>
     <string name="whitelisted">Auf der Whitelist</string>
     <string name="log">Protokoll</string>
@@ -172,7 +167,6 @@
     <string name="pretend_to_be_app_explainer">Mit LinkSheetCompat vorgeben, eine native App für unterstützte Domains zu sein</string>
     <string name="redact_log">Protokoll schwärzen (empfohlen, bei Deaktivierung können Paket- und Hostnamen bekannt werden)</string>
     <string name="at_least_one_unknown_browser_installer">Mindestens (unbekannt) ein Browser installiert</string>
-    <string name="checkmark">Häkchen</string>
     <string name="compat_installed">LinkSheetCompat ist bereits installiert</string>
     <string name="enable_ignore_libredirect_button_explainer">Zeigt eine Schaltfläche im unteren Fenster, wenn die URL über LibRedirect umgeleitet wurde, die stattdessen die ursprüngliche URL öffnet</string>
     <string name="mastodon_redirect_subtitle_2">Der Quellcode von Mastodon Redirect wurde als Referenz für die Interaktion mit Shizuku verwendet</string>
@@ -188,7 +182,6 @@
     <string name="donate_card">Mit Karte spenden (über BuyMeACoffee)</string>
     <string name="no_logs_found">Keine vergangenen Protokolle gefunden!</string>
     <string name="at_least_one_known_browser_installed">Mindestens ein Browser installiert</string>
-    <string name="shizuku_integration_no_permission_explainer">Tippe hier, um die Shizuku-Berechtigung anzufordern</string>
     <string name="add">Hinzufügen</string>
     <string name="follow_redirects_local_cache">Lokalen Weiterleitungs-Zwischenspeicher aktivieren</string>
     <string name="privacy">Datenschutz</string>

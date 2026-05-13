@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shizuku_integration_enabled_explainer">Shizuku entegrasyonu başarıyla etkinleştirildi!</string>
+    <string name="shizuku_not_running_explainer">Shizuku çalışmıyor. Shizuku\'yu açmak için dokunun, ardından yönergeleri takip ederek onu başlatın.</string>
+    <string name="shizuku_integration_no_permission_explainer">Shizuku iznini talep etmek için buraya dokunun.</string>
+    <string name="shizuku_integration_not_setup_explainer">LinkSheet\'in çalışması için gerekli olmasa da, Shizuku önerilir. Yüklemek için buraya dokunun.</string>
+    <string name="shizuku_integration">Shizuku entegrasyonu</string>
+</resources>

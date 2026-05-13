@@ -58,8 +58,6 @@
     <string name="donate_subtitle">升级到 <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">从剪贴板</string>
     <string name="paste">粘贴</string>
-    <string name="error">错误</string>
-    <string name="checkmark">复选标记</string>
     <string name="links">链接</string>
     <string name="links_explainer">ClearUrls，LibRedirect，跟随重定向</string>
     <string name="use_clear_urls">使用 ClearURLs</string>
@@ -117,7 +115,6 @@
     <string name="disable_all">禁用全部</string>
     <string name="manual_build">由 1fexd 手动构建和签名</string>
     <string name="log_files">过去的会话</string>
-    <string name="shizuku_integration_enabled_explainer">Shizuku 集成已成功启用！</string>
     <string name="warning">警告</string>
     <string name="logs_explainer">查看应用日志</string>
     <string name="enable_all">启用全部</string>
@@ -151,7 +148,6 @@
     <string name="import_settings">导入设置</string>
     <string name="usage_stats_sorting_explainer">在排序算法中引入安卓系统应用使用情况数据。第一次启用时需要请求权限。</string>
     <string name="amp2html_external_service_explainer">尝试使用在 supabase.com（<annotation url-id="supabase-privacy">隐私政策</annotation>）部署的 API 获取非 AMP 页面</string>
-    <string name="shizuku_integration">Shizuku集成</string>
     <string name="debug">调试</string>
     <string name="other">其他</string>
     <string name="export_import_settings">导出或导入设置</string>
@@ -164,12 +160,10 @@
     <string name="thanks_for_donating">感谢您的捐赠！</string>
     <string name="feature_flags_explainer">启用或禁用实验性功能</string>
     <string name="confirm_import">确认</string>
-    <string name="shizuku_not_running_explainer">Shizuku 未在运行。请点击此处打开 Shizuku，并按照指示将其启动。</string>
     <string name="dev">开发者</string>
     <string name="request_private_browsing">隐私</string>
     <string name="import_explainer">从文件导入以前的导出</string>
     <string name="resolved_via">%s 由%s 解析</string>
-    <string name="shizuku_integration_not_setup_explainer">LinkSheet 可在不使用 Shizuku 的情况下工作，但仍然建议使用 Shizuku。点击此处安装。</string>
     <string name="export_import_settings_explainer">导出当前设置或导入以前导出的设置</string>
     <string name="log">日志</string>
     <string name="donate_card_headline">捐赠以支持LinkSheet</string>
@@ -190,7 +184,6 @@
     <string name="no_logs_found">未找到过去的日志！</string>
     <string name="export_explainer">将当前应用设置导出到文件</string>
     <string name="at_least_one_known_browser_installed">至少已安装一个浏览器</string>
-    <string name="shizuku_integration_no_permission_explainer">点击此处请求 Shizuku 权限。</string>
     <string name="no_log_entries">这个会话不具有任何日志。</string>
     <string name="running_unofficial_build">非官方构建</string>
     <string name="donate_card_subtitle">如果您喜欢 LinkSheet，请考虑在 Github 上标星和/或捐款。 \n捐赠超过 <b>5 欧元</b>的捐赠者有资格获得 <b>LinkSheet Pro</b>，它将具有特别功能。</string>

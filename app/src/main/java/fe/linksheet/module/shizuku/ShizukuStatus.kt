@@ -1,5 +1,6 @@
 package fe.linksheet.module.shizuku
 
+@Deprecated("Use new API in :feature-shizuku")
 enum class ShizukuStatus {
     Enabled, NotRunning, NoPermission, NotInstalled;
 

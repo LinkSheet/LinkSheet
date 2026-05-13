@@ -8,4 +8,6 @@
     <string name="request_timeout">Limit czasu żądania</string>
     <string name="request_timeout_explainer">Określ ile sekund LinkSheet będzie oczekiwał na nawiązanie połączenia. Ustawienie tej wartości na 0 wyłącza limit czasu, ale nie jest to zalecane.</string>
     <string name="generic__text_mode">Tryb</string>
+    <string name="checkmark">Znacznik wyboru</string>
+    <string name="error">Błąd</string>
 </resources>

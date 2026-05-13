@@ -58,8 +58,6 @@
     <string name="donate_subtitle">升級至 <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">來自剪貼簿</string>
     <string name="paste">貼上</string>
-    <string name="error">錯誤</string>
-    <string name="checkmark">勾選符號</string>
     <string name="links">連結</string>
     <string name="links_explainer">ClearURLs、LibRedirect、跟進重新導向</string>
     <string name="use_clear_urls">使用 ClearURLs</string>
@@ -259,7 +257,6 @@
     <string name="github_workflow_run_id"><b>工作流程識別碼：</b><font face="monospace">%s</font></string>
     <string name="crash_viewer__subtitle_app_crashed">糟糕，這不該發生的！</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">記錄檔擷取於：%s</string>
-    <string name="shizuku_integration">Shizuku 整合</string>
     <string name="log">記錄檔</string>
     <string name="onboarding_2_install_shizuku">安裝 Shizuku</string>
     <string name="tap_customization_dialog_text">選擇欲執行的動作</string>

@@ -6,7 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.widget.Toast
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import fe.composekit.intent.buildIntent
 import fe.linksheet.R
 import fe.linksheet.extension.android.getApplicationInfoCompat
@@ -17,6 +21,7 @@ import rikka.shizuku.ShizukuProvider
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+@Deprecated("Use new API in :feature-shizuku")
 object ShizukuUtil {
     val MANAGER_COMPONENT = ComponentName(ShizukuProvider.MANAGER_APPLICATION_ID, "moe.shizuku.manager.MainActivity")
 

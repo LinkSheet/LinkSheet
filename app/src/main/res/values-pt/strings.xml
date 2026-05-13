@@ -61,7 +61,6 @@
     <string name="donate_subtitle">Atualizar para <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">Da área de transferência</string>
     <string name="paste">Colar</string>
-    <string name="error">Erro</string>
     <string name="links">Ligações</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
     <string name="use_clear_urls">Usar ClearURLs</string>
@@ -143,11 +142,6 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Modo Shizuku ativado, toque numa app para alternar os seus recursos de manipulação automática de ligações. Pressione numa app para abrir o menu de configurações \"Abrir por padrão\".</string>
     <string name="enable_all">Ativar todos</string>
     <string name="disable_all">Desativar todos</string>
-    <string name="shizuku_integration_enabled_explainer">A integração com o Shizuku foi ativada com sucesso!</string>
-    <string name="shizuku_not_running_explainer">O Shizuku não está em execução. Toque aqui para abrir o Shizuku e siga as instruções para iniciá-lo.</string>
-    <string name="shizuku_integration_no_permission_explainer">Toque aqui para solicitar a permissão ao Shizuku.</string>
-    <string name="shizuku_integration_not_setup_explainer">Embora não seja estritamente necessário para que o LinkSheet funcione, o Shizuku é recomendado. Toque aqui para instalá-lo.</string>
-    <string name="shizuku_integration">Integração com o Shizuku</string>
     <string name="feature_flags">Sinalizadores de recursos</string>
     <string name="feature_flags_explainer">Ativar ou desativar recursos experimentais</string>
     <string name="launch_onboarding">Apresentação ao abrir</string>

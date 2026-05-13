@@ -1,4 +1,4 @@
-package app.linksheet.feature.shizuku
+package app.linksheet.feature.shizuku.service
 
 import android.content.ComponentName
 import android.content.Context
@@ -8,9 +8,7 @@ import android.content.pm.PackageManager
 import android.content.pm.getApplicationInfoCompat
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.eventbus.IntentEventHandler
-import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import fe.composekit.intent.buildIntent
-import fe.droidkit.koin.getPackageManager
 import fe.linksheet.util.ApplicationInfoFlags
 import fe.linksheet.util.IntentFilters
 import fe.std.coroutines.RefreshableStateFlow
@@ -18,20 +16,8 @@ import fe.std.coroutines.asStateFlow
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
 import kotlinx.coroutines.flow.update
-import org.koin.core.module.dsl.viewModelOf
-import org.koin.dsl.module
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider
-
-val ShizukuModule = module {
-    single {
-        AndroidShizukuService(
-            eventBus = get(),
-            packageManager = getPackageManager()
-        )
-    }
-    viewModelOf(::ShizukuSettingsViewModel)
-}
 
 @Suppress("FunctionName")
 internal fun AndroidShizukuService(
@@ -103,11 +89,13 @@ class ShizukuService(
     override val filter = IntentFilters.packageState
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.data?.schemeSpecificPart != ShizukuProvider.MANAGER_APPLICATION_ID) return
+        if (intent.data?.schemeSpecificPart == ShizukuProvider.MANAGER_APPLICATION_ID) {
+            when (intent.action) {
+                Intent.ACTION_PACKAGE_ADDED -> _statusFlow.update { it.copy(installed = true) }
+                Intent.ACTION_PACKAGE_REMOVED -> _statusFlow.update { it.copy(installed = false) }
+            }
+        } else {
 
-        when (intent.action) {
-            Intent.ACTION_PACKAGE_ADDED -> _statusFlow.update { it.copy(installed = true) }
-            Intent.ACTION_PACKAGE_REMOVED -> _statusFlow.update { it.copy(installed = false) }
         }
     }
 
@@ -128,4 +116,6 @@ data class ShizukuStatus(
     companion object {
         val Unknown = ShizukuStatus(installed = false, running = false, permission = false)
     }
+
+    val allOk = installed && permission && running
 }

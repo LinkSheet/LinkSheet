@@ -14,8 +14,6 @@
     <string name="credits">Tänuavaldused</string>
     <string name="github">GitHub</string>
     <string name="paste">Aseta</string>
-    <string name="error">Viga</string>
-    <string name="checkmark">Märkeruut</string>
     <string name="links">Lingid</string>
     <string name="theme">Kujundus</string>
     <string name="light">Hele kujundus</string>
@@ -145,11 +143,6 @@
     <string name="bottom_sheet_explainer">Seadistamine ja kohendamine</string>
     <string name="loading_link">Töötlen linki…</string>
     <string name="follow_redirects_external_service">Järgi välise teenuse edasisuunamisi</string>
-    <string name="shizuku_integration_enabled_explainer">Shizuku lõimingu sisselülitamine õnnestus!</string>
-    <string name="shizuku_not_running_explainer">Shizuku ei tööta. Shizuku avamiseks klõpsa siin ja seejärel järgi käivitusjuhendit.</string>
-    <string name="shizuku_integration">Shizuku lõiming</string>
-    <string name="shizuku_integration_not_setup_explainer">Kuigi Shizuku pole LinkSheeti tööks otseselt vajalik, on ta siiski soovitatav. Paigaldamiseks klõpsa siia.</string>
-    <string name="shizuku_integration_no_permission_explainer">Klõpsa siin Shizuku õiguste seadistamiseks.</string>
     <string name="launch_onboarding">Käivita tervitusvaade</string>
     <string name="feature_flags_explainer">Lülita katselised funktsionaalsused sisse/välja</string>
     <string name="compat_installed">LinkSheetCompat on juba paigaldatud</string>

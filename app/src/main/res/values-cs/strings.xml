@@ -73,8 +73,6 @@
     <string name="about_explainer">Poděkování, licence, odkazy, verze</string>
     <string name="github">GitHub</string>
     <string name="open_copied_link">Ze schránky</string>
-    <string name="error">Chyba</string>
-    <string name="checkmark">Zaškrtávátko</string>
     <string name="links">Odkazy</string>
     <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url-id="clearurls-github">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
     <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url-id="supabase-privacy">zásady ochrany soukromí</annotation>)</string>
@@ -117,7 +115,6 @@
     <string name="donate">Přispět</string>
     <string name="built_by_error">Toto sestavení nebylo podepsáno ani vývojářem 1fexd, ani procesem GitHub.</string>
     <string name="manual_build">Ručně sestaveno a podepsáno vývojářem 1fexd</string>
-    <string name="shizuku_not_running_explainer">Shizuku neběží. Klepnutím sem otevřete aplikaci Shizuku a poté ji podle pokynů spusťte.</string>
     <string name="donate_crypto">Přispět kryptoměnou</string>
     <string name="no">Ne</string>
     <string name="no_handlers_found_explainer">Aplikace LinkSheet nedokáže otevřít tento odkaz.</string>
@@ -165,8 +162,6 @@
     <string name="shizuku_explainer_short">Přímo interagovat se systémovými rozhraními API</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Režim Shizuku aktivován, klepnutím na aplikaci přepnete její funkce automatického zpracování odkazů. Dlouhým klepnutím na aplikaci otevřete její nabídku nastavení „Otevírání ve výchozím nastavení“.</string>
     <string name="disable_all">Zakázat vše</string>
-    <string name="shizuku_integration_no_permission_explainer">Klepněte sem pro vyžádání oprávnění Shizuku.</string>
-    <string name="shizuku_integration_not_setup_explainer">Přestože není pro fungování LinkSheetu nezbytně nutný, je doporučeno používat službu Shizuku. Klepnutím sem ji nainstalujete.</string>
     <string name="pretend_to_be_app">Zachytit požadavky nativních aplikací</string>
     <string name="general">Různé</string>
     <string name="at_least_one_known_browser_installed_explainer">Aplikace LinkSheet detekovala alespoň jednu aplikaci prohlížeče.</string>
@@ -185,8 +180,6 @@
     <string name="feature_flags_explainer">Povolit nebo zakázat experimentální funkce</string>
     <string name="no_apps_which_can_handle_links_found">Nebyly nalezeny žádné aplikace, které dokážou zpracovat odkazy.</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
-    <string name="shizuku_integration_enabled_explainer">Integrace Shizuku byla úspěšně povolena!</string>
-    <string name="shizuku_integration">Integrace Shizuku</string>
     <string name="configure">Nastavit</string>
     <string name="pretend_to_be_app_explainer">Předstírat nativní aplikaci pro podporované domény pomocí aplikace LinkSheetCompat</string>
     <string name="pretend_to_be_app_explainer_2">Některé aplikace, jako například Google Chrome, výslovně hledají nativní aplikaci, která by zpracovala například odkaz na YouTube, když na něj klepnete ve výsledcích vyhledávání. Aplikace LinkSheetCompat předstírá, že je takovou nativní aplikací pro podporované hostitele, a poté předá požadavek aplikaci LinkSheet.</string>

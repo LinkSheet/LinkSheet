@@ -50,8 +50,6 @@
     <string name="donate_crypto">Wesprzyj poprzez krypto</string>
     <string name="donate_subtitle">Uaktualnij do <b>LinkSheet Pro</b></string>
     <string name="paste">Wklej</string>
-    <string name="error">Błąd</string>
-    <string name="checkmark">Znacznik wyboru</string>
     <string name="links">Linki</string>
     <string name="links_explainer">ClearURLs, LibRedirect, Śledzenie przekierowań</string>
     <string name="use_clear_urls">Użyj ClearURLs</string>
@@ -141,14 +139,9 @@
     <string name="use_unified_preferred_browser_explainer">Po włączeniu zostaną zastosowane poniższe ustawienia do obsługi linków w trybach normalnym i w aplikacji. Jeśli opcja jest wyłączona, używaj poniższych przycisków, aby przełączać między tymi trybami.</string>
     <string name="shizuku_explainer_short">Bezpośrednia interakcja z API systemu</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Tryb Shizuku aktywny, dotknij aplikację, aby przełączyć jej funkcję automatycznej obsługi linków. Przytrzymaj długo, aby otworzyć jej ustawienia „Otwieraj domyślnie”.</string>
-    <string name="shizuku_not_running_explainer">Shizuku nie jest uruchomiony. Dotknij tutaj, aby go otworzyć, a następnie postępuj zgodnie z instrukcjami.</string>
-    <string name="shizuku_integration_not_setup_explainer">Shizuku nie jest niezbędny do działania LinkSheet, ale jest zalecany. Kliknij tutaj, aby zainstalować.</string>
     <string name="shizuku">Integracja Shizuku</string>
     <string name="enable_all">Włącz wszystko</string>
     <string name="disable_all">Wyłącz wszystko</string>
-    <string name="shizuku_integration_enabled_explainer">Integracja z Shizuku została włączona!</string>
-    <string name="shizuku_integration_no_permission_explainer">Kliknij tutaj, aby poprosić Shizuku o uprawnienie.</string>
-    <string name="shizuku_integration">Integracja Shizuku</string>
     <string name="advanced">Zaawansowane</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="feature_flags_explainer">Włącz lub wyłącz funkcje eksperymentalne</string>

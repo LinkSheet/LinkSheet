@@ -28,7 +28,6 @@
     <string name="usage_stats_sorting">Ordina app per utilizzo</string>
     <string name="donate_subtitle">Passa a LinkSheet Pro</string>
     <string name="none_explainer">Elenca solo le app native, rimuovendo tutti i browser. Se è presente una sola app nativa, questa verrà aperta automaticamente. Se non è presente alcuna app nativa, vengono elencati tutti i browser.</string>
-    <string name="error">Errore</string>
     <string name="github">GitHub</string>
     <string name="links">Link</string>
     <string name="open_with_linksheet">Apri con LinkSheet</string>
@@ -123,7 +122,6 @@
     <string name="disable_in_selected_explainer">Disabilita il browser in-app per le app selezionate</string>
     <string name="disable_in_selected">Disabilita per…</string>
     <string name="no_logs_found">Nessun log trovato!</string>
-    <string name="checkmark">Spunta</string>
     <string name="amp2html_local_cache">Attiva la cache locale di Amp2Html</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="preferred_apps_settings">Rendi le app l\'opzione predefinita per i link supportati</string>

@@ -62,8 +62,6 @@
     <string name="donate_subtitle">Passer à <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">À partir du presse-papiers</string>
     <string name="paste">Coller</string>
-    <string name="error">Erreur</string>
-    <string name="checkmark">Cochez la case</string>
     <string name="links">Liens</string>
     <string name="use_clear_urls">Utiliser ClearURLs</string>
     <string name="follow_redirects">Suivre les redirections</string>
@@ -147,16 +145,11 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Mode Shizuku activé, appuyez sur une application pour activer/désactiver ses capacités de gestion automatique des liens. Appuyez longuement sur une application pour ouvrir son menu de paramètres \"Ouvrir par défaut\".</string>
     <string name="enable_all">Tout activer</string>
     <string name="disable_all">Tout désactiver</string>
-    <string name="shizuku_integration_enabled_explainer">L\'intégration de Shizuku a été activée avec succès !</string>
-    <string name="shizuku_not_running_explainer">Shizuku n\'est pas en cours d\'exécution. Touchez ici pour ouvrir Shizuku, puis suivez les instructions pour le démarrer.</string>
-    <string name="shizuku_integration_no_permission_explainer">Appuyez ici pour demander la permission Shizuku.</string>
-    <string name="shizuku_integration_not_setup_explainer">Bien qu\'il ne soit pas strictement nécessaire au fonctionnement de LinkSheet, Shizuku est recommandé. Appuyez ici pour l\'installer.</string>
     <string name="log_privacy">­Pour en savoir plus sur la confidentialité des journaux, vous pouvez visiter ce <annotation url-id="privacy-logs">lien</annotation>.</string>
     <string name="amp2html_local_cache_explainer">Mettre en cache localement les versions non-AMP des pages web récupérées</string>
     <string name="amp2html_external_service">Tenter d\'obtenir une version de page non-AMP via un service externe</string>
     <string name="amp2html_external_service_explainer">Tentative d\'obtention d\'une version de page non-AMP à l\'aide d\'une API déployée sur supabase.com (<annotation url-id="supabase-privacy">Politique de confidentialité</annotation>)</string>
     <string name="use_unified_preferred_browser_explainer">L\'activation de cette option permet d\'appliquer les paramètres ci-dessous à la gestion des liens en mode normal et en mode intégré. Utilisez les boutons ci-dessous pour passer du mode Normal au mode Intégré lorsqu\'il est désactivé.</string>
-    <string name="shizuku_integration">Intégration de Shizuku</string>
     <string name="feature_flags_explainer">Activer ou désactiver les fonctionnalités expérimentales</string>
     <string name="pretend_to_be_app">Intercepter les requêtes des applications natives</string>
     <string name="pretend_to_be_app_explainer">Prétendre être une application native pour les domaines pris en charge via LinkSheetCompat</string>

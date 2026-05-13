@@ -4,4 +4,6 @@
     <string name="options">ਵਿਕਲਪ</string>
     <string name="request_timeout">ਰਿਕਵੈਸਟ ਟਾਈਮਆਊਟ</string>
     <string name="request_timeout_explainer">ਇਹ ਪਰਿਭਾਸ਼ਿਤ ਕਰਦਾ ਹੈ ਕਿ ਲਿੰਕਸ਼ੀਟ ਕਿੰਨੇ ਸਕਿੰਟਾਂ ਲਈ ਇੱਕ ਕਨੈਕਸ਼ਨ ਸਥਾਪਤ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰੇਗੀ। ਇਸਨੂੰ 0 \'ਤੇ ਸੈੱਟ ਕਰਨ ਨਾਲ ਟਾਈਮਆਊਟ ਡਿਸੇਬਲ ਹੋ ਜਾਂਦਾ ਹੈ, ਪਰ ਇਸਦੀ ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਜਾਂਦੀ।</string>
+    <string name="checkmark">ਚੈੱਕਮਾਰਕ</string>
+    <string name="error">ਤਰੁੱਟੀ</string>
 </resources>

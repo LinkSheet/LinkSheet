@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic__button_text_back">Atpakaļ</string>
+    <string name="checkmark">Atzīme</string>
+    <string name="error">Kļūda</string>
 </resources>

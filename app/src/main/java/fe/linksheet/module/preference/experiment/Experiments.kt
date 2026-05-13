@@ -91,6 +91,11 @@ object Experiments : PreferenceDefinition(
             displayName = "LibRedirect",
             experiment("QuickJS engine", libRedirectJsEngine),
             experiment("Custom instances", libRedirectCustomInstances)
+        ),
+        group(
+            name = "shizuku",
+            displayName = "shizuku",
+            experiment("Enable Shizuku", newShizuku)
         )
     )
 

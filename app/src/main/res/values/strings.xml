@@ -63,8 +63,6 @@
     <string name="donate_subtitle">Upgrade to <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">From clipboard</string>
     <string name="paste">Paste</string>
-    <string name="error">Error</string>
-    <string name="checkmark">Checkmark</string>
     <string name="links">Links</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirect following</string>
     <string name="use_clear_urls">Use ClearURLs</string>
@@ -150,11 +148,6 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Shizuku mode activated, tap an app to toggle its automatic link handling capabilities. Long tap an app to open its \"Open by default\" settings menu.</string>
     <string name="enable_all">Enable all</string>
     <string name="disable_all">Disable all</string>
-    <string name="shizuku_integration_enabled_explainer">Shizuku integration has been successfully enabled!</string>
-    <string name="shizuku_not_running_explainer">Shizuku is not running. Tap here to open Shizuku, then follow the instructions to start it.</string>
-    <string name="shizuku_integration_no_permission_explainer">Tap here to request Shizuku permission.</string>
-    <string name="shizuku_integration_not_setup_explainer">While not strictly necessary for LinkSheet to work, Shizuku is recommended. Tap here to install it.</string>
-    <string name="shizuku_integration">Shizuku integration</string>
     <string name="feature_flags">Feature flags</string>
     <string name="feature_flags_explainer">Enable or disable experimental features</string>
     <string name="launch_onboarding">Launch onboarding</string>

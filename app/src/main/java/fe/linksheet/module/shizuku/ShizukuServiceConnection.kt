@@ -12,21 +12,25 @@ import dev.zwander.shared.shizuku.ShizukuService
 import fe.linksheet.BuildConfig
 import org.koin.dsl.module
 import rikka.shizuku.Shizuku
-import java.util.*
+import java.util.LinkedList
+import java.util.Queue
 
 
+@Deprecated("Use new API in :feature-shizuku")
 val ShizukuServiceModule = module {
     single {
         ShizukuServiceConnection(context = get())
     }
 }
 
+@Deprecated("Use new API in :feature-shizuku")
 data class ShizukuCommand<T>(
     val command: IShizukuService.() -> T,
     val resultHandler: (T) -> Unit
 )
 
 
+@Deprecated("Use new API in :feature-shizuku")
 class ShizukuServiceConnection(
     context: Context,
 ) : ServiceConnection, Shizuku.OnRequestPermissionResultListener {

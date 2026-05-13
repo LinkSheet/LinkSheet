@@ -25,7 +25,7 @@ import app.linksheet.feature.libredirect.LibRedirectFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.profile.ProfileFeatureModule
 import app.linksheet.feature.remoteconfig.RemoteConfigFeatureModule
-import app.linksheet.feature.shizuku.ShizukuModule
+import app.linksheet.feature.shizuku.ShizukuFeatureModule
 import app.linksheet.feature.wiki.WikiFeatureModule
 import app.linksheet.mozilla.components.support.base.log.Log
 import app.linksheet.mozilla.components.support.base.log.sink.AndroidLogSink
@@ -57,7 +57,6 @@ import fe.linksheet.module.refine.RefineModule
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.resolver.module.ResolverModule
 import fe.linksheet.module.resolver.urlresolver.UrlResolverModule
-import fe.linksheet.module.shizuku.ShizukuServiceModule
 import fe.linksheet.module.statistic.StatisticsModule
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import fe.linksheet.module.versiontracker.VersionTrackerModule
@@ -135,7 +134,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             provideAppModule(),
             AppLocaleModule,
             NetworkStateServiceModule,
-            ShizukuServiceModule,
+//            ShizukuServiceModule,
             GlobalGsonModule,
             PreferenceRepositoryModule,
             DefaultLogModule,
@@ -159,7 +158,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             AppStateServiceModule,
             provideDebugModule(),
             BroadcastEventBusModule,
-            ShizukuModule,
+            ShizukuFeatureModule,
             LibRedirectFeatureModule,
             LinkEngineFeatureModule,
             WikiFeatureModule,

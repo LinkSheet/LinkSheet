@@ -14,7 +14,7 @@ object HomePageNavSubGraph : NavSubGraph<MainOverviewRoute> {
     override val startDestination = MainOverviewRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<MainOverviewRoute> { _, route ->
-            NewMainRoute(navController = navController)
+            MainRoute(navController = navController)
         }
 
         animatedComposable<TextEditorRoute> { _, route ->

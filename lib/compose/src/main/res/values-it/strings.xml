@@ -4,4 +4,6 @@
     <string name="options">Preferenze</string>
     <string name="request_timeout">Timeout richiesta</string>
     <string name="request_timeout_explainer">Tempo di attesa massimo ﹙in secondi﹚ per stabilire una connessione. Il valore 0 ﹙zero﹚, che elimina del tutto il limite di tempo, è sconsigliato.</string>
+    <string name="checkmark">Spunta</string>
+    <string name="error">Errore</string>
 </resources>

@@ -1,31 +1,19 @@
 package app.linksheet.feature.shizuku.viewmodel
 
-import android.app.Activity
 import androidx.lifecycle.ViewModel
 import app.linksheet.api.preference.AppPreferenceRepository
-import app.linksheet.feature.shizuku.ShizukuService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
-import fe.linksheet.util.extension.android.tryStartActivity
+import app.linksheet.feature.shizuku.service.ShizukuService
+import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 
 class ShizukuSettingsViewModel(
     private val shizukuService: ShizukuService,
     preferenceRepository: AppPreferenceRepository,
     shizukuPreferences: ShizukuPreferences,
 ) : ViewModel() {
+    val statusUseCase = ShizukuStatusUseCase(shizukuService = shizukuService)
+
     val enableShizuku = preferenceRepository.asViewModelState(shizukuPreferences.enable)
     val autoDisableLinkHandling = preferenceRepository.asViewModelState(shizukuPreferences.autoDisableLinkHandling)
-    val status = shizukuService.statusFlow
-
-    fun requestPermission() {
-        shizukuService.requestPermission()
-    }
-
-    fun startManager(activity: Activity?) {
-        val success = activity?.tryStartActivity(ShizukuService.ManagerIntent)
-
-//        if (!success) {
-//            Toast.makeText(activity, R.string.shizuku_manager_start_failed, Toast.LENGTH_LONG).show()
-//        }
-    }
 }
 

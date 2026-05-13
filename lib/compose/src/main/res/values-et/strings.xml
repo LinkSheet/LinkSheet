@@ -6,4 +6,6 @@
     <string name="generic__text_url">Võrguaadress</string>
     <string name="options">Valikud</string>
     <string name="request_timeout">Päring aegus</string>
+    <string name="checkmark">Märkeruut</string>
+    <string name="error">Viga</string>
 </resources>

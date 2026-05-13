@@ -25,6 +25,7 @@ android {
 
 dependencies {
     implementation(project(":lib-api"))
+    implementation(project(":lib-log"))
     implementation(project(":lib-util"))
     implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
@@ -42,7 +43,7 @@ dependencies {
     implementation(_1fexd.composeKit.compose.theme.core)
     implementation(_1fexd.composeKit.compose.theme.preference)
     implementation(_1fexd.composeKit.compose.dialog)
-    implementation(_1fexd.composeKit.compose.route)
+    implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)
     implementation(_1fexd.composeKit.preference.core)

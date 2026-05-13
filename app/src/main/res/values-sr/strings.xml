@@ -40,7 +40,6 @@
     <string name="manual_build">Ручно направљено и потписано од 1fexd</string>
     <string name="log_files">Прошле сесије</string>
     <string name="open_link_with_subtitle_2">LibkSheet је првобитно био заснован на OpenLinkWith-у</string>
-    <string name="shizuku_integration_enabled_explainer">Shizuku интеграција је успешно омогућена!</string>
     <string name="warning">Упозорење</string>
     <string name="logs_explainer">Погледајте евиденције апликације</string>
     <string name="enable_all">Омогући све</string>
@@ -111,7 +110,6 @@
     <string name="amp2html_external_service_explainer">Покушајте да добијете не-AMP верзије странице користећи API који је примењен на supabase.con (<annotation url-id="supabase-privacy">Политика приватности</annotation>)</string>
     <string name="github_explainer">Репозиторијум изворног кода</string>
     <string name="launch_onboarding">Покрени започињање</string>
-    <string name="shizuku_integration">Shizuku интеграција</string>
     <string name="debug">Отклањање грешака</string>
     <string name="other">Остало</string>
     <string name="credits_explainer">Признања, лиценцирање</string>
@@ -132,7 +130,6 @@
     <string name="add_all">Додај све</string>
     <string name="feature_flags_explainer">Омогућите или онемогућите експерименталне функције</string>
     <string name="about_explainer">Заслуге, лиценце, линкови, верзија</string>
-    <string name="shizuku_not_running_explainer">Shizuku није покренут. Додирните овде да бисте отворили Shizuku, а затим пратите упутства да бисте га покренули.</string>
     <string name="browser_status">Статус прегледача</string>
     <string name="request_private_browsing">Приватно</string>
     <string name="always">Увек</string>
@@ -147,7 +144,6 @@
     <string name="follow_redirects_explainer">Аутоматски пратите сва преусмеравања пре отварања доњег листа. Ово може имати <annotation url-id="privacy-follow-redirects">импликације у вези са приватношћу</annotation></string>
     <string name="browser_mode">Преферирани прегледач</string>
     <string name="dark">Тамна</string>
-    <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали.</string>
     <string name="fastfoward_rules_explainer">Користите експерименталну <annotation url-id="fastforward-github">FastForward</annotation> интеграцију правила (заобилажење преусмеравања неких хостова издвајањем преусмеравања из линка)</string>
     <string name="set_as_browser">Подеси као прегледач</string>
     <string name="whitelisted">Бела листа</string>
@@ -163,8 +159,6 @@
     <string name="search">Претрага</string>
     <string name="at_least_one_unknown_browser_installer">Инсталиран је најмање један (непознати) прегледач</string>
     <string name="always_show_package_name">Увек приказуј назив пакета</string>
-    <string name="error">Грешка</string>
-    <string name="checkmark">Квачица</string>
     <string name="apps_which_can_open_links_explainer_2">Наводи све апликације које могу да ометају понашање LinkSheet-а</string>
     <string name="set_as_browser_explainer">Додирните овде да бисте подесили LinkSheet као подразумевани прегледач</string>
     <string name="current_session">Тренутна сесија</string>
@@ -189,7 +183,6 @@
     <string name="donate_card">Донирање картицом (путем BuyMeACoffee)</string>
     <string name="no_logs_found">Нису пронађене прошле евиденције!</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
-    <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
     <string name="system">Прати систем</string>
     <string name="no_log_entries">Ова сесија не садржи ниједну евиденцију.</string>
     <string name="add">Додај</string>

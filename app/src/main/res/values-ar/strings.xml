@@ -49,7 +49,6 @@
     <string name="about_explainer">الاعتمادات، الترخيص، الروابط، الإصدار</string>
     <string name="whitelisted">مدرج في القائمة البيضاء</string>
     <string name="version">إصدار ورقة الروابط</string>
-    <string name="error">خطأ</string>
     <string name="bottom_sheet_explainer">التهيئة والتخصيص</string>
     <string name="about">حول التطبيق</string>
     <string name="credits">شكر</string>
@@ -62,7 +61,6 @@
     <string name="links">الروابط</string>
     <string name="paste">لصق</string>
     <string name="use_clear_urls_explainer">استخدام تكامل <annotation url-id="clearurls-github"> ClearURLs</annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
-    <string name="checkmark">علامة الاختيار</string>
     <string name="links_explainer">ClearUrls، LibRedirect، تتبع إعادة التوجيه</string>
     <string name="system">اتباع النظام</string>
     <string name="light">مظيء</string>
@@ -143,14 +141,9 @@
     <string name="shizuku_explainer_short">تفاعل مع واجهات برمجة تطبيقات النظام مباشرة</string>
     <string name="advanced">متقدم</string>
     <string name="mastodon_redirect">إعادة توجيه Mastodon</string>
-    <string name="shizuku_integration">دمج شيزوكو</string>
-    <string name="shizuku_integration_no_permission_explainer">انقر هنا لطلب إذن شيزوكو.</string>
-    <string name="shizuku_integration_not_setup_explainer">في حين أنه ليس ضروريًا تمامًا لعمل ورقة الروابط ، يوصى باستخدام شيزوكو. اضغط هنا لتثبيته.</string>
     <string name="apps_which_can_open_links_shizuku_explainer">تم تنشيط وضع شيزوكو ، انقر فوق أحد التطبيقات لتبديل إمكانيات التعامل مع الارتباط التلقائي. انقر مطولاً على أحد التطبيقات لفتح قائمة الإعدادات \"الفتح افتراضيًا\".</string>
     <string name="enable_all">تمكين الكل</string>
     <string name="disable_all">تعطيل الكل</string>
-    <string name="shizuku_integration_enabled_explainer">تم تمكين تكامل شيزوكو بنجاح!</string>
-    <string name="shizuku_not_running_explainer">شيزوكو لا يعمل. انقر هنا لفتح شيزوكو ، ثم اتبع التعليمات لبدء تشغيله.</string>
     <string name="feature_flags">الاعلام المميزة</string>
     <string name="feature_flags_explainer">تمكين أو تعطيل الميزات التجريبية</string>
     <string name="launch_onboarding">تشغيل onboarding</string>

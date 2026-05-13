@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.ClipboardManager
 import androidx.core.content.getSystemService
 import fe.linksheet.module.log.file.LogPersistService
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon

@@ -5,7 +5,7 @@ import app.linksheet.feature.app.applist.AppListCommon
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import app.linksheet.api.SensitivePreference
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.base.BaseViewModel

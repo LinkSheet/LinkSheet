@@ -1,5 +1,6 @@
 package fe.linksheet.debug.module.debug
 
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.PreferenceRepository
@@ -7,14 +8,13 @@ import fe.android.preference.helper.compose.StatePreferenceRepository
 import fe.composekit.preference.FlowPreferenceRepository
 import fe.linksheet.debug.module.preference.DebugPreferenceRepository
 import fe.linksheet.debug.module.preference.DebugPreferences
-import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.preference.state.AppStatePreferences
-import fe.linksheet.module.preference.state.AppStateRepository
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
 
 data class Repository(val definition: PreferenceDefinition, val preferenceRepository: PreferenceRepository) {
     val allPreferences by lazy { definition.all.map { it.key } }
@@ -36,7 +36,7 @@ class MergedPreferenceRepository(
     val appPreferenceRepository: AppPreferenceRepository,
     val featureFlagRepository: FeatureFlagRepository,
     val experimentRepository: ExperimentRepository,
-    val appStateRepository: AppStateRepository,
+    val appStateRepository: DefaultAppStateRepository,
     val debugRepository: DebugPreferenceRepository,
 ) {
     private val repositories = setOf(

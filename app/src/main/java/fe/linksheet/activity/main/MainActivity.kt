@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import app.linksheet.feature.analytics.ui.rememberAnalyticDialog
-import app.linksheet.feature.remoteconfig.ui.rememberRemoteConfigDialog
+import app.linksheet.feature.remoteconfig.ui.RemoteConfigDialogLauncher
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
@@ -50,20 +50,7 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                 }
 
                 AddIntentDeepLinkHandler(navController = navController)
-
-                val remoteConfigDialogDismissed by viewModel.remoteConfigDialogDismissed.collectAsStateWithLifecycle(
-                    // Assume true to avoid having to show, then quickly dismiss the dialog, once the actual state is emitted to the flow
-                    initialValue = true
-                )
-                val remoteConfigDialog = rememberRemoteConfigDialog(
-                    onChanged = { viewModel.setRemoteConfig(it) }
-                )
-
-                LaunchedEffect(key1 = remoteConfigDialogDismissed) {
-                    if (!remoteConfigDialogDismissed) {
-                        remoteConfigDialog.open()
-                    }
-                }
+                RemoteConfigDialogLauncher(useCase = viewModel.remoteConfigUseCase)
 
                 if (StaticBuildInfo.IsDebug) {
                     navController.ObserveDestination { _, destination, args ->

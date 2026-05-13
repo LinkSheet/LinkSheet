@@ -2,17 +2,17 @@ package fe.linksheet.debug.command
 
 import android.content.Context
 import android.content.Intent
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.debug.DebugBroadcastReceiver
 import fe.linksheet.debug.module.preference.DebugPreferenceRepository
 import fe.linksheet.debug.module.preference.DebugPreferences
-import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.preference.state.AppStatePreferences
-import fe.linksheet.module.preference.state.AppStateRepository
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import org.koin.core.component.get
 
 object DumpPreferencesCommand : DebugCommand<DumpPreferencesCommand>(
@@ -22,7 +22,7 @@ object DumpPreferencesCommand : DebugCommand<DumpPreferencesCommand>(
         Triple("Preferences", AppPreferences.all, get<AppPreferenceRepository>()),
         Triple("Experiments", Experiments.all, get<ExperimentRepository>()),
         Triple("Feature flags", FeatureFlags.all, get<FeatureFlagRepository>()),
-        Triple("App state", AppStatePreferences.all, get<AppStateRepository>()),
+        Triple("App state", AppStatePreferences.all, get<DefaultAppStateRepository>()),
         Triple("Debug preferences", DebugPreferences.all, get<DebugPreferenceRepository>()),
     )
 

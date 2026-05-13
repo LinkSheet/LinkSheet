@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.linksheet.feature.profile.core.ProfileSwitcher
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.permission.UsageStatsPermission

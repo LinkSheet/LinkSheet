@@ -4,7 +4,7 @@ package fe.linksheet.module.preference.state
 
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.UnsafePreferenceInteraction
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments

@@ -2,6 +2,7 @@ package fe.linksheet.debug.command
 
 import android.content.Context
 import android.content.Intent
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
@@ -13,10 +14,9 @@ import fe.kotlin.extension.string.decodeBase64OrNull
 import fe.linksheet.debug.DebugBroadcastReceiver
 import fe.linksheet.debug.module.debug.MergedPreferenceRepository
 import fe.linksheet.debug.module.preference.DebugPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.state.AppStateRepository
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import org.koin.core.component.get
 import kotlin.io.encoding.ExperimentalEncodingApi
 
@@ -29,7 +29,7 @@ object ImportPreferencesCommand : DebugCommand<ImportPreferencesCommand>(
             appPreferenceRepository = get<AppPreferenceRepository>(),
             featureFlagRepository = get<FeatureFlagRepository>(),
             experimentRepository = get<ExperimentRepository>(),
-            appStateRepository = get<AppStateRepository>(),
+            appStateRepository = get<DefaultAppStateRepository>(),
             debugRepository = get<DebugPreferenceRepository>()
         )
     }

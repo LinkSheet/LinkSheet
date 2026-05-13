@@ -32,7 +32,7 @@ val AppStateServiceModule = module {
 internal class AppStateService(
     val clock: Clock,
     val preferenceRepository: DefaultAppPreferenceRepository,
-    val appStateRepository: AppStateRepository,
+    val appStateRepository: DefaultAppStateRepository,
     val experimentsRepository: ExperimentRepository,
 ) : LifecycleAwareService {
     private val logger = Logger("AppStateService")

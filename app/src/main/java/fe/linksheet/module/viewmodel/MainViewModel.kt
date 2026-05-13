@@ -13,20 +13,20 @@ import androidx.navigation.NavDestination
 import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
-import app.linksheet.feature.analytics.preference.AnalyticsPreferences
 import app.linksheet.feature.analytics.service.AnalyticsEvent
 import app.linksheet.feature.analytics.service.BaseAnalyticsService
 import app.linksheet.feature.analytics.service.TelemetryLevel
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
-import app.linksheet.feature.remoteconfig.preference.RemoteConfigPreferences
+import app.linksheet.feature.remoteconfig.usecase.RemoteConfigUseCase
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getSystemServiceOrThrow
 import fe.linksheet.module.ClipboardUseCase
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.state.AppStatePreferences
-import fe.linksheet.module.preference.state.AppStateRepository
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.util.extension.android.tryStartActivity
 import fe.std.coroutines.RefreshableStateFlow
@@ -37,11 +37,9 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     val context: Application,
-    val appStateRepository: AppStateRepository,
+    val appStateRepository: DefaultAppStateRepository,
     val preferenceRepository: AppPreferenceRepository,
     val experimentRepository: ExperimentRepository,
-    private val remoteConfigPreferences: RemoteConfigPreferences,
-    private val analyticsPreferences: AnalyticsPreferences,
     private val analyticsService: BaseAnalyticsService,
     private val miuiCompatProvider: MiuiCompatProvider,
     private val miuiCompat: MiuiCompat,
@@ -52,6 +50,12 @@ class MainViewModel(
         repository = preferenceRepository,
         clipboardManager = context.getSystemServiceOrThrow<ClipboardManager>(),
         coroutineScope = viewModelScope
+    )
+    val remoteConfigUseCase = RemoteConfigUseCase(
+        repository = preferenceRepository,
+        stateRepository = appStateRepository,
+        remoteConfigPreferences = AppPreferences.remoteConfig,
+        remoteConfigStatePreferences = AppStatePreferences.remoteConfig
     )
 
     init {
@@ -64,11 +68,8 @@ class MainViewModel(
         appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2025_12_15_InfoDismissed)
 
     @OptIn(SensitivePreference::class)
-    val telemetryLevel = preferenceRepository.asViewModelState(analyticsPreferences.telemetryLevel)
-    val telemetryShowInfoDialog =
-        preferenceRepository.asViewModelState(analyticsPreferences.telemetryShowInfoDialog)
-    val remoteConfigDialogDismissed = appStateRepository.asViewModelState(AppStatePreferences.remoteConfigDialogDismissed)
-    val remoteConfig = preferenceRepository.asViewModelState(remoteConfigPreferences.enable)
+    val telemetryLevel = preferenceRepository.asViewModelState(AppPreferences.analytics.telemetryLevel)
+    val telemetryShowInfoDialog = preferenceRepository.asViewModelState(AppPreferences.analytics.telemetryShowInfoDialog)
 
     private val _shizukuRunning = RefreshableStateFlow(false) {
         ShizukuUtil.isShizukuRunning()
@@ -114,10 +115,7 @@ class MainViewModel(
         analyticsService.changeLevel(level)
     }
 
-    fun setRemoteConfig(enabled: Boolean) {
-        remoteConfigDialogDismissed(true)
-        remoteConfig(enabled)
-    }
+
 
     enum class SettingsIntent(val action: String) {
         DefaultApps(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS),

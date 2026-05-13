@@ -5,7 +5,7 @@ import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
 import fe.linksheet.module.preference.PreferenceRepositoryModule
 import app.linksheet.api.SensitivePreference
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import org.koin.dsl.module
 

@@ -10,7 +10,7 @@ import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
 import fe.linksheet.feature.engine.RealLinkEngine
 import app.linksheet.api.SensitivePreference
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments

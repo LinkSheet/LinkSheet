@@ -36,7 +36,7 @@ import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments

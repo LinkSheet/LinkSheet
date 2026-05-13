@@ -2,7 +2,7 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 
 class FollowRedirectsSettingsViewModel(

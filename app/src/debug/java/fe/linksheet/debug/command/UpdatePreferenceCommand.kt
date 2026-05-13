@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.kotlin.extension.iterable.mapCatching
 import fe.kotlin.extension.iterable.onEachFailure
 import fe.kotlin.extension.iterable.toSuccess
@@ -13,10 +14,9 @@ import fe.linksheet.activity.util.UiEventReceiver
 import fe.linksheet.debug.DebugBroadcastReceiver
 import fe.linksheet.debug.module.debug.MergedPreferenceRepository
 import fe.linksheet.debug.module.preference.DebugPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.state.AppStateRepository
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import org.koin.core.component.get
 import org.koin.core.component.inject
 
@@ -31,7 +31,7 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
             appPreferenceRepository = get<AppPreferenceRepository>(),
             featureFlagRepository = get<FeatureFlagRepository>(),
             experimentRepository = get<ExperimentRepository>(),
-            appStateRepository = get<AppStateRepository>(),
+            appStateRepository = get<DefaultAppStateRepository>(),
             debugRepository = get<DebugPreferenceRepository>()
         )
     }

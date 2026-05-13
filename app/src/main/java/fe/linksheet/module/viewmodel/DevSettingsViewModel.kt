@@ -10,7 +10,7 @@ import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import com.google.gson.Gson
 import fe.linksheet.R
 import fe.linksheet.module.log.file.LogPersistService
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.shizuku.ShizukuCommand

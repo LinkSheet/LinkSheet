@@ -13,7 +13,7 @@ import fe.gson.GlobalGsonModule
 import fe.gson.GsonQualifier
 import fe.linksheet.BuildConfig
 import fe.linksheet.module.preference.PreferenceRepositoryModule
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import org.koin.core.qualifier.qualifier

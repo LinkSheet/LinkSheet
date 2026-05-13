@@ -12,7 +12,7 @@ import fe.kotlin.extension.iterable.groupByNoNullKeys
 import fe.linksheet.extension.kotlin.ProduceSideEffect
 import fe.linksheet.extension.kotlin.mapProducingSideEffects
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.repository.PreferredAppRepository

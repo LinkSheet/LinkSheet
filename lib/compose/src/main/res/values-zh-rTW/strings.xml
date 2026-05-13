@@ -8,4 +8,5 @@
     <string name="options">選項</string>
     <string name="request_timeout">請求逾時</string>
     <string name="request_timeout_explainer">調整 LinkSheet 等候連線建立的秒數。設為 0 表示停用逾時，但不建議這麼做。</string>
+    <string name="generic__text_mode">模式</string>
 </resources>

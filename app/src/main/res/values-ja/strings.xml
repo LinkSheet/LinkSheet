@@ -525,7 +525,6 @@
     <string name="settings_bottom_sheet__subtitle_double_tap_url">URL をダブルタップして提案されたアプリを開きます</string>
     <string name="settings_bottom_sheet__title_expand_fully">すべて展開</string>
     <string name="settings_bottom_sheet__subtitle_expand_fully">ボトムシートを最大の高さまで自動的に展開します</string>
-    <string name="generic__text_mode">モード</string>
     <string name="settings_follow_redirects__title_mode_auto">自動</string>
     <string name="settings_follow_redirects__title_mode_manual">手動</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">単一のブラウザを自動起動</string>

@@ -8,4 +8,5 @@
     <string name="options">Настройки</string>
     <string name="request_timeout">Изчакване на заявката</string>
     <string name="request_timeout_explainer">Задава колко секунди LinkSheet да изчака за установяване на връзка. Стойност 0 изключва времето за изчакване, но не се препоръчва.</string>
+    <string name="generic__text_mode">Режим</string>
 </resources>

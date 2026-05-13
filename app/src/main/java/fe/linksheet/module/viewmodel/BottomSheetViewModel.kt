@@ -14,6 +14,7 @@ import android.os.Environment
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.core.net.toUri
 import androidx.lifecycle.viewModelScope
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.browser.core.Browser
@@ -36,7 +37,6 @@ import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.module.database.entity.AppSelectionHistory
 import fe.linksheet.module.database.entity.PreferredApp
-import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
@@ -93,7 +93,6 @@ class BottomSheetViewModel(
     val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.browser.enable)
     val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideBottomSheetChoiceButtons)
-    val enableDownloader = preferenceRepository.asViewModelState(AppPreferences.downloader.enable)
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enableIgnoreLibRedirectButton)
     val bottomSheetProfileSwitcher = preferenceRepository.asViewModelState(AppPreferences.profileSwitcher.enable)
     val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.single)
@@ -104,6 +103,8 @@ class BottomSheetViewModel(
     val expandFully = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.expandFully)
     val doubleTapUrl = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.doubleTapUrl)
     val interceptAccidentalTaps = experimentRepository.asViewModelState(Experiments.interceptAccidentalTaps)
+    val downloaderEnabled = preferenceRepository.asViewModelState(AppPreferences.downloader.enable)
+    val downloaderMode = preferenceRepository.asViewModelState(AppPreferences.downloader.mode)
     val followRedirectsEnabled = preferenceRepository.asViewModelState(AppPreferences.followRedirects.enable)
     val followRedirectsMode = preferenceRepository.asViewModelState(AppPreferences.followRedirects.mode)
     val noBottomSheetStateSave = experimentRepository.asViewModelState(Experiments.noBottomSheetStateSave)

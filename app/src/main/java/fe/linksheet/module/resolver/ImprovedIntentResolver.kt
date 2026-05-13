@@ -13,6 +13,7 @@ import app.linksheet.feature.app.core.labelSorted
 import app.linksheet.feature.browser.core.PrivateBrowsingService
 import app.linksheet.feature.downloader.core.DownloadCheckResult
 import app.linksheet.feature.downloader.core.Downloader
+import app.linksheet.feature.downloader.core.DownloaderMode
 import app.linksheet.feature.downloader.core.isDownloadable
 import app.linksheet.feature.engine.database.entity.ResolveType
 import app.linksheet.feature.libredirect.LibRedirectResolver
@@ -103,7 +104,8 @@ class ImprovedIntentResolver(
     private val _events = MutableStateFlow(value = ResolveEvent.Idle)
     override val events = _events.asStateFlow()
 
-    private val _interactions = MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.Idle)
+    private val _interactions =
+        MutableStateFlow<ResolverInteraction>(value = ResolverInteraction.Idle)
     override val interactions = _interactions.asStateFlow()
 
     private fun emitEvent(event: ResolveEvent) {
@@ -146,7 +148,8 @@ class ImprovedIntentResolver(
 
         logger.debug("Referrer=${options.referrer}")
         val referringPackage = AndroidUri.get(Scheme.Package, options.referrer)
-        val isReferrerBrowser = privateBrowsingService.isKnownBrowser(referringPackage?.packageName) != null
+        val isReferrerBrowser =
+            privateBrowsingService.isKnownBrowser(referringPackage?.packageName) != null
 
         val searchIntentResult = tryHandleSearchIntent(intent)
         if (searchIntentResult != null) {
@@ -265,7 +268,10 @@ class ImprovedIntentResolver(
         )
 
         if (uri == null) {
-            return@scope fail("Failed to run uri modifiers", IntentResolveResult.UrlModificationFailed)
+            return@scope fail(
+                "Failed to run uri modifiers",
+                IntentResolveResult.UrlModificationFailed
+            )
         }
 
         val enableLibRedirect = libRedirectSettings.enableLibRedirect()
@@ -304,9 +310,9 @@ class ImprovedIntentResolver(
         )
         var resolveList = packageIntentHandler.findHandlers(uri, referringPackage?.packageName)
         resolveList = maybeFilterReferrer(
-            resolveList,
-            referringPackage,
-            settings.bottomSheetSettings.hideReferringApp()
+            resolveList = resolveList,
+            referringPackage = referringPackage,
+            hideReferringApp = settings.bottomSheetSettings.hideReferringApp()
         )
 
         emitEvent(ResolveEvent.CheckingBrowsers)
@@ -329,9 +335,14 @@ class ImprovedIntentResolver(
 
         val isRegularPreferredApp = app?.alwaysPreferred == true && filtered != null
 
-        val enabledDownloader = downloaderSettings.enableDownloader()
+        val shouldRunDownloader = shouldRunDownloader(
+            enabled = downloaderSettings.enableDownloader(),
+            mode = downloaderSettings.downloaderMode(),
+            isRegularPreferredApp = isRegularPreferredApp,
+            hasManualFlag = intent.getBooleanExtra(IntentKeyDownloader, false),
+        )
         var downloadable: DownloadCheckResult? = null
-        if (enabledDownloader && !isRegularPreferredApp) {
+        if (shouldRunDownloader) {
             downloadable = cancelable(ResolveEvent.CheckingDownloader) {
                 checkDownloadable(
                     downloader = downloader,
@@ -343,8 +354,8 @@ class ImprovedIntentResolver(
         }
 
         var unfurl: UnfurlResult? = null
-        val shouldSkipPreviewUrl = shouldSkipPreviewUrl(
-            previewUrl = previewSettings.previewUrl(),
+        val shouldSkipPreviewUrl = shouldRunPreviewUrl(
+            enabled = previewSettings.previewUrl(),
             previewUrlSkipBrowser = previewSettings.previewUrlSkipBrowser(),
             isReferrerBrowser = isReferrerBrowser,
             isRegularPreferredApp = isRegularPreferredApp
@@ -367,18 +378,6 @@ class ImprovedIntentResolver(
             libRedirectResult = libRedirectResult,
             downloadable = downloadable
         )
-    }
-
-    private fun shouldSkipPreviewUrl(
-        previewUrl: Boolean,
-        previewUrlSkipBrowser: Boolean,
-        isReferrerBrowser: Boolean,
-        isRegularPreferredApp: Boolean
-    ): Boolean {
-        if (!previewUrl) return true
-        if (previewUrlSkipBrowser && isReferrerBrowser) return true
-
-        return isRegularPreferredApp
     }
 
     private fun maybeFilterReferrer(
@@ -553,7 +552,34 @@ class ImprovedIntentResolver(
             BundledEmbedResolveConfigLoader.load().getOrNull()
         }
 
+        const val IntentKeyDownloader = "downloader"
         const val IntentKeyResolveRedirects = "resolve_redirects"
+
+        internal fun shouldRunDownloader(
+            enabled: Boolean,
+            mode: DownloaderMode,
+            isRegularPreferredApp: Boolean,
+            hasManualFlag: Boolean
+        ): Boolean {
+            if (!enabled) return false
+            if (isRegularPreferredApp) return false
+            return when (mode) {
+                is DownloaderMode.Auto -> true
+                is DownloaderMode.Manual -> hasManualFlag
+            }
+        }
+
+        internal fun shouldRunPreviewUrl(
+            enabled: Boolean,
+            previewUrlSkipBrowser: Boolean,
+            isReferrerBrowser: Boolean,
+            isRegularPreferredApp: Boolean
+        ): Boolean {
+            if (!enabled) return false
+            if (previewUrlSkipBrowser && isReferrerBrowser) return false
+
+            return !isRegularPreferredApp
+        }
 
         internal fun shouldFollowRedirects(
             enabled: Boolean,

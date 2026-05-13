@@ -7,4 +7,5 @@
     <string name="options">オプション</string>
     <string name="request_timeout">リクエストタイムアウト</string>
     <string name="request_timeout_explainer">LinkSheet が接続の確立を待機する秒数を定義します。この値を 0 に設定するとタイムアウトは無効になりますが、推奨されません。</string>
+    <string name="generic__text_mode">モード</string>
 </resources>

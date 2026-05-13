@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.linksheet.compose.ConnectedToggleButtonFlowRow
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewContainer
@@ -32,7 +33,6 @@ import fe.composekit.preference.fakeBooleanVM
 import fe.composekit.preference.fakeStringVM
 import fe.composekit.route.Route
 import fe.linksheet.R
-import fe.linksheet.composable.component.ConnectedToggleButtonFlowRow
 import fe.linksheet.composable.component.list.item.type.PreferenceRadioButtonListItem
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel

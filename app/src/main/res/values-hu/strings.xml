@@ -536,7 +536,6 @@
     <string name="settings_bottom_sheet__subtitle_expand_fully">Az alsó panel automatikus kibontása teljes magasságúra</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">Automatikusan indítson egy böngészőt</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Ha csak egyetlen alkalmazás érhető el, amely egy böngésző, indítsa el automatikusan</string>
-    <string name="generic__text_mode">Mód</string>
     <string name="settings_follow_redirects__title_mode_auto">Automatikus</string>
     <string name="settings_follow_redirects__subtitle_mode_auto">Automatikusan kövesse az összes átirányítást</string>
     <string name="settings_follow_redirects__title_mode_manual">Manuális</string>

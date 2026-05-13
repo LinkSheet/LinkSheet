@@ -402,7 +402,6 @@
     <string name="link_handle_failed_text">由於連結的格式似乎有誤，LinkSheet 無法處理。你可以在下方編輯後再試一次，或在網上搜尋之。</string>
     <string name="link_handle_failed">發生錯誤</string>
     <string name="browser_mode_divider">模式</string>
-    <string name="generic__text_mode">模式</string>
     <string name="settings_follow_redirects__title_mode_auto">自動</string>
     <string name="settings_follow_redirects__title_mode_manual">手動</string>
     <string name="settings_follow_redirects__subtitle_mode_auto">自動跟進所有重新導向</string>

@@ -3,18 +3,24 @@
 package fe.linksheet.module.resolver.module
 
 import android.app.usage.UsageStatsManager
+import app.linksheet.api.SensitivePreference
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.app.core.AppInfoCreator
+import app.linksheet.feature.downloader.core.DownloaderMode
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
 import fe.linksheet.BuildConfig
 import fe.linksheet.feature.engine.RealLinkEngine
-import app.linksheet.api.SensitivePreference
-import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.resolver.*
+import fe.linksheet.module.resolver.FollowRedirectsMode
+import fe.linksheet.module.resolver.ImprovedBrowserHandler
+import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.module.resolver.InAppBrowserHandler
+import fe.linksheet.module.resolver.IntentResolver
+import fe.linksheet.module.resolver.IntentResolverDelegate
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.DefaultIntentLauncher
@@ -146,6 +152,7 @@ data class Amp2HtmlSettings(
 
 data class DownloaderSettings(
     val enableDownloader: () -> Boolean,
+    val downloaderMode: () -> DownloaderMode,
     val downloaderCheckUrlMimeType: () -> Boolean,
 )
 
@@ -210,6 +217,7 @@ fun createSettings(
         ),
         downloaderSettings = DownloaderSettings(
             enableDownloader = prefRepo.asFunction(AppPreferences.downloader.enable),
+            downloaderMode = prefRepo.asFunction(AppPreferences.downloader.mode),
             downloaderCheckUrlMimeType = prefRepo.asFunction(AppPreferences.downloader.checkUrlMimeType),
         ),
         previewSettings = PreviewSettings(

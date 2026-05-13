@@ -24,6 +24,7 @@ import androidx.lifecycle.lifecycleScope
 import app.linksheet.compose.debug.LocalUiDebug
 import app.linksheet.compose.debugBorder
 import app.linksheet.compose.extension.collectOnIO
+import app.linksheet.feature.downloader.core.DownloaderMode
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.profile.core.switchTo
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
@@ -41,6 +42,7 @@ import fe.linksheet.activity.bottomsheet.IgnoreLibRedirectInteraction
 import fe.linksheet.activity.bottomsheet.LaunchFailure
 import fe.linksheet.activity.bottomsheet.LaunchHandler
 import fe.linksheet.activity.bottomsheet.LaunchResult
+import fe.linksheet.activity.bottomsheet.ManualDownloadInteraction
 import fe.linksheet.activity.bottomsheet.ManualRedirectInteraction
 import fe.linksheet.activity.bottomsheet.ShareUrlInteraction
 import fe.linksheet.activity.bottomsheet.StartDownloadInteraction
@@ -265,7 +267,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             }
 
             is IntentResolveResult.Default -> {
-                val enableDownloader by viewModel.enableDownloader.collectAsStateWithLifecycle()
                 val enableIgnoreLibRedirectButton by viewModel.enableIgnoreLibRedirectButton.collectAsStateWithLifecycle()
                 val bottomSheetProfileSwitcher by viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
                 val bottomSheetNativeLabel by viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
@@ -275,17 +276,19 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
                 val followRedirectsEnabled by viewModel.followRedirectsEnabled.collectAsStateWithLifecycle()
                 val followRedirectsMode by viewModel.followRedirectsMode.collectAsStateWithLifecycle()
+                val downloaderEnable by viewModel.downloaderEnabled.collectAsStateWithLifecycle()
+                val downloaderMode by viewModel.downloaderMode.collectAsStateWithLifecycle()
                 val doubleTapUrl by viewModel.doubleTapUrl.collectAsStateWithLifecycle()
 
                 BottomSheetApps(
                     modifier = modifier,
                     result = resolveResult,
                     imageLoader = viewModel.imageLoader,
-                    enableDownloader = enableDownloader,
+                    enableDownloader = downloaderEnable,
                     enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
                     profiles = if (bottomSheetProfileSwitcher) viewModel.profileSwitcher.getProfiles() else null,
-                    enableManualRedirect = followRedirectsMode == FollowRedirectsMode.Manual,
                     enableManualRedirect = followRedirectsEnabled && followRedirectsMode == FollowRedirectsMode.Manual,
+                    enableManualDownload = downloaderEnable && downloaderMode == DownloaderMode.Manual,
                     bottomSheetNativeLabel = bottomSheetNativeLabel,
                     gridLayout = gridLayout,
                     appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
@@ -346,6 +349,16 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     uri = interaction.uri.toUri(),
                     extras = Bundle().apply {
                         putBoolean(ImprovedIntentResolver.IntentKeyResolveRedirects, true)
+                    }
+                )
+                onNewIntent(intent)
+            }
+
+            is ManualDownloadInteraction -> {
+                val intent = StandardIntents.createSelfIntent(
+                    uri = interaction.uri.toUri(),
+                    extras = Bundle().apply {
+                        putBoolean(ImprovedIntentResolver.IntentKeyDownloader, true)
                     }
                 )
                 onNewIntent(intent)

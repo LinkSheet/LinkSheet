@@ -1,4 +1,4 @@
-package fe.linksheet.composable.component
+package app.linksheet.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.FlowRow
@@ -15,7 +15,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fe.composekit.component.PreviewThemeNew
-import fe.linksheet.module.resolver.FollowRedirectsMode
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -48,14 +47,17 @@ fun <T> ConnectedToggleButtonFlowRow(
     }
 }
 
+private enum class PreviewDummy {
+    Auto, Manual
+}
 
 @Preview(showBackground = true)
 @Composable
 private fun ConnectedToggleButtonFlowRowPreview() {
     PreviewThemeNew {
         ConnectedToggleButtonFlowRow(
-            items = listOf(FollowRedirectsMode.Auto, FollowRedirectsMode.Manual),
-            current = FollowRedirectsMode.Auto,
+            items = listOf(PreviewDummy.Auto, PreviewDummy.Manual),
+            current = PreviewDummy.Auto,
             onChange = {
 
             },

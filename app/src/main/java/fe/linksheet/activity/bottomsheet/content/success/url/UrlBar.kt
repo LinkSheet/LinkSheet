@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.FastForward
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.rounded.DoubleArrow
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.Icon
@@ -43,6 +44,7 @@ import fe.linksheet.activity.bottomsheet.BottomSheetStateController
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.CopyUrlInteraction
 import fe.linksheet.activity.bottomsheet.IgnoreLibRedirectInteraction
+import fe.linksheet.activity.bottomsheet.ManualDownloadInteraction
 import fe.linksheet.activity.bottomsheet.ManualRedirectInteraction
 import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
 import fe.linksheet.activity.bottomsheet.ShareUrlInteraction
@@ -51,6 +53,7 @@ import fe.linksheet.activity.bottomsheet.SwitchProfileInteraction
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.util.intent.StandardIntents
 import me.saket.unfurl.UnfurlResult
+import app.linksheet.feature.downloader.R as DownloaderR
 
 
 @Composable
@@ -61,6 +64,7 @@ fun UrlBarWrapper(
     enableIgnoreLibRedirectButton: Boolean,
     enableUrlCardDoubleTap: Boolean,
     enableManualRedirect: Boolean,
+    enableManualDownload: Boolean,
     controller: BottomSheetStateController,
     profiles: List<CrossProfile>?,
 ) {
@@ -106,6 +110,9 @@ fun UrlBarWrapper(
         manualRedirect = enableManualRedirect.if2 { uri ->
             controller.dispatch(ManualRedirectInteraction(uri))
         },
+        manualDownload = enableManualDownload.if2 { uri ->
+            controller.dispatch(ManualDownloadInteraction(uri))
+        },
         onDoubleClick = enableUrlCardDoubleTap.if2 {
             if (result.app != null) {
                 controller.dispatch(PreferredAppChoiceButtonInteraction(result.app, ClickModifier.None, result.intent))
@@ -134,6 +141,7 @@ fun UrlBar(
     downloadUri: ((String, DownloadCheckResult.Downloadable) -> Unit)? = null,
     ignoreLibRedirect: ((LibRedirectResult.Redirected) -> Unit)? = null,
     manualRedirect: ((String) -> Unit)? = null,
+    manualDownload: ((String) -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
 ) {
     Column(
@@ -185,6 +193,14 @@ fun UrlBar(
                         text = textContent(R.string.download),
                         icon = Icons.Filled.Download.iconPainter,
                         onClick = { downloadUri!!(uri, downloadable as DownloadCheckResult.Downloadable) }
+                    )
+                }
+            } else if (manualDownload != null) {
+                item {
+                    UrlActionButton(
+                        text = textContent(DownloaderR.string.action_downloader__try_to_download),
+                        icon = Icons.Rounded.Search.iconPainter,
+                        onClick = { manualDownload(uri) }
                     )
                 }
             }

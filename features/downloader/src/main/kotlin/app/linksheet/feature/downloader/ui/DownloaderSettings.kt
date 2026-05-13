@@ -1,13 +1,23 @@
 package app.linksheet.feature.downloader.ui
 
 import android.Manifest
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import app.linksheet.compose.ConnectedToggleButtonFlowRow
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.feature.downloader.R
+import app.linksheet.feature.downloader.core.DownloaderMode
 import app.linksheet.feature.downloader.viewmodel.DownloaderSettingsViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
@@ -25,6 +35,8 @@ import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import app.linksheet.compose.R as CommonR
+
+private val downloaderModes = listOf(DownloaderMode.Auto, DownloaderMode.Manual)
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -54,6 +66,39 @@ internal fun DownloaderSettings(
                 headlineContent = textContent(R.string.enable_downloader),
                 supportingContent = annotatedStringResource(R.string.enable_downloader_explainer),
             )
+        }
+        divider(id = CommonR.string.generic__text_mode)
+
+        item(key = -CommonR.string.generic__text_mode, contentType = ContentType.SingleGroupItem) {
+            Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                val downloaderMode by viewModel.mode.collectAsStateWithLifecycle()
+                ConnectedToggleButtonFlowRow(
+                    current = downloaderMode,
+                    items = downloaderModes,
+                    onChange = { viewModel.mode(it) },
+                    itemContent = {
+                        Text(
+                            text = stringResource(
+                                id = when (it) {
+                                    DownloaderMode.Auto -> R.string.settings_downloader__title_mode_auto
+                                    DownloaderMode.Manual -> R.string.settings_downloader__title_mode_manual
+                                }
+                            )
+                        )
+                    }
+                )
+
+                Text(
+                    modifier = Modifier.padding(horizontal = 8.dp),
+                    text = stringResource(
+                        id = when (downloaderMode) {
+                            DownloaderMode.Auto -> R.string.settings_downloader__subtitle_mode_auto
+                            DownloaderMode.Manual -> R.string.settings_downloader__subtitle_mode_manual
+                        }
+                    ),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
 
         divider(id = CommonR.string.options)

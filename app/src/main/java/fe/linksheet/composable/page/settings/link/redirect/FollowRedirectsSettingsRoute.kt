@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.compose.ConnectedToggleButtonFlowRow
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
@@ -23,9 +24,14 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.PreviewThemeNew
 import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.SliderListItem
-import fe.composekit.preference.*
+import fe.composekit.preference.BooleanVmPref
+import fe.composekit.preference.FakePreferences
+import fe.composekit.preference.IntVmPref
+import fe.composekit.preference.ViewModelStatePreference
+import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.preference.fakeBooleanVM
+import fe.composekit.preference.fakeIntVM
 import fe.linksheet.R
-import fe.linksheet.composable.component.ConnectedToggleButtonFlowRow
 import fe.linksheet.module.resolver.FollowRedirectsMode
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
@@ -88,9 +94,9 @@ private fun FollowRedirectsSettingsRouteInternal(
             )
         }
 
-        divider(id = R.string.generic__text_mode)
+        divider(id = CommonR.string.generic__text_mode)
 
-        item(key = -R.string.generic__text_mode, contentType = ContentType.SingleGroupItem) {
+        item(key = -CommonR.string.generic__text_mode, contentType = ContentType.SingleGroupItem) {
             Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 val followRedirectsMode by modePref.collectAsStateWithLifecycle()
                 ConnectedToggleButtonFlowRow(

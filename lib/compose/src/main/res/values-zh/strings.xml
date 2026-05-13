@@ -7,4 +7,5 @@
     <string name="options">选项</string>
     <string name="request_timeout">请求超时</string>
     <string name="request_timeout_explainer">定义 LinkSheet 等待建立连接的秒数。将此设置为 0 将禁用超时（不建议）。</string>
+    <string name="generic__text_mode">模式</string>
 </resources>

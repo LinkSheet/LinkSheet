@@ -58,6 +58,7 @@ fun BottomSheetApps(
     enableDownloader: Boolean,
     enableIgnoreLibRedirectButton: Boolean,
     enableManualRedirect: Boolean,
+    enableManualDownload: Boolean,
     bottomSheetNativeLabel: Boolean,
     gridLayout: Boolean,
     appListSelectedIdx: Int,
@@ -94,6 +95,7 @@ fun BottomSheetApps(
                     profiles = profiles,
                     enableUrlCardDoubleTap = urlCardDoubleTap,
                     enableManualRedirect = enableManualRedirect,
+                    enableManualDownload = enableManualDownload,
                     controller = controller,
                 )
 
@@ -325,6 +327,7 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
             enableDownloader = false,
             enableIgnoreLibRedirectButton = false,
             enableManualRedirect = false,
+            enableManualDownload = false,
             bottomSheetNativeLabel = false,
             gridLayout = gridLayout,
             appListSelectedIdx = -1,

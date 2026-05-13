@@ -537,7 +537,6 @@
     <string name="settings_bottom_sheet__subtitle_expand_fully">Alt sayfayı otomatik olarak tam boyutuna genişlet</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">Tek tarayıcıyı otomatik başlat</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Eğer yalnızca tek bir uygulama mevcutsa ve bu uygulama aynı zamanda bir tarayıcıysa, otomatik olarak onu başlat</string>
-    <string name="generic__text_mode">Mod</string>
     <string name="settings_follow_redirects__title_mode_auto">Otomatik</string>
     <string name="settings_follow_redirects__subtitle_mode_auto">Bütün yönlendirmeleri otomatik olarak takip et</string>
     <string name="settings_follow_redirects__title_mode_manual">El ile</string>

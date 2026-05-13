@@ -8,4 +8,5 @@
     <string name="options">Seçenekler</string>
     <string name="request_timeout">İstek zaman aşımı</string>
     <string name="request_timeout_explainer">LinkSheet\'in bir bağlantının kurulması için kaç saniye bekleyeceğini belirler. Bunu 0 yapmak zaman aşımını devre dışı bırakır, ancak bu önerilmez.</string>
+    <string name="generic__text_mode">Mod</string>
 </resources>

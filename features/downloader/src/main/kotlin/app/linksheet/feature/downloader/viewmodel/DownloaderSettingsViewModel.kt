@@ -12,6 +12,7 @@ class DownloaderSettingsViewModel(
 ) : ViewModel() {
 
     val enableDownloader = preferenceRepository.asViewModelState(downloaderPreferences.enable)
+    val mode = preferenceRepository.asViewModelState(downloaderPreferences.mode)
     val downloaderCheckUrlMimeType = preferenceRepository.asViewModelState(downloaderPreferences.checkUrlMimeType)
     val requestTimeout = preferenceRepository.asViewModelState(downloaderPreferences.requestTimeout)
 }

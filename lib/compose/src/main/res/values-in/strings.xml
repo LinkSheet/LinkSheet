@@ -7,4 +7,5 @@
     <string name="options">Opsi</string>
     <string name="request_timeout">Batas waktu permintaan</string>
     <string name="request_timeout_explainer">Menentukan berapa detik LinkSheet akan menunggu hingga koneksi terbentuk. Menyetel nilainya ke 0 akan menonaktifkan batas waktu, tetapi ini tidak direkomendasikan.</string>
+    <string name="generic__text_mode">Mode</string>
 </resources>

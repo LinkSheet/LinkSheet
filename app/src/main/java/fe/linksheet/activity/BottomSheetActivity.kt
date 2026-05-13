@@ -273,6 +273,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 val previewUrl by viewModel.previewUrl.collectAsStateWithLifecycle()
                 val hideBottomSheetChoiceButtons by viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
                 val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
+                val followRedirectsEnabled by viewModel.followRedirectsEnabled.collectAsStateWithLifecycle()
                 val followRedirectsMode by viewModel.followRedirectsMode.collectAsStateWithLifecycle()
                 val doubleTapUrl by viewModel.doubleTapUrl.collectAsStateWithLifecycle()
 
@@ -284,6 +285,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
                     profiles = if (bottomSheetProfileSwitcher) viewModel.profileSwitcher.getProfiles() else null,
                     enableManualRedirect = followRedirectsMode == FollowRedirectsMode.Manual,
+                    enableManualRedirect = followRedirectsEnabled && followRedirectsMode == FollowRedirectsMode.Manual,
                     bottomSheetNativeLabel = bottomSheetNativeLabel,
                     gridLayout = gridLayout,
                     appListSelectedIdx = viewModel.appListSelectedIdx.intValue,

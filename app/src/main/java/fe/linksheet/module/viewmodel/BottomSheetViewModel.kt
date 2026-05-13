@@ -104,6 +104,7 @@ class BottomSheetViewModel(
     val expandFully = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.expandFully)
     val doubleTapUrl = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.doubleTapUrl)
     val interceptAccidentalTaps = experimentRepository.asViewModelState(Experiments.interceptAccidentalTaps)
+    val followRedirectsEnabled = preferenceRepository.asViewModelState(AppPreferences.followRedirects.enable)
     val followRedirectsMode = preferenceRepository.asViewModelState(AppPreferences.followRedirects.mode)
     val noBottomSheetStateSave = experimentRepository.asViewModelState(Experiments.noBottomSheetStateSave)
     val appListSelectedIdx = mutableIntStateOf(-1)

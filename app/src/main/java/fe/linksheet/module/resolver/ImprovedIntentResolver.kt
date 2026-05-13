@@ -11,9 +11,9 @@ import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
 import app.linksheet.feature.app.core.labelSorted
 import app.linksheet.feature.browser.core.PrivateBrowsingService
-import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.downloader.Downloader
-import app.linksheet.feature.downloader.isDownloadable
+import app.linksheet.feature.downloader.core.DownloadCheckResult
+import app.linksheet.feature.downloader.core.Downloader
+import app.linksheet.feature.downloader.core.isDownloadable
 import app.linksheet.feature.engine.database.entity.ResolveType
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.LibRedirectResult

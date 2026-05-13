@@ -1,6 +1,7 @@
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
+import fe.build.dependencies._1fexd
 
 plugins {
     kotlin("plugin.compose")
@@ -24,7 +25,9 @@ android {
 
 dependencies {
     implementation(project(":lib-common"))
+    implementation(project(":lib-compose"))
     implementation(project(":lib-util"))
+    implementation(project(":lib-log"))
     implementation(project(":lib-api"))
     implementation(project(":integration-mime-types"))
 
@@ -35,6 +38,21 @@ dependencies {
     implementation(Koin.android)
     implementation(Koin.compose)
     implementation(AndroidX.core.ktx)
+    implementation(_1fexd.composeKit.core)
+    implementation(_1fexd.composeKit.preference.core)
+    implementation(_1fexd.composeKit.preference.compose.core)
+    implementation(_1fexd.composeKit.preference.compose.core2)
+    implementation(_1fexd.composeKit.preference.compose.mock)
+    implementation(_1fexd.composeKit.preference.compose.mock2)
+    implementation(_1fexd.composeKit.compose.route)
+    implementation(_1fexd.composeKit.compose.component)
+    implementation(AndroidX.compose.ui)
+    implementation(AndroidX.compose.ui.toolingPreview)
+    implementation(AndroidX.compose.material3)
+    implementation(AndroidX.navigation.compose)
+    implementation(AndroidX.compose.material.icons.core)
+    implementation(AndroidX.compose.material.icons.extended)
+    implementation(Google.accompanist.permissions)
 
     implementation(JetBrains.ktor.client.core)
     implementation(JetBrains.ktor.client.gson)

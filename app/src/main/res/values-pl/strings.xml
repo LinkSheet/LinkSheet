@@ -78,9 +78,6 @@
     <string name="dont_show_filtered_item_explainer">Nie pokazuj górnej sekcji, która sugeruje ostatnio używaną aplikację dla klikniętego linku</string>
     <string name="set_as_browser_explainer">Dotknij, aby ustawić LinkSheet jako domyślną przeglądarkę</string>
     <string name="linksheet_download">Pobieranie LinkSheet</string>
-    <string name="enable_downloader">Włącz program do pobierania</string>
-    <string name="downloader_url_mime_type">Użyj typu MIME z adresu URL</string>
-    <string name="downloader_url_mime_type_explainer">Sprawdza, czy adres URL kończy się rozszerzeniem pliku (np. \".jpg\"); jeśli tak, ten typ jest używany dla pobieranego pliku.</string>
     <string name="use_app_settings">Domyślnie</string>
     <string name="always_disable">Wymuś wyłączenie</string>
     <string name="disable_in_selected">Wymuś wyłączenie…</string>
@@ -98,7 +95,6 @@
     <string name="selected_browser_explainer">Ta przeglądarka zostanie automatycznie otwarta, jeśli żadna natywna aplikacja nie będzie w stanie obsłużyć klikniętego linku</string>
     <string name="preview_url_explainer">Pokazuje kliknięty link (po jego przetworzeniu)</string>
     <string name="use_clear_urls_explainer">Używaj eksperymentalnej integracji <annotation url-id="clearurls-github">ClearURLs</annotation> (czyści parametry śledzenia z adresów URL)</string>
-    <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli link prowadzi bezpośrednio do pliku. Może to mieć <annotation url-id="privacy-downloader">negatywny wpływ na prywatność</annotation></string>
     <string name="follow_redirects_external_service_explainer">Śledź przekierowania za pomocą interfejsu API wdrożonego na supabase.com (<annotation url-id="supabase-privacy">Polityka prywatności</annotation>)</string>
     <string name="fastfoward_rules_explainer">Używaj eksperymentalnej integracji reguł <annotation url-id="fastforward-github">FastForward</annotation> (omiń przekierowania niektórych stron internetowych, wyodrębniając przekierowanie z linku)</string>
     <string name="redirect_resolve_type_local">lokalny rozwiązywacz</string>

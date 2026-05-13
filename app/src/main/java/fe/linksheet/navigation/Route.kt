@@ -59,7 +59,6 @@ const val loadDumpedPreferences = "log_dumped_reference_settings_route"
 const val linksSettingsRoute = "link_settings_route"
 
 const val followRedirectsSettingsRoute = "follow_redirects_settings_route"
-const val downloaderSettingsRoute = "downloader_settings_route"
 const val amp2HtmlSettingsRoute = "amp2html_settings_route"
 
 

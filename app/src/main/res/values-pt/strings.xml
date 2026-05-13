@@ -94,10 +94,6 @@
     <string name="preview_url_explainer">Mostra o URL clicado (após ter sido processado)</string>
     <string name="download">Descarregar</string>
     <string name="linksheet_download">Descarregar via LinkSheet</string>
-    <string name="enable_downloader">Ativar descarregador</string>
-    <string name="enable_downloader_explainer">Adicione um botão \"Descarregar\" à folha inferior se o URL contiver uma ligação direta para o ficheiro. Isto pode ter <annotation url-id="privacy-downloader">implicações relacionadas à privacidade</annotation></string>
-    <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
-    <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de ficheiro (por exemplo, \".jpg\"); se terminar, este tipo será usado para o ficheiro descarregado.</string>
     <string name="in_app_browser">Navegador incorporado</string>
     <string name="in_app_browser_subtitle">Alterar configurações do navegador incorporado</string>
     <string name="use_app_settings">Padrão</string>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Abilita download</string>
+    <string name="enable_downloader_explainer">Aggiungi un pulsante \'Download\' nel foglio inferiore se l\'URL contiene un collegamento diretto a un file. Potrebbe avere</string>
+    <string name="downloader_url_mime_type">Ricava il tipo MIME dall\'URL</string>
+    <string name="downloader_url_mime_type_explainer">Controlla se l\'URL termina con un\'estensione che determina con certezza il tipo di file (ad es. \'.jpg\').</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Ativar baixador</string>
+    <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter</string>
+    <string name="settings_links_downloader__title_downloader">Downloader</string>
+    <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
+    <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de arquivo (por exemplo, \".jpg\"); se terminar, esse tipo será usado para o arquivo baixado.</string>
+</resources>

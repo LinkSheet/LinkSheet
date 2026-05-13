@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Activer le téléchargeur</string>
+    <string name="enable_downloader_explainer">Ajouter un bouton \"Télécharger\" au bas de l\'écran si l\'url contient un lien direct vers un fichier. Cela peut avoir des</string>
+    <string name="settings_links_downloader__title_downloader">Téléchargeur</string>
+    <string name="downloader_url_mime_type">Utiliser le type de mime de l\'url</string>
+    <string name="downloader_url_mime_type_explainer">Vérifie si l\'URL se termine par une extension de fichier (par exemple \".jpg\") ; si c\'est le cas, ce type est utilisé pour le fichier téléchargé.</string>
+</resources>

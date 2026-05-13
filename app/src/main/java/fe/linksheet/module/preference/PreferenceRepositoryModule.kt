@@ -2,6 +2,7 @@ package fe.linksheet.module.preference
 
 import app.linksheet.feature.analytics.preference.AnalyticsPreferences
 import app.linksheet.feature.browser.preference.BrowserPreferences
+import app.linksheet.feature.downloader.preference.DownloaderPreferences
 import app.linksheet.feature.libredirect.preference.Experiment
 import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import app.linksheet.feature.profile.preference.ProfilePreferences
@@ -34,4 +35,5 @@ val PreferenceRepositoryModule = module {
     single<ProfilePreferences> { AppPreferences.profileSwitcher }
     single<AnalyticsPreferences> { AppPreferences.analytics }
     single<RemoteConfigPreferences> { AppPreferences.remoteConfig }
+    single<DownloaderPreferences> { AppPreferences.downloader }
 }

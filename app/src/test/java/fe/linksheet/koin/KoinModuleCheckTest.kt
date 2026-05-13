@@ -28,7 +28,7 @@ import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.devicecompat.oneui.OneUiCompat
-import app.linksheet.feature.downloader.Downloader
+import app.linksheet.feature.downloader.core.Downloader
 import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.database.dao.LibRedirectDefaultDao

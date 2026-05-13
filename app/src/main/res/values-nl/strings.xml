@@ -127,12 +127,8 @@
     <string name="github">GitHub</string>
     <string name="links">Links</string>
     <string name="links_explainer">ClearUrls, LibRedirect, omleidingen volgen</string>
-    <string name="enable_downloader">Downloaden inschakelen</string>
     <string name="use_clear_urls">ClearURLs gebruiken</string>
-    <string name="downloader_url_mime_type">Mime-type van URL gebruiken</string>
     <string name="dont_show_filtered_item">Sectie \"laatst gekozen app\" niet tonen</string>
-    <string name="enable_downloader_explainer">Toon een knop \"Downloaden\" indien de URL een directe link naar een bestand is. Dit kan <annotation url-id="privacy-downloader">privacy-gerelateerde implicaties</annotation> hebben.</string>
-    <string name="downloader_url_mime_type_explainer">Controleer of de URL eindigt op een bestandsextensie (bijv. \".jpg\"). Als dit het geval is, dan wordt dit type gebruikt voor het gedownloade bestand.</string>
     <string name="log_files">Vorige sessies</string>
     <string name="log_viewer">Logboek</string>
     <string name="no_browsers_found">Geen browsers gevonden.</string>

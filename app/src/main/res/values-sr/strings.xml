@@ -42,7 +42,6 @@
     <string name="open_link_with_subtitle_2">LibkSheet је првобитно био заснован на OpenLinkWith-у</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku интеграција је успешно омогућена!</string>
     <string name="warning">Упозорење</string>
-    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк до фајла. Ово може имати <annotation url-id="privacy-downloader">импликације у вези са приватношћу</annotation></string>
     <string name="logs_explainer">Погледајте евиденције апликације</string>
     <string name="enable_all">Омогући све</string>
     <string name="selected_browser_explainer">Овај прегледач ће се аутоматски отворити ако ниједна изворна апликација не може да рукује линком на који је кликнуто</string>
@@ -114,13 +113,11 @@
     <string name="launch_onboarding">Покрени започињање</string>
     <string name="shizuku_integration">Shizuku интеграција</string>
     <string name="debug">Отклањање грешака</string>
-    <string name="downloader_url_mime_type_explainer">Проверава да ли се URL адреса завршава екстензијом фајла (нпр. .jpg); Ако је тако, овај тип се користи за преузети фајл.</string>
     <string name="other">Остало</string>
     <string name="credits_explainer">Признања, лиценцирање</string>
     <string name="remove_all">Уклони све</string>
     <string name="use_unified_preferred_browser">Користи обједињена подешавања</string>
     <string name="always_ask_explainer">Увек наведите све прегледаче</string>
-    <string name="enable_downloader">Омогући програм за преузимање</string>
     <string name="paste">Налепи</string>
     <string name="download">Преузми</string>
     <string name="links_explainer">ClearUrls, LibRedirect, праћење преусмеравања</string>
@@ -191,7 +188,6 @@
     <string name="no_browser_installed_explainer">LinkSheet није успео да открије најмање једну апликацију која тврди да је прегледач. За најбоље искуство, инсталирајте прегледач.</string>
     <string name="donate_card">Донирање картицом (путем BuyMeACoffee)</string>
     <string name="no_logs_found">Нису пронађене прошле евиденције!</string>
-    <string name="downloader_url_mime_type">Користите тип пантомиме из URL адресе</string>
     <string name="at_least_one_known_browser_installed">Инсталиран је најмање један прегледач</string>
     <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
     <string name="system">Прати систем</string>

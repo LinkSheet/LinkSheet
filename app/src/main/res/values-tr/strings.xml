@@ -89,8 +89,6 @@
     <string name="dont_show_filtered_item_explainer">Tıklanan sunucu için son kullanılan uygulamayı öneren üst bölümü göstermez</string>
     <string name="preview_url">URL\'yi önizle</string>
     <string name="download">İndir</string>
-    <string name="enable_downloader">İndiriciyi etkinleştir</string>
-    <string name="downloader_url_mime_type">URL\'den mime türünü kullan</string>
     <string name="always_disable_explainer">Uygulama içi tarayıcıyı bütün uygulamalar için devre dışı bırak</string>
     <string name="disable_in_selected_explainer">Uygulama içi tarayıcıyı seçilen uygulamalarda devre dışı bırak</string>
     <string name="use_unified_preferred_browser">Birleştirilmiş ayarları kullan</string>
@@ -119,11 +117,9 @@
     <string name="close">Kapat</string>
     <string name="follow_redirects_external_service_explainer">supabase.com adresinde bulunan bir API\'yi kullanarak yönlendirmeleri takip eder(<annotation url-id="supabase-privacy">Gizlilik politikası</annotation>)</string>
     <string name="redirect_resolve_type_local_cache">yerel önbellek</string>
-    <string name="downloader_url_mime_type_explainer">URL\'nin bir dosya uzantısı (örn. \".jpg\") ile bitip bitmediğini kontrol eder; bitiyorsa, indirilen dosya için bu tür kullanılır.</string>
     <string name="use_app_settings">Varsayılan</string>
     <string name="enable_amp2html_explainer">AMP sayfalarını normal web sürümlerine yönlendirir. Bunun <annotation url-id="privacy-amp2html">gizlilikle ilgili etkileri</annotation> olabilir</string>
     <string name="preview_url_explainer">Tıklanan URL\'yi (işlendikten sonra) gösterir</string>
-    <string name="enable_downloader_explainer">URL dosyaya giden bir doğrudan bağlantı içeriyorsa alt sayfaya bir \"İndir\" düğmesi ekle. Bunun <annotation url-id="privacy-downloader">gizlilikle ilgili etkileri</annotation> olabilir</string>
     <string name="in_app_browser">Uygulama içi tarayıcı</string>
     <string name="always_disable">Zorla devre dışı bırak</string>
     <string name="disable_in_selected">Zorla devre dışı bırak…</string>

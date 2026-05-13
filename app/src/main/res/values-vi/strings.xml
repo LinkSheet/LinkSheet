@@ -76,13 +76,11 @@
     <string name="preview_url">URL xem trước</string>
     <string name="usage_stats_sorting_explainer">Bao gồm số liệu thống kê sử dụng hệ thống Android trong thuật toán sắp xếp. Quyền được yêu cầu trong lần chuyển đổi đầu tiên.</string>
     <string name="github_explainer">Kho lưu trữ mã nguồn</string>
-    <string name="downloader_url_mime_type_explainer">Kiểm tra xem URL có kết thúc bằng phần mở rộng tệp hay không (ví dụ: \".jpg\"); Nếu có, loại này được sử dụng cho tệp tải xuống.</string>
     <string name="other">Khác</string>
     <string name="credits_explainer">Lời cảm ơn, Giấy phép</string>
     <string name="remove_all">Loại bỏ hết</string>
     <string name="use_unified_preferred_browser">Sử dụng thiết đặt thống nhất</string>
     <string name="always_ask_explainer">Luôn liệt kê mọi trình duyệt</string>
-    <string name="enable_downloader">Bật trình tải xuống</string>
     <string name="paste">Dán</string>
     <string name="download">Tải xuống</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Chuyển hướng theo dõi</string>
@@ -129,7 +127,6 @@
     <string name="browser_mode_subtitle">Đặt chế độ trình duyệt ưu tiên</string>
     <string name="follow_only_known_trackers">Theo dõi chỉ những người theo dõi đã biết</string>
     <string name="no_logs_found">Không tìm thấy nhật ký trước đây!</string>
-    <string name="downloader_url_mime_type">Sử dụng loại mime từ URL</string>
     <string name="system">Theo hệ thống</string>
     <string name="no_log_entries">Phiên này không chứa bất kỳ nhật ký nào.</string>
     <string name="add">Thêm</string>
@@ -224,7 +221,6 @@
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="app_browsers_subtitle">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
-    <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. Điều này có thể có <annotation url-id="privacy-downloader">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. Điều này có thể có <annotation url-id="privacy-amp2html">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url-id="supabase-privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="github">Github</string>

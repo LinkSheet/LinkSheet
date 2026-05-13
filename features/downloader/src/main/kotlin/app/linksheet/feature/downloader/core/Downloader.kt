@@ -1,6 +1,6 @@
-package app.linksheet.feature.downloader
+package app.linksheet.feature.downloader.core
 
-import app.linksheet.feature.downloader.DownloadCheckResult.Downloadable
+import app.linksheet.feature.downloader.core.DownloadCheckResult.Downloadable
 import fe.linksheet.extension.ktor.contentDisposition
 import fe.linksheet.util.mime.MimeType
 import fe.linksheet.web.ContentDispositionHelper
@@ -8,17 +8,13 @@ import fe.mimetype.KnownMimeTypes
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
 import fe.std.uri.StdUrl
-import io.ktor.client.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import org.koin.dsl.module
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.request
+import io.ktor.http.contentType
+import io.ktor.http.isSuccess
 
-val DownloaderModule = module {
-    single<Downloader> {
-        Downloader(client = get())
-    }
-}
 
 sealed interface DownloadCheckResult {
     //    class Downloadable(val fileName: String, val extension: String?) : DownloadCheckResult {

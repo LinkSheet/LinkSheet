@@ -15,7 +15,6 @@ import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
-import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel
 import fe.linksheet.module.viewmodel.FeatureFlagViewModel
@@ -102,7 +101,6 @@ val ViewModelModule = module {
     viewModelOf(::ThemeSettingsViewModel)
     viewModelOf(::LanguageSettingsViewModel)
     viewModelOf(::FollowRedirectsSettingsViewModel)
-    viewModelOf(::DownloaderSettingsViewModel)
     viewModelOf(::LogSettingsViewModel)
     viewModel { parameters ->
         LogTextSettingsViewModel(

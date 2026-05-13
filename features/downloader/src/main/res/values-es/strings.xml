@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Activar descargador</string>
+    <string name="enable_downloader_explainer">Añadir un botón \"Descargar\" a la hoja inferior si URL contiene enlace directo al archivo. Esto puede tener</string>
+    <string name="settings_links_downloader__title_downloader">Descargador</string>
+    <string name="downloader_url_mime_type">Usar el tipo mime desde el enlace</string>
+    <string name="downloader_url_mime_type_explainer">Comprueba si el enlace termina con una extensión de archivo (por ejemplo, \".jpg\"); Si es así, este tipo se utiliza para el archivo descargado.</string>
+</resources>

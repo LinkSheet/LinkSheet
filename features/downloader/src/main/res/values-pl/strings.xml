@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Włącz program do pobierania</string>
+    <string name="enable_downloader_explainer">Dodaj przycisk „Pobierz” do dolnego panelu, jeśli link prowadzi bezpośrednio do pliku. Może to mieć</string>
+    <string name="settings_links_downloader__title_downloader">Program do pobierania</string>
+    <string name="downloader_url_mime_type">Użyj typu MIME z adresu URL</string>
+    <string name="downloader_url_mime_type_explainer">Sprawdza, czy adres URL kończy się rozszerzeniem pliku (np. \".jpg\"); jeśli tak, ten typ jest używany dla pobieranego pliku.</string>
+</resources>

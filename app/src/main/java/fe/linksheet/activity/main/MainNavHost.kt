@@ -10,6 +10,7 @@ import app.linksheet.compose.util.animatedComposable
 import app.linksheet.compose.util.predictivePopEnterTransition
 import app.linksheet.compose.util.predictivePopExitTransition
 import app.linksheet.feature.browser.navigation.PrivateBrowsingNavSubGraph
+import app.linksheet.feature.downloader.navigation.DownloaderNav
 import app.linksheet.feature.engine.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
 import app.linksheet.feature.profile.navigation.ProfileNav
@@ -47,7 +48,6 @@ import fe.linksheet.composable.page.settings.debug.log.LogTextSettingsRoute
 import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
 import fe.linksheet.composable.page.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.page.settings.link.amp2html.Amp2HtmlSettingsRoute
-import fe.linksheet.composable.page.settings.link.downloader.DownloaderSettingsRoute
 import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
 import fe.linksheet.composable.page.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
@@ -74,7 +74,6 @@ import fe.linksheet.navigation.bottomSheetSettingsRoute
 import fe.linksheet.navigation.browserSettingsRoute
 import fe.linksheet.navigation.creditsSettingsRoute
 import fe.linksheet.navigation.devModeRoute
-import fe.linksheet.navigation.downloaderSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import fe.linksheet.navigation.generalSettingsRoute
 import fe.linksheet.navigation.inAppBrowserSettingsDisableInSelectedRoute
@@ -108,6 +107,7 @@ fun MainNavHost(
         attachSubGraph(ShizukuNavSubGraph, navController)
         attachSubGraph(LibRedirectNavSubGraph, navController)
         attachSubGraph(PrivateBrowsingNavSubGraph, navController)
+        attachNav(DownloaderNav, navController)
         attachNav(WikiNav, navController)
         if (AndroidVersion.isAtLeastApi30R()) {
             attachNav(ProfileNav, navController)
@@ -195,10 +195,6 @@ fun MainNavHost(
 
         animatedComposable(route = followRedirectsSettingsRoute) {
             FollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
-        }
-
-        animatedComposable(route = downloaderSettingsRoute) {
-            DownloaderSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = amp2HtmlSettingsRoute) {

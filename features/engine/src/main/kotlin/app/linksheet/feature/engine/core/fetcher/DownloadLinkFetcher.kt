@@ -1,8 +1,8 @@
 package app.linksheet.feature.engine.core.fetcher
 
-import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.downloader.Downloader
-import app.linksheet.feature.downloader.isDownloadable
+import app.linksheet.feature.downloader.core.DownloadCheckResult
+import app.linksheet.feature.downloader.core.Downloader
+import app.linksheet.feature.downloader.core.isDownloadable
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

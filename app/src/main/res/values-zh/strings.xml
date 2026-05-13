@@ -91,10 +91,6 @@
     <string name="preview_url_explainer">显示点击的链接（处理后）</string>
     <string name="download">下载</string>
     <string name="linksheet_download">LinkSheet 下载</string>
-    <string name="enable_downloader">启用下载器</string>
-    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加“下载”按钮。这可能带来 <annotation url-id="privacy-downloader">隐私方面的影响</annotation></string>
-    <string name="downloader_url_mime_type">使用来自链接的媒体类型</string>
-    <string name="downloader_url_mime_type_explainer">检查链接是否以文件扩展名结尾（例如“.jpg”）；如果是，则此类型用于下载的文件。</string>
     <string name="in_app_browser">应用内置的浏览器</string>
     <string name="always_disable">强制禁用</string>
     <string name="always_disable_explainer">禁用所有应用内浏览器</string>

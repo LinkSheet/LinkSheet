@@ -11,7 +11,6 @@
     <string name="checkmark">Отметка</string>
     <string name="donate_subtitle">Надградете до <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
-    <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне от %s</string>
     <string name="default_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
@@ -37,9 +36,6 @@
     <string name="follow_redirects_external_service">Последване на пренасочванията от външна услуга</string>
     <string name="follow_redirects_local_cache_explainer">Запазва резултатите от пренасочванията</string>
     <string name="redirect_resolve_type_local">местно откриване</string>
-    <string name="enable_downloader">Бутон за изтегляне</string>
-    <string name="downloader_url_mime_type_explainer">Проверява дали адресът завършва с файлово разширение (напр. „.jpg“); ако е така, се използва за изтегления файл.</string>
-    <string name="downloader_url_mime_type">Намиране на вида на файла от адреса</string>
     <string name="just_once">Веднъж</string>
     <string name="copy_url">Копиране</string>
     <string name="confirm">Потвърждаване</string>

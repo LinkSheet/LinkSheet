@@ -28,7 +28,7 @@ import app.linksheet.compose.preview.PreviewContainer
 import app.linksheet.compose.theme.HkGroteskFontFamily
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
-import app.linksheet.feature.downloader.DownloadCheckResult
+import app.linksheet.feature.downloader.core.DownloadCheckResult
 import app.linksheet.feature.profile.core.CrossProfile
 import app.linksheet.testing.asPreferredApp
 import app.linksheet.testing.fake.PackageInfoFakes

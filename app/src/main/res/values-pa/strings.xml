@@ -40,7 +40,6 @@
     <string name="open_link_with_subtitle_2">ਲਿੰਕਸ਼ੀਟ ਸ਼ੁਰੂ ਵਿੱਚ OpenLinkWith \'ਤੇ ਅਧਾਰਤ ਸੀ</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਇਨੇਬਲ ਕੀਤਾ ਗਿਆ!</string>
     <string name="warning">ਚੇਤਾਵਨੀ</string>
-    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url-id="privacy-downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="logs_explainer">ਐਪ ਲੌਗ ਵੇਖੋ</string>
     <string name="enable_all">ਸਭ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="selected_browser_explainer">ਇਹ ਬ੍ਰਾਊਜ਼ਰ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਕਲਿੱਕ ਕੀਤੇ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਸੰਭਾਲ ਸਕਦਾ</string>
@@ -105,12 +104,10 @@
     <string name="launch_onboarding">ਔਨਬੋਰਡਿੰਗ ਲਾਂਚ ਕਰੋ</string>
     <string name="shizuku_integration">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
     <string name="debug">ਡੀਬੱਗ</string>
-    <string name="downloader_url_mime_type_explainer">ਜਾਂਚ ਕਰਦਾ ਹੈ ਕਿ ਕੀ URL ਇੱਕ ਫਾਈਲ ਐਕਸਟੈਂਸ਼ਨ ਨਾਲ ਖਤਮ ਹੁੰਦਾ ਹੈ (ਉਦਾਹਰਨ ਲਈ \".jpg\"); ਜੇਕਰ ਅਜਿਹਾ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਇਸ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀ ਫ਼ਾਈਲ ਲਈ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।</string>
     <string name="credits_explainer">ਓਪਨ ਸੋਰਸ ਲਾਈਸੈਂਸਿੰਗ</string>
     <string name="remove_all">ਸਾਰੇ ਹਟਾਓ</string>
     <string name="use_unified_preferred_browser">ਯੂਨੀਫਾਈਡ ਸੈਟਿੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="always_ask_explainer">ਹਮੇਸ਼ਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੀ ਸੂਚੀ ਪੇਸ਼ ਕਰੋ</string>
-    <string name="enable_downloader">ਡਾਉਨਲੋਡਰ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="paste">ਪੇਸਟ ਕਰੋ</string>
     <string name="download">ਡਾਊਨਲੋਡ</string>
     <string name="links_explainer">ਲਿੰਕ ਹੇਰਾਫੇਰੀ ਸੰਬੰਧੀ ਸੈਟਿੰਗਾਂ</string>
@@ -176,7 +173,6 @@
     <string name="follow_only_known_trackers">ਸਿਰਫ਼ ਜਾਣੇ-ਪਛਾਣੇ ਟਰੈਕਰਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ</string>
     <string name="no_browser_installed_explainer">ਲਿੰਕਸ਼ੀਟ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਪਤਾ ਲਗਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ ਰਹੀ। ਸਭ ਤੋਂ ਵਧੀਆ ਅਨੁਭਵ ਲਈ, ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕਰੋ।</string>
     <string name="no_logs_found">ਕੋਈ ਪਿਛਲੇ ਲੌਗ ਨਹੀਂ ਮਿਲੇ!</string>
-    <string name="downloader_url_mime_type">URL ਤੋਂ ਮਾਈਮ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="at_least_one_known_browser_installed">ਘੱਟੋ-ਘੱਟ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕੀਤਾ ਗਿਆ ਹੈ</string>
     <string name="shizuku_integration_no_permission_explainer">Shizuku ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
     <string name="system">ਸਿਸਟਮ</string>

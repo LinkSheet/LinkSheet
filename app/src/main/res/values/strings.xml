@@ -98,10 +98,6 @@
     <string name="preview_url_explainer">Shows the clicked URL (after it has been processed)</string>
     <string name="download">Download</string>
     <string name="linksheet_download">LinkSheet Download</string>
-    <string name="enable_downloader">Enable downloader</string>
-    <string name="enable_downloader_explainer">Add a \"Download\" button to the bottom sheet if URL contains direct link to file. This may have <annotation url-id="privacy-downloader">privacy-related implications</annotation></string>
-    <string name="downloader_url_mime_type">Use mime type from URL</string>
-    <string name="downloader_url_mime_type_explainer">Checks if the URL ends with a file extension (e.g. \".jpg\"); If it does, this type is used for the downloaded file.</string>
     <string name="app_name" translatable="false">LinkSheet</string>
     <string name="in_app_browser">In-App browser</string>
     <string name="in_app_browser_subtitle">Override In-App browser settings</string>

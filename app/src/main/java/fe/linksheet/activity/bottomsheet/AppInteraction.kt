@@ -2,7 +2,7 @@ package fe.linksheet.activity.bottomsheet
 
 import android.content.Intent
 import app.linksheet.feature.app.core.ActivityAppInfo
-import app.linksheet.feature.downloader.DownloadCheckResult
+import app.linksheet.feature.downloader.core.DownloadCheckResult
 import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.profile.core.CrossProfile
 

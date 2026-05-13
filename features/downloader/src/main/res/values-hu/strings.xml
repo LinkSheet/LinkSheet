@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Letöltő engedélyezése</string>
+    <string name="enable_downloader_explainer">Hozzáad egy \"Letöltés\" gombot az alsó panelhez, ha az URL közvetlen linket tartalmaz a fájlra. Ennek lehetnek</string>
+    <string name="settings_links_downloader__title_downloader">Letöltő</string>
+    <string name="downloader_url_mime_type">Használja az URL-ből származó MIME típust</string>
+    <string name="downloader_url_mime_type_explainer">Ellenőrzi, hogy az URL fájlkiterjesztéssel végződik-e (pl. \".jpg\"); Ha igen, akkor a rendszer ezt a típust használja a letöltött fájlhoz.</string>
+</resources>

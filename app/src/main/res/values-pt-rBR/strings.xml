@@ -97,8 +97,6 @@
     <string name="dont_show_filtered_item_explainer">Não mostrar a seção superior que sugere o último aplicativo usado para o host clicado</string>
     <string name="preview_url_explainer">Mostra o URL clicado (após ter sido processado)</string>
     <string name="linksheet_download">Download via LinkSheet</string>
-    <string name="enable_downloader">Ativar baixador</string>
-    <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
     <string name="in_app_browser">Navegador incorporado</string>
     <string name="in_app_browser_subtitle">Alterar configurações do navegador incorporado</string>
     <string name="use_app_settings">Padrão</string>
@@ -133,8 +131,6 @@
     <string name="amp2html_external_service">Tentar obter uma versão de página não AMP por meio de um serviço externo</string>
     <string name="amp2html_external_service_explainer">Tentar obter uma versão de página não AMP usando uma API implementada em supabase.com (<annotation url-id="supabase-privacy">Política de privacidade</annotation>)</string>
     <string name="amp2html">Amp2Html</string>
-    <string name="enable_downloader_explainer">Adicione um botão \"Baixar\" à folha inferior se o URL contiver um link direto para o arquivo. Isso pode ter <annotation url-id="privacy-downloader">implicações relacionadas à privacidade</annotation></string>
-    <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de arquivo (por exemplo, \".jpg\"); se terminar, esse tipo será usado para o arquivo baixado.</string>
     <string name="in_app">Incorporado</string>
     <string name="normal">Normal</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>

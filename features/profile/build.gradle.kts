@@ -28,6 +28,7 @@ dependencies {
     implementation(project(":lib-api"))
     implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
+    implementation(project(":lib-log"))
     implementation(project(":lib-util"))
 
     implementation(AndroidX.core.ktx)

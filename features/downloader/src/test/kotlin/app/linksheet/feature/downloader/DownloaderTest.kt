@@ -2,8 +2,8 @@ package app.linksheet.feature.app.linksheet.feature.downloader
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.downloader.Downloader
+import app.linksheet.feature.downloader.core.DownloadCheckResult
+import app.linksheet.feature.downloader.core.Downloader
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.uri.toStdUrlOrThrow
 import io.ktor.client.*

@@ -26,8 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import app.linksheet.compose.extension.toImageBitmap
-import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.downloader.isDownloadable
+import app.linksheet.feature.downloader.core.DownloadCheckResult
+import app.linksheet.feature.downloader.core.isDownloadable
 import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.profile.core.CrossProfile
 import coil3.ImageLoader

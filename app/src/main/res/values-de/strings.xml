@@ -65,9 +65,7 @@
     <string name="export_log">Protokoll exportieren</string>
     <string name="preview_url">URL anzeigen</string>
     <string name="usage_stats_sorting_explainer">Android-Systemnutzungsstatistiken in den Sortieralgorithmus einbeziehen. Die Berechtigung wird beim ersten Einschalten angefordert.</string>
-    <string name="downloader_url_mime_type_explainer">Überprüft, ob die URL mit einer Dateiendung endet (z.B. \".jpg\"); Wenn sie dies tut, wird dieser Typ für die heruntergeladene Datei verwendet.</string>
     <string name="use_unified_preferred_browser">Einheitliche Einstellungen verwenden</string>
-    <string name="enable_downloader">Downloader aktivieren</string>
     <string name="download">Herunterladen</string>
     <string name="in_app_browser_subtitle">In-App-Browser-Modus setzen</string>
     <string name="in_app_browser">In-App-Browser</string>
@@ -75,7 +73,6 @@
     <string name="always_disable_explainer">Immer den In-App-Browser deaktivieren, unabhängig davon, was die App nutzen will</string>
     <string name="debug_explainer">Anwendungsprotokolle anzeigen</string>
     <string name="in_app">In-App</string>
-    <string name="downloader_url_mime_type">Mime-Typ aus URL verwenden</string>
     <string name="no_log_entries">Diese Sitzung enthält keine Protokolle.</string>
     <string name="hide_after_copying_explainer">Unteres Blatt automatisch ausblenden, wenn eine Aktionsschaltfläche wie „Link kopieren“ oder „Herunterladen“ angetippt wird</string>
     <string name="import_dumped_preference">Gespeicherte Einstellungen importieren</string>
@@ -104,7 +101,6 @@
     <string name="open_link_with_subtitle_2">LinkSheet basiert ursprünglich auf OpenWith</string>
     <string name="shizuku_integration_enabled_explainer">Shizuku-Integration wurde erfolgreich aktiviert!</string>
     <string name="warning">Warnung</string>
-    <string name="enable_downloader_explainer">Fügt einen \"Herunterladen\"-Knopf zum unteren Fenster hinzu, wenn die URL einen direkten Link zu einer Datei enthält. Dies kann <annotation url-id="privacy-downloader">Auswirkungen auf den Datenschutz</annotation> haben</string>
     <string name="enable_all">Alle aktivieren</string>
     <string name="selected_browser_explainer">Dieser Browser wird automatisch geöffnet, wenn keine native App den angetippten Link verarbeiten kann</string>
     <string name="misc_settings">Verschiedenes</string>

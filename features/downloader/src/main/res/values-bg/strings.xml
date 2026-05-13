@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Бутон за изтегляне</string>
+    <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Възможно е да има</string>
+    <string name="settings_links_downloader__title_downloader">Изтегляне</string>
+    <string name="downloader_url_mime_type">Намиране на вида на файла от адреса</string>
+    <string name="downloader_url_mime_type_explainer">Проверява дали адресът завършва с файлово разширение (напр. „.jpg“); ако е така, се използва за изтегления файл.</string>
+</resources>

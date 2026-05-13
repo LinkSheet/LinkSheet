@@ -1,4 +1,4 @@
-package fe.linksheet.composable.page.settings.link.downloader
+package app.linksheet.feature.downloader.ui
 
 import android.Manifest
 import androidx.compose.runtime.Composable
@@ -7,6 +7,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.downloader.R
+import app.linksheet.feature.downloader.viewmodel.DownloaderSettingsViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.isGranted
@@ -21,14 +23,12 @@ import fe.composekit.component.list.item.type.SliderListItem
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
-import fe.linksheet.R
-import fe.linksheet.module.viewmodel.DownloaderSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
-
+import app.linksheet.compose.R as CommonR
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun DownloaderSettingsRoute(
+internal fun DownloaderSettings(
     onBackPressed: () -> Unit,
     viewModel: DownloaderSettingsViewModel = koinViewModel(),
 ) {
@@ -56,7 +56,7 @@ fun DownloaderSettingsRoute(
             )
         }
 
-        divider(id = R.string.options)
+        divider(id = CommonR.string.options)
 
         group(size = 2) {
             item(key = R.string.downloader_url_mime_type) { padding, shape ->
@@ -70,7 +70,7 @@ fun DownloaderSettingsRoute(
                 )
             }
 
-            item(key = R.string.request_timeout) { padding, shape ->
+            item(key = CommonR.string.request_timeout) { padding, shape ->
                 val requestTimeout by viewModel.requestTimeout.collectAsStateWithLifecycle()
 
                 SliderListItem(
@@ -81,8 +81,8 @@ fun DownloaderSettingsRoute(
                     value = requestTimeout.toFloat(),
                     onValueChange = { viewModel.requestTimeout(it.toInt()) },
                     valueFormatter = { it.toInt().toString() },
-                    headlineContent = textContent(R.string.request_timeout),
-                    supportingContent = annotatedStringResource(R.string.request_timeout_explainer),
+                    headlineContent = textContent(CommonR.string.request_timeout),
+                    supportingContent = annotatedStringResource(CommonR.string.request_timeout_explainer),
                 )
             }
         }

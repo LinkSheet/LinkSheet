@@ -126,7 +126,6 @@
     <string name="fastfoward_rules_explainer">実験的な <annotation url-id="fastforward-github">FastForward</annotation> ルール統合を使用します (リンクからリダイレクトを抽出して、一部のホストのリダイレクトをバイパスします)</string>
     <string name="resolved_via">%s は %s 経由で解決されました</string>
     <string name="dont_show_filtered_item_explainer">クリックしたホストで最後に使用したアプリを提案する上部のセクションを表示しません</string>
-    <string name="downloader_url_mime_type_explainer">URL が .jpg などのファイル拡張子で終わるかどうかを確認します。拡張子で終わる場合、ダウンロードされたファイルにこのタイプが使用されます。</string>
     <string name="disable_in_selected">強制無効化…</string>
     <string name="donate_explainer_crypto">暗号通貨で寄付する場合は、<annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> にメールを送信してください。</string>
     <string name="debug_build">デバッグビルド</string>
@@ -224,7 +223,6 @@
     <string name="reset_app_link_verification_status">「確認済みのリンク」設定をリセット</string>
     <string name="settings_app_config__button_add_item">アイテムを追加</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">推奨</string>
-    <string name="enable_downloader_explainer">URL にファイルへの直接リンクが含まれている場合は、ボトムシートに「ダウンロード」ボタンを追加します。<annotation url-id="privacy-downloader">プライバシーに悪影響</annotation>を及ぼす可能性があります</string>
     <string name="disable_in_selected_explainer">選択したアプリでアプリ内ブラウザを無効にします</string>
     <string name="debug_explainer">アプリログ、確認済みのリンクをリセット</string>
     <string name="download_started">ダウンロードが開始されました</string>
@@ -361,8 +359,6 @@
     <string name="always_disable_explainer">すべてのアプリでアプリ内ブラウザを無効にします</string>
     <string name="follow_redirects_local_cache_explainer">リダイレクト結果をローカルにキャッシュする</string>
     <string name="linksheet_download">LinkSheet ダウンロード</string>
-    <string name="enable_downloader">ダウンローダーを有効にする</string>
-    <string name="downloader_url_mime_type">URL から MIME タイプを使用する</string>
     <string name="use_app_settings_explainer">アプリ内ブラウザを使用するかどうかをアプリが決定します</string>
     <string name="no_apps_which_can_handle_links_found">リンクを扱えるアプリは見つかりませんでした。</string>
     <string name="logs_explainer">アプリのログを見る</string>

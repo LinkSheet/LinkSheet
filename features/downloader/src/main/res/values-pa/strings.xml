@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">ਡਾਉਨਲੋਡਰ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
+    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ ਹੋ ਸਕਦੇ ਹਨ</string>
+    <string name="downloader_url_mime_type">URL ਤੋਂ ਮਾਈਮ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
+    <string name="downloader_url_mime_type_explainer">ਜਾਂਚ ਕਰਦਾ ਹੈ ਕਿ ਕੀ URL ਇੱਕ ਫਾਈਲ ਐਕਸਟੈਂਸ਼ਨ ਨਾਲ ਖਤਮ ਹੁੰਦਾ ਹੈ (ਉਦਾਹਰਨ ਲਈ \".jpg\"); ਜੇਕਰ ਅਜਿਹਾ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਇਸ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀ ਫ਼ਾਈਲ ਲਈ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।</string>
+</resources>

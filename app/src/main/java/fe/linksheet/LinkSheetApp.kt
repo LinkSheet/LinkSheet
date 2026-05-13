@@ -19,7 +19,7 @@ import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.devicecompat.miui.RealMiuiCompatProvider
 import app.linksheet.feature.devicecompat.oneui.OneUiCompatProvider
 import app.linksheet.feature.devicecompat.oneui.RealOneUiCompatProvider
-import app.linksheet.feature.downloader.DownloaderModule
+import app.linksheet.feature.downloader.DownloaderFeatureModule
 import app.linksheet.feature.engine.LinkEngineFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectFeatureModule
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
@@ -145,7 +145,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             DatabaseModule,
             RepositoryModule,
             HttpModule,
-            DownloaderModule,
+            DownloaderFeatureModule,
             RemoteConfigFeatureModule,
             UrlResolverModule,
             ResolverModule,

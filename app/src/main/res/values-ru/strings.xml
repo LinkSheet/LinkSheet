@@ -33,7 +33,6 @@
     <string name="always_show_package_name_explainer">Всегда показывать название пакетов, а не только имена приложений. Это относится ко всему приложению.</string>
     <string name="log_files">Прошлые лог файлы</string>
     <string name="shizuku_integration_enabled_explainer">Интеграция с Shizuku успешно включена!</string>
-    <string name="enable_downloader_explainer">Добавить кнопку «Скачать» на нижний лист, если URL-адрес содержит прямую ссылку на файл. Это может иметь <annotation url-id="privacy-downloader">последствия, связанные с конфиденциальностью</annotation></string>
     <string name="logs_explainer">Просмотр логов приложений</string>
     <string name="enable_all">Включить всё</string>
     <string name="selected_browser_explainer">Этот браузер откроется автоматически, если ни одно нативное приложение не сможет обработать выбранную ссылку</string>
@@ -86,12 +85,10 @@
     <string name="github_explainer">Репозиторий исходного кода</string>
     <string name="shizuku_integration">Интеграция Shizuku</string>
     <string name="debug">Дебаг</string>
-    <string name="downloader_url_mime_type_explainer">Проверяет, заканчивается ли URL-адрес расширением файла (например, «.jpg»); Если да, то этот тип используется для загруженного файла.</string>
     <string name="credits_explainer">Лицензирование открытого исходного кода</string>
     <string name="remove_all">Убрать всё</string>
     <string name="use_unified_preferred_browser">Использовать единые настройки</string>
     <string name="always_ask_explainer">Всегда перечислять все браузеры</string>
-    <string name="enable_downloader">Включить загрузчик</string>
     <string name="paste">Вставить</string>
     <string name="download">Скачать</string>
     <string name="links_explainer">Настройки, касающиеся манипулирования ссылками</string>
@@ -144,7 +141,6 @@
     <string name="browser_mode_subtitle">Установить предпочтительный режим браузера</string>
     <string name="follow_only_known_trackers">Следовать только за известными трекерами</string>
     <string name="no_logs_found">Прошлые логи не найдены!</string>
-    <string name="downloader_url_mime_type">Использовать тип mime из URL</string>
     <string name="shizuku_integration_no_permission_explainer">Нажмите здесь, чтобы запросить разрешение Shizuku</string>
     <string name="system">Системная</string>
     <string name="no_log_entries">Эта сессия не содержит логов.</string>

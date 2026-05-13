@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Ativar descarregador</string>
+    <string name="enable_downloader_explainer">Adicione um botão \"Descarregar\" à folha inferior se o URL contiver uma ligação direta para o ficheiro. Isto pode ter</string>
+    <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
+    <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de ficheiro (por exemplo, \".jpg\"); se terminar, este tipo será usado para o ficheiro descarregado.</string>
+</resources>

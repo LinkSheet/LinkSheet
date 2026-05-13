@@ -129,8 +129,6 @@
     <string name="preview_url_explainer">Megjeleníti a kattintott URL-t (a feldolgozás után)</string>
     <string name="download">Letöltés</string>
     <string name="linksheet_download">LinkSheet letöltés</string>
-    <string name="enable_downloader">Letöltő engedélyezése</string>
-    <string name="downloader_url_mime_type">Használja az URL-ből származó MIME típust</string>
     <string name="enable_all">Mind engedélyezése</string>
     <string name="disable_all">Mind letiltása</string>
     <string name="shizuku_not_running_explainer">Shizuku nem fut. Koppintson ide a Shizuku megnyitásához, majd kövesse az utasításokat az indításhoz.</string>
@@ -147,8 +145,6 @@
     <string name="follow_only_known_trackers_explainer">Csak akkor próbálja követni az átirányításokat, ha a fogadóról ismert, hogy nyomkövető/átirányító. Ha a \"Kövesse az átirányításokat külső szolgáltatáson keresztül\" opció be van kapcsolva, akkor ez mindig engedélyezve lesz</string>
     <string name="fastfoward_rules_explainer">Kísérleti <annotation url-id="fastforward-github">FastForward</annotation> szabály integrálása (egyes hostok átirányításainak megkerülése a linkből történő átirányítás kivonásával)</string>
     <string name="ignore_libredirect">LibRedirect figyelmen kívül hagyása</string>
-    <string name="enable_downloader_explainer">Hozzáad egy \"Letöltés\" gombot az alsó panelhez, ha az URL közvetlen linket tartalmaz a fájlra. Ennek lehetnek <annotation url-id="privacy-downloader">adatvédelmre vonatkozó következményei</annotation></string>
-    <string name="downloader_url_mime_type_explainer">Ellenőrzi, hogy az URL fájlkiterjesztéssel végződik-e (pl. \".jpg\"); Ha igen, akkor a rendszer ezt a típust használja a letöltött fájlhoz.</string>
     <string name="in_app_browser">Alkalmazáson belüli böngésző</string>
     <string name="disable_in_selected_explainer">Az alkalmazáson belüli böngésző letiltása a kiválasztott alkalmazásokban</string>
     <string name="enable_ignore_libredirect_button_explainer">Megjelenít egy gombot az alsó panelen, ha az URL-t a LibRedirect segítségével irányították át, ami helyette az eredeti URL-t nyitja meg</string>

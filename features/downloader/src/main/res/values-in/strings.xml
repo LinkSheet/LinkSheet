@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Aktifkan pengunduh</string>
+    <string name="enable_downloader_explainer">Tambahkan tombol \"Unduh\" ke lembar bawah jika URL berisi tautan langsung ke file. Ini mungkin memiliki</string>
+    <string name="settings_links_downloader__title_downloader">Pengunduh</string>
+    <string name="downloader_url_mime_type">Gunakan tipe MIME dari URL</string>
+    <string name="downloader_url_mime_type_explainer">Periksa apakah URL diakhiri dengan ekstensi file (mis. \".jpg\"); jika ya, tipe ini digunakan untuk file yang diunduh.</string>
+</resources>

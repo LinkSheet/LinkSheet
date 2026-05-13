@@ -18,7 +18,7 @@ import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.browser.core.Browser
 import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
-import app.linksheet.feature.downloader.DownloadCheckResult
+import app.linksheet.feature.downloader.core.DownloadCheckResult
 import app.linksheet.feature.profile.core.ProfileSwitcher
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.SafeIntent

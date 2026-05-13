@@ -5,6 +5,7 @@ import app.linksheet.api.PreferenceRegistry
 import app.linksheet.api.SensitivePreference
 import app.linksheet.feature.analytics.preference.analyticsPreferences
 import app.linksheet.feature.browser.preference.browserPreferences
+import app.linksheet.feature.downloader.preference.downloaderPreferences
 import app.linksheet.feature.libredirect.preference.libRedirectPreferences
 import app.linksheet.feature.profile.preference.profilePreferences
 import app.linksheet.feature.remoteconfig.preference.remoteConfigPreferences
@@ -53,6 +54,10 @@ object AppPreferences : PreferenceDefinition(
             return this@AppPreferences.string(key, initial)
         }
 
+        override fun int(key: String, default: Int): Preference.Int {
+            return this@AppPreferences.int(key, default)
+        }
+
         override fun <T : Any, M : Any> mapped(
             key: String,
             default: T,
@@ -95,7 +100,7 @@ object AppPreferences : PreferenceDefinition(
     val bottomSheet = BottomSheet(registry)
     val notifications = Notifications(registry)
     val amp2Html = Amp2Html(registry)
-    val downloader = Downloader(registry)
+    val downloader = downloaderPreferences(registry)
     val followRedirects = FollowRedirects(registry)
     val themeV2 = ThemeV2(registry)
 
@@ -114,6 +119,12 @@ object AppPreferences : PreferenceDefinition(
                 }
 
                 repository.put(themeV2.themeV2, theme.toV2())
+            }
+        }
+        downloader.requestTimeout.migrateTo { repository, i ->
+            when {
+                repository.hasStoredValue(requestTimeout) -> repository.get(requestTimeout)
+                else -> i
             }
         }
 

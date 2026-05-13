@@ -91,11 +91,7 @@
     <string name="preview_url_explainer">إظهار عنوان الرابط الذي تم النقر عليه (بعد معالجته)</string>
     <string name="download">تحميل</string>
     <string name="linksheet_download">تنزيل ورقة الرابط</string>
-    <string name="enable_downloader">تمكين أداة التنزيل</string>
-    <string name="enable_downloader_explainer">أضف زر \"تنزيل\" إلى الورقة السفلية إذا كان عنوان URL يحتوي على رابط مباشر للملف. قد يكون لهذا <annotation url-id="privacy-downloader"> آثار متعلقة بالخصوصية</annotation></string>
-    <string name="downloader_url_mime_type">استخدام نوع mime من عنوان الرابط</string>
     <string name="in_app_browser">متصفح داخل التطبيق</string>
-    <string name="downloader_url_mime_type_explainer">يتحقق مما إذا كان عنوان URL ينتهي بامتداد ملف (على سبيل المثال \".jpg\") ؛ إذا حدث ذلك ، استخدام هذا النوع للملف الذي تم تنزيله.</string>
     <string name="in_app_browser_subtitle">تعيين وضع المتصفح داخل التطبيق</string>
     <string name="use_app_settings">افتراضي</string>
     <string name="always_disable">فرض التعطيل</string>

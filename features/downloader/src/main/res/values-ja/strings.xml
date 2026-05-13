@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">ダウンローダーを有効にする</string>
+    <string name="enable_downloader_explainer">URL にファイルへの直接リンクが含まれている場合は、ボトムシートに「ダウンロード」ボタンを追加します。を及ぼす可能性があります</string>
+    <string name="settings_links_downloader__title_downloader">ダウンローダー</string>
+    <string name="downloader_url_mime_type">URL から MIME タイプを使用する</string>
+    <string name="downloader_url_mime_type_explainer">URL が .jpg などのファイル拡張子で終わるかどうかを確認します。拡張子で終わる場合、ダウンロードされたファイルにこのタイプが使用されます。</string>
+</resources>

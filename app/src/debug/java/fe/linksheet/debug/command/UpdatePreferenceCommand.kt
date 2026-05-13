@@ -63,7 +63,9 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
         val repository = requireNotNull(repositories.getPreference(key)) { "No repository found for '$key'" }
 
         // TODO: Implement success in pref indicator in pref lib
-        repository.set(key, value)
+        if(!repository.set(key, value)) {
+            throw IllegalArgumentException("Provided value is not valid for preference")
+        }
         return value
     }
 }

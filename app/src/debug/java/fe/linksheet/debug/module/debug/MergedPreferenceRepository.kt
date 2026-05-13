@@ -19,15 +19,17 @@ import fe.linksheet.module.preference.state.DefaultAppStateRepository
 data class Repository(val definition: PreferenceDefinition, val preferenceRepository: PreferenceRepository) {
     val allPreferences by lazy { definition.all.map { it.key } }
 
-    fun set(key: String, value: String) {
+    fun set(key: String, value: String): Boolean {
         val pref = requireNotNull(definition.all[key]) { "'$key' is not defined in '$definition'" }
-        preferenceRepository.setStringValueToPreference(pref, value)
-
-        if (preferenceRepository is StatePreferenceRepository) {
-            preferenceRepository.stateCache.get(key)?.forceRefresh()
-        } else if(preferenceRepository is FlowPreferenceRepository) {
-            preferenceRepository.cache.get(key)?.reload()
+        if(!preferenceRepository.setStringValueToPreference(pref, value)) {
+            return false
         }
+
+        when (preferenceRepository) {
+            is StatePreferenceRepository -> preferenceRepository.stateCache.get(key)?.forceRefresh()
+            is FlowPreferenceRepository -> preferenceRepository.cache.get(key)?.reload()
+        }
+        return true
     }
 }
 

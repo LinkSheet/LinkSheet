@@ -84,7 +84,6 @@
     <string name="normal">Обикновен</string>
     <string name="use_unified_preferred_browser">Използване на общи настройки</string>
     <string name="enable_ignore_libredirect_button">Бутон за пренебрегване на LibRedirect</string>
-    <string name="options">Настройки</string>
     <string name="enable_request_private_browsing_button_explainer">Добавя в долното меню бутон, който отваря посетената препратка в поверителен режим. Поддържани мрежови четци: %s</string>
     <string name="request_private_browsing">Поверителен</string>
     <string name="enable_request_private_browsing_button">Бутон за поверително разглеждане</string>
@@ -119,7 +118,6 @@
     <string name="use_app_settings">Подразбирани</string>
     <string name="disable_in_selected">Винаги изключено…</string>
     <string name="feature_flags_explainer">Включва или изключва експериментални възможности</string>
-    <string name="request_timeout_explainer">Задава колко секунди LinkSheet да изчака за установяване на връзка. Стойност 0 изключва времето за изчакване, но не се препоръчва.</string>
     <string name="enable_amp2html_explainer">Пренасочва страниците на AMP към техните нормални уеб версии. Възможно е да има <annotation url-id="privacy-amp2html">последствия, свързани с поверителността</annotation></string>
     <string name="amp2html_local_cache_explainer">Запазване на получените нормалните версии на страници в местна временна памет</string>
     <string name="amp2html_external_service">Опит за получаване на нормална версия на страницата чрез външна услуга</string>
@@ -138,7 +136,6 @@
     <string name="log_viewer">Преглед на дневник</string>
     <string name="no_log_entries">Сеансът не съдържа дневници.</string>
     <string name="download_started">Изтеглянето започна</string>
-    <string name="request_timeout">Изчакване на заявката</string>
     <string name="no_browsers_found">Не са открити мрежови четци.</string>
     <string name="no_apps_found">Не са открити приложения.</string>
     <string name="export">Изнасяне</string>

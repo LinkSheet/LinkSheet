@@ -120,14 +120,11 @@
     <string name="no_log_entries">هذه الجلسة لا تحتوي على أي سجلات.</string>
     <string name="download_started">بدأ التنزيل</string>
     <string name="log_viewer">عارض السجل</string>
-    <string name="request_timeout">انتهت مهلة الطلب</string>
-    <string name="request_timeout_explainer">تحديد عدد الثواني التي سينتظرها LinkSheet حتى يتم إنشاء الاتصال. يؤدي تعيين هذا إلى 0 إلى تعطيل المهلة ، لكن لا يوصى بذلك.</string>
     <string name="no_browsers_found">لم يتم العثور على متصفحات.</string>
     <string name="export_log">تصدير السجلات</string>
     <string name="export">تصدير</string>
     <string name="request_private_browsing">خاص</string>
     <string name="use_clear_urls">استخدام ClearURLs</string>
-    <string name="options">الخيارات</string>
     <string name="log">سجل</string>
     <string name="redact_log">سجل التنقيح (مستحسن ، قد يؤدي تعطيل هذا إلى تسريب أسماء الحزم وأسماء المضيفين)</string>
     <string name="include_settings">تضمين الإعدادات (موصى به)</string>

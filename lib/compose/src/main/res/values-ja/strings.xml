@@ -4,4 +4,7 @@
     <string name="generic__button_text_enable">有効化</string>
     <string name="generic__button_text_disable">無効化</string>
     <string name="generic__text_url">URL</string>
+    <string name="options">オプション</string>
+    <string name="request_timeout">リクエストタイムアウト</string>
+    <string name="request_timeout_explainer">LinkSheet が接続の確立を待機する秒数を定義します。この値を 0 に設定するとタイムアウトは無効になりますが、推奨されません。</string>
 </resources>

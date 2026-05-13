@@ -2,4 +2,7 @@
 <resources>
     <string name="generic__button_text_back">Atrás</string>
     <string name="generic__text_url">Url</string>
+    <string name="options">Opciones</string>
+    <string name="request_timeout">Tiempo de respuesta expirado</string>
+    <string name="request_timeout_explainer">Define cuántos segundos esperará LinkSheet hasta que se establezca una conexión. Establecer esto en 0 desactiva el tiempo de espera, pero no se recomienda.</string>
 </resources>

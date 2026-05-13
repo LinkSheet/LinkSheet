@@ -118,14 +118,11 @@
     <string name="debug_explainer">Registos da app, redefinir manipuladores verificados</string>
     <string name="logs">Registos</string>
     <string name="logs_explainer">Ver logs da app</string>
-    <string name="options">Opções</string>
     <string name="current_session">Sessão atual</string>
     <string name="log_files">Sessões anteriores</string>
     <string name="log_viewer">Visualizador de logs</string>
     <string name="no_log_entries">Esta sessão não contém nenhum registo.</string>
     <string name="download_started">Descarga iniciada</string>
-    <string name="request_timeout">Tempo limite da solicitação</string>
-    <string name="request_timeout_explainer">Define quantos segundos o LinkSheet aguardará o estabelecimento de uma conexão. Definir este valor como 0 desativa o tempo limite, mas isto não é recomendado.</string>
     <string name="resolve_failed">%s falhou: %s</string>
     <string name="no_browsers_found">Nenhum navegador encontrado.</string>
     <string name="export">Exportar</string>

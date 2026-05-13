@@ -4,4 +4,6 @@
     <string name="generic__button_text_enable">Võta kasutusele</string>
     <string name="generic__button_text_disable">Eemalda kasutuselt</string>
     <string name="generic__text_url">Võrguaadress</string>
+    <string name="options">Valikud</string>
+    <string name="request_timeout">Päring aegus</string>
 </resources>

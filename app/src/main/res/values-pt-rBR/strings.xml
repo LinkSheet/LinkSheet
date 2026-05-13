@@ -114,12 +114,9 @@
     <string name="ignore_libredirect">Ignorar LibRedirect</string>
     <string name="logs">Registros</string>
     <string name="logs_explainer">Ver logs do app</string>
-    <string name="options">Opções</string>
     <string name="log_viewer">Visualizador de logs</string>
     <string name="no_log_entries">Essa sessão não contém nenhum registro.</string>
     <string name="download_started">Download iniciado</string>
-    <string name="request_timeout">Tempo limite da solicitação</string>
-    <string name="request_timeout_explainer">Define quantos segundos o LinkSheet aguardará o estabelecimento de uma conexão. Definir esse valor como 0 desativa o tempo limite, mas isso não é recomendado.</string>
     <string name="no_browsers_found">Nenhum navegador encontrado.</string>
     <string name="export">Exportar</string>
     <string name="export_log">Exportar log</string>

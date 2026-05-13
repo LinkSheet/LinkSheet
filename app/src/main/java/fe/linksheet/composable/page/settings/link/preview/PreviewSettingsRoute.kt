@@ -9,6 +9,7 @@ import fe.composekit.component.ContentType
 import fe.linksheet.R
 import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
 import org.koin.androidx.compose.koinViewModel
+import app.linksheet.compose.R as CommonR
 
 
 @Composable
@@ -28,7 +29,7 @@ fun PreviewSettingsRoute(
             )
         }
 
-        divider(id = R.string.options)
+        divider(id = CommonR.string.options)
 
         group(size = 1) {
             item(key = R.string.settings_links_preview__title_preview_skip_browser) { padding, shape ->

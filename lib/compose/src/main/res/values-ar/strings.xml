@@ -5,4 +5,7 @@
     <string name="generic__button_text_enable">فعِّل</string>
     <string name="generic__button_text_disable">عطِّل</string>
     <string name="generic__text_url">عنوان URL</string>
+    <string name="options">الخيارات</string>
+    <string name="request_timeout">انتهت مهلة الطلب</string>
+    <string name="request_timeout_explainer">تحديد عدد الثواني التي سينتظرها LinkSheet حتى يتم إنشاء الاتصال. يؤدي تعيين هذا إلى 0 إلى تعطيل المهلة ، لكن لا يوصى بذلك.</string>
 </resources>

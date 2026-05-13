@@ -123,14 +123,11 @@
     <string name="debug_explainer">App logs, verified handler reset</string>
     <string name="logs">Logs</string>
     <string name="logs_explainer">View app logs</string>
-    <string name="options">Options</string>
     <string name="current_session">Current session</string>
     <string name="log_files">Past sessions</string>
     <string name="log_viewer">Log viewer</string>
     <string name="no_log_entries">This session does not contain any logs.</string>
     <string name="download_started">Download started</string>
-    <string name="request_timeout">Request timeout</string>
-    <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be established. Setting this to 0 disables the timeout, but this is not recommended.</string>
     <string name="resolve_failed">%s failed: %s</string>
     <string name="no_browsers_found">No browsers found.</string>
     <string name="export">Export</string>

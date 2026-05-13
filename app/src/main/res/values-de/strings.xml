@@ -59,7 +59,6 @@
     <string name="enable_ignore_libredirect_button">Schaltfläche \"LibRedirect ignorieren\" aktivieren</string>
     <string name="use_app_settings_explainer">Die App entscheiden lassen, ob der In-App-Browser genutzt werden soll</string>
     <string name="normal">Normal</string>
-    <string name="request_timeout_explainer">Definiert, wie viele Sekunden LinkSheet für die Herstellung einer Verbindung warten wird. Der Wert 0 deaktiviert die Zeitüberschreitung, dies wird aber nicht empfohlen.</string>
     <string name="resolve_failed">%s fehlgeschlagen: %s</string>
     <string name="export">Exportieren</string>
     <string name="no_browsers_found">Keine Browser gefunden.</string>
@@ -71,9 +70,7 @@
     <string name="enable_downloader">Downloader aktivieren</string>
     <string name="download">Herunterladen</string>
     <string name="in_app_browser_subtitle">In-App-Browser-Modus setzen</string>
-    <string name="options">Optionen</string>
     <string name="in_app_browser">In-App-Browser</string>
-    <string name="request_timeout">Zeitüberschreitung bei der Anfrage</string>
     <string name="current_session">Aktuelle Sitzung</string>
     <string name="always_disable_explainer">Immer den In-App-Browser deaktivieren, unabhängig davon, was die App nutzen will</string>
     <string name="debug_explainer">Anwendungsprotokolle anzeigen</string>

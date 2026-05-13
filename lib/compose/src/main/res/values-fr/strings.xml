@@ -5,4 +5,7 @@
     <string name="generic__button_text_enable">Activer</string>
     <string name="generic__button_text_disable">Désactiver</string>
     <string name="generic__text_url">Url</string>
+    <string name="options">Options</string>
+    <string name="request_timeout">Délai de requête</string>
+    <string name="request_timeout_explainer">Définit le nombre de secondes pendant lesquelles LinkSheet attendra qu\'une connexion soit établie. La valeur 0 désactive le délai d\'attente, mais ce n\'est pas recommandé.</string>
 </resources>

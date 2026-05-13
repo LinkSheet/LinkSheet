@@ -48,7 +48,6 @@
     <string name="clear">Dọn dẹp</string>
     <string name="import_and_override">Nhập và ghi đè</string>
     <string name="apps_which_can_open_links_explainer">Nhấn vào một ứng dụng để mở menu \"Mở theo mặc định\" cho phép bạn tắt tính năng mở liên kết tự động</string>
-    <string name="request_timeout_explainer">Xác định số giây LinkSheet sẽ đợi để thiết lập kết nối. Đặt giá trị này thành 0 sẽ tắt thời gian chờ nhưng điều này không được khuyến khích.</string>
     <string name="url_copied">URL đã được sao chép vào clipboard</string>
     <string name="copy_url">Sao chép liên kết</string>
     <string name="resolve_failed">%s thất bại: %s</string>
@@ -93,7 +92,6 @@
     <string name="in_app_browser_subtitle">Đặt chế độ trình duyệt trong ứng dụng</string>
     <string name="about">Giới thiệu</string>
     <string name="add_all">Thêm hết</string>
-    <string name="options">Tùy chọn</string>
     <string name="about_explainer">Tín dụng, Giấy phép, Liên kết, Phiên bản</string>
     <string name="browser_status">Trạng thái trình duyệt</string>
     <string name="request_private_browsing">Riêng tư</string>
@@ -119,7 +117,6 @@
     <string name="always_show_package_name">Luôn hiển thị tên gói</string>
     <string name="error">Lỗi</string>
     <string name="checkmark">Đánh dấu</string>
-    <string name="request_timeout">Hết thời gian yêu cầu</string>
     <string name="apps_which_can_open_links_explainer_2">Liệt kê tất cả các ứng dụng có thể can thiệp vào hoạt động của LinkSheet</string>
     <string name="set_as_browser_explainer">Nhấn vào đây để đặt LinkSheet làm trình duyệt mặc định</string>
     <string name="current_session">Phiên hiện tại</string>

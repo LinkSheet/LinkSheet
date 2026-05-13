@@ -150,7 +150,6 @@
     <string name="advanced">進階</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="no">否</string>
-    <string name="options">選項</string>
     <string name="other">其他</string>
     <string name="url_copied_toast">已複製網址</string>
     <string name="generic__button_text_done">完成</string>
@@ -238,8 +237,6 @@
     <string name="home__clipboard_card_source">來自剪貼簿</string>
     <string name="resolve_event__idle">閒置中</string>
     <string name="onboarding_1_card_title">預設瀏覽器</string>
-    <string name="request_timeout_explainer">調整 LinkSheet 等候連線建立的秒數。設為 0 表示停用逾時，但不建議這麼做。</string>
-    <string name="request_timeout">請求逾時</string>
     <string name="theme_mode">主題模式</string>
     <string name="theme_enable_material_you_explainer">使用 Android 12 版以上的 Material You 裝置主題</string>
     <string name="follow_redirects_allow_darknets_explainer">允許對暗網連結跟進重新導向 (支援：%s)</string>

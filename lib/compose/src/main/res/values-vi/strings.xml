@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic__button_text_back">Quay lại</string>
+    <string name="options">Tùy chọn</string>
+    <string name="request_timeout">Hết thời gian yêu cầu</string>
+    <string name="request_timeout_explainer">Xác định số giây LinkSheet sẽ đợi để thiết lập kết nối. Đặt giá trị này thành 0 sẽ tắt thời gian chờ nhưng điều này không được khuyến khích.</string>
 </resources>

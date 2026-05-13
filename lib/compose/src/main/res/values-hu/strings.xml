@@ -4,4 +4,7 @@
     <string name="generic__button_text_enable">Engedélyezés</string>
     <string name="generic__button_text_disable">Letiltás</string>
     <string name="generic__text_url">Url</string>
+    <string name="options">Beállítások</string>
+    <string name="request_timeout">Kérési időtúllépés</string>
+    <string name="request_timeout_explainer">Meghatározza, hogy a LinkSheet hány másodpercet várjon a kapcsolat létrehozására. Ennek 0-ra állítása kikapcsolja az időkorlátot, de ez nem ajánlott.</string>
 </resources>

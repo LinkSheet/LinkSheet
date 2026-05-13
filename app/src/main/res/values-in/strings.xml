@@ -128,12 +128,9 @@
     <string name="enable_ignore_libredirect_button_explainer">Menampilkan tombol di lembar bawah jika URL telah dialihkan melalui LibRedirect, yang membuka URL asli sebagai gantinya</string>
     <string name="debug_explainer">Log apl, penyetelan ulang penangan terverifikasi</string>
     <string name="logs">Log</string>
-    <string name="options">Opsi</string>
     <string name="current_session">Sesi saat ini</string>
     <string name="log_files">Sesi yang lalu</string>
     <string name="log_viewer">Penampil log</string>
-    <string name="request_timeout">Batas waktu permintaan</string>
-    <string name="request_timeout_explainer">Menentukan berapa detik LinkSheet akan menunggu hingga koneksi terbentuk. Menyetel nilainya ke 0 akan menonaktifkan batas waktu, tetapi ini tidak direkomendasikan.</string>
     <string name="resolve_failed">%s gagal: %s</string>
     <string name="no_browsers_found">Tidak ditemukan peramban yang ada.</string>
     <string name="export">Ekspor</string>

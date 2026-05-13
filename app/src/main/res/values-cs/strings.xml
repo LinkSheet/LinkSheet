@@ -128,7 +128,6 @@
     <string name="thanks_for_donating">Děkujeme za váš příspěvek!</string>
     <string name="donate_explainer_crypto">Při přispívání kryptoměnou pošlete e-mail na adresu <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="download_started">Stahování spuštěno</string>
-    <string name="request_timeout_explainer">Určuje, kolik sekund bude aplikace LinkSheet čekat na navázání spojení. Nastavením na 0 se časový limit vypne, to ale nedoporučujeme.</string>
     <string name="resolve_failed">%s selhalo: %s</string>
     <string name="discord">Discord</string>
     <string name="join">Připojit se</string>
@@ -151,11 +150,9 @@
     <string name="debug_explainer">Protokoly aplikací, reset otevírání odkazů</string>
     <string name="logs">Protokoly</string>
     <string name="logs_explainer">Zobrazit protokoly aplikace</string>
-    <string name="options">Možnosti</string>
     <string name="current_session">Aktuální relace</string>
     <string name="log_files">Minulé relace</string>
     <string name="log_viewer">Prohlížeč protokolů</string>
-    <string name="request_timeout">Vypršení požadavku</string>
     <string name="no_browsers_found">Nenalezeny žádné prohlížeče.</string>
     <string name="export_log">Protokol exportu</string>
     <string name="request_private_browsing">Soukromý</string>

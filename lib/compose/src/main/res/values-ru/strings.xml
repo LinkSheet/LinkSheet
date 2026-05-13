@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic__button_text_back">Назад</string>
+    <string name="options">Опции</string>
+    <string name="request_timeout">Запросить тайм-аут</string>
+    <string name="request_timeout_explainer">Определяет, сколько секунд LinkSheet будет ждать установления соединения. Установка значения 0 отключает тайм-аут, но это не рекомендуется.</string>
 </resources>

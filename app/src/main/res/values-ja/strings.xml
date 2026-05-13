@@ -62,7 +62,6 @@
     <string name="download">ダウンロード</string>
     <string name="debug">デバッグ</string>
     <string name="logs">ログ</string>
-    <string name="options">オプション</string>
     <string name="in_app">アプリ内</string>
     <string name="normal">通常</string>
     <string name="settings">設定</string>
@@ -229,7 +228,6 @@
     <string name="disable_in_selected_explainer">選択したアプリでアプリ内ブラウザを無効にします</string>
     <string name="debug_explainer">アプリログ、確認済みのリンクをリセット</string>
     <string name="download_started">ダウンロードが開始されました</string>
-    <string name="request_timeout">リクエストタイムアウト</string>
     <string name="resolve_failed">%s 失敗: %s</string>
     <string name="export_log">ログをエクスポート</string>
     <string name="include_settings">設定を含める（推奨）</string>
@@ -371,7 +369,6 @@
     <string name="current_session">現在のセッション</string>
     <string name="log_viewer">ログビューア</string>
     <string name="no_log_entries">このセッションにはログは含まれていません。</string>
-    <string name="request_timeout_explainer">LinkSheet が接続の確立を待機する秒数を定義します。この値を 0 に設定するとタイムアウトは無効になりますが、推奨されません。</string>
     <string name="no_browsers_found">ブラウザが見つかりません。</string>
     <string name="amp2html_local_cache">ローカル Amp2Html キャッシュを有効にする</string>
     <string name="amp2html_local_cache_explainer">取得した非 AMP バージョンのウェブページをローカルにキャッシュします</string>

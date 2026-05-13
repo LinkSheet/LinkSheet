@@ -4,4 +4,7 @@
     <string name="generic__button_text_enable">Aktifkan</string>
     <string name="generic__button_text_disable">Nonaktifkan</string>
     <string name="generic__text_url">Url</string>
+    <string name="options">Opsi</string>
+    <string name="request_timeout">Batas waktu permintaan</string>
+    <string name="request_timeout_explainer">Menentukan berapa detik LinkSheet akan menunggu hingga koneksi terbentuk. Menyetel nilainya ke 0 akan menonaktifkan batas waktu, tetapi ini tidak direkomendasikan.</string>
 </resources>

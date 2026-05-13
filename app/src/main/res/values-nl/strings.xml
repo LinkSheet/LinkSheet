@@ -53,7 +53,6 @@
     <string name="enable_ignore_libredirect_button">Knop \"LibRedirect negeren\" tonen</string>
     <string name="debug">Debuggen</string>
     <string name="debug_explainer">App-logs, geverifieerde linkverwerkers resetten</string>
-    <string name="request_timeout">Time-out verbindingen</string>
     <string name="resolve_failed">%s mislukt: %s</string>
     <string name="redact_log">Gevoelige informatie afschermen (aanbevolen, uitschakelen kan pakketnamen en hostnamen lekken)</string>
     <string name="copy_to_clipboard">Naar klembord kopiëren</string>
@@ -136,7 +135,6 @@
     <string name="downloader_url_mime_type_explainer">Controleer of de URL eindigt op een bestandsextensie (bijv. \".jpg\"). Als dit het geval is, dan wordt dit type gebruikt voor het gedownloade bestand.</string>
     <string name="log_files">Vorige sessies</string>
     <string name="log_viewer">Logboek</string>
-    <string name="request_timeout_explainer">Bepaal hoeveel seconden LinkSheet wacht totdat een verbinding tot stand is gebracht. Bij de waarde 0 wordt de time-out uitgeschakeld, maar dit wordt niet aangeraden.</string>
     <string name="no_browsers_found">Geen browsers gevonden.</string>
     <string name="follow_redirects_short">Omleidingen</string>
     <string name="always_disable_explainer">Schakel in-app browsers uit voor alle apps</string>
@@ -145,7 +143,6 @@
     <string name="dont_show_filtered_item_explainer">Verberg het bovenste gedeelte dat de laatst gebruikte app voor de gekozen host suggereert</string>
     <string name="preview_url_explainer">Toon de aangeklikte URL (nadat deze is verwerkt)</string>
     <string name="use_app_settings_explainer">Apps bepalen zelf of de in-app browser wordt gebruikt</string>
-    <string name="options">Opties</string>
     <string name="include_settings">Instellingen meesturen (aanbevolen)</string>
     <string name="log_privacy">Voor meer informatie over de privacy van logs kun je <annotation url-id="privacy-logs">hier terecht</annotation>.</string>
     <string name="use_unified_preferred_browser_explainer">Wanneer ingeschakeld worden de onderstaande instellingen toegepast bij zowel het openen van normale links als bij in-app links. Gebruik anders de onderstaande knoppen om te schakelen tussen de modus voor normale links en in-app links.</string>

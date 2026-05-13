@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic__button_text_back">Zurück</string>
+    <string name="options">Optionen</string>
+    <string name="request_timeout">Zeitüberschreitung bei der Anfrage</string>
+    <string name="request_timeout_explainer">Definiert, wie viele Sekunden LinkSheet für die Herstellung einer Verbindung warten wird. Der Wert 0 deaktiviert die Zeitüberschreitung, dies wird aber nicht empfohlen.</string>
 </resources>

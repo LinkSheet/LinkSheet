@@ -66,7 +66,6 @@
     <string name="import_and_override">Importar e invalidar</string>
     <string name="apps_which_can_open_links_explainer">Toca una aplicación para abrir el menú \"Abrir de forma predeterminada\" que te permite desactivar la apertura automática de enlaces</string>
     <string name="success">Éxito</string>
-    <string name="request_timeout_explainer">Define cuántos segundos esperará LinkSheet hasta que se establezca una conexión. Establecer esto en 0 desactiva el tiempo de espera, pero no se recomienda.</string>
     <string name="github">Github</string>
     <string name="configure">Configurar</string>
     <string name="show_linksheet_referrer">Mostrar referencias de LinkSheet</string>
@@ -123,7 +122,6 @@
     <string name="about">Acerca de</string>
     <string name="add_all">Añadir todo</string>
     <string name="feature_flags_explainer">Activar o desactivar características experimentales</string>
-    <string name="options">Opciones</string>
     <string name="about_explainer">Créditos, Licencia, Enlaces, Versión</string>
     <string name="shizuku_not_running_explainer">Shizuku no se está ejecutando. Pulse aquí para abrir Shizuku y siga las instrucciones para iniciarlo.</string>
     <string name="browser_status">Estado del navegador</string>
@@ -157,7 +155,6 @@
     <string name="always_show_package_name">Mostrar siempre el nombre del paquete</string>
     <string name="error">Error</string>
     <string name="checkmark">Marca de verificación</string>
-    <string name="request_timeout">Tiempo de respuesta expirado</string>
     <string name="apps_which_can_open_links_explainer_2">Mostrar todas las aplicaciones que puedan interferir con el comportamiento de LinkSheet</string>
     <string name="set_as_browser_explainer">Toca aquí para hacer de LinkSheet el navegador predeterminado</string>
     <string name="current_session">Sesión actual</string>

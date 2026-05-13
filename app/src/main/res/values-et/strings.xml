@@ -28,7 +28,6 @@
     <string name="in_app">Rakendusesisene</string>
     <string name="debug">Veaotsing</string>
     <string name="logs">Logid</string>
-    <string name="options">Valikud</string>
     <string name="export">Ekspordi</string>
     <string name="request_private_browsing">Privaatne</string>
     <string name="log">Logi</string>
@@ -140,7 +139,6 @@
     <string name="select_an_app">Vali rakendus</string>
     <string name="dont_show_filtered_item">Ära näita valikut „viimati valitud rakendus“</string>
     <string name="download_started">Allalaadimine algas</string>
-    <string name="request_timeout">Päring aegus</string>
     <string name="url_copied">Võrguaadress on kopeeritud lõikelauale</string>
     <string name="usage_stats_sorting_explainer">Kaasta järjestusalgoritmi Androidi süsteemikasutuse statistika. Esimese sisselülitamisel korral pead lubama ka vastavad õigused.</string>
     <string name="app_browsers_subtitle">Eelistatud rakendused, brauseri seadistused</string>

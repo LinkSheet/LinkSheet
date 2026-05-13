@@ -24,7 +24,12 @@ import fe.android.preference.helper.Preference
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.ListItemFilledIconButton
-import fe.composekit.preference.*
+import fe.composekit.preference.BooleanVmPref
+import fe.composekit.preference.FakePreferences
+import fe.composekit.preference.ViewModelStatePreference
+import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.preference.fakeBooleanVM
+import fe.composekit.preference.fakeStringVM
 import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.composable.component.ConnectedToggleButtonFlowRow
@@ -35,6 +40,7 @@ import fe.linksheet.module.viewmodel.PreferredBrowserViewModel.BrowserType
 import fe.linksheet.navigation.SingleBrowserSettingsRoute
 import fe.linksheet.navigation.WhitelistedBrowsersSettingsRoute
 import org.koin.androidx.compose.koinViewModel
+import app.linksheet.compose.R as CommonR
 
 @Composable
 fun PreferredBrowserSettingsRoute(
@@ -194,7 +200,7 @@ private fun PreferredBrowserSettingsRouteInternal(
             }
         }
 
-        divider(id = R.string.options)
+        divider(id = CommonR.string.options)
 
         item(
             key = R.string.settings_browser_mode__title_auto_launch_single_browser,

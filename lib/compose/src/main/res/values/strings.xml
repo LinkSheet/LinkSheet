@@ -12,4 +12,7 @@
     <string name="generic__button_text_enable">Enable</string>
     <string name="generic__button_text_disable">Disable</string>
     <string name="generic__text_url">Url</string>
+    <string name="options">Options</string>
+    <string name="request_timeout">Request timeout</string>
+    <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be established. Setting this to 0 disables the timeout, but this is not recommended.</string>
 </resources>

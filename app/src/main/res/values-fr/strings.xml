@@ -72,7 +72,6 @@
     <string name="follow_redirects_external_service">Suivre les redirections via un service externe</string>
     <string name="apps_which_can_open_links_explainer">Appuyez sur une application pour ouvrir le menu \"Ouvrir par défaut\" qui vous permet de désactiver l\'ouverture automatique des liens</string>
     <string name="enable_downloader_explainer">Ajouter un bouton \"Télécharger\" au bas de l\'écran si l\'url contient un lien direct vers un fichier. Cela peut avoir des <annotation url-id="privacy-downloader"> implications liées à la protection de la vie privée</annotation></string>
-    <string name="request_timeout_explainer">Définit le nombre de secondes pendant lesquelles LinkSheet attendra qu\'une connexion soit établie. La valeur 0 désactive le délai d\'attente, mais ce n\'est pas recommandé.</string>
     <string name="enable_ignore_libredirect_button_explainer">Affiche un bouton dans la feuille inférieure si l\'url a été redirigée via LibRedirect, qui ouvre l\'url d\'origine à la place</string>
     <string name="log_files">Sessions antérieures</string>
     <string name="redirect_resolve_type_local_cache">cache local</string>
@@ -106,12 +105,10 @@
     <string name="debug_explainer">Journaux de l\'app, réinitialisation vérifiée du gestionnaire</string>
     <string name="logs">Journaux</string>
     <string name="logs_explainer">Consulter les journaux de l\'app</string>
-    <string name="options">Options</string>
     <string name="current_session">Session en cours</string>
     <string name="log_viewer">Visionneuse de journaux</string>
     <string name="no_log_entries">Cette session ne contient aucun journal.</string>
     <string name="download_started">Téléchargement démarré</string>
-    <string name="request_timeout">Délai de requête</string>
     <string name="resolve_failed">%s échoué : %s</string>
     <string name="no_browsers_found">Aucun navigateur n\'a été trouvé.</string>
     <string name="export">Exporter</string>

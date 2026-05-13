@@ -140,7 +140,6 @@
     <string name="normal">正常</string>
     <string name="import_and_override">导入并覆盖</string>
     <string name="success">成功</string>
-    <string name="request_timeout_explainer">定义 LinkSheet 等待建立连接的秒数。将此设置为 0 将禁用超时（不建议）。</string>
     <string name="configure">配置</string>
     <string name="resolve_failed">%s 失败：%s</string>
     <string name="export">导出</string>
@@ -168,7 +167,6 @@
     <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="thanks_for_donating">感谢您的捐赠！</string>
     <string name="feature_flags_explainer">启用或禁用实验性功能</string>
-    <string name="options">选项</string>
     <string name="confirm_import">确认</string>
     <string name="shizuku_not_running_explainer">Shizuku 未在运行。请点击此处打开 Shizuku，并按照指示将其启动。</string>
     <string name="dev">开发者</string>
@@ -182,7 +180,6 @@
     <string name="general">杂项</string>
     <string name="pretend_to_be_app_explainer">使用 LinkSheetCompat 伪装成受支持域的原生应用</string>
     <string name="libredirect_version">LibRedirect</string>
-    <string name="request_timeout">请求超时</string>
     <string name="current_session">当前会话</string>
     <string name="compat_installed">已安装 LinkSheetCompat</string>
     <string name="enable_ignore_libredirect_button_explainer">如果链接已通过LibRedirect重定向，则在底栏中显示一个按钮，用以打开原始链接</string>

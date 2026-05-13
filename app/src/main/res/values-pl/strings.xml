@@ -116,14 +116,11 @@
     <string name="logs">Logi</string>
     <string name="logs_explainer">Wyświetl logi aplikacji</string>
     <string name="debug">Debugowanie</string>
-    <string name="options">Opcje</string>
     <string name="current_session">Bieżąca sesja</string>
     <string name="log_files">Poprzednie sesje</string>
     <string name="log_viewer">Przeglądarka logów</string>
     <string name="no_log_entries">Ta sesja nie zawiera dzienników.</string>
     <string name="download_started">Rozpoczęto pobieranie</string>
-    <string name="request_timeout">Limit czasu żądania</string>
-    <string name="request_timeout_explainer">Określ ile sekund LinkSheet będzie oczekiwał na nawiązanie połączenia. Ustawienie tej wartości na 0 wyłącza limit czasu, ale nie jest to zalecane.</string>
     <string name="no_browsers_found">Nie znaleziono przeglądarek.</string>
     <string name="export">Kopia zapasowa</string>
     <string name="export_log">Eksportuj log</string>

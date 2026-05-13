@@ -5,4 +5,7 @@
     <string name="generic__button_text_enable">Омогући</string>
     <string name="generic__button_text_disable">Онемогући</string>
     <string name="generic__text_url">URL</string>
+    <string name="options">Опције</string>
+    <string name="request_timeout">Време за истек захтева</string>
+    <string name="request_timeout_explainer">Дефинише колико секунди ће LinkSheet чекати да се веза успостави. Подешавање на 0 онемогућава временско ограничење, али се то не препоручује.</string>
 </resources>

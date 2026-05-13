@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="generic__button_text_back">Indietro</string>
+    <string name="options">Preferenze</string>
+    <string name="request_timeout">Timeout richiesta</string>
+    <string name="request_timeout_explainer">Tempo di attesa massimo ﹙in secondi﹚ per stabilire una connessione. Il valore 0 ﹙zero﹚, che elimina del tutto il limite di tempo, è sconsigliato.</string>
 </resources>

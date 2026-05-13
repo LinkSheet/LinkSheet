@@ -4,4 +4,7 @@
     <string name="generic__button_text_enable">Ativar</string>
     <string name="generic__button_text_disable">Desativar</string>
     <string name="generic__text_url">URL</string>
+    <string name="options">Opções</string>
+    <string name="request_timeout">Tempo limite da solicitação</string>
+    <string name="request_timeout_explainer">Define quantos segundos o LinkSheet aguardará o estabelecimento de uma conexão. Definir esse valor como 0 desativa o tempo limite, mas isso não é recomendado.</string>
 </resources>

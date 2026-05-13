@@ -66,7 +66,6 @@
     <string name="import_and_override">ਇੰਪੋਰਟ ਕਰੋ ਅਤੇ ਓਵਰਰਾਈਡ ਕਰੋ</string>
     <string name="apps_which_can_open_links_explainer">\"ਡਿਫ਼ਾਲਟ ਤੌਰ \'ਤੇ ਖੋਲ੍ਹੋ\" ਮੀਨੂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਕ ਐਪ \'ਤੇ ਟੈਪ ਕਰੋ ਜਿਸ ਨਾਲ ਤੁਹਾਨੂੰ ਆਟੋਮੈਟਿਕ ਲਿੰਕ ਖੋਲ੍ਹਣ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਮਿਲਦੀ ਹੈ</string>
     <string name="success">ਸਫਲਤਾ</string>
-    <string name="request_timeout_explainer">ਇਹ ਪਰਿਭਾਸ਼ਿਤ ਕਰਦਾ ਹੈ ਕਿ ਲਿੰਕਸ਼ੀਟ ਕਿੰਨੇ ਸਕਿੰਟਾਂ ਲਈ ਇੱਕ ਕਨੈਕਸ਼ਨ ਸਥਾਪਤ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰੇਗੀ। ਇਸਨੂੰ 0 \'ਤੇ ਸੈੱਟ ਕਰਨ ਨਾਲ ਟਾਈਮਆਊਟ ਡਿਸੇਬਲ ਹੋ ਜਾਂਦਾ ਹੈ, ਪਰ ਇਸਦੀ ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਜਾਂਦੀ।</string>
     <string name="github">ਗਿਟਹੱਬ</string>
     <string name="configure">ਕੌਨਫਿਗਰ ਕਰੋ</string>
     <string name="show_linksheet_referrer">ਲਿੰਕਸ਼ੀਟ ਰੈਫਰਰ ਦਿਖਾਓ</string>
@@ -123,7 +122,6 @@
     <string name="about">ਦੇ ਬਾਰੇ ਵਿੱਚ</string>
     <string name="add_all">ਸਭ ਸ਼ਾਮਿਲ ਕਰੋ</string>
     <string name="feature_flags_explainer">ਪ੍ਰਯੋਗਾਤਮਕ ਫੀਚਰਸ ਨੂੰ ਇਨੇਬਲ ਜਾਂ ਡਿਸੇਬਲ ਕਰੋ</string>
-    <string name="options">ਵਿਕਲਪ</string>
     <string name="about_explainer">ਇਸ ਐਪ ਬਾਰੇ, ਲਾਈਸੈਂਸ</string>
     <string name="shizuku_not_running_explainer">Shizuku ਨਹੀਂ ਚੱਲ ਰਿਹਾ ਹੈ। Shizuku ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ, ਫਿਰ ਇਸਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।</string>
     <string name="browser_status">ਬ੍ਰਾਊਜ਼ਰ ਸਥਿਤੀ</string>
@@ -157,7 +155,6 @@
     <string name="always_show_package_name">ਹਮੇਸ਼ਾਂ ਪੈਕੇਜ ਨਾਮ ਵਿਖਾਓ</string>
     <string name="error">ਤਰੁੱਟੀ</string>
     <string name="checkmark">ਚੈੱਕਮਾਰਕ</string>
-    <string name="request_timeout">ਰਿਕਵੈਸਟ ਟਾਈਮਆਊਟ</string>
     <string name="apps_which_can_open_links_explainer_2">ਉਹਨਾਂ ਸਾਰੀਆਂ ਐਪਾਂ ਨੂੰ ਸੂਚੀਬੱਧ ਕਰਦਾ ਹੈ ਜੋ ਲਿੰਕਸ਼ੀਟ ਦੇ ਵਿਹਾਰ ਵਿੱਚ ਦਖਲ ਦੇ ਸਕਦੀਆਂ ਹਨ</string>
     <string name="set_as_browser_explainer">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਬਣਾਉਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
     <string name="current_session">ਮੌਜੂਦਾ ਸੈਸ਼ਨ</string>

@@ -97,15 +97,12 @@
     <string name="ignore_libredirect">LibRedirect\'i yoksay</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <string name="debug_explainer">Uygulama günlükleri, onaylanmış işleyicileri sıfırlama</string>
-    <string name="options">Seçenekler</string>
     <string name="current_session">Mevcut oturum</string>
     <string name="log_files">Geçmiş oturumlar</string>
     <string name="log_viewer">Günlük görüntüleyici</string>
     <string name="no_log_entries">Bu oturum herhangi bir günlük içermiyor.</string>
     <string name="download_started">İndirme başladı</string>
-    <string name="request_timeout">İstek zaman aşımı</string>
     <string name="resolve_failed">%s başarısız oldu: %s</string>
-    <string name="request_timeout_explainer">LinkSheet\'in bir bağlantının kurulması için kaç saniye bekleyeceğini belirler. Bunu 0 yapmak zaman aşımını devre dışı bırakır, ancak bu önerilmez.</string>
     <string name="no_browsers_found">Tarayıcı bulunamadı.</string>
     <string name="export">Dışa aktar</string>
     <string name="log">Günlük</string>

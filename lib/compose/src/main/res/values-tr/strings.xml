@@ -5,4 +5,7 @@
     <string name="generic__button_text_enable">Etkinleştir</string>
     <string name="generic__button_text_disable">Devre dışı bırak</string>
     <string name="generic__text_url">Url</string>
+    <string name="options">Seçenekler</string>
+    <string name="request_timeout">İstek zaman aşımı</string>
+    <string name="request_timeout_explainer">LinkSheet\'in bir bağlantının kurulması için kaç saniye bekleyeceğini belirler. Bunu 0 yapmak zaman aşımını devre dışı bırakır, ancak bu önerilmez.</string>
 </resources>

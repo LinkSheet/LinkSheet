@@ -31,6 +31,7 @@ import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.web.Darknet
 import org.koin.androidx.compose.koinViewModel
+import app.linksheet.compose.R as CommonR
 
 private val followRedirectsModes = listOf(FollowRedirectsMode.Auto, FollowRedirectsMode.Manual)
 
@@ -121,7 +122,7 @@ private fun FollowRedirectsSettingsRouteInternal(
             }
         }
 
-        divider(id = R.string.options)
+        divider(id = CommonR.string.options)
 
         group(base = 7, LinkSheetAppConfig.isPro()) {
             item(key = R.string.follow_redirects_local_cache) { padding, shape ->
@@ -206,7 +207,7 @@ private fun FollowRedirectsSettingsRouteInternal(
                 )
             }
 
-            item(key = R.string.request_timeout) { padding, shape ->
+            item(key = CommonR.string.request_timeout) { padding, shape ->
                 val requestTimeout by requestTimeoutPref.collectAsStateWithLifecycle()
 
                 SliderListItem(
@@ -217,8 +218,8 @@ private fun FollowRedirectsSettingsRouteInternal(
                     value = requestTimeout.toFloat(),
                     onValueChange = { requestTimeoutPref(it.toInt()) },
                     valueFormatter = { it.toInt().toString() },
-                    headlineContent = textContent(R.string.request_timeout),
-                    supportingContent = annotatedStringResource(R.string.request_timeout_explainer),
+                    headlineContent = textContent(CommonR.string.request_timeout),
+                    supportingContent = annotatedStringResource(CommonR.string.request_timeout_explainer),
                 )
             }
         }

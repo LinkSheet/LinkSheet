@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import app.linksheet.compose.list.item.PreferenceSwitchListItem
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
@@ -12,12 +14,11 @@ import fe.composekit.component.list.item.type.SliderListItem
 import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import app.linksheet.compose.list.item.PreferenceSwitchListItem
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import fe.linksheet.web.Darknet
 import org.koin.androidx.compose.koinViewModel
+import app.linksheet.compose.R as CommonR
 
 
 @Composable
@@ -42,7 +43,7 @@ fun Amp2HtmlSettingsRoute(
             )
         }
 
-        divider(id =  R.string.options)
+        divider(id =  CommonR.string.options)
 
         group(base = 5, LinkSheetAppConfig.isPro()) {
             item(key = R.string.amp2html_local_cache) { padding, shape ->
@@ -102,7 +103,7 @@ fun Amp2HtmlSettingsRoute(
                 )
             }
 
-            item(key = R.string.request_timeout) { padding, shape ->
+            item(key = CommonR.string.request_timeout) { padding, shape ->
                 val requestTimeout by viewModel.requestTimeout.collectAsStateWithLifecycle()
 
                 SliderListItem(
@@ -113,8 +114,8 @@ fun Amp2HtmlSettingsRoute(
                     value = requestTimeout.toFloat(),
                     onValueChange = { viewModel.requestTimeout(it.toInt()) },
                     valueFormatter = { it.toInt().toString() },
-                    headlineContent = textContent(R.string.request_timeout),
-                    supportingContent = annotatedStringResource(R.string.request_timeout_explainer),
+                    headlineContent = textContent(CommonR.string.request_timeout),
+                    supportingContent = annotatedStringResource(CommonR.string.request_timeout_explainer),
                 )
             }
         }

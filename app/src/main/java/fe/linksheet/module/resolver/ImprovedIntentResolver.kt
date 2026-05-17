@@ -354,13 +354,13 @@ class ImprovedIntentResolver(
         }
 
         var unfurl: UnfurlResult? = null
-        val shouldSkipPreviewUrl = shouldRunPreviewUrl(
+        val shouldRunPreviewUrl = shouldRunPreviewUrl(
             enabled = previewSettings.previewUrl(),
             previewUrlSkipBrowser = previewSettings.previewUrlSkipBrowser(),
             isReferrerBrowser = isReferrerBrowser,
             isRegularPreferredApp = isRegularPreferredApp
         )
-        if (!shouldSkipPreviewUrl) {
+        if (shouldRunPreviewUrl) {
             unfurl = cancelable(ResolveEvent.GeneratingPreview) { tryUnfurl(uri = uri) }
         }
 

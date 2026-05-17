@@ -43,6 +43,7 @@ dependencies {
     implementation(_1fexd.composeKit.compose.theme.core)
     implementation(_1fexd.composeKit.compose.theme.preference)
     implementation(_1fexd.composeKit.compose.dialog)
+    implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)

@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">Program do pobierania</string>
     <string name="downloader_url_mime_type">Użyj typu MIME z adresu URL</string>
     <string name="downloader_url_mime_type_explainer">Sprawdza, czy adres URL kończy się rozszerzeniem pliku (np. \".jpg\"); jeśli tak, ten typ jest używany dla pobieranego pliku.</string>
+    <string name="action_downloader__try_to_download">Sprawdź do pobrania</string>
+    <string name="settings_downloader__title_mode_auto">Automatycznie</string>
+    <string name="settings_downloader__subtitle_mode_auto">Automatycznie sprawdzaj czy link zawiera treść do pobrania</string>
+    <string name="settings_downloader__title_mode_manual">Ręcznie</string>
+    <string name="settings_downloader__subtitle_mode_manual">Pokaż przycisk „Sprawdź do pobrania” na dolnym panelu</string>
 </resources>

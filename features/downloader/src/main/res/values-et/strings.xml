@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="settings_links_downloader__title_downloader">Allalaadija</string>
+    <string name="enable_downloader">Kasuta allalaadijat</string>
+    <string name="downloader_url_mime_type">Kasuta võrguaadressis leiduvat MIME-tüüpi (andmevormingu tüüpi)</string>
+    <string name="downloader_url_mime_type_explainer">Kontrolli, kas võrguaadressi lõpus on faililaiend (nt .jpg). Kui on, siis see tüüp on kasutusel faili allalaadimiseks.</string>
+    <string name="action_downloader__try_to_download">Kontrolli allalaaditavat</string>
+    <string name="settings_downloader__title_mode_auto">Automaatselt</string>
+    <string name="settings_downloader__subtitle_mode_auto">Kontrolli automaatselt, kas võrguaadressil leidub allalaaditavat sisu</string>
+    <string name="settings_downloader__title_mode_manual">Käsitsi</string>
+    <string name="settings_downloader__subtitle_mode_manual">Näita alumisel lehel „Kontrolli allalaaditavat“ nuppu</string>
+    <string name="enable_downloader_explainer">Kui võrguaadressis leidub otselink failile, siis lisa alumisele lehele „Laadi alla“ nupp</string>
 </resources>

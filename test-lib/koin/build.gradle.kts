@@ -28,4 +28,5 @@ android {
 dependencies {
     api(Koin.core)
     api(Koin.test)
+    api(Testing.junit.jupiter.api)
 }

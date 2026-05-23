@@ -147,7 +147,7 @@ class ImprovedIntentResolver(
         val canAccessInternet = networkStateService.isNetworkConnected
 
         logger.debug("Referrer=${options.referrer}")
-        val referringPackage = AndroidUri.get(Scheme.Package, options.referrer)
+        val referringPackage = AndroidUri.get(Scheme.AppScheme, options.referrer)
         val isReferrerBrowser =
             privateBrowsingService.isKnownBrowser(referringPackage?.packageName) != null
 

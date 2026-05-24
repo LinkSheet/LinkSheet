@@ -2,19 +2,15 @@ package fe.linksheet.module.viewmodel
 
 
 import android.app.Application
-import android.widget.Toast
 import app.linksheet.api.RefineWrapper
 import app.linksheet.api.SystemInfoService
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.devicecompat.miui.MiuiAuditor
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import com.google.gson.Gson
-import fe.linksheet.R
 import fe.linksheet.module.log.file.LogPersistService
-import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.shizuku.ShizukuCommand
-import fe.linksheet.module.shizuku.ShizukuServiceConnection
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -23,7 +19,7 @@ class DevSettingsViewModel(
     private val context: Application,
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
-    private val shizukuHandler: ShizukuServiceConnection,
+//    private val shizukuHandler: ShizukuServiceConnection,
     miuiCompatProvider: MiuiCompatProvider,
     private val gson: Gson,
     systemInfoService: SystemInfoService,
@@ -37,15 +33,15 @@ class DevSettingsViewModel(
     val miuiCompatRequired by miuiCompatProvider.isRequired
 
     fun enqueueResetAppLinks() {
-        val command = ShizukuCommand(command = { reset("all") }, resultHandler = {
-            Toast.makeText(
-                context,
-                context.getText(R.string.reset_app_link_verification_status_toast),
-                Toast.LENGTH_SHORT
-            ).show()
-        })
-
-        shizukuHandler.enqueueCommand(command)
+//        val command = ShizukuCommand(command = { reset("all") }, resultHandler = {
+//            Toast.makeText(
+//                context,
+//                context.getText(R.string.reset_app_link_verification_status_toast),
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        })
+//
+//        shizukuHandler.enqueueCommand(command)
     }
 
     fun auditMiuiEnvironment(): String {

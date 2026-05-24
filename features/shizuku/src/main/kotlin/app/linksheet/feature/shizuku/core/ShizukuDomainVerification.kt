@@ -24,4 +24,8 @@ object ShizukuDomainVerification {
             UserHandleHidden.myUserId()
         )
     }
+
+    fun setDomainVerification() {
+//        iDomainVerificationManager.setDomainVerificationStatus()
+    }
 }

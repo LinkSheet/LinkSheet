@@ -6,6 +6,14 @@ import android.content.Intent;
 import android.os.*;
 
 import androidx.annotation.*;
+
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.UUID;
+
 import fe.hidden.HiddenStub;
 
 @RequiresApi(Build.VERSION_CODES.S)
@@ -56,6 +64,45 @@ public interface IDomainVerificationManager extends IInterface {
      * @return error code or {@link #STATUS_OK} if successful
      */
     int setDomainVerificationUserSelection(String domainSetId, @NonNull DomainSet domains, boolean enabled, @UserIdInt int userId);
+
+
+    /**
+     * Change the verification status of the {@param domains} of the package associated with {@param
+     * domainSetId}.
+     *
+     * @param domainSetId See {@link DomainVerificationInfo#getIdentifier()}.
+     * @param domains     List of host names to change the state of.
+     * @param state       See {@link DomainVerificationInfo#getHostToStateMap()}.
+     * @return error code or {@link #STATUS_OK} if successful
+     * @throws NameNotFoundException If the ID is known to be good, but the package is
+     *                               unavailable. This may be because the package is installed on
+     *                               a volume that is no longer mounted. This error is
+     *                               unrecoverable until the package is available again, and
+     *                               should not be re-tried except on a time scheduled basis.
+     */
+    int setDomainVerificationStatus(@NonNull UUID domainSetId, @NonNull Set<String> domains, int state);
+
+
+    /**
+     * For the given domain, return all apps which are approved to open it in a
+     * greater than 0 priority. This does not mean that all apps can actually open
+     * an Intent with that domain. That will be decided by the set of apps which
+     * are the highest priority level, ignoring all lower priority levels.
+     *
+     * The set will be ordered from lowest to highest priority.
+     *
+     * @param domain The host to query for. An invalid domain will result in an empty set.
+     */
+    SortedSet<DomainOwner> getOwnersForDomain(@NonNull String domain);
+
+    /**
+     * Retrieves the domain verification state for a given package.
+     *
+     * @return the data for the package, or null if it does not declare any autoVerify domains
+     * @throws NameNotFoundException If the package is unavailable. This is an unrecoverable error
+     *                               and should not be re-tried except on a time scheduled basis.
+     */
+    DomainVerificationInfo getDomainVerificationInfo(@NonNull String packageName);
 
     abstract class Stub extends Binder implements IDomainVerificationManager {
         public static IDomainVerificationManager asInterface(IBinder obj) {

@@ -12,29 +12,47 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import app.linksheet.testlib.koin.junit5.AutoCloseKoinTest
+import app.linksheet.testlib.koin.junit5.KoinTestExtension
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import de.mannodermaus.junit5.compose.createAndroidComposeExtension
+import de.mannodermaus.junit5.extensions.GrantPermissionExtension
 import fe.composekit.core.putEnumExtra
+import fe.linksheet.Validator
 import fe.linksheet.composable.page.edit.EDITOR_APP_BAR_CANCEL_TEST_TAG
 import fe.linksheet.composable.page.edit.EDITOR_APP_BAR_DONE_TEST_TAG
+import fe.linksheet.debug.module.TestRootModule
 import fe.linksheet.testlib.core.ActivityInvoker
-import fe.linksheet.testlib.core.BaseUnitTest
+import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
 @OptIn(ExperimentalTestApi::class)
-internal class TextEditorActivityTest : BaseUnitTest {
+internal class TextEditorActivityTest : AutoCloseKoinTest() {
     @JvmField
     @RegisterExtension
+    @Order(1)
+    val koinTestExtension = KoinTestExtension.create {
+        modules(TestRootModule)
+    }
+
+    @JvmField
+    @RegisterExtension
+    @Order(2)
+    val grantPermissionExtension = GrantPermissionExtension.grant("android.permission.POST_NOTIFICATIONS")
+
+    @JvmField
+    @RegisterExtension
+    @Order(3)
     val extension = createAndroidComposeExtension {
         launchActivityForResult(ActivityInvoker.getIntentForActivity<TextEditorActivity> {
-            putExtra(TextEditorActivity.Companion.EXTRA_TEXT, INPUT_TEXT)
-            putEnumExtra(TextEditorActivity.Companion.EXTRA_SOURCE, TextEditorActivity.ExtraSource.ClipboardCard)
+            putExtra(TextEditorActivity.EXTRA_TEXT, INPUT_TEXT)
             putEnumExtra(
-                TextEditorActivity.Companion.EXTRA_VALIDATOR,
-                TextEditorActivity.ExtraValidator.WebUriTextValidator
+                TextEditorActivity.EXTRA_SOURCE,
+                TextEditorActivity.ExtraSource.ClipboardCard
             )
+            putEnumExtra(TextEditorActivity.EXTRA_VALIDATOR, Validator.WebUriTextValidator)
         })
     }
 
@@ -45,7 +63,7 @@ internal class TextEditorActivityTest : BaseUnitTest {
         assertThat(resultCode).isEqualTo(result)
 
         if (text == null) return
-        val resultText = resultData.getStringExtra(TextEditorActivity.Companion.EXTRA_TEXT)
+        val resultText = resultData.getStringExtra(TextEditorActivity.EXTRA_TEXT)
         assertThat(resultText).isEqualTo(text)
     }
 

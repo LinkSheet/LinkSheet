@@ -7,19 +7,25 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CheckCircleOutline
 import androidx.compose.material.icons.rounded.ErrorOutline
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.api.STATUS_CARD__SET_AS_DEFAULT_TEST_TAG
+import app.linksheet.compose.extension.testTagIfNotNull
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.card.AlertCard
 import fe.linksheet.R
-import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.composable.ui.PreviewTheme
+import fe.linksheet.module.viewmodel.MainViewModel
 
 @Composable
 private fun cardContainerColor(isDefaultBrowser: Boolean): Color {
@@ -89,6 +95,7 @@ internal fun StatusCard(
                 item(key = R.string.settings_main_setup_success__button_set_default_browser) {
                     StatusCardButton(
                         id = R.string.settings_main_setup_success__button_set_default_browser,
+                        testTag = STATUS_CARD__SET_AS_DEFAULT_TEST_TAG ,
                         buttonColor = buttonColor,
                         onClick = onSetAsDefault
                     )
@@ -101,10 +108,12 @@ internal fun StatusCard(
 @Composable
 private fun StatusCardButton(
     @StringRes id: Int,
+    testTag: String? = null,
     buttonColor: Color,
     onClick: () -> Unit,
 ) {
     Button(
+        modifier = Modifier.testTagIfNotNull(testTag),
         colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
         onClick = onClick
     ) {

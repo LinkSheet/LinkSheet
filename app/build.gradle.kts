@@ -1,3 +1,5 @@
+import app.linksheet.buildsrc.FlavorDimensions
+import app.linksheet.buildsrc.ProductFlavors
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import com.gitlab.grrfe.gradlebuild.android.ArchiveBaseName
@@ -106,7 +108,8 @@ android {
             string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
         }
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "fe.linksheet.CustomTestRunner"
         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
         testOptions.unitTests.isIncludeAndroidResources = true
 
@@ -128,16 +131,16 @@ android {
         }
     }
 
-    flavorDimensions += listOf("type")
+    flavorDimensions += FlavorDimensions.TYPE
 
     productFlavors {
-        register("foss") {
-            dimension = "type"
+        register(ProductFlavors.FOSS) {
+            dimension = FlavorDimensions.TYPE
             buildStringConfigField("FLAVOR", "Foss")
         }
 
-        register("pro") {
-            dimension = "type"
+        register(ProductFlavors.PRO) {
+            dimension = FlavorDimensions.TYPE
 
             applicationIdSuffix = ".pro"
             versionNameSuffix = "-pro"
@@ -308,6 +311,7 @@ dependencies {
 
     testImplementation(project(":test-core"))
     testImplementation(project(":test-koin"))
+    androidTestImplementation(project(":test-koin"))
     androidTestImplementation(project(":test-instrument"))
 
 //    implementation(platform(Square.okHttp3.bom))
@@ -454,7 +458,7 @@ dependencies {
 
     val commonTestDependencies = arrayOf(
         Koin.test,
-        Koin.junit4,
+//        Koin.junit4,
         Koin.android,
         KotlinX.coroutines.test,
         Grrfe.std.test,
@@ -463,7 +467,7 @@ dependencies {
         "androidx.room3:room3-testing:_",
         AndroidX.test.ext.junit.ktx,
         "com.willowtreeapps.assertk:assertk:_",
-        AndroidX.test.espresso.core,
+//        AndroidX.test.espresso.core,
         "io.mockk:mockk-android:1.14.9"
     )
 
@@ -493,6 +497,8 @@ dependencies {
     androidTestImplementation(platform("org.junit:junit-bom:5.14.1"))
     androidTestImplementation("org.junit.jupiter:junit-jupiter-api")
     androidTestImplementation(AndroidX.compose.ui.test)
+//    androidTestImplementation("io.insert-koin:koin-test-junit5:4.2.1")
+//    androidTestImplementation("io.insert-koin:koin-test-junit4:4.2.1")
 
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
     debugImplementation(Square.leakCanary.android)

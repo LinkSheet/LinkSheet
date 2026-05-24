@@ -1,7 +1,12 @@
 package fe.linksheet.activity.bottomsheet.content.success
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
@@ -9,14 +14,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.api.BOTTOM_SHEET_ALWAYS_TEST_TAG
+import app.linksheet.api.BOTTOM_SHEET_JUST_ONCE_TEST_TAG
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.ClickModifier
 import fe.linksheet.activity.bottomsheet.ClickType
-import app.linksheet.compose.theme.HkGroteskFontFamily
 
 @Composable
 fun ChoiceButtons(
@@ -32,6 +40,7 @@ fun ChoiceButtons(
     ) {
         OpenButton(
             outlined = true,
+            testTag = BOTTOM_SHEET_JUST_ONCE_TEST_TAG,
             enabled = enabled,
             textId = R.string.just_once,
             onClick = { choiceClick(ClickType.Single, ClickModifier.None) }
@@ -39,6 +48,7 @@ fun ChoiceButtons(
 
         OpenButton(
             outlined = false,
+            testTag = BOTTOM_SHEET_ALWAYS_TEST_TAG,
             enabled = enabled,
             textId = R.string.always,
             onClick = { choiceClick(ClickType.Single, ClickModifier.Always) }
@@ -50,10 +60,12 @@ fun ChoiceButtons(
 private fun RowScope.OpenButton(
     @StringRes textId: Int,
     outlined: Boolean,
+    testTag: String,
     enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
     val modifier = Modifier
+        .testTag(testTag)
         .fillMaxWidth()
         .weight(0.5f)
     val content: @Composable RowScope.() -> Unit = {

@@ -19,6 +19,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.SpanStyle
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.compose.debug.LocalUiDebug
@@ -32,7 +34,7 @@ import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.android.span.helper.LocalLinkTags
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
-import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.module.viewmodel.RootViewModel
 import fe.linksheet.util.LinkSheetLinkTags
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -83,7 +85,7 @@ private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 @Composable
 fun BaseComponentActivity.AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
-    themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
+    themeSettingsViewModel: RootViewModel = koinViewModel(),
     debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
     content: @Composable () -> Unit,
 ) {
@@ -102,7 +104,7 @@ fun BaseComponentActivity.AppTheme(
 fun AppTheme(
     edgeToEdge: Boolean = true,
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
-    themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
+    themeSettingsViewModel: RootViewModel = koinViewModel(),
     debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
     updateEdgeToEdge: ((statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) -> Unit)? = null,
     content: @Composable () -> Unit,
@@ -156,7 +158,11 @@ fun BoxAppHost(
     content: @Composable BoxScope.() -> Unit,
 ) {
     AppTheme {
-        Box(modifier = modifier, contentAlignment = contentAlignment, content = content)
+        Box(
+            modifier = modifier.semantics { testTagsAsResourceId = true },
+            contentAlignment = contentAlignment,
+            content = content
+        )
     }
 }
 

@@ -1,6 +1,7 @@
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.LibraryExtension
+import com.android.build.api.dsl.TestExtension
 import com.gitlab.grrfe.gradlebuild.android.extension.configurePickFirsts
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
@@ -22,6 +23,9 @@ subprojects {
         }
         if (plugins.hasPlugin("com.android.library")) {
             extensions.findByType<LibraryExtension>()?.packaging?.configurePickFirsts()
+        }
+        if (plugins.hasPlugin("com.android.test")) {
+            extensions.findByType<TestExtension>()?.packaging?.configurePickFirsts()
         }
 
         dependencies {

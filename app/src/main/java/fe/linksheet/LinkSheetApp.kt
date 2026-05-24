@@ -37,7 +37,7 @@ import fe.android.lifecycle.ProcessServiceRegistry
 import fe.android.lifecycle.koin.extension.applicationLifecycle
 import fe.composekit.core.AndroidVersion
 import fe.composekit.lifecycle.network.koin.NetworkStateServiceModule
-import fe.composekit.route.NavTypes
+import fe.composekit.route.ComposeKitRoute
 import fe.droidkit.koin.androidApplicationContext
 import fe.gson.GlobalGsonModule
 import fe.gson.context.GlobalGsonContext
@@ -64,7 +64,6 @@ import fe.linksheet.module.viewmodel.module.ViewModelModule
 import fe.linksheet.util.LinkSheetLogSink
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidLogger
@@ -86,9 +85,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun onCreate() {
         super.onCreate()
-        owner.lifecycleScope.launch(Dispatchers.IO) {
-            NavTypes.Types
-        }
+        owner.lifecycleScope.launch { ComposeKitRoute.warmup() }
         StaticBuildInfo.init(BuildConfig.DEBUG, BuildConfig.BUILD_TYPE)
         registerActivityLifecycleCallbacks(currentActivityObserver)
         Log.addSink(LinkSheetLogSink(logsDebug = StaticBuildInfo.IsDebug, AndroidLogSink()))

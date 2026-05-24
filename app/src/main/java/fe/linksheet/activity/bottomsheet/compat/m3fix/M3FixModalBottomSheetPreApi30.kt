@@ -3,7 +3,11 @@ package fe.linksheet.activity.bottomsheet.compat.m3fix
 import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +30,7 @@ import app.linksheet.compose.debugBorder
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun M3FixModalBottomSheetPreApi30(
+    modifier: Modifier = Modifier,
     contentModifier: Modifier,
     debug: Boolean = false,
     containerColor: Color = MaterialTheme.colorScheme.surface,
@@ -43,7 +48,7 @@ internal fun M3FixModalBottomSheetPreApi30(
 
     val safeDrawing = WindowInsets.safeDrawing.asPaddingValues()
     ModalBottomSheet(
-        modifier = Modifier.debugBorder(debug, 1.dp, Color.Cyan),
+        modifier = modifier.debugBorder(debug, 1.dp, Color.Cyan),
 //        sheetMaxWidth = Dp.Unspecified,
         sheetMaxWidth = targetWidth,
         containerColor = containerColor,

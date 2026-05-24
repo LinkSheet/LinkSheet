@@ -116,6 +116,9 @@ buildSettings {
         includeProject(":test-fake", "fake")
         includeProject(":test-koin", "koin")
     }
+    projects("test") {
+        includeProject(":test-e2e", "e2e")
+    }
     projects("sdk") {
         includeProject(":sdk-rule-plugin", "rule-plugin")
         includeProject(":sdk-common", "common")

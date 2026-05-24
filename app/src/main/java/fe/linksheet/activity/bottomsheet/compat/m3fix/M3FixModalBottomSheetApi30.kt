@@ -27,6 +27,7 @@ import app.linksheet.compose.debugBorder
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun M3FixModalBottomSheetApi30(
+    modifier: Modifier = Modifier,
     contentModifier: Modifier,
     debug: Boolean = false,
     containerColor: Color = MaterialTheme.colorScheme.surface,
@@ -39,7 +40,7 @@ internal fun M3FixModalBottomSheetApi30(
     val landscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     val targetWidth = BottomSheetDefaults.SheetMaxWidth
     ModalBottomSheet(
-        modifier = Modifier.debugBorder(debug, 1.dp, Color.Cyan),
+        modifier = modifier.debugBorder(debug, 1.dp, Color.Cyan),
         sheetMaxWidth = targetWidth,
         containerColor = containerColor,
         shape = shape,

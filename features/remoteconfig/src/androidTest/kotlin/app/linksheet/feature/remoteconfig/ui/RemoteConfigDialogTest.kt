@@ -5,6 +5,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import app.linksheet.api.REMOTE_CONFIG_DIALOG__DISABLE_TEST_TAG
+import app.linksheet.api.REMOTE_CONFIG_DIALOG__ENABLE_TEST_TAG
 import de.mannodermaus.junit5.compose.ComposeContext
 import de.mannodermaus.junit5.compose.createComposeExtension
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction

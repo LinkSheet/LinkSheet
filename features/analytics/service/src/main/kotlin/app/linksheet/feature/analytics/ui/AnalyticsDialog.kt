@@ -16,9 +16,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import app.linksheet.api.ANALYTICS_DIALOG__SAVE_TEST_TAG
 import app.linksheet.compose.theme.DialogTitleStyle
 import app.linksheet.feature.analytics.R
 import app.linksheet.feature.analytics.service.TelemetryLevel
@@ -61,6 +65,7 @@ private val telemetryLevels = listOf(
 private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryLevel) -> Unit) {
     var selectedLevel by remember { mutableStateOf(currentLevel) }
     AlertDialog(
+        modifier = Modifier.semantics { testTagsAsResourceId = true },
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
         icon = {
             Icon(
@@ -103,7 +108,10 @@ private fun AnalyticsDialog(currentLevel: TelemetryLevel, onConfirm: (TelemetryL
         onDismissRequest = {},
         dismissButton = null,
         confirmButton = {
-            TextButton(onClick = { onConfirm(selectedLevel) }) {
+            TextButton(
+                modifier = Modifier.testTag(ANALYTICS_DIALOG__SAVE_TEST_TAG),
+                onClick = { onConfirm(selectedLevel) }
+            ) {
                 Text(text = stringResource(id = CommonR.string.generic__button_text_save))
             }
         }

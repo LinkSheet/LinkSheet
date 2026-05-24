@@ -32,6 +32,7 @@ import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
+import fe.linksheet.module.viewmodel.RootViewModel
 import fe.linksheet.module.viewmodel.SelectDomainsConfirmationViewModel
 import fe.linksheet.module.viewmodel.SettingsViewModel
 import fe.linksheet.module.viewmodel.SingleBrowserViewModel
@@ -46,6 +47,7 @@ import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.qualifier
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 
@@ -98,7 +100,7 @@ val ViewModelModule = module {
     viewModelOf(::BottomSheetSettingsViewModel)
     viewModelOf(::LinksSettingsViewModel)
     viewModelOf(::BottomSheetViewModel)
-    viewModelOf(::ThemeSettingsViewModel)
+    viewModelOf(::ThemeSettingsViewModel).bind<RootViewModel>()
     viewModelOf(::LanguageSettingsViewModel)
     viewModelOf(::FollowRedirectsSettingsViewModel)
     viewModelOf(::LogSettingsViewModel)

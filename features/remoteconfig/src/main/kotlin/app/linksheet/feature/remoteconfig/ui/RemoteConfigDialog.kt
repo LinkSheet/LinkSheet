@@ -12,8 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.api.REMOTE_CONFIG_DIALOG__DISABLE_TEST_TAG
+import app.linksheet.api.REMOTE_CONFIG_DIALOG__ENABLE_TEST_TAG
 import app.linksheet.compose.theme.DialogTitleStyle
 import app.linksheet.feature.remoteconfig.R
 import fe.android.compose.dialog.helper.result.ResultDialog
@@ -29,9 +33,6 @@ import fe.composekit.component.dialog.SaneAlertDialogTextButton
 import fe.composekit.component.dialog.SaneIconAlertDialog
 import my.nanihadesuka.compose.ScrollbarSettings
 import app.linksheet.compose.R as CommonR
-
-const val REMOTE_CONFIG_DIALOG__DISABLE_TEST_TAG = "remote_config_dialog__disable_test_tag"
-const val REMOTE_CONFIG_DIALOG__ENABLE_TEST_TAG = "remote_config_dialog__enable_test_tag"
 
 @Composable
 fun rememberRemoteConfigDialog(onChanged: (Boolean) -> Unit): ResultDialogState<Boolean> {
@@ -56,6 +57,7 @@ private fun RemoteConfigDialog(
 ) {
     val state = rememberLazyListState()
     SaneIconAlertDialog(
+        modifier = Modifier.semantics { testTagsAsResourceId = true },
         state = state,
         settings = ScrollbarSettings(enabled = false),
         innerModifier = Modifier

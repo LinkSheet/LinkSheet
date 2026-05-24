@@ -12,7 +12,7 @@ plugins {
 
 android {
     namespace = "app.linksheet.compose"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK

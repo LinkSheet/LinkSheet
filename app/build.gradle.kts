@@ -64,7 +64,7 @@ object NightlyTagVersionCodeProducer : VersionCodeProducer {
 
 android {
     namespace = "fe.linksheet"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
 
     defaultConfig {
         applicationId = "fe.linksheet"

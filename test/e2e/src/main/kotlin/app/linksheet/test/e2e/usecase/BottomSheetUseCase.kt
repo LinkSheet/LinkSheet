@@ -9,9 +9,11 @@ import app.linksheet.api.BOTTOM_SHEET_TEST_TAG
 object BottomSheetUseCase {
     fun UiAutomatorTestScope.expandSheet() {
         val bottomSheet = onElement { viewIdResourceName == BOTTOM_SHEET_TEST_TAG }
+        onElementOrNull { viewIdResourceName == BOTTOM_SHEET_JUST_ONCE_TEST_TAG } ?: return
         bottomSheet.swipe(Direction.UP, 0.2f)
         waitForStableInActiveWindow()
     }
+
     fun UiAutomatorTestScope.openJustOnce(appLabel: String, appPackage: String) {
         val browserRow = onElement { textAsString() == appLabel }
         browserRow.click()

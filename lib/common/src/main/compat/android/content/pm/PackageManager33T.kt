@@ -3,7 +3,12 @@ package android.content.pm
 import android.content.ComponentName
 import android.content.Intent
 import fe.composekit.core.AndroidVersion
-import fe.linksheet.util.*
+import fe.linksheet.util.ApplicationInfoFlags
+import fe.linksheet.util.ComponentEnabledFlags
+import fe.linksheet.util.ComponentEnabledStateFlags
+import fe.linksheet.util.ComponentInfoFlags
+import fe.linksheet.util.PackageInfoFlags
+import fe.linksheet.util.ResolveInfoFlags
 
 fun PackageManager.resolveActivityCompat(
     intent: Intent,
@@ -48,6 +53,7 @@ fun PackageManager.getApplicationInfoCompatOrNull(
     return runCatching { getApplicationInfoCompat(packageName, flags) }.getOrNull()
 }
 
+@Deprecated("Use getApplicationInfoCompatOrNull instead")
 fun PackageManager.getApplicationInfoCompat(
     packageName: String,
     flags: ApplicationInfoFlags = ApplicationInfoFlags.EMPTY,
@@ -67,6 +73,7 @@ fun PackageManager.getActivityInfoCompatOrNull(
     return runCatching { getActivityInfoCompat(componentName, flags) }.getOrNull()
 }
 
+@Deprecated("Use getActivityInfoCompatOrNull instead")
 fun PackageManager.getActivityInfoCompat(
     componentName: ComponentName,
     flags: ComponentInfoFlags = ComponentInfoFlags.EMPTY
@@ -86,6 +93,7 @@ fun PackageManager.getPackageInfoCompatOrNull(
     return runCatching { getPackageInfoCompat(packageName, flags) }.getOrNull()
 }
 
+@Deprecated("Use getPackageInfoCompatOrNull instead")
 fun PackageManager.getPackageInfoCompat(
     packageName: String,
     flags: PackageInfoFlags = PackageInfoFlags.EMPTY

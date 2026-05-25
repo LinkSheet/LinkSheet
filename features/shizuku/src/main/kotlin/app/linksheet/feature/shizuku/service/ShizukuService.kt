@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.content.pm.getApplicationInfoCompat
+import android.content.pm.getApplicationInfoCompatOrNull
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.eventbus.IntentEventHandler
 import fe.composekit.intent.buildIntent
@@ -25,7 +25,7 @@ internal fun AndroidShizukuService(
     packageManager: PackageManager,
 ): ShizukuService {
     val service = ShizukuService(
-        getApplicationInfo = packageManager::getApplicationInfoCompat,
+        getApplicationInfoOrNull = packageManager::getApplicationInfoCompatOrNull,
         pingBinder = Shizuku::pingBinder,
         checkSelfPermission = {
             tryCatch { Shizuku.checkSelfPermission() }.getOrNull()
@@ -41,7 +41,7 @@ internal fun AndroidShizukuService(
 }
 
 class ShizukuService(
-    private val getApplicationInfo: (String, ApplicationInfoFlags) -> ApplicationInfo?,
+    private val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
     private val pingBinder: () -> Boolean,
     private val checkSelfPermission: () -> Int?,
     private val requestPermission: (Int) -> Unit
@@ -60,7 +60,7 @@ class ShizukuService(
     }
 
     private val _statusFlow = RefreshableStateFlow(ShizukuStatus.Unknown) {
-        val installed = getApplicationInfo(ShizukuProvider.MANAGER_APPLICATION_ID, ApplicationInfoFlags.EMPTY) != null
+        val installed = getApplicationInfoOrNull(ShizukuProvider.MANAGER_APPLICATION_ID, ApplicationInfoFlags.EMPTY) != null
         val running = pingBinder()
         val permission = if (running) checkSelfPermission() == PackageManager.PERMISSION_GRANTED else false
 

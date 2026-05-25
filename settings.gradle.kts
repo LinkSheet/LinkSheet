@@ -94,9 +94,10 @@ buildSettings {
     }
     projects("integration") {
         includeProject(":integration-amp2html", "amp2html")
-        includeProject(":integration-mime-types", "mime-types")
         includeProject(":integration-clearurl", "clearurl")
         includeProject(":integration-embed-resolve", "embed-resolve")
+        includeProject(":integration-fastforward", "fastforward")
+        includeProject(":integration-mime-types", "mime-types")
     }
     projects("lib") {
         includeProject(":lib-scaffold", "scaffold")

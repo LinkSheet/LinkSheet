@@ -406,7 +406,7 @@ dependencies {
     implementation(Grrfe.gsonExt.koin)
 
     implementation(Grrfe.signify)
-    implementation(_1fexd.fastForward)
+    implementation(project(":integration-fastforward"))
     implementation("com.github.1fexd.libredirectkt:lib:_")
 
     implementation(_1fexd.composeKit.compose.core)

@@ -55,7 +55,7 @@ dependencies {
     implementation("sh.calvin.reorderable:reorderable:_")
     implementation("org.jsoup:jsoup:_")
     implementation("me.saket.unfurl:unfurl:_")
-    implementation(_1fexd.fastForward)
+    implementation(project(":integration-fastforward"))
     implementation(AndroidX.lifecycle.viewModel)
     implementation(AndroidX.room.common)
     implementation(AndroidX.compose.ui)

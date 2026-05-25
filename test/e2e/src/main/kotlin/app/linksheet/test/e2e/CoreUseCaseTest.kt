@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.test.uiautomator.uiAutomator
 import app.linksheet.test.e2e.dialog.AnalyticsDialog
 import app.linksheet.test.e2e.dialog.RemoteConfigDialog
+import app.linksheet.test.e2e.story.ChromeSetupStory
 import app.linksheet.test.e2e.story.DefaultBrowserStory
 import app.linksheet.test.e2e.story.GoHomeStory
 import app.linksheet.test.e2e.story.LaunchAppStory
@@ -34,6 +35,10 @@ internal class CoreUseCaseTest : UiAutomatorTest() {
         with(BottomSheetUseCase) {
             expandSheet()
             openJustOnce(defaultBrowser.label, defaultBrowser.packageName)
+        }
+
+        if (defaultBrowser.label == "Chrome") {
+            with(ChromeSetupStory) { maybeDismissSetup() }
         }
     }
 }

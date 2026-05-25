@@ -9,6 +9,7 @@ import app.linksheet.test.e2e.story.ChromeSetupStory
 import app.linksheet.test.e2e.story.DefaultBrowserStory
 import app.linksheet.test.e2e.story.GoHomeStory
 import app.linksheet.test.e2e.story.LaunchAppStory
+import app.linksheet.test.e2e.story.LauncherStory
 import app.linksheet.test.e2e.usecase.BottomSheetUseCase
 import fe.linksheet.testlib.instrument.ui.UiAutomatorTest
 import org.junit.jupiter.api.Test
@@ -22,6 +23,9 @@ internal class CoreUseCaseTest : UiAutomatorTest() {
     @Test
     fun test(@DefaultBrowserParameter defaultBrowser: DefaultBrowser) = uiAutomator {
         with(GoHomeStory) { awaitHome() }
+        if (device.launcherPackageName in LauncherStory.PACKAGE_NAMES) {
+            with(LauncherStory) { dismissSwipeNudge() }
+        }
         with(LaunchAppStory) { launch(testApp.packageName) }
 
         watchFor(RemoteConfigDialog(device)) { clickEnable() }

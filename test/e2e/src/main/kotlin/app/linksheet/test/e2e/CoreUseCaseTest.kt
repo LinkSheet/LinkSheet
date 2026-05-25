@@ -38,10 +38,10 @@ internal class CoreUseCaseTest : UiAutomatorTest() {
 
         with(BottomSheetUseCase) {
             expandSheet()
-            openJustOnce(defaultBrowser.label, defaultBrowser.packageName)
+            openJustOnce(defaultBrowser.intentHandlerLabel, defaultBrowser.packageName)
         }
 
-        if (defaultBrowser.label == "Chrome") {
+        if (defaultBrowser.applicationLabel == "Chrome") {
             with(ChromeSetupStory) { maybeDismissSetup() }
         }
     }

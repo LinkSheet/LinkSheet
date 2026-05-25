@@ -40,7 +40,11 @@ class DefaultBrowserExtension internal constructor(
     }
 }
 
-data class DefaultBrowser(val label: String, val packageName: String)
+data class DefaultBrowser(
+    val applicationLabel: String,
+    val intentHandlerLabel: String,
+    val packageName: String
+)
 
 private fun getDefaultBrowser(targetContext: Context): DefaultBrowser? {
     val defaultBrowserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://"))
@@ -48,8 +52,10 @@ private fun getDefaultBrowser(targetContext: Context): DefaultBrowser? {
         .resolveActivity(defaultBrowserIntent, PackageManager.MATCH_DEFAULT_ONLY)
         ?.activityInfo
         ?: return null
-    val label = targetContext.packageManager.getApplicationLabel(activityInfo.applicationInfo)
-        .toString()
-    val packageName = activityInfo.packageName
-    return DefaultBrowser(label, packageName)
+
+    return DefaultBrowser(
+        applicationLabel = targetContext.packageManager.getApplicationLabel(activityInfo.applicationInfo).toString(),
+        intentHandlerLabel = activityInfo.loadLabel(targetContext.packageManager).toString(),
+        packageName = activityInfo.packageName
+    )
 }

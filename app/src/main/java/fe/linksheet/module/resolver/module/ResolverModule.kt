@@ -10,11 +10,14 @@ import app.linksheet.feature.downloader.core.DownloaderMode
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.BuildConfig
 import fe.linksheet.feature.engine.RealLinkEngine
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
+import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.FollowRedirectsMode
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.ImprovedIntentResolver
@@ -25,6 +28,7 @@ import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.DefaultIntentLauncher
 import fe.linksheet.module.resolver.util.IntentLauncher
+import kotlinx.coroutines.flow.firstOrNull
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
@@ -50,7 +54,7 @@ val ResolverModule = module {
     }
     singleOf(::InAppBrowserHandler)
     single<IntentResolver> {
-        val settings = createSettings(get(), get())
+        val settings = createSettings(get(), get(), get(), get())
         val experimentRepository = get<ExperimentRepository>()
 
         val realLinkEngine = RealLinkEngine(
@@ -58,8 +62,6 @@ val ResolverModule = module {
             client = get(),
             appSelectionHistoryRepository = get(),
             preferredAppRepository = get(),
-            normalBrowsersRepository = get(),
-            inAppBrowsersRepository = get(),
             packageIntentHandler = get(),
             packageLauncherService = get(),
             appSorter = get(),
@@ -78,8 +80,6 @@ val ResolverModule = module {
                 context = get(),
                 appSelectionHistoryRepository = get(),
                 preferredAppRepository = get(),
-                normalBrowsersRepository = get(),
-                inAppBrowsersRepository = get(),
                 appInfoCreator = get(),
                 packageIntentHandler = get(),
                 packageLauncherService = get(),
@@ -127,6 +127,8 @@ data class BrowserSettings(
     val inAppBrowserMode: () -> BrowserMode,
     val selectedInAppBrowser: () -> String?,
     val unifiedPreferredBrowser: () -> Boolean,
+    val whitelistedInAppBrowserPackages: suspend () -> Set<String>?,
+    val whitelistedNormalBrowserPackages: suspend  () -> Set<String>?,
 )
 
 data class FollowRedirectsSettings(
@@ -171,7 +173,9 @@ data class PreviewSettings(
 @OptIn(SensitivePreference::class)
 fun createSettings(
     prefRepo: AppPreferenceRepository,
-    experimentRepository: ExperimentRepository
+    experimentRepository: ExperimentRepository,
+    normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
+    inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
 ): IntentResolverSettings {
     return IntentResolverSettings(
         useClearUrls = prefRepo.asFunction(AppPreferences.useClearUrls),
@@ -190,6 +194,8 @@ fun createSettings(
             inAppBrowserMode = prefRepo.asFunction(AppPreferences.browserMode.inAppBrowserMode),
             selectedInAppBrowser = prefRepo.asFunction(AppPreferences.browserMode.selectedInAppBrowser),
             unifiedPreferredBrowser = prefRepo.asFunction(AppPreferences.browserMode.unifiedPreferredBrowser),
+            whitelistedInAppBrowserPackages = { inAppBrowsersRepository.getAll().firstOrNull()?.mapToSet { it.packageName } },
+            whitelistedNormalBrowserPackages = { normalBrowsersRepository.getAll().firstOrNull()?.mapToSet { it.packageName } },
         ),
         libRedirectSettings = LibRedirectSettings(
             enableIgnoreLibRedirectButton = prefRepo.asFunction(AppPreferences.libRedirect.enableIgnoreLibRedirectButton),

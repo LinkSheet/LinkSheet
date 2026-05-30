@@ -23,31 +23,22 @@ import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 import fe.composekit.lifecycle.network.core.NetworkStateService
-import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.toAndroidUri
 import fe.linksheet.extension.toStdUrl
-import fe.linksheet.module.database.dao.base.PackageEntityCreator
-import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
-import fe.linksheet.module.resolver.BrowserModeConfigHelper
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.ImprovedIntentResolver
 import fe.linksheet.module.resolver.ImprovedIntentResolver.Companion.IntentKeyResolveRedirects
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.module.resolver.IntentResolver
+import fe.linksheet.module.resolver.IntentResolverCommon
 import fe.linksheet.module.resolver.ResolveEvent
 import fe.linksheet.module.resolver.ResolveModuleStatus
 import fe.linksheet.module.resolver.ResolveOptions
 import fe.linksheet.module.resolver.ResolverInteraction
-import fe.linksheet.module.resolver.browser.BrowserMode
-import fe.linksheet.module.resolver.module.BrowserSettings
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
@@ -69,7 +60,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 
 class LinkEngineIntentResolver(
@@ -77,8 +67,6 @@ class LinkEngineIntentResolver(
     val client: HttpClient,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
-    private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
-    private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
     private val packageIntentHandler: PackageIntentHandler,
     private val packageLauncherService: PackageLauncherService,
     private val appSorter: AppSorter,
@@ -240,7 +228,7 @@ class LinkEngineIntentResolver(
         )
 
         emitEvent(ResolveEvent.CheckingBrowsers)
-        val browserModeConfigHelper = browserSettings.createBrowserModeConfig(customTab is CustomTabInfo2.Allowed)
+        val browserModeConfigHelper = IntentResolverCommon.createBrowserModeConfig(browserSettings, customTab is CustomTabInfo2.Allowed)
         val appList = browserHandler.filterBrowsers(
             config = browserModeConfigHelper,
             autoLaunchSingleBrowser = settings.browserSettings.autoLaunchSingleBrowser(),
@@ -303,37 +291,6 @@ class LinkEngineIntentResolver(
         }
 
         return resolveList
-    }
-
-    private suspend fun BrowserSettings.createBrowserModeConfig(
-        customTab: Boolean,
-    ): BrowserModeConfigHelper {
-        if (!unifiedPreferredBrowser() && customTab) {
-            return mapToBrowserConfig(
-                mode = inAppBrowserMode(),
-                selectedInAppBrowser = selectedInAppBrowser(),
-                repository = inAppBrowsersRepository
-            )
-        }
-
-        return mapToBrowserConfig(
-            mode = browserMode(),
-            selectedInAppBrowser = selectedBrowser(),
-            repository = normalBrowsersRepository
-        )
-    }
-
-    private suspend fun <T : WhitelistedBrowser<T>, C : PackageEntityCreator<T>, D : WhitelistedBrowsersDao<T, C>> mapToBrowserConfig(
-        mode: BrowserMode,
-        selectedInAppBrowser: String?,
-        repository: WhitelistedBrowsersRepository<T, C, D>,
-    ): BrowserModeConfigHelper = when (mode) {
-        BrowserMode.AlwaysAsk -> BrowserModeConfigHelper.AlwaysAsk
-        BrowserMode.None -> BrowserModeConfigHelper.None
-        BrowserMode.SelectedBrowser -> BrowserModeConfigHelper.SelectedBrowser(selectedInAppBrowser)
-        BrowserMode.Whitelisted -> BrowserModeConfigHelper.Whitelisted(
-            repository.getAll().firstOrNull()?.mapToSet { it.packageName }
-        )
     }
 
     private fun checkIntentFlag(intent: SafeIntent, flag: String, setting: Boolean): Boolean {

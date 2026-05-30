@@ -8,6 +8,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 
 class PreferredAppRepository(private val dao: PreferredAppDao) {
+    fun getAll(): Flow<List<PreferredApp>> {
+        return dao.getAll()
+    }
+
     fun getAllAlwaysPreferred() = dao.getAllAlwaysPreferred()
 
     suspend fun getByHost(uri: Uri?): PreferredApp? {

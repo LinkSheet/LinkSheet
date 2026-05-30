@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AppSelectionHistoryDao : BaseDao<AppSelectionHistory> {
+    @Query("SELECT * FROM app_selection_history")
+    fun getAll(): Flow<List<AppSelectionHistory>>
+
     @Query("SELECT * FROM app_selection_history WHERE host = :host")
     fun getByHost(host: String): Flow<List<AppSelectionHistory>>
 

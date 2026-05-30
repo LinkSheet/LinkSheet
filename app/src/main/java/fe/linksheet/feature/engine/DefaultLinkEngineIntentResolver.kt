@@ -23,14 +23,12 @@ import app.linksheet.feature.libredirect.LibRedirectResolver
 import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolver
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
 import kotlin.uuid.ExperimentalUuidApi
@@ -42,8 +40,6 @@ fun DefaultLinkEngineIntentResolver(
     client: HttpClient,
     appSelectionHistoryRepository: AppSelectionHistoryRepository,
     preferredAppRepository: PreferredAppRepository,
-    normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
-    inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
     packageIntentHandler: PackageIntentHandler,
     packageLauncherService: PackageLauncherService,
     appSorter: AppSorter,
@@ -141,8 +137,6 @@ fun DefaultLinkEngineIntentResolver(
         client = client,
         appSelectionHistoryRepository = appSelectionHistoryRepository,
         preferredAppRepository = preferredAppRepository,
-        normalBrowsersRepository = normalBrowsersRepository,
-        inAppBrowsersRepository = inAppBrowsersRepository,
         packageIntentHandler = packageIntentHandler,
         packageLauncherService = packageLauncherService,
         appSorter = appSorter,

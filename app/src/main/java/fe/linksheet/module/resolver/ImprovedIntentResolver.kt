@@ -27,19 +27,10 @@ import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
-import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.extension.toStdUrl
-import fe.linksheet.module.database.dao.base.PackageEntityCreator
-import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
 import fe.linksheet.module.database.entity.PreferredApp
-import fe.linksheet.module.database.entity.whitelisted.WhitelistedBrowser
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
-import fe.linksheet.module.resolver.browser.BrowserMode
-import fe.linksheet.module.resolver.module.BrowserSettings
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.urlresolver.base.ResolvePredicate
 import fe.linksheet.module.resolver.urlresolver.base.UrlResolver
@@ -67,7 +58,6 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
@@ -77,8 +67,6 @@ class ImprovedIntentResolver(
     val context: Context,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
-    private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
-    private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
     private val appInfoCreator: AppInfoCreator,
     private val packageIntentHandler: PackageIntentHandler,
     private val packageLauncherService: PackageLauncherService,
@@ -316,7 +304,7 @@ class ImprovedIntentResolver(
         )
 
         emitEvent(ResolveEvent.CheckingBrowsers)
-        val browserModeConfigHelper = createBrowserModeConfig(browserSettings, customTab)
+        val browserModeConfigHelper = IntentResolverCommon.createBrowserModeConfig(browserSettings, customTab)
         val autoLaunchSingleBrowser = browserSettings.autoLaunchSingleBrowser()
         val appList = browserHandler.filterBrowsers(
             browserModeConfigHelper,
@@ -458,38 +446,6 @@ class ImprovedIntentResolver(
             .labelSorted()
 
         return IntentResolveResult.WebSearch(query, newIntent, resolvedList)
-    }
-
-    private suspend fun createBrowserModeConfig(
-        browserSettings: BrowserSettings,
-        customTab: Boolean,
-    ): BrowserModeConfigHelper {
-        if (!browserSettings.unifiedPreferredBrowser() && customTab) {
-            return mapToBrowserConfig(
-                browserSettings.inAppBrowserMode(),
-                browserSettings.selectedInAppBrowser(),
-                inAppBrowsersRepository
-            )
-        }
-
-        return mapToBrowserConfig(
-            browserSettings.browserMode(),
-            browserSettings.selectedBrowser(),
-            normalBrowsersRepository
-        )
-    }
-
-    private suspend fun <T : WhitelistedBrowser<T>, C : PackageEntityCreator<T>, D : WhitelistedBrowsersDao<T, C>> mapToBrowserConfig(
-        mode: BrowserMode,
-        selectedInAppBrowser: String?,
-        repository: WhitelistedBrowsersRepository<T, C, D>,
-    ): BrowserModeConfigHelper = when (mode) {
-        BrowserMode.AlwaysAsk -> BrowserModeConfigHelper.AlwaysAsk
-        BrowserMode.None -> BrowserModeConfigHelper.None
-        BrowserMode.SelectedBrowser -> BrowserModeConfigHelper.SelectedBrowser(selectedInAppBrowser)
-        BrowserMode.Whitelisted -> BrowserModeConfigHelper.Whitelisted(
-            repository.getAll().firstOrNull()?.mapToSet { it.packageName }
-        )
     }
 
     private suspend fun tryUnfurl(

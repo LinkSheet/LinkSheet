@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PreferredAppDao : BaseDao<PreferredApp> {
+    @Query("SELECT * FROM openwith")
+    fun getAll(): Flow<List<PreferredApp>>
+
     @Query("SELECT * FROM openwith WHERE alwaysPreferred = 1")
     fun getAllAlwaysPreferred(): Flow<List<PreferredApp>>
 

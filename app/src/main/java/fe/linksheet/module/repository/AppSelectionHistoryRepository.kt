@@ -3,6 +3,7 @@ package fe.linksheet.module.repository
 import android.net.Uri
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.entity.AppSelectionHistory
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 
 
@@ -19,5 +20,9 @@ class AppSelectionHistoryRepository(private val dao: AppSelectionHistoryDao) {
 
     suspend fun delete(packageNames: List<String>) {
         dao.deleteByPackageNames(packageNames)
+    }
+
+    fun getAll(): Flow<List<AppSelectionHistory>> {
+        return dao.getAll()
     }
 }

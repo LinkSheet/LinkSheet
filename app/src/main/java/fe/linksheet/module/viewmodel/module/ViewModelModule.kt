@@ -126,7 +126,6 @@ val ViewModelModule = module {
             preferenceRepository = get(),
             gson = get(qualifier(GsonQualifier.Pretty)),
             clock = get(),
-            zoneId = get(),
             useCase = get()
         )
     }

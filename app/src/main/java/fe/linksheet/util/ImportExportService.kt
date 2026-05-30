@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalTime::class)
+@file:OptIn(ExperimentalTime::class, FormatStringsInDatetimeFormats::class)
 
 package fe.linksheet.util
 
@@ -12,16 +12,21 @@ import fe.linksheet.extension.android.bufferedWriter
 import fe.std.result.tryCatch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
+import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
-import kotlin.time.toJavaInstant
 
-class ImportExportService(val context: Context, val clock: Clock, val zoneId: ZoneId) {
+class ImportExportService(val context: Context, val clock: Clock) {
     companion object {
-        private val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm")
+        private val formatter = LocalDateTime.Format {
+            byUnicodePattern("uuuu-MM-dd'T'HH:mm[:ss]")
+        }
     }
 
     fun createImportIntent(format: ExportImportUseCase.Format): Intent {
@@ -38,7 +43,7 @@ class ImportExportService(val context: Context, val clock: Clock, val zoneId: Zo
         }
 
     fun createExportIntent(format: ExportImportUseCase.Format, now: Instant = clock.now()): Intent {
-        val nowString = now.toJavaInstant().atZone(zoneId).format(dateTimeFormatter)
+        val nowString = now.toLocalDateTime(TimeZone.currentSystemDefault()).format(formatter)
         val fileName = context.getString(R.string.export_file_name, nowString)
         val extension = when(format){
             ExportImportUseCase.Format.Json -> ".json"

@@ -124,7 +124,6 @@ import okhttp3.OkHttpClient
 import org.junit.Test
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.robolectric.annotation.Config
-import java.time.ZoneId
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
@@ -147,7 +146,6 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         Duration::class,
         List::class,
         Clock::class,
-        ZoneId::class,
         // TODO: Hook up CacheRepository to DI, then remove here
         CacheRepository::class
     )
@@ -224,7 +222,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<PreferredBrowserViewModel>(BrowsersUseCase::class),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
-        definition<ExportSettingsViewModel>(Gson::class, Clock::class, ZoneId::class),
+        definition<ExportSettingsViewModel>(Gson::class, Clock::class),
         definition<AboutSettingsViewModel>(Gson::class, SystemInfoService::class),
         definition<DevSettingsViewModel>(
             MiuiCompatProvider::class,

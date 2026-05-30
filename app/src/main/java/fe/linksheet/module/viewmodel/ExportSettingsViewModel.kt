@@ -5,10 +5,10 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
+import app.linksheet.api.SensitivePreference
 import com.google.gson.Gson
 import fe.linksheet.extension.android.bufferedSink
 import fe.linksheet.extension.android.bufferedSource
-import app.linksheet.api.SensitivePreference
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.permission.PermissionBoundPreference
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -21,7 +21,6 @@ import fe.std.result.Success
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
 import fe.std.result.unaryPlus
-import java.time.ZoneId
 import kotlin.contracts.ExperimentalContracts
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -31,11 +30,10 @@ class ExportSettingsViewModel(
     val preferenceRepository: DefaultAppPreferenceRepository,
     val gson: Gson,
     clock: Clock,
-    zoneId: ZoneId,
     private val useCase: ExportImportUseCase
 ) : BaseViewModel(preferenceRepository) {
 
-    private val importExportService = ImportExportService(context, clock, zoneId)
+    private val importExportService = ImportExportService(context, clock)
 
     fun createImportIntent(): Intent {
         return importExportService.createImportIntent(ExportImportUseCase.Format.Json)

@@ -15,7 +15,7 @@ class LibRedirectUserInstanceRepository(private val dao: LibRedirectUserInstance
     }
 
     suspend fun insert(userInstance: LibRedirectUserInstance) {
-        dao.insert(userInstance)
+        dao.insertReplace(userInstance)
     }
 
     suspend fun delete(userInstance: LibRedirectUserInstance) {

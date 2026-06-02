@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ScenarioExpressionDao : BaseDao<ScenarioExpression> {
+    @Query("SELECT * FROM scenario_expression")
+    override fun getAll(): Flow<List<ScenarioExpression>>
+
     @RewriteQueriesToDropUnusedColumns
     @Query("""
         SELECT * 

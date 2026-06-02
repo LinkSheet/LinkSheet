@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Importar configurações</string>
+    <string name="import_settings_override_preferences">Isso vai sobrescrever todas configurações existentes. Continuar?</string>
+    <string name="confirm_import">Confirmar</string>
+    <string name="export_settings">Exportar configurações</string>
+    <string name="export_include_recommendation">Nós recomendamos que você habilite as seguintes configurações somente se você planeja compartilhar sua exportação com alguém!</string>
+    <string name="include_log_hash_key">Incluir chave hash do log (chave usada para ocultar seus logs)</string>
+    <string name="include_history">Incluir histórico (seus cliques em links e histórico de apps)</string>
+    <string name="export_privacy">Para saber mais sobre a privacidade da exportação, visite .</string>
+    <string name="export_to_file">Exportar para arquivo</string>
+    <string name="export_settings__text_success">Exportado!</string>
+    <string name="export_import_settings">Exportar ou importar configurações</string>
+    <string name="export">Exportar</string>
+    <string name="export_explainer">Exportar suas configurações atuais para um arquivo</string>
+    <string name="import_headline">Importar</string>
+    <string name="import_explainer">Importar uma configuração anterior de um arquivo</string>
+    <string name="export_settings__text_failure">Erro ao exportar configurações!</string>
+    <string name="import_settings__text_success">Importado!</string>
+    <string name="import_settings__text_failure">Erro ao importar configurações!</string>
+    <string name="export_import_settings_explainer">Exportar suas configurações atuais ou importar uma configuração anterior</string>
+</resources>

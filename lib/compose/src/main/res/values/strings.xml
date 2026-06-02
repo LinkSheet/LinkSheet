@@ -18,4 +18,5 @@
     <string name="generic__text_mode">Mode</string>
     <string name="checkmark">Checkmark</string>
     <string name="error">Error</string>
+    <string name="cancel">Cancel</string>
 </resources>

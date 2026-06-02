@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface WhitelistedNormalBrowsersDao : BaseDao<WhitelistedNormalBrowser> {
     @Query("SELECT * FROM whitelisted_browser")
-    fun getAll(): Flow<List<WhitelistedNormalBrowser>>
+    override fun getAll(): Flow<List<WhitelistedNormalBrowser>>
 
     @Query("DELETE FROM whitelisted_browser WHERE packageName = :packageName")
     suspend fun deleteByPackageOrComponentName(packageName: String)

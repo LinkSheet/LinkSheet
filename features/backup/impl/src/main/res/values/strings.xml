@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Import settings</string>
+    <string name="import_settings_override_preferences">This will override all existing preferences. Continue?</string>
+    <string name="confirm_import">Confirm</string>
+    <string name="export_settings">Export settings</string>
+    <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not plan on sharing your export with someone else!</string>
+    <string name="include_log_hash_key">Include log hash key (the key used to redact your logs)</string>
+    <string name="include_history">Include history (your link click and app history)</string>
+    <string name="export_privacy">To learn about export privacy, you can visit this .</string>
+    <string name="export_to_file">Export to file</string>
+    <string name="export_settings__text_success">Exported!</string>
+    <string name="export_import_settings">Export or import settings</string>
+    <string name="export">Export</string>
+    <string name="export_explainer">Export your current app settings to a file</string>
+    <string name="import_headline">Import</string>
+    <string name="import_explainer">Import a previous export from a file</string>
+    <string name="export_settings__text_failure">Failed to export settings!</string>
+    <string name="import_settings__text_success">Imported!</string>
+    <string name="import_settings__text_failure">Failed to import settings!</string>
+    <string name="export_import_settings_explainer">Export your current settings or import a previous settings export</string>
+</resources>

@@ -10,4 +10,5 @@
     <string name="request_timeout_explainer">تحديد عدد الثواني التي سينتظرها LinkSheet حتى يتم إنشاء الاتصال. يؤدي تعيين هذا إلى 0 إلى تعطيل المهلة ، لكن لا يوصى بذلك.</string>
     <string name="checkmark">علامة الاختيار</string>
     <string name="error">خطأ</string>
+    <string name="cancel">إلغاء</string>
 </resources>

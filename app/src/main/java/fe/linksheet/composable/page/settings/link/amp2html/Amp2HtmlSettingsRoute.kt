@@ -43,7 +43,7 @@ fun Amp2HtmlSettingsRoute(
             )
         }
 
-        divider(id =  CommonR.string.options)
+        divider(id = CommonR.string.options)
 
         group(base = 5, LinkSheetAppConfig.isPro()) {
             item(key = R.string.amp2html_local_cache) { padding, shape ->

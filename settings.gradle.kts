@@ -81,6 +81,10 @@ buildSettings {
             includeProject(":feature-analytics-aptabase", "aptabase")
         }
         includeProject(":feature-app", "app")
+        projects("backup") {
+            includeProject(":feature-backup-api", "api")
+            includeProject(":feature-backup-impl", "impl")
+        }
         includeProject(":feature-browser", "browser")
         includeProject(":feature-engine", "engine")
         includeProject(":feature-devicecompat", "devicecompat")

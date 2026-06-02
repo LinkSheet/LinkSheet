@@ -11,4 +11,5 @@
     <string name="generic__text_mode">Режим</string>
     <string name="checkmark">Отметка</string>
     <string name="error">Грешка</string>
+    <string name="cancel">Отказ</string>
 </resources>

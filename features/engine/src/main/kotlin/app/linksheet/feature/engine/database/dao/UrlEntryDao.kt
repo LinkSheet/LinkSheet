@@ -4,9 +4,12 @@ import androidx.room3.Dao
 import androidx.room3.Query
 import app.linksheet.api.database.BaseDao
 import app.linksheet.feature.engine.database.entity.UrlEntry
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UrlEntryDao : BaseDao<UrlEntry> {
+    @Query("SELECT * FROM url")
+    override fun getAll(): Flow<List<UrlEntry>>
     @Query("SELECT * FROM url WHERE url = :url ORDER BY timestamp LIMIT 1")
     suspend fun getUrlEntry(url: String): UrlEntry?
 }

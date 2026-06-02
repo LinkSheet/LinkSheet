@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ResolvedRedirectDao : BaseDao<ResolvedRedirect> {
     @Query("SELECT * FROM resolved_redirect")
-    fun getAll(): Flow<List<ResolvedRedirect>>
+    override fun getAll(): Flow<List<ResolvedRedirect>>
 
     @Query("SELECT * FROM resolved_redirect WHERE shortUrl = :inputUrl")
     fun getForInputUrl(inputUrl: String): ResolvedRedirect?

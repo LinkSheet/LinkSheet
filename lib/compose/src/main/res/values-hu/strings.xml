@@ -10,4 +10,5 @@
     <string name="generic__text_mode">Mód</string>
     <string name="checkmark">Pipa</string>
     <string name="error">Hiba</string>
+    <string name="cancel">Mégse</string>
 </resources>

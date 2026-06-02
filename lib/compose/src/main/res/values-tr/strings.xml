@@ -11,4 +11,5 @@
     <string name="generic__text_mode">Mod</string>
     <string name="checkmark">Onay işareti</string>
     <string name="error">Hata</string>
+    <string name="cancel">İptal</string>
 </resources>

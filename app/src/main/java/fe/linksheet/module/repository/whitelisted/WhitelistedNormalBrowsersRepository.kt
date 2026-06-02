@@ -2,14 +2,23 @@ package fe.linksheet.module.repository.whitelisted
 
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.core.ActivityAppInfoStatus
+import app.linksheet.feature.backup.api.ExportableRepository
+import app.linksheet.feature.backup.api.ImportSettings
+import app.linksheet.feature.backup.model.WhitelistedNormalBrowserExportModel
+import app.linksheet.feature.backup.model.fromExportModel
+import app.linksheet.feature.backup.model.toExportModel
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlin.reflect.KClass
 
 class WhitelistedNormalBrowsersRepository(
     val dao: WhitelistedNormalBrowsersDao
-) : WhitelistedBrowsersRepository {
+) : WhitelistedBrowsersRepository, ExportableRepository<WhitelistedNormalBrowserExportModel> {
+    override val modelClass: KClass<WhitelistedNormalBrowserExportModel>
+        get() = WhitelistedNormalBrowserExportModel::class
 
     fun getAll(): Flow<List<WhitelistedNormalBrowser>> {
         return dao.getAll()
@@ -42,7 +51,7 @@ class WhitelistedNormalBrowsersRepository(
     }
 
     suspend fun insert(flatComponentName: String) {
-        dao.insert(WhitelistedNormalBrowser(packageName = flatComponentName))
+        dao.insertReplace(WhitelistedNormalBrowser(packageName = flatComponentName))
     }
 
     suspend fun delete(flatComponentName: String) {
@@ -52,7 +61,7 @@ class WhitelistedNormalBrowsersRepository(
     override suspend fun insertOrDelete(newState: Boolean, appInfo: ActivityAppInfo) {
         val flatCmpName = appInfo.flatComponentName
         when {
-            newState -> dao.insert(WhitelistedNormalBrowser(packageName = flatCmpName))
+            newState -> dao.insertReplace(WhitelistedNormalBrowser(packageName = flatCmpName))
             else -> dao.deleteByPackageOrComponentName(flatCmpName)
         }
     }
@@ -63,5 +72,18 @@ class WhitelistedNormalBrowsersRepository(
 
     suspend fun deleteByPackageName(packageName: String) {
         dao.deleteByPackageOrComponentName(packageName)
+    }
+
+    override suspend fun exportAll(): List<WhitelistedNormalBrowserExportModel> {
+        return dao.getAll().first().map { it.toExportModel() }
+    }
+
+    override suspend fun import(settings: ImportSettings, models: List<WhitelistedNormalBrowserExportModel>) {
+        val entities = models.map { it.fromExportModel() }
+        if (settings.replace) {
+            dao.insertReplace(entities)
+        } else {
+            dao.insert(entities)
+        }
     }
 }

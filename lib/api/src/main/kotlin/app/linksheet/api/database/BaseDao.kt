@@ -3,17 +3,25 @@ package app.linksheet.api.database
 import androidx.room3.Delete
 import androidx.room3.Insert
 import androidx.room3.OnConflictStrategy
+import androidx.room3.Query
+import kotlinx.coroutines.flow.Flow
 
 interface BaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertReturningId(item: T): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item: T)
+    suspend fun insertReplace(item: T)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertReplace(items: List<T>)
+
+    @Insert(onConflict = OnConflictStrategy.NONE)
     suspend fun insert(items: List<T>)
 
     @Delete
     suspend fun delete(item: T)
+
+    @Query("")
+    fun getAll(): Flow<List<T>>
 }

@@ -70,7 +70,7 @@ class ScenarioRepository internal constructor(
     }
 
     suspend fun insertScenarioExpression(id: Long, expression: ExpressionRule) {
-        scenarioExpressionDao.insert(ScenarioExpression(id, expression.id))
+        scenarioExpressionDao.insertReplace(ScenarioExpression(id, expression.id))
     }
 
     fun toBundle(expression: ExpressionRule): ExpressionBundle {

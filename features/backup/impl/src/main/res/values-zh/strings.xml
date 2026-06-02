@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">导入设置</string>
+    <string name="import_settings_override_preferences">这将会覆盖所有已存在的设置，确认继续？</string>
+    <string name="confirm_import">确认</string>
+    <string name="export_settings">导出设置</string>
+    <string name="export_include_recommendation">我们推荐你仅在不想将导出数据与他人分享时，再启用以下选项！</string>
+    <string name="include_log_hash_key">包含日志哈希密钥（用来删减日志的密钥）</string>
+    <string name="include_history">包含历史记录（点击链接与应用历史）</string>
+    <string name="export_privacy">要了解导出隐私，可以查看这个。</string>
+    <string name="export_to_file">导出到文件</string>
+    <string name="export_settings__text_success">导出成功！</string>
+    <string name="export_import_settings">导出或导入设置</string>
+    <string name="export">导出</string>
+    <string name="export_explainer">将当前应用设置导出到文件</string>
+    <string name="import_headline">导入</string>
+    <string name="import_explainer">从文件导入以前的导出</string>
+    <string name="export_settings__text_failure">导出设置失败！</string>
+    <string name="import_settings__text_success">导入成功！</string>
+    <string name="import_settings__text_failure">导入设置失败！</string>
+    <string name="export_import_settings_explainer">导出当前设置或导入以前导出的设置</string>
+</resources>

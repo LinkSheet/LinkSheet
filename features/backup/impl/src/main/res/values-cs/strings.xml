@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Importovat nastavení</string>
+    <string name="import_settings_override_preferences">Tímto přepíšete všechna existující nastavení. Pokračovat?</string>
+    <string name="confirm_import">Potvrdit</string>
+    <string name="export_settings">Nastavení exportu</string>
+    <string name="export_include_recommendation">Doporučujeme zapnout následující nastavení pouze, pokud neplánujete svůj export sdílet s někým jiným!</string>
+    <string name="include_log_hash_key">Zahrnout hash klíč protokolu (klíč používaný k redigování protokolů)</string>
+    <string name="include_history">Zahrnout historii (historie vašich klepnutí na odkazy a aplikací)</string>
+    <string name="export_privacy">Pro více informací o soukromí navštivte tento .</string>
+    <string name="export_to_file">Exportovat do souboru</string>
+    <string name="export_settings__text_success">Exportováno!</string>
+    <string name="export_import_settings">Exportovat nebo importovat nastavení</string>
+    <string name="export">Export</string>
+    <string name="export_explainer">Exportovat vaše aktuální nastavení aplikace do souboru</string>
+    <string name="import_headline">Import</string>
+    <string name="import_explainer">Importovat předchozí export ze souboru</string>
+    <string name="export_settings__text_failure">Nepodařilo se exportovat nastavení!</string>
+    <string name="import_settings__text_success">Importováno!</string>
+    <string name="import_settings__text_failure">Nepodařilo se importovat nastavení!</string>
+    <string name="export_import_settings_explainer">Exportujte svá aktuální nastavení nebo importujte předchozí export nastavení</string>
+</resources>

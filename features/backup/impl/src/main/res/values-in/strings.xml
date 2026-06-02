@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Impor pengaturan</string>
+    <string name="import_settings_override_preferences">Ini akan menimpa semua preferensi yang ada. Lanjutkan?</string>
+    <string name="confirm_import">Konfirmasi</string>
+    <string name="export_settings">Ekspor pengaturan</string>
+    <string name="export_include_recommendation">Kami merekomendasikan agar Anda mengaktifkan pengaturan berikut hanya jika Anda tidak berencana membagikan ekspor Anda kepada orang lain!</string>
+    <string name="include_log_hash_key">Sertakan kunci hash log (kunci yang digunakan untuk menyamarkan log Anda)</string>
+    <string name="include_history">Sertakan riwayat (riwayat klik tautan dan aplikasi Anda)</string>
+    <string name="export_privacy">Untuk mempelajari tentang privasi ekspor, Anda dapat mengunjungi ini.</string>
+    <string name="export_to_file">Ekspor ke file</string>
+    <string name="export_settings__text_success">Berhasil diekspor!</string>
+    <string name="export_import_settings">Ekspor atau impor pengaturan</string>
+    <string name="export">Ekspor</string>
+    <string name="export_explainer">Ekspor pengaturan aplikasi Anda saat ini ke sebuah file</string>
+    <string name="import_headline">Impor</string>
+    <string name="import_explainer">Impor ekspor sebelumnya dari sebuah file</string>
+    <string name="export_settings__text_failure">Gagal mengekspor pengaturan!</string>
+    <string name="import_settings__text_success">Berhasil diimpor!</string>
+    <string name="import_settings__text_failure">Gagal mengimpor pengaturan!</string>
+    <string name="export_import_settings_explainer">Ekspor pengaturan Anda saat ini atau impor ekspor pengaturan sebelumnya</string>
+</resources>

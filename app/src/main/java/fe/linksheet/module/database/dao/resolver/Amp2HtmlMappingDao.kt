@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface Amp2HtmlMappingDao : BaseDao<Amp2HtmlMapping> {
     @Query("SELECT * FROM amp2html_mapping")
-    fun getAll(): Flow<List<Amp2HtmlMapping>>
+    override fun getAll(): Flow<List<Amp2HtmlMapping>>
 
     @Query("SELECT * FROM amp2html_mapping WHERE ampUrl = :inputUrl")
     fun getForInputUrl(inputUrl: String): Amp2HtmlMapping?

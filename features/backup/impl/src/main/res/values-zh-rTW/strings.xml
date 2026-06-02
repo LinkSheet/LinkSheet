@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">匯入設定</string>
+    <string name="import_settings_override_preferences">這將會覆寫現有的偏好設定，確定要繼續嗎？</string>
+    <string name="confirm_import">確認</string>
+    <string name="export_settings">匯出設定</string>
+    <string name="export_include_recommendation">建議僅當你不會將匯出的檔案與他人分享時再勾選下列選項！</string>
+    <string name="export_privacy">如欲瞭解與匯出相關的隱私權資訊，請參見。</string>
+    <string name="export_to_file">匯出為檔案</string>
+    <string name="export_settings__text_success">已匯出！</string>
+    <string name="export_import_settings">匯出或匯入</string>
+    <string name="export">匯出</string>
+    <string name="export_explainer">匯出目前的設定為檔案</string>
+    <string name="import_headline">匯入</string>
+    <string name="import_explainer">從檔案匯入先前的設定</string>
+    <string name="export_settings__text_failure">無法匯出設定！</string>
+    <string name="import_settings__text_success">已匯入！</string>
+    <string name="import_settings__text_failure">無法匯入設定！</string>
+    <string name="export_import_settings_explainer">匯出目前的設定或匯入先前的設定</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">exportation_paramètres_linksheet_%s</string>
+    <string name="import_settings">Paramètres d\'importation</string>
+    <string name="import_settings_override_preferences">Cela remplacera toutes les préférences existantes. Poursuivre ?</string>
+    <string name="confirm_import">Confirmer</string>
+    <string name="export_settings">Paramètres d\'exportation</string>
+    <string name="export_include_recommendation">Nous vous recommandons d\'activer les paramètres suivants uniquement si vous n\'avez pas l\'intention de partager votre exportation avec quelqu\'un d\'autre !</string>
+    <string name="include_log_hash_key">Inclure la clé de hachage des journaux (la clé utilisée pour expurger vos journaux)</string>
+    <string name="include_history">Inclure l\'historique (vos clics sur les liens et l\'historique de l\'application)</string>
+    <string name="export_privacy">Pour en savoir plus sur la confidentialité des exportations, vous pouvez visiter ce .</string>
+    <string name="export_to_file">Exporter vers un fichier</string>
+    <string name="export_settings__text_success">Exporté !</string>
+    <string name="export_import_settings">Exporter ou importer les paramètres</string>
+    <string name="export">Exporter</string>
+    <string name="export_explainer">Exporter les paramètres actuels de l\'application dans un fichier</string>
+    <string name="import_headline">Importer</string>
+    <string name="import_explainer">Importer une exportation précédente à partir d\'un fichier</string>
+    <string name="export_settings__text_failure">Échec de l\'exportation des paramètres !</string>
+    <string name="import_settings__text_success">Importé !</string>
+    <string name="import_settings__text_failure">Échec de l\'importation des paramètres !</string>
+    <string name="export_import_settings_explainer">Exporter vos paramètres actuels ou importer une exportation de paramètres précédente</string>
+</resources>

@@ -1,13 +1,32 @@
+@file:OptIn(SensitivePreference::class)
+
 package fe.linksheet.module.viewmodel.module
 
 
+import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.backup.impl.usecase.ExportImportUseCase2
+import app.linksheet.feature.backup.impl.usecase.PreferenceExportImportHolder
+import app.linksheet.feature.exportimport.ExportImportUseCase
 import app.linksheet.feature.profile.ProfileFeatureModule
 import com.akuleshov7.ktoml.Toml
 import fe.gson.GsonQualifier
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
+import fe.linksheet.module.preference.app.AppPreferences
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
+import fe.linksheet.module.preference.state.AppStatePreferences
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
+import fe.linksheet.module.repository.AppSelectionHistoryRepository
+import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
+import fe.linksheet.module.repository.PreferredAppRepository
 import fe.linksheet.module.repository.module.RepositoryModule
+import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
+import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
 import fe.linksheet.module.viewmodel.AppConfigViewModel
@@ -16,7 +35,6 @@ import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
-import fe.linksheet.module.viewmodel.ExportSettingsViewModel
 import fe.linksheet.module.viewmodel.FeatureFlagViewModel
 import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
 import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
@@ -42,8 +60,8 @@ import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
-import fe.linksheet.util.ExportImportUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.qualifier
@@ -73,8 +91,46 @@ val ViewModelModule = module {
     factory {
         ExportImportUseCase(
             repository = get<AppPreferenceRepository>(),
-            gson = get(qualifier(GsonQualifier.Pretty)),
-            toml = Toml.Default
+            json = Json.Default,
+            toml = Toml.Default,
+            ioDispatcher = Dispatchers.IO
+        )
+    }
+    factory {
+        val preferencesHolder = PreferenceExportImportHolder(
+            name = "preferences",
+            repository = get<AppPreferenceRepository>(),
+            definition = AppPreferences,
+            exclude = AppPreferences.sensitivePreferences.mapToSet { it.key }
+        )
+        val experimentsHolder = PreferenceExportImportHolder(
+            name = "experiments",
+            repository = get<ExperimentRepository>(),
+            definition = Experiments,
+        )
+        val appStateHolder = PreferenceExportImportHolder(
+            name = "appState",
+            repository = get<DefaultAppStateRepository>(),
+            definition = AppStatePreferences,
+        )
+        val holders = listOf(
+            preferencesHolder,
+            experimentsHolder,
+            appStateHolder
+        )
+        ExportImportUseCase2(
+            json = Json.Default,
+            holders = holders,
+            exportableRepositories = listOf(
+                get<PreferredAppRepository>(),
+                get<DisableInAppBrowserInSelectedRepository>(),
+                get<WhitelistedNormalBrowsersRepository>(),
+                get<WhitelistedInAppBrowsersRepository>(),
+                get<AppSelectionHistoryRepository>(),
+                get<ResolvedRedirectRepository>(),
+                get<Amp2HtmlRepository>()
+            ),
+            ioDispatcher = Dispatchers.IO
         )
     }
 //    factory{
@@ -120,15 +176,7 @@ val ViewModelModule = module {
     viewModelOf(::GeneralSettingsViewModel)
     viewModelOf(::LoadDumpedPreferencesViewModel)
     viewModelOf(::PrivacySettingsViewModel)
-    viewModel {
-        ExportSettingsViewModel(
-            context = get(),
-            preferenceRepository = get(),
-            gson = get(qualifier(GsonQualifier.Pretty)),
-            clock = get(),
-            useCase = get()
-        )
-    }
+
     viewModel {
         AboutSettingsViewModel(
             context = get(),

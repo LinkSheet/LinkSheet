@@ -69,11 +69,11 @@ class CacheRepository internal constructor(
     }
 
     suspend fun insertResolved(entryId: Long, resolveType: ResolveType, resolvedUrl: String?) {
-        resolvedUrlCacheDao.insert(ResolvedUrl(entryId, resolveType.id, resolvedUrl))
+        resolvedUrlCacheDao.insertReplace(ResolvedUrl(entryId, resolveType.id, resolvedUrl))
     }
 
     suspend fun insertHtml(entryId: Long, html: String) {
-        htmlCacheDao.insert(CachedHtml(entryId, html))
+        htmlCacheDao.insertReplace(CachedHtml(entryId, html))
     }
 
     suspend fun insertPreview(entryId: Long, result: PreviewFetchResult) {
@@ -106,7 +106,7 @@ class CacheRepository internal constructor(
             else -> throw Exception("Unreachable")
         }
 
-        previewCacheDao.insert(cacheEntry)
+        previewCacheDao.insertReplace(cacheEntry)
     }
 }
 

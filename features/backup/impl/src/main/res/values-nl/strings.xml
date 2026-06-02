@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Instellingen importeren</string>
+    <string name="import_settings_override_preferences">Dit zal de huidige instellingen overschrijven. Doorgaan?</string>
+    <string name="confirm_import">OK</string>
+    <string name="export_settings">Instellingen exporteren</string>
+    <string name="export_include_recommendation">We raden aan om de volgende instellingen alleen in te schakelen als je niet van plan bent om de uitvoer met iemand anders te delen!</string>
+    <string name="include_log_hash_key">Hash-sleutel waarmee gevoelige informatie in het logboek wordt afgeschermd bijvoegen</string>
+    <string name="include_history">Geschiedenis van verwerkte links en apps bijvoegen</string>
+    <string name="export_privacy">over het privacybeleid bij exporteren.</string>
+    <string name="export_to_file">Naar bestand exporteren</string>
+    <string name="export_import_settings">Instellingen importeren/exporteren</string>
+    <string name="export">Exporteren</string>
+    <string name="export_explainer">Exporteer de huidige instellingen naar een bestand</string>
+    <string name="import_headline">Importeren</string>
+    <string name="import_explainer">Importeer een eerdere configuratie uit een bestand</string>
+    <string name="export_import_settings_explainer">Exporteer de huidige instellingen of importeer een eerdere configuratie</string>
+</resources>

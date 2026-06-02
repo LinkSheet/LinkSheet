@@ -10,4 +10,5 @@
     <string name="request_timeout_explainer">Définit le nombre de secondes pendant lesquelles LinkSheet attendra qu\'une connexion soit établie. La valeur 0 désactive le délai d\'attente, mais ce n\'est pas recommandé.</string>
     <string name="checkmark">Cochez la case</string>
     <string name="error">Erreur</string>
+    <string name="cancel">Annuler</string>
 </resources>

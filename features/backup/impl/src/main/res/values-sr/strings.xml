@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Увоз подешавања</string>
+    <string name="import_settings_override_preferences">Ово ће заменити сва постојећа подешавања. Наставити?</string>
+    <string name="confirm_import">Потврди</string>
+    <string name="export_settings">Извоз подешавања</string>
+    <string name="export_include_recommendation">Препоручујемо вам да укључите следећа подешавања само ако не планирате да свој извоз делите с неким другим!</string>
+    <string name="include_log_hash_key">Укључи хеш кључ eвиденције (кључ који се користи за редиговање ваших евиденција)</string>
+    <string name="include_history">Укључи историју (ваш клик на линк и историју апликације)</string>
+    <string name="export_privacy">Да бисте сазнали више о приватности извоза, можете посетити овaј .</string>
+    <string name="export_to_file">Извоз у фајл</string>
+    <string name="export_settings__text_success">Извезено!</string>
+    <string name="export_import_settings">Извоз или увоз подешавања</string>
+    <string name="export">Извоз</string>
+    <string name="export_explainer">Извезите тренутна подешавања апликације у фајл</string>
+    <string name="import_headline">Увоз</string>
+    <string name="import_explainer">Увезите претходни извоз из фајла</string>
+    <string name="export_settings__text_failure">Извоз подешавања није успео!</string>
+    <string name="import_settings__text_success">Увезено!</string>
+    <string name="import_settings__text_failure">Увоз подешавања није успео!</string>
+    <string name="export_import_settings_explainer">Извезите тренутна подешавања или увезите претходна подешавања</string>
+</resources>

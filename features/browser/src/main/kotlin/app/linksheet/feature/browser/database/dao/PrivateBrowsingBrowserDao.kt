@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PrivateBrowsingBrowserDao : BaseDao<PrivateBrowsingBrowser> {
     @Query("SELECT * FROM private_browsing_browser")
-    fun getAll(): Flow<List<PrivateBrowsingBrowser>>
+    override fun getAll(): Flow<List<PrivateBrowsingBrowser>>
 
     @Query("SELECT * FROM private_browsing_browser WHERE flatComponentName = :flatComponentName")
     suspend fun getByFlatComponentName(flatComponentName: String): PrivateBrowsingBrowser?

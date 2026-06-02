@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">सेटिंग्स इंपोर्ट करें</string>
+    <string name="import_settings_override_preferences">यह सभी मौजूदा प्राथमिकताओं को ओवरराइड कर देगा। जारी रखना है?</string>
+    <string name="confirm_import">पुष्टि करें</string>
+    <string name="export_settings">सेटिंग्स एक्सपोर्ट करें</string>
+    <string name="export_include_recommendation">हम अनुशंसा करते हैं कि आप निम्नलिखित सेटिंग्स तभी चालू करें जब आप अपना निर्यात किसी और के साथ साझा करने की योजना नहीं बनाते हैं!</string>
+    <string name="include_log_hash_key">लॉग हैश कुंजी शामिल करें (आपके लॉग को संशोधित करने के लिए उपयोग की जाने वाली कुंजी)</string>
+    <string name="include_history">इतिहास शामिल करें (आपका लिंक क्लिक और ऐप इतिहास)</string>
+    <string name="export_privacy">निर्यात गोपनीयता के बारे में जानने के लिए, आप इस पर जा सकते हैं।</string>
+    <string name="export_to_file">फ़ाइल में निर्यात करें</string>
+    <string name="export_import_settings">निर्यात या आयात सेटिंग्स</string>
+    <string name="export_explainer">अपनी वर्तमान ऐप सेटिंग को एक फ़ाइल में निर्यात करें</string>
+    <string name="import_headline">आयात करें</string>
+    <string name="import_explainer">फ़ाइल से पिछला निर्यात आयात करें</string>
+    <string name="export_import_settings_explainer">अपनी वर्तमान सेटिंग्स निर्यात करें या पिछली निर्यात की हूई सेटिंग्स आयात करें</string>
+</resources>

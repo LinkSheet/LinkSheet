@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">İçe aktarma ayarları</string>
+    <string name="import_settings_override_preferences">Bu, şu anki bütün tercihlerinizin üzerine yazacaktır. Devam et?</string>
+    <string name="confirm_import">Onayla</string>
+    <string name="export_settings">Dışa aktarma ayarları</string>
+    <string name="export_include_recommendation">Aşağıdaki ayarları sadece dışa aktarmanızı başka biriyle paylaşmayı düşünmüyorsanız etkinleştirmenizi öneririz!</string>
+    <string name="include_log_hash_key">Günlük hash anahtarını dahil et (günlüklerinizi gizlemek için kullanılan anahtar)</string>
+    <string name="include_history">Geçmişi dahil et (link tıklamaları ve uygulama geçmişi)</string>
+    <string name="export_privacy">Dışa aktarma gizliliği hakkında daha fazla bilgi edinmek için bu ziyaret edin</string>
+    <string name="export_to_file">Dosyaya aktar</string>
+    <string name="export_settings__text_success">Dışa aktarıldı!</string>
+    <string name="export_import_settings">Ayarları içe/dışa aktar</string>
+    <string name="export">Dışa aktar</string>
+    <string name="export_explainer">Şimdiki uygulama ayarlarınızı bir dosyaya aktarın</string>
+    <string name="import_headline">İçe aktar</string>
+    <string name="import_explainer">Bir dosyadan önceki bir dışa aktarmayı içe aktarın</string>
+    <string name="export_settings__text_failure">Ayarlar dışa aktarılamadı!</string>
+    <string name="import_settings__text_success">İçe aktarıldı!</string>
+    <string name="import_settings__text_failure">Ayarlar içe aktarılamadı!</string>
+    <string name="export_import_settings_explainer">Şimdiki ayarlarınızı dışa aktarın veya önceki bir dışa aktarmayı içe aktarın</string>
+</resources>

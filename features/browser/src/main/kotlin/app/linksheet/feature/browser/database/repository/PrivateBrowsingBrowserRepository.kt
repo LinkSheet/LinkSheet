@@ -18,7 +18,7 @@ class PrivateBrowsingBrowserRepository internal constructor(private val dao: Pri
     }
 
     suspend fun insert(flatComponentName: String) {
-        dao.insert(PrivateBrowsingBrowser(flatComponentName = flatComponentName))
+        dao.insertReplace(PrivateBrowsingBrowser(flatComponentName = flatComponentName))
     }
 
     suspend fun deleteByFlatComponentName(flatComponentName: String) {

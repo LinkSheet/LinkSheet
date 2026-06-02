@@ -10,4 +10,5 @@
     <string name="generic__text_mode">Modo</string>
     <string name="checkmark">Checado</string>
     <string name="error">Erro</string>
+    <string name="cancel">Cancelar</string>
 </resources>

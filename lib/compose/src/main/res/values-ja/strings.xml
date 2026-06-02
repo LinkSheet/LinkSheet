@@ -10,4 +10,5 @@
     <string name="generic__text_mode">モード</string>
     <string name="checkmark">チェックマーク</string>
     <string name="error">エラー</string>
+    <string name="cancel">キャンセル</string>
 </resources>

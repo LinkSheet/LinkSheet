@@ -37,6 +37,6 @@ class WikiCacheRepository internal constructor(
     }
 
     suspend fun insert(cache: WikiCache) {
-        dao.insert(cache)
+        dao.insertReplace(cache)
     }
 }

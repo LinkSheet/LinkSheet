@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Импортировать настройки</string>
+    <string name="import_settings_override_preferences">Это отменит все существующие настройки. Продолжить?</string>
+    <string name="confirm_import">Подтвердить</string>
+    <string name="export_settings">Настройки экспорта</string>
+    <string name="export_include_recommendation">Мы рекомендуем вам включить следующие настройки, только если вы не планируете делиться экспортированными данными с кем-то ещё!</string>
+    <string name="include_log_hash_key">Включите хэш-ключ журнала (ключ, используемый для редактирования ваших журналов)</string>
+    <string name="include_history">Включить историю (ваши нажатия по ссылке и историю приложений)</string>
+    <string name="export_privacy">Чтобы узнать о конфиденциальности экспорта, перейдите по этой .</string>
+    <string name="export_to_file">Экспортировать в файл</string>
+    <string name="export_import_settings">Экспорт или импорт настроек</string>
+    <string name="export">Экспорт</string>
+    <string name="export_explainer">Экспортируйте текущие настройки приложения в файл</string>
+    <string name="import_headline">Импорт</string>
+    <string name="import_explainer">Импортировать предыдущий экспорт из файла</string>
+    <string name="export_import_settings_explainer">Экспортируйте текущие настройки или импортируйте предыдущие настройки</string>
+</resources>

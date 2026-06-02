@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">إعدادات الاستيراد</string>
+    <string name="import_settings_override_preferences">سيؤدي هذا إلى تجاوز كافة التفضيلات الموجودة. استمرار؟</string>
+    <string name="confirm_import">تاكيد</string>
+    <string name="export_settings">إعدادات التصدير</string>
+    <string name="export_include_recommendation">نوصي بتمكين الإعدادات التالية فقط إذا كنت لا تخطط لمشاركة تصديرك مع شخص آخر!</string>
+    <string name="include_log_hash_key">قم بتضمين مفتاح تجزئة السجل (المفتاح المستخدم لتنقيح سجلاتك)</string>
+    <string name="include_history">تضمين السجل (النقر على الرابط وسجل التطبيق)</string>
+    <string name="export_privacy">للتعرف على خصوصية التصدير، يمكنك زيارة هذا .</string>
+    <string name="export_to_file">تصدير الى ملف</string>
+    <string name="export_settings__text_success">صُدِّر!</string>
+    <string name="export_import_settings">إعدادات التصدير أو الاستيراد</string>
+    <string name="export">تصدير</string>
+    <string name="export_explainer">يصدّر اعدادات تطبيقك الحالي إلى ملف</string>
+    <string name="import_headline">استيراد</string>
+    <string name="import_explainer">استيراد تصدير سابق من ملف</string>
+    <string name="export_settings__text_failure">فشل تصدير الإعدادات!</string>
+    <string name="import_settings__text_success">استورد!</string>
+    <string name="import_settings__text_failure">فشل استيراد الإعدادات!</string>
+    <string name="export_import_settings_explainer">تصدير إعداداتك الحالية أو استيراد تصدير الإعدادات السابقة</string>
+</resources>

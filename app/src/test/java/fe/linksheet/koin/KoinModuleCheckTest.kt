@@ -33,6 +33,7 @@ import app.linksheet.feature.devicecompat.oneui.OneUiCompat
 import app.linksheet.feature.downloader.core.Downloader
 import app.linksheet.feature.downloader.viewmodel.DownloaderSettingsViewModel
 import app.linksheet.feature.engine.database.repository.CacheRepository
+import app.linksheet.feature.exportimport.ExportImportUseCase
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.database.dao.LibRedirectDefaultDao
 import app.linksheet.feature.libredirect.database.dao.LibRedirectServiceStateDao
@@ -114,7 +115,6 @@ import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.util.ExportImportUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine

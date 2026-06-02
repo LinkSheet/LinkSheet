@@ -279,6 +279,7 @@ junitPlatform {
 dependencies {
     implementation(project(":feature-analytics-service"))
     debugImplementation(project(":feature-analytics-aptabase"))
+    implementation(project(":feature-backup-impl"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
     implementation(project(":feature-devicecompat"))
@@ -450,6 +451,7 @@ dependencies {
     implementation("dev.rikka.tools.refine:runtime:_")
 
     implementation(KotlinX.serialization.json)
+    implementation(KotlinX.serialization.json.okio)
     implementation(KotlinX.serialization.protobuf)
     implementation(KotlinX.serialization.cbor)
     implementation("com.akuleshov7:ktoml-core:_")

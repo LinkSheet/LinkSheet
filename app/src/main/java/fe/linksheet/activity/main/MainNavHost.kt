@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import app.linksheet.compose.util.animatedComposable
 import app.linksheet.compose.util.predictivePopEnterTransition
 import app.linksheet.compose.util.predictivePopExitTransition
+import app.linksheet.feature.backup.impl.navigation.BackupNav
 import app.linksheet.feature.browser.navigation.PrivateBrowsingNavSubGraph
 import app.linksheet.feature.downloader.navigation.DownloaderNav
 import app.linksheet.feature.engine.navigation.ScenarioNavSubGraph
@@ -28,7 +29,6 @@ import fe.linksheet.composable.page.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.page.settings.about.VersionSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.AdvancedSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.ExperimentsSettingsRoute
-import fe.linksheet.composable.page.settings.advanced.ExportImportSettingsRoute
 import fe.linksheet.composable.page.settings.app.RuleOverviewRoute
 import fe.linksheet.composable.page.settings.app.RuleRoute
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VerifiedLinkHandlersRoute
@@ -59,7 +59,6 @@ import fe.linksheet.navigation.AdvancedRoute
 import fe.linksheet.navigation.AppsWhichCanOpenLinksSettingsRoute
 import fe.linksheet.navigation.DebugRoute
 import fe.linksheet.navigation.ExperimentRoute
-import fe.linksheet.navigation.ExportImportRoute
 import fe.linksheet.navigation.LogTextViewerRoute
 import fe.linksheet.navigation.PreferredBrowserSettingsRoute
 import fe.linksheet.navigation.PreviewUrlRoute
@@ -109,16 +108,13 @@ fun MainNavHost(
         attachSubGraph(PrivateBrowsingNavSubGraph, navController)
         attachNav(DownloaderNav, navController)
         attachNav(WikiNav, navController)
+        attachNav(BackupNav, navController)
         if (AndroidVersion.isAtLeastApi30R()) {
             attachNav(ProfileNav, navController)
         }
 
         animatedComposable<ExperimentRoute> { _, route ->
             ExperimentsSettingsRoute(onBackPressed = onBackPressed, experiment = route.experiment)
-        }
-
-        animatedComposable<ExportImportRoute> { _, _ ->
-            ExportImportSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable<AdvancedRoute> { _, _ ->

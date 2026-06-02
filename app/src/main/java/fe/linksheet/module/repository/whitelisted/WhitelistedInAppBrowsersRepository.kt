@@ -2,12 +2,25 @@ package fe.linksheet.module.repository.whitelisted
 
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.core.ActivityAppInfoStatus
+import app.linksheet.feature.backup.api.ExportableRepository
+import app.linksheet.feature.backup.api.ImportSettings
+import app.linksheet.feature.backup.model.WhitelistedInAppBrowserExportModel
+import app.linksheet.feature.backup.model.WhitelistedInAppBrowserExportModelV1
+import app.linksheet.feature.backup.model.fromExportModel
+import app.linksheet.feature.backup.model.toExportModel
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlin.reflect.KClass
 
-class WhitelistedInAppBrowsersRepository(val dao: WhitelistedInAppBrowsersDao) : WhitelistedBrowsersRepository {
+class WhitelistedInAppBrowsersRepository(
+    val dao: WhitelistedInAppBrowsersDao
+) : WhitelistedBrowsersRepository, ExportableRepository<WhitelistedInAppBrowserExportModel> {
+
+    override val modelClass: KClass<WhitelistedInAppBrowserExportModel>
+        get() = WhitelistedInAppBrowserExportModel::class
 
     fun getAll(): Flow<List<WhitelistedInAppBrowser>> {
         return dao.getAll()
@@ -40,7 +53,7 @@ class WhitelistedInAppBrowsersRepository(val dao: WhitelistedInAppBrowsersDao) :
     }
 
     suspend fun insert(flatComponentName: String) {
-        dao.insert(WhitelistedInAppBrowser(packageName = flatComponentName))
+        dao.insertReplace(WhitelistedInAppBrowser(packageName = flatComponentName))
     }
 
     suspend fun delete(flatComponentName: String) {
@@ -50,7 +63,7 @@ class WhitelistedInAppBrowsersRepository(val dao: WhitelistedInAppBrowsersDao) :
     override suspend fun insertOrDelete(newState: Boolean, appInfo: ActivityAppInfo) {
         val flatCmpName = appInfo.flatComponentName
         when {
-            newState -> dao.insert(WhitelistedInAppBrowser(packageName = flatCmpName))
+            newState -> dao.insertReplace(WhitelistedInAppBrowser(packageName = flatCmpName))
             else -> dao.deleteByPackageOrComponentName(flatCmpName)
         }
     }
@@ -61,5 +74,21 @@ class WhitelistedInAppBrowsersRepository(val dao: WhitelistedInAppBrowsersDao) :
 
     suspend fun deleteByPackageName(packageName: String) {
         dao.deleteByPackageOrComponentName(packageName)
+    }
+
+    override suspend fun exportAll(): List<WhitelistedInAppBrowserExportModelV1> {
+        return dao.getAll().first().map { it.toExportModel() }
+    }
+
+    override suspend fun import(
+        settings: ImportSettings,
+        models: List<WhitelistedInAppBrowserExportModel>
+    ) {
+        val entities = models.map { it.fromExportModel() }
+        if (settings.replace) {
+            dao.insertReplace(entities)
+        } else {
+            dao.insert(entities)
+        }
     }
 }

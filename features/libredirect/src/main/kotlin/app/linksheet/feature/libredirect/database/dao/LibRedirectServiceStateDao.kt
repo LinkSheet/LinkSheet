@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LibRedirectServiceStateDao : BaseDao<LibRedirectServiceState> {
+    @Query("SELECT * FROM lib_redirect_service_state")
+    override fun getAll(): Flow<List<LibRedirectServiceState>>
     @Query("SELECT * FROM lib_redirect_service_state WHERE serviceKey = :serviceKey")
     fun getServiceState(serviceKey: String): Flow<LibRedirectServiceState?>
 }

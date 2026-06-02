@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LibRedirectUserInstanceDao : BaseDao<LibRedirectUserInstance> {
+    @Query("SELECT * FROM lib_redirect_user_instance")
+    override fun getAll(): Flow<List<LibRedirectUserInstance>>
     @Query("SELECT * FROM lib_redirect_user_instance WHERE serviceKey = :serviceKey AND frontendKey = :frontend")
     fun getByServiceAndFrontendOrNull(serviceKey: String, frontend: String): Flow<List<LibRedirectUserInstance>>
 }

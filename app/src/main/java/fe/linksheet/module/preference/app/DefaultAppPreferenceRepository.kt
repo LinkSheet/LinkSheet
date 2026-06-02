@@ -5,6 +5,7 @@ import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.android.preference.helper.Preference
 import fe.linksheet.module.preference.permission.UsageStatsPermission
+import fe.linksheet.module.preference.reload
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -34,8 +35,7 @@ class DefaultAppPreferenceRepository(val context: Context) : AppPreferenceReposi
             // Forces refresh by reading new value from the preference file; In the future, maybe this should be updating
             // newValue to the RepositoryState instance directly, but that would require converting the
             // string value to the appropriate state type
-
-            cache.get(preference.key)?.reload()
+            reload(preference.key)
 
             val requiredPermission = preferencesRequiringPermission[preference]
             if (requiredPermission?.check() == false) requiredPermission else null

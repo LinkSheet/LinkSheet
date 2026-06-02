@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">インポート設定</string>
+    <string name="import_settings_override_preferences">これにより、既存の設定がすべて上書きされます。続行しますか?</string>
+    <string name="confirm_import">確認</string>
+    <string name="export_settings">エクスポート設定</string>
+    <string name="export_include_recommendation">エクスポートを他の人と共有する予定がない場合にのみ、次の設定をオンにすることをお勧めします！</string>
+    <string name="include_log_hash_key">ログハッシュキー（ログを編集するために使用されるキー）を含める</string>
+    <string name="include_history">履歴を含める（リンクのクリックとアプリの履歴）</string>
+    <string name="export_privacy">エクスポートのプライバシーについて詳しくは、この をご覧ください。</string>
+    <string name="export_to_file">ファイルにエクスポート</string>
+    <string name="export_settings__text_success">エクスポートされました！</string>
+    <string name="export_import_settings">設定をエクスポートまたはインポートする</string>
+    <string name="export">エクスポート</string>
+    <string name="export_explainer">現在のアプリ設定をファイルにエクスポートする</string>
+    <string name="import_headline">インポート</string>
+    <string name="import_explainer">ファイルから以前のエクスポートをインポートする</string>
+    <string name="export_settings__text_failure">設定のエクスポートに失敗しました！</string>
+    <string name="import_settings__text_success">インポートされました！</string>
+    <string name="import_settings__text_failure">設定のインポートに失敗しました！</string>
+    <string name="export_import_settings_explainer">現在の設定をエクスポートするか、以前の設定のエクスポートをインポートします</string>
+</resources>

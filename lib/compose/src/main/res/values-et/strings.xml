@@ -8,4 +8,5 @@
     <string name="request_timeout">Päring aegus</string>
     <string name="checkmark">Märkeruut</string>
     <string name="error">Viga</string>
+    <string name="cancel">Katkesta</string>
 </resources>

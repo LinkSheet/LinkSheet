@@ -1,11 +1,12 @@
 package fe.linksheet.module.viewmodel
 
 import androidx.lifecycle.viewModelScope
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.app.applist.AppListCommon
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.usecase.BrowsersUseCase
-import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedBrowserInfo
+import fe.linksheet.module.repository.whitelisted.WhitelistedBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -22,7 +23,7 @@ class WhitelistedBrowsersViewModel(
 ) : BaseViewModel(preferenceRepository) {
     val list by lazy { AppListCommon(apps = useCase.queryBrowsersFlow(), scope = viewModelScope) }
 
-    val browsersRepository = when(type) {
+    val browsersRepository: WhitelistedBrowsersRepository = when(type) {
         PreferredBrowserViewModel.BrowserType.Normal -> normalBrowsersRepository
         PreferredBrowserViewModel.BrowserType.InApp -> inAppBrowsersRepository
     }

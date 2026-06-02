@@ -12,6 +12,8 @@ import kotlin.uuid.ExperimentalUuidApi
 
 @Dao
 interface ScenarioDao : BaseDao<Scenario> {
+    @Query("SELECT * FROM scenario")
+    override fun getAll(): Flow<List<Scenario>>
     @Query("SELECT COUNT(id) FROM scenario")
     fun getCount(): Int
 

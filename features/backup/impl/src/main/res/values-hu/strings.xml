@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
+    <string name="import_settings">Beállítások importálása</string>
+    <string name="import_settings_override_preferences">Ez felülír minden meglévő beállítást. Folytatja?</string>
+    <string name="confirm_import">Megerősítem</string>
+    <string name="export_settings">Beállítások exportálása</string>
+    <string name="export_include_recommendation">Javasoljuk, hogy csak akkor kapcsolja be az alábbi beállításokat, ha nem tervezi megosztani az exportálást másokkal!</string>
+    <string name="include_log_hash_key">Tartalmazza a napló hash-kulcsot (a naplóbejegyzés elrejtéséhez használt kulcs)</string>
+    <string name="include_history">Előzmények felvétele (a linkre leadott kattintások és az alkalmazáselőzmények)</string>
+    <string name="export_privacy">Ha többet szeretne megtudni az exportálási adatvédelemről, látogasson el erre a .</string>
+    <string name="export_to_file">Exportálás fájlba</string>
+    <string name="export_settings__text_success">Exportálva!</string>
+    <string name="export_import_settings">Beállítások exportálása vagy importálása</string>
+    <string name="export">Exportálás</string>
+    <string name="export_explainer">Exportálja az aktuális alkalmazásbeállításokat egy fájlba</string>
+    <string name="import_headline">Importálás</string>
+    <string name="import_explainer">Korábbi exportálás importálása fájlból</string>
+    <string name="export_settings__text_failure">Nem sikerült exportálni a beállításokat!</string>
+    <string name="import_settings__text_success">Importálva!</string>
+    <string name="import_settings__text_failure">Nem sikerült importálni a beállításokat!</string>
+    <string name="export_import_settings_explainer">Exportálja a jelenlegi-, vagy importáljon egy korábbi beállításokat</string>
+</resources>

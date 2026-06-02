@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="export_file_name">linksheet_kopia_ustawień_%s</string>
+    <string name="import_settings">Przywracanie ustawień</string>
+    <string name="import_settings_override_preferences">Spowoduje to zastąpienie wszystkich istniejących preferencji. Kontynuować?</string>
+    <string name="confirm_import">Potwierdzam</string>
+    <string name="export_settings">Eksportuj ustawienia</string>
+    <string name="export_include_recommendation">Zalecamy włączenie poniższych ustawień tylko wtedy, gdy nie planujesz udostępniać eksportu komuś innemu!</string>
+    <string name="include_log_hash_key">Dołącz klucz hash logu (klucz używany do usuwania danych z logów)</string>
+    <string name="include_history">Uwzględnij historię (kliknięć linków i aplikacji)</string>
+    <string name="export_privacy">Aby dowiedzieć się więcej na temat prywatności eksportu, możesz odwiedzić ten .</string>
+    <string name="export_to_file">Eksportuj do pliku</string>
+    <string name="export_settings__text_success">Zapisano!</string>
+    <string name="export_import_settings">Kopia ustawień</string>
+    <string name="export">Kopia zapasowa</string>
+    <string name="export_explainer">Zapisz bieżące ustawienia do pliku</string>
+    <string name="import_headline">Przywróć z kopii zapasowej</string>
+    <string name="import_explainer">Importuj ustawienia z pliku</string>
+    <string name="export_settings__text_failure">Nie udało się stworzyć kopii ustawień!</string>
+    <string name="import_settings__text_success">Przywrócono!</string>
+    <string name="import_settings__text_failure">Nie udało się przywrócić ustawień!</string>
+    <string name="export_import_settings_explainer">Wykonaj kopię ustawień lub przywróć je z pliku</string>
+</resources>

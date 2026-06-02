@@ -21,9 +21,9 @@ fun rememberFileSelectedLauncher(onResult: (FileSelectionResult) -> Unit): Manag
     return fileSelectedLauncher
 }
 
-sealed interface FileSelectionResult {
-    @Parcelize
-    data class Ok(val uri: Uri) : FileSelectionResult, Parcelable
+@Parcelize
+sealed interface FileSelectionResult : Parcelable {
+    data class Ok(val uri: Uri) : FileSelectionResult
     data object Cancelled : FileSelectionResult
 }
 

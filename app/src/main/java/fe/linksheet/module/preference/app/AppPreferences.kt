@@ -1,7 +1,6 @@
 package fe.linksheet.module.preference.app
 
 
-import app.linksheet.api.PreferenceRegistry
 import app.linksheet.api.SensitivePreference
 import app.linksheet.feature.analytics.preference.analyticsPreferences
 import app.linksheet.feature.browser.preference.browserPreferences
@@ -11,16 +10,13 @@ import app.linksheet.feature.profile.preference.profilePreferences
 import app.linksheet.feature.remoteconfig.preference.remoteConfigPreferences
 import app.linksheet.feature.shizuku.preference.shizukuPreferences
 import com.google.gson.JsonArray
-import fe.android.preference.helper.Preference
-import fe.android.preference.helper.PreferenceDefinition
-import fe.android.preference.helper.TypeMapper
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.composable.ui.Theme
+import fe.linksheet.module.preference.LinkSheetPreferenceDefinition
 import java.util.UUID
-import kotlin.reflect.KClass
 
-object AppPreferences : PreferenceDefinition(
+object AppPreferences : LinkSheetPreferenceDefinition(
     "enable_copy_button",
     "single_tap",
     "enable_send_button",
@@ -35,41 +31,6 @@ object AppPreferences : PreferenceDefinition(
     "show_discord_banner",
     "donate_card_dismissed"
 ) {
-    private val registry = object : PreferenceRegistry {
-        override fun boolean(
-            key: String,
-            default: Boolean
-        ): Preference.Boolean {
-            return this@AppPreferences.boolean(key, default)
-        }
-
-        override fun string(key: String, default: String?): Preference.Nullable<String> {
-            return this@AppPreferences.string(key, default)
-        }
-
-        override fun string(
-            key: String,
-            initial: () -> String
-        ): Preference.Init {
-            return this@AppPreferences.string(key, initial)
-        }
-
-        override fun int(key: String, default: Int): Preference.Int {
-            return this@AppPreferences.int(key, default)
-        }
-
-        override fun <T : Any, M : Any> mapped(
-            key: String,
-            default: T,
-            mapper: TypeMapper<T, M>,
-            t: KClass<T>,
-            m: KClass<M>
-        ): Preference.Mapped<T, M> {
-            return this@AppPreferences.mapped(key, default, mapper, t, m)
-        }
-    }
-
-
     val alwaysShowPackageName = boolean("always_show_package_name")
     val useClearUrls = boolean("use_clear_urls")
     val useFastForwardRules = boolean("fast_forward_rules")

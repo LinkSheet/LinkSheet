@@ -6,6 +6,7 @@ import fe.build.dependencies._1fexd
 
 plugins {
     kotlin("plugin.compose")
+    kotlin("plugin.serialization")
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit")
@@ -65,14 +66,15 @@ dependencies {
     implementation(_1fexd.composeKit.compose.dialog)
     implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.preference.compose.core)
+    implementation(_1fexd.composeKit.preference.util)
     implementation(_1fexd.composeKit.preference.compose.core2)
     implementation(_1fexd.composeKit.preference.compose.mock)
     implementation(_1fexd.composeKit.preference.compose.mock2)
-    implementation(AndroidX.navigation.compose)
 
     implementation(Grrfe.gsonExt.core)
+    implementation(AndroidX.navigation.compose)
     implementation(AndroidX.core.ktx)
-    implementation("androidx.activity:activity-compose:1.13.0")
+    implementation(AndroidX.activity.compose)
 
     androidTestImplementation(AndroidX.test.uiAutomator)
     androidTestImplementation(AndroidX.test.coreKtx)

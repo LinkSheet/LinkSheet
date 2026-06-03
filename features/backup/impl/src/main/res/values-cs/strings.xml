@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Importovat nastavení</string>
+    <string name="settings_backup__title_restore_dialog">Importovat nastavení</string>
     <string name="import_settings_override_preferences">Tímto přepíšete všechna existující nastavení. Pokračovat?</string>
-    <string name="confirm_import">Potvrdit</string>
     <string name="export_settings">Nastavení exportu</string>
     <string name="export_include_recommendation">Doporučujeme zapnout následující nastavení pouze, pokud neplánujete svůj export sdílet s někým jiným!</string>
     <string name="include_log_hash_key">Zahrnout hash klíč protokolu (klíč používaný k redigování protokolů)</string>

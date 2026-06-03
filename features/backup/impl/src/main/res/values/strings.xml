@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Import settings</string>
     <string name="import_settings_override_preferences">This will override all existing preferences. Continue?</string>
-    <string name="confirm_import">Confirm</string>
     <string name="export_settings">Export settings</string>
     <string name="export_include_recommendation">We recommend that you turn on the following settings only if you do not plan on sharing your export with someone else!</string>
     <string name="include_log_hash_key">Include log hash key (the key used to redact your logs)</string>
@@ -16,8 +14,27 @@
     <string name="export_explainer">Export your current app settings to a file</string>
     <string name="import_headline">Import</string>
     <string name="import_explainer">Import a previous export from a file</string>
+    <string name="export_import_settings_explainer">Export your current settings or import a previous settings export</string>
     <string name="export_settings__text_failure">Failed to export settings!</string>
     <string name="import_settings__text_success">Imported!</string>
     <string name="import_settings__text_failure">Failed to import settings!</string>
-    <string name="export_import_settings_explainer">Export your current settings or import a previous settings export</string>
+    <string name="settings_backup__button_text_backup_to_file">Backup to file</string>
+    <string name="settings_backup__title_backup">Backup</string>
+    <string name="settings_backup__subtitle_backup">Backup app settings to a file</string>
+    <string name="settings_backup__title_backup_dialog">Backup settings</string>
+    <string name="settings_backup__title_restore_dialog">Restore settings</string>
+    <string name="settings_backup__title_restore">Restore</string>
+    <string name="settings_backup__subtitle_restore">Restore app settings backup from a file</string>
+    <string name="settings_backup__title_preferences">Preferences</string>
+    <string name="settings_backup__title_experiments">Experiments</string>
+    <string name="settings_backup__title_app_state">App state</string>
+    <string name="settings_backup__title_selection_history">Selection history</string>
+    <string name="settings_backup__title_cached_items">Cached urls</string>
+    <string name="settings_backup__restore_dialog_text_information">Choose restore mode</string>
+    <string name="settings_backup__restore_dialog_title_replace_settings">Replace</string>
+    <string name="settings_backup__restore_dialog_subtitle_replace_settings">Keep existing data, overwrite on conflict</string>
+    <string name="settings_backup__restore_dialog_title_merge_settings">Merge</string>
+    <string name="settings_backup__restore_dialog_subtitle_merge_settings">Keep existing data, ignore on conflict</string>
+    <string name="settings_backup__restore_dialog_title_erase_restore_settings"><![CDATA[Erase & restore]]></string>
+    <string name="settings_backup__restore_dialog_subtitle_erase_restore_settings">Erase current data and restore backup</string>
 </resources>

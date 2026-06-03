@@ -10,5 +10,6 @@
     <string name="generic__text_mode">Mode</string>
     <string name="checkmark">Tanda centang</string>
     <string name="error">Kesalahan</string>
-    <string name="cancel">Batal</string>
+    <string name="generic__button_text_cancel">Batal</string>
+    <string name="generic__button_text_confirm">Konfirmasi</string>
 </resources>

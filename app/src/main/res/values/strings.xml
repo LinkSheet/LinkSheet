@@ -216,9 +216,7 @@
     <string name="export_privacy">To learn about export privacy, you can visit this <annotation url-id="privacy-exports">link</annotation>.</string>
     <string name="export_to_file">Export to file</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Import settings</string>
     <string name="import_settings_override_preferences">This will override all existing preferences. Continue?</string>
-    <string name="confirm_import">Confirm</string>
     <string name="clear_urls_version">ClearURLs rules</string>
     <string name="dev_mode_enabled">Congratulations, you have enabled dev-mode. Just be cautious.</string>
     <string name="fastforward_version">FastForward rules</string>
@@ -321,7 +319,6 @@
     <string name="tap_customization_dialog_title_double_tap">double tap</string>
     <string name="tap_customization_dialog_title_long_tap">long tap</string>
     <string name="tap_customization_dialog_text">Choose the action that should be performed</string>
-    <string name="cancel">Cancel</string>
     <string name="expand_on_app_select">Expand when an app is selected</string>
     <string name="expand_on_app_select_explainer">Automatically expand the bottom sheet when an app is selected</string>
     <string name="telemetry_configure_title">Analytics</string>
@@ -397,7 +394,6 @@
     <string name="export_log_dialog__subtitle_include_settings">Recommended</string>
     <string name="export_log_dialog__text_log_privacy">To learn more about potentially sensitive data in shared log files, tap <annotation url-id="privacy-logs">here</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Copy to clipboard</string>
-    <string name="generic__button_text_cancel">Cancel</string>
     <string name="export_log_dialog__text_log_info">Configure share settings for log captured at: <font face="monospace">%s</font></string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Viewing log captured at: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Aww snap, that should not have happened!</string>
@@ -461,7 +457,7 @@
     <string name="settings_main_experiment_news__text_experiment_state_updated">Some experiments have been removed and are now the default behavior.</string>
     <string name="generic__button_dismiss">Dismiss</string>
     <string name="settings_main_experiment_changelog__title_changelog">Experiments changelog</string>
-    <string name="settings__subtitle_advanced"><![CDATA[Experiments & Export/Import]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[Experiments, Backup & Restore]]></string>
     <string name="bottom_sheet__button_manual_redirect">Follow redirects</string>
     <string name="app_host_dialog__title_hosts">Default hosts</string>
     <string name="generic__button_text_save">Save</string>
@@ -540,4 +536,5 @@
     <string name="settings_follow_redirects__title_aggressive">Aggressive mode</string>
     <string name="settings_follow_redirects__subtitle_aggressive">Fetch full page body for better compatibility with sites which don\'t use HTTP redirects</string>
     <string name="handler_target__label_switch_profile_view_intent">Switch profile</string>
+    <string name="settings_advanced__divider_backup"><![CDATA[Backup & Restore]]></string>
 </resources>

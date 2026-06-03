@@ -159,6 +159,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            signingConfig = signingConfigs.getByName("env")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -168,7 +169,6 @@ android {
         register("nightly") {
             initWith(buildTypes.getByName("release"))
             matchingFallbacks.add("release")
-            signingConfig = signingConfigs.getByName("env")
 
             applicationIdSuffix = ".nightly"
             versionNameSuffix = "-nightly"
@@ -192,7 +192,6 @@ android {
         register("migrate") {
             initWith(buildTypes.getByName("release"))
             matchingFallbacks.add("release")
-            signingConfig = signingConfigs.getByName("env")
 
             resValue("string", "app_name", "$appName Migrate")
         }

@@ -112,7 +112,6 @@
     <string name="generic__button_text_share">分享</string>
     <string name="donate_card">以刷卡捐款 (透過 BuyMeACoffee)</string>
     <string name="discord">Discord</string>
-    <string name="confirm_import">確認</string>
     <string name="reset">重設</string>
     <string name="follow_redirects_short">重新導向</string>
     <string name="experiments_explainer_2">活躍開發中</string>
@@ -162,7 +161,6 @@
     <string name="settings_verified_link_handlers__text_user_apps">使用者應用程式</string>
     <string name="app_browsers_subtitle">偏好的應用程式、瀏覽器設定</string>
     <string name="enable_amp2html">啟用 Amp2Html</string>
-    <string name="generic__button_text_cancel">取消</string>
     <string name="nightly_experiments_card_explainer">輕觸以查看正在開發的功能</string>
     <string name="bottom_sheet__button_manual_redirect">跟進重新導向</string>
     <string name="share">分享連結</string>
@@ -180,7 +178,6 @@
     <string name="use_unified_preferred_browser_explainer">如要分別設定一般連結和程式內瀏覽連結的模式，請停用此選項並從下方的按鈕切換兩者。</string>
     <string name="allow_darknets">允許暗網</string>
     <string name="amp2html_allow_darknets_explainer">允許對暗網連結執行 Amp2Html (支援：%s)</string>
-    <string name="cancel">取消</string>
     <string name="verified_link_handlers_subtitle">控制應用程式網域驗證狀態</string>
     <string name="resolve_event__resolving_redirects">正在解析重新導向</string>
     <string name="resolve_event__unamping_link">正在為連結去 AMP 化</string>
@@ -330,7 +327,6 @@
     <string name="export_settings__text_failure">無法匯出設定！</string>
     <string name="import_settings__text_failure">無法匯入設定！</string>
     <string name="export_import_settings">匯出或匯入</string>
-    <string name="import_settings">匯入設定</string>
     <string name="export_settings">匯出設定</string>
     <string name="import_settings_override_preferences">這將會覆寫現有的偏好設定，確定要繼續嗎？</string>
     <string name="export_import_settings_explainer">匯出目前的設定或匯入先前的設定</string>

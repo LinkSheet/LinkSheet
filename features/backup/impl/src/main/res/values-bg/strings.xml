@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Внасяне на настройки</string>
+    <string name="settings_backup__title_restore_dialog">Внасяне на настройки</string>
     <string name="import_settings_override_preferences">Ще бъдат презаписани текущите настройки. Потвърждавате ли?</string>
-    <string name="confirm_import">Потвърждаване</string>
     <string name="export_settings">Изнасяне на настройки</string>
     <string name="export_include_recommendation">Препоръчваме ви да не отмятате тези отметки ако смятате да споделяте изнесеното с други хора!</string>
     <string name="include_log_hash_key">Включително ключа за дневника</string>

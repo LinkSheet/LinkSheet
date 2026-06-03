@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.impl.R
+import app.linksheet.feature.backup.impl.ui.exportimport.ExportSettings
 import app.linksheet.feature.backup.impl.usecase.ExportImportUseCase2
 import fe.composekit.intent.buildIntent
 import fe.linksheet.extension.android.bufferedSource
@@ -34,10 +35,7 @@ class ExportSettingsViewModel2(
         private val formatter = LocalDateTime.Format {
             byUnicodePattern("uuuu-MM-dd'T'HH:mm[:ss]")
         }
-    }
-
-    fun createImportIntent(): Intent {
-        return buildIntent(Intent.ACTION_OPEN_DOCUMENT) {
+        val ImportIntent = buildIntent(Intent.ACTION_OPEN_DOCUMENT) {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/json"
         }
@@ -58,8 +56,7 @@ class ExportSettingsViewModel2(
         }
     }
 
-    suspend fun importPreferences(uri: Uri): StdResult<out Any> = withContext(Dispatchers.IO) {
-        val settings = ImportSettings.Default
+    suspend fun importPreferences(uri: Uri, settings: ImportSettings): StdResult<out Any> = withContext(Dispatchers.IO) {
         val result = tryCatch {
             context.useDescriptor(uri, "r") { pfd ->
                 pfd.bufferedSource().use {
@@ -77,11 +74,8 @@ class ExportSettingsViewModel2(
 //        return +preferenceRepository.refreshPostImport(mappedPreferences)
     }
 
-    suspend fun exportPreferences(
-        uri: Uri,
-        includeLogHashKey: Boolean
-    ): StdResult<Unit> = withContext(Dispatchers.IO) {
-        val preferences = useCase.exportToString(includeLogHashKey)
+    suspend fun exportPreferences(uri: Uri, settings: ExportSettings): StdResult<Unit> = withContext(Dispatchers.IO) {
+        val preferences = useCase.exportToString(settings)
         tryCatch {
             context.useDescriptor(uri, "w") { pfd ->
                 pfd.bufferedWriter().use { it.write(preferences) }

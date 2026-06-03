@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Importar configurações</string>
+    <string name="settings_backup__title_restore_dialog">Importar configurações</string>
     <string name="import_settings_override_preferences">Isso vai sobrescrever todas configurações existentes. Continuar?</string>
-    <string name="confirm_import">Confirmar</string>
     <string name="export_settings">Exportar configurações</string>
     <string name="export_include_recommendation">Nós recomendamos que você habilite as seguintes configurações somente se você planeja compartilhar sua exportação com alguém!</string>
     <string name="include_log_hash_key">Incluir chave hash do log (chave usada para ocultar seus logs)</string>

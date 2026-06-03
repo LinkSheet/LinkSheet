@@ -215,9 +215,7 @@
     <string name="export_privacy">Para saber mais sobre a privacidade da exportação, visite <annotation url-id="privacy-exports">link</annotation>.</string>
     <string name="export_to_file">Exportar para arquivo</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Importar configurações</string>
     <string name="import_settings_override_preferences">Isso vai sobrescrever todas configurações existentes. Continuar?</string>
-    <string name="confirm_import">Confirmar</string>
     <string name="clear_urls_version">Regras ClearURLs</string>
     <string name="dev_mode_enabled">Parabéns, você habilitou o modo Dev. Tome cuidado.</string>
     <string name="fastforward_version">Regras FastForward</string>
@@ -320,7 +318,6 @@
     <string name="tap_customization_dialog_title_double_tap">clique duplo</string>
     <string name="tap_customization_dialog_title_long_tap">clique longo</string>
     <string name="tap_customization_dialog_text">Escolha a ação que deve ser realizada</string>
-    <string name="cancel">Cancelar</string>
     <string name="expand_on_app_select">Expandir quando um app é selecionado</string>
     <string name="expand_on_app_select_explainer">Expandir automaticamente a aba inferior quando um app é selecionado</string>
     <string name="telemetry_configure_title">Analíticas</string>
@@ -412,7 +409,6 @@
     <string name="export_log_dialog__subtitle_include_settings">Recomendado</string>
     <string name="export_log_dialog__text_log_privacy">Para saber mais sobre pontenciais dados sensíveis nos logs compartilhados, clique <annotation url-id="privacy-logs">aqui</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Copiar área de transferência</string>
-    <string name="generic__button_text_cancel">Cancelar</string>
     <string name="export_log_dialog__text_log_info">Configurar compartilhamento de log capturado em: <font face="monospace">%s</font></string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Vendo log capturado em: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Isso não devia ter acontecido!</string>

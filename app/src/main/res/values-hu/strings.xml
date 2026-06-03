@@ -203,7 +203,6 @@
     <string name="fastforward_version">FastForward szabályok</string>
     <string name="no_internet_connection">Nincs internetkapcsolat</string>
     <string name="onboarding_1_title">LinkSheet beállítása alapértelmezett böngészőként</string>
-    <string name="confirm_import">Megerősítem</string>
     <string name="clear_urls_version">ClearURL szabályok</string>
     <string name="onboarding_1_card_explainer">A LinkSheet nem működik anélkül, hogy az alapértelmezett böngésző lenne.</string>
     <string name="privacy_settings_explainer">Hivatkozó adatvédelem, telemetria</string>
@@ -278,7 +277,6 @@
     <string name="unknown_host">%s vagy blokkolva van, vagy nem létezik</string>
     <string name="onboarding_1_card_title">Alapértelmezett böngésző</string>
     <string name="onboarding_2_shizuku_enabled">Következő</string>
-    <string name="import_settings">Beállítások importálása</string>
     <string name="onboarding_2_card_title">Shizuku</string>
     <string name="built_by_error">Ezt a buildet sem az 1fexd, sem a Github munkafolyamat nem írta alá.</string>
     <string name="manual_build">Kézzel build-elte és írta alá az 1fexd</string>
@@ -371,7 +369,6 @@
     <string name="settings_notifications__divider_toasts">Felugró üzenetek</string>
     <string name="export_log_dialog__subtitle_redact_log">Ajánlott, elrejti az alkalmazások neveit és URL-jeit</string>
     <string name="theme_mode">Téma mód</string>
-    <string name="cancel">Mégse</string>
     <string name="telemetry_identifier_reset">Azonosító visszaállítása</string>
     <string name="expand_on_app_select">Bontsa ki, ha egy alkalmazást kiválaszt</string>
     <string name="settings_credits__app_credit_reason_seal">Dizájn ötletek</string>
@@ -405,7 +402,6 @@
     <string name="resolve_event__unamping_link">AMP nélküli link</string>
     <string name="export_log_dialog__text_log_privacy">Ha többet szeretne megtudni a megosztott naplófájlokban található potenciálisan érzékeny adatokról, koppintson erre a <annotation url-id="privacy-logs"> linkre</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Másolás a vágólapra</string>
-    <string name="generic__button_text_cancel">Mégse</string>
     <string name="export_log_dialog__text_log_info">Megosztási beállítások konfigurálása a következő helyen rögzített naplóhoz: <font face="monospace">%s</font></string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Rögzített napló megtekintése: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Jajj, ennek nem lett volna szabad megtörténnie!</string>

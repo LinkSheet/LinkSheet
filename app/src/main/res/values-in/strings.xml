@@ -221,9 +221,7 @@
     <string name="export_privacy">Untuk mempelajari tentang privasi ekspor, Anda dapat mengunjungi <annotation url-id="privacy-exports">tautan</annotation> ini.</string>
     <string name="export_to_file">Ekspor ke file</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Impor pengaturan</string>
     <string name="import_settings_override_preferences">Ini akan menimpa semua preferensi yang ada. Lanjutkan?</string>
-    <string name="confirm_import">Konfirmasi</string>
     <string name="clear_urls_version">Aturan ClearURLs</string>
     <string name="dev_mode_enabled">Selamat, Anda telah mengaktifkan mode pengembang. Berhati-hatilah.</string>
     <string name="fastforward_version">Aturan FastForward</string>
@@ -322,7 +320,6 @@
     <string name="tap_customization_dialog_title_double_tap">ketuk ganda</string>
     <string name="tap_customization_dialog_title_long_tap">ketuk lama</string>
     <string name="tap_customization_dialog_text">Pilih aksi yang harus dilakukan</string>
-    <string name="cancel">Batal</string>
     <string name="expand_on_app_select">Bentangkan saat aplikasi dipilih</string>
     <string name="expand_on_app_select_explainer">Bentangkan lembar bawah secara otomatis saat aplikasi dipilih</string>
     <string name="telemetry_configure_title">Analitik</string>
@@ -389,7 +386,6 @@
     <string name="export_log_dialog__subtitle_include_settings">Disarankan</string>
     <string name="export_log_dialog__text_log_privacy">Untuk mempelajari lebih lanjut tentang data yang berpotensi sensitif di file log yang dibagikan, ketuk <annotation url-id="privacy-logs">di sini</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Salin ke papan klip</string>
-    <string name="generic__button_text_cancel">Batal</string>
     <string name="export_log_dialog__text_log_info">Konfigurasikan pengaturan berbagi untuk log yang diambil pada: <font face="monospace">%s</font></string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Melihat log yang diambil pada: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Aduh, itu seharusnya tidak terjadi!</string>

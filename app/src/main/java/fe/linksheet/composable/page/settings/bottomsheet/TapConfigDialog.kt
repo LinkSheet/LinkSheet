@@ -23,7 +23,7 @@ import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
-
+import app.linksheet.compose.R as CommonR
 
 private val tapConfigOptions = listOf(
     TapConfig.None,
@@ -78,7 +78,7 @@ fun TapConfigDialog(
         onDismissRequest = onDismiss,
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(text = stringResource(id = R.string.cancel))
+                Text(text = stringResource(id = CommonR.string.generic__button_text_cancel))
             }
         },
         confirmButton = {

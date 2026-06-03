@@ -35,6 +35,7 @@ import fe.linksheet.module.language.LocaleItem
 import fe.linksheet.module.viewmodel.LanguageSettingsViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import java.util.*
+import app.linksheet.compose.R as CommonR
 
 @Composable
 fun rememberLanguageDialog(
@@ -114,7 +115,7 @@ private fun LanguageDialog(
         },
         dismissButton = {
             SaneAlertDialogTextButton(
-                content = textContent(R.string.cancel),
+                content = textContent(CommonR.string.generic__button_text_cancel),
                 onClick = onDismiss
             )
         },

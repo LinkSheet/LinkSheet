@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">导入设置</string>
+    <string name="settings_backup__title_restore_dialog">导入设置</string>
     <string name="import_settings_override_preferences">这将会覆盖所有已存在的设置，确认继续？</string>
-    <string name="confirm_import">确认</string>
     <string name="export_settings">导出设置</string>
     <string name="export_include_recommendation">我们推荐你仅在不想将导出数据与他人分享时，再启用以下选项！</string>
     <string name="include_log_hash_key">包含日志哈希密钥（用来删减日志的密钥）</string>

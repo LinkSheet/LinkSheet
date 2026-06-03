@@ -7,5 +7,6 @@
     <string name="request_timeout_explainer">Define cuántos segundos esperará LinkSheet hasta que se establezca una conexión. Establecer esto en 0 desactiva el tiempo de espera, pero no se recomienda.</string>
     <string name="checkmark">Marca de verificación</string>
     <string name="error">Error</string>
-    <string name="cancel">Cancelar</string>
+    <string name="generic__button_text_cancel">Cancelar</string>
+    <string name="generic__button_text_confirm">Confirmar</string>
 </resources>

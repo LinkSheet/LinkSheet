@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">インポート設定</string>
+    <string name="settings_backup__title_restore_dialog">インポート設定</string>
     <string name="import_settings_override_preferences">これにより、既存の設定がすべて上書きされます。続行しますか?</string>
-    <string name="confirm_import">確認</string>
     <string name="export_settings">エクスポート設定</string>
     <string name="export_include_recommendation">エクスポートを他の人と共有する予定がない場合にのみ、次の設定をオンにすることをお勧めします！</string>
     <string name="include_log_hash_key">ログハッシュキー（ログを編集するために使用されるキー）を含める</string>

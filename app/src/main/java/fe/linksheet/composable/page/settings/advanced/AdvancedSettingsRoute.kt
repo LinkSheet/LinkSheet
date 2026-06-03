@@ -5,7 +5,11 @@ import androidx.compose.material.icons.outlined.Science
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import app.linksheet.feature.backup.impl.navigation.BackupRoute
+import app.linksheet.feature.backup.impl.ui.backupDialog
+import app.linksheet.feature.backup.impl.ui.backupListItem
+import app.linksheet.feature.backup.impl.ui.restoreDialog
+import app.linksheet.feature.backup.impl.ui.restoreListItem
+import app.linksheet.feature.backup.impl.viewmodel.ExportSettingsViewModel2
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.layout.column.group
@@ -14,6 +18,7 @@ import fe.composekit.route.RouteNavItemNew
 import fe.composekit.route.RouteNavigateListItemNew
 import fe.linksheet.R
 import fe.linksheet.navigation.ExperimentRoute
+import org.koin.androidx.compose.koinViewModel
 
 private object AdvancedSettingsRouteData {
     val items = arrayOf(
@@ -22,13 +27,24 @@ private object AdvancedSettingsRouteData {
             Icons.Outlined.Science.iconPainter,
             textContent(R.string.experiments),
             textContent(R.string.experiments_explainer),
-        ),
-        BackupRoute.NavItem
+        )
     )
 }
 
 @Composable
-fun AdvancedSettingsRoute(onBackPressed: () -> Unit, navigate: (Route) -> Unit) {
+fun AdvancedSettingsRoute(
+    onBackPressed: () -> Unit,
+    navigate: (Route) -> Unit,
+    viewModel: ExportSettingsViewModel2 = koinViewModel()
+) {
+    val backupDialogState = backupDialog(
+        exportPreferences = viewModel::exportPreferences
+    )
+    val restoreDialogState = restoreDialog(
+        importIntent = ExportSettingsViewModel2.ImportIntent,
+        importPreferences = viewModel::importPreferences
+    )
+
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.advanced),
         onBackPressed = onBackPressed
@@ -40,6 +56,21 @@ fun AdvancedSettingsRoute(onBackPressed: () -> Unit, navigate: (Route) -> Unit) 
                 padding = padding,
                 navigate = navigate,
             )
+        }
+
+        divider(
+            key = R.string.settings_advanced__divider_backup,
+            id = R.string.settings_advanced__divider_backup
+        )
+
+        group(size = 2) {
+            backupListItem(
+                open = {
+                    val intent = viewModel.createExportIntent()
+                    backupDialogState.open(intent)
+                }
+            )
+            restoreListItem(open = { restoreDialogState.open() })
         }
     }
 }

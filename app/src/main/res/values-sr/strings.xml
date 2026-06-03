@@ -200,12 +200,10 @@
     <string name="credits">Заслуге</string>
     <string name="export_to_file">Извоз у фајл</string>
     <string name="linksheet_donation_explainer_2">Донација већа од <b>5€</b> омогућава вам приступ за <b>LinkSheetPro</b>, што укључује <b>ексклузивне Pro функције</b> као што су: праћење спољних преусмеравања, спољно добијање не-AMP страница и још много тога!</string>
-    <string name="import_settings">Увоз подешавања</string>
     <string name="export_import_settings">Извоз или увоз подешавања</string>
     <string name="import_headline">Увоз</string>
     <string name="export_include_recommendation">Препоручујемо вам да укључите следећа подешавања само ако не планирате да свој извоз делите с неким другим!</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="confirm_import">Потврди</string>
     <string name="include_log_hash_key">Укључи хеш кључ eвиденције (кључ који се користи за редиговање ваших евиденција)</string>
     <string name="import_explainer">Увезите претходни извоз из фајла</string>
     <string name="export_privacy">Да бисте сазнали више о приватности извоза, можете посетити овaј <annotation url-id="privacy-exports"> линк</annotation>.</string>
@@ -305,7 +303,6 @@
     <string name="tap_customization_dialog_title_single_tap">један додир</string>
     <string name="expand_on_app_select">Прошири када је апликација изабрана</string>
     <string name="expand_on_app_select_explainer">Аутоматски проширује доњи лист када се изабере апликација</string>
-    <string name="cancel">Откажи</string>
     <string name="theme_enable_material_you">Динамичка боја</string>
     <string name="theme_mode">Режим теме</string>
     <string name="theme_enable_amoled">Чисто црна</string>
@@ -380,7 +377,6 @@
     <string name="export_log_dialog__title_include_settings">Обухвати подешавања</string>
     <string name="export_log_dialog__subtitle_include_settings">Препоручено</string>
     <string name="generic__button_text_copy_clipboard">Копирај у привремену меморију</string>
-    <string name="generic__button_text_cancel">Откажи</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Прегледање евиденције снимљене на: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Аууу, то није требало да се деси!</string>
     <string name="settings_links_downloader__title_downloader">Програм за преузимање</string>

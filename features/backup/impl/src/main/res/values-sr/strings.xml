@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Увоз подешавања</string>
+    <string name="settings_backup__title_restore_dialog">Увоз подешавања</string>
     <string name="import_settings_override_preferences">Ово ће заменити сва постојећа подешавања. Наставити?</string>
-    <string name="confirm_import">Потврди</string>
     <string name="export_settings">Извоз подешавања</string>
     <string name="export_include_recommendation">Препоручујемо вам да укључите следећа подешавања само ако не планирате да свој извоз делите с неким другим!</string>
     <string name="include_log_hash_key">Укључи хеш кључ eвиденције (кључ који се користи за редиговање ваших евиденција)</string>

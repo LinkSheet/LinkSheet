@@ -34,14 +34,12 @@
     <string name="url_copied_toast">URL कॉपी किया गया टोस्ट</string>
     <string name="dev_mode_enabled">बधाई हो, आपने डेव-मोड सक्षम कर दिया है। जरा सावधान रहें।</string>
     <string name="clear_urls_version">ClearURLs नियम</string>
-    <string name="import_settings">सेटिंग्स इंपोर्ट करें</string>
     <string name="resolve_via_toast">किसी URL का समाधान हो जाने पर एक टोस्ट दिखाएँ</string>
     <string name="download_started_toast">डाउनलोड प्रारंभ टोस्ट</string>
     <string name="notifications">नोटीफिकेशन</string>
     <string name="export_include_recommendation">हम अनुशंसा करते हैं कि आप निम्नलिखित सेटिंग्स तभी चालू करें जब आप अपना निर्यात किसी और के साथ साझा करने की योजना नहीं बनाते हैं!</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="resolve_via_toast_explainer">जब किसी URL का समाधान किसी बाहरी सेवा के माध्यम से किया जाता है तो एक टोस्ट दिखाएं</string>
-    <string name="confirm_import">पुष्टि करें</string>
     <string name="dev">डेवलपर</string>
     <string name="include_log_hash_key">लॉग हैश कुंजी शामिल करें (आपके लॉग को संशोधित करने के लिए उपयोग की जाने वाली कुंजी)</string>
     <string name="export_privacy">निर्यात गोपनीयता के बारे में जानने के लिए, आप इस <annotation url-id="privacy-exports">link</annotation> पर जा सकते हैं।</string>

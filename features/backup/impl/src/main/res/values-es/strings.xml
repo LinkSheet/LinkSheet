@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Importar los ajustes</string>
+    <string name="settings_backup__title_restore_dialog">Importar los ajustes</string>
     <string name="import_settings_override_preferences">Esto anulará todas las preferencias existentes. ¿Continuar?</string>
-    <string name="confirm_import">Confirmar</string>
     <string name="export_settings">Ajustes de la exportación</string>
     <string name="export_include_recommendation">¡Le recomendamos que active la siguiente configuración sólo si no planea compartir su exportación con otra persona!</string>
     <string name="include_log_hash_key">Incluya la clave hash del registro (la clave utilizada para redactar sus registros)</string>

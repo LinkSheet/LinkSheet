@@ -1,5 +1,8 @@
 package app.linksheet.feature.backup.api
 
+import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
 import kotlin.reflect.KClass
 
 interface ExportableRepository<T : ExportModel> {
@@ -20,10 +23,19 @@ interface ExportableRepository<T : ExportModel> {
     }
 }
 
+@Parcelize
 data class ImportSettings(
-    val replace: Boolean
-) {
-    companion object{
-        val Default = ImportSettings(true)
+    val mode: RestoreMode
+) : Parcelable {
+    companion object {
+        val Default = ImportSettings(RestoreMode.Merge)
     }
+
+    @IgnoredOnParcel
+    @Deprecated("Remove this")
+    val replace = mode == RestoreMode.Replace
+}
+
+enum class RestoreMode {
+    EraseRestore, Replace, Merge
 }

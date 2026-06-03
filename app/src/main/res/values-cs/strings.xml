@@ -198,7 +198,6 @@
     <string name="online_services">Online služby</string>
     <string name="export_explainer">Exportovat vaše aktuální nastavení aplikace do souboru</string>
     <string name="onboarding_0_subtitle">Vyberte si, zda chcete být vždy dotázáni po otevření odkazu, nastavte výchozí prohlížeče a spoustu dalšího</string>
-    <string name="import_settings">Importovat nastavení</string>
     <string name="linksheet_donation_explainer_2">Darováním více než <b>5 €</b> vám umožní přístup k <b>LinkSheet Pro</b>, který zahrnuje <b>exkluzivní funkce</b>, jako například: externí následování přesměrování, externí načtení ne-AMP stránek a již brzy spoustu dalšího!</string>
     <string name="privacy_settings_explainer">Soukromí odkazovatele, telemetrie</string>
     <string name="include_log_hash_key">Zahrnout hash klíč protokolu (klíč používaný k redigování protokolů)</string>
@@ -217,7 +216,6 @@
     <string name="import_explainer">Importovat předchozí export ze souboru</string>
     <string name="export_include_recommendation">Doporučujeme zapnout následující nastavení pouze, pokud neplánujete svůj export sdílet s někým jiným!</string>
     <string name="import_settings_override_preferences">Tímto přepíšete všechna existující nastavení. Pokračovat?</string>
-    <string name="confirm_import">Potvrdit</string>
     <string name="clear_urls_version">Pravidla ClearURLs</string>
     <string name="debug_build">Ladicí sestavení</string>
     <string name="dev">Vývojář</string>
@@ -321,7 +319,6 @@
     <string name="tap_customization">Přizpůsobení klepnutí</string>
     <string name="tap_customization_single_tap">Jedno klepnutí</string>
     <string name="open_app_settings_page">Otevřít nastavení aplikace</string>
-    <string name="cancel">Zrušit</string>
     <string name="share">Sdílet odkaz</string>
     <string name="opening_with_app">Otevírání v aplikaci %s</string>
     <string name="launch_onboarding">Spustit úvod</string>
@@ -388,7 +385,6 @@
     <string name="export_log_dialog__subtitle_include_settings">Doporučeno</string>
     <string name="export_log_dialog__text_log_privacy">Pro více informací o potenciálně citlivých datech ve sdíleném protokolu klepněte <annotation url-id="privacy-logs">sem</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Zkopírovat do schránky</string>
-    <string name="generic__button_text_cancel">Zrušit</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Prohlížení protokolu zachyceného: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Jejda, tohle se nemělo stát!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>

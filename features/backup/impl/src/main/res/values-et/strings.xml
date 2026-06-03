@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_seadistused_%s</string>
-    <string name="confirm_import">Kinnita</string>
     <string name="export_settings__text_success">Eksportimine õnnestus!</string>
     <string name="export">Ekspordi</string>
     <string name="import_headline">Impordi</string>

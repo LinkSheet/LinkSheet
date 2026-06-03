@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
     <string name="generic__button_text_open_external">Open externally</string>
-    <string name="generic__button_text_create">Create</string>
     <string name="generic__button_text_cancel">Cancel</string>
+    <string name="generic__button_text_create">Create</string>
     <string name="generic__button_text_add">Add</string>
     <string name="generic__action_move_up">Move up</string>
     <string name="generic__action_move_down">Move Down</string>
@@ -18,5 +18,5 @@
     <string name="generic__text_mode">Mode</string>
     <string name="checkmark">Checkmark</string>
     <string name="error">Error</string>
-    <string name="cancel">Cancel</string>
+    <string name="generic__button_text_confirm">Confirm</string>
 </resources>

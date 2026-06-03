@@ -10,5 +10,6 @@
     <string name="generic__text_mode">模式</string>
     <string name="checkmark">复选标记</string>
     <string name="error">错误</string>
-    <string name="cancel">取消</string>
+    <string name="generic__button_text_cancel">取消</string>
+    <string name="generic__button_text_confirm">确认</string>
 </resources>

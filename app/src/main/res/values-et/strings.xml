@@ -47,7 +47,6 @@
     <string name="other">Muu</string>
     <string name="import_headline">Impordi</string>
     <string name="export_file_name">linksheet_seadistused_%s</string>
-    <string name="confirm_import">Kinnita</string>
     <string name="dev">Arendaja</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="amp2html_short">Amp2Html</string>
@@ -61,7 +60,6 @@
     <string name="onboarding_5_button">Lõpeta</string>
     <string name="experiments">Katsed</string>
     <string name="reset">Lähtesta</string>
-    <string name="cancel">Katkesta</string>
     <string name="telemetry_configure_title">Analüütika</string>
     <string name="link_handle_failed_text_field_label">Päring</string>
     <string name="customization">Kohandamine</string>
@@ -73,7 +71,6 @@
     <string name="bottom_sheet_loading_indicator__button_skip_job">Jäta vahele</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Soovitatud</string>
     <string name="export_log_dialog__subtitle_include_settings">Soovitatud</string>
-    <string name="generic__button_text_cancel">Katkesta</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Allalaadija</string>
     <string name="resolve_event__initialized">Valmendatud</string>

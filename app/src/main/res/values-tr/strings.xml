@@ -215,7 +215,6 @@
     <string name="export_include_recommendation">Aşağıdaki ayarları sadece dışa aktarmanızı başka biriyle paylaşmayı düşünmüyorsanız etkinleştirmenizi öneririz!</string>
     <string name="export_privacy">Dışa aktarma gizliliği hakkında daha fazla bilgi edinmek için bu <annotation url-id="privacy-exports">bağlantıyı</annotation> ziyaret edin</string>
     <string name="export_to_file">Dosyaya aktar</string>
-    <string name="import_settings">İçe aktarma ayarları</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="import_settings_override_preferences">Bu, şu anki bütün tercihlerinizin üzerine yazacaktır. Devam et?</string>
     <string name="launch_onboarding_new">Yeni ilk başlatmayı başlat</string>
@@ -272,7 +271,6 @@
     <string name="export_explainer">Şimdiki uygulama ayarlarınızı bir dosyaya aktarın</string>
     <string name="import_headline">İçe aktar</string>
     <string name="import_explainer">Bir dosyadan önceki bir dışa aktarmayı içe aktarın</string>
-    <string name="confirm_import">Onayla</string>
     <string name="resolve_embeds">Yerleştirmeleri çözümle</string>
     <string name="resolve_embeds_explainer">fxtwitter gibi yerleştirme (embed) alternatif kaynaklarını, gerçek alan adına çözümle</string>
     <string name="advanced">Gelişmiş</string>
@@ -311,7 +309,6 @@
     <string name="select_app">Uygulamayı seç</string>
     <string name="open_app_settings_page">Uygulamanın ayarlar sayfasını aç</string>
     <string name="tap_customization_dialog_title_single_tap">Tek dokunma</string>
-    <string name="cancel">İptal</string>
     <string name="expand_on_app_select">Bir uygulama seçildiğinde genişlet</string>
     <string name="tap_customization_single_tap">Tek dokunma eylemi</string>
     <string name="tap_customization_double_tap">Çift dokunma eylemi</string>
@@ -392,7 +389,6 @@
     <string name="export_log_dialog__title_include_fingerprint">Derleme parmak izini dahil et</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Önerilir</string>
     <string name="export_log_dialog__title_include_settings">Ayarları dahil et</string>
-    <string name="generic__button_text_cancel">İptal</string>
     <string name="export_log_dialog__text_log_info"><font face="monospace">%s</font> tarihli günlük için paylaşım ayarlarını yapılandırın</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_main_setup_success__title_linksheet_setup_failure">LinkSheet kurulmadı</string>

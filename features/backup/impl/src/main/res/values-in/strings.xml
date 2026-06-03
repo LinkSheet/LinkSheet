@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Impor pengaturan</string>
+    <string name="settings_backup__title_restore_dialog">Impor pengaturan</string>
     <string name="import_settings_override_preferences">Ini akan menimpa semua preferensi yang ada. Lanjutkan?</string>
-    <string name="confirm_import">Konfirmasi</string>
     <string name="export_settings">Ekspor pengaturan</string>
     <string name="export_include_recommendation">Kami merekomendasikan agar Anda mengaktifkan pengaturan berikut hanya jika Anda tidak berencana membagikan ekspor Anda kepada orang lain!</string>
     <string name="include_log_hash_key">Sertakan kunci hash log (kunci yang digunakan untuk menyamarkan log Anda)</string>

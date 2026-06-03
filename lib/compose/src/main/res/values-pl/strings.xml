@@ -10,5 +10,6 @@
     <string name="generic__text_mode">Tryb</string>
     <string name="checkmark">Znacznik wyboru</string>
     <string name="error">Błąd</string>
-    <string name="cancel">Anuluj</string>
+    <string name="generic__button_text_cancel">Anuluj</string>
+    <string name="generic__button_text_confirm">Potwierdzam</string>
 </resources>

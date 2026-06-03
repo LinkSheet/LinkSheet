@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_kopia_ustawień_%s</string>
-    <string name="import_settings">Przywracanie ustawień</string>
+    <string name="settings_backup__title_restore_dialog">Przywracanie ustawień</string>
     <string name="import_settings_override_preferences">Spowoduje to zastąpienie wszystkich istniejących preferencji. Kontynuować?</string>
-    <string name="confirm_import">Potwierdzam</string>
     <string name="export_settings">Eksportuj ustawienia</string>
     <string name="export_include_recommendation">Zalecamy włączenie poniższych ustawień tylko wtedy, gdy nie planujesz udostępniać eksportu komuś innemu!</string>
     <string name="include_log_hash_key">Dołącz klucz hash logu (klucz używany do usuwania danych z logów)</string>

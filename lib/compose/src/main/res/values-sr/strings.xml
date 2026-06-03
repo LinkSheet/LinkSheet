@@ -10,5 +10,6 @@
     <string name="request_timeout_explainer">Дефинише колико секунди ће LinkSheet чекати да се веза успостави. Подешавање на 0 онемогућава временско ограничење, али се то не препоручује.</string>
     <string name="checkmark">Квачица</string>
     <string name="error">Грешка</string>
-    <string name="cancel">Откажи</string>
+    <string name="generic__button_text_cancel">Откажи</string>
+    <string name="generic__button_text_confirm">Потврди</string>
 </resources>

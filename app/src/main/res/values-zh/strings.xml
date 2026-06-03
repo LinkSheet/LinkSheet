@@ -145,7 +145,6 @@
     <string name="shizuku_explainer_short">与系统API直接交互</string>
     <string name="include_fingerprint">包括设备指纹（推荐）</string>
     <string name="github_pipeline_build">由 CI 构建与签名</string>
-    <string name="import_settings">导入设置</string>
     <string name="usage_stats_sorting_explainer">在排序算法中引入安卓系统应用使用情况数据。第一次启用时需要请求权限。</string>
     <string name="amp2html_external_service_explainer">尝试使用在 supabase.com（<annotation url-id="supabase-privacy">隐私政策</annotation>）部署的 API 获取非 AMP 页面</string>
     <string name="debug">调试</string>
@@ -159,7 +158,6 @@
     <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="thanks_for_donating">感谢您的捐赠！</string>
     <string name="feature_flags_explainer">启用或禁用实验性功能</string>
-    <string name="confirm_import">确认</string>
     <string name="dev">开发者</string>
     <string name="request_private_browsing">隐私</string>
     <string name="import_explainer">从文件导入以前的导出</string>
@@ -286,7 +284,6 @@
     <string name="delete_log_dialog__subtitle_delete_info">要删除此日志会话吗？此操作不可逆！</string>
     <string name="delete_log_dialog__title_delete_log">删除会话？</string>
     <string name="preferred_apps_settings">为支持的主机设置偏好应用</string>
-    <string name="cancel">取消</string>
     <string name="export_log_dialog__title_redact_log">删减日志</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">隐藏底栏中的“仅一次”与“始终”按钮</string>
     <string name="crash_viewer__subtitle_app_crashed">哦天哪，这不该发生的！</string>
@@ -356,7 +353,6 @@
     <string name="export_log_dialog__title_share_logs">分享日志</string>
     <string name="export_log_dialog__subtitle_redact_log">推荐，删减应用名称与链接</string>
     <string name="settings_links_downloader__title_downloader">下载器</string>
-    <string name="generic__button_text_cancel">取消</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">查看捕获于 %s 的日志</string>
     <string name="settings_main_news__text_ui_overhaul">LinkSheet 的界面焕然一新！</string>
     <string name="settings_main_setup_success__button_connected_apps">已关联应用</string>

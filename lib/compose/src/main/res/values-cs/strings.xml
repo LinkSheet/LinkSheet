@@ -7,5 +7,6 @@
     <string name="request_timeout_explainer">Určuje, kolik sekund bude aplikace LinkSheet čekat na navázání spojení. Nastavením na 0 se časový limit vypne, to ale nedoporučujeme.</string>
     <string name="checkmark">Zaškrtávátko</string>
     <string name="error">Chyba</string>
-    <string name="cancel">Zrušit</string>
+    <string name="generic__button_text_cancel">Zrušit</string>
+    <string name="generic__button_text_confirm">Potvrdit</string>
 </resources>

@@ -12,7 +12,6 @@ import fe.android.span.helper.formatter.SpanFormatter
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])

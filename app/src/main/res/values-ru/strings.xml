@@ -174,7 +174,6 @@
     <string name="built_at">Построено в (UTC):</string>
     <string name="linksheet_donation_explainer_2">Пожертвование на сумму более <b>5€</b> (<b>4€</b>, если вы делаете пожертвование в криптовалюте!) открывает вам доступ к <b>LinkSheet Pro</b>, который в настоящее время только скрывает баннер пожертвования на главном экране приложения, но в будущем появятся <b>эксклюзивные Pro функции.</b></string>
     <string name="github_pipeline_build">Создан и подписан рабочим процессом Github</string>
-    <string name="import_settings">Импортировать настройки</string>
     <string name="launch_onboarding">Запустить процесс адаптации</string>
     <string name="other">Другое</string>
     <string name="export_import_settings">Экспорт или импорт настроек</string>
@@ -184,7 +183,6 @@
     <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="thanks_for_donating">Спасибо за пожертвование!</string>
     <string name="app_setup">Настройка приложения</string>
-    <string name="confirm_import">Подтвердить</string>
     <string name="include_log_hash_key">Включите хэш-ключ журнала (ключ, используемый для редактирования ваших журналов)</string>
     <string name="import_explainer">Импортировать предыдущий экспорт из файла</string>
     <string name="github_workflow_run_id">Идентификатор рабочего процесса сборки:</string>

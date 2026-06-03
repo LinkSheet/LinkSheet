@@ -232,9 +232,7 @@
     <string name="include_history">تضمين السجل (النقر على الرابط وسجل التطبيق)</string>
     <string name="export_to_file">تصدير الى ملف</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">إعدادات الاستيراد</string>
     <string name="import_settings_override_preferences">سيؤدي هذا إلى تجاوز كافة التفضيلات الموجودة. استمرار؟</string>
-    <string name="confirm_import">تاكيد</string>
     <string name="manual_build">تم إنشاؤه يدويًا وتوقيعه بواسطة 1fexd</string>
     <string name="export_include_recommendation">نوصي بتمكين الإعدادات التالية فقط إذا كنت لا تخطط لمشاركة تصديرك مع شخص آخر!</string>
     <string name="export_privacy">للتعرف على خصوصية التصدير، يمكنك زيارة هذا <annotation url-id="privacy-exports">الرابط</annotation>.</string>
@@ -307,7 +305,6 @@
     <string name="onboarding_4_button">التالي</string>
     <string name="export_log_dialog__title_include_fingerprint">تضمين بصمة الإصدار</string>
     <string name="export_log_dialog__title_redact_log">تنقيح السجل</string>
-    <string name="generic__button_text_cancel">إلغاء</string>
     <string name="resolve_event__sorting_apps">جاري فرز قائمة التطبيقات</string>
     <string name="resolve_event__generating_preview">جاري إنشاء معاينة</string>
     <string name="home__clipboard_card_source">من الحافظة</string>
@@ -358,7 +355,6 @@
     <string name="settings_main_setup_success__button_change_browser">المتصفح الافتراضي</string>
     <string name="delete_log_dialog__title_delete_log">حذف الجلسة؟</string>
     <string name="tap_customization_dialog_text">اختر الإجراء الذي يجب تنفيذه</string>
-    <string name="cancel">إلغاء</string>
     <string name="settings_app_config__title_browsers">المتصفحات</string>
     <string name="export_log_dialog__title_include_settings">تضمين الإعدادات</string>
     <string name="settings_app_config_rules__title_default_rule">القاعدة الافتراضية</string>

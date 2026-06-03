@@ -81,7 +81,6 @@
     <string name="join">参加</string>
     <string name="donate">寄付</string>
     <string name="flavor"><b>フレーバー:</b> <font face="monospace">%s</font></string>
-    <string name="confirm_import">確認</string>
     <string name="bottom_sheet">ボトムシート</string>
     <string name="whitelisted_browsers">ホワイトリストに登録されているブラウザ</string>
     <string name="version">LinkSheet バージョン</string>
@@ -155,7 +154,6 @@
     <string name="open_app">アプリを開く</string>
     <string name="tap_customization_dialog_title">%s を構成する</string>
     <string name="tap_customization_dialog_text">実行するアクションを選択してください</string>
-    <string name="cancel">キャンセル</string>
     <string name="tap_customization_dialog_title_long_tap">長押し</string>
     <string name="log_files">過去のセッション</string>
     <string name="onboarding_4_card_explainer">LinkSheet で処理する必要があるすべてのドメインのリンク処理を無効にします。</string>
@@ -175,7 +173,6 @@
     <string name="settings_verified_link_handlers__text_user_apps">ユーザーアプリ</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">すべて</string>
     <string name="generic__button_text_copy_clipboard">クリップボードにコピー</string>
-    <string name="generic__button_text_cancel">キャンセル</string>
     <string name="export_log_dialog__text_log_info">次の場所でキャプチャされたログの共有設定を構成します: <font face="monospace">%s</font></string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet は正しくセットアップされ、操作できる状態です</string>
     <string name="resolve_event__sorting_apps">アプリリストの並べ替え</string>
@@ -244,7 +241,6 @@
     <string name="github_workflow_run_id"><b>ワークフロー ID:</b> <font face="monospace">%s</font></string>
     <string name="version_name"><b>バージョン:</b> <font face="monospace">%s</font></string>
     <string name="built_at"><b>ビルド:</b> <font face="monospace">%s</font></string>
-    <string name="import_settings">インポート設定</string>
     <string name="fastforward_version">FastForward ルール</string>
     <string name="download_started_toast">ダウンロードを開始しました</string>
     <string name="online_services">オンラインサービス</string>

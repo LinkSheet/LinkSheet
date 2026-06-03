@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Instellingen importeren</string>
+    <string name="settings_backup__title_restore_dialog">Instellingen importeren</string>
     <string name="import_settings_override_preferences">Dit zal de huidige instellingen overschrijven. Doorgaan?</string>
-    <string name="confirm_import">OK</string>
     <string name="export_settings">Instellingen exporteren</string>
     <string name="export_include_recommendation">We raden aan om de volgende instellingen alleen in te schakelen als je niet van plan bent om de uitvoer met iemand anders te delen!</string>
     <string name="include_log_hash_key">Hash-sleutel waarmee gevoelige informatie in het logboek wordt afgeschermd bijvoegen</string>

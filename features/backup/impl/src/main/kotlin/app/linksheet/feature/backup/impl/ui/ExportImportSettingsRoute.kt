@@ -2,12 +2,14 @@ package app.linksheet.feature.backup.impl.ui
 
 import android.widget.Toast
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ImportExport
+import androidx.compose.material.icons.rounded.Backup
+import androidx.compose.material.icons.rounded.SettingsBackupRestore
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.impl.R
 import app.linksheet.feature.backup.impl.ui.exportimport.FileSelectionResult
 import app.linksheet.feature.backup.impl.ui.exportimport.rememberExportSettingsDialog
@@ -32,11 +34,11 @@ fun ExportImportSettingsRoute(
 
     val exportDialog = rememberExportSettingsDialog(
         exportIntent = viewModel.createExportIntent(),
-        onResult = { (result, includeLogHashKey) ->
+        onResult = { exportResult ->
             scope.launch {
-                when (result) {
+                when (val result = exportResult.result) {
                     is FileSelectionResult.Ok -> {
-                        val result = viewModel.exportPreferences(result.uri, includeLogHashKey)
+                        val result = viewModel.exportPreferences(result.uri, exportResult.settings)
                         val resId = if (result.isSuccess()) R.string.export_settings__text_success
                         else R.string.export_settings__text_failure
 
@@ -50,12 +52,12 @@ fun ExportImportSettingsRoute(
     )
 
     val importDialog = rememberImportSettingsDialog(
-        importIntent = viewModel.createImportIntent(),
-        onResult = { result ->
+        importIntent = ExportSettingsViewModel2.ImportIntent,
+        onResult = { importResult ->
             scope.launch {
-                when (result) {
+                when (val result = importResult.result) {
                     is FileSelectionResult.Ok -> {
-                        val result = viewModel.importPreferences(result.uri)
+                        val result = viewModel.importPreferences(result.uri, ImportSettings.Default)
                         val resId = if (result.isSuccess()) R.string.import_settings__text_success
                         else R.string.import_settings__text_failure
 
@@ -79,7 +81,7 @@ fun ExportImportSettingsRoute(
                     padding = padding,
                     headlineContent = textContent(R.string.export),
                     supportingContent = textContent(R.string.export_explainer),
-                    icon = Icons.Outlined.ImportExport.iconPainter,
+                    icon = Icons.Rounded.Backup.iconPainter,
                     onClick = {
                         exportDialog.open()
                     }
@@ -92,7 +94,7 @@ fun ExportImportSettingsRoute(
                     padding = padding,
                     headlineContent = textContent(R.string.import_headline),
                     supportingContent = textContent(R.string.import_explainer),
-                    icon = Icons.Outlined.ImportExport.iconPainter,
+                    icon = Icons.Rounded.SettingsBackupRestore.iconPainter,
                     onClick = {
                         importDialog.open()
                     }

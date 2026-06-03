@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">ਸੈਟਿੰਗਾਂ ਇੰਪੋਰਟ ਕਰੋ</string>
+    <string name="settings_backup__title_restore_dialog">ਸੈਟਿੰਗਾਂ ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="import_settings_override_preferences">ਇਹ ਸਾਰੀਆਂ ਮੌਜੂਦਾ ਤਰਜੀਹਾਂ ਨੂੰ ਓਵਰਰਾਈਡ ਕਰ ਦੇਵੇਗਾ। ਜਾਰੀ ਰੱਖਣਾ ਹੈ?</string>
-    <string name="confirm_import">ਤਸਦੀਕ ਕਰੋ</string>
     <string name="export_settings">ਐਕਸਪੋਰਟ ਸੈਟਿੰਗਾਂ</string>
     <string name="export_include_recommendation">ਅਸੀਂ ਸਿਫ਼ਾਰਿਸ਼ ਕਰਦੇ ਹਾਂ ਕਿ ਤੁਸੀਂ ਨਿਮਨਲਿਖਤ ਸੈਟਿੰਗਾਂ ਨੂੰ ਤਾਂ ਹੀ ਚਾਲੂ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਕਿਸੇ ਹੋਰ ਨਾਲ ਆਪਣੇ ਐਕਸਪੋਰਟ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਦੀ ਯੋਜਨਾ ਨਹੀਂ ਬਣਾਉਂਦੇ ਹੋ!</string>
     <string name="include_log_hash_key">ਲੌਗ ਹੈਸ਼ ਕੁੰਜੀ ਸ਼ਾਮਲ ਕਰੋ (ਤੁਹਾਡੇ ਲੌਗਸ ਨੂੰ ਸੋਧਣ ਲਈ ਵਰਤੀ ਜਾਂਦੀ ਕੁੰਜੀ)</string>

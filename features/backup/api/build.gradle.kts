@@ -2,14 +2,13 @@
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies._1fexd
 
 plugins {
-    kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -35,25 +34,8 @@ dependencies {
     implementation(project(":lib-compose"))
     implementation(project(":lib-log"))
     implementation(project(":lib-util"))
-    implementation(Koin.workManager)
-
-
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
-
-    implementation(_1fexd.composeKit.core)
-    implementation(_1fexd.composeKit.koin)
-    implementation(_1fexd.composeKit.lifecycle.core)
-    implementation(_1fexd.composeKit.lifecycle.koin)
-    implementation(_1fexd.composeKit.compose.core)
-    implementation(_1fexd.composeKit.compose.component)
-    implementation(_1fexd.composeKit.compose.dialog)
-    implementation(_1fexd.composeKit.preference.compose.core)
-    implementation(_1fexd.composeKit.preference.compose.core2)
-    implementation(_1fexd.composeKit.preference.compose.mock)
-    implementation(_1fexd.composeKit.preference.compose.mock2)
-
-    implementation(Grrfe.gsonExt.core)
     implementation(AndroidX.core.ktx)
 
     androidTestImplementation(AndroidX.test.uiAutomator)

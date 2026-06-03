@@ -6,4 +6,5 @@
     <string name="request_timeout_explainer">Определяет, сколько секунд LinkSheet будет ждать установления соединения. Установка значения 0 отключает тайм-аут, но это не рекомендуется.</string>
     <string name="checkmark">Галочка</string>
     <string name="error">Ошибка</string>
+    <string name="generic__button_text_confirm">Подтвердить</string>
 </resources>

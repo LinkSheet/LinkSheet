@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">Xuất_thiết_đặt_linksheet_%s</string>
-    <string name="import_settings">Nhập thiết đặt</string>
+    <string name="settings_backup__title_restore_dialog">Nhập thiết đặt</string>
     <string name="import_settings_override_preferences">Điều này sẽ ghi đè tất cả các tùy chọn hiện có. Tiếp tục?</string>
-    <string name="confirm_import">Xác nhận</string>
     <string name="export_settings">Xuất thiết đặt</string>
     <string name="export_include_recommendation">Chúng tôi khuyên bạn chỉ nên bật các thiết đặt sau nếu bạn không có kế hoạch chia sẻ nội dung xuất của mình với người khác!</string>
     <string name="include_log_hash_key">Bao gồm khóa băm nhật ký (khóa được sử dụng để sắp xếp lại nhật ký của bạn)</string>

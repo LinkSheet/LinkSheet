@@ -212,9 +212,7 @@
     <string name="include_history">Geschiedenis van verwerkte links en apps bijvoegen</string>
     <string name="export_privacy"><annotation url-id="privacy-exports">Lees meer</annotation> over het privacybeleid bij exporteren.</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Instellingen importeren</string>
     <string name="import_settings_override_preferences">Dit zal de huidige instellingen overschrijven. Doorgaan?</string>
-    <string name="confirm_import">OK</string>
     <string name="fastforward_version">Regels voor FastForward</string>
     <string name="dev_mode_enabled">Je hebt de ontwikkelaarsmodus ingeschakeld. Wees voorzichtig.</string>
     <string name="debug_build">Debug-build</string>
@@ -322,7 +320,6 @@
     <string name="open_app">App openen</string>
     <string name="no_action">Geen actie</string>
     <string name="tap_customization_dialog_text">Kies de actie die moet worden uitgevoerd</string>
-    <string name="cancel">Annuleren</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="one">%d host: %s</item>
         <item quantity="other">%d hosts: %s</item>
@@ -400,7 +397,6 @@
     <string name="export_log_dialog__title_include_throwable">Crashlogs bijvoegen</string>
     <string name="export_log_dialog__title_include_settings">Instellingen bijvoegen</string>
     <string name="export_log_dialog__subtitle_include_settings">Aanbevolen</string>
-    <string name="generic__button_text_cancel">Annuleren</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Log aangemaakt op: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Oef, dat had niet mogen gebeuren!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>

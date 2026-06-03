@@ -221,9 +221,7 @@
     <string name="app_setup">Configuration de l\'app</string>
     <string name="export_privacy">Pour en savoir plus sur la confidentialité des exportations, vous pouvez visiter ce <annotation url-id="privacy-exports">lien</annotation>.</string>
     <string name="export_to_file">Exporter vers un fichier</string>
-    <string name="import_settings">Paramètres d\'importation</string>
     <string name="import_settings_override_preferences">Cela remplacera toutes les préférences existantes. Poursuivre ?</string>
-    <string name="confirm_import">Confirmer</string>
     <string name="clear_urls_version">Règles ClearURLs</string>
     <string name="dev_mode_enabled">Félicitations, vous avez activé le mode dev. Soyez prudent.</string>
     <string name="fastforward_version">Règles FastForward</string>
@@ -312,7 +310,6 @@
         <item quantity="other">%d hôtes désactivés</item>
     </plurals>
     <string name="settings_verified_link_handlers__text_browser">Navigateur</string>
-    <string name="cancel">Annuler</string>
     <string name="tap_customization_dialog_title_long_tap">Long tapotement</string>
     <string name="link_handle_failed_text">LinkSheet ne peut pas gérer ce lien car il semble incorrect. Vous pouvez le modifier ci-dessous, puis réessayer. Vous pouvez également effectuer une recherche sur le Web.</string>
     <string name="reset_app_link_verification_status_subtitle">Tapez ici pour réinitialiser le statut de vérification du lien avec l\'application pour toutes les applications, puis attendez quelques minutes pendant qu\'Android les revérifie. Vous ne recevrez pas de confirmation. Nécessite Shizuku.</string>
@@ -388,7 +385,6 @@
     <string name="export_log_dialog__subtitle_include_settings">Recommandé</string>
     <string name="export_log_dialog__text_log_privacy">Pour en savoir plus sur les données potentiellement sensibles dans les fichiers journaux partagés, appuyez sur <annotation url-id="privacy-logs">ici</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Copier dans le presse-papier</string>
-    <string name="generic__button_text_cancel">Annuler</string>
     <string name="crash_viewer__subtitle_app_crashed">Oh mince, ça n’aurait pas dû arriver !</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Téléchargeur</string>

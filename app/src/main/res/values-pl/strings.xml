@@ -200,12 +200,10 @@
     <string name="built_by_error">Ta kompilacja nie została podpisana przez 1fexd, ani przez przepływ pracy GitHub.</string>
     <string name="export_to_file">Eksportuj do pliku</string>
     <string name="linksheet_donation_explainer_2">Darowizna w wysokości ponad <b>5€</b> zapewnia dostęp do <b>LinkSheet Pro</b>, który zawiera <b>funkcje dostępne tylko w wersji Pro</b>, takie jak: zewnętrzne śledzenie przekierowań, zewnętrznie uzyskiwanie stron nie-AMP i wiele innych, które będą dostępne w przyszłości!</string>
-    <string name="import_settings">Przywracanie ustawień</string>
     <string name="export_import_settings">Kopia ustawień</string>
     <string name="import_headline">Przywróć z kopii zapasowej</string>
     <string name="export_include_recommendation">Zalecamy włączenie poniższych ustawień tylko wtedy, gdy nie planujesz udostępniać eksportu komuś innemu!</string>
     <string name="export_file_name">linksheet_kopia_ustawień_%s</string>
-    <string name="confirm_import">Potwierdzam</string>
     <string name="include_log_hash_key">Dołącz klucz hash logu (klucz używany do usuwania danych z logów)</string>
     <string name="import_explainer">Importuj ustawienia z pliku</string>
     <string name="export_privacy">Aby dowiedzieć się więcej na temat prywatności eksportu, możesz odwiedzić ten <annotation url-id="privacy-exports">link</annotation>.</string>
@@ -341,7 +339,6 @@
     <string name="open_app">Otwórz aplikację</string>
     <string name="tap_customization_dialog_title_single_tap">pojedyncze dotknięcie</string>
     <string name="tap_customization_dialog_title_double_tap">podwójne dotknięcie</string>
-    <string name="cancel">Anuluj</string>
     <string name="expand_on_app_select_explainer">Automatycznie rozwijaj dolny panel, gdy aplikacja jest wybrana</string>
     <string name="nightly_experiments_card">Nocne eksperymenty</string>
     <string name="share">Udostępnij link</string>
@@ -369,7 +366,6 @@
     <string name="resolve_event__checking_browsers">Sprawdzanie przeglądarek</string>
     <string name="export_log_dialog__text_log_info">Skonfiguruj udostępnianie dla przechwyconego dziennika: <font face="monospace">%s</font></string>
     <string name="export_log_dialog__title_include_fingerprint">Dołącz odcisk wersji (build fingerprint)</string>
-    <string name="generic__button_text_cancel">Anuluj</string>
     <string name="settings_edit_rule__title_edit_rule">Edytowanie zasady</string>
     <string name="settings_links_follow_redirects__title_skip_browser">Pomiń, gdy pochodzi z przeglądarki</string>
     <string name="settings_credits__app_credit_reason_seal">Inspiracja projektowa</string>

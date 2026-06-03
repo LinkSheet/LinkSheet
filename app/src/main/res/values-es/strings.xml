@@ -200,12 +200,10 @@
     <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd ni por el flujo de trabajo de Github.</string>
     <string name="export_to_file">Exportar a un archivo</string>
     <string name="linksheet_donation_explainer_2">Una donación de más de <b>5€</b> te permite acceder a <b>LinkSheet Pro</b>, que incluye <b>características exclusivas Pro</b> como: seguir redirecciones externamente, obtener páginas no AMP externamente y ¡mucho más por venir!</string>
-    <string name="import_settings">Importar los ajustes</string>
     <string name="export_import_settings">Exportar o importar los ajustes</string>
     <string name="import_headline">Importar</string>
     <string name="export_include_recommendation">¡Le recomendamos que active la siguiente configuración sólo si no planea compartir su exportación con otra persona!</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="confirm_import">Confirmar</string>
     <string name="include_log_hash_key">Incluya la clave hash del registro (la clave utilizada para redactar sus registros)</string>
     <string name="import_explainer">Importar una exportación anterior desde un archivo</string>
     <string name="export_privacy">Para obtener información sobre la privacidad de las exportaciones, puede visitar este <annotation url-id="privacy-exports">enlace</annotation>.</string>
@@ -318,7 +316,6 @@
     <string name="tap_customization_dialog_title">Configurar %s</string>
     <string name="tap_customization_dialog_title_single_tap">una sola pulsación</string>
     <string name="tap_customization_dialog_text">Elija la acción que debe realizarse</string>
-    <string name="cancel">Cancelar</string>
     <string name="expand_on_app_select_explainer">Expandir automáticamente la hoja inferior cuando se selecciona una aplicación</string>
     <string name="expand_on_app_select">Expandir cuando se selecciona una aplicación</string>
     <string name="telemetry_configure_title">Analíticas</string>
@@ -382,7 +379,6 @@
     <string name="export_log_dialog__title_redact_log">Editar registro</string>
     <string name="export_log_dialog__title_include_throwable">Incluir registro de errores</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Recomendado</string>
-    <string name="generic__button_text_cancel">Cancelar</string>
     <string name="crash_viewer__subtitle_app_crashed">¡Vaya, eso no debería haber ocurrido!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Descargador</string>

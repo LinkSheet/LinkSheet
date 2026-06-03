@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">Beállítások importálása</string>
+    <string name="settings_backup__title_restore_dialog">Beállítások importálása</string>
     <string name="import_settings_override_preferences">Ez felülír minden meglévő beállítást. Folytatja?</string>
-    <string name="confirm_import">Megerősítem</string>
     <string name="export_settings">Beállítások exportálása</string>
     <string name="export_include_recommendation">Javasoljuk, hogy csak akkor kapcsolja be az alábbi beállításokat, ha nem tervezi megosztani az exportálást másokkal!</string>
     <string name="include_log_hash_key">Tartalmazza a napló hash-kulcsot (a naplóbejegyzés elrejtéséhez használt kulcs)</string>

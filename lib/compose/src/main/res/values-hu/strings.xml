@@ -10,5 +10,6 @@
     <string name="generic__text_mode">Mód</string>
     <string name="checkmark">Pipa</string>
     <string name="error">Hiba</string>
-    <string name="cancel">Mégse</string>
+    <string name="generic__button_text_cancel">Mégse</string>
+    <string name="generic__button_text_confirm">Megerősítem</string>
 </resources>

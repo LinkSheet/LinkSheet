@@ -6,5 +6,6 @@
     <string name="request_timeout_explainer">Bepaal hoeveel seconden LinkSheet wacht totdat een verbinding tot stand is gebracht. Bij de waarde 0 wordt de time-out uitgeschakeld, maar dit wordt niet aangeraden.</string>
     <string name="checkmark">Vinkje</string>
     <string name="error">Fout</string>
-    <string name="cancel">Annuleren</string>
+    <string name="generic__button_text_cancel">Annuleren</string>
+    <string name="generic__button_text_confirm">OK</string>
 </resources>

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">exportation_paramètres_linksheet_%s</string>
-    <string name="import_settings">Paramètres d\'importation</string>
+    <string name="settings_backup__title_restore_dialog">Paramètres d\'importation</string>
     <string name="import_settings_override_preferences">Cela remplacera toutes les préférences existantes. Poursuivre ?</string>
-    <string name="confirm_import">Confirmer</string>
     <string name="export_settings">Paramètres d\'exportation</string>
     <string name="export_include_recommendation">Nous vous recommandons d\'activer les paramètres suivants uniquement si vous n\'avez pas l\'intention de partager votre exportation avec quelqu\'un d\'autre !</string>
     <string name="include_log_hash_key">Inclure la clé de hachage des journaux (la clé utilisée pour expurger vos journaux)</string>

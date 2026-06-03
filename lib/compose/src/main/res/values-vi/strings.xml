@@ -6,5 +6,6 @@
     <string name="request_timeout_explainer">Xác định số giây LinkSheet sẽ đợi để thiết lập kết nối. Đặt giá trị này thành 0 sẽ tắt thời gian chờ nhưng điều này không được khuyến khích.</string>
     <string name="checkmark">Đánh dấu</string>
     <string name="error">Lỗi</string>
-    <string name="cancel">Hủy</string>
+    <string name="generic__button_text_cancel">Hủy</string>
+    <string name="generic__button_text_confirm">Xác nhận</string>
 </resources>

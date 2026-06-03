@@ -139,7 +139,6 @@
     <string name="pretend_to_be_app_explainer_2">Một số ứng dụng như Google Chrome tìm kiếm ứng dụng gốc một cách rõ ràng để xử lý, chẳng hạn như liên kết Youtube khi ứng dụng đó được nhấn vào kết quả tìm kiếm. LinkSheetCompat giả vờ là một ứng dụng gốc dành cho các máy chủ được hỗ trợ và sau đó chuyển tiếp yêu cầu tới LinkSheet.</string>
     <string name="configure">Cấu hình</string>
     <string name="debug">Gỡ lỗi</string>
-    <string name="confirm_import">Xác nhận</string>
     <string name="general">Điều khoản khác</string>
     <string name="compat_installed">LinkSheetCompat đã được cài đặt</string>
     <string name="debug_explainer">Nhật ký ứng dụng, đặt lại trình xử lý đã được xác minh</string>
@@ -192,7 +191,6 @@
     <string name="export_import_settings_explainer">Xuất thiết đặt hiện tại của bạn hoặc nhập thiết đặt đã xuất trước đó</string>
     <string name="export_import_settings">Xuất hoặc nhập thiết đặt</string>
     <string name="import_settings_override_preferences">Điều này sẽ ghi đè tất cả các tùy chọn hiện có. Tiếp tục?</string>
-    <string name="import_settings">Nhập thiết đặt</string>
     <string name="onboarding_5_card_explainer">Cấu hình cơ bản cần thiết để LinkSheet hoạt động đã được thực hiện - hãy đi tới phần thiết đặt để khám phá những tính năng khác mà nó cung cấp!</string>
     <string name="urlbar_settings">Thanh url</string>
     <string name="export_settings">Xuất thiết đặt</string>
@@ -242,7 +240,6 @@
     <string name="tap_customization_dialog_title_double_tap">nhấn đúp</string>
     <string name="tap_customization_dialog_title_long_tap">nhấn lâu</string>
     <string name="tap_customization_dialog_text">Chọn hành động cần thực hiện</string>
-    <string name="cancel">Hủy</string>
     <string name="open_app_settings_page">Mở trang thiết đặt của ứng dụng</string>
     <string name="open_app">Mở ứng dụng</string>
     <string name="select_app">Chọn ứng dụng</string>

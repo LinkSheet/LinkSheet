@@ -1,19 +1,29 @@
-@file:OptIn(SensitivePreference::class)
+@file:OptIn(SensitivePreference::class, ExperimentalSerializationApi::class)
 
 package fe.linksheet.module.viewmodel.module
 
 
 import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.backup.api.ExportModel
+import app.linksheet.feature.backup.impl.usecase.DatabaseExportImportHolder
+import app.linksheet.feature.backup.impl.usecase.DatabaseType
 import app.linksheet.feature.backup.impl.usecase.ExportImportUseCase2
 import app.linksheet.feature.backup.impl.usecase.PreferenceExportImportHolder
+import app.linksheet.feature.backup.impl.usecase.PreferenceType
+import app.linksheet.feature.backup.model.Amp2HtmlMappingExportModel
+import app.linksheet.feature.backup.model.AppSelectionHistoryExportModel
+import app.linksheet.feature.backup.model.DisableInAppBrowserInSelectedExportModel
+import app.linksheet.feature.backup.model.PreferredAppExportModel
+import app.linksheet.feature.backup.model.ResolvedRedirectExportModel
+import app.linksheet.feature.backup.model.WhitelistedInAppBrowserExportModel
+import app.linksheet.feature.backup.model.WhitelistedNormalBrowserExportModel
 import app.linksheet.feature.exportimport.ExportImportUseCase
 import app.linksheet.feature.profile.ProfileFeatureModule
 import com.akuleshov7.ktoml.Toml
 import fe.gson.GsonQualifier
 import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.module.log.DefaultLogModule
-import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
@@ -61,7 +71,10 @@ import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import kotlinx.coroutines.Dispatchers
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.qualifier
@@ -97,38 +110,45 @@ val ViewModelModule = module {
         )
     }
     factory {
-        val preferencesHolder = PreferenceExportImportHolder(
-            name = "preferences",
-            repository = get<AppPreferenceRepository>(),
-            definition = AppPreferences,
-            exclude = AppPreferences.sensitivePreferences.mapToSet { it.key }
-        )
-        val experimentsHolder = PreferenceExportImportHolder(
-            name = "experiments",
-            repository = get<ExperimentRepository>(),
-            definition = Experiments,
-        )
-        val appStateHolder = PreferenceExportImportHolder(
-            name = "appState",
-            repository = get<DefaultAppStateRepository>(),
-            definition = AppStatePreferences,
-        )
-        val holders = listOf(
-            preferencesHolder,
-            experimentsHolder,
-            appStateHolder
-        )
+        val module = SerializersModule {
+            polymorphic(ExportModel::class) {
+                subclassesOfSealed<Amp2HtmlMappingExportModel>()
+                subclassesOfSealed<AppSelectionHistoryExportModel>()
+                subclassesOfSealed<DisableInAppBrowserInSelectedExportModel>()
+                subclassesOfSealed<PreferredAppExportModel>()
+                subclassesOfSealed<ResolvedRedirectExportModel>()
+                subclassesOfSealed<WhitelistedInAppBrowserExportModel>()
+                subclassesOfSealed<WhitelistedNormalBrowserExportModel>()
+            }
+        }
         ExportImportUseCase2(
-            json = Json.Default,
-            holders = holders,
-            exportableRepositories = listOf(
-                get<PreferredAppRepository>(),
-                get<DisableInAppBrowserInSelectedRepository>(),
-                get<WhitelistedNormalBrowsersRepository>(),
-                get<WhitelistedInAppBrowsersRepository>(),
-                get<AppSelectionHistoryRepository>(),
-                get<ResolvedRedirectRepository>(),
-                get<Amp2HtmlRepository>()
+            json = Json { serializersModule = module },
+            holders = listOf(
+                PreferenceExportImportHolder(
+                    type = PreferenceType.Preferences,
+                    repository = get<AppPreferenceRepository>(),
+                    definition = AppPreferences,
+                    exclude = AppPreferences.sensitivePreferences.mapToSet { it.key }
+                ),
+                PreferenceExportImportHolder(
+                    type = PreferenceType.Experiments,
+                    repository = get<ExperimentRepository>(),
+                    definition = Experiments,
+                ),
+                PreferenceExportImportHolder(
+                    type = PreferenceType.AppState,
+                    repository = get<DefaultAppStateRepository>(),
+                    definition = AppStatePreferences,
+                )
+            ),
+            databaseHolders = listOf(
+                DatabaseExportImportHolder(PreferenceType.Preferences , get<PreferredAppRepository>()),
+                DatabaseExportImportHolder(PreferenceType.Preferences , get<DisableInAppBrowserInSelectedRepository>()),
+                DatabaseExportImportHolder(PreferenceType.Preferences , get<WhitelistedNormalBrowsersRepository>()),
+                DatabaseExportImportHolder(PreferenceType.Preferences , get<WhitelistedInAppBrowsersRepository>()),
+                DatabaseExportImportHolder(DatabaseType.SelectionHistory , get<AppSelectionHistoryRepository>()),
+                DatabaseExportImportHolder(DatabaseType.Cache , get<ResolvedRedirectRepository>()),
+                DatabaseExportImportHolder(DatabaseType.Cache, get<Amp2HtmlRepository>())
             ),
             ioDispatcher = Dispatchers.IO
         )

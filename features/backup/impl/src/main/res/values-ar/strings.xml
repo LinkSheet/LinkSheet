@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">إعدادات الاستيراد</string>
+    <string name="settings_backup__title_restore_dialog">إعدادات الاستيراد</string>
     <string name="import_settings_override_preferences">سيؤدي هذا إلى تجاوز كافة التفضيلات الموجودة. استمرار؟</string>
-    <string name="confirm_import">تاكيد</string>
     <string name="export_settings">إعدادات التصدير</string>
     <string name="export_include_recommendation">نوصي بتمكين الإعدادات التالية فقط إذا كنت لا تخطط لمشاركة تصديرك مع شخص آخر!</string>
     <string name="include_log_hash_key">قم بتضمين مفتاح تجزئة السجل (المفتاح المستخدم لتنقيح سجلاتك)</string>

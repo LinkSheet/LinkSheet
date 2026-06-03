@@ -15,6 +15,7 @@ import app.linksheet.compose.debug.NoOpDebugPreferenceProvider
 import app.linksheet.feature.analytics.client.DebugLogAnalyticsClient
 import app.linksheet.feature.analytics.service.AnalyticsServiceModule
 import app.linksheet.feature.app.AppModule
+import app.linksheet.feature.backup.impl.BackupFeatureModule
 import app.linksheet.feature.browser.PrivateBrowsingModule
 import app.linksheet.feature.devicecompat.CompatModule
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
@@ -168,6 +169,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             LinkEngineFeatureModule,
             WikiFeatureModule,
             PrivateBrowsingModule,
+            BackupFeatureModule
         )
     }
 

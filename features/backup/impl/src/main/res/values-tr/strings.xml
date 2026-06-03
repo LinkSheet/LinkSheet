@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_file_name">linksheet_settings_export_%s</string>
-    <string name="import_settings">İçe aktarma ayarları</string>
+    <string name="settings_backup__title_restore_dialog">İçe aktarma ayarları</string>
     <string name="import_settings_override_preferences">Bu, şu anki bütün tercihlerinizin üzerine yazacaktır. Devam et?</string>
-    <string name="confirm_import">Onayla</string>
     <string name="export_settings">Dışa aktarma ayarları</string>
     <string name="export_include_recommendation">Aşağıdaki ayarları sadece dışa aktarmanızı başka biriyle paylaşmayı düşünmüyorsanız etkinleştirmenizi öneririz!</string>
     <string name="include_log_hash_key">Günlük hash anahtarını dahil et (günlüklerinizi gizlemek için kullanılan anahtar)</string>

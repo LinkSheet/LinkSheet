@@ -1,3 +1,5 @@
+@file:OptIn(UnsafePreferenceInteraction::class)
+
 package fe.linksheet.module.preference.app
 
 
@@ -10,9 +12,9 @@ import app.linksheet.feature.profile.preference.profilePreferences
 import app.linksheet.feature.remoteconfig.preference.remoteConfigPreferences
 import app.linksheet.feature.shizuku.preference.shizukuPreferences
 import com.google.gson.JsonArray
+import fe.android.preference.helper.UnsafePreferenceInteraction
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
-import fe.linksheet.composable.ui.Theme
 import fe.linksheet.module.preference.LinkSheetPreferenceDefinition
 import java.util.UUID
 
@@ -29,7 +31,8 @@ object AppPreferences : LinkSheetPreferenceDefinition(
     "use_dev_bottom_sheet",
     "dev_bottom_sheet_experiment",
     "show_discord_banner",
-    "donate_card_dismissed"
+    "donate_card_dismissed",
+    "theme"
 ) {
     val alwaysShowPackageName = boolean("always_show_package_name")
     val useClearUrls = boolean("use_clear_urls")
@@ -73,19 +76,26 @@ object AppPreferences : LinkSheetPreferenceDefinition(
     val remoteConfig = remoteConfigPreferences(registry)
 
     init {
-        mapped("theme", Theme.System, Theme).migrate { repository, theme ->
+        migrate("theme") { repository ->
             if (!repository.hasStoredValue(themeV2.themeV2)) {
-                if (theme == Theme.AmoledBlack) {
+                val theme = repository.raw.unsafeGetInt("theme", 0)
+                if (theme == 3) {
                     repository.put(themeV2.amoled, true)
                 }
-
-                repository.put(themeV2.themeV2, theme.toV2())
+                val value = when(theme) {
+                    0 -> fe.linksheet.composable.ui.ThemeV2.System
+                    1 -> fe.linksheet.composable.ui.ThemeV2.Light
+                    2, 3 -> fe.linksheet.composable.ui.ThemeV2.Dark
+                    else -> null
+                }
+                if (value != null) {
+                    repository.put(themeV2.themeV2, value)
+                }
             }
         }
-        downloader.requestTimeout.migrateTo { repository, i ->
-            when {
-                repository.hasStoredValue(requestTimeout) -> repository.get(requestTimeout)
-                else -> i
+        requestTimeout.migrate { repository, i ->
+            if(!repository.hasStoredValue(downloader.requestTimeout)) {
+                repository.put(downloader.requestTimeout, i)
             }
         }
 

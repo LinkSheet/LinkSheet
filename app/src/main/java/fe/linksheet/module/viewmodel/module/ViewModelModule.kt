@@ -72,7 +72,7 @@ import kotlin.time.ExperimentalTime
 @OptIn(ExperimentalTime::class)
 val ViewModelModule = module {
     includes(
-        PreferenceRepositoryModule,
+//        PreferenceRepositoryModule,
         RepositoryModule,
         DefaultLogModule,
         ProfileFeatureModule

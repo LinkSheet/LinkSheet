@@ -7,7 +7,6 @@ import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
 import fe.linksheet.extension.kotlin.nowMillis
-import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
@@ -18,7 +17,7 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 val AppStateServiceModule = module {
-    includes(PreferenceRepositoryModule)
+//    includes(PreferenceRepositoryModule)
     service<AppStateService> {
         AppStateService(
             clock = scope.get(),

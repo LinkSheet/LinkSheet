@@ -2,6 +2,7 @@ package fe.linksheet.module.versiontracker
 
 import androidx.lifecycle.LifecycleOwner
 import app.linksheet.api.SystemInfoService
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.analytics.service.AnalyticsEvent
 import app.linksheet.feature.analytics.service.AppStart
 import app.linksheet.feature.analytics.service.BaseAnalyticsService
@@ -12,15 +13,15 @@ import fe.android.lifecycle.koin.extension.service
 import fe.gson.GlobalGsonModule
 import fe.gson.GsonQualifier
 import fe.linksheet.BuildConfig
-import fe.linksheet.module.preference.PreferenceRepositoryModule
-import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.systeminfo.SystemInfoServiceModule
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
 val VersionTrackerModule = module {
-    includes(GlobalGsonModule, SystemInfoServiceModule, PreferenceRepositoryModule)
+    includes(GlobalGsonModule, SystemInfoServiceModule
+//        , PreferenceRepositoryModule
+    )
 
     service<VersionTracker, BaseAnalyticsService, AppPreferenceRepository> { _, analyticsService, preferences ->
         VersionTracker(

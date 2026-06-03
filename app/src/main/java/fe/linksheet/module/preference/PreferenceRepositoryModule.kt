@@ -19,25 +19,32 @@ import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.DefaultAppStateRepository
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.bind
+import org.koin.dsl.binds
 import org.koin.dsl.module
 
-val PreferenceRepositoryModule = module {
-    singleOf(::DefaultAppPreferenceRepository).bind<AppPreferenceRepository>()
-    singleOf(::FeatureFlagRepository)
-    singleOf(::ExperimentRepository)
-    singleOf(::DefaultAppStateRepository).bind<AppStatePreferenceRepository>()
-    single<ShizukuPreferences> { AppPreferences.shizuku }
-    single<LibRedirectPreferences> { AppPreferences.libRedirect }
-    single<() -> Boolean>(Experiment.CustomInstances.qualifier) {
-        get<ExperimentRepository>().asFunction(Experiments.libRedirectCustomInstances)
+
+fun PreferenceRepositoryModule(appPreferenceRepository: DefaultAppPreferenceRepository): Module {
+    return module {
+        single<AppPreferenceRepository> { appPreferenceRepository }.binds(
+            arrayOf(AppPreferenceRepository::class, DefaultAppPreferenceRepository::class)
+        )
+        singleOf(::FeatureFlagRepository)
+        singleOf(::ExperimentRepository)
+        singleOf(::DefaultAppStateRepository).bind<AppStatePreferenceRepository>()
+        single<ShizukuPreferences> { AppPreferences.shizuku }
+        single<LibRedirectPreferences> { AppPreferences.libRedirect }
+        single<() -> Boolean>(Experiment.CustomInstances.qualifier) {
+            get<ExperimentRepository>().asFunction(Experiments.libRedirectCustomInstances)
+        }
+        single<BrowserPreferences> { AppPreferences.browser }
+        single<ProfilePreferences> { AppPreferences.profileSwitcher }
+        single<AnalyticsPreferences> { AppPreferences.analytics }
+        single<RemoteConfigPreferences> { AppPreferences.remoteConfig }
+        single<RemoteConfigStatePreferences> { AppStatePreferences.remoteConfig }
+        single<DownloaderPreferences> { AppPreferences.downloader }
     }
-    single<BrowserPreferences> { AppPreferences.browser }
-    single<ProfilePreferences> { AppPreferences.profileSwitcher }
-    single<AnalyticsPreferences> { AppPreferences.analytics }
-    single<RemoteConfigPreferences> { AppPreferences.remoteConfig }
-    single<RemoteConfigStatePreferences> { AppStatePreferences.remoteConfig }
-    single<DownloaderPreferences> { AppPreferences.downloader }
 }

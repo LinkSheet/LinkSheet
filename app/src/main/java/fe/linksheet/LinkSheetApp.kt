@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalAtomicApi::class)
+
 package fe.linksheet
 
 import android.app.Activity
@@ -51,6 +53,7 @@ import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.paste.PasteServiceModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
+import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.receiver.BroadcastEventBusModule
 import fe.linksheet.module.refine.RefineModule
@@ -64,6 +67,7 @@ import fe.linksheet.module.viewmodel.module.ViewModelModule
 import fe.linksheet.util.LinkSheetLogSink
 import fe.linksheet.util.serialization.HttpUrlTypeAdapter
 import fe.linksheet.util.serialization.UriTypeAdapter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidLogger
@@ -73,6 +77,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import org.lsposed.hiddenapibypass.HiddenApiBypass
 import java.time.LocalDateTime
+import kotlin.concurrent.atomics.ExperimentalAtomicApi
 import kotlin.system.exitProcess
 
 
@@ -82,10 +87,13 @@ open class LinkSheetApp : Application(), DependencyProvider {
     private val currentActivityObserver = CurrentActivityObserver()
     protected val owner by lazy { ProcessLifecycleOwner.get() }
     private val lifecycleObserver by lazy { ProcessServiceRegistry(owner) }
+    private val preferenceRepository by lazy { DefaultAppPreferenceRepository(applicationContext) }
 
     override fun onCreate() {
         super.onCreate()
-        owner.lifecycleScope.launch { ComposeKitRoute.warmup() }
+        owner.lifecycleScope.launch { ComposeKitRoute.warmup(Dispatchers.IO) }
+        owner.lifecycleScope.launch { preferenceRepository.migrate(Dispatchers.IO) }
+
         StaticBuildInfo.init(BuildConfig.DEBUG, BuildConfig.BUILD_TYPE)
         registerActivityLifecycleCallbacks(currentActivityObserver)
         Log.addSink(LinkSheetLogSink(logsDebug = StaticBuildInfo.IsDebug, AndroidLogSink()))
@@ -133,7 +141,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
             NetworkStateServiceModule,
 //            ShizukuServiceModule,
             GlobalGsonModule,
-            PreferenceRepositoryModule,
+            PreferenceRepositoryModule(preferenceRepository),
             DefaultLogModule,
             provideCompatProvider(),
             CompatModule,

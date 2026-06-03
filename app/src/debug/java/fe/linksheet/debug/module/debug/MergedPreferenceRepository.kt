@@ -4,6 +4,7 @@ import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.PreferenceRepository
+import fe.composekit.preference.util.reload
 import fe.linksheet.debug.module.preference.DebugPreferenceRepository
 import fe.linksheet.debug.module.preference.DebugPreferences
 import fe.linksheet.module.preference.app.AppPreferences
@@ -11,7 +12,6 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
-import fe.linksheet.module.preference.reload
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.DefaultAppStateRepository
 

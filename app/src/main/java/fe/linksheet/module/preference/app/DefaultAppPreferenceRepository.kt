@@ -4,8 +4,8 @@ import android.content.Context
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.mozilla.components.support.base.log.logger.Logger
 import fe.android.preference.helper.Preference
+import fe.composekit.preference.util.reload
 import fe.linksheet.module.preference.permission.UsageStatsPermission
-import fe.linksheet.module.preference.reload
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

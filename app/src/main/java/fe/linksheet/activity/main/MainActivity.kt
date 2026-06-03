@@ -2,6 +2,7 @@ package fe.linksheet.activity.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.collection.valueIterator
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.SnackbarHost
@@ -35,7 +36,7 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent(edgeToEdge = true) {
-            BoxAppHost {
+            BoxAppHost(updateEdgeToEdge = ::enableEdgeToEdge) {
                 val snackbarHostState = remember { SnackbarHostState() }
                 val navController = rememberNavController()
 

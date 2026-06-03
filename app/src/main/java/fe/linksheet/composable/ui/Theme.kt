@@ -28,7 +28,6 @@ import app.linksheet.compose.theme.LightColors
 import app.linksheet.compose.theme.NewTypography
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.rememberHapticFeedbackInteraction
-import fe.android.preference.helper.EnumTypeMapper
 import fe.android.span.helper.LinkAnnotationStyle
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.android.span.helper.LocalLinkTags
@@ -45,30 +44,6 @@ tailrec fun Context.findActivity(): Activity? = when (this) {
     is ContextWrapper -> baseContext.findActivity()
     else -> null
 }
-
-enum class Theme {
-    System,
-    Light,
-    Dark,
-
-    @Deprecated(message = "Use the new property")
-    AmoledBlack;
-
-    companion object Companion : EnumTypeMapper<Theme>(entries.toTypedArray())
-
-    fun toV2(): ThemeV2 {
-        return when (this) {
-            System -> ThemeV2.System
-            Light -> ThemeV2.Light
-            Dark, AmoledBlack -> ThemeV2.Dark
-        }
-    }
-
-    override fun toString(): String {
-        return ordinal.toString()
-    }
-}
-
 
 /**
  * The default light scrim, as defined by androidx and the platform:
@@ -106,7 +81,7 @@ fun AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
     themeSettingsViewModel: RootViewModel = koinViewModel(),
     debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
-    updateEdgeToEdge: ((statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) -> Unit)? = null,
+    updateEdgeToEdge: ((statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) -> Unit)?,
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
@@ -155,9 +130,10 @@ fun AppTheme(
 fun BoxAppHost(
     modifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.TopStart,
+    updateEdgeToEdge: ((statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) -> Unit)?,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    AppTheme {
+    AppTheme(updateEdgeToEdge = updateEdgeToEdge) {
         Box(
             modifier = modifier.semantics { testTagsAsResourceId = true },
             contentAlignment = contentAlignment,

@@ -2,7 +2,7 @@ package fe.linksheet.web
 
 import fe.std.result.getOrNull
 import fe.std.result.tryCatch
-import io.ktor.http.*
+import io.ktor.http.ContentDisposition
 import java.net.URLDecoder
 
 object ContentDispositionHelper {
@@ -19,6 +19,6 @@ object ContentDispositionHelper {
         val encodedValue = fileNameAsterisk.substring(ASTERISK_ENCODING_PREFIX.length)
         if (encodedValue.isEmpty()) return null
 
-        return tryCatch { URLDecoder.decode(encodedValue, Charsets.UTF_8) }.getOrNull()
+        return tryCatch { URLDecoder.decode(encodedValue, "utf-8") }.getOrNull()
     }
 }

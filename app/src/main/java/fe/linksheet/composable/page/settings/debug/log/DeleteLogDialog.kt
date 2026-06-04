@@ -10,8 +10,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
+import app.linksheet.compose.theme.DialogTitleStyle
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContentWrapper
 import fe.composekit.component.dialog.DialogDefaults
@@ -34,9 +33,7 @@ fun DeleteLogDialog(
         title = {
             Text(
                 text = stringResource(id = R.string.delete_log_dialog__title_delete_log),
-                fontFamily = HkGroteskFontFamily,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp
+                style = DialogTitleStyle
             )
         },
         text = {

@@ -4,7 +4,7 @@ import android.net.Uri
 import android.net.compatHost
 import app.linksheet.feature.engine.database.entity.ResolveType
 import app.linksheet.feature.engine.database.repository.CacheRepository
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.extension.kotlin.unwrapOrNull
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect

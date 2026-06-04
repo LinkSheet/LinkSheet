@@ -27,7 +27,7 @@ import app.linksheet.compose.extension.collectOnIO
 import app.linksheet.feature.downloader.core.DownloaderMode
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.profile.core.switchTo
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.toSafeIntent
 import fe.composekit.extension.setText
 import fe.composekit.preference.collectAsStateWithLifecycle

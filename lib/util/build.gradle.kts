@@ -23,7 +23,6 @@ android {
 
 dependencies {
     implementation(project(":lib-api"))
-    implementation(project(":lib-common"))
 
     api(KotlinX.coroutines.android)
     implementation(Koin.android)

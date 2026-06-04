@@ -8,7 +8,7 @@ import app.linksheet.feature.engine.core.context.EngineRunContext
 import app.linksheet.feature.engine.core.rule.PostProcessorInput
 import app.linksheet.feature.engine.core.rule.PostProcessorRule
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Test

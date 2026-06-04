@@ -14,7 +14,7 @@ import app.linksheet.feature.engine.core.context.SourceAppExtra
 import app.linksheet.feature.engine.core.context.findExtraOrNull
 import app.linksheet.feature.engine.core.context.hasExtra
 import app.linksheet.feature.engine.eval.EvalContext
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

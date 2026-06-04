@@ -2,8 +2,8 @@ package app.linksheet.feature.app.core
 
 import android.content.Intent
 import android.content.pm.ResolveInfo
-import fe.linksheet.util.ResolveInfoFlags
-import fe.linksheet.util.extension.android.toComponentNameKeyedMap
+import fe.composekit.flag.ResolveInfoFlags
+import fe.linksheet.extension.android.toComponentNameKeyedMap
 
 interface PackageLauncherService {
     fun getLauncherOrNull(packageName: String?): ResolveInfo?

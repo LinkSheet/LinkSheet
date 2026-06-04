@@ -55,7 +55,7 @@ import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.testlib.koin.definition
 import app.linksheet.testlib.koin.injectedParameters
 import app.linksheet.testlib.koin.verifyAll

@@ -43,7 +43,7 @@ android {
 dependencies {
     implementation(project(":lib-api"))
     implementation(project(":lib-util"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-compose"))
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)

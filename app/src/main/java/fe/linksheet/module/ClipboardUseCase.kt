@@ -3,9 +3,9 @@ package fe.linksheet.module
 import android.content.ClipboardManager
 import android.net.Uri
 import app.linksheet.api.preference.AppPreferenceRepository
-import app.linksheet.log.createLogger
 import fe.composekit.extension.getFirstText
 import fe.composekit.extension.setText
+import fe.composekit.log.createLogger
 import fe.composekit.preference.asFlow
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.web.UriUtil

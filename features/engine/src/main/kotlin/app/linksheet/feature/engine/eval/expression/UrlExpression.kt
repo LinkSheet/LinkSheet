@@ -5,7 +5,7 @@ package app.linksheet.feature.engine.eval.expression
 import android.net.Uri
 import androidx.annotation.Keep
 import app.linksheet.feature.engine.eval.EvalContext
-import fe.linksheet.extension.toAndroidUri
+import fe.linksheet.extension.std.toAndroidUri
 import fe.std.uri.StdUrl
 import fe.std.uri.extension.new
 import kotlinx.serialization.Contextual

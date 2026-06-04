@@ -26,9 +26,8 @@ android {
 dependencies {
     implementation(project(":feature-app"))
     implementation(project(":lib-api"))
-    implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-util"))
 
     implementation(AndroidX.core.ktx)

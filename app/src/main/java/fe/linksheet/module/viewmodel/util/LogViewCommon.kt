@@ -15,7 +15,7 @@ import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.util.extension.android.getCurrentLanguageTag
+import fe.linksheet.extension.android.getCurrentLanguageTag
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.encodeToString
 

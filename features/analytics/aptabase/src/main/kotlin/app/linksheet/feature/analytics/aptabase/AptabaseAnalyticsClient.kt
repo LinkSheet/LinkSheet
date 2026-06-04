@@ -11,7 +11,7 @@ import app.linksheet.feature.analytics.service.AnalyticsClient
 import app.linksheet.feature.analytics.service.AnalyticsEvent
 import app.linksheet.feature.analytics.service.TelemetryIdentityData
 import app.linksheet.lib.http.TaggedRequest
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.android.lifecycle.koin.extension.service
 import fe.httpkt.ext.isHttpSuccess
 import fe.httpkt.ext.readToString

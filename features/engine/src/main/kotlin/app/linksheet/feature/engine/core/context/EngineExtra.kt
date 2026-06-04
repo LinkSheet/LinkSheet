@@ -1,7 +1,7 @@
 package app.linksheet.feature.engine.core.context
 
 import app.linksheet.feature.browser.core.Browser
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import kotlin.reflect.KClass
 
 sealed interface EngineExtra

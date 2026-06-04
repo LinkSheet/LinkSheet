@@ -19,7 +19,7 @@ import app.linksheet.feature.engine.core.step.EngineStepId
 import app.linksheet.feature.engine.core.step.StepResult
 import assertk.Assert
 import assertk.assertThat
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher

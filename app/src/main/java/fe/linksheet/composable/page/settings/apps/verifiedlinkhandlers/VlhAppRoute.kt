@@ -51,7 +51,7 @@ import fe.linksheet.composable.dialog.DomainVerificationDialogData
 import fe.linksheet.composable.dialog.createState
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
-import fe.linksheet.util.extension.android.tryStartActivity
+import fe.linksheet.extension.android.tryStartActivity
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 

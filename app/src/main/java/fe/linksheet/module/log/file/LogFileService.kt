@@ -2,7 +2,7 @@ package fe.linksheet.module.log.file
 
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
-import app.linksheet.mozilla.components.support.base.log.Log
+import fe.composekit.mozilla.components.support.base.log.Log
 import fe.android.lifecycle.LifecycleAwareService
 import fe.gson.extension.io.fromJsonOrNull
 import fe.gson.extension.io.toJson

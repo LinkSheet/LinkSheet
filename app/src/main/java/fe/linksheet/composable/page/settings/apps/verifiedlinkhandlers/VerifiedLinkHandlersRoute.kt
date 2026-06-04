@@ -32,7 +32,7 @@ import fe.linksheet.composable.dialog.rememberDomainVerificationAppInfoDialog
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.navigation.VlhAppRoute
-import fe.linksheet.util.extension.android.tryStartActivity
+import fe.linksheet.extension.android.tryStartActivity
 import my.nanihadesuka.compose.InternalLazyColumnScrollbar
 import my.nanihadesuka.compose.ScrollbarSettings
 import org.koin.androidx.compose.koinViewModel

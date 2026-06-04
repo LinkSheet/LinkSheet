@@ -9,7 +9,7 @@ import androidx.room3.migration.Migration
 import app.linksheet.api.database.CrossDatabaseMigration
 import app.linksheet.feature.libredirect.LibRedirectMigratorModule
 import app.linksheet.feature.libredirect.database.LibRedirectDatabase
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.module.database.dao.AppSelectionHistoryDao
 import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
 import fe.linksheet.module.database.dao.PreferredAppDao

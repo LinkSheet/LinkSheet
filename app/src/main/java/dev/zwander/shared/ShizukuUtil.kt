@@ -14,7 +14,7 @@ import androidx.compose.runtime.remember
 import fe.composekit.intent.buildIntent
 import fe.linksheet.R
 import fe.linksheet.extension.android.getApplicationInfoCompat
-import fe.linksheet.util.extension.android.tryStartActivity
+import fe.linksheet.extension.android.tryStartActivity
 import fe.std.result.isFailure
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuProvider

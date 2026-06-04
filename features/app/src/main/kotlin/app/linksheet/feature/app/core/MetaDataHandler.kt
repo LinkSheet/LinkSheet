@@ -10,10 +10,10 @@ import android.content.pm.getPackageInfoCompatOrNull
 import android.content.pm.setComponentEnabledSettingCompat
 import android.os.Bundle
 import fe.composekit.extension.componentName
-import fe.linksheet.util.ComponentEnabledFlags
-import fe.linksheet.util.ComponentEnabledStateFlags
-import fe.linksheet.util.ComponentInfoFlags
-import fe.linksheet.util.PackageInfoFlags
+import fe.composekit.flag.ComponentEnabledFlags
+import fe.composekit.flag.ComponentEnabledStateFlags
+import fe.composekit.flag.ComponentInfoFlags
+import fe.composekit.flag.PackageInfoFlags
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

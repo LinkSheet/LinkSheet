@@ -32,12 +32,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":lib-common"))
     implementation(project(":lib-util"))
     implementation(project(":lib-api"))
     implementation(project(":lib-compose"))
     implementation(project(":test-core"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     compileOnly(project(":lib-hidden-api"))
 
     implementation("androidx.room3:room3-runtime:_")

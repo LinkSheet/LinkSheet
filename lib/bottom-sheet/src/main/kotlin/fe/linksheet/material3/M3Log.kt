@@ -1,6 +1,6 @@
 package fe.linksheet.material3
 
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 
 object M3Log {
     private val logger = Logger("M3Log")

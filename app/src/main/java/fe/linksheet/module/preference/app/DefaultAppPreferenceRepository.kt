@@ -2,7 +2,7 @@ package fe.linksheet.module.preference.app
 
 import android.content.Context
 import app.linksheet.api.preference.AppPreferenceRepository
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.android.preference.helper.Preference
 import fe.composekit.preference.util.reload
 import fe.linksheet.module.preference.permission.UsageStatsPermission

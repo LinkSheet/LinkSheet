@@ -25,9 +25,8 @@ android {
 
 dependencies {
     implementation(project(":lib-api"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-util"))
-    implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
     compileOnly(project(":lib-hidden-api"))
     implementation(AndroidX.lifecycle.viewModelKtx)

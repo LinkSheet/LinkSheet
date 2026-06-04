@@ -1,7 +1,7 @@
 package app.linksheet.feature.engine.core.resolver
 
 import android.net.Uri
-import fe.linksheet.extension.toAndroidUri
+import fe.linksheet.extension.std.toAndroidUri
 import fe.linksheet.web.Darknet
 import fe.linksheet.web.HostType
 import fe.linksheet.web.HostUtil

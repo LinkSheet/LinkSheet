@@ -2,7 +2,7 @@ package fe.linksheet.module.resolver.urlresolver
 
 import app.linksheet.api.CachedRequest
 import fe.httpkt.Request
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import java.io.IOException
 import java.net.HttpURLConnection
 

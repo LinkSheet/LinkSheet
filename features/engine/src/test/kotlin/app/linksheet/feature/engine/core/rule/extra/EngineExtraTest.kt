@@ -8,7 +8,7 @@ import app.linksheet.feature.engine.core.context.findExtraOrNull
 import app.linksheet.feature.engine.core.rule.PreProcessorInput
 import app.linksheet.feature.engine.core.rule.PreProcessorRule
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Test

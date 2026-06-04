@@ -39,7 +39,7 @@ android {
 dependencies {
     implementation(project(":feature-analytics-service"))
     implementation(project(":lib-api"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-http"))
 
     implementation(Grrfe.std.core)

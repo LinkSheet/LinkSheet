@@ -23,7 +23,7 @@ import app.linksheet.feature.engine.core.step.StepRule
 import app.linksheet.feature.engine.core.step.StepRuleInput
 import app.linksheet.feature.engine.core.step.StepRuleResult
 import app.linksheet.feature.engine.core.step.StepStart
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher

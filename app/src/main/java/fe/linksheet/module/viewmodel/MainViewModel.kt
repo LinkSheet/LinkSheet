@@ -30,7 +30,7 @@ import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.extension.android.tryStartActivity
+import fe.linksheet.extension.android.tryStartActivity
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.result.isSuccess
 import kotlinx.coroutines.flow.asFlow

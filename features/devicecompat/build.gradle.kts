@@ -25,7 +25,6 @@ android {
 
 dependencies {
     implementation(project(":lib-api"))
-    implementation(project(":lib-common"))
     implementation(project(":lib-util"))
     implementation(project(":feature-systeminfo"))
 

@@ -8,7 +8,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.api.database.CrossDatabaseMigrationCallback
 import app.linksheet.api.database.DefaultCrossDatabaseMigration
 import app.linksheet.feature.libredirect.database.LibRedirectDatabase
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo

@@ -1,4 +1,4 @@
-package fe.linksheet.util.extension.android
+package fe.linksheet.extension.android
 
 import android.content.pm.ResolveInfo
 import fe.composekit.extension.componentName

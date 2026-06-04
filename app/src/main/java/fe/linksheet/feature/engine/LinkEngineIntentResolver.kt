@@ -20,11 +20,14 @@ import app.linksheet.feature.engine.core.fetcher.ContextResultId
 import app.linksheet.feature.engine.core.fetcher.preview.toUnfurlResult
 import app.linksheet.feature.engine.core.fetcher.toFetchResult
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.SafeIntent
+import fe.composekit.core.AndroidAppPackage
+import fe.composekit.core.Scheme
+import fe.composekit.core.getAndroidAppPackage
 import fe.composekit.lifecycle.network.core.NetworkStateService
-import fe.linksheet.extension.toAndroidUri
-import fe.linksheet.extension.toStdUrl
+import fe.linksheet.extension.std.toAndroidUri
+import fe.linksheet.extension.std.toStdUrl
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -44,9 +47,6 @@ import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.CustomTabInfo2
 import fe.linksheet.module.resolver.util.IntentSanitizer
-import fe.linksheet.util.AndroidAppPackage
-import fe.linksheet.util.Scheme
-import fe.linksheet.util.getAndroidAppPackage
 import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.parser.UriException
 import fe.linksheet.util.intent.parser.UriParseException

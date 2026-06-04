@@ -12,7 +12,7 @@ import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.core.domain.VerificationBrowserState
 import app.linksheet.feature.app.core.domain.VerificationState
 import app.linksheet.feature.app.core.domain.VerificationStateCompat
-import fe.linksheet.util.ApplicationInfoFlags
+import fe.composekit.flag.ApplicationInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

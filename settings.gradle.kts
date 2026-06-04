@@ -111,8 +111,6 @@ buildSettings {
         includeProject(":lib-http", "http")
         includeProject(":lib-util", "util")
         includeProject(":lib-api", "api")
-        includeProject(":lib-log", "log")
-        includeProject(":lib-common", "common")
         includeProject(":lib-compose", "compose")
     }
     projects("test-lib") {

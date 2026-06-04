@@ -25,7 +25,7 @@ import app.linksheet.feature.libredirect.R
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.libredirect.navigation.LibRedirectServiceRoute
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
 import fe.android.compose.text.ComposableTextContent.Companion.content
 import fe.android.compose.text.DefaultContent.Companion.text

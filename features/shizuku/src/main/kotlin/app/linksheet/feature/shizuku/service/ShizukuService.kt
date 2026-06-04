@@ -8,8 +8,8 @@ import android.content.pm.PackageManager
 import android.content.pm.getApplicationInfoCompatOrNull
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.eventbus.IntentEventHandler
+import fe.composekit.flag.ApplicationInfoFlags
 import fe.composekit.intent.buildIntent
-import fe.linksheet.util.ApplicationInfoFlags
 import fe.linksheet.util.IntentFilters
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.coroutines.asStateFlow

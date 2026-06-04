@@ -1,7 +1,7 @@
 package app.linksheet.feature.engine.core.context
 
+import fe.composekit.core.AndroidAppPackage
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.util.AndroidAppPackage
 
 enum class AppRoleId {
     Browser,

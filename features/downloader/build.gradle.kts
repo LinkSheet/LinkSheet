@@ -24,10 +24,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
     implementation(project(":lib-util"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-api"))
     implementation(project(":integration-mime-types"))
 

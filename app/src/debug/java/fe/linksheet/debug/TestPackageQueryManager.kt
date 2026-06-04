@@ -12,7 +12,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.core.AndroidVersion
 import org.koin.core.component.KoinComponent
 

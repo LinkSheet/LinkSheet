@@ -6,9 +6,9 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import app.linksheet.api.SystemInfoService
+import fe.composekit.core.Scheme
+import fe.composekit.core.create
 import fe.composekit.intent.buildIntent
-import fe.linksheet.util.Scheme
-import fe.linksheet.util.create
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
 

@@ -30,8 +30,8 @@ import app.linksheet.feature.profile.ProfileFeatureModule
 import app.linksheet.feature.remoteconfig.RemoteConfigFeatureModule
 import app.linksheet.feature.shizuku.ShizukuFeatureModule
 import app.linksheet.feature.wiki.WikiFeatureModule
-import app.linksheet.mozilla.components.support.base.log.Log
-import app.linksheet.mozilla.components.support.base.log.sink.AndroidLogSink
+import fe.composekit.mozilla.components.support.base.log.Log
+import fe.composekit.mozilla.components.support.base.log.sink.AndroidLogSink
 import app.linksheet.testing.Testing
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import com.google.android.material.color.DynamicColors

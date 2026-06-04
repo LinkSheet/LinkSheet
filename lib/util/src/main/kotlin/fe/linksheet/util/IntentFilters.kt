@@ -1,6 +1,7 @@
 package fe.linksheet.util
 
 import android.content.Intent
+import fe.composekit.intent.buildIntentFilter
 
 object IntentFilters {
     val packageState by lazy {

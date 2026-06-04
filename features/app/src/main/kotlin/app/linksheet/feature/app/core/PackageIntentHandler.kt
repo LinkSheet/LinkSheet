@@ -11,7 +11,7 @@ import androidx.annotation.VisibleForTesting
 import app.linksheet.feature.app.extension.activityDescriptor
 import app.linksheet.lib.flavors.LinkSheetApp
 import fe.composekit.extension.packageName
-import fe.linksheet.util.ResolveInfoFlags
+import fe.composekit.flag.ResolveInfoFlags
 
 interface PackageIntentHandler {
     fun isSelfDefaultBrowser(): Boolean

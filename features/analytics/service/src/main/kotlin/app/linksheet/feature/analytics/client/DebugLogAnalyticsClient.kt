@@ -3,7 +3,7 @@ package app.linksheet.feature.analytics.client
 import android.content.Context
 import app.linksheet.feature.analytics.service.AnalyticsClient
 import app.linksheet.feature.analytics.service.AnalyticsEvent
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import org.koin.dsl.module
 
 class DebugLogAnalyticsClient(

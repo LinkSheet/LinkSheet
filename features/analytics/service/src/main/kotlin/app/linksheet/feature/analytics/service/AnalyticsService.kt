@@ -8,7 +8,7 @@ import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.analytics.BuildConfig
 import app.linksheet.feature.analytics.preference.AnalyticsPreferences
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.android.lifecycle.koin.extension.applicationLifecycle
 import fe.android.lifecycle.koin.extension.service
 import fe.composekit.lifecycle.network.core.NetworkStateService

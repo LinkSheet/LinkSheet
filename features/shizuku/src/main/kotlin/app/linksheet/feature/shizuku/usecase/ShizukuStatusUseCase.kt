@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.core.net.toUri
 import app.linksheet.feature.shizuku.ShizukuDownload
 import app.linksheet.feature.shizuku.service.ShizukuService
-import fe.linksheet.util.extension.android.tryStartActivity
+import fe.linksheet.extension.android.tryStartActivity
 
 class ShizukuStatusUseCase(
     private val shizukuService: ShizukuService,

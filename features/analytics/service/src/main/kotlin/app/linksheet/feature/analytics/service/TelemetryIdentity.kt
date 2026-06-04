@@ -5,7 +5,7 @@ import android.os.Build
 import androidx.annotation.StringRes
 import app.linksheet.feature.analytics.R
 import fe.android.preference.helper.OptionTypeMapper
-import fe.linksheet.util.extension.android.getCurrentLanguageTag
+import fe.linksheet.extension.android.getCurrentLanguageTag
 
 @JvmInline
 value class TelemetryIdentityData(val data: Map<String, String>)

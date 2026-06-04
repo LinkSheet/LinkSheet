@@ -297,11 +297,10 @@ dependencies {
 
     compileOnly(project(":lib-hidden-api"))
     implementation(project(":config"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-http"))
     implementation(project(":lib-util"))
     implementation(project(":lib-api"))
-    implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
 
     implementation(project(":lib-bottom-sheet"))
@@ -356,7 +355,6 @@ dependencies {
     implementation(Koin.android)
     implementation(Koin.compose)
     implementation(Koin.workManager)
-    implementation("org.jetbrains.kotlin:kotlin-reflect:_")
 
     implementation("io.coil-kt.coil3:coil-compose:_")
     implementation("io.coil-kt.coil3:coil-core:_")

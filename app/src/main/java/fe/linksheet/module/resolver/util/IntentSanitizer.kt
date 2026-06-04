@@ -2,8 +2,8 @@ package fe.linksheet.module.resolver.util
 
 import android.content.Intent
 import android.net.Uri
-import fe.linksheet.util.IntentFlags
 import app.linksheet.mozilla.components.support.utils.SafeIntent
+import fe.composekit.flag.IntentFlags
 
 open class IntentSanitizer internal constructor(
     private val removeFlags: IntentFlags

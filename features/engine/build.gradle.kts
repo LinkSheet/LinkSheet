@@ -34,10 +34,9 @@ room3 {
 }
 
 dependencies {
-    implementation(project(":lib-common"))
     implementation(project(":lib-util"))
     implementation(project(":lib-api"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-compose"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))

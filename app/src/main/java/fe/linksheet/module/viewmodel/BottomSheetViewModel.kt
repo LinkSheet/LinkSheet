@@ -21,7 +21,7 @@ import app.linksheet.feature.browser.core.Browser
 import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.downloader.core.DownloadCheckResult
 import app.linksheet.feature.profile.core.ProfileSwitcher
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 import coil3.ImageLoader
 import fe.composekit.extension.getSystemServiceOrThrow
@@ -53,7 +53,7 @@ import fe.linksheet.module.resolver.util.LaunchRawIntent
 import fe.linksheet.module.resolver.util.Launchable
 import fe.linksheet.module.resolver.workaround.GithubWorkaround
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.extension.android.tryStartActivity
+import fe.linksheet.extension.android.tryStartActivity
 import fe.linksheet.util.intent.StandardIntents
 import fe.std.result.isSuccess
 import kotlinx.coroutines.Dispatchers

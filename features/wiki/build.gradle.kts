@@ -32,7 +32,6 @@ android {
 dependencies {
     implementation(project(":lib-api"))
     implementation(project(":lib-util"))
-    implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
 
     implementation("androidx.room3:room3-runtime:_")

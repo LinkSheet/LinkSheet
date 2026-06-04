@@ -5,8 +5,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
 import app.linksheet.feature.remoteconfig.worker.RemoteAssetFetcherWorker
-import app.linksheet.log.createLogger
 import fe.android.lifecycle.LifecycleAwareService
+import fe.composekit.log.createLogger
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 

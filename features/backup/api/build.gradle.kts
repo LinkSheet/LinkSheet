@@ -2,6 +2,7 @@
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
+import fe.build.dependencies._1fexd
 
 plugins {
     kotlin("plugin.serialization")
@@ -30,9 +31,8 @@ android {
 
 dependencies {
     implementation(project(":lib-api"))
-    implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-util"))
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)

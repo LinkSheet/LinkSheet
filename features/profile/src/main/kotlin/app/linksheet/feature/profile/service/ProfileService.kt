@@ -4,8 +4,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.app.core.setForwardProfileActivities
-import app.linksheet.log.createLogger
 import fe.android.lifecycle.LifecycleAwareService
+import fe.composekit.log.createLogger
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 

@@ -19,15 +19,18 @@ import app.linksheet.feature.engine.database.entity.ResolveType
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
+import fe.composekit.core.AndroidAppPackage
+import fe.composekit.core.AndroidPackageUri
+import fe.composekit.core.Scheme
 import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
-import fe.linksheet.extension.toStdUrl
+import fe.linksheet.extension.std.toStdUrl
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -37,9 +40,6 @@ import fe.linksheet.module.resolver.urlresolver.base.UrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
-import fe.linksheet.util.AndroidAppPackage
-import fe.linksheet.util.AndroidUri
-import fe.linksheet.util.Scheme
 import fe.linksheet.util.intent.cloneIntent
 import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.parser.UriException
@@ -135,7 +135,7 @@ class ImprovedIntentResolver(
         val canAccessInternet = networkStateService.isNetworkConnected
 
         logger.debug("Referrer=${options.referrer}")
-        val referringPackage = AndroidUri.get(Scheme.AppScheme, options.referrer)
+        val referringPackage = AndroidPackageUri.get(Scheme.AppScheme, options.referrer)
         val isReferrerBrowser =
             privateBrowsingService.isKnownBrowser(referringPackage?.packageName) != null
 

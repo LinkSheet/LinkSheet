@@ -1,7 +1,7 @@
 package app.linksheet.feature.analytics.service
 
 import android.content.Context
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.android.lifecycle.LifecycleAwareService
 import java.io.IOException
 

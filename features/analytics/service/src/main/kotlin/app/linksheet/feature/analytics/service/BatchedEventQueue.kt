@@ -1,7 +1,7 @@
 package app.linksheet.feature.analytics.service
 
 import androidx.lifecycle.LifecycleCoroutineScope
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.lifecycle.network.core.NetworkStateService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.DelicateCoroutinesApi

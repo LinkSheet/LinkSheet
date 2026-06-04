@@ -1,7 +1,7 @@
 package fe.linksheet.debug.module.debug
 
 import app.linksheet.api.preference.AppPreferenceRepository
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.PreferenceRepository
 import fe.composekit.preference.util.reload

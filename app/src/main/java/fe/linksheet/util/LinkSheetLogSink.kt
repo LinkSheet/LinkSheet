@@ -1,7 +1,7 @@
 package fe.linksheet.util
 
-import app.linksheet.mozilla.components.support.base.log.Log
-import app.linksheet.mozilla.components.support.base.log.sink.LogSink
+import fe.composekit.mozilla.components.support.base.log.Log
+import fe.composekit.mozilla.components.support.base.log.sink.LogSink
 
 class LinkSheetLogSink(
     private val logsDebug: Boolean = true,

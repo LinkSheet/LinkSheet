@@ -5,7 +5,7 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.api.database.CrossDatabaseMigration
 import app.linksheet.api.database.DefaultCrossDatabaseMigration
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.testlib.instrument.InstrumentationTest
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule

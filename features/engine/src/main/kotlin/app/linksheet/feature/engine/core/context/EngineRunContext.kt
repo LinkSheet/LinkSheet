@@ -3,7 +3,7 @@ package app.linksheet.feature.engine.core.context
 import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.core.fetcher.ContextResult
 import app.linksheet.feature.engine.core.fetcher.ContextResultId
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import java.util.*
 

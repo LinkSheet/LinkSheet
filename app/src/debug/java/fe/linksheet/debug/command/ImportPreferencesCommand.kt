@@ -3,7 +3,7 @@ package fe.linksheet.debug.command
 import android.content.Context
 import android.content.Intent
 import app.linksheet.api.preference.AppPreferenceRepository
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import fe.gson.extension.json.array.elementsFilterNull

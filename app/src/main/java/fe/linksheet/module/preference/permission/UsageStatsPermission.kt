@@ -7,8 +7,7 @@ import android.content.Intent
 import android.provider.Settings
 import androidx.core.content.getSystemService
 import fe.linksheet.R
-import fe.linksheet.extension.android.startActivityWithConfirmation
-import fe.linksheet.util.extension.android.tryStartActivity
+import fe.linksheet.extension.android.tryStartActivity
 import fe.std.result.isSuccess
 
 class UsageStatsPermission(private val context: Context) : PermissionBoundPreference(

@@ -33,9 +33,8 @@ android {
 dependencies {
     api(project(":feature-backup-api"))
     implementation(project(":lib-api"))
-    implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
-    implementation(project(":lib-log"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-util"))
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
@@ -53,7 +52,6 @@ dependencies {
     implementation(Koin.android)
     implementation(Koin.compose)
     implementation(Koin.workManager)
-
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
 

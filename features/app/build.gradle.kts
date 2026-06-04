@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":lib-common"))
     implementation(project(":lib-compose"))
     implementation(project(":lib-util"))
     implementation(project(":test-fake"))

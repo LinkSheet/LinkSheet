@@ -6,8 +6,23 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.exclude
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ScaffoldDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +44,7 @@ import fe.composekit.component.page.SaneSettingsScaffold
 import fe.linksheet.R
 import fe.linksheet.TextValidator
 import fe.linksheet.WebUriTextValidator
+import app.linksheet.compose.R as CommonR
 
 
 private val editorPadding = 16.dp
@@ -110,7 +126,7 @@ private fun EditorAppBar(
                     modifier = Modifier.testTag(EDITOR_APP_BAR_CANCEL_TEST_TAG),
                     onClick = onDismiss
                 ) {
-                    Text(text = stringResource(id = R.string.generic__button_text_cancel))
+                    Text(text = stringResource(id = CommonR.string.generic__button_text_cancel))
                 }
             }
         }

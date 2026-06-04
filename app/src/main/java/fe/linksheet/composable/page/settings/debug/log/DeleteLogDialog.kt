@@ -16,7 +16,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContentWrapper
 import fe.composekit.component.dialog.DialogDefaults
 import fe.linksheet.R
-import app.linksheet.compose.theme.HkGroteskFontFamily
+import app.linksheet.compose.R as CommonR
 
 
 @Composable
@@ -48,7 +48,7 @@ fun DeleteLogDialog(
         onDismissRequest = dismiss,
         dismissButton = {
             TextButton(onClick = dismiss) {
-                Text(text = stringResource(id = R.string.generic__button_text_cancel))
+                Text(text = stringResource(id = CommonR.string.generic__button_text_cancel))
             }
         },
         confirmButton = {

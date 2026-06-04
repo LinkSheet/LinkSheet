@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.eventbus.IntentEventHandler
-import app.linksheet.feature.shizuku.ShizukuDomainVerification
+import app.linksheet.feature.shizuku.core.ShizukuDomainVerification
 import fe.android.lifecycle.LifecycleAwareService
 import fe.composekit.core.AndroidVersion
 import fe.composekit.log.createLogger

@@ -1,4 +1,4 @@
-package app.linksheet.feature.shizuku
+package app.linksheet.feature.shizuku.core
 
 import android.content.Context
 import android.content.pm.verify.domain.IDomainVerificationManager

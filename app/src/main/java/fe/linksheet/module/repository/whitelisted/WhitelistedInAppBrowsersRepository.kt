@@ -2,6 +2,7 @@ package fe.linksheet.module.repository.whitelisted
 
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.core.ActivityAppInfoStatus
+import app.linksheet.feature.backup.api.CommonImport
 import app.linksheet.feature.backup.api.ExportableRepository
 import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.model.WhitelistedInAppBrowserExportModel
@@ -11,13 +12,12 @@ import app.linksheet.feature.backup.model.toExportModel
 import fe.linksheet.module.database.dao.whitelisted.WhitelistedInAppBrowsersDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedInAppBrowser
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlin.reflect.KClass
 
 class WhitelistedInAppBrowsersRepository(
     val dao: WhitelistedInAppBrowsersDao
-) : WhitelistedBrowsersRepository, ExportableRepository<WhitelistedInAppBrowserExportModel> {
+) : WhitelistedBrowsersRepository, ExportableRepository<WhitelistedInAppBrowser, WhitelistedInAppBrowserExportModel> {
 
     override val modelClass: KClass<WhitelistedInAppBrowserExportModel>
         get() = WhitelistedInAppBrowserExportModel::class
@@ -77,18 +77,13 @@ class WhitelistedInAppBrowsersRepository(
     }
 
     override suspend fun exportAll(): List<WhitelistedInAppBrowserExportModelV1> {
-        return dao.getAll().first().map { it.toExportModel() }
+        return CommonImport.export(dao) { it.toExportModel() }
     }
 
     override suspend fun import(
         settings: ImportSettings,
         models: List<WhitelistedInAppBrowserExportModel>
-    ) {
-        val entities = models.map { it.fromExportModel() }
-        if (settings.replace) {
-            dao.insertReplace(entities)
-        } else {
-            dao.insert(entities)
-        }
+    ): List<Pair<WhitelistedInAppBrowser, Long>> {
+        return CommonImport.import(dao, settings, models) { it.fromExportModel() }
     }
 }

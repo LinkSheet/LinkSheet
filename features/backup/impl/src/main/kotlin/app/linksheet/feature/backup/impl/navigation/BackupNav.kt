@@ -7,7 +7,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import app.linksheet.compose.util.animatedComposable
 import app.linksheet.feature.backup.impl.R
-import app.linksheet.feature.backup.impl.ui.ExportImportSettingsRoute
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.route.Nav
@@ -19,7 +18,7 @@ import kotlinx.serialization.Serializable
 object BackupNav : Nav {
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<BackupRoute> { _, _ ->
-            ExportImportSettingsRoute(onBackPressed = navController::popBackStack)
+//            ExportImportSettingsRoute(onBackPressed = navController::popBackStack)
         }
     }
 }

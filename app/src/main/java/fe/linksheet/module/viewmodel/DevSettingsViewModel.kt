@@ -7,7 +7,9 @@ import app.linksheet.api.SystemInfoService
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.devicecompat.miui.MiuiAuditor
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
+import app.linksheet.feature.shizuku.service.ShizukuFeatureService
 import com.google.gson.Gson
+import fe.composekit.core.AndroidVersion
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
@@ -19,6 +21,7 @@ class DevSettingsViewModel(
     private val context: Application,
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
+    private val shizukuFeatureService: ShizukuFeatureService,
 //    private val shizukuHandler: ShizukuServiceConnection,
     miuiCompatProvider: MiuiCompatProvider,
     private val gson: Gson,

@@ -2,6 +2,7 @@ package app.linksheet.feature.backup.impl.ui
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Backup
@@ -17,6 +18,7 @@ import app.linksheet.feature.backup.impl.ui.exportimport.FileSelectionResult
 import app.linksheet.feature.backup.impl.ui.exportimport.ImportResult
 import app.linksheet.feature.backup.impl.ui.exportimport.rememberExportSettingsDialog2
 import app.linksheet.feature.backup.impl.ui.exportimport.rememberImportSettingsDialog
+import app.linksheet.feature.backup.impl.usecase.RestoreResultWrapper
 import fe.android.compose.dialog.helper.input.InputResultDialogState
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.icon.iconPainter
@@ -56,7 +58,7 @@ fun backupDialog(
 @Composable
 fun restoreDialog(
     importIntent: Intent,
-    importPreferences: suspend (Uri, ImportSettings) -> StdResult<out Any>
+    importPreferences: suspend (Uri, ImportSettings) -> StdResult<RestoreResultWrapper?>
 ): ResultDialogState<ImportResult> {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -90,7 +92,7 @@ fun SaneLazyColumnGroupScope.backupListItem(open: () -> Unit) {
             headlineContent = textContent(R.string.settings_backup__title_backup),
             supportingContent = textContent(R.string.settings_backup__subtitle_backup),
             icon = Icons.Rounded.Backup.iconPainter,
-            onClick = { open() }
+            onClick = open
         )
     }
 }
@@ -103,7 +105,7 @@ fun SaneLazyColumnGroupScope.restoreListItem(open: () -> Unit) {
             headlineContent = textContent(R.string.settings_backup__title_restore),
             supportingContent = textContent(R.string.settings_backup__subtitle_restore),
             icon = Icons.Rounded.SettingsBackupRestore.iconPainter,
-            onClick = { open() }
+            onClick = open
         )
     }
 }

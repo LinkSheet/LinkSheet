@@ -15,6 +15,7 @@ import app.linksheet.compose.debug.NoOpDebugPreferenceProvider
 import app.linksheet.feature.analytics.client.DebugLogAnalyticsClient
 import app.linksheet.feature.analytics.service.AnalyticsServiceModule
 import app.linksheet.feature.app.AppModule
+import app.linksheet.feature.backup.BackupFeatureConfigurationModule
 import app.linksheet.feature.backup.impl.BackupFeatureModule
 import app.linksheet.feature.browser.PrivateBrowsingModule
 import app.linksheet.feature.devicecompat.CompatModule
@@ -30,8 +31,6 @@ import app.linksheet.feature.profile.ProfileFeatureModule
 import app.linksheet.feature.remoteconfig.RemoteConfigFeatureModule
 import app.linksheet.feature.shizuku.ShizukuFeatureModule
 import app.linksheet.feature.wiki.WikiFeatureModule
-import fe.composekit.mozilla.components.support.base.log.Log
-import fe.composekit.mozilla.components.support.base.log.sink.AndroidLogSink
 import app.linksheet.testing.Testing
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import com.google.android.material.color.DynamicColors
@@ -40,6 +39,8 @@ import fe.android.lifecycle.ProcessServiceRegistry
 import fe.android.lifecycle.koin.extension.applicationLifecycle
 import fe.composekit.core.AndroidVersion
 import fe.composekit.lifecycle.network.koin.NetworkStateServiceModule
+import fe.composekit.mozilla.components.support.base.log.Log
+import fe.composekit.mozilla.components.support.base.log.sink.AndroidLogSink
 import fe.composekit.route.ComposeKitRoute
 import fe.droidkit.koin.androidApplicationContext
 import fe.gson.GlobalGsonModule
@@ -169,7 +170,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             LinkEngineFeatureModule,
             WikiFeatureModule,
             PrivateBrowsingModule,
-            BackupFeatureModule
+            BackupFeatureConfigurationModule,
+            BackupFeatureModule()
         )
     }
 

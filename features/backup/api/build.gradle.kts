@@ -37,6 +37,7 @@ dependencies {
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)
     implementation(AndroidX.core.ktx)
+    implementation(KotlinX.serialization.json)
 
     androidTestImplementation(AndroidX.test.uiAutomator)
     androidTestImplementation(AndroidX.test.coreKtx)

@@ -9,7 +9,7 @@ import app.linksheet.feature.backup.impl.ui.backupDialog
 import app.linksheet.feature.backup.impl.ui.backupListItem
 import app.linksheet.feature.backup.impl.ui.restoreDialog
 import app.linksheet.feature.backup.impl.ui.restoreListItem
-import app.linksheet.feature.backup.impl.viewmodel.ExportSettingsViewModel2
+import app.linksheet.feature.backup.impl.viewmodel.BackupViewModel
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.layout.column.group
@@ -35,13 +35,13 @@ private object AdvancedSettingsRouteData {
 fun AdvancedSettingsRoute(
     onBackPressed: () -> Unit,
     navigate: (Route) -> Unit,
-    viewModel: ExportSettingsViewModel2 = koinViewModel()
+    viewModel: BackupViewModel = koinViewModel()
 ) {
     val backupDialogState = backupDialog(
         exportPreferences = viewModel::exportPreferences
     )
     val restoreDialogState = restoreDialog(
-        importIntent = ExportSettingsViewModel2.ImportIntent,
+        importIntent = BackupViewModel.ImportIntent,
         importPreferences = viewModel::importPreferences
     )
 

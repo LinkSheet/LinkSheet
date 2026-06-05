@@ -8,16 +8,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface BaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertReturningId(item: T): Long
+    suspend fun insertReplace(item: T): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertReplace(item: T)
+    suspend fun insertReplace(items: List<T>): List<Long>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertReplace(items: List<T>)
-
-    @Insert(onConflict = OnConflictStrategy.NONE)
-    suspend fun insert(items: List<T>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(items: List<T>): List<Long>
 
     @Delete
     suspend fun delete(item: T)

@@ -7,15 +7,17 @@ import androidx.lifecycle.ViewModel
 import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.impl.R
 import app.linksheet.feature.backup.impl.ui.exportimport.ExportSettings
-import app.linksheet.feature.backup.impl.usecase.ExportImportUseCase2
+import app.linksheet.feature.backup.impl.usecase.BackupUseCase
+import app.linksheet.feature.backup.impl.usecase.RestoreResultWrapper
+import app.linksheet.feature.backup.impl.usecase.RestoreUseCase
 import fe.composekit.intent.buildIntent
 import fe.linksheet.extension.android.bufferedSource
 import fe.linksheet.extension.android.bufferedWriter
-import fe.linksheet.extension.android.useDescriptor
+import fe.linksheet.extension.android.useFileDescriptor
 import fe.std.result.StdResult
-import fe.std.result.isFailure
 import fe.std.result.tryCatch
 import fe.std.result.unaryPlus
+import fe.std.result.unwrap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
@@ -25,12 +27,13 @@ import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
-class ExportSettingsViewModel2(
+class BackupViewModel(
     val context: Application,
     private val clock: Clock,
-    private val useCase: ExportImportUseCase2
+    private val backupUseCase: BackupUseCase,
+    private val restoreUseCase: RestoreUseCase
 ) : ViewModel() {
-//    private val importExportService = ExportImportService(context, clock)
+
     companion object {
         private val formatter = LocalDateTime.Format {
             byUnicodePattern("uuuu-MM-dd'T'HH:mm[:ss]")
@@ -56,28 +59,28 @@ class ExportSettingsViewModel2(
         }
     }
 
-    suspend fun importPreferences(uri: Uri, settings: ImportSettings): StdResult<out Any> = withContext(Dispatchers.IO) {
+    suspend fun importPreferences(
+        uri: Uri,
+        settings: ImportSettings
+    ): StdResult<RestoreResultWrapper?> = withContext(Dispatchers.IO) {
         val result = tryCatch {
-            context.useDescriptor(uri, "r") { pfd ->
+            context.useFileDescriptor(uri, "r") { pfd ->
                 pfd.bufferedSource().use {
-                    useCase.import(it, settings)
+                    restoreUseCase.import(it, settings)
                 }
-            }
+            }?.unwrap()
         }
-        if (result.isFailure()) {
-            return@withContext +result
-        }
+//        if (result.isFailure()) {
+//            return@withContext +result
+//        }
 
-        val value = result.value
-        return@withContext +result
-//        val mappedPreferences = useCase.importPreferences(value)
-//        return +preferenceRepository.refreshPostImport(mappedPreferences)
+        return@withContext result
     }
 
     suspend fun exportPreferences(uri: Uri, settings: ExportSettings): StdResult<Unit> = withContext(Dispatchers.IO) {
-        val preferences = useCase.exportToString(settings)
+        val preferences = backupUseCase.exportToString(settings)
         tryCatch {
-            context.useDescriptor(uri, "w") { pfd ->
+            context.useFileDescriptor(uri, "w") { pfd ->
                 pfd.bufferedWriter().use { it.write(preferences) }
             }
         }

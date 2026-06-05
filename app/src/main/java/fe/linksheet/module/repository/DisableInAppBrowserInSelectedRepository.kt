@@ -1,5 +1,6 @@
 package fe.linksheet.module.repository
 
+import app.linksheet.feature.backup.api.CommonImport
 import app.linksheet.feature.backup.api.ExportableRepository
 import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.model.DisableInAppBrowserInSelectedExportModel
@@ -8,13 +9,12 @@ import app.linksheet.feature.backup.model.toExportModel
 import fe.linksheet.module.database.dao.DisableInAppBrowserInSelectedDao
 import fe.linksheet.module.database.entity.DisableInAppBrowserInSelected
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlin.reflect.KClass
 
 
 class DisableInAppBrowserInSelectedRepository(
     private val dao: DisableInAppBrowserInSelectedDao
-) : ExportableRepository<DisableInAppBrowserInSelectedExportModel> {
+) : ExportableRepository<DisableInAppBrowserInSelected, DisableInAppBrowserInSelectedExportModel> {
 
     override val modelClass: KClass<DisableInAppBrowserInSelectedExportModel>
         get() = DisableInAppBrowserInSelectedExportModel::class
@@ -39,15 +39,13 @@ class DisableInAppBrowserInSelectedRepository(
     }
 
     override suspend fun exportAll(): List<DisableInAppBrowserInSelectedExportModel> {
-        return dao.getAll().first().map { it.toExportModel() }
+        return CommonImport.export(dao) { it.toExportModel() }
     }
 
-    override suspend fun import(settings: ImportSettings, models: List<DisableInAppBrowserInSelectedExportModel>) {
-        val entities = models.map { it.fromExportModel() }
-        if (settings.replace) {
-            dao.insertReplace(entities)
-        } else {
-            dao.insert(entities)
-        }
+    override suspend fun import(
+        settings: ImportSettings,
+        models: List<DisableInAppBrowserInSelectedExportModel>
+    ): List<Pair<DisableInAppBrowserInSelected, Long>> {
+        return CommonImport.import(dao, settings, models) { it.fromExportModel() }
     }
 }

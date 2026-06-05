@@ -1,5 +1,6 @@
 package fe.linksheet.module.repository.resolver
 
+import app.linksheet.feature.backup.api.CommonImport
 import app.linksheet.feature.backup.api.ExportableRepository
 import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.model.Amp2HtmlMappingExportModel
@@ -8,12 +9,11 @@ import app.linksheet.feature.backup.model.toExportModel
 import fe.linksheet.module.database.dao.resolver.Amp2HtmlMappingDao
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlin.reflect.KClass
 
 class Amp2HtmlRepository(
     private val dao: Amp2HtmlMappingDao,
-) : ExportableRepository<Amp2HtmlMappingExportModel> {
+) : ExportableRepository<Amp2HtmlMapping, Amp2HtmlMappingExportModel> {
 
     override val modelClass: KClass<Amp2HtmlMappingExportModel>
         get() = Amp2HtmlMappingExportModel::class
@@ -34,18 +34,10 @@ class Amp2HtmlRepository(
     }
 
     override suspend fun exportAll(): List<Amp2HtmlMappingExportModel> {
-        return dao.getAll().first().map { it.toExportModel() }
+        return CommonImport.export(dao) { it.toExportModel() }
     }
 
-    override suspend fun import(
-        settings: ImportSettings,
-        models: List<Amp2HtmlMappingExportModel>
-    ) {
-        val entities = models.map { it.fromExportModel() }
-        if (settings.replace) {
-            dao.insertReplace(entities)
-        } else {
-            dao.insert(entities)
-        }
+    override suspend fun import(settings: ImportSettings, models: List<Amp2HtmlMappingExportModel>): List<Pair<Amp2HtmlMapping, Long>> {
+        return CommonImport.import(dao, settings, models) { it.fromExportModel() }
     }
 }

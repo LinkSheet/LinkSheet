@@ -5,7 +5,7 @@ package app.linksheet.feature.exportimport
 import app.linksheet.api.BuildInfo
 import app.linksheet.api.DeviceInfo
 import app.linksheet.api.SensitivePreference
-import app.linksheet.mozilla.components.support.base.log.logger.Logger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import com.akuleshov7.ktoml.Toml
 import com.akuleshov7.ktoml.annotations.TomlInlineTable
 import com.akuleshov7.ktoml.file.TomlFileReader

@@ -24,7 +24,7 @@ class ScenarioRepository internal constructor(
     suspend fun createScenario(name: String): Scenario {
         val count = scenarioDao.getCount()
         val scenario = Scenario(name = name, position = count + 1, referrerApp = null)
-        val id = scenarioDao.insertReturningId(scenario)
+        val id = scenarioDao.insertReplace(scenario)
         scenario.id = id
         return scenario
     }
@@ -64,7 +64,7 @@ class ScenarioRepository internal constructor(
 
     suspend fun insertExpression(bundle: ExpressionBundle, type: ExpressionRuleType): ExpressionRule {
         val expression = ExpressionRule(bytes = serializer.encodeToByteArray(bundle), type = type)
-        val id = expressionRuleDao.insertReturningId(expression)
+        val id = expressionRuleDao.insertReplace(expression)
         expression.id = id
         return expression
     }

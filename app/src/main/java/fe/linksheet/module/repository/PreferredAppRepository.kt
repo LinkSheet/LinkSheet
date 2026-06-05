@@ -1,6 +1,7 @@
 package fe.linksheet.module.repository
 
 import android.net.Uri
+import app.linksheet.feature.backup.api.CommonImport
 import app.linksheet.feature.backup.api.ExportableRepository
 import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.model.PreferredAppExportModel
@@ -15,22 +16,20 @@ import kotlin.reflect.KClass
 
 class PreferredAppRepository(
     private val dao: PreferredAppDao
-) : ExportableRepository<PreferredAppExportModel> {
+) : ExportableRepository<PreferredApp, PreferredAppExportModel> {
 
     override val modelClass: KClass<PreferredAppExportModel>
         get() = PreferredAppExportModel::class
 
     override suspend fun exportAll(): List<PreferredAppExportModel> {
-        return dao.getAll().first().map { it.toExportModel() }
+        return CommonImport.export(dao) { it.toExportModel() }
     }
 
-    override suspend fun import(settings: ImportSettings, models: List<PreferredAppExportModel>) {
-        val entities = models.map { it.fromExportModel() }
-        if (settings.replace) {
-            dao.insertReplace(entities)
-        } else {
-            dao.insert(entities)
-        }
+    override suspend fun import(
+        settings: ImportSettings,
+        models: List<PreferredAppExportModel>
+    ): List<Pair<PreferredApp, Long>> {
+        return CommonImport.import(dao, settings, models) { it.fromExportModel() }
     }
 
     fun getAll(): Flow<List<PreferredApp>> {

@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import dev.zwander.shared.ShizukuUtil
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
@@ -21,12 +22,12 @@ import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
+import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.navigation.logViewerSettingsRoute
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
+import fe.linksheet.navigation.logViewerSettingsRoute
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -47,8 +48,11 @@ fun DebugSettingsRoute(
     val feedback = LocalHapticFeedbackInteraction.current
 
     val disableLogging by viewModel.disableLogging.collectAsStateWithLifecycle()
-    SaneScaffoldSettingsPage(headline = stringResource(id = R.string.debug), onBackPressed = onBackPressed) {
-        group(base = 3, viewModel.miuiCompatRequired, disableLogging) {
+    SaneScaffoldSettingsPage(
+        headline = stringResource(id = R.string.debug),
+        onBackPressed = onBackPressed
+    ) {
+        group(base = 2, viewModel.miuiCompatRequired, AndroidVersion.isAtLeastApi31S(), disableLogging) {
             item(key = R.string.logs) { padding, shape ->
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),
@@ -60,18 +64,19 @@ fun DebugSettingsRoute(
                 )
             }
 
-            item(key = R.string.reset_app_link_verification_status) { padding, shape ->
-                DefaultTwoLineIconClickableShapeListItem(
-                    enabled = shizukuInstalled && shizukuRunning && shizukuPermission,
-                    headlineContent = textContent(R.string.reset_app_link_verification_status),
-                    supportingContent = textContent(R.string.reset_app_link_verification_status_subtitle),
-                    icon = Icons.Outlined.RestartAlt.iconPainter,
-                    shape = shape,
-                    padding = padding,
-                    onClick = viewModel::enqueueResetAppLinks
-                )
+            if (AndroidVersion.isAtLeastApi31S()) {
+                item(key = R.string.reset_app_link_verification_status) { padding, shape ->
+                    DefaultTwoLineIconClickableShapeListItem(
+                        enabled = shizukuInstalled && shizukuRunning && shizukuPermission,
+                        headlineContent = textContent(R.string.reset_app_link_verification_status),
+                        supportingContent = textContent(R.string.reset_app_link_verification_status_subtitle),
+                        icon = Icons.Outlined.RestartAlt.iconPainter,
+                        shape = shape,
+                        padding = padding,
+                        onClick = viewModel::enqueueResetAppLinks
+                    )
+                }
             }
-
 
             if (viewModel.miuiCompatRequired) {
                 item(key = "Audit MIUI environment") { padding, shape ->

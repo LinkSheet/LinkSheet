@@ -5,23 +5,37 @@ import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import kotlin.reflect.KClass
 
-interface ExportableRepository<T : ExportModel> {
-    val modelClass: KClass<T>
-    suspend fun exportAll(): List<T>
-    suspend fun import(settings: ImportSettings, models: List<T>)
+interface ExportableRepository<Entity, Model : ExportModel> {
+    val modelClass: KClass<Model>
+    suspend fun exportAll(): List<Model>
+    suspend fun import(settings: ImportSettings, models: List<Model>): List<Pair<Entity, Long>>
 
-    suspend fun importModels(settings: ImportSettings, models: List<ExportModel>) {
+    suspend fun importModels(settings: ImportSettings, models: List<ExportModel>): List<ImportResult<Entity, Model>>? {
         val items = models.mapNotNull {
             @Suppress("UNCHECKED_CAST")
-            it as? T
+            it as? Model
         }
-        return import(settings, items)
+        val inserts = import(settings, items)
+        if (items.size != inserts.size) {
+            return null
+        }
+
+        return items.indices.map { i ->
+            val insert = inserts[i]
+            ImportResult(insert.first, items[i], insert.second)
+        }
     }
 
     fun canImport(model: ExportModel): Boolean {
-        return model::class.isInstance(modelClass)
+        return modelClass.java.isAssignableFrom(model::class.java)
     }
 }
+
+data class ImportResult<Entity, Model : ExportModel>(
+    val entity: Entity,
+    val model: Model,
+    val id: Long,
+)
 
 @Parcelize
 data class ImportSettings(
@@ -32,8 +46,7 @@ data class ImportSettings(
     }
 
     @IgnoredOnParcel
-    @Deprecated("Remove this")
-    val replace = mode == RestoreMode.Replace
+    val replace = (mode == RestoreMode.EraseRestore || mode == RestoreMode.Replace)
 }
 
 enum class RestoreMode {

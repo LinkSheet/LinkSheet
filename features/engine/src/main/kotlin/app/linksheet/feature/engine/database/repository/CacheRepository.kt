@@ -2,19 +2,19 @@
 
 package app.linksheet.feature.engine.database.repository
 
-import app.linksheet.feature.engine.database.dao.PreviewCacheDao
-import app.linksheet.feature.engine.database.dao.ResolveTypeDao
-import app.linksheet.feature.engine.database.dao.ResolvedUrlCacheDao
-import app.linksheet.feature.engine.database.dao.UrlEntryDao
-import app.linksheet.feature.engine.database.entity.PreviewCache
-import app.linksheet.feature.engine.database.entity.ResolveType
-import app.linksheet.feature.engine.database.entity.ResolvedUrl
-import app.linksheet.feature.engine.database.entity.UrlEntry
 import app.linksheet.feature.engine.core.fetcher.preview.HtmlPreviewResult
 import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResult
 import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResultId
 import app.linksheet.feature.engine.database.dao.HtmlCacheDao
+import app.linksheet.feature.engine.database.dao.PreviewCacheDao
+import app.linksheet.feature.engine.database.dao.ResolveTypeDao
+import app.linksheet.feature.engine.database.dao.ResolvedUrlCacheDao
+import app.linksheet.feature.engine.database.dao.UrlEntryDao
 import app.linksheet.feature.engine.database.entity.CachedHtml
+import app.linksheet.feature.engine.database.entity.PreviewCache
+import app.linksheet.feature.engine.database.entity.ResolveType
+import app.linksheet.feature.engine.database.entity.ResolvedUrl
+import app.linksheet.feature.engine.database.entity.UrlEntry
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
@@ -62,7 +62,7 @@ class CacheRepository internal constructor(
     suspend fun createUrlEntry(url: String): UrlEntry {
         val now = clock.now()
         val entry = UrlEntry(timestamp = now.toEpochMilliseconds(), url = url)
-        val id = urlEntryDao.insertReturningId(entry)
+        val id = urlEntryDao.insertReplace(entry)
 
         entry.id = id
         return entry

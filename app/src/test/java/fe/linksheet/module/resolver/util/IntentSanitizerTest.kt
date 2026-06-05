@@ -3,15 +3,14 @@ package fe.linksheet.module.resolver.util
 import android.content.Intent
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.mozilla.components.support.utils.toSafeIntent
 import assertk.assertThat
 import assertk.assertions.isTrue
+import fe.composekit.flag.IntentFlags
 import fe.composekit.intent.buildIntent
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.util.IntentFlags
-import app.linksheet.mozilla.components.support.utils.toSafeIntent
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])

@@ -4,12 +4,10 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import app.linksheet.sdk.Message
 import app.linksheet.sdk.PluginMethod
-import app.linksheet.sdk.PostRuleMessage
-import app.linksheet.sdk.PreRuleMessage
-import kotlin.reflect.KClass
 
 abstract class BaseRulePluginProvider(
     private vararg val handlers: PluginMethod<*>
@@ -20,7 +18,10 @@ abstract class BaseRulePluginProvider(
         val handler = handlers.firstOrNull { it.name == method }
         if(handler == null) return null
 
-        val message = extras?.getParcelable("message", handler.input.java) ?: return null
+        val message = when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> extras?.getParcelable("message", handler.input.java)
+            else -> extras?.getParcelable("message")
+        } ?: return null
         val result = handleMessage(message)
 
         return null

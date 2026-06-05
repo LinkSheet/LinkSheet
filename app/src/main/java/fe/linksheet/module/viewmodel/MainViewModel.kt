@@ -24,7 +24,7 @@ import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getSystemServiceOrThrow
-import fe.linksheet.module.ClipboardUseCase
+import fe.linksheet.usecase.ClipboardUseCase
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.state.AppStatePreferences

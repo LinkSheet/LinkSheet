@@ -39,7 +39,7 @@ import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.module.ClipboardState
+import fe.linksheet.usecase.ClipboardState
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.navigation.settingsRoute
 import fe.linksheet.util.LinkSheet

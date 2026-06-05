@@ -4,7 +4,7 @@ import android.content.ClipboardManager
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import fe.composekit.extension.getSystemServiceOrThrow
-import fe.linksheet.module.ClipboardUseCase
+import fe.linksheet.usecase.ClipboardUseCase
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.testlib.core.BaseUnitTest
 import kotlinx.coroutines.test.runTest

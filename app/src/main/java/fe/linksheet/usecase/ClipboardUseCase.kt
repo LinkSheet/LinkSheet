@@ -1,4 +1,4 @@
-package fe.linksheet.module
+package fe.linksheet.usecase
 
 import android.content.ClipboardManager
 import android.net.Uri

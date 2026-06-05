@@ -11,7 +11,6 @@ import org.koin.dsl.module
 val SystemInfoServiceModule = module {
     single<SystemInfoService> {
         RealSystemInfoService(
-            refineWrapper = get(),
             buildInfo = BuildInfo(
                 versionName = BuildConfig.VERSION_NAME,
                 versionCode = BuildConfig.VERSION_CODE,

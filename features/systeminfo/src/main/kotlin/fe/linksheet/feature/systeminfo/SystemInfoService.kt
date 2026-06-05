@@ -5,13 +5,12 @@ package fe.linksheet.feature.systeminfo
 import app.linksheet.api.BuildConstants
 import app.linksheet.api.BuildInfo
 import app.linksheet.api.DeviceInfo
-import app.linksheet.api.RefineWrapper
 import app.linksheet.api.SystemInfoService
 import app.linksheet.api.SystemProperties
 
-fun RealSystemInfoService(refineWrapper: RefineWrapper, buildInfo: BuildInfo): SystemInfoService {
+fun RealSystemInfoService(buildInfo: BuildInfo): SystemInfoService {
     return RealSystemInfoService(
-        properties = RealSystemProperties(refineWrapper = refineWrapper),
+        properties = RealSystemProperties(),
         build = StaticBuildConstants,
         buildInfo = buildInfo
     )

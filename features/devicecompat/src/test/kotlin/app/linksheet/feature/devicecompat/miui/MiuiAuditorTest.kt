@@ -4,7 +4,6 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.api.DeviceInfo
 import app.linksheet.feature.devicecompat.util.BuildInfoFake
-import app.linksheet.feature.devicecompat.util.RefineWrapperDummy
 import app.linksheet.testing.fake.device.Device
 import app.linksheet.testing.fake.device.Xiaomi11TPro_A13
 import app.linksheet.testing.fake.device.XiaomiMi5C
@@ -73,7 +72,7 @@ internal class MiuiAuditorTest : BaseUnitTest  {
     fun test() = table.forAll { device, expectedDeviceInfo, expectedMiui, expectedFingerprint ->
         val infoService = RealSystemInfoService(device, buildInfo = BuildInfoFake.Info)
 
-        val auditor = MiuiAuditor(infoService, RefineWrapperDummy)
+        val auditor = MiuiAuditor(infoService)
         val audit = auditor.audit(applicationContext)
 
         assertThat(audit.deviceInfo).isEqualTo(expectedDeviceInfo)

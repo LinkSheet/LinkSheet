@@ -26,6 +26,7 @@ android {
 dependencies {
     implementation(project(":lib-api"))
     implementation(project(":lib-util"))
+    compileOnly(project(":lib-hidden-api"))
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)

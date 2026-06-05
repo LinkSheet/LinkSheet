@@ -1,18 +1,18 @@
 package app.linksheet.feature.devicecompat.miui
 
 import android.app.AppOpsManager
+import android.app.AppOpsManagerHidden
 import android.content.Context
 import android.os.Process
 import androidx.annotation.Keep
 import androidx.core.content.getSystemService
 import app.linksheet.api.BuildInfo
 import app.linksheet.api.DeviceInfo
-import app.linksheet.api.RefineWrapper
 import app.linksheet.api.SystemInfoService
+import dev.rikka.tools.refine.Refine
 
 class MiuiAuditor(
     private val service: SystemInfoService,
-    private val refineWrapper: RefineWrapper
 ) {
     @Keep
     data class MiuiAudit(
@@ -49,7 +49,7 @@ class MiuiAuditor(
 
     private fun getMiuiOpStatus(context: Context): Map<Int, Int> {
         val appOpsManager = context.getSystemService<AppOpsManager>()!!
-        val appOpsManagerHidden = refineWrapper.cast(appOpsManager)
+        val appOpsManagerHidden = Refine.unsafeCast<AppOpsManagerHidden>(appOpsManager)
 
         return (0..40).map { 10_000 + it }.associateWith {
             runCatching {

@@ -8,6 +8,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
+    id("dev.rikka.tools.refine")
 }
 
 android {
@@ -27,9 +28,11 @@ dependencies {
     implementation(project(":feature-app"))
     implementation(project(":lib-api"))
     implementation(project(":lib-compose"))
-    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-util"))
+    compileOnly(project(":lib-hidden-api"))
+    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:4.4.1")
 
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)
     implementation(Koin.compose)

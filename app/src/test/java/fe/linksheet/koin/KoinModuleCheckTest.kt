@@ -11,7 +11,6 @@ import androidx.work.WorkerParameters
 import app.linksheet.api.BuildConstants
 import app.linksheet.api.BuildInfo
 import app.linksheet.api.CachedRequest
-import app.linksheet.api.RefineWrapper
 import app.linksheet.api.SystemInfoService
 import app.linksheet.api.SystemProperties
 import app.linksheet.api.eventbus.BroadcastEventBus
@@ -229,7 +228,6 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             Gson::class,
             SystemInfoService::class,
             LogPersistService::class,
-            RefineWrapper::class,
             CoroutineDispatcher::class
         ),
         definition<LogTextSettingsViewModel>(),

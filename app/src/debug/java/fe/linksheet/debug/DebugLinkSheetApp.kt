@@ -46,7 +46,7 @@ class DebugLinkSheetApp : LinkSheetApp() {
 
     override fun provideCompatProvider(): Module {
         return module {
-            single<MiuiCompatProvider> { DebugMiuiCompatProvider(get()) }
+            single<MiuiCompatProvider> { DebugMiuiCompatProvider }
             single<OneUiCompatProvider> { RealOneUiCompatProvider(get()) }
         }
     }

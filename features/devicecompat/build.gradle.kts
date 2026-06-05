@@ -8,6 +8,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("com.gitlab.grrfe.android-build-plugin")
+    id("dev.rikka.tools.refine")
 }
 
 android {
@@ -27,6 +28,8 @@ dependencies {
     implementation(project(":lib-api"))
     implementation(project(":lib-util"))
     implementation(project(":feature-systeminfo"))
+    compileOnly(project(":lib-hidden-api"))
+    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:4.4.1")
 
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)

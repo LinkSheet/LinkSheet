@@ -19,7 +19,6 @@ val ProfileFeatureModule = module {
     single {
         AndroidProfileSwitcher(
             appLabel = "LinkSheet",
-            refineWrapper = get(),
 //            appLabel = getResources().getString(R.string.app_name),
             crossProfileAppsCompat = get(),
             userManager = getSystemServiceOrThrow()

@@ -35,20 +35,31 @@ pluginManagement {
         id("androidx.navigation.safeargs") version "2.9.6"
     }
 
+    val resolveDetails = mutableListOf<PluginResolveDetails.() -> Unit>()
     when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]
-            resolutionStrategy {
-                eachPlugin {
-                    with(requested.id) {
-                        if (namespace == "com.gitlab.grrfe") {
-                            useModule("com.gitlab.grrfe.gradle-build:$name:$gradleBuildVersion")
-                        }
+            resolveDetails.add {
+                with(requested.id) {
+                    if (namespace == "com.gitlab.grrfe") {
+                        useModule("com.gitlab.grrfe.gradle-build:$name:$gradleBuildVersion")
                     }
                 }
             }
         }
+
         else -> includeBuild(gradleBuildDir.toString())
+    }
+    resolveDetails.add {
+        if (requested.id.id == "dev.rikka.tools.refine") {
+            useModule("com.github.1fexd.HiddenApiRefinePlugin:dev.rikka.tools.refine.gradle.plugin:4.4.1")
+        }
+    }
+
+    resolutionStrategy {
+        eachPlugin {
+            resolveDetails.forEach { this.apply(it) }
+        }
     }
 }
 

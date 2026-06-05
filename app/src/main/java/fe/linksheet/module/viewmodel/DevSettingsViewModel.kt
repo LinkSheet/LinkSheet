@@ -27,11 +27,10 @@ class DevSettingsViewModel(
     private val gson: Gson,
     systemInfoService: SystemInfoService,
     private val logPersistService: LogPersistService,
-    refineWrapper: RefineWrapper,
     private val ioDispatcher: CoroutineDispatcher,
 ) : BaseViewModel(preferenceRepository) {
     val disableLogging = experimentRepository.asViewModelState(Experiments.disableLogging)
-    private val auditor = MiuiAuditor(systemInfoService, refineWrapper)
+    private val auditor = MiuiAuditor(systemInfoService)
 
     val miuiCompatRequired by miuiCompatProvider.isRequired
 

@@ -58,7 +58,6 @@ import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.receiver.BroadcastEventBusModule
-import fe.linksheet.module.refine.RefineModule
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.resolver.module.ResolverModule
 import fe.linksheet.module.resolver.urlresolver.UrlResolverModule
@@ -134,7 +133,6 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideKoinModules(): List<Module> {
         return listOf(
-            RefineModule,
             ClockModule,
             SystemInfoServiceModule,
             PrivateBrowsingModule,
@@ -177,7 +175,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
     override fun provideCompatProvider(): Module {
         return module {
-            single<MiuiCompatProvider> { RealMiuiCompatProvider(get(), get()) }
+            single<MiuiCompatProvider> { RealMiuiCompatProvider(get()) }
             single<OneUiCompatProvider> { RealOneUiCompatProvider(get()) }
         }
     }

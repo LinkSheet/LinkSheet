@@ -5,24 +5,22 @@ import android.content.ComponentName
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.UserHandle
+import android.os.UserHandleHidden
 import android.os.UserManager
 import androidx.core.net.toUri
-import app.linksheet.api.RefineWrapper
-import app.linksheet.api.WrappedUserHandleHidden
+import dev.rikka.tools.refine.Refine
 import fe.composekit.core.AndroidVersion
 
 @Suppress("FunctionName")
 internal fun AndroidProfileSwitcher(
     appLabel: String,
-    refineWrapper: RefineWrapper,
     crossProfileAppsCompat: CrossProfileAppsCompat,
     userManager: UserManager
 ): ProfileSwitcher {
     return RealProfileSwitcher(
         appLabel = appLabel,
-        refineWrapper = refineWrapper,
         crossProfileAppsCompat = crossProfileAppsCompat,
-        userManagerCompat = UserManagerCompatImpl(userManager, refineWrapper.myUserId()),
+        userManagerCompat = UserManagerCompatImpl(userManager, UserHandleHidden.myUserId()),
     )
 }
 
@@ -39,7 +37,6 @@ interface ProfileSwitcher {
 
 internal class RealProfileSwitcher(
     private val appLabel: String,
-    private val refineWrapper: RefineWrapper,
     private val crossProfileAppsCompat: CrossProfileAppsCompat,
     private val userManagerCompat: UserManagerCompat,
 ) : ProfileSwitcher {
@@ -72,10 +69,12 @@ internal class RealProfileSwitcher(
     override fun getUserProfileInfo(status: ProfileStatus): UserProfileInfo? {
         val crossProfiles = getProfiles(status) ?: return null
 
-        val profiles = userManagerCompat.getUserProfiles().associateWith { refineWrapper.cast(it) }
+        val profiles = userManagerCompat.getUserProfiles().associateWith {
+            Refine.unsafeCast<UserHandleHidden>(it)
+        }
         val myUserId = userManagerCompat.getMyUserId()
 
-        var myUserHandle: WrappedUserHandleHidden? = null
+        var myUserHandle: UserHandleHidden? = null
         val otherHandles = mutableListOf<Pair<Int, CrossProfile?>>()
 
         for ((_, hiddenUserHandle) in profiles) {
@@ -135,7 +134,7 @@ internal class RealProfileSwitcher(
     }
 
     private fun toCrossProfile(handle: UserHandle): CrossProfile? {
-        val userHandle = refineWrapper.cast(handle)
+        val userHandle = Refine.unsafeCast<UserHandleHidden>(handle)
         return toCrossProfile(handle, userHandle.identifier)
     }
 }

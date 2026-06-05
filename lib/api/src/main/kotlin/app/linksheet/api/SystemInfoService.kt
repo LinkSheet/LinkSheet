@@ -4,6 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 interface SystemInfoService {
     val properties: SystemProperties
@@ -41,7 +42,7 @@ data class BuildInfo(
     @SerialName("workflowId")
     val workflowId: String? = null,
     @Transient
-    val applicationId: String
+    val applicationId: String? = null
 )
 
 @Keep

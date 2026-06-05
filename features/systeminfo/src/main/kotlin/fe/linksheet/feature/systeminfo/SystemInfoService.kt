@@ -54,6 +54,6 @@ class RealSystemInfoService(
     }
 
     override fun getApplicationId(): String {
-        return buildInfo.applicationId
+        return buildInfo.applicationId!!
     }
 }

@@ -5,9 +5,9 @@ package app.linksheet.feature.backup
 import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.backup.impl.core.BackupConfiguration
-import app.linksheet.feature.backup.impl.core.DatabaseExportImportHolder
+import app.linksheet.feature.backup.impl.core.DatabaseBackup
 import app.linksheet.feature.backup.impl.core.DatabaseType
-import app.linksheet.feature.backup.impl.core.PreferenceExportImportHolder
+import app.linksheet.feature.backup.impl.core.PreferenceRepositoryBackup
 import app.linksheet.feature.backup.impl.core.PreferenceType
 import app.linksheet.feature.backup.model.Amp2HtmlMappingExportModel
 import app.linksheet.feature.backup.model.AppSelectionHistoryExportModel
@@ -35,7 +35,49 @@ import org.koin.dsl.module
 val BackupFeatureConfigurationModule = module {
     single {
         BackupConfiguration(
-            builder = {
+            preferenceBackups = listOf(
+                PreferenceRepositoryBackup(
+                    type = PreferenceType.Preferences,
+                    repository = get<AppPreferenceRepository>(),
+                    definition = AppPreferences,
+                    exclude = AppPreferences.sensitivePreferences.mapToSet { it.key }
+                ),
+                PreferenceRepositoryBackup(
+                    type = PreferenceType.Experiments,
+                    repository = get<ExperimentRepository>(),
+                    definition = Experiments,
+                ),
+                PreferenceRepositoryBackup(
+                    type = PreferenceType.AppState,
+                    repository = get<DefaultAppStateRepository>(),
+                    definition = AppStatePreferences,
+                )
+            ),
+            databaseBackups = listOf(
+                DatabaseBackup(
+                    PreferenceType.Preferences,
+                    get<PreferredAppRepository>()
+                ),
+                DatabaseBackup(
+                    PreferenceType.Preferences,
+                    get<DisableInAppBrowserInSelectedRepository>()
+                ),
+                DatabaseBackup(
+                    PreferenceType.Preferences,
+                    get<WhitelistedNormalBrowsersRepository>()
+                ),
+                DatabaseBackup(
+                    PreferenceType.Preferences,
+                    get<WhitelistedInAppBrowsersRepository>()
+                ),
+                DatabaseBackup(
+                    DatabaseType.SelectionHistory,
+                    get<AppSelectionHistoryRepository>()
+                ),
+                DatabaseBackup(DatabaseType.Cache, get<ResolvedRedirectRepository>()),
+                DatabaseBackup(DatabaseType.Cache, get<Amp2HtmlRepository>())
+            ),
+            configureSerialization = {
                 subclassesOfSealed<Amp2HtmlMappingExportModel>()
                 subclassesOfSealed<AppSelectionHistoryExportModel>()
                 subclassesOfSealed<DisableInAppBrowserInSelectedExportModel>()
@@ -43,49 +85,7 @@ val BackupFeatureConfigurationModule = module {
                 subclassesOfSealed<ResolvedRedirectExportModel>()
                 subclassesOfSealed<WhitelistedInAppBrowserExportModel>()
                 subclassesOfSealed<WhitelistedNormalBrowserExportModel>()
-            },
-            holders = listOf(
-                PreferenceExportImportHolder(
-                    type = PreferenceType.Preferences,
-                    repository = get<AppPreferenceRepository>(),
-                    definition = AppPreferences,
-                    exclude = AppPreferences.sensitivePreferences.mapToSet { it.key }
-                ),
-                PreferenceExportImportHolder(
-                    type = PreferenceType.Experiments,
-                    repository = get<ExperimentRepository>(),
-                    definition = Experiments,
-                ),
-                PreferenceExportImportHolder(
-                    type = PreferenceType.AppState,
-                    repository = get<DefaultAppStateRepository>(),
-                    definition = AppStatePreferences,
-                )
-            ),
-            databaseHolders = listOf(
-                DatabaseExportImportHolder(
-                    PreferenceType.Preferences,
-                    get<PreferredAppRepository>()
-                ),
-                DatabaseExportImportHolder(
-                    PreferenceType.Preferences,
-                    get<DisableInAppBrowserInSelectedRepository>()
-                ),
-                DatabaseExportImportHolder(
-                    PreferenceType.Preferences,
-                    get<WhitelistedNormalBrowsersRepository>()
-                ),
-                DatabaseExportImportHolder(
-                    PreferenceType.Preferences,
-                    get<WhitelistedInAppBrowsersRepository>()
-                ),
-                DatabaseExportImportHolder(
-                    DatabaseType.SelectionHistory,
-                    get<AppSelectionHistoryRepository>()
-                ),
-                DatabaseExportImportHolder(DatabaseType.Cache, get<ResolvedRedirectRepository>()),
-                DatabaseExportImportHolder(DatabaseType.Cache, get<Amp2HtmlRepository>())
-            ),
+            }
         )
     }
 }

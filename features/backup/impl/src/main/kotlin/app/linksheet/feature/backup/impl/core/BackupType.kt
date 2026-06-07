@@ -1,7 +1,8 @@
 package app.linksheet.feature.backup.impl.core
 
-sealed interface ExportType
-sealed interface PreferenceType : ExportType {
+sealed interface BackupType
+
+sealed interface PreferenceType : BackupType {
     val name: String
 
     object Preferences : PreferenceType {
@@ -17,7 +18,7 @@ sealed interface PreferenceType : ExportType {
     }
 }
 
-sealed interface DatabaseType : ExportType {
+sealed interface DatabaseType : BackupType {
     data object SelectionHistory : DatabaseType
     data object Cache : DatabaseType
 }

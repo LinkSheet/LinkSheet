@@ -1,6 +1,5 @@
 package app.linksheet.feature.backup.impl.core
 
-import android.util.Log
 import app.linksheet.feature.backup.api.ExportModel
 import app.linksheet.feature.backup.api.ExportableRepository
 import app.linksheet.feature.backup.api.UnsupportedExportModel
@@ -12,22 +11,35 @@ import kotlinx.serialization.modules.PolymorphicModuleBuilder
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
-data class BackupConfiguration(
-    val builder: PolymorphicModuleBuilder<ExportModel>.() -> Unit,
-    val holders: List<PreferenceExportImportHolder<*>>,
-    val databaseHolders: List<DatabaseExportImportHolder<*, *>>,
-) {
-    val json = Json {
-        serializersModule = SerializersModule {
-            polymorphic(ExportModel::class) {
-                builder(this)
-                defaultDeserializer { UnsupportedExportModel.serializer() }
+fun BackupConfiguration(
+    preferenceBackups: List<PreferenceRepositoryBackup<*>> = emptyList(),
+    databaseBackups: List<DatabaseBackup<*, *>> = emptyList(),
+    configureSerialization: PolymorphicModuleBuilder<ExportModel>.() -> Unit = {}
+): BackupConfiguration {
+    return BackupConfiguration(
+        json = Json {
+            serializersModule = SerializersModule {
+                polymorphic(BackupSchema::class) {
+                    defaultDeserializer { LegacyBackupSchema.serializer() }
+                }
+                polymorphic(ExportModel::class) {
+                    configureSerialization(this)
+                    defaultDeserializer { UnsupportedExportModel.serializer() }
+                }
             }
-        }
-    }
+        },
+        preferenceBackups = preferenceBackups,
+        databaseBackups = databaseBackups,
+    )
 }
 
-data class PreferenceExportImportHolder<T : PreferenceDefinition>(
+data class BackupConfiguration(
+    val json: Json,
+    val preferenceBackups: List<PreferenceRepositoryBackup<*>>,
+    val databaseBackups: List<DatabaseBackup<*, *>>,
+)
+
+data class PreferenceRepositoryBackup<T : PreferenceDefinition>(
     val type: PreferenceType,
     val repository: PreferenceRepository,
     val definition: T,
@@ -41,7 +53,7 @@ data class PreferenceExportImportHolder<T : PreferenceDefinition>(
     }
 }
 
-data class DatabaseExportImportHolder<Entity, T : ExportModel>(
-    val type: ExportType,
+data class DatabaseBackup<Entity, T : ExportModel>(
+    val type: BackupType,
     val repository: ExportableRepository<Entity, T>
 )

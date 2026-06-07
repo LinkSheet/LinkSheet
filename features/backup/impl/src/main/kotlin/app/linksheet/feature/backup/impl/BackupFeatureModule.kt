@@ -12,20 +12,10 @@ import org.koin.dsl.module
 fun BackupFeatureModule(): Module {
     return module {
         factory {
-            val configuration = get<BackupConfiguration>()
-            BackupUseCase(
-                holders = configuration.holders,
-                databaseHolders = configuration.databaseHolders,
-                json = configuration.json
-            )
+            BackupUseCase(configuration = get<BackupConfiguration>())
         }
         factory {
-            val configuration = get<BackupConfiguration>()
-            RestoreUseCase(
-                holders = configuration.holders,
-                databaseHolders = configuration.databaseHolders,
-                json = configuration.json
-            )
+            RestoreUseCase(configuration = get<BackupConfiguration>())
         }
         viewModel {
             BackupViewModel(

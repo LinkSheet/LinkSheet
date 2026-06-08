@@ -39,9 +39,9 @@ import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.usecase.ClipboardState
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.navigation.settingsRoute
+import fe.linksheet.usecase.ClipboardState
 import fe.linksheet.util.LinkSheet
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.launch
@@ -51,6 +51,7 @@ import org.koin.compose.viewmodel.koinActivityViewModel
 @Composable
 fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinActivityViewModel()) {
     val clipboardContent by viewModel.clipboardUseCase.contentFlow.collectAsStateWithLifecycle()
+    val newShizuku by viewModel.shizukuEnabled.collectAsStateWithLifecycle()
     val newDefaultsDismissed by viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
 
     val showMiuiAlert by viewModel.showMiuiAlert.collectRefreshableAsStateWithLifecycle(
@@ -61,16 +62,6 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinA
     val defaultBrowser by viewModel.defaultBrowser.collectAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED,
         initialValue = true
-    )
-
-    val shizukuInstalled by viewModel.shizukuInstalled.collectRefreshableAsStateWithLifecycle(
-        minActiveState = Lifecycle.State.RESUMED,
-        initialValue = false
-    )
-
-    val shizukuRunning by viewModel.shizukuRunning.collectRefreshableAsStateWithLifecycle(
-        minActiveState = Lifecycle.State.RESUMED,
-        initialValue = false
     )
 
     val activity = LocalActivity.current
@@ -155,7 +146,7 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinA
                 }
             }
 
-            if (StaticBuildInfo.CurrentType == BuildType.Debug) {
+            if (newShizuku && StaticBuildInfo.CurrentType == BuildType.Debug) {
                 item {
                     ShizukuCard(
                         activity = activity!!,

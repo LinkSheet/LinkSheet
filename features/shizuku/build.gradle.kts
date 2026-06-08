@@ -21,6 +21,11 @@ android {
     kotlin {
         jvmToolchain(Version.JVM)
     }
+
+    buildFeatures {
+        aidl = true
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -46,6 +51,7 @@ dependencies {
     implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)
+    implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.preference.core)
     implementation(_1fexd.composeKit.preference.compose.core)
     implementation(_1fexd.composeKit.preference.compose.core2)
@@ -59,6 +65,7 @@ dependencies {
     implementation(Koin.compose)
 
     implementation(Grrfe.std.core)
+    implementation(Grrfe.std.process.core)
     implementation(Grrfe.std.coroutines)
     implementation(Grrfe.std.result.core)
 

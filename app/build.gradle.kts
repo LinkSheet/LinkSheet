@@ -394,8 +394,6 @@ dependencies {
     implementation(Grrfe.std.uri)
     implementation(Grrfe.std.stringbuilder)
     implementation(Grrfe.std.test)
-    implementation(Grrfe.std.process.core)
-
 
     implementation(Grrfe.httpkt.core)
     implementation(Grrfe.httpkt.serialization.gson)
@@ -418,7 +416,6 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     testImplementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)
-    implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.lifecycle.compose)
     implementation(_1fexd.composeKit.lifecycle.core)
     implementation(_1fexd.composeKit.lifecycle.koin)

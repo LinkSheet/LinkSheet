@@ -20,9 +20,6 @@
     <uses-permission
             android:name="android.permission.PACKAGE_USAGE_STATS"
             tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="moe.shizuku.manager.permission.API_V23"/>
-    <uses-permission android:name="moe.shizuku.manager.permission.API"/>
-    <uses-permission android:name="moe.shizuku.manager.permission.Manager"/>
 
     <permission-group android:name="${applicationId}.permission-group.INTERCONNECT"
                       android:icon="@drawable/ic_permission"
@@ -53,14 +50,6 @@
                 android:name=".activity.onboarding.OnboardingActivity"
                 android:exported="true"
                 android:theme="@style/AppTheme"/>
-
-        <provider
-                android:name="rikka.shizuku.ShizukuProvider"
-                android:authorities="${applicationId}.shizuku"
-                android:enabled="true"
-                android:exported="true"
-                android:multiprocess="false"
-                android:permission="android.permission.INTERACT_ACROSS_USERS_FULL"/>
 
         <activity
                 android:name=".activity.main.MainActivity"

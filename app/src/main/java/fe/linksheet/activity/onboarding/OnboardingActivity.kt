@@ -9,7 +9,11 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,20 +21,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.linksheet.compose.theme.NewTypography
+import app.linksheet.compose.theme.PoppinsFontFamily
 import fe.linksheet.R
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.activity.main.MainActivity
-import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.composable.ui.AppTheme
-import app.linksheet.compose.theme.NewTypography
-import app.linksheet.compose.theme.PoppinsFontFamily
 import fe.linksheet.extension.compose.LargeTopAppBar
+import fe.linksheet.module.viewmodel.OnboardingViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import app.linksheet.compose.R as CommonR
 
 class OnboardingActivity : BaseComponentActivity() {
-    private val onboardingViewModel by viewModel<MainViewModel>()
+    private val onboardingViewModel by viewModel<OnboardingViewModel>()
 
     private val appBarTitles = arrayOf(
         R.string.onboarding_0_title,
@@ -100,7 +104,7 @@ class OnboardingActivity : BaseComponentActivity() {
                             when (page) {
                                 0 -> Screen0(padding = padding, onNextClick = next)
                                 1 -> Screen1(padding = padding, onNextClick = next)
-                                2 -> Screen2(padding = padding, onNextClick = next)
+                                2 -> Screen2(useCase = onboardingViewModel.shizukuStatusUseCase, padding = padding, onNextClick = next)
                                 3 -> Screen3(padding = padding, onNextClick = next)
                                 5 -> Screen5(padding = padding, onNextClick = {
                                     startActivity(main)

@@ -8,6 +8,7 @@ import android.os.*;
 import androidx.annotation.*;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
@@ -26,7 +27,7 @@ public interface IDomainVerificationManager extends IInterface {
      * the package does not declare any HTTP/HTTPS domains.
      */
     @Nullable
-    DomainVerificationUserState getDomainVerificationUserState(String packageName, @UserIdInt int userId);
+    DomainVerificationUserState getDomainVerificationUserState(String packageName, @UserIdInt int userId) throws android.os.RemoteException;
 
     /**
      * Change whether the given packageName is allowed to handle BROWSABLE and DEFAULT category web
@@ -36,7 +37,7 @@ public interface IDomainVerificationManager extends IInterface {
      * <p>
      * By default, all apps are allowed to open links. Users must disable them explicitly.
      */
-    void setDomainVerificationLinkHandlingAllowed(String packageName, boolean allowed, @UserIdInt int userId);
+    void setDomainVerificationLinkHandlingAllowed(String packageName, boolean allowed, @UserIdInt int userId) throws android.os.RemoteException;
 
     /**
      * Update the recorded user selection for the given {@param domains} for the given {@param
@@ -50,10 +51,10 @@ public interface IDomainVerificationManager extends IInterface {
      * Enabling an unverified domain will allow an application to open it, but this can only occur
      * if no other app on the device is approved for a higher approval level. This can queried
      * using {@link #getOwnersForDomain(String)}.
-     *
+     * <p>
      * If all owners for a domain are {@link DomainOwner#isOverrideable()}, then calling this to
      * enable that domain will disable all other owners.
-     *
+     * <p>
      * On the other hand, if any of the owners are non-overrideable, then this must be called with
      * false for all of the other owners to disable them before the domain can be taken by a new
      * owner.
@@ -63,7 +64,7 @@ public interface IDomainVerificationManager extends IInterface {
      * @param enabled     Whether or not the app should automatically open the domains specified.
      * @return error code or {@link #STATUS_OK} if successful
      */
-    int setDomainVerificationUserSelection(String domainSetId, @NonNull DomainSet domains, boolean enabled, @UserIdInt int userId);
+    int setDomainVerificationUserSelection(String domainSetId, @NonNull DomainSet domains, boolean enabled, @UserIdInt int userId) throws android.os.RemoteException;
 
 
     /**
@@ -80,7 +81,7 @@ public interface IDomainVerificationManager extends IInterface {
      *                               unrecoverable until the package is available again, and
      *                               should not be re-tried except on a time scheduled basis.
      */
-    int setDomainVerificationStatus(@NonNull UUID domainSetId, @NonNull Set<String> domains, int state);
+    int setDomainVerificationStatus(@NonNull String domainSetId, @NonNull DomainSet domains, int state) throws android.os.RemoteException;
 
 
     /**
@@ -88,12 +89,21 @@ public interface IDomainVerificationManager extends IInterface {
      * greater than 0 priority. This does not mean that all apps can actually open
      * an Intent with that domain. That will be decided by the set of apps which
      * are the highest priority level, ignoring all lower priority levels.
-     *
+     * <p>
      * The set will be ordered from lowest to highest priority.
      *
      * @param domain The host to query for. An invalid domain will result in an empty set.
      */
-    SortedSet<DomainOwner> getOwnersForDomain(@NonNull String domain);
+    SortedSet<DomainOwner> getOwnersForDomain(@NonNull String domain) throws android.os.RemoteException;
+
+
+    /**
+     * Used to iterate all {@link DomainVerificationInfo} values to do cleanup or retries. This is
+     * usually a heavy workload and should be done infrequently.
+     *
+     * @return the current snapshot of package names with valid autoVerify URLs.
+     */
+    List<String> queryValidVerificationPackageNames() throws android.os.RemoteException;
 
     /**
      * Retrieves the domain verification state for a given package.
@@ -102,7 +112,7 @@ public interface IDomainVerificationManager extends IInterface {
      * @throws NameNotFoundException If the package is unavailable. This is an unrecoverable error
      *                               and should not be re-tried except on a time scheduled basis.
      */
-    DomainVerificationInfo getDomainVerificationInfo(@NonNull String packageName);
+    DomainVerificationInfo getDomainVerificationInfo(@NonNull String packageName) throws android.os.RemoteException;
 
     abstract class Stub extends Binder implements IDomainVerificationManager {
         public static IDomainVerificationManager asInterface(IBinder obj) {

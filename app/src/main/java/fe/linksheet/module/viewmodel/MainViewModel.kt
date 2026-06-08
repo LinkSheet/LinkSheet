@@ -22,15 +22,15 @@ import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.remoteconfig.usecase.RemoteConfigUseCase
 import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
-import dev.zwander.shared.ShizukuUtil
 import fe.composekit.extension.getSystemServiceOrThrow
-import fe.linksheet.usecase.ClipboardUseCase
+import fe.linksheet.extension.android.tryStartActivity
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.extension.android.tryStartActivity
+import fe.linksheet.usecase.ClipboardUseCase
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.result.isSuccess
 import kotlinx.coroutines.flow.asFlow
@@ -70,24 +70,13 @@ class MainViewModel(
         addCloseable(clipboardUseCase)
     }
 
+    val shizukuEnabled = experimentRepository.asViewModelState(Experiments.newShizuku)
     val newDefaultsDismissed =
         appStateRepository.asViewModelState(AppStatePreferences.newDefaults_2025_12_15_InfoDismissed)
 
     @OptIn(SensitivePreference::class)
     val telemetryLevel = preferenceRepository.asViewModelState(AppPreferences.analytics.telemetryLevel)
     val telemetryShowInfoDialog = preferenceRepository.asViewModelState(AppPreferences.analytics.telemetryShowInfoDialog)
-
-    private val _shizukuRunning = RefreshableStateFlow(false) {
-        ShizukuUtil.isShizukuRunning()
-    }
-
-    val shizukuRunning = _shizukuRunning
-
-    private val _shizukuInstalled = RefreshableStateFlow(false) {
-        ShizukuUtil.isShizukuInstalled(context)
-    }
-
-    val shizukuInstalled = _shizukuInstalled
 
     private val _showMiuiAlert = RefreshableStateFlow(false) {
         if (miuiCompatProvider.isRequired.value) miuiCompat.showAlert(context) else false

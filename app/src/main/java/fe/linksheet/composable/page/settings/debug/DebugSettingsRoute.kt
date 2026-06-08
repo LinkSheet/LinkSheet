@@ -1,5 +1,6 @@
 package fe.linksheet.composable.page.settings.debug
 
+import android.widget.Toast
 import androidx.activity.compose.LocalActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.List
@@ -9,13 +10,11 @@ import androidx.compose.material.icons.rounded.DeleteForever
 import androidx.compose.material.icons.rounded.JoinLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.Lifecycle
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import dev.zwander.shared.ShizukuUtil
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.icon.iconPainter
@@ -23,6 +22,7 @@ import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.core.AndroidVersion
+import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.extension.android.showToast
@@ -40,10 +40,9 @@ fun DebugSettingsRoute(
     val context = LocalContext.current
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
-    val shizukuInstalled by remember { mutableStateOf(ShizukuUtil.isShizukuInstalled(context)) }
-    val shizukuRunning by remember { mutableStateOf(ShizukuUtil.isShizukuRunning()) }
-
-    val shizukuPermission by ShizukuUtil.rememberHasShizukuPermissionAsState()
+    val status by viewModel.statusUseCase.status.collectRefreshableAsStateWithLifecycle(
+        minActiveState = Lifecycle.State.RESUMED
+    )
 
     val feedback = LocalHapticFeedbackInteraction.current
 
@@ -52,7 +51,12 @@ fun DebugSettingsRoute(
         headline = stringResource(id = R.string.debug),
         onBackPressed = onBackPressed
     ) {
-        group(base = 2, viewModel.miuiCompatRequired, AndroidVersion.isAtLeastApi31S(), disableLogging) {
+        group(
+            base = 2,
+            viewModel.miuiCompatRequired,
+            AndroidVersion.isAtLeastApi31S(),
+            disableLogging
+        ) {
             item(key = R.string.logs) { padding, shape ->
                 DefaultTwoLineIconClickableShapeListItem(
                     headlineContent = textContent(R.string.logs),
@@ -67,13 +71,19 @@ fun DebugSettingsRoute(
             if (AndroidVersion.isAtLeastApi31S()) {
                 item(key = R.string.reset_app_link_verification_status) { padding, shape ->
                     DefaultTwoLineIconClickableShapeListItem(
-                        enabled = shizukuInstalled && shizukuRunning && shizukuPermission,
+                        enabled = status.allOk,
                         headlineContent = textContent(R.string.reset_app_link_verification_status),
                         supportingContent = textContent(R.string.reset_app_link_verification_status_subtitle),
                         icon = Icons.Outlined.RestartAlt.iconPainter,
                         shape = shape,
                         padding = padding,
-                        onClick = viewModel::enqueueResetAppLinks
+                        onClick = {
+                            viewModel.enqueueResetAppLinks {
+                                coroutineScope.launch {
+                                    context.showToast(R.string.reset_app_link_verification_status_toast, Toast.LENGTH_SHORT)
+                                }
+                            }
+                        }
                     )
                 }
             }

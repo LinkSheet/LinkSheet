@@ -178,7 +178,7 @@
     <string name="version_name"><b>Wersja:</b> <font face="monospace">%s</font></string>
     <string name="built_at"><b>Data:</b> <font face="monospace">%s</font></string>
     <string name="github_workflow_run_id"><b>ID workflow:</b> <font face="monospace">%s</font></string>
-    <string name="privacy_settings_explainer">Prywatność odsyłacza, Telemetria</string>
+    <string name="privacy_settings_explainer">Prywatność odsyłacza</string>
     <string name="show_linksheet_referrer">Pokazuj odsyłacz LinkSheet</string>
     <string name="show_linksheet_referrer_explainer">Kiedy uruchamiana jest aplikacja, może sprawdzić, która aplikacja ją uruchomiła, lub \"odwołała\" się do niej. Domyślnie, gdy LinkSheet uruchamia aplikację, ukrywa się, twierdząc, że to aplikacja, która uruchomiła LinkSheet, jest docelową aplikacją. Włącz to, aby ponownie wstawić LinkSheet jako odwołującą się aplikację dla aplikacji, które otwiera.</string>
     <string name="privacy">Prywatność</string>

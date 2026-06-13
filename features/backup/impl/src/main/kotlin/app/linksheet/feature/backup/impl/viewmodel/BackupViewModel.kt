@@ -6,7 +6,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.impl.R
-import app.linksheet.feature.backup.impl.ui.exportimport.ExportSettings
+import app.linksheet.feature.backup.impl.ui.ExportSettings
 import app.linksheet.feature.backup.impl.usecase.BackupUseCase
 import app.linksheet.feature.backup.impl.usecase.RestoreResultWrapper
 import app.linksheet.feature.backup.impl.usecase.RestoreUseCase

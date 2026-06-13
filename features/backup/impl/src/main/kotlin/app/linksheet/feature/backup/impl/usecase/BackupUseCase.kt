@@ -7,7 +7,7 @@ import app.linksheet.feature.backup.impl.core.BackupType
 import app.linksheet.feature.backup.impl.core.DatabaseType
 import app.linksheet.feature.backup.impl.core.PreferenceRepositoryBackup
 import app.linksheet.feature.backup.impl.core.PreferenceType
-import app.linksheet.feature.backup.impl.ui.exportimport.ExportSettings
+import app.linksheet.feature.backup.impl.ui.ExportSettings
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

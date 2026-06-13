@@ -475,7 +475,6 @@
     <string name="settings_verified_link_handlers__text_browser">Прегледач</string>
     <string name="generic__button_text_share">Дели</string>
     <string name="resolve_event__idle">У мировању</string>
-
     <string name="settings_home__title_clipboard_card">Картица привремене меморије</string>
     <string name="settings_home__text_clipboard_card">Приказивање тренутног садржаја привремене меморије на почетној страници, ако је URL адреса</string>
     <string name="settings_language__dialog_title">Језик апликације</string>

@@ -78,7 +78,7 @@
     <string name="dark">Escuro</string>
     <string name="credits">Créditos</string>
     <string name="paste">Colar</string>
-    <string name="theme_explainer">Material You, tema escuro, modo AMOLED</string>
+    <string name="theme_explainer">Material You, tema escuro, modo puro preto</string>
     <string name="github">Github</string>
     <string name="follow_only_known_trackers_explainer">Somente tente seguir redirecionamentos quando o host for conhecido como rastreador/redirecionamento. Se a opção \"Seguir rastreadores via serviço externo\" estiver ativada, ela sempre será ativada</string>
     <string name="add">Adicionar</string>
@@ -157,7 +157,7 @@
     <string name="open_link_with_subtitle_2">O LinkSheet foi inicialmente baseado no OpenLinkWith</string>
     <string name="import_and_override">Importar e substituir</string>
     <string name="privacy">Privacidade</string>
-    <string name="donate_card_subtitle">Se você gostou do LinkSheet, considere deixar uma estrela no Github e/ou fazer uma doação.\nOs doadores que doarem mais de <b>5 euros</b> poderão receber o <b>LinkSheet Pro</b>, que terá recursos exclusivos.</string>
+    <string name="donate_card_subtitle">Se você gosta do LinkSheet, considere deixar uma estrela no Github e/ou fazer uma doação.\nOs doadores que doarem mais de <b>5€</b> poderão receber o <b>LinkSheet Pro</b>, que terá recursos exclusivos.</string>
     <string name="success">Sucesso</string>
     <string name="warning">Aviso</string>
     <string name="at_least_one_known_browser_installed_explainer">O LinkSheet detectou pelo menos um aplicativo conhecido por ser um navegador.</string>
@@ -191,7 +191,7 @@
     <string name="flavor"><b>Título:</b> <font face="monospace">%s</font></string>
     <string name="show_linksheet_referrer">Mostrar referenciador do LinkSheet</string>
     <string name="show_linksheet_referrer_explainer">Quando um app é aberto, ele pode verificar qual app o abriu, ou o referenciou. Por padrão, o LinkSheet se esconde para que o app de destino pense que foi aberto pelo app original. Habilite isso para reinserir o LinkSheet como o referenciador para os app que ele abrir.</string>
-    <string name="privacy_settings_explainer">Privacidade de referenciador, Telemetria</string>
+    <string name="privacy_settings_explainer">Privacidade de referenciador</string>
     <string name="donate_crypto">Doar via cripto</string>
     <string name="donate_card">Doar com cartão (via BuyMeACoffee)</string>
     <string name="donate_explainer_crypto">Quando doar com cripto, mande um email para <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
@@ -400,7 +400,7 @@
     <string name="bottom_sheet_loading_indicator__button_skip_job">Pular</string>
     <string name="export_log_dialog__title_share_logs">Compartilhar log</string>
     <string name="export_log_dialog__title_redact_log">Editar log</string>
-    <string name="export_log_dialog__subtitle_redact_log">Recomendado, oculte nomes de apps e URLs</string>
+    <string name="export_log_dialog__subtitle_redact_log">Recomendado, oculta nomes de apps e URLs</string>
     <string name="export_log_dialog__title_include_throwable">Incluir logs de crash</string>
     <string name="export_log_dialog__subtitle_include_throwable">Recomendado, mas não pode ser editado</string>
     <string name="export_log_dialog__title_include_fingerprint">Incluir digital de compilação</string>
@@ -471,7 +471,7 @@
     <string name="settings_main_experiment_news__text_experiment_state_updated">Alguns experimentos foram removidos e agora são comportamento padrão.</string>
     <string name="generic__button_dismiss">Dispensar</string>
     <string name="settings_main_experiment_changelog__title_changelog">Log de mudanças dos experimentos</string>
-    <string name="settings__subtitle_advanced"><![CDATA[Experimentos &amp; Exportar/Importar]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[Experimentos, Backup &amp; Restauração]]></string>
     <string name="bottom_sheet__button_manual_redirect">Seguir redirecionamentos</string>
     <string name="generic__button_text_save">Salvar</string>
     <string name="generic__button_text_close">Fechar</string>
@@ -539,4 +539,5 @@
     <string name="settings_follow_redirects__title_aggressive">Modo agressivo</string>
     <string name="settings_follow_redirects__subtitle_aggressive">Buscar página completa para melhor compatibilidade com sites que não usam redirecionamentos HTTP</string>
     <string name="handler_target__label_switch_profile_view_intent">Trocar perfil</string>
+    <string name="settings_advanced__divider_backup"><![CDATA[Backup &amp; Restauração]]></string>
 </resources>

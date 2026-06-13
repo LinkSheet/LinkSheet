@@ -483,7 +483,6 @@
     <string name="settings_verified_link_handlers__text_browser">Prohlížeč</string>
     <string name="generic__button_text_share">Sdílet</string>
     <string name="resolve_event__idle">Nečinný</string>
-
     <string name="settings_home__title_clipboard_card">Karta schránky</string>
     <string name="settings_home__text_clipboard_card">Zobrazit aktuální obsah schránky na domovské stránce, pokud se jedná o adresu</string>
     <string name="settings_language__dialog_title">Jazyk aplikace</string>

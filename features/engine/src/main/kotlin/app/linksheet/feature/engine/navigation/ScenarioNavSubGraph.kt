@@ -16,13 +16,11 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.route.NavSubGraph
 import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 
 @Keep
 @Serializable
-@SerialName("ScenarioNavSubGraph")
 object ScenarioNavSubGraph : NavSubGraph<ScenarioOverviewRoute> {
     override val startDestination = ScenarioOverviewRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
@@ -41,7 +39,6 @@ object ScenarioNavSubGraph : NavSubGraph<ScenarioOverviewRoute> {
 
 @Keep
 @Serializable
-@SerialName("ScenarioOverviewRoute")
 data object ScenarioOverviewRoute : Route {
     val NavItem by lazy {
         RouteNavItemNew(
@@ -55,5 +52,4 @@ data object ScenarioOverviewRoute : Route {
 
 @Keep
 @Serializable
-@SerialName("ScenarioRoute")
 data class ScenarioRoute(val id: Long) : Route

@@ -12,12 +12,9 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.route.Nav
 import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Keep
 @Serializable
-@SerialName("BackupNav")
 object BackupNav : Nav {
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<BackupRoute> { _, _ ->
@@ -28,7 +25,6 @@ object BackupNav : Nav {
 
 @Keep
 @Serializable
-@SerialName("BackupRoute")
 data object BackupRoute : Route {
     val NavItem by lazy {
         RouteNavItemNew(

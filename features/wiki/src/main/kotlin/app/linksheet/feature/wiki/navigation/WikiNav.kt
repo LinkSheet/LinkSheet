@@ -12,13 +12,10 @@ import app.linksheet.feature.wiki.core.WikiPage
 import app.linksheet.feature.wiki.ui.MarkdownViewerWrapper
 import fe.composekit.route.Nav
 import fe.composekit.route.Route
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 
-@Keep
 @Serializable
-@SerialName("WikiNav")
 object WikiNav : Nav {
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<MarkdownViewerRoute> { _, route ->
@@ -36,7 +33,6 @@ object WikiNav : Nav {
 
 @Keep
 @Serializable
-@SerialName("MarkdownViewerRoute")
 data class MarkdownViewerRoute(
     val title: String,
     val url: String,

@@ -4,8 +4,8 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
+import androidx.core.os.BundleCompat
 import app.linksheet.sdk.Message
 import app.linksheet.sdk.PluginMethod
 
@@ -18,9 +18,8 @@ abstract class BaseRulePluginProvider(
         val handler = handlers.firstOrNull { it.name == method }
         if(handler == null) return null
 
-        val message = when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> extras?.getParcelable("message", handler.input.java)
-            else -> extras?.getParcelable("message")
+        val message = extras?.let {
+            BundleCompat.getParcelable(it, "message", handler.input.java)
         } ?: return null
         val result = handleMessage(message)
 

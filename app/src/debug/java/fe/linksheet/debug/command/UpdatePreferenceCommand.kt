@@ -51,7 +51,7 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
 
             val activity = app.currentActivity().value
             if (activity != null && activity is UiEventReceiver) {
-                activity.send(UiEvent.ShowSnackbar(text = msg))
+                activity.onEvent(UiEvent.ShowSnackbar(text = msg))
             } else {
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
             }

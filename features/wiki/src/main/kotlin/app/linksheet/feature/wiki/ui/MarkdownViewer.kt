@@ -6,9 +6,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,41 +37,37 @@ import app.linksheet.compose.preview.PreviewTheme
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
 import dev.jeziellago.compose.markdowntext.MarkdownText
 import fe.android.span.helper.LocalLinkAnnotationStyle
+import fe.composekit.component.CommonDefaults
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.component.page.SaneSettingsScaffold
 import org.koin.androidx.compose.koinViewModel
 import app.linksheet.compose.R as CommonR
 
-@Composable
-fun <T, R> rememberSavableWithInit(key1: T, block: suspend (T) -> R?): R? {
-    var state by rememberSaveable(key1) { mutableStateOf<R?>(null) }
-
-    LaunchedEffect(key1 = key1) {
-        state = block(key1)
-    }
-
-    return state
-}
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MarkdownViewerWrapper(
-    title: String,
-    url: String,
-    rawUrl: String = url,
     onBackPressed: () -> Unit,
     viewModel: MarkdownViewModel = koinViewModel(),
 ) {
-    val markdown = rememberSavableWithInit(rawUrl) { viewModel.getWikiText(it) }
+    val markdown by viewModel.markdownText.collectAsStateWithLifecycle()
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
+    val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()
     val handler = LocalUriHandler.current
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.init()
+    }
+
     MarkdownViewer(
-        title = title,
+        title = viewModel.data.customTitle?.let { stringResource(id = it) } ?: viewModel.data.title,
         markdown = markdown,
+        isLoading = isLoading,
+        isRefreshing = isRefreshing,
+        onRefresh = viewModel::refresh,
         onBackPressed = onBackPressed,
         onOpenExternally = {
-            handler.openUri(url)
+            handler.openUri(viewModel.data.url)
         }
     )
 }
@@ -70,6 +77,9 @@ fun MarkdownViewerWrapper(
 private fun MarkdownViewer(
     title: String,
     markdown: String? = null,
+    isLoading: Boolean,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
     onBackPressed: () -> Unit,
     onOpenExternally: () -> Unit,
 ) {
@@ -77,6 +87,8 @@ private fun MarkdownViewer(
         rememberTopAppBarState(),
         canScroll = { false }
     )
+
+    val state = rememberPullToRefreshState()
 
     val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
     SaneSettingsScaffold(
@@ -100,7 +112,7 @@ private fun MarkdownViewer(
             )
         }
     ) { padding ->
-        if (markdown == null) {
+        if (isLoading) {
             Box(modifier = Modifier.padding(padding)) {
                 LinearProgressIndicator(
                     modifier = Modifier
@@ -111,21 +123,36 @@ private fun MarkdownViewer(
             }
         }
 
-        SaneLazyColumnLayout(padding = padding) {
-            item(key = 1, contentType = ContentType.TextItem) {
-                if (markdown != null) {
-                    MarkdownText(
-                        modifier = Modifier,
-                        markdown = markdown,
-                        linkColor = LocalLinkAnnotationStyle.current.style.color,
-                        syntaxHighlightColor = MaterialTheme.colorScheme.tertiary,
-                        syntaxHighlightTextColor = MaterialTheme.colorScheme.onTertiary,
-                        style = MaterialTheme.typography.bodyMedium,
-                        isTextSelectable = true,
+        PullToRefreshBox(
+            modifier = Modifier.padding(padding),
+            isRefreshing = isRefreshing,
+            onRefresh = onRefresh,
+            state = state,
+            indicator = {
+                @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+                PullToRefreshDefaults.LoadingIndicator(
+                    state = state,
+                    isRefreshing = isRefreshing,
+                    modifier = Modifier.align(Alignment.TopCenter),
+                )
+            }
+        ) {
+            SaneLazyColumnLayout(padding = CommonDefaults.EmptyPadding) {
+                item(key = 1, contentType = ContentType.TextItem) {
+                    if (markdown != null) {
+                        MarkdownText(
+                            modifier = Modifier,
+                            markdown = markdown,
+                            linkColor = LocalLinkAnnotationStyle.current.style.color,
+                            syntaxHighlightColor = MaterialTheme.colorScheme.tertiary,
+                            syntaxHighlightTextColor = MaterialTheme.colorScheme.onTertiary,
+                            style = MaterialTheme.typography.bodyMedium,
+                            isTextSelectable = true,
 //                        onLinkClicked = {
 //                            Log.d("MarkdownViewer", "$it")
 //                        }
-                    )
+                        )
+                    }
                 }
             }
         }
@@ -146,98 +173,14 @@ private class MarkdownPreviewParameterProvider : PreviewParameterProvider<Pair<S
         Please use this [discussion thread](https://github.com/orgs/LinkSheet/discussions/501) to ask questions and/or report issues/bugs
         """.trimIndent(),
         "Privacy" to """
-        LinkSheet does not track the user in any way. LinkSheet always uses common browser headers and never
-        includes device information when sending web-requests, but due to the nature of how the internet works, your
-        public IP address is not hidden.
-        
-        ## Features connecting to the internet locally
-        
-        ### Follow redirects
-        
-        When the "Follow redirects" feature is enabled, LinkSheet attempts to follow redirects before
-        showing the app chooser by sending a `HEAD` request to the opened URL (which means a connection to
-        the website is always made, regardless of whether the user actually opens the URL in any app
-        afterwards).
-        
-        Redirects will only be followed for darknet urls (.i2p, .onion) if the corresponding option "Allow darknets" is enabled.
-        
         ### Amp2Html
         
         When "Enable Amp2Html" is enabled, LinkSheet will send a `GET` request to the opened URL (again, a
-        connection is always made, even if the user does not actually open the URL in any app afterwards) to
-        attempt to obtain the non-AMP version of the page. If the page is not an AMP page, or if no non-AMP
-        version could be found, the original URL will be opened when the user clicks an app in the bottom
-        sheet. 
-        
-        Amp2Html will only run on darknet urls (.i2p, .onion) if the corresponding option "Allow darknets" is enabled.
-        
-        ### Downloader
-        
-        When the "Enable downloader" feature is enabled, LinkSheet will send a `HEAD` request to the opened
-        URL (again, a connection is always made, even if the user does not actually open the URL in any app
-        afterwards) and check if the `Content-Type` header of the response is not `text/html`.
-        
-        Enabling "Use mime type from URL" will still send a request if no mime type could be read from the
-        opened URL
+        connectioture is enabled, LinkSheet will send a `HEAD` request to the opened
         
         ## External services
         
-        Both "Follow redirects" and "Amp2Html" are also available as external services, meaning that,
-        when the corresponding option is enabled ("Follow redirects via external service" and
-        "Attempt to obtain non-AMP page version via external service" respectively),
-        a [Supabase edge-function](https://github.com/1fexd/linksheet-supabase-functions/) is used to follow
-        redirects or convert an AMP page to the normal HTML page. The functions only cache the timestamp,
-        input and output link. The cache will periodically be exported from the database directly into LinkSheet,
-        so common links can easily be resolved locally.
-        
-        When "Follow redirects" and "Follow redirects via external service" are enabled, only
-        links [known to be trackers (checkout the *.txt files)](https://github.com/1fexd/fastforward-ext/releases/latest)
-        will be sent to the edge function.
-        
-        If "Enable Amp2Html" and "Attempt to obtain non-AMP page version via external service", ALL links
-        are sent to the edge function.
-        
-        Darknet links (.i2p, .onion) are NEVER sent to this external service.
-        
-        ## Logs
-        
-        ### Crash log viewer
-        
-        The crash log viewer displays exceptions which could not be handled by the application. Usually,
-        exception messages do not contain any personal data and can safely be shared with others.
-        
-        ### Internal log viewer
-        
-        The internal log viewer (available from version `0.0.32` onwards) will default to exporting a
-        redacted version of the log. In the redacted version, personal identifiers like package names or
-        hosts are hashed with `HmacSHA256` (a random key is generated when the app is launched for the first
-        time). This approach ensures privacy while still allowing debugging.
-        
-        ### Other log content
-        
-        The log will contain the LinkSheet version.
-        
-        Additionally, both logs will include the device fingerprint by default. This fingerprint
-        contains the
-        device brand, device
-        name, Android version, Android build id, Android version incremental id, user type (e.g. user) and
-        tags (e.g. release-keys). While this fingerprint may be considered personal data, it may be
-        incredibly useful while debugging issues.
-        
-        Settings are also included in both logs by default since they may also help a lot while debugging
-        issues. While they do not include any personal data (settings containing package names are obscured
-        when the log is exported in redacted mode), exporting them can still be disabled.
-        
-        ## ADB logcat
-        
-        ADB logcats of LinkSheet may include personal identifiable information like installed packages or
-        visited hosts as well as preferences. Logcats should only be shared in rare cases where a full log
-        is required to debug an issue. Logcats should not be published publicly.
-        
-        ## Exports
-        
-        When exporting LinkSheet settings, you can select to export the log key. Please make sure not to share exports containing log keys with other people as the key may be sensitive information.
-        """.trimIndent()
+        Both "Follow redirects" and "Amp2Html" are also available as external services, meaning that""".trimIndent()
     )
 }
 
@@ -250,21 +193,32 @@ private fun MarkdownViewerPreviewBase(preview: Pair<String, String>) {
         MarkdownViewer(
             title = title,
             markdown = markdown,
+            isLoading = false,
+            isRefreshing = false,
+            onRefresh = {},
             onBackPressed = {},
             onOpenExternally = {}
         )
     }
 }
 
-@Preview(group = "MarkdownViewerPage", showBackground = false, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(
+    group = "MarkdownViewerPage",
+    showBackground = false,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
 @Composable
 private fun PreviewTextLight(
     @PreviewParameter(MarkdownPreviewParameterProvider::class) preview: Pair<String, String>,
 ) {
-  MarkdownViewerPreviewBase(preview)
+    MarkdownViewerPreviewBase(preview)
 }
 
-@Preview(group = "MarkdownViewerPage", showBackground = false, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(
+    group = "MarkdownViewerPage",
+    showBackground = false,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 private fun PreviewTextDark(
     @PreviewParameter(MarkdownPreviewParameterProvider::class) preview: Pair<String, String>,
@@ -280,6 +234,9 @@ private fun PreviewLoading() {
         MarkdownViewer(
             title = "Experiments",
             markdown = null,
+            isLoading = false,
+            isRefreshing = false,
+            onRefresh = {},
             onBackPressed = {},
             onOpenExternally = {}
         )

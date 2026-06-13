@@ -4,6 +4,7 @@ package fe.linksheet.navigation
 import androidx.annotation.Keep
 import fe.composekit.route.Route
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
@@ -69,14 +70,17 @@ const val bottomSheetSettingsRoute = "bottom_sheet_settings_route"
 
 @Keep
 @Serializable
+@SerialName("PreferredBrowserSettingsRoute")
 data object PreferredBrowserSettingsRoute : Route
 
 @Keep
 @Serializable
+@SerialName("WhitelistedBrowsersSettingsRoute")
 data class WhitelistedBrowsersSettingsRoute(val type: PreferredBrowserViewModel.BrowserType) : Route
 
 @Keep
 @Serializable
+@SerialName("SingleBrowserSettingsRoute")
 data class SingleBrowserSettingsRoute(val type: PreferredBrowserViewModel.BrowserType) : Route
 
 const val inAppBrowserSettingsRoute = "in_app_browser_settings_route"
@@ -84,10 +88,12 @@ const val devModeRoute = "dev_mode"
 
 @Keep
 @Serializable
+@SerialName("AppsWhichCanOpenLinksSettingsRoute")
 data object AppsWhichCanOpenLinksSettingsRoute : Route
 
 @Keep
 @Serializable
+@SerialName("ExperimentRoute")
 data class ExperimentRoute(
     val experiment: String? = null,
 ) : Route {
@@ -98,30 +104,37 @@ data class ExperimentRoute(
 
 @Keep
 @Serializable
+@SerialName("AdvancedRoute")
 data object AdvancedRoute : Route
 
 @Keep
 @Serializable
+@SerialName("DebugRoute")
 data object DebugRoute : Route
 
 @Keep
 @Serializable
+@SerialName("LogTextViewerRoute")
 data class LogTextViewerRoute(val id: String?, val name: String) : Route
 
 @Keep
 @Serializable
+@SerialName("VlhAppRoute")
 data class VlhAppRoute(val packageName: String) : Route
 
 @Keep
 @Serializable
+@SerialName("PreviewUrlRoute")
 data object PreviewUrlRoute : Route
 
 @Keep
 @Serializable
+@SerialName("LanguageRoute")
 data object LanguageRoute : Route
 
 @Keep
 @Serializable
+@SerialName("SqlRoute")
 data object SqlRoute : Route
 
 //@Keep

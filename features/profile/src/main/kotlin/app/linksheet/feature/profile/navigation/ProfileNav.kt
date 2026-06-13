@@ -10,10 +10,13 @@ import app.linksheet.feature.profile.ui.ProfileSwitchingSettings
 import fe.composekit.core.AndroidVersion
 import fe.composekit.route.Nav
 import fe.composekit.route.Route
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 
+@Keep
 @Serializable
+@SerialName("ProfileNav")
 object ProfileNav : Nav {
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         if (AndroidVersion.isAtLeastApi28P()) {
@@ -27,5 +30,6 @@ object ProfileNav : Nav {
 
 @Keep
 @Serializable
+@SerialName("ProfileRoute")
 data object ProfileRoute : Route {
 }

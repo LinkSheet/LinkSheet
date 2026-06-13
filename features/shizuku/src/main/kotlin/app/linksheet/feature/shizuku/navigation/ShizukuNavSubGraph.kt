@@ -13,10 +13,12 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.route.NavSubGraph
 import fe.composekit.route.Route
 import fe.composekit.route.RouteNavItemNew
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
+@Keep
 @Serializable
+@SerialName("ShizukuNavSubGraph")
 object ShizukuNavSubGraph : NavSubGraph<ShizukuRoute> {
     override val startDestination = ShizukuRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
@@ -28,6 +30,7 @@ object ShizukuNavSubGraph : NavSubGraph<ShizukuRoute> {
 
 @Keep
 @Serializable
+@SerialName("ShizukuRoute")
 data object ShizukuRoute : Route {
     val NavItem by lazy {
         RouteNavItemNew(

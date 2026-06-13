@@ -8,9 +8,12 @@ import app.linksheet.feature.libredirect.ui.LibRedirectServiceSettingsRoute
 import app.linksheet.feature.libredirect.ui.LibRedirectSettingsRoute
 import fe.composekit.route.NavSubGraph
 import fe.composekit.route.Route
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Keep
 @Serializable
+@SerialName("LibRedirectNavSubGraph")
 object LibRedirectNavSubGraph : NavSubGraph<LibRedirectRoute> {
     override val startDestination = LibRedirectRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
@@ -25,8 +28,10 @@ object LibRedirectNavSubGraph : NavSubGraph<LibRedirectRoute> {
 
 @Keep
 @Serializable
+@SerialName("LibRedirectRoute")
 data object LibRedirectRoute : Route
 
 @Keep
 @Serializable
+@SerialName("LibRedirectServiceRoute")
 data class LibRedirectServiceRoute(val serviceKey: String) : Route

@@ -10,10 +10,13 @@ import app.linksheet.feature.browser.ui.PrivateBrowsingBrowsersSettings
 import app.linksheet.feature.browser.ui.PrivateBrowsingSettings
 import fe.composekit.route.NavSubGraph
 import fe.composekit.route.Route
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 
+@Keep
 @Serializable
+@SerialName("PrivateBrowsingNavSubGraph")
 object PrivateBrowsingNavSubGraph: NavSubGraph<PrivateBrowsingRoute> {
     override val startDestination = PrivateBrowsingRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
@@ -30,8 +33,10 @@ object PrivateBrowsingNavSubGraph: NavSubGraph<PrivateBrowsingRoute> {
 
 @Keep
 @Serializable
+@SerialName("PrivateBrowsingRoute")
 data object PrivateBrowsingRoute : Route
 
 @Keep
 @Serializable
+@SerialName("PrivateBrowserBrowserRoute")
 data object PrivateBrowserBrowserRoute : Route

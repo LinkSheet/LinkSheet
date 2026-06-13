@@ -19,6 +19,7 @@
     <string name="import_settings__text_success">Imported!</string>
     <string name="import_settings__text_failure">Failed to import settings!</string>
     <string name="settings_backup__button_text_backup_to_file">Backup to file</string>
+    <string name="settings_backup__button_text_restore_from_file">Select file &amp; restore</string>
     <string name="settings_backup__title_backup">Backup</string>
     <string name="settings_backup__subtitle_backup">Backup app settings to a file</string>
     <string name="settings_backup__title_backup_dialog">Backup settings</string>

@@ -115,7 +115,7 @@ private fun ImportSettingsDialog(
         },
         confirmButton = {
             SaneAlertDialogTextButton(
-                content = textContent(CommonR.string.generic__button_text_confirm),
+                content = textContent(R.string.settings_backup__button_text_restore_from_file),
                 onClick = { fileSelectedLauncher.launch(importIntent) }
             )
         }

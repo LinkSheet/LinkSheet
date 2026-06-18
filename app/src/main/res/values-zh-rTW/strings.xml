@@ -33,7 +33,7 @@
     <string name="hide_after_copying_explainer">當輕觸諸如「複製連結」或「下載」等按鈕後自動隱藏底部功能表</string>
     <string name="display_grid_layout">格狀版面配置</string>
     <string name="display_grid_layout_explainer">在底部功能表以格狀檢視而非清單</string>
-    <string name="set_as_browser_done">LinkSheet 已被設為預設瀏覽器！</string>
+    <string name="set_as_browser_done">已將 LinkSheet 設為預設瀏覽器！</string>
     <string name="browser_status">瀏覽器狀態</string>
     <string name="app_browsers">應用程式與瀏覽器</string>
     <string name="bottom_sheet">底部功能表</string>
@@ -49,7 +49,7 @@
     <string name="about">關於</string>
     <string name="about_explainer">鳴謝、授權、連結、版本</string>
     <string name="credits">鳴謝</string>
-    <string name="credits_explainer">感謝、軟體授權</string>
+    <string name="credits_explainer">謝辭、授權條款</string>
     <string name="version">LinkSheet 版本</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github">GitHub</string>
@@ -115,7 +115,7 @@
     <string name="reset">重設</string>
     <string name="follow_redirects_short">重新導向</string>
     <string name="experiments_explainer_2">活躍開發中</string>
-    <string name="settings__subtitle_advanced"><![CDATA[實驗功能、匯出或匯入]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[實驗功能、備份與還原]]></string>
     <string name="apps_which_can_open_links">已驗證的連結處理常式</string>
     <string name="debug">偵錯</string>
     <string name="download_started">已開始下載</string>
@@ -337,7 +337,7 @@
     <string name="export_include_recommendation">建議僅當你不會將匯出的檔案與他人分享時再勾選下列選項！</string>
     <string name="export_privacy">如欲瞭解與匯出相關的隱私權資訊，請參見<annotation url-id="privacy-exports">隱私權政策</annotation>。</string>
     <string name="no_handlers_found_explainer">LinkSheet 無法開啟此連結。</string>
-    <string name="privacy_settings_explainer">參照隱私、遙測</string>
+    <string name="privacy_settings_explainer">參照隱私</string>
     <string name="show_linksheet_referrer">表明參照為 LinkSheet</string>
     <string name="customization">自訂</string>
     <string name="notifications">訊息與通知</string>
@@ -414,5 +414,6 @@
     <string name="settings_browser_mode__title_auto_launch_single_browser">自動採用唯一瀏覽器</string>
     <string name="settings_bottom_sheet__subtitle_expand_fully">自動將底部功能表完全展開</string>
     <string name="settings_bottom_sheet__title_expand_fully">完全展開</string>
-    <string name="debug_build">偵錯建置</string>
+    <string name="debug_build">偵錯建構</string>
+    <string name="settings_advanced__divider_backup"><![CDATA[備份與還原]]></string>
 </resources>

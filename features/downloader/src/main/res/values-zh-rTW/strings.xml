@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">下載器</string>
     <string name="downloader_url_mime_type">採用網址提供的 MIME 類型</string>
     <string name="downloader_url_mime_type_explainer">若網址結尾為副檔名 (例如「.jpg」)，則將該類型套用至下載的檔案。</string>
+    <string name="settings_downloader__subtitle_mode_manual">在底部功能表顯示一個「檢查是否可供下載」按鈕</string>
+    <string name="settings_downloader__subtitle_mode_auto">自動檢查網址是否具有可供下載的內容</string>
+    <string name="action_downloader__try_to_download">檢查是否可供下載</string>
+    <string name="settings_downloader__title_mode_manual">手動</string>
+    <string name="settings_downloader__title_mode_auto">自動</string>
 </resources>

@@ -2,4 +2,5 @@
 <resources>
     <string name="no_apps_found">Tidak ditemukan aplikasi yang ada.</string>
     <string name="no_such_app_found">Apl tersebut tidak ditemukan!</string>
+    <string name="settings__title_filter_apps">Filter aplikasi</string>
 </resources>

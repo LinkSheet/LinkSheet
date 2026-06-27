@@ -113,7 +113,6 @@ val ViewModelModule = module {
             context = get(),
             sessionId = parameters[0],
             logViewCommon = get(),
-            preferenceRepository = get(),
             logPersistService = get()
         )
     }

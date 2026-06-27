@@ -15,7 +15,6 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 class BottomSheetSettingsViewModel(
     val context: Application,
     preferenceRepository: AppPreferenceRepository,
-    experimentsRepository: ExperimentRepository,
     val profileSwitcher: ProfileSwitcher,
 ) : BaseViewModel(preferenceRepository) {
 

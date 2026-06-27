@@ -31,7 +31,7 @@ import org.koin.dsl.binds
 import org.koin.dsl.module
 
 
-fun PreferenceRepositoryModule(appPreferenceRepository: DefaultAppPreferenceRepository): Module {
+fun PreferenceRepositoryModule(appPreferenceRepository: AppPreferenceRepository): Module {
     return module {
         single<AppPreferenceRepository> { appPreferenceRepository }.binds(
             arrayOf(AppPreferenceRepository::class, DefaultAppPreferenceRepository::class)

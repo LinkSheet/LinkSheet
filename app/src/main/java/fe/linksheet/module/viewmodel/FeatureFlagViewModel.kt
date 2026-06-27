@@ -1,18 +1,12 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
+import androidx.lifecycle.ViewModel
 import fe.android.preference.helper.compose.StatePreference
-import fe.linksheet.R
-import app.linksheet.api.preference.AppPreferenceRepository
-import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.flags.FeatureFlags
-import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 class FeatureFlagViewModel(
     val context: Application,
-    preferenceRepository: AppPreferenceRepository,
-    featureFlagRepository: FeatureFlagRepository,
-) : BaseViewModel(preferenceRepository) {
+) : ViewModel() {
 }
 
 sealed class Flag(val pref: StatePreference<Boolean>) {

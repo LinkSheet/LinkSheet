@@ -8,6 +8,7 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.work.WorkManager
 import app.linksheet.api.DependencyProvider
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.compose.debug.NoOpDebugMenuSlotProvider
@@ -116,7 +117,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 
-        val koinModules = provideKoinModules()
+        val koinModules = provideKoinModules(preferenceRepository)
         startKoin {
             allowOverride(StaticBuildInfo.IsDebug)
             androidLogger()
@@ -131,7 +132,7 @@ open class LinkSheetApp : Application(), DependencyProvider {
         lifecycleObserver.onAppInitialized()
     }
 
-    override fun provideKoinModules(): List<Module> {
+    override fun provideKoinModules(preferenceRepository: AppPreferenceRepository): List<Module> {
         return listOf(
             ClockModule,
             SystemInfoServiceModule,

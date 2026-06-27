@@ -3,11 +3,10 @@ package fe.linksheet.module.viewmodel
 import android.app.Application
 import android.content.ClipboardManager
 import androidx.core.content.getSystemService
+import androidx.lifecycle.ViewModel
 import fe.linksheet.composable.page.settings.debug.log.PrefixMessageCardContent
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.log.file.entry.LogEntry
-import app.linksheet.api.preference.AppPreferenceRepository
-import fe.linksheet.module.viewmodel.base.BaseViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.util.flowOfLazy
 import kotlinx.coroutines.flow.map
@@ -16,9 +15,8 @@ class LogTextSettingsViewModel(
     context: Application,
     private val sessionId: String?,
     val logViewCommon: LogViewCommon,
-    val preferenceRepository: AppPreferenceRepository,
     private val logPersistService: LogPersistService,
-) : BaseViewModel(preferenceRepository) {
+) : ViewModel() {
     val merger = LogEntryMerger()
 
     val clipboardManager = context.getSystemService<ClipboardManager>()!!

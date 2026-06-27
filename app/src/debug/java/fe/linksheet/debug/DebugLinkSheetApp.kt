@@ -2,6 +2,7 @@ package fe.linksheet.debug
 
 import android.os.StrictMode
 import androidx.lifecycle.lifecycleScope
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.compose.debug.DebugPreferenceProvider
 import app.linksheet.feature.analytics.aptabase.aptabaseAnalyticsClientModule
@@ -40,8 +41,8 @@ class DebugLinkSheetApp : LinkSheetApp() {
         super.onCreate()
     }
 
-    override fun provideKoinModules(): List<Module> {
-        return super.provideKoinModules() + DebugViewModelModule + DebugAppModule
+    override fun provideKoinModules(preferenceRepository: AppPreferenceRepository): List<Module> {
+        return super.provideKoinModules(preferenceRepository) + DebugViewModelModule + DebugAppModule
     }
 
     override fun provideCompatProvider(): Module {

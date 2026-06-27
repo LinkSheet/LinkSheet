@@ -5,4 +5,18 @@
     <string name="shizuku_integration_no_permission_explainer">Ketuk di sini untuk meminta izin Shizuku.</string>
     <string name="shizuku_integration_not_setup_explainer">Walaupun tidak sepenuhnya diperlukan agar LinkSheet berfungsi, Shizuku direkomendasikan. Ketuk di sini untuk menginstalnya.</string>
     <string name="shizuku_integration">Integrasi Shizuku</string>
+    <string name="settings_shizuku__title_shizuku">Shizuku</string>
+    <string name="settings_shizuku__text_shizuku">Konfigurasi fitur Shizuku</string>
+    <string name="settings_shizuku__title_not_installed">Shizuku tidak terinstal</string>
+    <string name="settings_shizuku__text_not_installed">Sentuh untuk membuka panduan instalasi</string>
+    <string name="settings_shizuku__text_info">Shizuku adalah alat yang memanfaatkan ADB (wireless) dan akses root untuk memungkinkan aplikasi lain mengakses fungsi sistem khusus yang hanya tersedia melalui pengguna shell khusus.\n\nLinkSheet menggunakan Shizuku agar dapat mengaktifkan atau menonaktifkan penanganan tautan untuk aplikasi mana pun tanpa pengguna perlu membuka pengaturan dan melakukannya sendiri.</string>
+    <string name="settings_shizuku__title_missing_permission">Izin tidak ditemukan</string>
+    <string name="settings_shizuku__text_missing_permission">Ketuk untuk meminta izin Shizuku</string>
+    <string name="settings_shizuku__title_not_running">Shizuku tidak berjalan</string>
+    <string name="settings_shizuku__text_not_running">Sentuh untuk membuka manajer</string>
+    <string name="settings_shizuku__title_enable">Aktifkan integrasi Shizuku</string>
+    <string name="settings_shizuku__text">Shizuku</string>
+    <string name="settings_shizuku__divider_settings">Pengaturan</string>
+    <string name="settings_shizuku__text_auto_disable_link_handling">Nonaktifkan otomatis penanganan tautan untuk aplikasi yang baru diinstal.</string>
+    <string name="settings_shizuku__title_auto_disable_link_handling">Otomatis nonaktifkan penanganan tautan</string>
 </resources>

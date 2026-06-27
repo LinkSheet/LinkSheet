@@ -15,6 +15,7 @@ import app.linksheet.api.SystemInfoService
 import app.linksheet.api.SystemProperties
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.api.preference.RemoteConfigRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.feature.analytics.service.BaseAnalyticsService
 import app.linksheet.feature.app.core.MetaDataHandler
@@ -44,8 +45,7 @@ import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
 import app.linksheet.feature.profile.service.ProfileService
-import app.linksheet.feature.remoteconfig.preference.RemoteConfigRepository
-import app.linksheet.feature.remoteconfig.service.RemoteConfigClient
+import app.linksheet.feature.remoteconfig.core.RemoteConfigClient
 import app.linksheet.feature.remoteconfig.service.RemoteConfigService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.service.ShizukuFeatureService
@@ -54,7 +54,6 @@ import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
-import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.testlib.koin.definition
 import app.linksheet.testlib.koin.injectedParameters
 import app.linksheet.testlib.koin.verifyAll
@@ -62,6 +61,7 @@ import coil3.ImageLoader
 import com.akuleshov7.ktoml.Toml
 import com.google.gson.Gson
 import fe.android.preference.helper.PreferenceRepository
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals

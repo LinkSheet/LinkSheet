@@ -4,6 +4,7 @@ import app.linksheet.feature.remoteconfig.preference.remoteConfigStatePreference
 import fe.linksheet.module.preference.LinkSheetPreferenceDefinition
 
 object AppStatePreferences : LinkSheetPreferenceDefinition() {
+    val lastClDismissed = int("last_cl_dismissed", -1)
     val newDefaults_2024_12_16_InfoDismissed = boolean("has_new_defaults_2024_12_16_info_dismissed", true)
     val newDefaults_2024_12_29_InfoDismissed = boolean("has_new_defaults_2024_12_29_info_dismissed", true)
     val newDefaults_2025_12_15_InfoDismissed = boolean("has_new_defaults_2025_12_15_info_dismissed")

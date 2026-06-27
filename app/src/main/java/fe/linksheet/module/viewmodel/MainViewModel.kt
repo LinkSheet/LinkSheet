@@ -30,6 +30,7 @@ import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.usecase.ChangelogUseCase
 import fe.linksheet.usecase.ClipboardUseCase
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.result.isSuccess
@@ -61,8 +62,9 @@ class MainViewModel(
         remoteConfigPreferences = AppPreferences.remoteConfig,
         remoteConfigStatePreferences = AppStatePreferences.remoteConfig
     )
-    val shizukuStatusUseCase = ShizukuStatusUseCase(
-        shizukuService = shizukuService
+    val changelogUseCase = ChangelogUseCase(
+        stateRepository = appStateRepository,
+        buildInfo = systemInfoService.buildInfo
     )
 
     init {
@@ -110,7 +112,6 @@ class MainViewModel(
         telemetryShowInfoDialog(false)
         analyticsService.changeLevel(level)
     }
-
 
 
     enum class SettingsIntent(val action: String) {

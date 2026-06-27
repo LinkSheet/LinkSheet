@@ -11,6 +11,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDestination
 import app.linksheet.api.SensitivePreference
+import app.linksheet.api.SystemInfoService
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.feature.analytics.service.AnalyticsEvent
@@ -20,7 +21,6 @@ import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.remoteconfig.usecase.RemoteConfigUseCase
-import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import fe.composekit.extension.getSystemServiceOrThrow
 import fe.linksheet.extension.android.tryStartActivity
@@ -47,7 +47,8 @@ class MainViewModel(
     private val miuiCompat: MiuiCompat,
     val debugMenu: DebugMenuSlotProvider,
     private val intentHandler: PackageIntentHandler,
-    private val shizukuService: ShizukuService,
+    private val systemInfoService: SystemInfoService,
+    val shizukuStatusUseCase: ShizukuStatusUseCase
 ) : BaseViewModel(preferenceRepository) {
     val clipboardUseCase: ClipboardUseCase = ClipboardUseCase(
         repository = preferenceRepository,

@@ -1,5 +1,7 @@
 package app.linksheet.feature.remoteconfig.preference
 
+import app.linksheet.api.PreferenceRegistry
+import app.linksheet.api.mapped
 import com.google.gson.Gson
 import fe.android.preference.helper.Mapper
 import fe.android.preference.helper.Preference
@@ -18,6 +20,14 @@ inline fun <reified T> JsonTypeMapper(gson: Gson): TypeMapper<T, String> {
 }
 
 inline fun <reified T : Any> PreferenceDefinition.jsonMapped(
+    key: String,
+    default: T,
+    gson: Gson = GlobalGsonContext.compactGson
+): Preference.Mapped<T, String> {
+    val mapper = JsonTypeMapper<T>(gson)
+    return mapped(key, default, mapper)
+}
+inline fun <reified T : Any> PreferenceRegistry.jsonMapped(
     key: String,
     default: T,
     gson: Gson = GlobalGsonContext.compactGson

@@ -40,7 +40,7 @@ fun DebugSettingsRoute(
     val context = LocalContext.current
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
-    val status by viewModel.statusUseCase.status.collectRefreshableAsStateWithLifecycle(
+    val status by viewModel.shizukuStatusUseCase.status.collectRefreshableAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED
     )
 

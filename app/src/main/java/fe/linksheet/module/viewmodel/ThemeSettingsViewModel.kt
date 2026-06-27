@@ -2,7 +2,7 @@ package fe.linksheet.module.viewmodel
 
 import androidx.lifecycle.ViewModel
 import app.linksheet.api.preference.AppPreferenceRepository
-import app.linksheet.feature.remoteconfig.preference.RemoteConfigRepository
+import app.linksheet.api.preference.RemoteConfigRepository
 import app.linksheet.feature.remoteconfig.preference.StoredRemotePreferences
 import app.linksheet.feature.remoteconfig.util.LinkAssets
 import fe.android.preference.helper.Preference

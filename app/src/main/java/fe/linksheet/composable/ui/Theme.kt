@@ -35,8 +35,8 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.module.viewmodel.RootViewModel
 import fe.linksheet.util.LinkSheetLinkTags
-import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinActivityViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 tailrec fun Context.findActivity(): Activity? = when (this) {
@@ -60,7 +60,7 @@ private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 @Composable
 fun BaseComponentActivity.AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
-    themeSettingsViewModel: RootViewModel = koinViewModel(),
+    themeSettingsViewModel: RootViewModel = koinActivityViewModel(),
     debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
     content: @Composable () -> Unit,
 ) {
@@ -79,7 +79,7 @@ fun BaseComponentActivity.AppTheme(
 fun AppTheme(
     edgeToEdge: Boolean = true,
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
-    themeSettingsViewModel: RootViewModel = koinViewModel(),
+    themeSettingsViewModel: RootViewModel = koinActivityViewModel(),
     debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
     updateEdgeToEdge: ((statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) -> Unit)?,
     content: @Composable () -> Unit,

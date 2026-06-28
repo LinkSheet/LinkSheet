@@ -105,7 +105,7 @@ android {
             string("BRANCH", branch)
             boolean("IS_CI", System.getenv("CI")?.toBooleanStrictOrNull() == true)
             string("GITHUB_WORKFLOW_RUN_ID", System.getenv("GITHUB_WORKFLOW_RUN_ID"))
-            string("FLAVOR_CONFIG", System.getenv("FLAVOR_CONFIG"))
+            string("FLAVOR_CONFIG", localProviders.get("FLAVOR_CONFIG"))
         }
 
 //        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

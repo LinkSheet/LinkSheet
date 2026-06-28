@@ -9,7 +9,7 @@ import fe.linksheet.testlib.core.ActivityInvoker
 import fe.linksheet.testlib.core.BaseUnitTest
 
 //@RunWith(AndroidJUnit4::class)
-//@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+//@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class TextEditorActivityTest : BaseUnitTest {
     companion object {
         private const val INPUT_TEXT = "Hello World"

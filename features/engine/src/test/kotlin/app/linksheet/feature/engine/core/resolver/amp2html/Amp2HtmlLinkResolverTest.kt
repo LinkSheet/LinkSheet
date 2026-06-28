@@ -33,7 +33,7 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
     companion object {
         private val URL = "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html".toStdUrlOrThrow()

@@ -14,7 +14,7 @@ import org.junit.Test
 import kotlin.uuid.ExperimentalUuidApi
 
 //@RunWith(AndroidJUnit4::class)
-//@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+//@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class EngineScenarioTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 

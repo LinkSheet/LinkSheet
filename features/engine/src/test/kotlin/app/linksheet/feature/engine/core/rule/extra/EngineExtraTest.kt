@@ -14,7 +14,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 //@RunWith(AndroidJUnit4::class)
-//@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+//@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class EngineExtraTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 

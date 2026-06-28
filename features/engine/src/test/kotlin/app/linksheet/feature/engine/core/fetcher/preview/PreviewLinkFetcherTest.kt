@@ -24,7 +24,7 @@ import kotlin.time.ExperimentalTime
 
 //TODO: Needs to be moved to [feature-engine] module, but has dependency on [DatabaseTestRule], which requires the application database
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class PreviewLinkFetcherTest : BaseUnitTest {
     companion object {
         private const val PREVIEW_URL = "https://linksheet.app"

@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class RemoteAssetFetcherTest : BaseUnitTest {
     private fun MockRequestHandleScope.respondJson(json: String): HttpResponseData {
         return respond(json, HttpStatusCode.OK, headersOf(HttpHeaders.ContentType, "application/json"))

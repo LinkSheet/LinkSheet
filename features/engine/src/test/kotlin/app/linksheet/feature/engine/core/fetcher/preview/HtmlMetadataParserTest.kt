@@ -17,7 +17,7 @@ import org.robolectric.annotation.Config
 import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class HtmlMetadataParserTest : BaseUnitTest {
 
     private val parser = HtmlMetadataParser()

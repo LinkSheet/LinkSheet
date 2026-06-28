@@ -10,7 +10,7 @@ import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class HttpProtocolUtilTest : BaseUnitTest {
     @org.junit.Test
     fun `test maybePrependProtocol`() {

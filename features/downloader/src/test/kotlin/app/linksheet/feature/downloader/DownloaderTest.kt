@@ -18,7 +18,7 @@ import kotlin.test.assertIs
 
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class DownloaderTest : BaseUnitTest {
     companion object {
         private val FyWt0wvWAAAxgYk = byteArrayOf(

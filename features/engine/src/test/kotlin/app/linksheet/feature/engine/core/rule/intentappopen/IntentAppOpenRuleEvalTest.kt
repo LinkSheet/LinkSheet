@@ -3,21 +3,28 @@ package app.linksheet.feature.engine.core.rule.intentappopen
 import android.content.Intent
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import fe.linksheet.testlib.core.BaseUnitTest
-import app.linksheet.feature.engine.eval.KnownTokens
 import app.linksheet.feature.engine.eval.BundleSerializer
-import app.linksheet.feature.engine.eval.expression.*
+import app.linksheet.feature.engine.eval.KnownTokens
+import app.linksheet.feature.engine.eval.expression.ComponentNameExpression
+import app.linksheet.feature.engine.eval.expression.ConstantExpression
+import app.linksheet.feature.engine.eval.expression.IfExpression
+import app.linksheet.feature.engine.eval.expression.IntentComponentNameExpression
+import app.linksheet.feature.engine.eval.expression.IntentEngineResultExpression
+import app.linksheet.feature.engine.eval.expression.RegexExpression
+import app.linksheet.feature.engine.eval.expression.RegexMatchEntireExpression
+import app.linksheet.feature.engine.eval.expression.UrlStringExpression
+import app.linksheet.feature.engine.eval.expression.UrlToAndroidUriExpression
 import app.linksheet.feature.engine.eval.rule.ExpressionPostProcessorRule
+import fe.linksheet.testlib.core.BaseUnitTest
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class IntentAppOpenRuleEvalTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 

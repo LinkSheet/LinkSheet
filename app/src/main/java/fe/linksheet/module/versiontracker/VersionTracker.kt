@@ -1,6 +1,7 @@
 package fe.linksheet.module.versiontracker
 
 import androidx.lifecycle.LifecycleOwner
+import app.linksheet.api.BuildInfo
 import app.linksheet.api.SystemInfoService
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.analytics.service.AnalyticsEvent
@@ -19,7 +20,8 @@ import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
 val VersionTrackerModule = module {
-    includes(GlobalGsonModule, SystemInfoServiceModule
+    includes(
+        GlobalGsonModule, SystemInfoServiceModule
 //        , PreferenceRepositoryModule
     )
 
@@ -27,7 +29,7 @@ val VersionTrackerModule = module {
         VersionTracker(
             analyticsService = analyticsService,
             preferenceRepository = preferences,
-            systemInfoService = scope.get<SystemInfoService>(),
+            buildInfo = scope.get<SystemInfoService>().buildInfo,
             gson = scope.get(qualifier(GsonQualifier.Compact))
         )
     }
@@ -36,17 +38,17 @@ val VersionTrackerModule = module {
 internal class VersionTracker(
     private val analyticsService: BaseAnalyticsService,
     val preferenceRepository: AppPreferenceRepository,
-    private val systemInfoService: SystemInfoService,
+    private val buildInfo: BuildInfo,
     val gson: Gson,
 ) : LifecycleAwareService {
     private val lastVersionsService by lazy {
-        LastVersionService(gson, systemInfoService.buildInfo)
+        LastVersionService(gson, buildInfo)
     }
 
     private fun createAppStartEvent(lastVersion: Int): AnalyticsEvent {
         return when {
             lastVersion == -1 -> AppStart.FirstRun
-            BuildConfig.VERSION_CODE > lastVersion -> AppStart.Updated(lastVersion)
+            buildInfo.versionCode > lastVersion -> AppStart.Updated(lastVersion)
             else -> AppStart.Default
         }
     }

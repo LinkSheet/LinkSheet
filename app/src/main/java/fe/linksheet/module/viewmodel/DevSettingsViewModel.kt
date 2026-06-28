@@ -8,7 +8,6 @@ import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.devicecompat.miui.MiuiAuditor
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.shizuku.service.ShizukuFeatureService
-import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import com.google.gson.Gson
 import fe.composekit.core.AndroidVersion
@@ -24,7 +23,7 @@ class DevSettingsViewModel(
     private val context: Application,
     preferenceRepository: AppPreferenceRepository,
     experimentRepository: ExperimentRepository,
-    private val shizukuService: ShizukuService,
+    val shizukuStatusUseCase: ShizukuStatusUseCase,
     private val shizukuFeatureService: ShizukuFeatureService,
     miuiCompatProvider: MiuiCompatProvider,
     private val gson: Gson,
@@ -34,8 +33,6 @@ class DevSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
     val disableLogging = experimentRepository.asViewModelState(Experiments.disableLogging)
     private val auditor = MiuiAuditor(systemInfoService)
-    val statusUseCase = ShizukuStatusUseCase(shizukuService = shizukuService)
-
     val miuiCompatRequired by miuiCompatProvider.isRequired
 
     fun enqueueResetAppLinks(resultHandler: (Int) -> Unit) {

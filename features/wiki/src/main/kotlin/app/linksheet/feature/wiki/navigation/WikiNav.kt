@@ -19,11 +19,7 @@ import kotlin.uuid.ExperimentalUuidApi
 object WikiNav : Nav {
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<MarkdownViewerRoute> { _, route ->
-            val titleStr = route.customTitle?.let { stringResource(id = it) } ?: route.title
             MarkdownViewerWrapper(
-                title = titleStr,
-                url = route.url,
-                rawUrl = route.rawUrl,
                 onBackPressed = navController::popBackStack
             )
         }

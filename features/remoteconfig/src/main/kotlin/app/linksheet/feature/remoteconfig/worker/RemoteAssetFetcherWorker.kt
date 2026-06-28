@@ -10,9 +10,9 @@ import androidx.work.PeriodicWorkRequest
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import app.linksheet.feature.remoteconfig.preference.RemoteConfigRepository
+import app.linksheet.feature.remoteconfig.preference.DefaultRemoteConfigRepository
 import app.linksheet.feature.remoteconfig.preference.StoredRemotePreferences
-import app.linksheet.feature.remoteconfig.service.RemoteConfigClient
+import app.linksheet.feature.remoteconfig.core.RemoteConfigClient
 import fe.std.result.isFailure
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,7 +25,8 @@ class RemoteAssetFetcherWorker(
     parameters: WorkerParameters,
 ) : CoroutineWorker(context, parameters), KoinComponent {
     private val client by inject<RemoteConfigClient>()
-    private val repository by inject<RemoteConfigRepository>()
+    private val repository by inject<DefaultRemoteConfigRepository>()
+//    private val storedPreferences by inject<RemoteConfigStoredPreferences>()
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val result = client.fetchLinkAssets()
@@ -33,6 +34,7 @@ class RemoteAssetFetcherWorker(
             result.isFailure() -> Result.failure()
             else -> {
                 repository.put(StoredRemotePreferences.linkAssets, result.value)
+//                repository.put(storedPreferences.linkAssets, result.value)
                 Result.success()
             }
         }

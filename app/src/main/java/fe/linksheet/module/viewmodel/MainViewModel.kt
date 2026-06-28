@@ -11,6 +11,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDestination
 import app.linksheet.api.SensitivePreference
+import app.linksheet.api.SystemInfoService
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.feature.analytics.service.AnalyticsEvent
@@ -20,7 +21,6 @@ import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.remoteconfig.usecase.RemoteConfigUseCase
-import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import fe.composekit.extension.getSystemServiceOrThrow
 import fe.linksheet.extension.android.tryStartActivity
@@ -30,6 +30,7 @@ import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.state.AppStatePreferences
 import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import fe.linksheet.usecase.ChangelogUseCase
 import fe.linksheet.usecase.ClipboardUseCase
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.result.isSuccess
@@ -47,7 +48,8 @@ class MainViewModel(
     private val miuiCompat: MiuiCompat,
     val debugMenu: DebugMenuSlotProvider,
     private val intentHandler: PackageIntentHandler,
-    private val shizukuService: ShizukuService,
+    private val systemInfoService: SystemInfoService,
+    val shizukuStatusUseCase: ShizukuStatusUseCase
 ) : BaseViewModel(preferenceRepository) {
     val clipboardUseCase: ClipboardUseCase = ClipboardUseCase(
         repository = preferenceRepository,
@@ -60,8 +62,9 @@ class MainViewModel(
         remoteConfigPreferences = AppPreferences.remoteConfig,
         remoteConfigStatePreferences = AppStatePreferences.remoteConfig
     )
-    val shizukuStatusUseCase = ShizukuStatusUseCase(
-        shizukuService = shizukuService
+    val changelogUseCase = ChangelogUseCase(
+        stateRepository = appStateRepository,
+        buildInfo = systemInfoService.buildInfo
     )
 
     init {
@@ -109,7 +112,6 @@ class MainViewModel(
         telemetryShowInfoDialog(false)
         analyticsService.changeLevel(level)
     }
-
 
 
     enum class SettingsIntent(val action: String) {

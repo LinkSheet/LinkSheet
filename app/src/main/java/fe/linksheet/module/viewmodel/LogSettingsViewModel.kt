@@ -1,16 +1,14 @@
 package fe.linksheet.module.viewmodel
 
+import androidx.lifecycle.ViewModel
 import fe.linksheet.extension.android.launchIO
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.log.file.LogSession
-import app.linksheet.api.preference.AppPreferenceRepository
-import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class LogSettingsViewModel(
-    val preferenceRepository: AppPreferenceRepository,
     val logPersistService: LogPersistService
-) : BaseViewModel(preferenceRepository) {
+) : ViewModel() {
 
     val files = MutableStateFlow(emptyList<LogSession>())
 

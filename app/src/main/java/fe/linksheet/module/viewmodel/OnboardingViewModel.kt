@@ -12,12 +12,8 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 class OnboardingViewModel(
     val context: Application,
     val preferenceRepository: AppPreferenceRepository,
-    private val shizukuService: ShizukuService,
+    val shizukuStatusUseCase: ShizukuStatusUseCase
 ) : BaseViewModel(preferenceRepository) {
 
     val firstRun = preferenceRepository.asViewModelState(AppPreferences.firstRun)
-
-    val shizukuStatusUseCase = ShizukuStatusUseCase(
-        shizukuService = shizukuService
-    )
 }

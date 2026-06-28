@@ -1,11 +1,21 @@
 package fe.linksheet.composable.page.settings.about
 
-import LibRedirectMetadata
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.Bolt
+import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material.icons.outlined.Code
+import androidx.compose.material.icons.outlined.Forum
+import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.Security
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -27,6 +37,7 @@ import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.layout.column.group
 import fe.fastforwardkt.FastForwardRules
+import fe.libredirectkt.LibRedirectMetadata
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
@@ -53,7 +64,7 @@ object AboutSettingsRouteData {
         ListItemData(
             Icons.Outlined.Security.iconPainter,
             textContent(R.string.libredirect_version),
-            additional = LibRedirectMetadata.fetchedAt
+            additional = LibRedirectMetadata.FETCHED_AT
         )
     )
 }

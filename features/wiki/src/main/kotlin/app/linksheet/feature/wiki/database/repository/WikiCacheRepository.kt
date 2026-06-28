@@ -6,6 +6,7 @@ import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.entity.WikiCache
 import fe.linksheet.extension.kotlin.nowMillis
 import fe.linksheet.util.CacheResult
+import fe.linksheet.util.StoredCacheResult
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
@@ -21,8 +22,8 @@ class WikiCacheRepository internal constructor(
         val cached = dao.getCachedText(url) ?: return CacheResult.Miss
 
         return when {
-            cached.timestamp > after -> CacheResult.Hit(cached)
-            else -> CacheResult.Stale(cached)
+            cached.timestamp > after -> StoredCacheResult.Hit(cached)
+            else -> StoredCacheResult.Stale(cached)
         }
     }
 

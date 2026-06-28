@@ -133,10 +133,6 @@ buildSettings {
     projects("test") {
         includeProject(":test-e2e", "e2e")
     }
-    projects("sdk") {
-        includeProject(":sdk-rule-plugin", "rule-plugin")
-        includeProject(":sdk-common", "common")
-    }
 
     substitutes {
         trySubstitute(Grrfe.std, properties["kotlin-ext.dir"])

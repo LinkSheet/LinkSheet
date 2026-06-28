@@ -2,6 +2,7 @@ package app.linksheet.feature.remoteconfig.service
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.feature.remoteconfig.core.RemoteConfigClient
 import assertk.assertions.isEqualTo
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.assert.assertFailure

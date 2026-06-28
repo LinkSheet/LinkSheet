@@ -19,7 +19,6 @@ import app.linksheet.feature.remoteconfig.ui.RemoteConfigDialogLauncher
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
-import fe.linksheet.activity.util.DebugStatePublisher
 import fe.linksheet.activity.util.NavGraphDebugState
 import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.composable.ui.BoxAppHost
@@ -32,6 +31,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : UiEventReceiverBaseComponentActivity() {
     private val viewModel by viewModel<MainViewModel>()
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -82,9 +82,8 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
 
                 if (StaticBuildInfo.IsDebug) {
                     LaunchedEffect(key1 = Unit) {
-                        @SuppressLint("RestrictedApi")
                         val graphNodes = navController.graph.nodes.valueIterator().asSequence().toList()
-                        DebugStatePublisher.publishDebugState(NavGraphDebugState(graphNodes))
+                        publishDebugState(NavGraphDebugState(navController::findDestination, graphNodes))
                     }
                 }
 

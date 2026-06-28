@@ -108,8 +108,8 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
         val entry = UrlEntry(1, url = URL.toString())
         val resolved = ResolvedUrl(entry.id, ResolveType.Companion.Amp2Html.id, testResolvedUrl)
 
-        rule.database.urlEntryDao().insertReturningId(entry)
-        rule.database.resolvedUrlCacheDao().insertReturningId(resolved)
+        rule.database.urlEntryDao().insertReplace(entry)
+        rule.database.resolvedUrlCacheDao().insertReplace(resolved)
 
         val result = withTestRunContext { resolver.runStep(entry.url.toStdUrlOrThrow()) }
         assertThat(result)
@@ -147,8 +147,8 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
         val entry = UrlEntry(1, url = URL.toString())
         val htmlCache = CachedHtml(entry.id, cachedHtml)
 
-        rule.database.urlEntryDao().insertReturningId(entry)
-        rule.database.htmlCacheDao().insertReturningId(htmlCache)
+        rule.database.urlEntryDao().insertReplace(entry)
+        rule.database.htmlCacheDao().insertReplace(htmlCache)
 
         val result = withTestRunContext { resolver.runStep(entry.url.toStdUrlOrThrow()) }
         assertThat(result)

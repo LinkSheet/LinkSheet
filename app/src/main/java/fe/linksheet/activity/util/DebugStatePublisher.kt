@@ -1,26 +1,16 @@
 package fe.linksheet.activity.util
 
 import androidx.navigation.NavDestination
-import kotlin.reflect.KClass
 
-object DebugStatePublisher {
-    val map = mutableMapOf<KClass<out DebugState>, DebugState>()
 
-    fun <T : DebugState> publishDebugState(state: T) {
-        map[state::class] = state
-        val x = map
-    }
-
-    fun <T : DebugState> getStateOrNull(clazz: KClass<out T>): T? {
-        @Suppress("UNCHECKED_CAST")
-        return map[clazz] as T?
-    }
-
-    inline fun <reified T : DebugState> getStateOrNull(): T? {
-        return getStateOrNull(T::class)
+abstract class DebugState(internal val key: Key<*>) {
+    interface Key<SpecificParameter : DebugState>
+}
+data class NavGraphDebugState(
+    val findDestination: (route: String) -> NavDestination?,
+    val graphNodes: List<NavDestination>
+) : DebugState(Key) {
+    companion object {
+        val Key = object : Key<NavGraphDebugState> {}
     }
 }
-
-sealed interface DebugState
-
-data class NavGraphDebugState(val graphNodes: List<NavDestination>) : DebugState

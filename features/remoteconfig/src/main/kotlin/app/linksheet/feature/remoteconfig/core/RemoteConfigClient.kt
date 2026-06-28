@@ -1,4 +1,4 @@
-package app.linksheet.feature.remoteconfig.service
+package app.linksheet.feature.remoteconfig.core
 
 import app.linksheet.api.BuildInfo
 import app.linksheet.feature.remoteconfig.BuildConfig

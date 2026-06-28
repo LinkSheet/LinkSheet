@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 9.2.0" type="baseline" client="gradle" dependencies="false" name="AGP (9.2.0)" variant="all" version="9.2.0">
+<issues format="6" by="lint 9.3.0-alpha04" type="baseline" client="gradle" dependencies="false" name="AGP (9.3.0-alpha04)" variant="all" version="9.3.0-alpha04">
 
     <issue
         id="MissingTvBanner"
@@ -8,7 +8,7 @@
         errorLine2="     ~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="38"
+            line="35"
             column="6"/>
     </issue>
 
@@ -52,7 +52,7 @@
         errorLine2="        ^">
         <location
             file="src/main/java/fe/linksheet/LinkSheetApp.kt"
-            line="98"
+            line="103"
             column="9"/>
     </issue>
 
@@ -74,7 +74,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetPreApi30.kt"
-            line="41"
+            line="46"
             column="17"/>
     </issue>
 
@@ -107,46 +107,13 @@
         errorLine2="    ~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheet.kt"
-            line="16"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="ModifierParameter"
-        message="Modifier parameter should be named modifier"
-        errorLine1="    contentModifier: Modifier,"
-        errorLine2="    ~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheet.kt"
-            line="38"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="ModifierParameter"
-        message="Modifier parameter should be named modifier"
-        errorLine1="    contentModifier: Modifier,"
-        errorLine2="    ~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetApi30.kt"
-            line="30"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="ModifierParameter"
-        message="Modifier parameter should be named modifier"
-        errorLine1="    contentModifier: Modifier,"
-        errorLine2="    ~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/fe/linksheet/activity/bottomsheet/compat/m3fix/M3FixModalBottomSheetPreApi30.kt"
-            line="29"
+            line="21"
             column="5"/>
     </issue>
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x1&quot; type=&quot;dimen&quot;>0.3&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -157,7 +124,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_x2&quot; type=&quot;dimen&quot;>0.8&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -168,7 +135,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y1&quot; type=&quot;dimen&quot;>0&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -179,7 +146,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_accelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_accelerate_control_y2&quot; type=&quot;dimen&quot;>0.2&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -190,7 +157,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x1` which is marked as private in com.google.android.material:material:1.14.0. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x1&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -201,7 +168,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_x2` which is marked as private in com.google.android.material:material:1.14.0. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_x2&quot; type=&quot;dimen&quot;>0.1&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -212,7 +179,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y1` which is marked as private in com.google.android.material:material:1.14.0. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y1&quot; type=&quot;dimen&quot;>0.7&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -223,7 +190,7 @@
 
     <issue
         id="PrivateResource"
-        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0-rc01. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
+        message="Overriding `@dimen/m3_sys_motion_easing_emphasized_decelerate_control_y2` which is marked as private in com.google.android.material:material:1.14.0. If deliberate, use tools:override=&quot;true&quot;, otherwise pick a different name."
         errorLine1="    &lt;item format=&quot;float&quot; name=&quot;m3_sys_motion_easing_emphasized_decelerate_control_y2&quot; type=&quot;dimen&quot;>1&lt;/item>"
         errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -239,7 +206,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="69"
+            line="58"
             column="17"/>
     </issue>
 
@@ -250,7 +217,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="93"
+            line="82"
             column="17"/>
     </issue>
 
@@ -261,7 +228,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="99"
+            line="88"
             column="17"/>
     </issue>
 
@@ -272,7 +239,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="105"
+            line="94"
             column="17"/>
     </issue>
 
@@ -283,7 +250,7 @@
         errorLine2="                                      ~~~~~~~~~">
         <location
             file="src/main/res/values-pt-rBR/strings.xml"
-            line="265"
+            line="249"
             column="39"/>
     </issue>
 
@@ -294,7 +261,7 @@
         errorLine2="                                                                                                                                                       ~~~~~~~">
         <location
             file="src/main/res/values-tr/strings.xml"
-            line="305"
+            line="289"
             column="152"/>
     </issue>
 
@@ -305,7 +272,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="88"
+            line="81"
             column="13"/>
     </issue>
 
@@ -316,7 +283,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="90"
+            line="83"
             column="13"/>
     </issue>
 
@@ -327,7 +294,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="143"
+            line="132"
             column="13"/>
     </issue>
 
@@ -338,7 +305,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ja/strings.xml"
-            line="153"
+            line="148"
             column="13"/>
     </issue>
 
@@ -349,7 +316,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-nl/strings.xml"
-            line="179"
+            line="166"
             column="13"/>
     </issue>
 
@@ -360,7 +327,29 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-nl/strings.xml"
-            line="211"
+            line="197"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;import_settings&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;import_settings&quot;>Importar configurações&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="214"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;confirm_import&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;confirm_import&quot;>Confirmar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="216"
             column="13"/>
     </issue>
 
@@ -371,18 +360,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-zh/strings.xml"
-            line="296"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="ExtraTranslation"
-        message="&quot;switch_profile&quot; is translated here but not found in default locale"
-        errorLine1="    &lt;string name=&quot;switch_profile&quot;>Włącz przełączanie profili&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values-pl/strings.xml"
-            line="311"
+            line="280"
             column="13"/>
     </issue>
 
@@ -393,7 +371,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-zh/strings.xml"
-            line="311"
+            line="294"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;switch_profile&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;switch_profile&quot;>Włącz przełączanie profili&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pl/strings.xml"
+            line="295"
             column="13"/>
     </issue>
 
@@ -404,7 +393,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="324"
+            line="308"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;cancel&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;cancel&quot;>Cancelar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="311"
             column="13"/>
     </issue>
 
@@ -415,7 +415,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pl/strings.xml"
-            line="329"
+            line="313"
             column="13"/>
     </issue>
 
@@ -426,7 +426,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-vi/strings.xml"
-            line="350"
+            line="333"
             column="13"/>
     </issue>
 
@@ -437,7 +437,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-vi/strings.xml"
-            line="351"
+            line="334"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ExtraTranslation"
+        message="&quot;generic__button_text_cancel&quot; is translated here but not found in default locale"
+        errorLine1="    &lt;string name=&quot;generic__button_text_cancel&quot;>Cancelar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="384"
             column="13"/>
     </issue>
 
@@ -448,7 +459,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-nl/strings.xml"
-            line="406"
+            line="389"
             column="13"/>
     </issue>
 
@@ -459,11 +470,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-hi/strings.xml"
-            line="23"
+            line="22"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="199"
+            line="185"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -475,11 +486,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-hi/strings.xml"
-            line="29"
+            line="28"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="255"
+            line="239"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -491,11 +502,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-hi/strings.xml"
-            line="72"
+            line="69"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="198"
+            line="184"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -507,11 +518,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-hi/strings.xml"
-            line="77"
+            line="74"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="200"
+            line="186"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -523,11 +534,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-hi/strings.xml"
-            line="88"
+            line="85"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="197"
+            line="183"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -539,11 +550,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pa/strings.xml"
-            line="92"
+            line="89"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="198"
+            line="184"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -555,11 +566,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pa/strings.xml"
-            line="134"
+            line="126"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="200"
+            line="186"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -571,11 +582,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-de/strings.xml"
-            line="141"
+            line="132"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="198"
+            line="184"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -587,11 +598,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-de/strings.xml"
-            line="168"
+            line="157"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="200"
+            line="186"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -603,11 +614,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ru/strings.xml"
-            line="187"
+            line="173"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="199"
+            line="185"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -619,11 +630,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ru/strings.xml"
-            line="188"
+            line="174"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="198"
+            line="184"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -635,11 +646,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pa/strings.xml"
-            line="193"
+            line="179"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="197"
+            line="183"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -651,11 +662,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ru/strings.xml"
-            line="204"
+            line="188"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="200"
+            line="186"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -667,11 +678,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-de/strings.xml"
-            line="205"
+            line="191"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="197"
+            line="183"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -683,11 +694,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pa/strings.xml"
-            line="209"
+            line="195"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="199"
+            line="185"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -699,11 +710,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pa/strings.xml"
-            line="227"
+            line="213"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="255"
+            line="239"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -715,11 +726,11 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ru/strings.xml"
-            line="229"
+            line="213"
             column="5"/>
         <location
             file="src/main/res/values/strings.xml"
-            line="197"
+            line="183"
             column="5"
             message="Conflicting number of arguments (1) here"/>
     </issue>
@@ -731,7 +742,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="44"
+            line="41"
             column="35"/>
     </issue>
 
@@ -742,7 +753,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="44"
+            line="41"
             column="35"/>
     </issue>
 
@@ -753,7 +764,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="44"
+            line="41"
             column="35"/>
     </issue>
 
@@ -764,7 +775,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="44"
+            line="41"
             column="35"/>
     </issue>
 
@@ -775,7 +786,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="44"
+            line="41"
             column="35"/>
     </issue>
 
@@ -786,7 +797,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="44"
+            line="41"
             column="35"/>
     </issue>
 
@@ -797,7 +808,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="44"
+            line="41"
             column="35"/>
     </issue>
 
@@ -808,7 +819,7 @@
         errorLine2="                                  ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/AndroidManifest.xml"
-            line="44"
+            line="41"
             column="35"/>
     </issue>
 
@@ -1396,18 +1407,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="88"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.resolved_via` appears to be unused"
-        errorLine1="    &lt;string name=&quot;resolved_via&quot;>%s resolved via %s&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="88"
+            line="81"
             column="13"/>
     </issue>
 
@@ -1418,7 +1418,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="90"
+            line="83"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.resolved_via` appears to be unused"
+        errorLine1="    &lt;string name=&quot;resolved_via&quot;>%s resolved via %s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="86"
             column="13"/>
     </issue>
 
@@ -1429,7 +1440,7 @@
         errorLine2="            ~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="92"
+            line="90"
             column="13"/>
     </issue>
 
@@ -1440,7 +1451,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="93"
+            line="91"
             column="13"/>
     </issue>
 
@@ -1451,7 +1462,7 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="94"
+            line="92"
             column="13"/>
     </issue>
 
@@ -1462,7 +1473,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="100"
+            line="98"
             column="13"/>
     </issue>
 
@@ -1473,7 +1484,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="114"
+            line="108"
             column="13"/>
     </issue>
 
@@ -1484,7 +1495,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="121"
+            line="115"
             column="13"/>
     </issue>
 
@@ -1495,7 +1506,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="134"
+            line="125"
             column="13"/>
     </issue>
 
@@ -1506,7 +1517,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="135"
+            line="126"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export&quot;>Export&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="127"
             column="13"/>
     </issue>
 
@@ -1517,7 +1539,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="137"
+            line="128"
             column="13"/>
     </issue>
 
@@ -1528,7 +1550,7 @@
         errorLine2="            ~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="139"
+            line="130"
             column="13"/>
     </issue>
 
@@ -1539,7 +1561,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="140"
+            line="131"
             column="13"/>
     </issue>
 
@@ -1550,29 +1572,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="141"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.include_fingerprint` appears to be unused"
-        errorLine1="    &lt;string name=&quot;include_fingerprint&quot;>Include device fingerprint (recommended)&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="142"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.log_privacy` appears to be unused"
-        errorLine1="    &lt;string name=&quot;log_privacy&quot;>To learn about log privacy, you can visit this &lt;annotation url-id=&quot;privacy-logs&quot;>link&lt;/annotation>.&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="143"
+            line="132"
             column="13"/>
     </issue>
 
@@ -1583,18 +1583,29 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="143"
+            line="132"
             column="13"/>
     </issue>
 
     <issue
         id="UnusedResources"
-        message="The resource `R.string.switch_profile_explainer` appears to be unused"
-        errorLine1="    &lt;string name=&quot;switch_profile_explainer&quot;>下のシートに、タップしたリンクを（仕事用）プロファイルで開くためのボタンを表示します。 LinkSheetが両方のプロファイルにインストールされ、設定 -&amp;gt; 特別なアプリへのアクセス -&amp;gt; 仕事とプライベートのアプリの接続を介して手動でリンクされている必要があります&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        message="The resource `R.string.include_fingerprint` appears to be unused"
+        errorLine1="    &lt;string name=&quot;include_fingerprint&quot;>Include device fingerprint (recommended)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/res/values-ja/strings.xml"
-            line="153"
+            file="src/main/res/values/strings.xml"
+            line="133"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.log_privacy` appears to be unused"
+        errorLine1="    &lt;string name=&quot;log_privacy&quot;>To learn about log privacy, you can visit this &lt;annotation url-id=&quot;privacy-logs&quot;>link&lt;/annotation>.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="134"
             column="13"/>
     </issue>
 
@@ -1605,7 +1616,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="154"
+            line="145"
             column="13"/>
     </issue>
 
@@ -1616,7 +1627,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="155"
+            line="146"
             column="13"/>
     </issue>
 
@@ -1627,7 +1638,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="157"
+            line="148"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.switch_profile_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;switch_profile_explainer&quot;>下のシートに、タップしたリンクを（仕事用）プロファイルで開くためのボタンを表示します。 LinkSheetが両方のプロファイルにインストールされ、設定 -&amp;gt; 特別なアプリへのアクセス -&amp;gt; 仕事とプライベートのアプリの接続を介して手動でリンクされている必要があります&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-ja/strings.xml"
+            line="148"
             column="13"/>
     </issue>
 
@@ -1638,7 +1660,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="158"
+            line="149"
             column="13"/>
     </issue>
 
@@ -1649,7 +1671,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="159"
+            line="150"
             column="13"/>
     </issue>
 
@@ -1660,7 +1682,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="165"
+            line="151"
             column="13"/>
     </issue>
 
@@ -1671,7 +1693,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="166"
+            line="152"
             column="13"/>
     </issue>
 
@@ -1682,7 +1704,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="167"
+            line="153"
             column="13"/>
     </issue>
 
@@ -1693,7 +1715,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="168"
+            line="154"
             column="13"/>
     </issue>
 
@@ -1704,7 +1726,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="169"
+            line="155"
             column="13"/>
     </issue>
 
@@ -1715,7 +1737,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="170"
+            line="156"
             column="13"/>
     </issue>
 
@@ -1726,7 +1748,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="171"
+            line="157"
             column="13"/>
     </issue>
 
@@ -1737,7 +1759,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="172"
+            line="158"
             column="13"/>
     </issue>
 
@@ -1748,7 +1770,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="173"
+            line="159"
             column="13"/>
     </issue>
 
@@ -1759,7 +1781,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="176"
+            line="162"
             column="13"/>
     </issue>
 
@@ -1770,7 +1792,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="177"
+            line="163"
             column="13"/>
     </issue>
 
@@ -1781,18 +1803,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="178"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.string.generic__label_work_profile` appears to be unused"
-        errorLine1="    &lt;string name=&quot;generic__label_work_profile&quot;>Werkprofiel&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values-nl/strings.xml"
-            line="179"
+            line="164"
             column="13"/>
     </issue>
 
@@ -1803,7 +1814,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="180"
+            line="166"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.generic__label_work_profile` appears to be unused"
+        errorLine1="    &lt;string name=&quot;generic__label_work_profile&quot;>Werkprofiel&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-nl/strings.xml"
+            line="166"
             column="13"/>
     </issue>
 
@@ -1814,7 +1836,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="181"
+            line="167"
             column="13"/>
     </issue>
 
@@ -1825,7 +1847,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="182"
+            line="168"
             column="13"/>
     </issue>
 
@@ -1836,7 +1858,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="183"
+            line="169"
             column="13"/>
     </issue>
 
@@ -1847,7 +1869,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="184"
+            line="170"
             column="13"/>
     </issue>
 
@@ -1858,7 +1880,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="185"
+            line="171"
             column="13"/>
     </issue>
 
@@ -1869,7 +1891,7 @@
         errorLine2="            ~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="186"
+            line="172"
             column="13"/>
     </issue>
 
@@ -1880,7 +1902,7 @@
         errorLine2="            ~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="187"
+            line="173"
             column="13"/>
     </issue>
 
@@ -1891,7 +1913,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="189"
+            line="175"
             column="13"/>
     </issue>
 
@@ -1902,7 +1924,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="191"
+            line="177"
             column="13"/>
     </issue>
 
@@ -1913,7 +1935,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="192"
+            line="178"
             column="13"/>
     </issue>
 
@@ -1924,7 +1946,7 @@
         errorLine2="            ~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="208"
+            line="194"
             column="13"/>
     </issue>
 
@@ -1935,7 +1957,7 @@
         errorLine2="            ~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="209"
+            line="195"
             column="13"/>
     </issue>
 
@@ -1946,7 +1968,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="210"
+            line="196"
             column="13"/>
     </issue>
 
@@ -1957,7 +1979,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="211"
+            line="197"
             column="13"/>
     </issue>
 
@@ -1968,7 +1990,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-nl/strings.xml"
-            line="211"
+            line="197"
             column="13"/>
     </issue>
 
@@ -1979,7 +2001,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="212"
+            line="198"
             column="13"/>
     </issue>
 
@@ -1990,7 +2012,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="213"
+            line="199"
             column="13"/>
     </issue>
 
@@ -2001,7 +2023,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="215"
+            line="201"
             column="13"/>
     </issue>
 
@@ -2012,7 +2034,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="219"
+            line="205"
             column="13"/>
     </issue>
 
@@ -2023,7 +2045,172 @@
         errorLine2="            ~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="220"
+            line="206"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_import_settings` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_import_settings&quot;>Export or import settings&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="207"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_import_settings_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_import_settings_explainer&quot;>Export your current settings or import a previous settings export&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="208"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_explainer&quot;>Export your current app settings to a file&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="209"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.import_headline` appears to be unused"
+        errorLine1="    &lt;string name=&quot;import_headline&quot;>Import&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="210"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.import_explainer` appears to be unused"
+        errorLine1="    &lt;string name=&quot;import_explainer&quot;>Import a previous export from a file&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="211"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_settings` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_settings&quot;>Export settings&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="212"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.include_log_hash_key` appears to be unused"
+        errorLine1="    &lt;string name=&quot;include_log_hash_key&quot;>Include log hash key (the key used to redact your logs)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="213"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.import_settings` appears to be unused"
+        errorLine1="    &lt;string name=&quot;import_settings&quot;>Importar configurações&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="214"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.include_history` appears to be unused"
+        errorLine1="    &lt;string name=&quot;include_history&quot;>Include history (your link click and app history)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="214"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_include_recommendation` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_include_recommendation&quot;>We recommend that you turn on the following settings only if you do not plan on sharing your export with someone else!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="215"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.confirm_import` appears to be unused"
+        errorLine1="    &lt;string name=&quot;confirm_import&quot;>Confirmar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="216"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_privacy` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_privacy&quot;>To learn about export privacy, you can visit this &lt;annotation url-id=&quot;privacy-exports&quot;>link&lt;/annotation>.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="216"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_to_file` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_to_file&quot;>Export to file&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="217"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_file_name` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_file_name&quot;>linksheet_settings_export_%s&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="218"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.import_settings_override_preferences` appears to be unused"
+        errorLine1="    &lt;string name=&quot;import_settings_override_preferences&quot;>This will override all existing preferences. Continue?&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="219"
             column="13"/>
     </issue>
 
@@ -2034,7 +2221,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="236"
+            line="220"
             column="13"/>
     </issue>
 
@@ -2045,7 +2232,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="237"
+            line="221"
             column="13"/>
     </issue>
 
@@ -2056,7 +2243,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="239"
+            line="223"
             column="13"/>
     </issue>
 
@@ -2067,7 +2254,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="257"
+            line="241"
             column="13"/>
     </issue>
 
@@ -2078,7 +2265,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="258"
+            line="242"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.shizuku_manager_start_failed` appears to be unused"
+        errorLine1="    &lt;string name=&quot;shizuku_manager_start_failed&quot;>Failed to start Shizuku Manager, please start it manually!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="243"
             column="13"/>
     </issue>
 
@@ -2089,7 +2287,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="260"
+            line="244"
             column="13"/>
     </issue>
 
@@ -2100,7 +2298,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="264"
+            line="248"
             column="13"/>
     </issue>
 
@@ -2111,7 +2309,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="306"
+            line="290"
             column="13"/>
     </issue>
 
@@ -2122,7 +2320,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="307"
+            line="291"
             column="13"/>
     </issue>
 
@@ -2133,7 +2331,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
-            line="324"
+            line="308"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.cancel` appears to be unused"
+        errorLine1="    &lt;string name=&quot;cancel&quot;>Cancelar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-pt/strings.xml"
+            line="311"
             column="13"/>
     </issue>
 
@@ -2144,7 +2353,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="346"
+            line="329"
             column="13"/>
     </issue>
 
@@ -2155,7 +2364,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="362"
+            line="345"
             column="13"/>
     </issue>
 
@@ -2166,7 +2375,18 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="366"
+            line="349"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.settings_links_downloader__title_downloader` appears to be unused"
+        errorLine1="    &lt;string name=&quot;settings_links_downloader__title_downloader&quot;>Downloader&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="401"
             column="13"/>
     </issue>
 
@@ -2177,7 +2397,51 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="468"
+            line="449"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_settings__text_success` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_settings__text_success&quot;>Exported!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="479"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.export_settings__text_failure` appears to be unused"
+        errorLine1="    &lt;string name=&quot;export_settings__text_failure&quot;>Failed to export settings!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="480"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.import_settings__text_success` appears to be unused"
+        errorLine1="    &lt;string name=&quot;import_settings__text_success&quot;>Imported!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="481"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.import_settings__text_failure` appears to be unused"
+        errorLine1="    &lt;string name=&quot;import_settings__text_failure&quot;>Failed to import settings!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="482"
             column="13"/>
     </issue>
 
@@ -2188,7 +2452,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="533"
+            line="510"
             column="13"/>
     </issue>
 
@@ -2199,7 +2463,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="534"
+            line="511"
             column="13"/>
     </issue>
 
@@ -2210,7 +2474,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="535"
+            line="512"
             column="13"/>
     </issue>
 
@@ -2221,7 +2485,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="536"
+            line="513"
             column="13"/>
     </issue>
 
@@ -2232,7 +2496,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="538"
+            line="515"
             column="13"/>
     </issue>
 
@@ -2243,7 +2507,7 @@
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/strings.xml"
-            line="546"
+            line="523"
             column="13"/>
     </issue>
 
@@ -2342,7 +2606,7 @@
         errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-hu/strings.xml"
-            line="313"
+            line="297"
             column="42"/>
     </issue>
 
@@ -2614,19 +2878,8 @@
         errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/activity/bottomsheet/BottomSheetApps.kt"
-            line="308"
+            line="310"
             column="15"/>
-    </issue>
-
-    <issue
-        id="UseKtx"
-        message="Use the KTX extension function `String.toUri` instead?"
-        errorLine1="        return Uri.parse(read.nextString())"
-        errorLine2="               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/fe/linksheet/util/serialization/DisplayActivityInfoTypeAdapter.kt"
-            line="13"
-            column="16"/>
     </issue>
 
     <issue
@@ -2636,7 +2889,7 @@
         errorLine2="                             ~~~~~~~~~~~~~~">
         <location
             file="src/main/java/fe/linksheet/module/resolver/ImprovedIntentResolver.kt"
-            line="565"
+            line="586"
             column="30"/>
     </issue>
 

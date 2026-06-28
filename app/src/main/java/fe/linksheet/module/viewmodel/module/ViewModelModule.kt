@@ -113,7 +113,6 @@ val ViewModelModule = module {
             context = get(),
             sessionId = parameters[0],
             logViewCommon = get(),
-            preferenceRepository = get(),
             logPersistService = get()
         )
     }
@@ -138,7 +137,7 @@ val ViewModelModule = module {
             context = get(),
             preferenceRepository = get(),
             experimentRepository = get(),
-            shizukuService = get(),
+            shizukuStatusUseCase = get(),
             shizukuFeatureService = get(),
             miuiCompatProvider = get(),
             gson = get(qualifier(GsonQualifier.Pretty)),

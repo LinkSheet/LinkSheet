@@ -1,10 +1,14 @@
 package fe.linksheet.module.database.entity
 
 import android.content.ComponentName
-import androidx.room3.*
+import androidx.room3.ColumnInfo
+import androidx.room3.Entity
+import androidx.room3.Ignore
+import androidx.room3.Index
+import androidx.room3.PrimaryKey
 
 @Entity(
-    tableName = "openwith",
+    tableName = PreferredApp.TABLE_NAME,
     indices = [(Index("host", unique = true))]
 )
 data class PreferredApp(
@@ -21,6 +25,8 @@ data class PreferredApp(
     val pkg = tryGetPackageName(cmp, _packageName)
 
     companion object {
+        const val TABLE_NAME = "openwith"
+
         private fun tryGetComponentName(component: String?, packageName: String?): ComponentName? {
             if (component == null) return null
             val cmp = ComponentName.unflattenFromString(component)

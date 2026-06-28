@@ -42,6 +42,8 @@ data class BuildInfo(
     @SerialName("workflowId")
     val workflowId: String? = null,
     @Transient
+    // We still use Gson in some places, which doesn't know what to do with kotlinx.serialization.Transient
+    @kotlin.jvm.Transient
     val applicationId: String? = null
 )
 

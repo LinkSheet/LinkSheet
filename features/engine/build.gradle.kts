@@ -45,7 +45,8 @@ dependencies {
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
-    implementation(project(":sdk-common"))
+//    implementation(project(":sdk-common"))
+    implementation("com.github.LinkSheet.flavors:sdk-common:_")
 
     implementation("androidx.room3:room3-runtime:_")
     ksp("androidx.room3:room3-compiler:_")

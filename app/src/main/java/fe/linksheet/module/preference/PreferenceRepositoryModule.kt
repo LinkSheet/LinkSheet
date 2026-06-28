@@ -1,5 +1,6 @@
 package fe.linksheet.module.preference
 
+import app.linksheet.api.DiQualifier
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.api.preference.AppStatePreferenceRepository
 import app.linksheet.feature.analytics.preference.AnalyticsPreferences
@@ -10,7 +11,10 @@ import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import app.linksheet.feature.profile.preference.ProfilePreferences
 import app.linksheet.feature.remoteconfig.preference.RemoteConfigPreferences
 import app.linksheet.feature.remoteconfig.preference.RemoteConfigStatePreferences
+import app.linksheet.feature.remoteconfig.preference.StoredRemotePreferences
+import app.linksheet.feature.remoteconfig.util.LinkAssets
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
+import fe.android.preference.helper.Preference
 import fe.composekit.preference.asFunction
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
@@ -27,7 +31,7 @@ import org.koin.dsl.binds
 import org.koin.dsl.module
 
 
-fun PreferenceRepositoryModule(appPreferenceRepository: DefaultAppPreferenceRepository): Module {
+fun PreferenceRepositoryModule(appPreferenceRepository: AppPreferenceRepository): Module {
     return module {
         single<AppPreferenceRepository> { appPreferenceRepository }.binds(
             arrayOf(AppPreferenceRepository::class, DefaultAppPreferenceRepository::class)
@@ -39,6 +43,9 @@ fun PreferenceRepositoryModule(appPreferenceRepository: DefaultAppPreferenceRepo
         single<LibRedirectPreferences> { AppPreferences.libRedirect }
         single<() -> Boolean>(Experiment.CustomInstances.qualifier) {
             get<ExperimentRepository>().asFunction(Experiments.libRedirectCustomInstances)
+        }
+        single<Preference.Mapped<LinkAssets, String>>(DiQualifier.LinkAssetsPreference) {
+            StoredRemotePreferences.linkAssets
         }
         single<BrowserPreferences> { AppPreferences.browser }
         single<ProfilePreferences> { AppPreferences.profileSwitcher }

@@ -1,13 +1,16 @@
 package app.linksheet.feature.shizuku
 
 import android.content.Context
+import app.linksheet.api.DiQualifier
 import app.linksheet.api.SystemInfoService
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.api.preference.RemoteConfigRepository
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.service.AndroidShizukuService
 import app.linksheet.feature.shizuku.service.ShizukuFeatureService
 import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.service.UserServiceConfig
+import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.android.lifecycle.koin.extension.service
@@ -39,6 +42,13 @@ val ShizukuFeatureModule = module {
             enabled = repo.asFlow(preferences.enable),
             autoDisableLinkHandlers = repo.asFlow(preferences.autoDisableLinkHandling),
             userServiceFlow = connection.userServiceFlow
+        )
+    }
+    factory {
+        ShizukuStatusUseCase(
+            remoteConfigRepository = get<RemoteConfigRepository>(),
+            linkAssetsPreference = get(DiQualifier.LinkAssetsPreference),
+            shizukuService = get()
         )
     }
     viewModelOf(::ShizukuSettingsViewModel)

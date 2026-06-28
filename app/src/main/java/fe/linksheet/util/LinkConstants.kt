@@ -74,6 +74,3 @@ object LinkSheet {
 
     val CompatReleases = "$Org/compat/releases"
 }
-
-
-const val ShizukuDownload = "https://shizuku.rikka.app/download"

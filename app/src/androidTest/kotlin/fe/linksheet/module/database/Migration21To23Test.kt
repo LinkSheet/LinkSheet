@@ -8,11 +8,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.api.database.CrossDatabaseMigrationCallback
 import app.linksheet.api.database.DefaultCrossDatabaseMigration
 import app.linksheet.feature.libredirect.database.LibRedirectDatabase
-import fe.composekit.mozilla.components.support.base.log.logger.Logger
+import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.module.database.migrations.Migration21to23
 import fe.linksheet.testlib.instrument.InstrumentationTest
 import kotlinx.coroutines.test.runTest
@@ -46,8 +47,8 @@ internal class Migration21To23Test : InstrumentationTest {
     @Test
     fun test() = runTest {
         val linkSheetDb = linkSheetHelper.createDatabase(21).apply {
-            execSQL("""INSERT INTO lib_redirect_default (serviceKey, frontendKey, instanceUrl) VALUES ('bandcamp', 'tent', 'https://tent.bloat.cat')""")
-            execSQL("""INSERT INTO lib_redirect_default (serviceKey, frontendKey, instanceUrl) VALUES ('youtube', 'invidious', 'RANDOM_INSTANCE')""")
+            execSQL("""INSERT INTO ${LibRedirectDefault.TABLE_NAME} (serviceKey, frontendKey, instanceUrl) VALUES ('bandcamp', 'tent', 'https://tent.bloat.cat')""")
+            execSQL("""INSERT INTO ${LibRedirectDefault.TABLE_NAME} (serviceKey, frontendKey, instanceUrl) VALUES ('youtube', 'invidious', 'RANDOM_INSTANCE')""")
             execSQL("""INSERT INTO lib_redirect_service_state (serviceKey, enabled) VALUES ('bandcamp', 0)""")
             execSQL("""INSERT INTO lib_redirect_service_state (serviceKey, enabled) VALUES ('youtube', 1)""")
             close()

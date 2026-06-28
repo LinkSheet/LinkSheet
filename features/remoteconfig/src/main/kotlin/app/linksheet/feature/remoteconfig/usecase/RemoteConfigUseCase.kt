@@ -6,10 +6,10 @@ import app.linksheet.feature.remoteconfig.preference.RemoteConfigPreferences
 import app.linksheet.feature.remoteconfig.preference.RemoteConfigStatePreferences
 
 class RemoteConfigUseCase(
-    private val repository: AppPreferenceRepository,
-    private val stateRepository: AppStatePreferenceRepository,
-    private val remoteConfigPreferences: RemoteConfigPreferences,
-    private val remoteConfigStatePreferences: RemoteConfigStatePreferences,
+    repository: AppPreferenceRepository,
+    stateRepository: AppStatePreferenceRepository,
+    remoteConfigPreferences: RemoteConfigPreferences,
+    remoteConfigStatePreferences: RemoteConfigStatePreferences,
 ) {
     val enabled = repository.asViewModelState(remoteConfigPreferences.enable)
     val dialogDismissed = stateRepository.asViewModelState(remoteConfigStatePreferences.dialogDismissed)

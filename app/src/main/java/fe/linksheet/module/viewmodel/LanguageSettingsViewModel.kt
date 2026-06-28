@@ -1,5 +1,6 @@
 package fe.linksheet.module.viewmodel
 
+import androidx.lifecycle.ViewModel
 import fe.linksheet.module.language.AppLocaleService
 import fe.linksheet.module.language.LocaleItem
 import app.linksheet.api.preference.AppPreferenceRepository
@@ -7,8 +8,7 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 class LanguageSettingsViewModel(
     val localeService: AppLocaleService,
-    val preferenceRepository: AppPreferenceRepository,
-) : BaseViewModel(preferenceRepository) {
+) : ViewModel() {
 
     val localesFlow = localeService.localesFlow
     val appLocaleItemFlow = localeService.appLocaleItemFlow

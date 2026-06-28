@@ -11,6 +11,7 @@ plugins {
     id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit")
     id("kotlin-parcelize")
+    id("de.infix.testBalloon") version "1.0.0-K2.4.0"
 }
 
 android {
@@ -85,6 +86,8 @@ dependencies {
     androidTestImplementation("io.mockk:mockk-android:1.14.9")
     androidTestImplementation(project(":test-core"))
 
+    testImplementation("de.infix.testBalloon:testBalloon-framework-core:_")
+    testImplementation("de.infix.testBalloon:testBalloon-integration-robolectric:_")
     testImplementation(Testing.junit.jupiter.api)
     testRuntimeOnly(Testing.junit.jupiter.engine)
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:_")

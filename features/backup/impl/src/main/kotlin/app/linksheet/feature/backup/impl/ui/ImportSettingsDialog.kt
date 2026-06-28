@@ -1,4 +1,4 @@
-package app.linksheet.feature.backup.impl.ui.exportimport
+package app.linksheet.feature.backup.impl.ui
 
 import android.content.Intent
 import android.os.Parcelable
@@ -29,6 +29,8 @@ import app.linksheet.compose.theme.DialogTitleStyle
 import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.api.RestoreMode
 import app.linksheet.feature.backup.impl.R
+import app.linksheet.feature.backup.impl.core.FileSelectionResult
+import app.linksheet.feature.backup.impl.core.rememberFileSelectedLauncher
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
@@ -113,7 +115,7 @@ private fun ImportSettingsDialog(
         },
         confirmButton = {
             SaneAlertDialogTextButton(
-                content = textContent(CommonR.string.generic__button_text_confirm),
+                content = textContent(R.string.settings_backup__button_text_restore_from_file),
                 onClick = { fileSelectedLauncher.launch(importIntent) }
             )
         }

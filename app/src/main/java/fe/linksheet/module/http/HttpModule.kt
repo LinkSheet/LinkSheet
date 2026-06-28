@@ -15,6 +15,8 @@ import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.HttpTimeoutConfig
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.gson.gson
 import me.saket.unfurl.Unfurler
 import okhttp3.Cache
@@ -68,6 +70,12 @@ val HttpModule = module {
             install(HttpTimeout) {
                 // TODO: Is this a good idea?
                 requestTimeoutMillis = HttpTimeoutConfig.INFINITE_TIMEOUT_MS
+            }
+            if (StaticBuildInfo.IsDebug) {
+                install(Logging) {
+                    level = LogLevel.INFO
+                    logger = KtorLoggerAdapter
+                }
             }
         }
     }

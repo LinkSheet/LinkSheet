@@ -36,6 +36,7 @@ import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
 import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
+import fe.linksheet.composable.page.home.card.news.ChangelogCard
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.extension.android.showToast
@@ -49,10 +50,16 @@ import org.koin.compose.viewmodel.koinActivityViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinActivityViewModel()) {
+fun MainRoute(
+    navController: NavHostController,
+    viewModel: MainViewModel = koinActivityViewModel()
+) {
     val clipboardContent by viewModel.clipboardUseCase.contentFlow.collectAsStateWithLifecycle()
     val newShizuku by viewModel.shizukuEnabled.collectAsStateWithLifecycle()
     val newDefaultsDismissed by viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
+    val changelogDismissed by viewModel.changelogUseCase.showChangelog.collectAsStateWithLifecycle(
+        initialValue = true
+    )
 
     val showMiuiAlert by viewModel.showMiuiAlert.collectRefreshableAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED,
@@ -141,7 +148,10 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinA
             }
 
             if (StaticBuildInfo.isType(BuildType.Debug, BuildType.Nightly)) {
-                item(key = R.string.nightly_experiments_card, contentType = ContentType.ClickableAlert) {
+                item(
+                    key = R.string.nightly_experiments_card,
+                    contentType = ContentType.ClickableAlert
+                ) {
                     NightlyExperimentsCard(navigate = { navController.navigate(it) })
                 }
             }
@@ -166,6 +176,25 @@ fun MainRoute(navController: NavHostController, viewModel: MainViewModel = koinA
                         },
                         onDismiss = {
                             viewModel.newDefaultsDismissed(true)
+                        }
+                    )
+                }
+            }
+
+            if (!changelogDismissed) {
+                item(
+                    key = R.string.settings_main_changelog__title_changelog,
+                    contentType = ContentType.ClickableAlert
+                ) {
+                    ChangelogCard(
+                        version = viewModel.changelogUseCase.version,
+                        onClick = {
+//                            navController.navigate(MarkdownViewerRoute(LinkSheet.WikiExperiments))
+                        },
+                        onDismiss = {
+                            coroutineScope.launch {
+                                viewModel.changelogUseCase.dismiss()
+                            }
                         }
                     )
                 }

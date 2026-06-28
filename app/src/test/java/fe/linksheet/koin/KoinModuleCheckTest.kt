@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Build
 import androidx.lifecycle.SavedStateHandle
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import app.linksheet.api.BuildConstants
@@ -15,7 +16,9 @@ import app.linksheet.api.SystemInfoService
 import app.linksheet.api.SystemProperties
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.api.preference.RemoteConfigRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
+import app.linksheet.feature.analytics.preference.AnalyticsPreferences
 import app.linksheet.feature.analytics.service.BaseAnalyticsService
 import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.app.core.PackageIntentHandler
@@ -25,6 +28,7 @@ import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.usecase.AllAppsUseCase
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import app.linksheet.feature.app.usecase.DomainVerificationUseCase
+import app.linksheet.feature.backup.impl.core.BackupConfiguration
 import app.linksheet.feature.browser.usecase.PrivateBrowserUseCase
 import app.linksheet.feature.devicecompat.miui.MiuiCompat
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
@@ -43,25 +47,29 @@ import app.linksheet.feature.libredirect.database.repository.LibRedirectUserInst
 import app.linksheet.feature.libredirect.preference.LibRedirectPreferences
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
+import app.linksheet.feature.profile.core.ProfileSwitcher
 import app.linksheet.feature.profile.service.ProfileService
-import app.linksheet.feature.remoteconfig.preference.RemoteConfigRepository
-import app.linksheet.feature.remoteconfig.service.RemoteConfigClient
+import app.linksheet.feature.remoteconfig.core.RemoteConfigClient
+import app.linksheet.feature.remoteconfig.preference.RemoteConfigPreferences
 import app.linksheet.feature.remoteconfig.service.RemoteConfigService
 import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.service.ShizukuFeatureService
 import app.linksheet.feature.shizuku.service.ShizukuService
+import app.linksheet.feature.shizuku.service.UserServiceConfig
+import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
-import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.testlib.koin.definition
 import app.linksheet.testlib.koin.injectedParameters
 import app.linksheet.testlib.koin.verifyAll
 import coil3.ImageLoader
 import com.akuleshov7.ktoml.Toml
 import com.google.gson.Gson
+import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceRepository
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.httpkt.HttpData
 import fe.httpkt.Request
 import fe.httpkt.internal.HttpInternals
@@ -76,6 +84,10 @@ import fe.linksheet.module.database.dao.whitelisted.WhitelistedNormalBrowsersDao
 import fe.linksheet.module.language.AppLocaleService
 import fe.linksheet.module.log.file.LogPersistService
 import fe.linksheet.module.paste.PasteService
+import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
+import fe.linksheet.module.preference.experiment.ExperimentRepository
+import fe.linksheet.module.preference.state.AppStateService
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.repository.PreferredAppRepository
@@ -96,14 +108,21 @@ import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.statistic.StatisticsService
 import fe.linksheet.module.versiontracker.VersionTracker
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
+import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
+import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
+import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel
+import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
 import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
 import fe.linksheet.module.viewmodel.LanguageSettingsViewModel
+import fe.linksheet.module.viewmodel.LinksSettingsViewModel
+import fe.linksheet.module.viewmodel.LoadDumpedPreferencesViewModel
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
+import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
 import fe.linksheet.module.viewmodel.SelectDomainsConfirmationViewModel
 import fe.linksheet.module.viewmodel.SettingsViewModel
@@ -119,8 +138,10 @@ import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.robolectric.annotation.Config
 import kotlin.time.Clock
@@ -128,6 +149,7 @@ import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
 @OptIn(KoinExperimentalAPI::class, ExperimentalTime::class)
+@RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
 internal class KoinModuleCheckTest : BaseUnitTest {
     private val extraTypes = listOf(
@@ -145,11 +167,13 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         Duration::class,
         List::class,
         Clock::class,
+        Preference.Mapped::class,
         // TODO: Hook up CacheRepository to DI, then remove here
         CacheRepository::class
     )
 
     private val injections = injectedParameters(
+        definition<BackupConfiguration>(Json::class, List::class),
         definition<AppSorter>(Clock::class),
         definition<HttpClient>(HttpClientEngine::class, HttpClientConfig::class),
         definition<SystemInfoService>(
@@ -190,11 +214,14 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             AppPreferenceRepository::class,
             LibRedirectPreferences::class
         ),
+//        definition<fe.linksheet.module.viewmodel.LogSettingsViewModel>(app.linksheet.api.preference.AppPreferenceRepository::class),
         definition<LibRedirectResolver>(
             LibRedirectDefaultRepository::class,
             LibRedirectStateRepository::class
         ),
         definition<LogViewCommon>(
+            DefaultAppPreferenceRepository::class,
+            ExperimentRepository::class,
             PasteService::class,
             Gson::class,
             Toml::class,
@@ -208,22 +235,39 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         ),
         definition<VersionTracker>(BaseAnalyticsService::class, SystemInfoService::class),
         definition<MainViewModel>(
+            AppPreferenceRepository::class,
+            DefaultAppStateRepository::class,
+            ExperimentRepository::class,
             BaseAnalyticsService::class,
             MiuiCompatProvider::class,
             MiuiCompat::class,
             DebugMenuSlotProvider::class,
             PackageIntentHandler::class,
-            ShizukuService::class
+            SystemInfoService::class,
+            ShizukuStatusUseCase::class
         ),
+        definition<ShizukuStatusUseCase>(RemoteConfigRepository::class),
         definition<VerifiedLinkHandlersViewModel>(
+            AppPreferenceRepository::class,
+            ExperimentRepository::class,
+//            PreferredAppRepository::class,
             DomainVerificationUseCase::class,
             OneUiCompat::class
         ),
-        definition<PreferredBrowserViewModel>(BrowsersUseCase::class),
+        definition<PreferredBrowserViewModel>(
+            BrowsersUseCase::class,
+            AppPreferenceRepository::class
+        ),
         definition<PrivacySettingsViewModel>(BaseAnalyticsService::class),
         definition<ExportSettingsViewModel>(Gson::class, Clock::class),
         definition<AboutSettingsViewModel>(Gson::class, SystemInfoService::class),
+        definition<ExperimentsViewModel>(ExperimentRepository::class),
+        definition<PreviewSettingsViewModel>(AppPreferenceRepository::class),
         definition<DevSettingsViewModel>(
+            AppPreferenceRepository::class,
+            ExperimentRepository::class,
+            ShizukuStatusUseCase::class,
+            ShizukuFeatureService::class,
             MiuiCompatProvider::class,
             Gson::class,
             SystemInfoService::class,
@@ -236,6 +280,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             CoroutineDispatcher::class
         ),
         definition<BottomSheetViewModel>(
+            AppPreferenceRepository::class,
+            ExperimentRepository::class,
             ImageLoader::class,
             IntentResolver::class,
             IntentLauncher::class,
@@ -249,36 +295,90 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             HttpData::class
         ),
         definition<Downloader>(HttpClient::class),
-        definition<DownloaderSettingsViewModel>(AppPreferenceRepository::class, app.linksheet.feature.downloader.preference.DownloaderPreferences::class),
+        definition<DownloaderSettingsViewModel>(
+            AppPreferenceRepository::class,
+            app.linksheet.feature.downloader.preference.DownloaderPreferences::class
+        ),
         definition<StatisticsService>(AppPreferenceRepository::class),
         definition<AppLocaleService>(List::class),
         definition<LanguageSettingsViewModel>(AppLocaleService::class),
-        definition<SettingsViewModel>(AppLocaleService::class),
-        definition<ThemeSettingsViewModel>(RemoteConfigRepository::class),
+        definition<fe.linksheet.module.viewmodel.NotificationSettingsViewModel>(
+            AppPreferenceRepository::class
+        ),
+        definition<SettingsViewModel>(
+            AppLocaleService::class,
+            AppPreferenceRepository::class,
+            ExperimentRepository::class
+        ),
+        definition<ThemeSettingsViewModel>(
+            RemoteConfigRepository::class,
+            AppPreferenceRepository::class
+        ),
         definition<RedirectResolveRequest>(HttpClient::class),
         definition<Amp2HtmlResolveRequest>(HttpClient::class),
         definition<VerifiedLinkHandlerViewModel>(
+            AppPreferenceRepository::class,
             DomainVerificationUseCase::class,
             OneUiCompat::class
         ),
+        definition<PrivacySettingsViewModel>(
+            AppPreferenceRepository::class,
+            ExperimentRepository::class,
+            BaseAnalyticsService::class,
+            AnalyticsPreferences::class,
+            RemoteConfigPreferences::class
+        ),
+        definition<fe.linksheet.module.viewmodel.AboutSettingsViewModel>(
+            Gson::class,
+            SystemInfoService::class,
+            AppPreferenceRepository::class
+        ),
+        definition<LoadDumpedPreferencesViewModel>(AppPreferenceRepository::class),
+        definition<GeneralSettingsViewModel>(AppPreferenceRepository::class),
+        definition<Amp2HtmlSettingsViewModel>(AppPreferenceRepository::class),
+        definition<BottomSheetSettingsViewModel>(
+            AppPreferenceRepository::class,
+            ProfileSwitcher::class
+        ),
+        definition<ShizukuService>(UserServiceConfig::class),
         definition<ShizukuSettingsViewModel>(
             ShizukuService::class,
             AppPreferenceRepository::class,
             ShizukuPreferences::class
         ),
-        definition<InAppBrowserSettingsViewModel>(AllAppsUseCase::class),
+        definition<fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel>(
+            AppPreferenceRepository::class
+        ),
+        definition<InAppBrowserSettingsViewModel>(
+            DisableInAppBrowserInSelectedRepository::class,
+            AllAppsUseCase::class,
+            AppPreferenceRepository::class
+        ),
+        definition<LinksSettingsViewModel>(AppPreferenceRepository::class),
         definition<WhitelistedBrowsersViewModel>(
             PreferredBrowserViewModel.BrowserType::class,
-            BrowsersUseCase::class
+            BrowsersUseCase::class,
+            AppPreferenceRepository::class
         ),
         definition<SingleBrowserViewModel>(
             PreferredBrowserViewModel.BrowserType::class,
-            BrowsersUseCase::class
+            BrowsersUseCase::class,
+            AppPreferenceRepository::class
+        ),
+        definition<AppStateService>(
+            DefaultAppStateRepository::class,
+            DefaultAppPreferenceRepository::class,
+            ExperimentRepository::class
+        ),
+        definition<VersionTracker>(
+            BuildInfo::class,
+            BaseAnalyticsService::class,
+            AppPreferenceRepository::class
         ),
         definition<SelectDomainsConfirmationViewModel>(AllAppsUseCase::class),
         definition<LibRedirectUserInstanceRepository>(LibRedirectUserInstanceDao::class),
         definition<ProfileService>(MetaDataHandler::class),
-        definition<ExportImportUseCase>(PreferenceRepository::class, Gson::class, Toml::class),
+        definition<ExportImportUseCase>(PreferenceRepository::class, Json::class, Toml::class),
         definition<RemoteConfigClient>(HttpClient::class),
         definition<RemoteConfigService>(WorkManager::class, StateFlow::class),
         definition<ShizukuFeatureService>(BroadcastEventBus::class)
@@ -286,7 +386,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
 
     @Test
     fun test() {
-        LinkSheetApp().provideKoinModules().verifyAll(
+        val appPreferenceRepository = DefaultAppPreferenceRepository(applicationContext)
+        LinkSheetApp().provideKoinModules(appPreferenceRepository).verifyAll(
             extraTypes = extraTypes,
             injections = injections
         )

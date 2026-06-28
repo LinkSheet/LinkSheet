@@ -2,8 +2,6 @@ package app.linksheet.feature.engine.core.resolver.followredirects
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.engine.core.resolver.followredirects.FollowRedirectsLocalSource
-import app.linksheet.feature.engine.core.resolver.followredirects.FollowRedirectsResult
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
@@ -11,15 +9,20 @@ import assertk.fail
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.assert.assertFailure
 import fe.std.result.assert.assertSuccess
-import io.ktor.client.*
-import io.ktor.client.engine.mock.*
-import io.ktor.client.plugins.*
-import io.ktor.client.plugins.logging.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.respondBadRequest
+import io.ktor.client.engine.mock.respondOk
+import io.ktor.client.engine.mock.respondRedirect
+import io.ktor.client.plugins.HttpRequestRetry
+import io.ktor.client.plugins.SendCountExceedException
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.http.HttpMethod
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
@@ -43,9 +46,9 @@ internal class FollowRedirectsLocalSourceTest : BaseUnitTest {
                 retryOnServerErrors(maxRetries = 3)
                 exponentialDelay()
             }
-            install(HttpTimeout) {
-                requestTimeoutMillis = 1000
-            }
+//            install(HttpTimeout) {
+//                requestTimeoutMillis = 1000
+//            }
             install(Logging) {
                 level = LogLevel.ALL
                 logger = object : Logger {

@@ -377,7 +377,7 @@
     <string name="bottom_sheet_loading_indicator__button_skip_job">Lewati</string>
     <string name="export_log_dialog__title_share_logs">Bagikan log</string>
     <string name="export_log_dialog__title_redact_log">Samarkan log</string>
-    <string name="export_log_dialog__subtitle_redact_log">Disarankan, menyamarkan nama aplikasi dan URL</string>
+    <string name="export_log_dialog__subtitle_redact_log">Disarankan, samarkan nama aplikasi dan URL</string>
     <string name="export_log_dialog__title_include_throwable">Sertakan log crash</string>
     <string name="export_log_dialog__subtitle_include_throwable">Disarankan, tetapi tidak dapat disamarkan</string>
     <string name="export_log_dialog__title_include_fingerprint">Sertakan sidik jari build</string>
@@ -447,7 +447,7 @@
     <string name="settings_main_experiment_news__text_experiment_state_updated">Beberapa eksperimen telah dihapus dan sekarang menjadi perilaku default.</string>
     <string name="generic__button_dismiss">Tutup</string>
     <string name="settings_main_experiment_changelog__title_changelog">Log perubahan eksperimen</string>
-    <string name="settings__subtitle_advanced"><![CDATA[Eksperimen & Ekspor/Impor]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[Eksperimen, Pencadangan &amp; Pemulihan]]></string>
     <string name="bottom_sheet__button_manual_redirect">Ikuti pengalihan</string>
     <string name="app_host_dialog__title_hosts">Host default</string>
     <string name="generic__button_text_save">Simpan</string>
@@ -523,4 +523,5 @@
     <string name="settings_follow_redirects__title_aggressive">Mode agresif</string>
     <string name="settings_follow_redirects__subtitle_aggressive">Ambil isi halaman penuh untuk kompatibilitas yang lebih baik dengan situs yang tidak menggunakan pengalihan HTTP</string>
     <string name="handler_target__label_switch_profile_view_intent">Ganti profil</string>
+    <string name="settings_advanced__divider_backup"><![CDATA[Pencadangan &amp; Pemulihan]]></string>
 </resources>

@@ -8,12 +8,19 @@ import kotlin.reflect.KClass
 interface ExportableRepository<Entity, Model : ExportModel> {
     val modelClass: KClass<Model>
     suspend fun exportAll(): List<Model>
+    suspend fun eraseAll()
     suspend fun import(settings: ImportSettings, models: List<Model>): List<Pair<Entity, Long>>
 
-    suspend fun importModels(settings: ImportSettings, models: List<ExportModel>): List<ImportResult<Entity, Model>>? {
+    suspend fun importModels(
+        settings: ImportSettings,
+        models: List<ExportModel>
+    ): List<ImportResult<Entity, Model>>? {
         val items = models.mapNotNull {
             @Suppress("UNCHECKED_CAST")
             it as? Model
+        }
+        if (settings.mode == RestoreMode.EraseRestore) {
+            eraseAll()
         }
         val inserts = import(settings, items)
         if (items.size != inserts.size) {
@@ -21,8 +28,8 @@ interface ExportableRepository<Entity, Model : ExportModel> {
         }
 
         return items.indices.map { i ->
-            val insert = inserts[i]
-            ImportResult(insert.first, items[i], insert.second)
+            val (entity, id) = inserts[i]
+            ImportResult(entity, items[i], id)
         }
     }
 

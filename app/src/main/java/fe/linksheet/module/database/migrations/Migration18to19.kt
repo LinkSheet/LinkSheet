@@ -4,15 +4,18 @@ import androidx.room3.migration.Migration
 import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 import app.linksheet.api.database.query
+import app.linksheet.feature.engine.database.entity.CachedHtml
+import app.linksheet.feature.engine.database.entity.PreviewCache
+import app.linksheet.feature.engine.database.entity.ResolvedUrl
 
 object Migration18to19 : Migration(18, 19) {
 
     override suspend fun migrate(connection: SQLiteConnection) = connection.run {
-        execSQL("CREATE TABLE IF NOT EXISTS `html_cache` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
-        execSQL("CREATE TABLE IF NOT EXISTS `preview_cache` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `faviconUrl` TEXT, `thumbnailUrl` TEXT, `resultId` INTEGER NOT NULL, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
-        execSQL("CREATE TABLE IF NOT EXISTS `resolved_url` (`urlId` INTEGER NOT NULL, `typeId` INTEGER NOT NULL, `result` TEXT, PRIMARY KEY(`urlId`, `typeId`), FOREIGN KEY(`urlId`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`typeId`) REFERENCES `resolve_type`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
-        execSQL("CREATE INDEX IF NOT EXISTS `index_resolved_url_urlId` ON `resolved_url` (`urlId`)")
-        execSQL("CREATE INDEX IF NOT EXISTS `index_resolved_url_typeId` ON `resolved_url` (`typeId`)")
+        execSQL("CREATE TABLE IF NOT EXISTS `${CachedHtml.TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `content` TEXT NOT NULL, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
+        execSQL("CREATE TABLE IF NOT EXISTS `${PreviewCache.TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `description` TEXT, `faviconUrl` TEXT, `thumbnailUrl` TEXT, `resultId` INTEGER NOT NULL, FOREIGN KEY(`id`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
+        execSQL("CREATE TABLE IF NOT EXISTS `${ResolvedUrl.TABLE_NAME}` (`urlId` INTEGER NOT NULL, `typeId` INTEGER NOT NULL, `result` TEXT, PRIMARY KEY(`urlId`, `typeId`), FOREIGN KEY(`urlId`) REFERENCES `url`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`typeId`) REFERENCES `resolve_type`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
+        execSQL("CREATE INDEX IF NOT EXISTS `index_resolved_url_urlId` ON `${ResolvedUrl.TABLE_NAME}` (`urlId`)")
+        execSQL("CREATE INDEX IF NOT EXISTS `index_resolved_url_typeId` ON `${ResolvedUrl.TABLE_NAME}` (`typeId`)")
         execSQL("CREATE TABLE IF NOT EXISTS `resolve_type` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL)")
         execSQL("CREATE TABLE IF NOT EXISTS `url` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` INTEGER NOT NULL, `url` TEXT NOT NULL)")
         execSQL("CREATE TABLE IF NOT EXISTS `_new_resolved_redirect` (`shortUrl` TEXT NOT NULL, `resolvedUrl` TEXT, PRIMARY KEY(`shortUrl`))")

@@ -37,6 +37,10 @@ class Amp2HtmlRepository(
         return CommonImport.export(dao) { it.toExportModel() }
     }
 
+    override suspend fun eraseAll() {
+        dao.deleteAll()
+    }
+
     override suspend fun import(settings: ImportSettings, models: List<Amp2HtmlMappingExportModel>): List<Pair<Amp2HtmlMapping, Long>> {
         return CommonImport.import(dao, settings, models) { it.fromExportModel() }
     }

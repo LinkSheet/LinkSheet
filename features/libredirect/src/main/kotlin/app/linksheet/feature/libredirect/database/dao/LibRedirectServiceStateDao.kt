@@ -3,14 +3,17 @@ package app.linksheet.feature.libredirect.database.dao
 import androidx.room3.Dao
 import androidx.room3.Query
 import app.linksheet.api.database.BaseDao
+import app.linksheet.api.database.UserDataDao
 import app.linksheet.feature.libredirect.database.entity.LibRedirectServiceState
 import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface LibRedirectServiceStateDao : BaseDao<LibRedirectServiceState> {
-    @Query("SELECT * FROM lib_redirect_service_state")
+interface LibRedirectServiceStateDao : BaseDao<LibRedirectServiceState>, UserDataDao {
+    @Query("SELECT * FROM ${LibRedirectServiceState.TABLE_NAME}")
     override fun getAll(): Flow<List<LibRedirectServiceState>>
-    @Query("SELECT * FROM lib_redirect_service_state WHERE serviceKey = :serviceKey")
+    @Query("DELETE FROM ${LibRedirectServiceState.TABLE_NAME}")
+    override suspend fun deleteAll()
+    @Query("SELECT * FROM ${LibRedirectServiceState.TABLE_NAME} WHERE serviceKey = :serviceKey")
     fun getServiceState(serviceKey: String): Flow<LibRedirectServiceState?>
 }

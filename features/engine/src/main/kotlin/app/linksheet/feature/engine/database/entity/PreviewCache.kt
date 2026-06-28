@@ -7,7 +7,7 @@ import androidx.room3.TypeConverters
 import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResultId
 
 @Entity(
-    tableName = "preview_cache",
+    tableName = PreviewCache.TABLE_NAME,
     foreignKeys = [
         ForeignKey(entity = UrlEntry::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
     ]
@@ -24,4 +24,8 @@ data class PreviewCache(
 //    val faviconUrl: ByteArray?,
 //    val thumbnailType: String?,
 //    val thumbnail: ByteArray?
-)
+) {
+    companion object {
+        const val TABLE_NAME = "preview_cache"
+    }
+}

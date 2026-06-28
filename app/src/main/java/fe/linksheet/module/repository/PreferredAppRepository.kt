@@ -25,6 +25,10 @@ class PreferredAppRepository(
         return CommonImport.export(dao) { it.toExportModel() }
     }
 
+    override suspend fun eraseAll() {
+        dao.deleteAll()
+    }
+
     override suspend fun import(
         settings: ImportSettings,
         models: List<PreferredAppExportModel>

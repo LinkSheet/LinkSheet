@@ -7,6 +7,8 @@ import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 import app.linksheet.api.database.CrossDatabaseMigration
 import app.linksheet.api.database.query
+import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
+import app.linksheet.feature.libredirect.database.entity.LibRedirectServiceState
 import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
@@ -30,8 +32,8 @@ class Migration21to23(
         return Migration(start, start + 1) { connection ->
             logger.info("Running migration from $start to ${start + 1}")
             val result = tryCatch {
-                migrateTable(connection, "lib_redirect_default")
-                migrateTable(connection, "lib_redirect_service_state")
+                migrateTable(connection, LibRedirectDefault.TABLE_NAME)
+                migrateTable(connection, LibRedirectServiceState.TABLE_NAME)
             }
             if (result.isFailure()) {
                 logger.error("Error", result.exception)

@@ -5,13 +5,16 @@ import androidx.room3.PrimaryKey
 import androidx.room3.TypeConverter
 import androidx.room3.TypeConverters
 
-@Entity(tableName = "expression_rule")
+@Entity(tableName = ExpressionRule.TABLE_NAME)
 @TypeConverters(value = [ExpressionRuleType.Converter::class])
 class ExpressionRule(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val bytes: ByteArray,
     val type: ExpressionRuleType
 ) {
+    companion object {
+        const val TABLE_NAME = "expression_rule"
+    }
 }
 
 enum class ExpressionRuleType {

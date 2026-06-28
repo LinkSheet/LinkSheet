@@ -22,3 +22,8 @@ interface BaseDao<T> {
     @Query("")
     fun getAll(): Flow<List<T>>
 }
+
+interface UserDataDao {
+    @Query("")
+    suspend fun deleteAll()
+}

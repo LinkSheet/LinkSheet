@@ -5,7 +5,7 @@ import androidx.room3.Entity
 import androidx.room3.ForeignKey
 
 @Entity(
-    tableName = "resolved_url", primaryKeys = ["urlId", "typeId"],
+    tableName = ResolvedUrl.TABLE_NAME, primaryKeys = ["urlId", "typeId"],
     foreignKeys = [
         ForeignKey(entity = UrlEntry::class, parentColumns = arrayOf("id"), childColumns = arrayOf("urlId")),
         ForeignKey(entity = ResolveType::class, parentColumns = arrayOf("id"), childColumns = arrayOf("typeId"))
@@ -16,4 +16,7 @@ data class ResolvedUrl(
     @ColumnInfo(index = true) val typeId: Long = 0,
     val result: String? = null
 ) {
+    companion object{
+        const val TABLE_NAME = "resolved_url"
+    }
 }

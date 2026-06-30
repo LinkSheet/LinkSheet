@@ -17,7 +17,9 @@ import fe.composekit.log.createLogger
 import fe.linksheet.util.IntentFilters
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.coroutines.asStateFlow
+import fe.std.result.StdResult
 import fe.std.result.getOrNull
+import fe.std.result.isFailure
 import fe.std.result.tryCatch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -106,9 +108,11 @@ class ShizukuService(
     private val _userServiceFlow = MutableStateFlow<IShizukuUserService?>(null)
     val userServiceFlow = _userServiceFlow.asStateFlow()
 
-    private fun rebind() {
-        Shizuku.unbindUserService(serviceArgs, this, true)
-        Shizuku.bindUserService(serviceArgs, this)
+    private fun rebind(): StdResult<Unit> {
+        return tryCatch {
+            Shizuku.unbindUserService(serviceArgs, this, true)
+            Shizuku.bindUserService(serviceArgs, this)
+        }
     }
 
     override fun onServiceConnected(name: ComponentName, service: IBinder) {
@@ -157,8 +161,13 @@ class ShizukuService(
 
     override fun onBinderReceived() {
         logger.debug("onBinderReceived")
-        rebind()
-        _statusFlow.update { it.copy(running = true) }
+        val result = rebind()
+        if (result.isFailure()) {
+            logger.debug("onBinderReceived, failed to rebind", result.exception)
+            _statusFlow.update { it.copy(running = false) }
+        } else {
+            _statusFlow.update { it.copy(running = true) }
+        }
     }
 
     override fun onBinderDead() {

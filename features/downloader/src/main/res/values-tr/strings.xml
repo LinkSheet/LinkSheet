@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">İndirici</string>
     <string name="downloader_url_mime_type">URL\'den mime türünü kullan</string>
     <string name="downloader_url_mime_type_explainer">URL\'nin bir dosya uzantısı (örn. \".jpg\") ile bitip bitmediğini kontrol eder; bitiyorsa, indirilen dosya için bu tür kullanılır.</string>
+    <string name="action_downloader__try_to_download">İndirilebilirleri kontrol et</string>
+    <string name="settings_downloader__title_mode_auto">Otomatik</string>
+    <string name="settings_downloader__subtitle_mode_auto">URL\'nin indirilebilir içeriğe sahip olup olmadığını otomatik olarak kontrol et</string>
+    <string name="settings_downloader__title_mode_manual">El ile</string>
+    <string name="settings_downloader__subtitle_mode_manual">Alt sayfada \"İndirilebilirleri kontrol et\" düğmesi göster</string>
 </resources>

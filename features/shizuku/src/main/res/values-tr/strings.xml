@@ -5,4 +5,18 @@
     <string name="shizuku_integration_no_permission_explainer">Shizuku iznini talep etmek için buraya dokunun.</string>
     <string name="shizuku_integration_not_setup_explainer">LinkSheet\'in çalışması için gerekli olmasa da, Shizuku önerilir. Yüklemek için buraya dokunun.</string>
     <string name="shizuku_integration">Shizuku entegrasyonu</string>
+    <string name="settings_shizuku__title_shizuku">Shizuku</string>
+    <string name="settings_shizuku__text_shizuku">Shizuku özellikli özellikleri yapılandırın</string>
+    <string name="settings_shizuku__title_not_installed">Shizuku yüklü değil</string>
+    <string name="settings_shizuku__text_not_installed">Kurulum talimatlarını açmak için dokunun</string>
+    <string name="settings_shizuku__text_info">Shizuku; diğer uygulamaların, yalnızca ayrıcalıklı shell kullanıcısı aracılığıyla erişilebilen ayrıcalıklı sistem işlevlerine erişmesine olanak sağlamak için (kablosuz) ADB/root\'u kullanan bir araç setidir.\n\nLinkSheet, kullanıcının ayarları açıp kendisi yapmasına gerek kalmadan, herhangi bir uygulama için bağlantı işlemeyi açıp kapatmak için Shizuku kullanır.</string>
+    <string name="settings_shizuku__title_missing_permission">Eksik izin</string>
+    <string name="settings_shizuku__text_missing_permission">Shizuku iznini istemek için dokunun</string>
+    <string name="settings_shizuku__title_not_running">Shizuku çalışmıyor</string>
+    <string name="settings_shizuku__text_not_running">Yöneticiyi açmak için dokunun</string>
+    <string name="settings_shizuku__title_enable">Shizuku entegrasyonunu etkinleştir</string>
+    <string name="settings_shizuku__text">Shizuku</string>
+    <string name="settings_shizuku__divider_settings">Ayarlar</string>
+    <string name="settings_shizuku__title_auto_disable_link_handling">Bağlantı işlemeyi otomatik devre dışı bırak</string>
+    <string name="settings_shizuku__text_auto_disable_link_handling">Yeni yüklenen uygulamalar için bağlantı işlemeyi otomatik olarak devre dışı bırak.</string>
 </resources>

@@ -17,10 +17,8 @@ import fe.composekit.log.createLogger
 import fe.linksheet.util.IntentFilters
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.coroutines.asStateFlow
-import fe.std.result.StdResult
 import fe.std.result.getOrNull
-import fe.std.result.isFailure
-import fe.std.result.tryCatch
+import fe.std.result.ifFailure
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -36,13 +34,11 @@ internal fun AndroidShizukuService(
     val service = ShizukuService(
         config = config,
         getApplicationInfoOrNull = packageManager::getApplicationInfoCompatOrNull,
-        pingBinder = Shizuku::pingBinder,
-        checkSelfPermission = {
-            tryCatch { Shizuku.checkSelfPermission() }.getOrNull()
-        },
-        requestPermission = {
-            tryCatch { Shizuku.requestPermission(it) }
-        }
+        wrappedShizuku = RealWrappedShizuku,
+        managerComponent = ComponentName(
+            ShizukuProvider.MANAGER_APPLICATION_ID,
+            "moe.shizuku.manager.MainActivity"
+        )
     )
     Shizuku.addBinderReceivedListenerSticky(service)
     Shizuku.addRequestPermissionResultListener(service)
@@ -54,9 +50,8 @@ internal fun AndroidShizukuService(
 class ShizukuService(
     config: UserServiceConfig,
     private val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
-    private val pingBinder: () -> Boolean,
-    private val checkSelfPermission: () -> Int?,
-    private val requestPermission: (Int) -> Unit,
+    private val wrappedShizuku: WrappedShizuku,
+    private val managerComponent: ComponentName,
 ) : Shizuku.OnRequestPermissionResultListener,
     Shizuku.OnBinderReceivedListener,
     Shizuku.OnBinderDeadListener,
@@ -64,35 +59,6 @@ class ShizukuService(
     IntentEventHandler {
 
     private val logger = createLogger<ShizukuService>()
-
-    companion object {
-        private const val REQUEST_CODE = 10000
-
-        val ManagerIntent = buildIntent(
-            action = Intent.ACTION_VIEW,
-            componentName = ComponentName(
-                ShizukuProvider.MANAGER_APPLICATION_ID,
-                "moe.shizuku.manager.MainActivity"
-            )
-        )
-    }
-
-    private val _statusFlow = RefreshableStateFlow(ShizukuStatus.Unknown) {
-        val installed = getApplicationInfoOrNull(
-            ShizukuProvider.MANAGER_APPLICATION_ID,
-            ApplicationInfoFlags.EMPTY
-        ) != null
-        val running = pingBinder()
-        val permission =
-            if (running) checkSelfPermission() == PackageManager.PERMISSION_GRANTED else false
-
-        ShizukuStatus(
-            installed = installed,
-            running = running,
-            permission = permission
-        )
-    }
-    val statusFlow = _statusFlow.asStateFlow()
     private val serviceArgs = Shizuku.UserServiceArgs(
         ComponentName(
             config.packageName,
@@ -105,16 +71,55 @@ class ShizukuService(
         .daemon(false)
         .tag("${config.tag}_shizuku")
 
+    val managerIntent = buildIntent(
+        action = Intent.ACTION_VIEW,
+        componentName = managerComponent
+    )
+
+    companion object {
+        private const val REQUEST_CODE = 10000
+    }
+
+    private val _statusFlow = RefreshableStateFlow(ShizukuStatus.Unknown, ::computeShizukuStatus)
+    val statusFlow = _statusFlow.asStateFlow()
+
     private val _userServiceFlow = MutableStateFlow<IShizukuUserService?>(null)
     val userServiceFlow = _userServiceFlow.asStateFlow()
 
-    private fun rebind(): StdResult<Unit> {
-        return tryCatch {
-            Shizuku.unbindUserService(serviceArgs, this, true)
-            Shizuku.bindUserService(serviceArgs, this)
+    private suspend fun computeShizukuStatus(): ShizukuStatus {
+        val installed = getApplicationInfoOrNull(managerComponent.packageName, ApplicationInfoFlags.EMPTY) != null
+        if (!installed) {
+            return ShizukuStatus.Unknown
         }
+
+        val running = isShizukuRunning()
+        return ShizukuStatus(
+            installed = true,
+            running = running,
+            permission = if (running) checkPermission() else false
+        )
     }
 
+    fun requestPermission() {
+        wrappedShizuku.requestPermission(REQUEST_CODE)
+    }
+
+    fun isShizukuRunning(): Boolean {
+        return wrappedShizuku.pingBinder().getOrNull() == true
+    }
+
+    private fun checkPermission(): Boolean {
+        return wrappedShizuku.checkSelfPermission().getOrNull() == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun rebind() {
+        val unbindResult = wrappedShizuku.unbindUserService(serviceArgs, this)
+        logger.debug("unbind result", unbindResult.ifFailure()?.exception)
+        val bindResult = wrappedShizuku.bindUserService(serviceArgs, this)
+        logger.debug("bind result", bindResult.ifFailure()?.exception)
+    }
+
+    //<editor-fold desc="ServiceConnection">
     override fun onServiceConnected(name: ComponentName, service: IBinder) {
         logger.debug("onServiceConnected")
         val userService = IShizukuUserService.Stub.asInterface(service)
@@ -130,50 +135,52 @@ class ShizukuService(
         logger.debug("onBindingDied")
         _userServiceFlow.tryEmit(null)
     }
+    //</editor-fold>
 
-    override fun onRequestPermissionResult(requestCode: Int, grantResult: Int) {
-        if (requestCode != REQUEST_CODE) return
-
-        val granted = grantResult == PackageManager.PERMISSION_GRANTED
-        _statusFlow.update { it.copy(permission = granted) }
-    }
-
-    fun requestPermission() {
-        requestPermission(REQUEST_CODE)
-    }
-
-    fun isShizukuRunning(): Boolean {
-        return pingBinder()
-    }
-
+    //<editor-fold desc="IntentEventHandler">
     override val filter = IntentFilters.packageState
-
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.data?.schemeSpecificPart == ShizukuProvider.MANAGER_APPLICATION_ID) {
-            when (intent.action) {
-                Intent.ACTION_PACKAGE_ADDED -> _statusFlow.update { it.copy(installed = true) }
-                Intent.ACTION_PACKAGE_REMOVED -> _statusFlow.update { it.copy(installed = false) }
-            }
-        } else {
-
+        if (intent.data?.schemeSpecificPart != managerComponent.packageName) return
+        val newStatus = when (intent.action) {
+            Intent.ACTION_PACKAGE_ADDED -> ShizukuStatus.Unknown.copy(installed = true)
+            Intent.ACTION_PACKAGE_REMOVED -> ShizukuStatus.Unknown
+            else -> null
+        }
+        newStatus?.let {
+            _statusFlow.value = it
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="OnBinderReceivedListener">
     override fun onBinderReceived() {
         logger.debug("onBinderReceived")
-        val result = rebind()
-        if (result.isFailure()) {
-            logger.debug("onBinderReceived, failed to rebind", result.exception)
-            _statusFlow.update { it.copy(running = false) }
-        } else {
-            _statusFlow.update { it.copy(running = true) }
+        val permission = checkPermission()
+        if (permission) {
+            val result = rebind()
         }
+        _statusFlow.update { it.copy(running = true, permission = permission) }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="OnBinderDeadListener">
     override fun onBinderDead() {
         logger.debug("onBinderDead")
         _statusFlow.update { it.copy(running = false) }
     }
+    //</editor-fold>
+
+    //<editor-fold desc="OnRequestPermissionResultListener">
+    override fun onRequestPermissionResult(requestCode: Int, grantResult: Int) {
+        if (requestCode != REQUEST_CODE) return
+
+        val granted = grantResult == PackageManager.PERMISSION_GRANTED
+        logger.debug("onRequestPermissionResult, granted: $granted")
+        _statusFlow.update { it.copy(permission = granted) }
+        logger.debug("trying to rebind")
+        rebind()
+    }
+    //</editor-fold>
 }
 
 data class ShizukuStatus(

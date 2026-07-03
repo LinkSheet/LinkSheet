@@ -528,5 +528,5 @@
     <string name="generic__label_arrow_rotation">矢印の回転</string>
     <string name="settings_main_changelog__title_changelog">変更履歴</string>
     <string name="settings_advanced__divider_backup"><![CDATA[バックアップと復元]]></string>
-    <string name="settings_main_changelog__text_changelog">バージョン%sの新機能を確認する。</string>
+    <string name="settings_main_changelog__text_changelog">バージョン %s の新機能を確認してください。</string>
 </resources>

@@ -187,7 +187,7 @@
     <string name="mastodon_redirect_subtitle_2">Mastodon Redirect のソースコードは Shizuku とのやりとりの参考として使われました</string>
     <string name="resolve_event__loading_preferred_apps">優先アプリを読み込んでいます</string>
     <string name="redact_log">ログを編集する （推奨。無効にするとパッケージ名とホスト名が漏洩する可能性があります）</string>
-    <string name="privacy_settings_explainer">リファラープライバシー、テレメトリ</string>
+    <string name="privacy_settings_explainer">リファラープライバシー</string>
     <string name="show_linksheet_referrer_explainer">アプリを起動する際に、どのアプリが起動したか、あるいは「参照」したかを確認できます。デフォルトでは、LinkSheet がアプリを起動すると、LinkSheet を起動したアプリが起動先であると表示され、アプリは非表示になります。これを有効にすると、LinkSheet が開くアプリの参照元として LinkSheet が再設定されます。</string>
     <string name="discord_explainer">Discord で LinkSheet についてチャットする</string>
     <string name="donate_crypto">暗号通貨で寄付する</string>
@@ -440,7 +440,7 @@
     <string name="bottom_sheet__event_app_refusal">対象アプリがリンクの処理を拒否しました！</string>
     <string name="settings_main_miui_compat__title_linksheet_auto_start_failure">追加の設定が必要</string>
     <string name="settings_main_miui_compat__text_request_failed">権限のリクエストに失敗しました！</string>
-    <string name="settings__subtitle_advanced"><![CDATA[実験とエクスポート/インポート]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[実験的機能、バックアップと復元]]></string>
     <string name="settings_verified_link_handlers__text_browser">ブラウザ</string>
     <plurals name="settings_verified_link_handlers__text_app_host_default_host">
         <item quantity="other">%d 個のデフォルトのホスト</item>
@@ -526,4 +526,7 @@
     <string name="settings_follow_redirects__subtitle_aggressive">HTTP リダイレクトを使用しないサイトとの互換性を高めるために、ページ全体の本文を取得します</string>
     <string name="handler_target__label_switch_profile_view_intent">プロファイルを切り替える</string>
     <string name="generic__label_arrow_rotation">矢印の回転</string>
+    <string name="settings_main_changelog__title_changelog">変更履歴</string>
+    <string name="settings_advanced__divider_backup"><![CDATA[バックアップと復元]]></string>
+    <string name="settings_main_changelog__text_changelog">バージョン%sの新機能を確認する。</string>
 </resources>

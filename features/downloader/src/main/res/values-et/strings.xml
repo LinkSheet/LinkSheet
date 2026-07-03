@@ -9,5 +9,5 @@
     <string name="settings_downloader__subtitle_mode_auto">Kontrolli automaatselt, kas võrguaadressil leidub allalaaditavat sisu</string>
     <string name="settings_downloader__title_mode_manual">Käsitsi</string>
     <string name="settings_downloader__subtitle_mode_manual">Näita alumisel lehel „Kontrolli allalaaditavat“ nuppu</string>
-    <string name="enable_downloader_explainer">Kui võrguaadressis leidub otselink failile, siis lisa alumisele lehele „Laadi alla“ nupp</string>
+    <string name="enable_downloader_explainer">Kui võrguaadressis leidub otselink failile, siis lisa alumisele lehele „Laadi alla“ nupp. Sellel tegevusel võib olla <annotation url-id="privacy-downloader">privaatsusega seotud tagajärgi</annotation></string>
 </resources>

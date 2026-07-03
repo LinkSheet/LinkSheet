@@ -41,6 +41,7 @@ internal fun AndroidShizukuService(
         )
     )
     Shizuku.addBinderReceivedListenerSticky(service)
+    Shizuku.addBinderDeadListener(service)
     Shizuku.addRequestPermissionResultListener(service)
     eventBus.register(service)
 

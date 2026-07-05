@@ -529,4 +529,8 @@
     <string name="settings_main_changelog__title_changelog">変更履歴</string>
     <string name="settings_advanced__divider_backup"><![CDATA[バックアップと復元]]></string>
     <string name="settings_main_changelog__text_changelog">バージョン %s の新機能を確認してください。</string>
+    <string name="settings_verified_link_handler__placeholder_filter_">ホストをフィルタリング</string>
+    <string name="settings_verified_link_handler__text_no_hosts">ホストがありません！</string>
+    <string name="settings_verified_link_handler__text_no_such_host_found">そのようなホストは見つかりませんでした！</string>
+    <string name="settings_verified_link_handler__placeholder_filter_hosts">ホストをフィルタリング</string>
 </resources>

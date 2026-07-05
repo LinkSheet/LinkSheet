@@ -122,8 +122,9 @@ private fun AppPageWrapper(
             appInfo = appInfo,
             domains = supportedHosts.intersect(domains.toSet()),
             onClose = { (appInfo, hostState) ->
-                viewModel.handler.updateHostState(appInfo, hostState)
-                onClose()
+                viewModel.updateHostState(appInfo, hostState).invokeOnCompletion {
+                    onClose()
+                }
             },
             onDismiss = onDismiss
         )

@@ -92,7 +92,7 @@ val ViewModelModule = module {
     viewModelOf(::VerifiedLinkHandlersViewModel)
     viewModel { parameters ->
         VerifiedLinkHandlerViewModel(
-            packageName = parameters.get(),
+            handle = parameters.get(),
             preferenceRepository = get(),
             preferredAppRepository = get(),
             service = get(),

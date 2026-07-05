@@ -3,7 +3,7 @@ package app.linksheet.feature.browser.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.app.applist.AppListCommon
+import app.linksheet.feature.app.applist.AppListModel
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.app.usecase.BrowsersUseCase
 import app.linksheet.feature.browser.core.PrivateBrowsingService
@@ -20,10 +20,11 @@ class PrivateBrowsingBrowserSettingsViewModel internal constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    val list by lazy {
-        AppListCommon(
-            apps = useCase.queryBrowsersFlow().map { list ->
-                list.filter { privateBrowsingService.isKnownBrowser(it.packageName, true) != null }
+    val appListModel by lazy {
+        AppListModel(
+            queryApps = {
+                useCase.queryBrowsers()
+                    .filter { privateBrowsingService.isKnownBrowser(it.packageName, true) != null }
             },
             scope = viewModelScope
         )

@@ -80,12 +80,11 @@ object Experiments : PreferenceDefinition(
             displayName = "Link engine",
             experiment("Use LinkEngine", linkEngine)
         ),
-        // TODO: New VLH page is still broken
-//        group(
-//            name = "new_vlh",
-//            displayName = "New verified link handlers page",
-//            experiment("Enable new VLH page", newVlh)
-//        ),
+        group(
+            name = "new_vlh",
+            displayName = "New verified link handlers page",
+            experiment("Enable new VLH page", newVlh)
+        ),
         group(
             name = "libredirect",
             displayName = "LibRedirect",
@@ -94,7 +93,7 @@ object Experiments : PreferenceDefinition(
         ),
         group(
             name = "shizuku",
-            displayName = "shizuku",
+            displayName = "Shizuku",
             experiment("Enable Shizuku", newShizuku)
         )
     )

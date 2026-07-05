@@ -130,7 +130,7 @@ fun MainNavHost(
         }
 
         animatedComposable<VlhAppRoute> { _, route ->
-            VlhAppRoute(onBackPressed = onBackPressed, packageName = route.packageName)
+            VlhAppRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable<SqlRoute> { _, route ->

@@ -36,6 +36,9 @@ dependencies {
     implementation(project(":lib-util"))
     implementation(project(":test-fake"))
     compileOnly(project(":lib-hidden-api"))
+
+    api(Grrfe.std.coroutines)
+    implementation(AndroidX.compose.material3)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.foundation)

@@ -2,14 +2,7 @@ package fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers
 
 import android.os.Build
 import androidx.activity.compose.LocalActivity
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.FilterList
@@ -17,27 +10,18 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.extension.collectOnIO
-import app.linksheet.compose.util.listState
-import app.linksheet.feature.app.ui.AppFilterSearchTopAppBar
-import app.linksheet.feature.app.ui.appList
+import app.linksheet.feature.app.ui.AppListPage
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.composekit.component.list.column.SaneLazyColumnLayout
-import fe.composekit.component.page.SaneSettingsScaffold
 import fe.composekit.core.AndroidVersion
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
@@ -48,13 +32,13 @@ import fe.linksheet.extension.android.tryStartActivity
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
 import fe.linksheet.navigation.VlhAppRoute
-import my.nanihadesuka.compose.InternalLazyColumnScrollbar
-import my.nanihadesuka.compose.ScrollbarSettings
 import org.koin.androidx.compose.koinViewModel
 
-private const val allPackages = "all"
-
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class, ExperimentalMaterial3ExpressiveApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalLayoutApi::class,
+    ExperimentalMaterial3ExpressiveApi::class
+)
 @Composable
 fun VerifiedLinkHandlersRoute(
     navigateNew: (Route) -> Unit,
@@ -63,160 +47,83 @@ fun VerifiedLinkHandlersRoute(
 ) {
     val activity = LocalActivity.current
 
-    val linkHandlingAllowed by viewModel.filterDisabledOnly.collectOnIO(true)
-
-    val lastEmitted by viewModel.lastEmitted.collectOnIO()
-
-    val context = LocalContext.current
-    val state = rememberPullToRefreshState()
-
     LocalLifecycleOwner.current.lifecycle.ObserveStateChange(invokeOnCall = true) {
-        viewModel.emitLatest()
+//        viewModel.refresh()
     }
-
-    // TODO: Refactor refresh indicator
-    LaunchedEffect(lastEmitted) {
-//        state.endRefresh()
-    }
-
-//    fun postCommand(packageName: String) {
-////        state.startRefresh()
-//        viewModel.postShizukuCommand(if (linkHandlingAllowed) 0 else 500) {
-//            val newState = !linkHandlingAllowed
-//            val result = setDomainState(packageName, "all", newState)
-//            if (packageName == allPackages) {
-//                // TODO: Revert previous state instead of always setting to !newState
-//                setDomainState(PretendToBeAppSettingsViewModel.linksheetCompatPackage, "all", !newState)
-//            }
-//
-//            result
-//        }
-//    }
 
     val preferredApps by viewModel.preferredApps.collectOnIO(emptyMap())
 
-    val items by viewModel.list.appsFiltered.collectOnIO()
-    val filter by viewModel.list.searchQuery.collectOnIO()
-
-    val listState = remember(items?.size, filter, linkHandlingAllowed) {
-        listState(items, filter)
-    }
-
     val dialogState = rememberDomainVerificationAppInfoDialog(
         onClose = { (info, hostStates) ->
-            viewModel.handler.updateHostState(info, hostStates)
+            viewModel.updateHostState(info, hostStates)
         }
     )
 
+    val lazyListState = rememberLazyListState()
+
     var showBottomSheet by rememberSaveable { mutableStateOf(false) }
+    val newVlh by viewModel.newVlh.collectAsStateWithLifecycle()
 
-    SaneSettingsScaffold(
-        topBar = {
-            AppFilterSearchTopAppBar(
-                appListCommon = viewModel.list,
-                titleContent = textContent(R.string.apps_which_can_open_links),
-                onBackPressed = onBackPressed,
-                actions = {
-                    IconButton(onClick = {
-                        showBottomSheet = true
-                    }) {
-                        Icon(
-                            imageVector = Icons.Rounded.FilterList,
-                            contentDescription = null,
-                        )
-                    }
-                }
-            )
-        }
-    ) { padding ->
-//        if (items == null) {
-//            Box(modifier = Modifier.padding(padding)) {
-//                LinearWavyProgressIndicator(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(horizontal = 4.dp)
-//                        .align(Alignment.Center)
-//                )
-//            }
-//        }
-//        FilterState(VlhStateModeFilter.ShowAll, VlhTypeFilter.All, true)
-        val state = rememberLazyListState()
-        var lastItemIndex by rememberSaveable { mutableIntStateOf(0) }
-        if (showBottomSheet) {
-            val sortState by viewModel.list.sortState.collectAsStateWithLifecycle()
-            val filterState by viewModel.list.filterState.collectAsStateWithLifecycle()
-            FilterSortSheet(
-                sortState = sortState,
-                filterState = filterState,
-                onDismiss = { sortByState, filterState ->
-                    lastItemIndex = state.firstVisibleItemIndex
-                    viewModel.list.sortState.value = sortByState
-                    viewModel.list.filterState.value = filterState
-                    showBottomSheet = false
-                }
-            )
-        }
-
-        Column(modifier = Modifier.padding(padding)) {
-            val newVlh by viewModel.newVlh.collectAsStateWithLifecycle()
-            Box(modifier = Modifier) {
-                SaneLazyColumnLayout(
-                    state = state,
-                    padding = PaddingValues()
-                ) {
-                    item(key = "0") {
-                        // Works around odd re-order scroll behavior: https://issuetracker.google.com/issues/234223556
-                    }
-                    appList(
-                        listState = listState,
-                        list = items,
-                        listKey = { it.packageName }
-                    ) { item, padding, shape ->
-                        val preferredHosts = remember(preferredApps, item) {
-                            preferredApps[item.packageName]?.toSet() ?: emptySet()
-                        }
-                        VerifiedAppListItem(
-                            item = item,
-                            padding = padding,
-                            shape = shape,
-                            preferredHosts = preferredHosts.size,
-                            onClick = {
-                                if (newVlh) {
-                                    navigateNew(VlhAppRoute(item.packageName))
-                                } else {
-                                    dialogState.open(DomainVerificationDialogData(item, preferredHosts))
-                                }
-                            },
-                            onOtherClick = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
-                                {
-                                    activity?.tryStartActivity(
-                                        viewModel.makeOpenByDefaultSettingsIntent(item.packageName)
-                                    )
-                                }
-                            }
-                        )
-                    }
-                }
-                InternalLazyColumnScrollbar(
-                    modifier = Modifier.padding(paddingValues = WindowInsets.navigationBars.asPaddingValues()),
-                    state = state,
-                    settings = ScrollbarSettings.Default.copy(
-//                        alwaysShowScrollbar = true,
-                        thumbSelectedColor = MaterialTheme.colorScheme.primary,
-                        thumbUnselectedColor = MaterialTheme.colorScheme.primary
-                    )
+    AppListPage(
+        titleContent = textContent(R.string.apps_which_can_open_links),
+        appListModel = viewModel.appListModel,
+        lazyListState = lazyListState,
+        onBackPressed = onBackPressed,
+        actions = {
+            IconButton(onClick = {
+                showBottomSheet = true
+            }) {
+                Icon(
+                    imageVector = Icons.Rounded.FilterList,
+                    contentDescription = null,
                 )
             }
-//            LazyColumnScrollbar(
-//                modifier = Modifier.windowInsetsBottomHeight(WindowInsets.systemBars),
-//                state = state,
-//                settings =
-//            ) {
-//                Box(modifier = Modifier) {
-//
-//                }
-//            }
+        },
+        additionalContent = {
+            var lastItemIndex by rememberSaveable { mutableIntStateOf(0) }
+            if (showBottomSheet) {
+                val sortState by viewModel.appListModel.sortState.collectAsStateWithLifecycle()
+                val filterState by viewModel.appListModel.filterState.collectAsStateWithLifecycle()
+                FilterSortSheet(
+                    sortState = sortState,
+                    filterState = filterState,
+                    onDismiss = { sortByState, filterState ->
+                        lastItemIndex = lazyListState.firstVisibleItemIndex
+                        viewModel.appListModel.updateState(sortByState, filterState)
+                        showBottomSheet = false
+                    }
+                )
+            }
         }
+    ) { item, padding, shape ->
+        val preferredHosts = remember(preferredApps, item) {
+            preferredApps[item.packageName]?.toSet() ?: emptySet()
+        }
+        VerifiedAppListItem(
+            item = item,
+            padding = padding,
+            shape = shape,
+            preferredHosts = preferredHosts.size,
+            onClick = {
+                if (newVlh) {
+                    navigateNew(VlhAppRoute(item.packageName))
+                } else {
+                    dialogState.open(
+                        DomainVerificationDialogData(
+                            item,
+                            preferredHosts
+                        )
+                    )
+                }
+            },
+            onOtherClick = AndroidVersion.atLeastApi(Build.VERSION_CODES.S) {
+                {
+                    activity?.tryStartActivity(
+                        viewModel.makeOpenByDefaultSettingsIntent(item.packageName)
+                    )
+                }
+            }
+        )
     }
 }
 

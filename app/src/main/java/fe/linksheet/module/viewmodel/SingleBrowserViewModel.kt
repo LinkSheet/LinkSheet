@@ -1,11 +1,11 @@
 package fe.linksheet.module.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.app.applist.AppListCommon
-import app.linksheet.feature.app.core.ActivityAppInfo
-import app.linksheet.feature.app.usecase.BrowsersUseCase
 import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.app.applist.AppListModel
+import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.app.usecase.BrowsersUseCase
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -16,7 +16,12 @@ class SingleBrowserViewModel(
     preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val list by lazy { AppListCommon(apps = useCase.queryBrowsersFlow(), scope = viewModelScope) }
+    val appListModel by lazy {
+        AppListModel(
+            queryApps = useCase::queryBrowsers,
+            scope = viewModelScope
+        )
+    }
 
     private val normalBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.browserMode)
     private val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.inAppBrowserMode)

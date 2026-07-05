@@ -1,6 +1,7 @@
 package fe.linksheet.koin
 
 import android.app.Application
+import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -56,6 +57,7 @@ import app.linksheet.feature.shizuku.preference.ShizukuPreferences
 import app.linksheet.feature.shizuku.service.ShizukuFeatureService
 import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.service.UserServiceConfig
+import app.linksheet.feature.shizuku.service.WrappedShizuku
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
@@ -340,7 +342,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             AppPreferenceRepository::class,
             ProfileSwitcher::class
         ),
-        definition<ShizukuService>(UserServiceConfig::class),
+        definition<ShizukuService>(UserServiceConfig::class, ComponentName::class, WrappedShizuku::class),
         definition<ShizukuSettingsViewModel>(
             ShizukuService::class,
             AppPreferenceRepository::class,

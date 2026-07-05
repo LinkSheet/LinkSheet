@@ -156,7 +156,7 @@ fun MainRoute(
                 }
             }
 
-            if (newShizuku && StaticBuildInfo.CurrentType == BuildType.Debug) {
+            if (newShizuku) {
                 item {
                     ShizukuCard(
                         activity = activity!!,
@@ -181,7 +181,7 @@ fun MainRoute(
                 }
             }
 
-            if (!changelogDismissed) {
+            if (!changelogDismissed && StaticBuildInfo.CurrentType == BuildType.Debug) {
                 item(
                     key = R.string.settings_main_changelog__title_changelog,
                     contentType = ContentType.ClickableAlert
@@ -192,9 +192,7 @@ fun MainRoute(
 //                            navController.navigate(MarkdownViewerRoute(LinkSheet.WikiExperiments))
                         },
                         onDismiss = {
-                            coroutineScope.launch {
-                                viewModel.changelogUseCase.dismiss()
-                            }
+                            viewModel.changelogUseCase.dismiss()
                         }
                     )
                 }

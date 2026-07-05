@@ -16,13 +16,14 @@ fun <T : IAppInfo> SaneLazyListScope.appList(
     list: List<T>?,
     listKey: (T) -> Any,
     content: @Composable LazyItemScope.(T, PaddingValues, Shape) -> Unit,
-){
+) {
     listHelper(
         noItems = R.string.no_apps_found,
         notFound = R.string.no_such_app_found,
         listState = listState,
         list = list,
         listKey = listKey,
+        loaderEnabled = false,
         content = content
     )
 }

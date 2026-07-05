@@ -87,7 +87,7 @@ class AutoDisableHandler(
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != Intent.ACTION_PACKAGE_ADDED) return
-        val packageName = intent.data!!.schemeSpecificPart
+        val packageName = intent.data?.schemeSpecificPart ?: return
 
         if (!AndroidVersion.isAtLeastApi31S()) return
         logger.debug("Disabling link handling for $packageName")

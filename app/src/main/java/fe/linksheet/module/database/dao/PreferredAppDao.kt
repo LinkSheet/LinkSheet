@@ -11,8 +11,10 @@ import kotlinx.coroutines.flow.Flow
 interface PreferredAppDao : BaseDao<PreferredApp>, UserDataDao {
     @Query("SELECT * FROM ${PreferredApp.TABLE_NAME}")
     override fun getAll(): Flow<List<PreferredApp>>
+
     @Query("DELETE FROM ${PreferredApp.TABLE_NAME}")
     override suspend fun deleteAll()
+
     @Query("SELECT * FROM ${PreferredApp.TABLE_NAME} WHERE alwaysPreferred = 1")
     fun getAllAlwaysPreferred(): Flow<List<PreferredApp>>
 
@@ -25,8 +27,14 @@ interface PreferredAppDao : BaseDao<PreferredApp>, UserDataDao {
     @Query("DELETE FROM ${PreferredApp.TABLE_NAME} WHERE host = :host")
     suspend fun deleteByHost(host: String)
 
+    @Query("DELETE FROM ${PreferredApp.TABLE_NAME} WHERE host IN (:hosts)")
+    suspend fun deleteByHosts(hosts: Set<String>)
+
     @Query("DELETE FROM ${PreferredApp.TABLE_NAME} WHERE host = :host AND packageName = :packageName")
     suspend fun deleteByHostAndPackageName(host: String, packageName: String)
+
+    @Query("DELETE FROM ${PreferredApp.TABLE_NAME} WHERE host IN (:hosts) AND packageName = :packageName")
+    suspend fun deleteByHostsAndPackageName(hosts: Set<String>, packageName: String)
 
     @Query("DELETE FROM ${PreferredApp.TABLE_NAME} WHERE packageName = :packageName")
     suspend fun deleteByPackageName(packageName: String)

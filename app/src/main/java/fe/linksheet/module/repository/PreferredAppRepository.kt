@@ -7,6 +7,7 @@ import app.linksheet.feature.backup.api.ImportSettings
 import app.linksheet.feature.backup.model.PreferredAppExportModel
 import app.linksheet.feature.backup.model.fromExportModel
 import app.linksheet.feature.backup.model.toExportModel
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.module.database.dao.PreferredAppDao
 import fe.linksheet.module.database.entity.PreferredApp
 import kotlinx.coroutines.flow.Flow
@@ -62,12 +63,23 @@ class PreferredAppRepository(
         packageName: String,
     ) = dao.deleteByHostAndPackageName(host, packageName)
 
+    suspend fun deleteByHostsAndPackageName(
+        hosts: Set<String>,
+        packageName: String,
+    ) {
+        dao.deleteByHostsAndPackageName(hosts, packageName)
+    }
+
     suspend fun deleteByHost(host: String) {
         dao.deleteByHost(host)
     }
 
-    suspend fun insert(preferredApp: PreferredApp) {
-        dao.insertReplace(preferredApp)
+    suspend fun deleteByHosts(hosts: Set<String>) {
+        dao.deleteByHosts(hosts)
+    }
+
+    suspend fun insert(preferredApp: PreferredApp): Long {
+        return dao.insertReplace(preferredApp)
     }
 
     suspend fun insert(items: List<PreferredApp>) {
@@ -80,5 +92,9 @@ class PreferredAppRepository(
 
     suspend fun getByPackageName(packageName: String): List<PreferredApp> {
         return dao.getByPackageName(packageName).first()
+    }
+
+    suspend fun getPreferredHostSet(packageName: String): Set<String> {
+        return getByPackageName(packageName).mapToSet { it.host }
     }
 }

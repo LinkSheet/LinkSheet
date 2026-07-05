@@ -1,7 +1,12 @@
 package app.linksheet.compose.extension
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.CircularProgressIndicator
@@ -63,12 +68,15 @@ fun <T> SaneLazyListScope.listHelper(
     listState: ListState,
     list: List<T>?,
     listKey: (T) -> Any,
+    loaderEnabled: Boolean = true,
     content: @Composable LazyItemScope.(T, PaddingValues, Shape) -> Unit,
 ) {
     if (listState == ListState.Items && !list.isNullOrEmpty()) {
         group(list = list, key = listKey, content = content)
     } else {
-        loader(noItems, notFound, listState)
+        if (loaderEnabled) {
+            loader(noItems, notFound, listState)
+        }
     }
 }
 
@@ -94,12 +102,33 @@ fun <K : Any, T : GroupValueProvider<K>, V> SaneLazyListScope.mapHelper(
     @StringRes notFound: Int? = null,
     mapState: ListState,
     values: Map<T, V>?,
+    loaderEnabled: Boolean = true,
     content: @Composable LazyItemScope.(T, V, PaddingValues, Shape) -> Unit,
 ) {
     if (mapState == ListState.Items) {
         group(map = values!!, content = content)
     } else {
-        loader(noItems, notFound, mapState)
+        if (loaderEnabled) {
+            loader(noItems, notFound, mapState)
+        }
+    }
+}
+
+fun <K : Any, T, V> SaneLazyListScope.mapHelper(
+    @StringRes noItems: Int,
+    @StringRes notFound: Int? = null,
+    mapState: ListState,
+    values: Map<T, V>?,
+    listKey: (T) -> K,
+    loaderEnabled: Boolean = true,
+    content: @Composable LazyItemScope.(T, V, PaddingValues, Shape) -> Unit,
+) {
+    if (mapState == ListState.Items) {
+        group(map = values!!, key = listKey, content = content)
+    } else {
+        if (loaderEnabled) {
+            loader(noItems, notFound, mapState)
+        }
     }
 }
 
@@ -109,12 +138,15 @@ inline fun <K, V> LazyListScope.mapHelper(
     mapState: ListState,
     map: Map<K, V>?,
     listKey: (K) -> Any,
+    loaderEnabled: Boolean = true,
     crossinline listItem: @Composable LazyItemScope.(K, V) -> Unit,
 ) {
     if (mapState == ListState.Items) {
         items(items = map!!, key = listKey, itemContent = listItem)
     } else {
-        loader(noItems, notFound, mapState)
+        if (loaderEnabled) {
+            loader(noItems, notFound, mapState)
+        }
     }
 }
 

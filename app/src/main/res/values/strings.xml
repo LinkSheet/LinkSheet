@@ -539,4 +539,8 @@
     <string name="handler_target__label_switch_profile_view_intent">Switch profile</string>
     <string name="settings_advanced__divider_backup"><![CDATA[Backup & Restore]]></string>
     <string name="settings_main_changelog__text_changelog">Check out what\'s new in version %s.</string>
+    <string name="settings_verified_link_handler__placeholder_filter_">Filter hosts</string>
+    <string name="settings_verified_link_handler__text_no_hosts">No hosts!</string>
+    <string name="settings_verified_link_handler__text_no_such_host_found">No such host found!</string>
+    <string name="settings_verified_link_handler__placeholder_filter_hosts">Filter hosts</string>
 </resources>

@@ -13,6 +13,8 @@ import app.linksheet.feature.app.core.domain.VerificationBrowserState
 import app.linksheet.feature.app.core.domain.VerificationState
 import app.linksheet.feature.app.core.domain.VerificationStateCompat
 import fe.composekit.flag.ApplicationInfoFlags
+import fe.std.coroutines.BaseRefreshableFlow
+import fe.std.coroutines.RefreshableStateFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -30,6 +32,15 @@ class DomainVerificationUseCase(
         if (browsable.isNotEmpty()) return VerificationBrowserState
 
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
+    }
+
+    fun getDomainVerificationAppInfoList() = getInstalledPackages().mapNotNull { packageInfo ->
+        createDomainVerificationAppInfo(packageInfo)
+    }
+    fun getDomainVerificationAppInfoListRefreshableFlow(): BaseRefreshableFlow<List<DomainVerificationAppInfo>?> {
+        return RefreshableStateFlow(null) {
+            getInstalledPackages().mapNotNull { createDomainVerificationAppInfo(it) }
+        }
     }
 
     fun getDomainVerificationAppInfoListFlow(): Flow<List<DomainVerificationAppInfo>> = flow {

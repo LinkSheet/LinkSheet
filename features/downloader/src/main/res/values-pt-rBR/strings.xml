@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">Downloader</string>
     <string name="downloader_url_mime_type">Usar o tipo de mime do URL</string>
     <string name="downloader_url_mime_type_explainer">Verifica se o URL termina com uma extensão de arquivo (por exemplo, \".jpg\"); se terminar, esse tipo será usado para o arquivo baixado.</string>
+    <string name="settings_downloader__title_mode_auto">Automático</string>
+    <string name="settings_downloader__subtitle_mode_auto">Checar automaticamente se o URL tem conteúdo para download</string>
+    <string name="settings_downloader__title_mode_manual">Manual</string>
+    <string name="settings_downloader__subtitle_mode_manual">Mostrar botão \"Checar downloads\" na aba inferior</string>
+    <string name="action_downloader__try_to_download">Checar downloads</string>
 </resources>

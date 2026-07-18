@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.LifecycleOwner
-import fe.android.lifecycle.LifecycleAwareService
-import fe.android.lifecycle.koin.extension.service
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.eventbus.IntentEventHandler
+import fe.android.lifecycle.LifecycleAwareService
+import fe.android.lifecycle.koin.extension.service
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -46,20 +46,18 @@ class BroadcastReceiverService(
         if (state == null) {
             state = BroadcastState(mutableListOf(handler))
             registerReceiver(state, handler.filter)
+            map[handler.filter] = state
         } else {
             state.handlers.add(handler)
         }
     }
 
     override fun unregister(handler: IntentEventHandler) {
-        val state = map[handler.filter]
-        if (state != null) {
-            state.handlers.remove(handler)
-            if (state.handlers.isEmpty()) {
-                unregisterReceiver(state)
-                map.remove(handler.filter)
-            }
-        }
+        val state = map[handler.filter] ?: return
+        state.handlers.remove(handler)
+        if (state.handlers.isNotEmpty()) return
+        unregisterReceiver(state)
+        map.remove(handler.filter)
     }
 }
 

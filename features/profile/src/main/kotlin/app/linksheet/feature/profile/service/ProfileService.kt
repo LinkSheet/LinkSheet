@@ -5,7 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.app.core.setForwardProfileActivities
 import fe.android.lifecycle.LifecycleAwareService
-import fe.composekit.log.createLogger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -13,7 +13,7 @@ class ProfileService(
     private val metaDataHandler: MetaDataHandler,
     private val sendTarget: StateFlow<Boolean>,
 ) : LifecycleAwareService {
-    private val logger = createLogger<ProfileService>()
+    private val logger = Logger("ProfileService")
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
         owner.lifecycleScope.launch {

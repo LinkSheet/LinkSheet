@@ -6,7 +6,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
 import app.linksheet.feature.remoteconfig.worker.RemoteAssetFetcherWorker
 import fe.android.lifecycle.LifecycleAwareService
-import fe.composekit.log.createLogger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -15,7 +15,7 @@ class RemoteConfigService(
     private val enabled: StateFlow<Boolean>
 ) : LifecycleAwareService {
 
-    private val logger = createLogger<RemoteConfigService>()
+    private val logger = Logger("RemoteConfigService")
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {
         owner.lifecycleScope.launch {

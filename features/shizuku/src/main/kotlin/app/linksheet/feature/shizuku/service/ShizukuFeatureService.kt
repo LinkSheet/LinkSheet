@@ -12,7 +12,7 @@ import app.linksheet.feature.shizuku.IShizukuUserService
 import app.linksheet.feature.shizuku.core.ShizukuDomainVerification
 import fe.android.lifecycle.LifecycleAwareService
 import fe.composekit.core.AndroidVersion
-import fe.composekit.log.createLogger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.util.IntentFilters
 import fe.std.result.tryCatch
 import kotlinx.coroutines.CoroutineDispatcher
@@ -70,7 +70,7 @@ class AutoDisableHandler(
     private val autoDisableLinkHandlers: StateFlow<Boolean>,
     private val scope: CoroutineScope,
 ) : IntentEventHandler {
-    private val logger = createLogger<AutoDisableHandler>()
+    private val logger = Logger("AutoDisableHandler")
 
     fun init() = scope.launch {
         enabled.combine(autoDisableLinkHandlers) { enabled, autoDisable -> enabled to autoDisable }
@@ -113,7 +113,7 @@ class CommandProcessor(
     private val scope: CoroutineScope,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    private val logger = createLogger<CommandProcessor>()
+    private val logger = Logger("CommandProcessor")
     private val commandQueue = Channel<ShizukuCommand<*>>(Channel.UNLIMITED)
     private var job: Job? = null
 

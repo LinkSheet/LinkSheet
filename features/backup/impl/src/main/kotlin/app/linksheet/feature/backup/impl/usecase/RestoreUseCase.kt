@@ -13,7 +13,7 @@ import app.linksheet.feature.backup.impl.core.PreferenceType
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceEditor
 import fe.android.preference.helper.PreferenceRepository
-import fe.composekit.log.createLogger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.preference.util.reload
 import fe.std.result.StdResult
 import fe.std.result.isFailure
@@ -32,7 +32,7 @@ class RestoreUseCase internal constructor(
     private val configuration: BackupConfiguration,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
-    private val logger = createLogger<RestoreUseCase>()
+    private val logger = Logger("RestoreUseCase")
 
     private fun findRepository(model: ExportModel): DatabaseBackup<*, *>? {
         return configuration.databaseBackups.firstOrNull { it.repository.canImport(model) }

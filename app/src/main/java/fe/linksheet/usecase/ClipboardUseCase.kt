@@ -5,7 +5,7 @@ import android.net.Uri
 import app.linksheet.api.preference.AppPreferenceRepository
 import fe.composekit.extension.getFirstText
 import fe.composekit.extension.setText
-import fe.composekit.log.createLogger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.preference.asFlow
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.web.UriUtil
@@ -22,7 +22,7 @@ class ClipboardUseCase(
     private val coroutineScope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : AutoCloseable {
-    private val logger = createLogger<ClipboardUseCase>()
+    private val logger = Logger("ClipboardUseCase")
     private val isPermittedFlow = repository.asFlow(AppPreferences.homeClipboardCard)
     private val _contentFlow = RefreshableStateFlow { readClipboard() }
     val contentFlow = _contentFlow.asStateFlow()

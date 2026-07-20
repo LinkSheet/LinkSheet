@@ -14,6 +14,7 @@ import app.linksheet.feature.shizuku.IShizukuUserService
 import fe.composekit.flag.ApplicationInfoFlags
 import fe.composekit.intent.buildIntent
 import fe.composekit.log.createLogger
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.util.IntentFilters
 import fe.std.coroutines.RefreshableStateFlow
 import fe.std.coroutines.asStateFlow
@@ -59,7 +60,7 @@ class ShizukuService(
     ServiceConnection,
     IntentEventHandler {
 
-    private val logger = createLogger<ShizukuService>()
+    private val logger = Logger("ShizukuService")
     private val serviceArgs = Shizuku.UserServiceArgs(
         ComponentName(
             config.packageName,

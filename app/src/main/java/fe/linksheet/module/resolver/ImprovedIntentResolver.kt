@@ -19,7 +19,6 @@ import app.linksheet.feature.engine.database.entity.ResolveType
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
-import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
@@ -27,6 +26,7 @@ import fe.composekit.core.AndroidAppPackage
 import fe.composekit.core.AndroidPackageUri
 import fe.composekit.core.Scheme
 import fe.composekit.lifecycle.network.core.NetworkStateService
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.embed.resolve.EmbedResolver
 import fe.embed.resolve.loader.BundledEmbedResolveConfigLoader
 import fe.fastforwardkt.FastForward
@@ -399,7 +399,6 @@ class ImprovedIntentResolver(
             result = deferred.await()
         } catch (e: CancellationException) {
             currentCoroutineContext().ensureActive()
-            logger.error("Failed to cancel", e)
         }
 
         clearInteraction()

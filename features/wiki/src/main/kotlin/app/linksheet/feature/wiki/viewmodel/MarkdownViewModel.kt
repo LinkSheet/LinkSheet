@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import app.linksheet.feature.wiki.navigation.MarkdownViewerRoute
 import app.linksheet.feature.wiki.usecase.WikiArticleUseCase
+import fe.std.result.isSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -26,9 +27,9 @@ class MarkdownViewModel internal constructor(
     fun init() = viewModelScope.launch {
         if (_isLoading.value) return@launch
         _isLoading.emit(true)
-        val text = useCase.getWikiText(data.rawUrl, false)
-        if (text != null) {
-            _markdownText.emit(text)
+        val textResult = useCase.getWikiText(data.rawUrl, false)
+        if (textResult.isSuccess()) {
+            _markdownText.emit(textResult.value)
         }
         _isLoading.emit(false)
     }
@@ -36,9 +37,9 @@ class MarkdownViewModel internal constructor(
     fun refresh() = viewModelScope.launch {
         if (_isLoading.value || _isRefreshing.value) return@launch
         _isRefreshing.emit(true)
-        val text = useCase.getWikiText(data.rawUrl, true)
-        if (text != null) {
-            _markdownText.emit(text)
+        val textResult = useCase.getWikiText(data.rawUrl, true)
+        if (textResult.isSuccess()) {
+            _markdownText.emit(textResult.value)
         }
         _isRefreshing.emit(false)
     }

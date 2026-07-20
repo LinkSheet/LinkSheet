@@ -1,8 +1,10 @@
 package app.linksheet.feature.wiki.core
 
 import app.linksheet.feature.wiki.core.model.ReleaseByTagName
+import fe.std.result.StdResult
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
+import fe.std.result.unaryPlus
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -17,7 +19,7 @@ class GithubClient(
     private val client: HttpClient,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
-    suspend fun fetchText(url: String, skipCache: Boolean): String? = withContext(dispatcher) {
+    suspend fun fetchText(url: String, skipCache: Boolean): StdResult<String> {
         val result = tryCatch {
             client.get(urlString = url) {
                 if (skipCache) {
@@ -25,11 +27,11 @@ class GithubClient(
                 }
             }
         }
-        if (result.isFailure()) return@withContext null
+        if (result.isFailure()) return +result
         val response = result.value
-        if (!response.status.isSuccess()) return@withContext null
+        if (!response.status.isSuccess()) return +GithubException.NonSuccessResponse(response.status.value)
 
-        return@withContext response.bodyAsText()
+        return tryCatch { response.bodyAsText() }
     }
 
     suspend fun fetchReleaseByTagName(
@@ -56,4 +58,8 @@ class GithubClient(
 
         bodyResult.value
     }
+}
+
+abstract class GithubException : Exception() {
+    class NonSuccessResponse(val code: Int) : GithubException()
 }

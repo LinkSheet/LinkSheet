@@ -2,6 +2,7 @@
 
 package app.linksheet.feature.wiki
 
+import app.linksheet.feature.wiki.core.GithubClient
 import app.linksheet.feature.wiki.database.WikiDatabase
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.usecase.WikiArticleUseCase
@@ -16,6 +17,9 @@ val WikiFeatureModule = module {
     viewModelOf(::MarkdownViewModel)
     factory {
         WikiCacheRepository(dao = get<WikiDatabase>().wikiCacheDao(), clock = get())
+    }
+    factory {
+        GithubClient(client = get())
     }
     factory {
         WikiArticleUseCase(

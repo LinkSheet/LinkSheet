@@ -13,6 +13,6 @@ interface WikiCacheDao : BaseDao<WikiCache>, UserDataDao {
     override fun getAll(): Flow<List<WikiCache>>
     @Query("DELETE FROM ${WikiCache.TABLE_NAME}")
     override suspend fun deleteAll()
-    @Query("SELECT * FROM ${WikiCache.TABLE_NAME} WHERE url = :url AND timestamp")
+    @Query("SELECT * FROM ${WikiCache.TABLE_NAME} WHERE url = :url")
     suspend fun getCachedText(url: String): WikiCache?
 }

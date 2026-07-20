@@ -20,7 +20,7 @@ class ThemeSettingsViewModel(
     override val linkAssets = remoteConfigRepository.asViewModelState(StoredRemotePreferences.linkAssets)
 }
 
-abstract class RootViewModel : ViewModel(){
+abstract class RootViewModel : ViewModel() {
     abstract val themeV2: ViewModelStatePreference<ThemeV2, ThemeV2, Preference.Mapped<ThemeV2, String>>
     abstract val themeAmoled: ViewModelStatePreference<Boolean, Boolean, Preference.Default<Boolean>>
     abstract val themeMaterialYou: ViewModelStatePreference<Boolean, Boolean, Preference.Default<Boolean>>

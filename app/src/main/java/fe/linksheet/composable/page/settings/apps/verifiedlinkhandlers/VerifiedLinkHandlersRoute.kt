@@ -70,9 +70,7 @@ fun VerifiedLinkHandlersRoute(
         lazyListState = lazyListState,
         onBackPressed = onBackPressed,
         actions = {
-            IconButton(onClick = {
-                showBottomSheet = true
-            }) {
+            IconButton(onClick = { showBottomSheet = true }) {
                 Icon(
                     imageVector = Icons.Rounded.FilterList,
                     contentDescription = null,

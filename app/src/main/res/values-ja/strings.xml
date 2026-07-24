@@ -6,7 +6,7 @@
     <string name="default_apps">デフォルトアプリ</string>
     <string name="set_as_browser">ブラウザとして設定</string>
     <string name="set_as_browser_explainer">LinkSheet をデフォルトのブラウザにするにはここをタップしてください</string>
-    <string name="linksheet_donation_explainer_2"><b>5€</b> を超える寄付をすると、<b>LinkSheet Pro</b> を利用できます。<b>Pro限定機能</b> として、外部でリダイレクトをたどる機能や非AMPページを取得する機能などが含まれ、今後もさらに追加される予定です！</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b> を超える寄付をすると、<b>LinkSheet Pro</b> を利用できます。これには、外部リダイレクトの追跡や非 AMP ページの取得など、<b>Pro 限定の機能</b> が含まれています。今後もさらに多くの機能が追加される予定です！</string>
     <string name="built_by_error">このビルドは 1fexd によっても Github workflow によっても署名されていません。</string>
     <string name="always">常時</string>
     <string name="open_with_app">%s で開く</string>
@@ -252,7 +252,7 @@
     <string name="resolve_embeds">埋め込みを解決する</string>
     <string name="resolve_embeds_explainer">fxtwitter.com などのミラーサイトを使用しているリンクを、本来のウェブサイトに変換します</string>
     <string name="hide_bottom_sheet_choice_buttons">選択ボタンを非表示にする</string>
-    <string name="urlbar_settings">URLバー</string>
+    <string name="urlbar_settings">URL バー</string>
     <string name="theme_enable_amoled">ピュアブラック</string>
     <string name="telemetry_configure_title">アナリティクス</string>
     <string name="telemetry_identifier_reset">識別子をリセット</string>
@@ -288,7 +288,7 @@
     <string name="resolve_event__applying_link_modifiers">リンク修飾子の適用</string>
     <string name="resolve_event__resolving_redirects">リダイレクトの解決</string>
     <string name="resolve_event__running_libredirect">FOSS フロントエンドを探す</string>
-    <string name="resolve_event__unamping_link">リンクの非AMP化</string>
+    <string name="resolve_event__unamping_link">リンクの非 AMP 化</string>
     <string name="resolve_event__download_check">ダウンロード可能性の確認</string>
     <string name="resolve_event__checking_browsers">ブラウザの確認</string>
     <string name="resolve_event__generating_preview">プレビューを生成しています</string>
@@ -322,7 +322,7 @@
     <string name="app_setup">アプリのセットアップ</string>
     <string name="export_import_settings">設定をエクスポートまたはインポートする</string>
     <string name="clear_urls_version">ClearURLs ルール</string>
-    <string name="dev_mode_enabled">おめでとうございます。開発モードが有効になりました。ただし注意してください。</string>
+    <string name="dev_mode_enabled">おめでとうございます。開発者モードが有効になりました。ただし注意してください。</string>
     <string name="resolve_via_failed_toast_explainer">外部サービス経由で URL を解決できない場合にトーストを表示します</string>
     <string name="dev_explainer">開発者設定</string>
     <string name="last_updated"><b>バージョン:</b> <font face="monospace">%s</font></string>
@@ -416,7 +416,7 @@
     <string name="bottom_sheet_loading_indicator__button_skip_job">スキップ</string>
     <string name="export_log_dialog__title_share_logs">ログを共有</string>
     <string name="export_log_dialog__title_redact_log">ログを編集</string>
-    <string name="export_log_dialog__subtitle_redact_log">推奨。アプリ名とURLを秘匿します</string>
+    <string name="export_log_dialog__subtitle_redact_log">推奨。アプリ名と URL を秘匿します</string>
     <string name="export_log_dialog__title_include_throwable">クラッシュログを含める</string>
     <string name="export_log_dialog__title_include_fingerprint">ビルドフィンガープリントを含める</string>
     <string name="export_log_dialog__title_include_settings">設定を含める</string>
@@ -475,12 +475,12 @@
     <string name="settings_sql__text_query">クエリ</string>
     <string name="settings_verified_link_handlers__text_sort_by_a_z">A-Z</string>
     <string name="settings_verified_link_handlers__text_sort_by_installation_time">インストール時間</string>
-    <string name="settings_links_preview__title_preview">URLのプレビューを表示</string>
+    <string name="settings_links_preview__title_preview">URL のプレビューを表示</string>
     <string name="settings_links_preview__subtitle_preview">ボトムシートに OpenGraph プレビューを読み込んで表示しようとします。<annotation url-id="github.linksheet.wiki.privacy.preview">プライバシーに悪影響</annotation>を及ぼす可能性があります</string>
     <string name="settings_home__title_clipboard_card">クリップボードカード</string>
-    <string name="settings_home__text_clipboard_card">クリップボードの現在の内容がURLの場合、ホーム画面に表示します</string>
+    <string name="settings_home__text_clipboard_card">クリップボードの現在の内容が URL の場合、ホーム画面に表示します</string>
     <string name="bottom_sheet__text_launch_failure_unknown">原因が不明な起動失敗です！</string>
-    <string name="settings__title_sql">SQLクエリ</string>
+    <string name="settings__title_sql">SQL クエリ</string>
     <string name="generic__title_sort_by">並べ替え</string>
     <string name="generic__title_filter">フィルター</string>
     <string name="settings_verified_link_handlers__text_ascending">上昇</string>
@@ -510,8 +510,8 @@
     <string name="notification_interconnect_description">相互接続はアクティブです</string>
     <string name="settings_bottom_sheet__title_hide_referring_app">参照アプリを非表示にする</string>
     <string name="settings_bottom_sheet__subtitle_hide_referring_app">リンクを処理できる場合でも、参照 / ソースアプリを表示しません</string>
-    <string name="settings_bottom_sheet__title_double_tap_url">URLをダブルタップ</string>
-    <string name="settings_bottom_sheet__subtitle_double_tap_url">URLをダブルタップしたときに、候補のアプリを開きます</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">URL をダブルタップ</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">URL をダブルタップしたときに、候補のアプリを開きます</string>
     <string name="settings_bottom_sheet__title_expand_fully">すべて展開</string>
     <string name="settings_bottom_sheet__subtitle_expand_fully">ボトムシートを最大の高さまで自動的に展開します</string>
     <string name="settings_follow_redirects__title_mode_auto">自動</string>

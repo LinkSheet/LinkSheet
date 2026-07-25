@@ -9,13 +9,20 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Moving
-import androidx.compose.material3.*
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import app.linksheet.compose.preview.PreviewContainer
+import app.linksheet.feature.app.applist.SortByState
+import app.linksheet.feature.app.applist.SortType
 import fe.android.compose.content.rememberOptionalContent
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
@@ -25,8 +32,6 @@ import fe.composekit.component.list.column.shape.ShapeListItemDefaults
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.RadioButtonListItem
 import fe.linksheet.R
-import app.linksheet.feature.app.applist.SortByState
-import app.linksheet.feature.app.applist.SortType
 
 
 @Composable
@@ -110,10 +115,12 @@ private fun SortByListItem(
 @Preview(showBackground = true)
 @Composable
 private fun SortByColumnPreview() {
-    SortByColumn(
-        state = SortByState(SortType.AZ, true),
-        onChange = {
+    PreviewContainer {
+        SortByColumn(
+            state = SortByState(SortType.AZ, true),
+            onChange = {
 
-        }
-    )
+            }
+        )
+    }
 }

@@ -213,7 +213,7 @@
     <string name="include_log_hash_key">Günlük hash anahtarını dahil et (günlüklerinizi gizlemek için kullanılan anahtar)</string>
     <string name="include_history">Geçmişi dahil et (link tıklamaları ve uygulama geçmişi)</string>
     <string name="export_include_recommendation">Aşağıdaki ayarları sadece dışa aktarmanızı başka biriyle paylaşmayı düşünmüyorsanız etkinleştirmenizi öneririz!</string>
-    <string name="export_privacy">Dışa aktarma gizliliği hakkında daha fazla bilgi edinmek için bu <annotation url-id="privacy-exports">bağlantıyı</annotation> ziyaret edin</string>
+    <string name="export_privacy">Dışa aktarma gizliliği hakkında daha fazla bilgi edinmek için bu <annotation url-id="privacy-exports">bağlantıyı</annotation> ziyaret edin.</string>
     <string name="export_to_file">Dosyaya aktar</string>
     <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="import_settings_override_preferences">Bu, şu anki bütün tercihlerinizin üzerine yazacaktır. Devam et?</string>
@@ -260,7 +260,7 @@
     <string name="no_browser_installed">Hiç tarayıcı yüklenmedi</string>
     <string name="yes">Evet</string>
     <string name="misc_settings">Çeşitli</string>
-    <string name="donate_card_subtitle">LinkSheet\'i sevdiyseniz, GitHub\'da yıldızlamayı veya bağış yapmayı düşünün. <b>5€</b>\'dan fazla bağış yapanlar, özel özellikler bulunduracak <b>LinkSheet Pro</b> için hak sahibidir.</string>
+    <string name="donate_card_subtitle">LinkSheet\'i sevdiyseniz, GitHub\'da yıldızlamayı veya bağış yapmayı düşünün.\n<b>5€</b>\'dan fazla bağış yapanlar, özel özellikler bulunduracak <b>LinkSheet Pro</b> için hak sahibidir.</string>
     <string name="open_link_with_subtitle_2">LinkSheet, ilk başta OpenLinkWith temelli idi</string>
     <string name="version_name"><b>Sürüm:</b> <font face="monospace">%s</font></string>
     <string name="privacy">Gizlilik</string>
@@ -280,7 +280,7 @@
     <string name="pretend_to_be_app_explainer_2">Google Chrome gibi bazı uygulamalar, örneğin arama sonuçlarındaki bir YouTube bağlantısına tıklandığında, bağlantıyı açacak bir uygulama bulmaya çalışır. LinkSheetCompat desteklenen alan adları için bu uygulamalardan biri gibi davranır ve LinkSheet\'e yönlendirir.</string>
     <string name="configure_explainer">LinkSheetCompat\'ı yapılandırmak için buraya dokunun</string>
     <string name="no_browser_installed_explainer">LinkSheet, tarayıcı olduğunu iddia eden herhangi bir uygulama bulamadı. En iyi deneyim için, bir tarayıcı yükleyin.</string>
-    <string name="linksheet_donation_explainer_2"><b>5€</b>\'dan fazla bir bağış; harici yönlendirmeleri takip etme, AMP olmayan sayfaları edinme (ve gelecekte daha fazlası!) gibi <b>Pro özel özellikleri</b>ni barındıran <b>LinkSheetPro</b>\'ya erişmenizi sağlar.</string>
+    <string name="linksheet_donation_explainer_2"><b>5€</b>\'dan fazla bir bağış; harici yönlendirmeleri takip etme, AMP olmayan sayfaları edinme (ve gelecekte daha fazlası!) gibi <b>Pro özel özellikleri</b>ni barındıran <b>LinkSheetPro</b>\'ya erişmenizi sağlar!</string>
     <string name="show_linksheet_referrer_explainer">Bir uygulama başlatıldığında, hangi uygulamanın başlattığını veya yönlendirdiğini kontrol edebilir. LinkSheet bir uygulama başlattığında, varsayılan olarak kendini gizler ve LinkSheet\'i başlatan uygulamayı gösterir. LinkSheet\'i, açtığı uygulamalar için yönlendiren olarak göstermek için bunu etkinleştirin.</string>
     <string name="built_by_error">Bu derleme, 1fexd veya GitHub iş akışı tarafından imzalanmadı.</string>
     <string name="notifications_explainer">URL kopyalandı, İndirme başladı</string>
@@ -420,7 +420,7 @@
     <string name="settings_app_config__title_native_apps">Uygulamalar</string>
     <string name="settings_app_config_rules__title_rules">Kurallar</string>
     <string name="settings_app_config_rules__btn_new_rule">Yeni kural</string>
-    <string name="export_log_dialog__text_log_privacy">Paylaşılan günlük dosyalarındaki muhtemel hassas veriler hakkında daha fazla bilgi için <annotation url-id="privacy-logs">buraya</annotation> dokunun</string>
+    <string name="export_log_dialog__text_log_privacy">Paylaşılan günlük dosyalarındaki muhtemel hassas veriler hakkında daha fazla bilgi için <annotation url-id="privacy-logs">buraya</annotation> dokunun.</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">%s tarihli günlük görüntüleniyor</string>
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet kuruldu</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet doğru bir şekilde kuruldu ve çalışmaya hazır</string>
@@ -536,4 +536,8 @@
     <string name="settings_main_changelog__title_changelog">Değişiklik günlüğü</string>
     <string name="settings_advanced__divider_backup"><![CDATA[Yedekleme &amp; Geri Yükleme]]></string>
     <string name="settings_main_changelog__text_changelog">%s sürümündeki yeniliklerine göz atın.</string>
+    <string name="settings_verified_link_handler__placeholder_filter_">Sunucuları filtrele</string>
+    <string name="settings_verified_link_handler__text_no_hosts">Sunucu yok!</string>
+    <string name="settings_verified_link_handler__text_no_such_host_found">Böyle bir sunucu bulunamadı!</string>
+    <string name="settings_verified_link_handler__placeholder_filter_hosts">Sunucuları filtrele</string>
 </resources>

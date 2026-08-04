@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="settings_shizuku__divider_settings">Iestatījumi</string>
+    <string name="settings_shizuku__title_not_running">Shizuku nav palaists</string>
+    <string name="settings_shizuku__title_not_installed">Shizuku nav uzstādīts⁣</string>
 </resources>

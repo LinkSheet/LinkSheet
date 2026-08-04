@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="settings_links_downloader__title_downloader">Lejupielādētājs</string>
+    <string name="enable_downloader">Iespējot lejupielādētāju</string>
+    <string name="action_downloader__try_to_download">Pārbaudīt, vai iespējams lejupielādēt</string>
+    <string name="downloader_url_mime_type">Izmantot interneta medija (MIME) tipu no URL adreses</string>
+    <string name="settings_downloader__subtitle_mode_auto">Automātiski pārbauda, vai URL adrese satur lejupielādējamu saturu</string>
+    <string name="downloader_url_mime_type_explainer">Pārbauda, vai URL adrese beidzas ar datnes paplašinājumu (piem., \".jpg\"); ja beidzas, šis tips tiek izmantots lejupielādētajai datnei.</string>
+    <string name="settings_downloader__title_mode_auto">Automātiskais</string>
+    <string name="settings_downloader__title_mode_manual">Pašrocīgais</string>
+    <string name="settings_downloader__subtitle_mode_manual">Apakšējā lapā tiek rādīta \"Pārbaudīt, vai iespējams lejupielādēt\" poga</string>
+    <string name="enable_downloader_explainer">Pievieno apakšējai lapai \"Lejupielādēt\" pogu, ja URL adrese satur tiešu saiti uz datni. Tas var netieši ietekmēt jūsu <annotation url-id="privacy-downloader">konfidenciālitāti</annotation></string>
 </resources>

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_such_app_found">Tāda lietotne nav atrasta!</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d pārlūki</string>
+    <string name="settings_private_browsing__title_private_browsing">Privātā pārlūkošana</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">Iespējot privāto pārlūkošanu</string>
+    <string name="settings_private_browsing_browsers__title_browsers">Iespējotie privātie pārlūki</string>
+    <string name="enable_request_private_browsing_button">Iespējot \"Rādīt privātā pārlūkošana\" pogu</string>
+    <string name="enable_request_private_browsing_button_explainer">Parāda pogu blakus pārlūkiem, kas piedāvā iespēju atvērt noklikšķināto URL privātā pārlūkošanas režīmā (cilnē).</string>
+    <string name="settings_private_browsing__title_allowed_browsers">Atļautie pārlūki</string>
+    <string name="settings_private_browsing__divider_configuration">Iestatījumi</string>
 </resources>

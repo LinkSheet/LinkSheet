@@ -4,4 +4,14 @@
     <string name="enable_libredirect">Iespējot LibRedirect</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="frontend">Lietotājsaskarne</string>
+    <string name="instance">Servera instance</string>
+    <string name="services">Pakalpojumi</string>
+    <string name="instance_not_available_anymore">Servera instance vairs nav pieejama!</string>
+    <string name="enable_libredirect_explainer">Novirza saites uz konfidenciālitātei draudzīgām lietotājsaskarnēm, izmantojot eksperimentālo <annotation url-id="libredirect-github">LibRedirect</annotation> integrāciju</string>
+    <string name="settings_libredirect__title_add_instance">Pievienot servera instanci</string>
+    <string name="settings_libredirect__text_placeholder_instance">Servera instance</string>
+    <string name="no_libredirect_services">Nav atrasts neviens LibRedirect pakalpojums!</string>
+    <string name="libredirect_via">Izmantos %s</string>
+    <string name="random_instance">nejaušu servera instanci</string>
 </resources>

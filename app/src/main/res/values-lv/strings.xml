@@ -97,4 +97,5 @@
     <string name="logs">Žurnāli</string>
     <string name="export">Izgūt</string>
     <string name="log">Žurnāls</string>
+    <string name="settings_links_downloader__title_downloader">Lejupielādētājs</string>
 </resources>

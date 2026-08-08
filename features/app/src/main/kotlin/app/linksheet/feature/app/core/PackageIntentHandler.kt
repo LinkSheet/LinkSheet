@@ -9,7 +9,7 @@ import android.content.pm.resolveActivityCompat
 import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import app.linksheet.feature.app.extension.activityDescriptor
-import app.linksheet.lib.flavors.LinkSheetApp
+import app.linksheet.lib.flavors.BaseLinkSheetApp
 import fe.composekit.extension.packageName
 import fe.composekit.flag.ResolveInfoFlags
 
@@ -27,7 +27,7 @@ fun DefaultPackageIntentHandler(context: Context, applicationId: String): Packag
     return DefaultPackageIntentHandler(
         queryIntentActivities = pm::queryIntentActivitiesCompat,
         resolveActivity = pm::resolveActivityCompat,
-        isLinkSheetCompat = { LinkSheetApp.Compat.isApp(it) != null },
+        isLinkSheetCompat = { BaseLinkSheetApp.Compat.isApp(it) != null },
         isSelf = { applicationId == it },
     )
 }

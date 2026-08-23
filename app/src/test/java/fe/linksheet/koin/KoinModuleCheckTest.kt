@@ -60,6 +60,7 @@ import app.linksheet.feature.shizuku.service.UserServiceConfig
 import app.linksheet.feature.shizuku.service.WrappedShizuku
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
+import app.linksheet.feature.wiki.core.GithubClient
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
@@ -383,7 +384,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<ExportImportUseCase>(PreferenceRepository::class, Json::class, Toml::class),
         definition<RemoteConfigClient>(HttpClient::class),
         definition<RemoteConfigService>(WorkManager::class, StateFlow::class),
-        definition<ShizukuFeatureService>(BroadcastEventBus::class)
+        definition<ShizukuFeatureService>(BroadcastEventBus::class),
+        definition<GithubClient>(HttpClient::class)
     )
 
     @Test

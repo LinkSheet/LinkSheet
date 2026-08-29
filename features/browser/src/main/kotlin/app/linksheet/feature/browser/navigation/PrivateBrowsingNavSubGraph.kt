@@ -14,7 +14,8 @@ import kotlinx.serialization.Serializable
 import kotlin.uuid.ExperimentalUuidApi
 
 @Serializable
-object PrivateBrowsingNavSubGraph: NavSubGraph<PrivateBrowsingRoute> {
+object PrivateBrowsingNavSubGraph: NavSubGraph<PrivateBrowsingNavSubGraph, PrivateBrowsingRoute>, Route {
+    override val subGraphRoute = PrivateBrowsingNavSubGraph
     override val startDestination = PrivateBrowsingRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<PrivateBrowsingRoute> { _, route ->

@@ -11,14 +11,21 @@ import fe.composekit.route.Route
 import kotlinx.serialization.Serializable
 
 @Serializable
-object LibRedirectNavSubGraph : NavSubGraph<LibRedirectRoute> {
+object LibRedirectNavSubGraph : NavSubGraph<LibRedirectNavSubGraph, LibRedirectRoute>, Route {
+    override val subGraphRoute = LibRedirectNavSubGraph
     override val startDestination = LibRedirectRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<LibRedirectRoute> { _, route ->
-            LibRedirectSettingsRoute(onBackPressed = navController::popBackStack, navigate = navController::navigate)
+            LibRedirectSettingsRoute(
+                onBackPressed = navController::popBackStack,
+                navigate = navController::navigate
+            )
         }
         animatedComposable<LibRedirectServiceRoute> { _, route ->
-            LibRedirectServiceSettingsRoute(onBackPressed = navController::popBackStack, serviceKey = route.serviceKey)
+            LibRedirectServiceSettingsRoute(
+                onBackPressed = navController::popBackStack,
+                serviceKey = route.serviceKey
+            )
         }
     }
 }

@@ -21,7 +21,8 @@ import kotlin.uuid.ExperimentalUuidApi
 
 @Keep
 @Serializable
-object ScenarioNavSubGraph : NavSubGraph<ScenarioOverviewRoute> {
+object ScenarioNavSubGraph : NavSubGraph<ScenarioNavSubGraph, ScenarioOverviewRoute>, Route {
+    override val subGraphRoute = ScenarioNavSubGraph
     override val startDestination = ScenarioOverviewRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<ScenarioOverviewRoute> { _, route ->

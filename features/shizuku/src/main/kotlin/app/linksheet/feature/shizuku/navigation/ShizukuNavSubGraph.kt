@@ -17,7 +17,8 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-object ShizukuNavSubGraph : NavSubGraph<ShizukuRoute> {
+object ShizukuNavSubGraph : NavSubGraph<ShizukuNavSubGraph, ShizukuRoute>, Route {
+    override val subGraphRoute = ShizukuNavSubGraph
     override val startDestination = ShizukuRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<ShizukuRoute> { _, route ->

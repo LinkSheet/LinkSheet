@@ -10,7 +10,8 @@ import fe.linksheet.composable.page.home.edit.TextEditorPageWrapper
 import kotlinx.serialization.Serializable
 
 @Serializable
-object HomePageNavSubGraph : NavSubGraph<MainOverviewRoute> {
+object HomePageNavSubGraph : NavSubGraph<HomePageNavSubGraph, MainOverviewRoute>, Route {
+    override val subGraphRoute = HomePageNavSubGraph
     override val startDestination = MainOverviewRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<MainOverviewRoute> { _, route ->

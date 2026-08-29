@@ -6,6 +6,12 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.ResolveInfo
 
+fun buildPackageInfoTestFakeLazy(
+    packageName: String,
+    name: String,
+    block: PackageInfoFakeScope.() -> Unit,
+): Lazy<PackageInfoFake> = lazy { buildPackageInfoTestFake(packageName, name, block) }
+
 fun buildPackageInfoTestFake(
     packageName: String,
     name: String,
@@ -36,8 +42,8 @@ class PackageInfoFakeScope(val packageInfo: PackageInfo) {
     fun activity(name: String, exported: Boolean = true, block: (ActivityScope.() -> Unit)? = null) {
         val activityInfo = ActivityInfo().apply {
             this.name = name
-            applicationInfo = packageInfo.applicationInfo
-            packageName = packageInfo.packageName
+            this.applicationInfo = packageInfo.applicationInfo
+            this.packageName = packageInfo.packageName
         }
 
         val scope = ActivityScope(resolveInfos, activityInfo)

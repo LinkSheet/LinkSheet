@@ -105,7 +105,7 @@ class RestoreUseCase internal constructor(
         return@withContext +RestoreResultWrapper(entries)
     }
 
-    private fun importPreferences(
+    private suspend fun importPreferences(
         holder: PreferenceRepositoryBackup<*>,
         preferencesToImport: Map<String, String>,
         settings: ImportSettings
@@ -159,10 +159,10 @@ class RestoreUseCase internal constructor(
 
         val entries = mutableListOf<PreferenceRestoreEntry>()
         if (settings.mode == RestoreMode.EraseRestore) {
-            holder.repository.edit { clearAll() }
+            holder.repository.suspendingEdit { clearAll() }
         }
 
-        holder.repository.edit {
+        holder.repository.suspendingEdit {
             for ((preference, newValue) in mappedPreferences) {
                 val result = updateOne(preference, newValue)
                 entries.add(result)

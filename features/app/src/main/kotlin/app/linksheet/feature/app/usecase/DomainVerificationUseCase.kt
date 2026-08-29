@@ -23,7 +23,7 @@ class DomainVerificationUseCase(
     private val domainVerificationManager: DomainVerificationManagerCompat,
     private val packageIntentHandler: PackageIntentHandler,
     private val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
-    private val getInstalledPackages: () -> List<PackageInfo>,
+    private val getInstalledPackages: (PackageInfoFlags) -> List<PackageInfo>,
 ) {
     fun getVerificationState(applicationInfo: ApplicationInfo): VerificationStateCompat? {
         // TODO: There should be some sort of hybrid state which allows checking the domain verification status of browsers

@@ -34,6 +34,7 @@
                 "dchild",
                 "camp",
                 "creative",
+                "s",
                 "content-id",
                 "dib",
                 "dib_tag",
@@ -122,6 +123,11 @@
             "redirections": [],
             "forceRedirection": false
         },
+        "share.google": {
+            "urlPattern": "^https?:\\/\\/share\\.google\\/",
+            "completeProvider": true,
+            "forceRedirection": true
+        },
         "google": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}",
             "completeProvider": false,
@@ -180,7 +186,8 @@
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/s\\?tbm=map.*?gs_[a-z]*=.",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/(?:complete\\/search|setprefs|searchbyimage)",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/(?:appsactivity|aclk\\?)",
-                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/safe[-]?browsing\\/([^&]+)"
+                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/safe[-]?browsing\\/([^&]+)",
+                "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/async\\/.*"
             ],
             "redirections": [
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/url\\?.*?(?:url|q)=(https?[^&]+)",
@@ -188,6 +195,19 @@
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/amp\\/s\\/([^&]+)"
             ],
             "forceRedirection": true
+        },
+        "googleSearch": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}\\/search\\?",
+            "completeProvider": false,
+            "rules": [
+                "client",
+                "sclient"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
         },
         "googlesyndication": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?googlesyndication\\.com",
@@ -299,7 +319,7 @@
                 "^https?:\\/\\/git(lab)?\\.[^/]*\\/[^?]+\\?.*?&?ref_?=[^/?&]*",
                 "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?amazon(?:\\.[a-z]{2,}){1,}\\/message-us\\?",
                 "^https?:\\/\\/authorization\\.td\\.com",
-                "^https?:\\/\\/support\\.steampowered\\.com",
+                "^https?:\\/\\/(?:help|support)\\.steampowered\\.com",
                 "^https?:\\/\\/privacy\\.vakmedianet\\.nl\\/.*?ref=",
                 "^https?:\\/\\/sso\\.serverplan\\.com\\/manage2fa\\/check\\?ref=",
                 "^https?:\\/\\/login\\.meijer\\.com\\/.*?\\?ref=",
@@ -336,6 +356,16 @@
         },
         "adtech": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?adtech(?:\\.[a-z]{2,}){1,}",
+            "completeProvider": true,
+            "rules": [],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "contentpass": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?contentpass\\.(?:net|de)",
             "completeProvider": true,
             "rules": [],
             "referralMarketing": [],
@@ -384,6 +414,7 @@
             "rules": [
                 "feature",
                 "gclid",
+                "is",
                 "kw" ,
                 "si",
                 "pp"
@@ -945,7 +976,17 @@
                 "sk",
                 "dp",
                 "terminal_id",
-                "aff_request_id"
+                "aff_request_id",
+                "businessType",
+                "sku_id",
+                "spreadType",
+                "srcSns",
+                "pvid",
+                "_t",
+                "pdp_ext_f",
+                "pdp_npi",
+                "search_p4p_id",
+                "algo_exp_id"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1096,7 +1137,11 @@
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?ozon\\.ru",
             "completeProvider": false,
             "rules": [
-                "partner"
+                "partner",
+                "from",
+                "perehod",
+                "sh",
+                "short"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1188,7 +1233,8 @@
             "completeProvider": false,
             "rules": [
                 "igshid",
-                "igsh"
+                "igsh",
+                "igsi"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1331,9 +1377,20 @@
             "completeProvider": false,
             "rules": [
                 "lr",
-                "redircnt"
+                "redircnt",
+                "stock_amount",
+                "isComfortPlus",
+                "isGroupPurchaseFlow",
+                "cpa",
+                "ogV"
             ],
-            "referralMarketing": [],
+            "referralMarketing": [
+                "nid",
+                "hid",
+                "offerid",
+                "publicId",
+                "do-waremd5"
+            ],
             "rawRules": [],
             "exceptions": [],
             "redirections": [],
@@ -1417,6 +1474,7 @@
             "urlPattern": "^https?:\\/\\/(?:accounts\\.)?firefox\\.com",
             "completeProvider": false,
             "rules": [
+                "context",
                 "entrypoint",
                 "form_type"
             ],
@@ -1714,7 +1772,13 @@
                 "bftTag",
                 "bftRwd",
                 "spm",
-                "_u"
+                "_u",
+                "from_kun_share",
+                "xy_refer",
+                "xy_flow_in",
+                "ownerId",
+                "un_site",
+                "bxsign"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1771,7 +1835,8 @@
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?tb\\.cn",
             "completeProvider": false,
             "rules": [
-                "sm"
+                "sm",
+                "tk"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1804,7 +1869,9 @@
                 "plat_id",
                 "buvid",
                 "is_story_h5",
-                "up_id"
+                "up_id",
+                "from_spmid",
+                "spmid"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -1937,7 +2004,9 @@
                 "user_id",
                 "share_app_name",
                 "share_iid",
-                "source"
+                "source",
+                "is_from_webapp",
+                "sender_device"
             ],
             "referralMarketing": [],
             "rawRules": [],
@@ -3093,7 +3162,7 @@
             ],
             "forceRedirection": false
         },
-        "office-partner.de": { 
+        "office-partner.de": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?office-partner\\.de",
             "completeProvider": false,
             "rules": [
@@ -3106,7 +3175,7 @@
             "redirections": [],
             "forceRedirection": false
         },
-        "mozgcp.net": { 
+        "mozgcp.net": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?mozgcp\\.net",
             "completeProvider": false,
             "rules": [],
@@ -3164,6 +3233,59 @@
             "redirections": [
                 "^https?:\\/\\/redirect\\.viglink\\.com\\/.*?u=([^&]+)"
             ],
+            "forceRedirection": false
+        },
+        "nordwolle.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?nordwolle\\.com",
+            "completeProvider": false,
+            "rules": [
+                "_sc",
+                "_sid",
+                "_ss"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "goofish.com": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?goofish\\.com",
+            "completeProvider": false,
+            "rules": [
+                "ut_sk",
+                "un",
+                "share_crt_v",
+                "sp_tk",
+                "cpp",
+                "shareurl",
+                "short_name",
+                "app",
+                "spm",
+                "tk",
+                "from_kun_share",
+                "xy_refer",
+                "xy_flow_in",
+                "ownerId",
+                "un_site",
+                "bxsign"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
+            "forceRedirection": false
+        },
+        "threads": {
+            "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?threads\\.com",
+            "completeProvider": false,
+            "rules": [
+                "xmt"
+            ],
+            "referralMarketing": [],
+            "rawRules": [],
+            "exceptions": [],
+            "redirections": [],
             "forceRedirection": false
         }
     }

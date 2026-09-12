@@ -123,11 +123,6 @@
             "redirections": [],
             "forceRedirection": false
         },
-        "share.google": {
-            "urlPattern": "^https?:\\/\\/share\\.google\\/",
-            "completeProvider": true,
-            "forceRedirection": true
-        },
         "google": {
             "urlPattern": "^https?:\\/\\/(?:[a-z0-9-]+\\.)*?google(?:\\.[a-z]{2,}){1,}",
             "completeProvider": false,

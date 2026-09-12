@@ -6,6 +6,7 @@ import assertk.assertions.isEqualTo
 import assertk.tableOf
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
+import fe.std.result.isSuccess
 import fe.std.test.trimMargin
 import kotlin.test.Test
 
@@ -185,7 +186,11 @@ internal class UrlClearTest {
         )
 
 
-    private val providers = BundledClearURLConfigLoader.load().getOrNull()!!
+    private val providers by lazy {
+        val result = BundledClearURLConfigLoader.load()
+        if(result.isSuccess()) return@lazy result.value!!
+        throw result.exception
+    }
     private val clearUrl = ClearUrls(providers)
 
     private fun runTest(input: String): String {

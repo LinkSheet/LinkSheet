@@ -8,11 +8,14 @@ import fe.clearurlskt.provider.ProviderSerializer
 import fe.signify.Ed25519
 import fe.signify.Ed25519PublicKey
 import fe.signify.Type
+import fe.std.result.StdResult
+import fe.std.result.tryCatch
+import fe.std.result.unaryPlus
 import java.io.InputStream
 import java.net.URL
 
 public interface ClearURLConfigLoader {
-    public fun load(): Result<List<Provider>?>
+    public fun load(): StdResult<List<Provider>?>
 }
 
 public object BundledClearURLConfigLoader : ClearURLConfigLoader {
@@ -34,16 +37,20 @@ public object BundledClearURLConfigLoader : ClearURLConfigLoader {
         return ClassLoader.getSystemResource(filePath)
     }
 
-    override fun load(): Result<List<Provider>?> {
-        return runCatching {
-            url?.openStream()?.let { ProviderSerializer.handle(it) }
+    override fun load(): StdResult<List<Provider>?> {
+        if (url == null) return +LoaderException.UrlNull()
+        val stream = url!!.openStream()
+        return tryCatch {
+            stream.use {
+                ProviderSerializer.handle(it)
+            }
         }
     }
 }
 
 public class StreamClearURLConfigLoader(private val stream: InputStream) : ClearURLConfigLoader {
-    override fun load(): Result<List<Provider>?> {
-        return runCatching {
+    override fun load(): StdResult<List<Provider>?> {
+        return tryCatch {
             ProviderSerializer.handle(stream)
         }
     }
@@ -67,5 +74,6 @@ public object RemoteLoader {
     }
 }
 
-
-
+public abstract class LoaderException : Exception() {
+    public class UrlNull : LoaderException()
+}

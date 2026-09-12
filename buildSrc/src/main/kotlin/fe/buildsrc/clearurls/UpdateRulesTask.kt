@@ -16,14 +16,18 @@ import java.net.http.HttpResponse
 abstract class UpdateRulesTask : DefaultTask() {
     @get:Input
     abstract val file: Property<String>
-    @Input
-    val rawUrl: String = "https://raw.githubusercontent.com/ClearURLs/Rules/master/data.min.json"
+    @get:Input
+    abstract val rawUrl: Property<String>
+
+    init {
+        rawUrl.convention("https://raw.githubusercontent.com/ClearURLs/Rules/master/data.min.json")
+    }
 
     @TaskAction
     fun fetch() {
         val jsonFile = project.file(file.get())
 
-        val response = httpClient.send(get(rawUrl), asString)
+        val response = httpClient.send(get(rawUrl.get()), asString)
         jsonFile.writeText(response.body())
     }
 }

@@ -45,7 +45,8 @@ class PreferredAppRepository(
 
     suspend fun getByHost(uri: Uri?): PreferredApp? {
         if (uri?.host == null) return null
-        return dao.getByHost(uri.host!!).firstOrNull()
+        val host = uri.host!!.lowercase()
+        return dao.getByHost(host).firstOrNull()
     }
 
 

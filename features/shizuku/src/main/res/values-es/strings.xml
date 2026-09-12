@@ -5,4 +5,18 @@
     <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
     <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
     <string name="shizuku_integration">Integración con Shizuku</string>
+    <string name="settings_shizuku__title_shizuku">Shizuku</string>
+    <string name="settings_shizuku__text_shizuku">Configurar las funciones compatibles con Shizuku</string>
+    <string name="settings_shizuku__title_not_installed">Shizuku no está instalado</string>
+    <string name="settings_shizuku__text_not_installed">Toca para abrir las instrucciones de instalación</string>
+    <string name="settings_shizuku__text_info">Shizuku es un conjunto de herramientas que aprovecha ADB (inalámbrico) o acceso root para permitir que otras aplicaciones accedan a funciones privilegiadas del sistema, disponibles únicamente a través del usuario de shell con privilegios.\n\nLinkSheet utiliza Shizuku para poder activar o desactivar la gestión de enlaces de cualquier aplicación, sin que el usuario tenga que abrir los ajustes y hacerlo manualmente.</string>
+    <string name="settings_shizuku__title_missing_permission">Faltan permisos</string>
+    <string name="settings_shizuku__text_missing_permission">Toca para solicitar permiso de Shizuku</string>
+    <string name="settings_shizuku__title_not_running">Shizuku no se está ejecutando</string>
+    <string name="settings_shizuku__text_not_running">Toca para abrir el administrador</string>
+    <string name="settings_shizuku__title_enable">Activar integración con Shizuku</string>
+    <string name="settings_shizuku__text">Shizuku</string>
+    <string name="settings_shizuku__divider_settings">Ajustes</string>
+    <string name="settings_shizuku__title_auto_disable_link_handling">Desactivar automáticamente la gestión de enlaces</string>
+    <string name="settings_shizuku__text_auto_disable_link_handling">Desactivar automáticamente la gestión de enlaces para las aplicaciones recién instaladas.</string>
 </resources>

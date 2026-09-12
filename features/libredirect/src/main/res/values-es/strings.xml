@@ -12,4 +12,6 @@
     <string name="no_libredirect_services">¡No se han encontrado servicios de LibRedirect!</string>
     <string name="enable_libredirect">Activar LibRedirect</string>
     <string name="enable_libredirect_explainer">Redirigir enlaces a frontends amigables para la privacidad utilizando la integración experimental <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="settings_libredirect__title_add_instance">Añadir una instancia</string>
+    <string name="settings_libredirect__text_placeholder_instance">Instancia</string>
 </resources>

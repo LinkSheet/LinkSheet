@@ -2,4 +2,9 @@
 <resources>
     <string name="enable_request_private_browsing_button">Включить кнопку «Запросить приватный просмотр»</string>
     <string name="enable_request_private_browsing_button_explainer">Отображение кнопки рядом с браузерами, которая открывает выбранный URL-адрес в режиме приватного просмотра.</string>
+    <string name="settings_private_browsing__title_private_browsing">Приватный просмотр</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">Включить приватный просмотр</string>
+    <string name="settings_private_browsing__divider_configuration">Конфигурация</string>
+    <string name="settings_private_browsing__title_allowed_browsers">Разрешенные браузеры</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d браузеров</string>
 </resources>

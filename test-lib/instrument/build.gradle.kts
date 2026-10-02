@@ -11,6 +11,7 @@ group = "fe.linksheet.testlib.ui"
 android {
     namespace = group.toString()
     compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK

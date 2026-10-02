@@ -10,6 +10,7 @@ plugins {
 android {
     namespace = "app.linksheet.test.e2e"
     compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK

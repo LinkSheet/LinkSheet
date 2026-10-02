@@ -18,6 +18,7 @@ plugins {
 android {
     namespace = "app.linksheet.feature.analytics"
     compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK

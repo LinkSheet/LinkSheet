@@ -13,6 +13,7 @@ plugins {
 android {
     namespace = "fe.linksheet.feature.systeminfo"
     compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK

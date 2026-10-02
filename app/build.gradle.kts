@@ -46,7 +46,7 @@ val supportedLocales = publicLocalProviders.get("SUPPORTED_LOCALES")?.split(",")
 android {
     namespace = "fe.linksheet"
     compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
-    compileSdkMinor = 2
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         applicationId = "fe.linksheet"

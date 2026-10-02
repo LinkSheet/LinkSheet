@@ -12,4 +12,6 @@
     <string name="no_libredirect_services">Службы LibRedirect не найдены!</string>
     <string name="enable_libredirect">Включить LibRedirect</string>
     <string name="enable_libredirect_explainer">Перенаправление ссылки на интерфейсы, обеспечивающие конфиденциальность, с помощью экспериментальной интеграции <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="settings_libredirect__title_add_instance">Добавить сервер</string>
+    <string name="settings_libredirect__text_placeholder_instance">Сервер</string>
 </resources>

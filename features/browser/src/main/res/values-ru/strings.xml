@@ -7,4 +7,5 @@
     <string name="settings_private_browsing__divider_configuration">Конфигурация</string>
     <string name="settings_private_browsing__title_allowed_browsers">Разрешенные браузеры</string>
     <string name="settings_private_browsing__text_allowed_browsers">%d браузеров</string>
+    <string name="settings_private_browsing_browsers__title_browsers">Разрешённые приватные браузеры</string>
 </resources>

@@ -5,4 +5,18 @@
     <string name="shizuku_integration_no_permission_explainer">Нажмите здесь, чтобы запросить разрешение Shizuku</string>
     <string name="shizuku_integration_not_setup_explainer">Хотя для работы LinkSheet это не обязательно, рекомендуется использовать Shizuku. Нажмите здесь, чтобы установить его</string>
     <string name="shizuku_integration">Интеграция Shizuku</string>
+    <string name="settings_shizuku__title_shizuku">Shizuku</string>
+    <string name="settings_shizuku__text_shizuku">Настроить функции, использующие Shizuku</string>
+    <string name="settings_shizuku__title_not_installed">Shizuku не установлен</string>
+    <string name="settings_shizuku__text_not_installed">Коснитесь, чтобы открыть инструкцию по установке</string>
+    <string name="settings_shizuku__text_info">Shizuku — это набор инструментов, использующий (беспроводной) ADB или root-доступ, чтобы предоставить другим приложениям доступ к привилегированным системным функциям, доступным только системному пользователю shell.\n\nLinkSheet использует Shizuku, чтобы переключать обработку ссылок для любого приложения без необходимости перехода в настройки и выполнения этого вручную.</string>
+    <string name="settings_shizuku__title_missing_permission">Отсутствует разрешение</string>
+    <string name="settings_shizuku__text_missing_permission">Коснитесь, чтобы запросить разрешение Shizuku</string>
+    <string name="settings_shizuku__title_not_running">Shizuku не запущен</string>
+    <string name="settings_shizuku__text_not_running">Коснитесь, чтобы открыть менеджер</string>
+    <string name="settings_shizuku__title_enable">Включить интеграцию с Shizuku</string>
+    <string name="settings_shizuku__text">Shizuku</string>
+    <string name="settings_shizuku__divider_settings">Настройки</string>
+    <string name="settings_shizuku__title_auto_disable_link_handling">Автоотключение обработки ссылок</string>
+    <string name="settings_shizuku__text_auto_disable_link_handling">Автоматически отключать обработку ссылок для вновь установленных приложений.</string>
 </resources>

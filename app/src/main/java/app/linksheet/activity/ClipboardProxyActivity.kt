@@ -1,4 +1,4 @@
-package fe.linksheet.activity
+package app.linksheet.activity
 
 import android.content.ClipboardManager
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.getSystemService
 import fe.linksheet.R
+import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.web.UriUtil
 
 class ClipboardProxyActivity : ComponentActivity() {

@@ -9,7 +9,8 @@ import androidx.core.content.getSystemService
 import fe.composekit.extension.getFirstText
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.web.UriUtil
+import fe.linksheet.util.intent.parser.IntentParser
+import fe.std.result.getOrNull
 
 class ClipboardProxyActivity : ComponentActivity() {
     
@@ -34,13 +35,7 @@ class ClipboardProxyActivity : ComponentActivity() {
             return
         }
 
-        val fixedText = if (!text.startsWith("http://") && !text.startsWith("https://") && text.contains(".")) {
-           "https://$text"
-        } else {
-           text
-        }
-        
-        val uri = UriUtil.parseWebUriStrict(fixedText)
+        val uri = text.let { IntentParser.parseText(it) }.getOrNull()
         if (uri != null) {
             val intent = Intent(this, BottomSheetActivity::class.java).apply {
                 action = Intent.ACTION_VIEW

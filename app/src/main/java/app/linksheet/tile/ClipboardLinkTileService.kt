@@ -1,26 +1,24 @@
-package fe.linksheet.tile
+package app.linksheet.tile
 
+import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import fe.linksheet.R
-import fe.linksheet.activity.ClipboardProxyActivity
-import android.app.PendingIntent
+import app.linksheet.activity.ClipboardProxyActivity
 
-@RequiresApi(Build.VERSION_CODES.N)
 /**
  * Known issue: TileService might cause memory leaks on some Android versions.
  * See: https://github.com/square/leakcanary/issues/2207
  * After extensive exploration, this appears to be a system-level issue that cannot be resolved here.
  */
+@RequiresApi(Build.VERSION_CODES.N)
 class ClipboardLinkTileService : TileService() {
 
     override fun onClick() {
         super.onClick()
-        
+
         // Android 10+ restricts background clipboard access.
         // We must start a foreground activity to read it.
         val intent = Intent(this, ClipboardProxyActivity::class.java).apply {

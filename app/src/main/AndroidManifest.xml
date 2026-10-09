@@ -194,7 +194,7 @@
         </activity-alias>
 
         <activity
-                android:name=".activity.ClipboardProxyActivity"
+                android:name="app.linksheet.activity.ClipboardProxyActivity"
                 android:exported="false"
                 android:excludeFromRecents="true"
                 android:theme="@style/DialogTheme"/>
@@ -228,7 +228,7 @@
                        android:value="true"/>
         </service>
         <service
-                android:name=".tile.ClipboardLinkTileService"
+                android:name="app.linksheet.tile.ClipboardLinkTileService"
                 android:label="@string/qs_tile_label"
                 android:icon="@drawable/ic_qs_clipboard_send"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"

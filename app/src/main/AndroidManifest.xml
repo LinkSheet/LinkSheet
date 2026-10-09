@@ -230,7 +230,7 @@
         <service
                 android:name="app.linksheet.tile.ClipboardLinkTileService"
                 android:label="@string/qs_tile_label"
-                android:icon="@drawable/ic_qs_clipboard_send"
+                android:icon="@drawable/content_paste_go_24px"
                 android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
                 android:enabled="true"
                 android:exported="true">

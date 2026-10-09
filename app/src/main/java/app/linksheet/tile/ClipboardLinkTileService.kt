@@ -11,6 +11,7 @@ import app.linksheet.activity.ClipboardProxyActivity
 /**
  * Known issue: TileService might cause memory leaks on some Android versions.
  * See: https://github.com/square/leakcanary/issues/2207
+ * See: https://issuetracker.google.com/issues/410432415
  * After extensive exploration, this appears to be a system-level issue that cannot be resolved here.
  */
 @RequiresApi(Build.VERSION_CODES.N)

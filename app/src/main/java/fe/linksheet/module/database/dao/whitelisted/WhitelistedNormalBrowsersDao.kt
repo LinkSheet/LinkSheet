@@ -1,18 +1,18 @@
 package fe.linksheet.module.database.dao.whitelisted
 
-import androidx.room.Dao
-import androidx.room.Query
-import fe.linksheet.module.database.dao.base.WhitelistedBrowsersDao
+import androidx.room3.Dao
+import androidx.room3.Query
+import app.linksheet.api.database.BaseDao
+import app.linksheet.api.database.UserDataDao
 import fe.linksheet.module.database.entity.whitelisted.WhitelistedNormalBrowser
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-abstract class WhitelistedNormalBrowsersDao : WhitelistedBrowsersDao<WhitelistedNormalBrowser, WhitelistedNormalBrowser.Creator>(
-    WhitelistedNormalBrowser.Creator
-) {
-    @Query("SELECT * FROM whitelisted_browser")
-    abstract override fun getAll(): Flow<List<WhitelistedNormalBrowser>>
-
-    @Query("DELETE FROM whitelisted_browser WHERE packageName = :packageName")
-    abstract override suspend fun deleteByPackageOrComponentName(packageName: String)
+interface WhitelistedNormalBrowsersDao : BaseDao<WhitelistedNormalBrowser>, UserDataDao {
+    @Query("SELECT * FROM ${WhitelistedNormalBrowser.TABLE_NAME}")
+    override fun getAll(): Flow<List<WhitelistedNormalBrowser>>
+    @Query("DELETE FROM ${WhitelistedNormalBrowser.TABLE_NAME}")
+    override suspend fun deleteAll()
+    @Query("DELETE FROM ${WhitelistedNormalBrowser.TABLE_NAME} WHERE packageName = :packageName")
+    suspend fun deleteByPackageOrComponentName(packageName: String)
 }

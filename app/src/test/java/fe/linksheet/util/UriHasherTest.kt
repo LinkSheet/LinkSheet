@@ -10,7 +10,7 @@ import javax.crypto.Mac
 import kotlin.intArrayOf
 
 //@RunWith(AndroidJUnit4::class)
-//@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+//@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class UriHasherTest : BaseUnitTest {
     private val mac: Mac
 

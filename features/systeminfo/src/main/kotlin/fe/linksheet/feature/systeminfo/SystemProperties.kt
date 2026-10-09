@@ -1,17 +1,14 @@
 package fe.linksheet.feature.systeminfo
 
-import app.linksheet.api.RefineWrapper
 import app.linksheet.api.SystemProperties
 import fe.kotlin.extension.string.substringOrNull
 import fe.std.process.android.AndroidStartConfig
 import fe.std.process.launchProcess
 
-class RealSystemProperties(
-    private val refineWrapper: RefineWrapper
-) : SystemProperties {
+class RealSystemProperties : SystemProperties {
 
     override fun get(key: String): String? {
-        return refineWrapper.getSystemProperty(key)
+        return android.os.SystemProperties.get(key)
     }
 
     override fun getAllProperties(): Map<String, String> {

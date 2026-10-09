@@ -1,7 +1,7 @@
 package app.linksheet.feature.engine.core
 
 import app.linksheet.feature.engine.core.context.EngineRunContext
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +24,10 @@ data class EngineScenario(
 
     suspend fun run(url: StdUrl, context: EngineRunContext): ContextualEngineResult {
         return engine.process(url, context)
+    }
+
+    fun fetch(url: StdUrl, context: EngineRunContext): Flow<FetchHandle?> {
+        return engine.fetch(url, context)
     }
 }
 

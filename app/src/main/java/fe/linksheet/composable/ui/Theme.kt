@@ -11,28 +11,32 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.SpanStyle
+import app.linksheet.compose.debug.DebugPreferenceProvider
+import app.linksheet.compose.debug.LocalUiDebug
+import app.linksheet.compose.theme.LightColors
+import app.linksheet.compose.theme.NewTypography
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.rememberHapticFeedbackInteraction
-import fe.android.preference.helper.EnumTypeMapper
 import fe.android.span.helper.LinkAnnotationStyle
 import fe.android.span.helper.LocalLinkAnnotationStyle
 import fe.android.span.helper.LocalLinkTags
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.activity.BaseComponentActivity
-import app.linksheet.compose.debug.DebugPreferenceProvider
-import app.linksheet.compose.debug.LocalUiDebug
-import app.linksheet.compose.theme.LightColors
-import app.linksheet.compose.theme.NewTypography
-import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.module.viewmodel.RootViewModel
 import fe.linksheet.util.LinkSheetLinkTags
-import org.koin.androidx.compose.KoinAndroidContext
-import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinActivityViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 tailrec fun Context.findActivity(): Activity? = when (this) {
@@ -40,30 +44,6 @@ tailrec fun Context.findActivity(): Activity? = when (this) {
     is ContextWrapper -> baseContext.findActivity()
     else -> null
 }
-
-enum class Theme {
-    System,
-    Light,
-    Dark,
-
-    @Deprecated(message = "Use the new property")
-    AmoledBlack;
-
-    companion object Companion : EnumTypeMapper<Theme>(entries.toTypedArray())
-
-    fun toV2(): ThemeV2 {
-        return when (this) {
-            System -> ThemeV2.System
-            Light -> ThemeV2.Light
-            Dark, AmoledBlack -> ThemeV2.Dark
-        }
-    }
-
-    override fun toString(): String {
-        return ordinal.toString()
-    }
-}
-
 
 /**
  * The default light scrim, as defined by androidx and the platform:
@@ -80,7 +60,7 @@ private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 @Composable
 fun BaseComponentActivity.AppTheme(
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
-    themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
+    themeSettingsViewModel: RootViewModel = koinActivityViewModel(),
     debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
     content: @Composable () -> Unit,
 ) {
@@ -99,9 +79,9 @@ fun BaseComponentActivity.AppTheme(
 fun AppTheme(
     edgeToEdge: Boolean = true,
     systemDarkTheme: Boolean = isSystemInDarkTheme(),
-    themeSettingsViewModel: ThemeSettingsViewModel = koinViewModel(),
+    themeSettingsViewModel: RootViewModel = koinActivityViewModel(),
     debugPreferenceProvider: DebugPreferenceProvider = koinInject(),
-    updateEdgeToEdge: ((SystemBarStyle, SystemBarStyle) -> Unit)? = null,
+    updateEdgeToEdge: ((statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) -> Unit)?,
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
@@ -116,7 +96,7 @@ fun AppTheme(
 
     if (edgeToEdge && updateEdgeToEdge != null) {
         LaunchedEffect(key1 = themeV2) {
-            val isDarkMode: (Resources) -> Boolean = { _ -> themeV2 == ThemeV2.Dark || systemDarkTheme }
+            val isDarkMode: (Resources) -> Boolean = { resources -> themeV2.isDarkTheme(resources) }
 
             updateEdgeToEdge(
                 SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT, detectDarkMode = isDarkMode),
@@ -132,30 +112,33 @@ fun AppTheme(
     val hapticFeedbackInteraction = rememberHapticFeedbackInteraction(context = context)
 
     val linkAssets by themeSettingsViewModel.linkAssets.collectAsStateWithLifecycle()
-    KoinAndroidContext {
-        CompositionLocalProvider(
-            LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
-            LocalLinkAnnotationStyle provides linkAnnotationStyle,
-            LocalLinkTags provides LinkSheetLinkTags(urlIds = linkAssets),
-            LocalUiDebug provides debugPreferenceProvider
-        ) {
-            MaterialTheme(
-                colorScheme = colorScheme,
-                typography = NewTypography,
-                content = content
-            )
-        }
+    CompositionLocalProvider(
+        LocalHapticFeedbackInteraction provides hapticFeedbackInteraction,
+        LocalLinkAnnotationStyle provides linkAnnotationStyle,
+        LocalLinkTags provides LinkSheetLinkTags(urlIds = linkAssets),
+        LocalUiDebug provides debugPreferenceProvider
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = NewTypography,
+            content = content
+        )
     }
 }
 
 @Composable
-fun BaseComponentActivity.BoxAppHost(
+fun BoxAppHost(
     modifier: Modifier = Modifier,
     contentAlignment: Alignment = Alignment.TopStart,
+    updateEdgeToEdge: ((statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) -> Unit)?,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    AppTheme {
-        Box(modifier = modifier, contentAlignment = contentAlignment, content = content)
+    AppTheme(updateEdgeToEdge = updateEdgeToEdge) {
+        Box(
+            modifier = modifier.semantics { testTagsAsResourceId = true },
+            contentAlignment = contentAlignment,
+            content = content
+        )
     }
 }
 

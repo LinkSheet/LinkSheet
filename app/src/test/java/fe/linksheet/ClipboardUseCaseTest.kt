@@ -1,0 +1,29 @@
+package fe.linksheet
+
+import android.content.ClipboardManager
+import android.os.Build
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import fe.composekit.extension.getSystemServiceOrThrow
+import fe.linksheet.usecase.ClipboardUseCase
+import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
+import fe.linksheet.testlib.core.BaseUnitTest
+import kotlinx.coroutines.test.runTest
+import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+
+@RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
+class ClipboardUseCaseTest : BaseUnitTest {
+    @org.junit.Test
+    fun test() = runTest {
+        val clipboardManager = applicationContext.getSystemServiceOrThrow<ClipboardManager>()
+        val useCase = ClipboardUseCase(
+            repository = DefaultAppPreferenceRepository(applicationContext),
+            clipboardManager = clipboardManager,
+            coroutineScope = this
+        )
+//        useCase.contentFlow.test {
+//
+//        }
+    }
+}

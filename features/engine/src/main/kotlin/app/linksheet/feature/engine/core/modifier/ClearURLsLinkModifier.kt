@@ -8,6 +8,7 @@ import app.linksheet.feature.engine.core.step.StepResult
 import fe.clearurlskt.ClearUrlOperation
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
+import fe.std.result.getOrNull
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
@@ -33,7 +34,9 @@ class ClearURLsLinkModifier(
         Unit
     }
 
-    override suspend fun EngineRunContext.runStep(url: StdUrl) = withContext(ioDispatcher) {
+
+    context(context: EngineRunContext)
+    override suspend fun runStep(url: StdUrl) = withContext(ioDispatcher) {
         val result = clearUrls?.clearUrl(url.toString())
         result?.let { (url, operations) -> ClearURLsModifyOutput(url.toStdUrlOrThrow(), operations) }
     }

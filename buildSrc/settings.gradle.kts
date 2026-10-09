@@ -1,8 +1,10 @@
 @file:Suppress("UnstableApiUsage")
 
-import fe.buildsettings.config.GradlePluginPortalRepository
-import fe.buildsettings.config.MavenRepository
-import fe.buildsettings.config.configureRepositories
+import com.gitlab.grrfe.gradlebuild.config.configureRepositories
+import com.gitlab.grrfe.gradlebuild.repository.GradlePluginPortalRepository
+import com.gitlab.grrfe.gradlebuild.repository.MavenRepository
+import com.gitlab.grrfe.gradlebuild.repository.jitpack
+import com.gitlab.grrfe.gradlebuild.repository.mavenCentral
 
 pluginManagement {
     repositories {
@@ -19,8 +21,8 @@ plugins {
 }
 
 configureRepositories(
-    MavenRepository.MavenCentral,
-    MavenRepository.Jitpack,
+    MavenRepository.mavenCentral(),
+    MavenRepository.jitpack(),
     GradlePluginPortalRepository,
     mode = RepositoriesMode.PREFER_SETTINGS
 )

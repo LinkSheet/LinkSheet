@@ -1,23 +1,23 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import com.gitlab.grrfe.gradlebuild.common.CompilerOption
+import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
-import fe.buildlogic.common.OptIn
-import fe.buildlogic.common.extension.addOptIn
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("androidx.room")
+    id("androidx.room3")
     id("com.google.devtools.ksp")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {
     namespace = "app.linksheet.feature.engine"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -25,25 +25,20 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addOptIn(OptIn.ExperimentalTime)
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    room {
-        schemaDirectory("$projectDir/schemas")
-        generateKotlin = true
+        compilerOptions.freeCompilerArgs.addCompilerOptions(CompilerOption.ContextParameters)
     }
 }
 
+room3 {
+    schemaDirectory("$projectDir/schemas")
+
+}
+
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":util"))
-    implementation(project(":api"))
-    implementation(project(":log"))
-    implementation(project(":compose"))
+    implementation(project(":lib-util"))
+    implementation(project(":lib-api"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
+    implementation(project(":lib-compose"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
     implementation(project(":feature-downloader"))
@@ -51,16 +46,17 @@ dependencies {
     implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
-    implementation(project(":sdk-common"))
-    implementation(AndroidX.room.runtime)
-    implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
+//    implementation(project(":sdk-common"))
+    implementation("com.github.LinkSheet.flavors:sdk-common:_")
+
+    implementation("androidx.room3:room3-runtime:_")
+    ksp("androidx.room3:room3-compiler:_")
 
 
     implementation("sh.calvin.reorderable:reorderable:_")
     implementation("org.jsoup:jsoup:_")
     implementation("me.saket.unfurl:unfurl:_")
-    implementation(_1fexd.fastForward)
+    implementation(project(":integration-fastforward"))
     implementation(AndroidX.lifecycle.viewModel)
     implementation(AndroidX.room.common)
     implementation(AndroidX.compose.ui)
@@ -97,7 +93,6 @@ dependencies {
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.sqlite.ktx)
 
-    implementation(platform(KotlinX.serialization.bom))
     implementation(KotlinX.serialization.json)
     implementation(KotlinX.serialization.protobuf)
     implementation(KotlinX.serialization.cbor)

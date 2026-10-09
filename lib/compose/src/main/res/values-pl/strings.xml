@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic__button_open_external">Otwórz zewnętrznie</string>
+    <string name="generic__button_text_back">Cofnij</string>
+    <string name="generic__button_text_enable">Włącz</string>
+    <string name="generic__button_text_disable">Wyłącz</string>
+    <string name="generic__text_url">Adres</string>
+    <string name="options">Opcje</string>
+    <string name="request_timeout">Limit czasu żądania</string>
+    <string name="request_timeout_explainer">Określ ile sekund LinkSheet będzie oczekiwał na nawiązanie połączenia. Ustawienie tej wartości na 0 wyłącza limit czasu, ale nie jest to zalecane.</string>
+    <string name="generic__text_mode">Tryb</string>
+    <string name="checkmark">Znacznik wyboru</string>
+    <string name="error">Błąd</string>
+    <string name="generic__button_text_cancel">Anuluj</string>
+    <string name="generic__button_text_confirm">Potwierdzam</string>
 </resources>

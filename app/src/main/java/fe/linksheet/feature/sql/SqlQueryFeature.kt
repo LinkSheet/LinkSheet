@@ -5,14 +5,14 @@ import androidx.core.database.getBlobOrNull
 import androidx.core.database.getFloatOrNull
 import androidx.core.database.getIntOrNull
 import androidx.core.database.getStringOrNull
-import androidx.sqlite.db.SupportSQLiteOpenHelper
+import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 
-class SqlQueryFeature(val openHelper: SupportSQLiteOpenHelper) {
+class SqlQueryFeature(val database: SupportSQLiteDatabase) {
     fun query(query: String): Flow<SqlRow> {
-        val flow = openHelper.writableDatabase.query(query).collect()
+        val flow = database.query(query).collect()
         return flow
     }
 

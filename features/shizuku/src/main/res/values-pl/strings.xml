@@ -14,4 +14,9 @@
     <string name="settings_shizuku__divider_settings">Ustawienia</string>
     <string name="settings_shizuku__title_auto_disable_link_handling">Auto-wyłącz obsługę linków</string>
     <string name="settings_shizuku__text_auto_disable_link_handling">Wyłącza obsługę linków dla nowo zainstalowanych aplikacji.</string>
+    <string name="shizuku_integration_enabled_explainer">Integracja z Shizuku została włączona!</string>
+    <string name="shizuku_not_running_explainer">Shizuku nie jest uruchomiony. Dotknij tutaj, aby go otworzyć, a następnie postępuj zgodnie z instrukcjami.</string>
+    <string name="shizuku_integration_no_permission_explainer">Kliknij tutaj, aby poprosić Shizuku o uprawnienie.</string>
+    <string name="shizuku_integration_not_setup_explainer">Shizuku nie jest niezbędny do działania LinkSheet, ale jest zalecany. Kliknij tutaj, aby zainstalować.</string>
+    <string name="shizuku_integration">Integracja Shizuku</string>
 </resources>

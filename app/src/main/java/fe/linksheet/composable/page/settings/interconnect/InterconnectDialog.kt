@@ -26,6 +26,7 @@ import fe.linksheet.R
 import fe.linksheet.module.language.DisplayLocaleItem
 import fe.linksheet.module.language.LocaleItem
 import java.util.*
+import app.linksheet.compose.R as CommonR
 
 @Composable
 private fun rememberInterconnectDialog(
@@ -83,7 +84,7 @@ private fun InterconnectDialog(
         },
         dismissButton = {
             SaneAlertDialogTextButton(
-                content = textContent(R.string.cancel),
+                content = textContent(CommonR.string.generic__button_text_cancel),
                 onClick = onDismiss
             )
         },

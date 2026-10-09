@@ -1,19 +1,20 @@
-import fe.buildlogic.Version
+import com.gitlab.grrfe.gradlebuild.Version
+import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 
 plugins {
     id("com.android.library")
-    kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 group = "fe.linksheet.config"
 
 android {
     namespace = group.toString()
-    compileSdk = Version.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
-        minSdk = Version.MIN_SDK
+        minSdk = AndroidSdk.MIN_SDK
     }
 }
 

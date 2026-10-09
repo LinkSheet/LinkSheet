@@ -24,9 +24,9 @@ class ScenarioViewModel(
         return scenarioRepository.getById(id)
     }
 
-    fun getScenarioExpressions(): Flow<Pair<Scenario, List<ExpressionRule>>?> {
-        return scenarioRepository.getScenarioExpressionsById(id)
-    }
+//    fun getScenarioExpressions(): Flow<ScenarioInfo?> {
+//        return scenarioRepository.getScenarioExpressionsById(id)
+//    }
 
     fun toString(rule: ExpressionRule): String {
         return scenarioRepository.toString(rule)

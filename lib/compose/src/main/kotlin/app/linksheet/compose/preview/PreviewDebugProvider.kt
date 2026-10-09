@@ -8,5 +8,6 @@ fun PreviewDebugProvider(drawBorders: Boolean = true): DebugPreferenceProvider {
     return object : DebugPreferenceProvider {
         override val drawBorders = MutableStateFlow(drawBorders)
         override val bottomSheetLog = MutableStateFlow(false)
+        override val m3Log = MutableStateFlow(false)
     }
 }

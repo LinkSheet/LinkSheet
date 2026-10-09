@@ -1,18 +1,18 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
-import fe.buildlogic.Version
 
 plugins {
     id("com.android.library")
-    kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
-    id("de.mannodermaus.android-junit5")
+    id("com.gitlab.grrfe.android-build-plugin")
+    id("de.mannodermaus.android-junit")
 }
 
 group = "fe.linksheet.testlib.fake"
 
 android {
     namespace = group.toString()
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -21,17 +21,17 @@ android {
     buildFeatures {
         buildConfig = true
     }
-}
 
-kotlin {
-    jvmToolchain(Version.JVM)
+    kotlin {
+        jvmToolchain(Version.JVM)
+    }
 }
 
 dependencies {
-    api(project(":api"))
+    api(project(":lib-api"))
     api(AndroidX.test.runner)
     api(AndroidX.test.coreKtx)
-    api(Testing.junit.jupiter.api)
+    api("org.junit.jupiter:junit-jupiter-api:6.1.0")
     api(Koin.test)
 
     implementation(platform("androidx.compose:compose-bom-alpha:_"))

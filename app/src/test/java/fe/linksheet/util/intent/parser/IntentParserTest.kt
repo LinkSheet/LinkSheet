@@ -5,6 +5,7 @@ import android.net.Uri
 import android.nfc.NfcAdapter
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.linksheet.mozilla.components.support.utils.toSafeIntent
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import fe.composekit.intent.buildIntent
@@ -13,14 +14,11 @@ import fe.std.result.assert.assertSuccess
 import fe.std.result.getOrNull
 import fe.std.test.TestFunction
 import fe.std.test.tableTest
-import mozilla.components.support.utils.toSafeIntent
-import fe.linksheet.testlib.core.JunitTest
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class IntentParserTest : BaseUnitTest {
     @org.junit.Test
     fun `test nfc intent correctly handled`() {
@@ -51,7 +49,7 @@ internal class IntentParserTest : BaseUnitTest {
                 IntentParser.parseViewAction(intent.toSafeIntent()).getOrNull()?.toString()
             })
             .forAll { test, url, extra, intent ->
-                assertThat(test.run(intent)).isEqualTo(url)
+                assertThat(test.runTest(intent)).isEqualTo(url)
             }
     }
 

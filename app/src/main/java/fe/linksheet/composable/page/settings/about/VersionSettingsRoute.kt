@@ -20,6 +20,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.android.compose.dialog.helper.confirm.ConfirmActionDialog
 import fe.android.compose.dialog.helper.confirm.rememberConfirmActionDialog
 import fe.android.compose.feedback.FeedbackType
@@ -32,13 +34,10 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.card.AlertCard
 import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.std.javatime.extension.unixMillisUtc
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
-import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
-import app.linksheet.compose.theme.HkGroteskFontFamily
-import fe.linksheet.util.buildconfig.LinkSheetInfo
+import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.androidx.compose.koinViewModel
 
@@ -114,10 +113,10 @@ fun VersionSettingsRoute(
                     fontSize = 18.sp
                 )
 
-                Text(text = LinkSheetInfo.buildInfo.flavor)
+                Text(text = viewModel.infoService.buildInfo.flavor)
 
-                Text(text = LinkSheetInfo.buildInfo.versionName)
-                Text(text = LinkSheetInfo.buildInfo.builtAt)
+                Text(text = viewModel.infoService.buildInfo.versionName)
+                Text(text = viewModel.infoService.buildInfo.builtAt)
             }
 //            }
         }
@@ -127,7 +126,7 @@ fun VersionSettingsRoute(
                 icon = Icons.Outlined.Bolt.iconPainter,
                 iconContentDescription = null,
                 headline = text("Build"),
-                subtitle = text(LinkSheetInfo.buildInfo.versionName)
+                subtitle = text(viewModel.infoService.buildInfo.versionName)
             )
 
 //            DefaultTwoLineIconClickableShapeListItem(
@@ -196,7 +195,7 @@ private fun ExternalVersionListItem(shape: Shape, padding: PaddingValues, data: 
     val interaction = LocalHapticFeedbackInteraction.current
 
     val formatted = remember(timestamp) {
-        timestamp.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+        timestamp.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat)
     }
 
     DefaultTwoLineIconClickableShapeListItem(

@@ -7,7 +7,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import app.linksheet.compose.util.animatedComposable
+import app.linksheet.compose.util.predictivePopEnterTransition
+import app.linksheet.compose.util.predictivePopExitTransition
+import app.linksheet.feature.backup.impl.navigation.BackupNav
 import app.linksheet.feature.browser.navigation.PrivateBrowsingNavSubGraph
+import app.linksheet.feature.downloader.navigation.DownloaderNav
 import app.linksheet.feature.engine.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
 import app.linksheet.feature.profile.navigation.ProfileNav
@@ -25,7 +29,6 @@ import fe.linksheet.composable.page.settings.about.CreditsSettingsRoute
 import fe.linksheet.composable.page.settings.about.VersionSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.AdvancedSettingsRoute
 import fe.linksheet.composable.page.settings.advanced.ExperimentsSettingsRoute
-import fe.linksheet.composable.page.settings.advanced.ExportImportSettingsRoute
 import fe.linksheet.composable.page.settings.app.RuleOverviewRoute
 import fe.linksheet.composable.page.settings.app.RuleRoute
 import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.VerifiedLinkHandlersRoute
@@ -45,7 +48,6 @@ import fe.linksheet.composable.page.settings.debug.log.LogTextSettingsRoute
 import fe.linksheet.composable.page.settings.dev.DevSettingsRoute
 import fe.linksheet.composable.page.settings.link.LinksSettingsRoute
 import fe.linksheet.composable.page.settings.link.amp2html.Amp2HtmlSettingsRoute
-import fe.linksheet.composable.page.settings.link.downloader.DownloaderSettingsRoute
 import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
 import fe.linksheet.composable.page.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
@@ -53,7 +55,35 @@ import fe.linksheet.composable.page.settings.notification.NotificationSettingsRo
 import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
-import fe.linksheet.navigation.*
+import fe.linksheet.navigation.AdvancedRoute
+import fe.linksheet.navigation.AppsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.navigation.DebugRoute
+import fe.linksheet.navigation.ExperimentRoute
+import fe.linksheet.navigation.LogTextViewerRoute
+import fe.linksheet.navigation.PreferredBrowserSettingsRoute
+import fe.linksheet.navigation.PreviewUrlRoute
+import fe.linksheet.navigation.Routes
+import fe.linksheet.navigation.SingleBrowserSettingsRoute
+import fe.linksheet.navigation.SqlRoute
+import fe.linksheet.navigation.VlhAppRoute
+import fe.linksheet.navigation.WhitelistedBrowsersSettingsRoute
+import fe.linksheet.navigation.aboutSettingsRoute
+import fe.linksheet.navigation.amp2HtmlSettingsRoute
+import fe.linksheet.navigation.bottomSheetSettingsRoute
+import fe.linksheet.navigation.browserSettingsRoute
+import fe.linksheet.navigation.creditsSettingsRoute
+import fe.linksheet.navigation.devModeRoute
+import fe.linksheet.navigation.followRedirectsSettingsRoute
+import fe.linksheet.navigation.generalSettingsRoute
+import fe.linksheet.navigation.inAppBrowserSettingsDisableInSelectedRoute
+import fe.linksheet.navigation.inAppBrowserSettingsRoute
+import fe.linksheet.navigation.linksSettingsRoute
+import fe.linksheet.navigation.loadDumpedPreferences
+import fe.linksheet.navigation.logViewerSettingsRoute
+import fe.linksheet.navigation.notificationSettingsRoute
+import fe.linksheet.navigation.privacySettingsRoute
+import fe.linksheet.navigation.settingsRoute
+import fe.linksheet.navigation.themeSettingsRoute
 
 @Composable
 fun MainNavHost(
@@ -67,24 +97,24 @@ fun MainNavHost(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         navController = navController,
         typeMap = NavTypes.Types,
-        startDestination = HomePageNavSubGraph
+        startDestination = HomePageNavSubGraph,
+        predictivePopEnterTransition = predictivePopEnterTransition,
+        predictivePopExitTransition = predictivePopExitTransition,
     ) {
         attachSubGraph(HomePageNavSubGraph, navController)
         attachSubGraph(ScenarioNavSubGraph, navController)
         attachSubGraph(ShizukuNavSubGraph, navController)
         attachSubGraph(LibRedirectNavSubGraph, navController)
         attachSubGraph(PrivateBrowsingNavSubGraph, navController)
+        attachNav(DownloaderNav, navController)
         attachNav(WikiNav, navController)
+        attachNav(BackupNav, navController)
         if (AndroidVersion.isAtLeastApi30R()) {
             attachNav(ProfileNav, navController)
         }
 
         animatedComposable<ExperimentRoute> { _, route ->
             ExperimentsSettingsRoute(onBackPressed = onBackPressed, experiment = route.experiment)
-        }
-
-        animatedComposable<ExportImportRoute> { _, _ ->
-            ExportImportSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable<AdvancedRoute> { _, _ ->
@@ -100,7 +130,7 @@ fun MainNavHost(
         }
 
         animatedComposable<VlhAppRoute> { _, route ->
-            VlhAppRoute(onBackPressed = onBackPressed, packageName = route.packageName)
+            VlhAppRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable<SqlRoute> { _, route ->
@@ -161,10 +191,6 @@ fun MainNavHost(
 
         animatedComposable(route = followRedirectsSettingsRoute) {
             FollowRedirectsSettingsRoute(onBackPressed = onBackPressed)
-        }
-
-        animatedComposable(route = downloaderSettingsRoute) {
-            DownloaderSettingsRoute(onBackPressed = onBackPressed)
         }
 
         animatedComposable(route = amp2HtmlSettingsRoute) {

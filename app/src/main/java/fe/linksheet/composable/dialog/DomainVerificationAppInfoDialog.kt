@@ -2,17 +2,16 @@ package fe.linksheet.composable.dialog
 
 import android.os.Parcelable
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateMap
 import app.linksheet.feature.app.core.DomainVerificationAppInfo
-import app.linksheet.feature.app.core.LinkHandling
 import fe.android.compose.dialog.helper.input.InputResultDialog
 import fe.android.compose.dialog.helper.input.InputResultDialogState
-import fe.android.compose.dialog.helper.input.rememberInputResultDialog
+import fe.android.compose.dialog.helper.input.rememberInputResultDialogState
 import fe.android.compose.feedback.FeedbackType
 import fe.android.compose.feedback.LocalHapticFeedbackInteraction
 import fe.android.compose.feedback.wrap
+import fe.linksheet.composable.page.settings.apps.verifiedlinkhandlers.createHostState
 import kotlinx.parcelize.Parcelize
 
 @Composable
@@ -20,7 +19,7 @@ fun rememberDomainVerificationAppInfoDialog(
     onClose: (AppHostDialogResult) -> Unit,
 ): InputResultDialogState<DomainVerificationDialogData, AppHostDialogResult> {
     val interaction = LocalHapticFeedbackInteraction.current
-    val state = rememberInputResultDialog<DomainVerificationDialogData, AppHostDialogResult>()
+    val state = rememberInputResultDialogState<DomainVerificationDialogData, AppHostDialogResult>()
 
     InputResultDialog(state = state, onClose = onClose) { data ->
         val (info, _) = data
@@ -48,15 +47,5 @@ data class DomainVerificationDialogData(
 ) : Parcelable
 
 fun DomainVerificationDialogData.createState(): SnapshotStateMap<String, Boolean> {
-    val map = mutableStateMapOf<String, Boolean>()
-    when (appInfo.linkHandling) {
-        LinkHandling.Unsupported, LinkHandling.Browser -> for (host in preferredHosts) {
-            map[host] = true
-        }
-        else -> for (host in appInfo.hostSet) {
-            map[host] = host in preferredHosts
-        }
-    }
-
-    return map
+    return createHostState(appInfo.hostSet, appInfo.linkHandling, preferredHosts)
 }

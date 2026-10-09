@@ -1,6 +1,6 @@
 package app.linksheet.feature.engine.core.fetcher.preview
 
-import androidx.room.TypeConverter
+import androidx.room3.TypeConverter
 import app.linksheet.feature.engine.core.fetcher.FetchResult
 import fe.std.result.IResult
 import me.saket.unfurl.UnfurlResult

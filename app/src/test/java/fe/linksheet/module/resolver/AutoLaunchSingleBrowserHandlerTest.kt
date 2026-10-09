@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class AutoLaunchSingleBrowserHandlerTest : BaseUnitTest  {
     companion object {
         private val whitelistedNull = BrowserModeConfigHelper.Whitelisted(null)

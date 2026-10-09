@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import app.linksheet.compose.preview.PreviewTheme
 import app.linksheet.feature.shizuku.R
-import app.linksheet.feature.shizuku.ShizukuStatus
+import app.linksheet.feature.shizuku.service.ShizukuStatus
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.item.ContentPosition

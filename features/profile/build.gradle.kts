@@ -1,19 +1,20 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
+    id("dev.rikka.tools.refine")
 }
 
 android {
     namespace = "app.linksheet.feature.profile"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -25,10 +26,14 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":compose"))
-    implementation(project(":util"))
+    implementation(project(":feature-app"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-compose"))
+    implementation(project(":lib-util"))
+    compileOnly(project(":lib-hidden-api"))
+    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:4.4.1")
 
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)
     implementation(Koin.compose)
@@ -41,6 +46,8 @@ dependencies {
     implementation(_1fexd.composeKit.preference.compose.mock2)
     implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.compose.component)
+    implementation(_1fexd.composeKit.lifecycle.core)
+    implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.material3)

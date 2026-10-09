@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="enable_request_private_browsing_button">「プライベートブラウジングをリクエスト」ボタンを有効にする</string>
-    <string name="enable_request_private_browsing_button_explainer">ブラウザボタンの横にクリックした URL をプライベート ブラウジング モードで開くボタンを表示します。サポートされているブラウザ: %s</string>
+    <string name="enable_request_private_browsing_button_explainer">ブラウザボタンの横にクリックした URL をプライベートブラウジングモードで開くボタンを表示します。</string>
+    <string name="settings_private_browsing__title_private_browsing">プライベートブラウジング</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">プライベートブラウジングを有効化</string>
+    <string name="settings_private_browsing__divider_configuration">設定</string>
+    <string name="settings_private_browsing__title_allowed_browsers">許可されたブラウザ</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d 個のブラウザ</string>
+    <string name="settings_private_browsing_browsers__title_browsers">プライベートブラウザが有効です</string>
 </resources>

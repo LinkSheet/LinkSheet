@@ -1,11 +1,21 @@
 package fe.linksheet.composable.page.settings.about
 
-import LibRedirectMetadata
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.Bolt
+import androidx.compose.material.icons.outlined.Build
+import androidx.compose.material.icons.outlined.Code
+import androidx.compose.material.icons.outlined.Forum
+import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.Security
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
@@ -27,13 +37,13 @@ import fe.composekit.component.list.column.group.ListItemData
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
 import fe.composekit.layout.column.group
 import fe.fastforwardkt.FastForwardRules
+import fe.libredirectkt.LibRedirectMetadata
 import fe.linksheet.BuildConfig
 import fe.linksheet.R
 import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.navigation.creditsSettingsRoute
 import fe.linksheet.util.LinkSheet
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
-import fe.linksheet.util.buildconfig.LinkSheetInfo
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.androidx.compose.koinViewModel
@@ -54,7 +64,7 @@ object AboutSettingsRouteData {
         ListItemData(
             Icons.Outlined.Security.iconPainter,
             textContent(R.string.libredirect_version),
-            additional = LibRedirectMetadata.fetchedAt
+            additional = LibRedirectMetadata.FETCHED_AT
         )
     )
 }
@@ -65,9 +75,7 @@ fun AboutSettingsRoute(
     navigate: (String) -> Unit,
     viewModel: AboutSettingsViewModel = koinViewModel(),
 ) {
-    val activity = androidx.activity.compose.LocalActivity.current
     val uriHandler = LocalUriHandler.current
-    val buildDate = BuildConfig.BUILT_AT.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat)
 //    val buildType = AppSignature.checkSignature(activity)
 
     var devClicks by remember { mutableIntStateOf(0) }
@@ -148,17 +156,17 @@ fun AboutSettingsRoute(
             DefaultTwoLineIconClickableShapeListItem(
                 headlineContent = textContent(R.string.version),
                 supportingContent = buildAnnotatedTextContent {
-                    appendBuildInfo(R.string.built_at, LinkSheetInfo.buildInfo.builtAt)
-                    appendBuildInfo(R.string.version_name, LinkSheetInfo.buildInfo.versionName)
+                    appendBuildInfo(R.string.built_at, viewModel.infoService.buildInfo.builtAt)
+                    appendBuildInfo(R.string.version_name, viewModel.infoService.buildInfo.versionName)
                     appendBuildInfo(
                         R.string.flavor,
-                        LinkSheetInfo.buildInfo.flavor,
-                        LinkSheetInfo.buildInfo.workflowId != null
+                        viewModel.infoService.buildInfo.flavor,
+                        viewModel.infoService.buildInfo.workflowId != null
                     )
 
-                    if (LinkSheetInfo.buildInfo.workflowId != null) {
+                    if (viewModel.infoService.buildInfo.workflowId != null) {
                         appendBuildInfo(id = R.string.github_workflow_run_id,
-                            LinkSheetInfo.buildInfo.workflowId!!, false)
+                            viewModel.infoService.buildInfo.workflowId!!, false)
                     }
                 },
                 icon = Icons.Outlined.Build.iconPainter,
@@ -214,7 +222,7 @@ private fun ExternalVersionListItem(shape: Shape, padding: PaddingValues, data: 
     val interaction = LocalHapticFeedbackInteraction.current
 
     val formatted = remember(timestamp) {
-        timestamp.unixMillisUtc.format(ISO8601DateTimeFormatter.DefaultFormat)
+        timestamp.unixMillisUtc.format(ISO8601DateTimeFormatter.FriendlyFormat)
     }
 
     DefaultTwoLineIconClickableShapeListItem(

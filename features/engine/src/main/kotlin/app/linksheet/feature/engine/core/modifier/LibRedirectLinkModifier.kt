@@ -9,7 +9,7 @@ import app.linksheet.feature.engine.core.step.EngineStepId
 import app.linksheet.feature.engine.core.step.StepResult
 import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.LibRedirectResult
-import fe.linksheet.extension.toStdUrlOrThrow
+import fe.linksheet.extension.std.toStdUrlOrThrow
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -27,8 +27,9 @@ class LibRedirectLinkModifier(
         resolver.warmup()
     }
 
-    override suspend fun EngineRunContext.runStep(url: StdUrl): LibRedirectModifyOutput = withContext(ioDispatcher) {
-        if (hasExtra<IgnoreLibRedirectExtra>()) {
+    context(context: EngineRunContext)
+    override suspend fun runStep(url: StdUrl): LibRedirectModifyOutput = withContext(ioDispatcher) {
+        if (context.hasExtra<IgnoreLibRedirectExtra>()) {
             return@withContext LibRedirectModifyOutput.Ignored(url)
         }
 
@@ -36,7 +37,7 @@ class LibRedirectLinkModifier(
         val result = resolver.resolve(url.toString(), jsEngine)
         val output = result.toModifyOutput(url)
         val contextResult = result.wrapInContextResult()
-        put(ContextResultId.LibRedirect, contextResult)
+        context.put(ContextResultId.LibRedirect, contextResult)
 
         output
     }

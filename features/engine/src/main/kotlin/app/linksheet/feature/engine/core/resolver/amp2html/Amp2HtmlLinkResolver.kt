@@ -1,12 +1,12 @@
 package app.linksheet.feature.engine.core.resolver.amp2html
 
-import app.linksheet.feature.engine.database.entity.ResolveType
-import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.engine.core.context.EngineRunContext
 import app.linksheet.feature.engine.core.resolver.LinkResolver
 import app.linksheet.feature.engine.core.resolver.ResolveOutput
 import app.linksheet.feature.engine.core.resolver.UrlChecker
 import app.linksheet.feature.engine.core.step.EngineStepId
+import app.linksheet.feature.engine.database.entity.ResolveType
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import fe.std.result.IResult
 import fe.std.result.isFailure
 import fe.std.uri.StdUrl
@@ -53,7 +53,8 @@ class Amp2HtmlLinkResolver(
         return ResolveOutput(result.url)
     }
 
-    override suspend fun EngineRunContext.runStep(url: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
+    context(context: EngineRunContext)
+    override suspend fun runStep(url: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
         urlChecker.check(url)?.let { return@withContext it }
 
         val localCache = useLocalCache()

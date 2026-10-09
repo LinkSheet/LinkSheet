@@ -3,22 +3,32 @@
 package fe.linksheet.module.resolver.module
 
 import android.app.usage.UsageStatsManager
+import app.linksheet.api.SensitivePreference
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.app.core.AppInfoCreator
+import app.linksheet.feature.downloader.core.DownloaderMode
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
 import fe.droidkit.koin.getSystemServiceOrThrow
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.BuildConfig
 import fe.linksheet.feature.engine.RealLinkEngine
-import fe.linksheet.module.preference.SensitivePreference
-import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
-import fe.linksheet.module.resolver.*
+import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
+import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
+import fe.linksheet.module.resolver.FollowRedirectsMode
+import fe.linksheet.module.resolver.ImprovedBrowserHandler
+import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.module.resolver.InAppBrowserHandler
+import fe.linksheet.module.resolver.IntentResolver
+import fe.linksheet.module.resolver.IntentResolverDelegate
 import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.DefaultIntentLauncher
 import fe.linksheet.module.resolver.util.IntentLauncher
+import kotlinx.coroutines.flow.firstOrNull
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
@@ -44,7 +54,7 @@ val ResolverModule = module {
     }
     singleOf(::InAppBrowserHandler)
     single<IntentResolver> {
-        val settings = createSettings(get(), get())
+        val settings = createSettings(get(), get(), get(), get())
         val experimentRepository = get<ExperimentRepository>()
 
         val realLinkEngine = RealLinkEngine(
@@ -52,8 +62,6 @@ val ResolverModule = module {
             client = get(),
             appSelectionHistoryRepository = get(),
             preferredAppRepository = get(),
-            normalBrowsersRepository = get(),
-            inAppBrowsersRepository = get(),
             packageIntentHandler = get(),
             packageLauncherService = get(),
             appSorter = get(),
@@ -72,8 +80,6 @@ val ResolverModule = module {
                 context = get(),
                 appSelectionHistoryRepository = get(),
                 preferredAppRepository = get(),
-                normalBrowsersRepository = get(),
-                inAppBrowsersRepository = get(),
                 appInfoCreator = get(),
                 packageIntentHandler = get(),
                 packageLauncherService = get(),
@@ -121,6 +127,8 @@ data class BrowserSettings(
     val inAppBrowserMode: () -> BrowserMode,
     val selectedInAppBrowser: () -> String?,
     val unifiedPreferredBrowser: () -> Boolean,
+    val whitelistedInAppBrowserPackages: suspend () -> Set<String>?,
+    val whitelistedNormalBrowserPackages: suspend  () -> Set<String>?,
 )
 
 data class FollowRedirectsSettings(
@@ -132,6 +140,7 @@ data class FollowRedirectsSettings(
     val followRedirectsExternalService: () -> Boolean,
     val followRedirectsAllowDarknets: () -> Boolean,
     val followRedirectsAllowLocalNetwork: () -> Boolean,
+    val followRedirectsAggressive: () -> Boolean
 )
 
 data class Amp2HtmlSettings(
@@ -145,6 +154,7 @@ data class Amp2HtmlSettings(
 
 data class DownloaderSettings(
     val enableDownloader: () -> Boolean,
+    val downloaderMode: () -> DownloaderMode,
     val downloaderCheckUrlMimeType: () -> Boolean,
 )
 
@@ -163,7 +173,9 @@ data class PreviewSettings(
 @OptIn(SensitivePreference::class)
 fun createSettings(
     prefRepo: AppPreferenceRepository,
-    experimentRepository: ExperimentRepository
+    experimentRepository: ExperimentRepository,
+    normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
+    inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
 ): IntentResolverSettings {
     return IntentResolverSettings(
         useClearUrls = prefRepo.asFunction(AppPreferences.useClearUrls),
@@ -182,6 +194,8 @@ fun createSettings(
             inAppBrowserMode = prefRepo.asFunction(AppPreferences.browserMode.inAppBrowserMode),
             selectedInAppBrowser = prefRepo.asFunction(AppPreferences.browserMode.selectedInAppBrowser),
             unifiedPreferredBrowser = prefRepo.asFunction(AppPreferences.browserMode.unifiedPreferredBrowser),
+            whitelistedInAppBrowserPackages = { inAppBrowsersRepository.getAll().firstOrNull()?.mapToSet { it.packageName } },
+            whitelistedNormalBrowserPackages = { normalBrowsersRepository.getAll().firstOrNull()?.mapToSet { it.packageName } },
         ),
         libRedirectSettings = LibRedirectSettings(
             enableIgnoreLibRedirectButton = prefRepo.asFunction(AppPreferences.libRedirect.enableIgnoreLibRedirectButton),
@@ -205,9 +219,11 @@ fun createSettings(
             followRedirectsExternalService = prefRepo.asFunction(AppPreferences.followRedirects.externalService),
             followRedirectsAllowDarknets = prefRepo.asFunction(AppPreferences.followRedirects.allowDarknets),
             followRedirectsAllowLocalNetwork = prefRepo.asFunction(AppPreferences.followRedirects.allowLocalNetwork),
+            followRedirectsAggressive  = prefRepo.asFunction(AppPreferences.followRedirects.aggressive)
         ),
         downloaderSettings = DownloaderSettings(
             enableDownloader = prefRepo.asFunction(AppPreferences.downloader.enable),
+            downloaderMode = prefRepo.asFunction(AppPreferences.downloader.mode),
             downloaderCheckUrlMimeType = prefRepo.asFunction(AppPreferences.downloader.checkUrlMimeType),
         ),
         previewSettings = PreviewSettings(

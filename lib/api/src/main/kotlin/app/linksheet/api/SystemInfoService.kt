@@ -1,0 +1,60 @@
+package app.linksheet.api
+
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
+
+interface SystemInfoService {
+    val properties: SystemProperties
+    val build: BuildConstants
+    val buildInfo: BuildInfo
+    val deviceInfo: DeviceInfo
+    fun isCustomRom() : Boolean
+    fun getApplicationId(): String
+}
+
+interface BuildConstants {
+    val manufacturer: String
+    val fingerprint: String
+    val release: String
+    val model: String
+    val sdk: Int
+}
+
+@Keep
+@Serializable
+data class BuildInfo(
+    @SerializedName("version_name")
+    @SerialName("versionName")
+    val versionName: String,
+    @SerializedName("version_code")
+    @SerialName("versionCode")
+    val versionCode: Int,
+    @SerializedName("built_at")
+    @SerialName("builtAt")
+    val builtAt: String,
+    @SerializedName("flavor")
+    @SerialName("flavor")
+    val flavor: String,
+    @SerializedName("workflow_id")
+    @SerialName("workflowId")
+    val workflowId: String? = null,
+    @Transient
+    // We still use Gson in some places, which doesn't know what to do with kotlinx.serialization.Transient
+    @kotlin.jvm.Transient
+    val applicationId: String? = null
+)
+
+@Keep
+@Serializable
+data class DeviceInfo(
+    @SerializedName("android_version")
+    @SerialName("androidVersion")
+    val androidVersion: String,
+    @SerialName("manufacturer")
+    val manufacturer: String,
+    @SerialName("model")
+    val model: String,
+)

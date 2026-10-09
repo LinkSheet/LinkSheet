@@ -7,12 +7,12 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import app.linksheet.feature.analytics.service.TelemetryLevel
+import app.linksheet.feature.analytics.ui.rememberAnalyticDialog
 import fe.linksheet.activity.BaseComponentActivity
 import fe.linksheet.composable.component.dialog.rememberExportLogDialog
-import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
-import fe.linksheet.module.analytics.TelemetryLevel
-import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.composable.ui.AppTheme
+import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.std.javatime.time.ISO8601DateTimeFormatter
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

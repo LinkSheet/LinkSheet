@@ -32,8 +32,16 @@ import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.*
+import androidx.compose.material3.fix.AnchoredDraggableState.Companion.Saver
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
@@ -45,7 +53,12 @@ import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntSize
 import fe.linksheet.material3.M3Log
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -224,6 +237,9 @@ internal class AnchoredDraggableState<T>(
     internal val velocityThreshold: () -> Float,
     val animationSpec: AnimationSpec<Float>,
     internal val confirmValueChange: (newValue: T) -> Boolean = { true },
+    //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+    internal val isReducedMotionEnabled: () -> Boolean,
+    //</editor-fold>
 ) {
 
     /**
@@ -251,12 +267,18 @@ internal class AnchoredDraggableState<T>(
         velocityThreshold: () -> Float,
         animationSpec: AnimationSpec<Float>,
         confirmValueChange: (newValue: T) -> Boolean = { true },
+        //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+        isReducedMotionEnabled: () -> Boolean,
+        //</editor-fold>
     ) : this(
         initialValue,
         positionalThreshold,
         velocityThreshold,
         animationSpec,
-        confirmValueChange
+        confirmValueChange,
+        //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+        isReducedMotionEnabled
+        //</editor-fold>
     ) {
         this.anchors = anchors
         trySnapTo(initialValue)
@@ -405,13 +427,19 @@ internal class AnchoredDraggableState<T>(
         } else targetValue,
     ) {
         if (anchors != newAnchors) {
-            val bypassSnap = newAnchors.minAnchor() < anchors.minAnchor()
+            //<editor-fold desc="b/331418947">
+            M3Log.d("AnchoredDraggableState.updateAnchors,anchors != newAnchors :: $anchors != $newAnchors")
+            val bypassSnap = !isReducedMotionEnabled() && newAnchors.minAnchor() < anchors.minAnchor()
+            M3Log.d("AnchoredDraggableState.updateAnchors,newAnchors.minAnchor() < anchors.minAnchor() :: $bypassSnap")
+            //</editor-fold>
             anchors = newAnchors
 
+            //<editor-fold desc="b/331418947">
             if (bypassSnap) {
                 dragTarget = newTarget
                 return
             }
+            //</editor-fold>
 
             // Attempt to snap. If nobody is holding the lock, we can immediately update the offset.
             // If anybody is holding the lock, we send a signal to restart the ongoing work with the
@@ -649,6 +677,9 @@ internal class AnchoredDraggableState<T>(
             confirmValueChange: (T) -> Boolean,
             positionalThreshold: (distance: Float) -> Float,
             velocityThreshold: () -> Float,
+            //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+            isReducedMotionEnabled: () -> Boolean,
+            //</editor-fold>
         ) = Saver<AnchoredDraggableState<T>, T>(
             save = { it.currentValue },
             restore = {
@@ -657,7 +688,10 @@ internal class AnchoredDraggableState<T>(
                     animationSpec = animationSpec,
                     confirmValueChange = confirmValueChange,
                     positionalThreshold = positionalThreshold,
-                    velocityThreshold = velocityThreshold
+                    velocityThreshold = velocityThreshold,
+                    //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+                    isReducedMotionEnabled = isReducedMotionEnabled
+                    //</editor-fold>
                 )
             }
         )
@@ -701,8 +735,12 @@ internal suspend fun <T> AnchoredDraggableState<T>.animateTo(
     velocity: Float = this.lastVelocity,
 ) {
     M3Log.d("BottomSheet", "animateTo: targetValue=$targetValue, velocity=$velocity")
-
-
+    //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+    if (isReducedMotionEnabled()) {
+        snapTo(targetValue)
+        return
+    }
+    //</editor-fold>
     anchoredDrag(targetValue = targetValue) { anchors, latestTarget ->
         val targetOffset = anchors.positionOf(latestTarget)
         if (!targetOffset.isNaN()) {

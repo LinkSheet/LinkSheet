@@ -1,11 +1,13 @@
 package fe.linksheet.activity.util
 
 interface UiEventReceiver {
-    fun receive(event: UiEvent)
-    fun send(event: UiEvent) = receive(event)
+    fun onEvent(event: UiEvent)
+
+    fun <T : DebugState> publishDebugState(state: T)
+    fun <T : DebugState> getStateOrNull(key: DebugState.Key<*>): T?
 }
 
 sealed interface UiEvent {
     class ShowSnackbar(val text: String) : UiEvent
-    class NavigateTo(val route: String) : UiEvent
+    class NavigateTo(val route: Any) : UiEvent
 }

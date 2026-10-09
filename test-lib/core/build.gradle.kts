@@ -1,19 +1,20 @@
+
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
-import fe.buildlogic.Version
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.extension.addCompilerOptions
+import com.gitlab.grrfe.gradlebuild.common.CompilerOption
+import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
 
 plugins {
     id("com.android.library")
-    kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 group = "fe.linksheet.testlib.core"
 
 android {
     namespace = group.toString()
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -21,7 +22,7 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addCompilerOptions(CompilerOption.AllowKotlinPackage)
+        compilerOptions.freeCompilerArgs.addCompilerOptions(CompilerOption.AllowKotlinPackage)
     }
 
     buildFeatures {
@@ -31,9 +32,9 @@ android {
 
 
 dependencies {
-    implementation(AndroidX.room.ktx)
     api(AndroidX.test.runner)
     api(AndroidX.test.coreKtx)
-    api(Testing.junit.jupiter.api)
+    api("org.junit.jupiter:junit-jupiter-api:6.1.0")
     api(Koin.test)
+    implementation("androidx.room3:room3-runtime:_")
 }

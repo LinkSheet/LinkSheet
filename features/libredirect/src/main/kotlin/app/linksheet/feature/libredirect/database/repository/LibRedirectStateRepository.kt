@@ -18,5 +18,5 @@ class LibRedirectStateRepository(private val dao: LibRedirectServiceStateDao) {
 
     suspend fun isEnabled(serviceKey: String) = isEnabledFlow(serviceKey).firstOrNull() == true
 
-    suspend fun insert(state: LibRedirectServiceState) = dao.insert(state)
+    suspend fun insert(state: LibRedirectServiceState) = dao.insertReplace(state)
 }

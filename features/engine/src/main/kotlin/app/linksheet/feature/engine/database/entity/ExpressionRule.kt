@@ -1,17 +1,20 @@
 package app.linksheet.feature.engine.database.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
+import androidx.room3.TypeConverter
+import androidx.room3.TypeConverters
 
-@Entity(tableName = "expression_rule")
+@Entity(tableName = ExpressionRule.TABLE_NAME)
 @TypeConverters(value = [ExpressionRuleType.Converter::class])
 class ExpressionRule(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val bytes: ByteArray,
     val type: ExpressionRuleType
 ) {
+    companion object {
+        const val TABLE_NAME = "expression_rule"
+    }
 }
 
 enum class ExpressionRuleType {

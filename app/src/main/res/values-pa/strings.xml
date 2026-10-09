@@ -38,9 +38,7 @@
     <string name="domain_selection_confirmation_title">ਡੋਮੇਨ ਚੁਣੋ?</string>
     <string name="log_files">ਪਿਛਲੀਆਂ ਲੌਗ ਫਾਈਲਾਂ</string>
     <string name="open_link_with_subtitle_2">ਲਿੰਕਸ਼ੀਟ ਸ਼ੁਰੂ ਵਿੱਚ OpenLinkWith \'ਤੇ ਅਧਾਰਤ ਸੀ</string>
-    <string name="shizuku_integration_enabled_explainer">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਇਨੇਬਲ ਕੀਤਾ ਗਿਆ!</string>
     <string name="warning">ਚੇਤਾਵਨੀ</string>
-    <string name="enable_downloader_explainer">ਜੇਕਰ URL ਵਿੱਚ ਫਾਈਲ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਹੈ ਤਾਂ ਹੇਠਲੀ ਸ਼ੀਟ ਵਿੱਚ \"ਡਾਊਨਲੋਡ\" ਬਟਨ ਸ਼ਾਮਿਲ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url-id="privacy-downloader">ਗੋਪਨੀਯਤਾ-ਸੰਬੰਧੀ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="logs_explainer">ਐਪ ਲੌਗ ਵੇਖੋ</string>
     <string name="enable_all">ਸਭ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="selected_browser_explainer">ਇਹ ਬ੍ਰਾਊਜ਼ਰ ਆਪਣੇ ਆਪ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ ਜੇਕਰ ਕੋਈ ਮੂਲ ਐਪ ਕਲਿੱਕ ਕੀਤੇ ਲਿੰਕ ਨੂੰ ਨਹੀਂ ਸੰਭਾਲ ਸਕਦਾ</string>
@@ -66,7 +64,6 @@
     <string name="import_and_override">ਇੰਪੋਰਟ ਕਰੋ ਅਤੇ ਓਵਰਰਾਈਡ ਕਰੋ</string>
     <string name="apps_which_can_open_links_explainer">\"ਡਿਫ਼ਾਲਟ ਤੌਰ \'ਤੇ ਖੋਲ੍ਹੋ\" ਮੀਨੂ ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਕ ਐਪ \'ਤੇ ਟੈਪ ਕਰੋ ਜਿਸ ਨਾਲ ਤੁਹਾਨੂੰ ਆਟੋਮੈਟਿਕ ਲਿੰਕ ਖੋਲ੍ਹਣ ਨੂੰ ਅਸਮਰੱਥ ਬਣਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਮਿਲਦੀ ਹੈ</string>
     <string name="success">ਸਫਲਤਾ</string>
-    <string name="request_timeout_explainer">ਇਹ ਪਰਿਭਾਸ਼ਿਤ ਕਰਦਾ ਹੈ ਕਿ ਲਿੰਕਸ਼ੀਟ ਕਿੰਨੇ ਸਕਿੰਟਾਂ ਲਈ ਇੱਕ ਕਨੈਕਸ਼ਨ ਸਥਾਪਤ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰੇਗੀ। ਇਸਨੂੰ 0 \'ਤੇ ਸੈੱਟ ਕਰਨ ਨਾਲ ਟਾਈਮਆਊਟ ਡਿਸੇਬਲ ਹੋ ਜਾਂਦਾ ਹੈ, ਪਰ ਇਸਦੀ ਸਿਫ਼ਾਰਸ਼ ਨਹੀਂ ਕੀਤੀ ਜਾਂਦੀ।</string>
     <string name="github">ਗਿਟਹੱਬ</string>
     <string name="configure">ਕੌਨਫਿਗਰ ਕਰੋ</string>
     <string name="show_linksheet_referrer">ਲਿੰਕਸ਼ੀਟ ਰੈਫਰਰ ਦਿਖਾਓ</string>
@@ -91,7 +88,6 @@
     <string name="advanced">ਉੱਨਤ</string>
     <string name="built_at">(UTC) \'ਤੇ ਬਣਾਇਆ ਗਿਆ:</string>
     <string name="shizuku_explainer_short">ਸਿਸਟਮ APIs ਨਾਲ ਸਿੱਧਾ ਇੰਟਰੈਕਟ ਕਰੋ</string>
-    <string name="back">ਪਿੱਛੇ</string>
     <string name="linksheet_download">ਲਿੰਕਸ਼ੀਟ ਡਾਊਨਲੋਡ</string>
     <string name="follow_redirects_external_service_explainer">ਸੁਪਰਬੇਸਡਾਟਕਾਮ (<annotation url-id="supabase-privacy"> \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>)</string>
     <string name="include_fingerprint">ਡਿਵਾਈਸ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸ਼ਾਮਲ ਕਰੋ (ਸਿਫਾਰਸ਼ੀ)</string>
@@ -105,14 +101,11 @@
     <string name="amp2html_external_service_explainer">supabase.com (<annotation url-id="supabase-privacy">ਗੋਪਨੀਯਤਾ ਨੀਤੀ</annotation>) \'ਤੇ ਤੈਨਾਤ API ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਗੈਰ-AMP ਪੰਨਾ ਸੰਸਕਰਣ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
     <string name="github_explainer">ਸਰੋਤ ਕੋਡ ਰਿਪੌਜ਼ਟਰੀ</string>
     <string name="launch_onboarding">ਔਨਬੋਰਡਿੰਗ ਲਾਂਚ ਕਰੋ</string>
-    <string name="shizuku_integration">Shizuku ਇੰਟੀਗਰੇਸ਼ਨ</string>
     <string name="debug">ਡੀਬੱਗ</string>
-    <string name="downloader_url_mime_type_explainer">ਜਾਂਚ ਕਰਦਾ ਹੈ ਕਿ ਕੀ URL ਇੱਕ ਫਾਈਲ ਐਕਸਟੈਂਸ਼ਨ ਨਾਲ ਖਤਮ ਹੁੰਦਾ ਹੈ (ਉਦਾਹਰਨ ਲਈ \".jpg\"); ਜੇਕਰ ਅਜਿਹਾ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਇਸ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀ ਫ਼ਾਈਲ ਲਈ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।</string>
     <string name="credits_explainer">ਓਪਨ ਸੋਰਸ ਲਾਈਸੈਂਸਿੰਗ</string>
     <string name="remove_all">ਸਾਰੇ ਹਟਾਓ</string>
     <string name="use_unified_preferred_browser">ਯੂਨੀਫਾਈਡ ਸੈਟਿੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="always_ask_explainer">ਹਮੇਸ਼ਾਂ ਸਾਰੇ ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੀ ਸੂਚੀ ਪੇਸ਼ ਕਰੋ</string>
-    <string name="enable_downloader">ਡਾਉਨਲੋਡਰ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="paste">ਪੇਸਟ ਕਰੋ</string>
     <string name="download">ਡਾਊਨਲੋਡ</string>
     <string name="links_explainer">ਲਿੰਕ ਹੇਰਾਫੇਰੀ ਸੰਬੰਧੀ ਸੈਟਿੰਗਾਂ</string>
@@ -124,9 +117,7 @@
     <string name="about">ਦੇ ਬਾਰੇ ਵਿੱਚ</string>
     <string name="add_all">ਸਭ ਸ਼ਾਮਿਲ ਕਰੋ</string>
     <string name="feature_flags_explainer">ਪ੍ਰਯੋਗਾਤਮਕ ਫੀਚਰਸ ਨੂੰ ਇਨੇਬਲ ਜਾਂ ਡਿਸੇਬਲ ਕਰੋ</string>
-    <string name="options">ਵਿਕਲਪ</string>
     <string name="about_explainer">ਇਸ ਐਪ ਬਾਰੇ, ਲਾਈਸੈਂਸ</string>
-    <string name="shizuku_not_running_explainer">Shizuku ਨਹੀਂ ਚੱਲ ਰਿਹਾ ਹੈ। Shizuku ਨੂੰ ਖੋਲ੍ਹਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ, ਫਿਰ ਇਸਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ।</string>
     <string name="browser_status">ਬ੍ਰਾਊਜ਼ਰ ਸਥਿਤੀ</string>
     <string name="request_private_browsing">ਪ੍ਰਾਈਵੇਟ</string>
     <string name="always">ਹਮੇਸ਼ਾਂ</string>
@@ -140,7 +131,6 @@
     <string name="follow_redirects_explainer">ਹੇਠਲੀ ਸ਼ੀਟ ਖੋਲ੍ਹਣ ਤੋਂ ਪਹਿਲਾਂ ਆਟੋਮੈਟਿਕਲੀ ਸਾਰੇ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰੋ। ਇਸ ਵਿੱਚ <annotation url-id="privacy-follow-redirects">ਗੋਪਨੀਯਤਾ-ਸਬੰਧਤ ਪ੍ਰਭਾਵ</annotation> ਹੋ ਸਕਦੇ ਹਨ</string>
     <string name="browser_mode">ਤਰਜੀਹੀ ਬ੍ਰਾਊਜ਼ਰ</string>
     <string name="dark">ਗਹਿਰਾ</string>
-    <string name="shizuku_integration_not_setup_explainer">ਲਿੰਕਸ਼ੀਟ ਦੇ ਕੰਮ ਕਰਨ ਲਈ ਸਖ਼ਤੀ ਨਾਲ ਜ਼ਰੂਰੀ ਨਾ ਹੋਣ ਦੇ ਬਾਵਜੂਦ, ਸ਼ਿਜ਼ੁਕੂ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
     <string name="fastfoward_rules_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url-id="fastforward-github">FastForward</annotation> ਨਿਯਮ ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਲਿੰਕ ਤੋਂ ਰੀਡਾਇਰੈਕਟ ਕੱਢ ਕੇ ਕੁਝ ਮੇਜ਼ਬਾਨਾਂ ਦੇ ਰੀਡਾਇਰੈਕਟਸ ਨੂੰ ਬਾਈਪਾਸ ਕਰੋ)</string>
     <string name="set_as_browser">ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="whitelisted">ਵ੍ਹਾਈਟਲਿਸਟਡ</string>
@@ -156,9 +146,6 @@
     <string name="search">ਖੋਜ ਕਰੋ</string>
     <string name="at_least_one_unknown_browser_installer">ਘੱਟੋ-ਘੱਟ ਇੱਕ (ਅਣਜਾਣ) ਬ੍ਰਾਊਜ਼ਰ ਸਥਾਪਤ ਕੀਤਾ ਗਿਆ ਹੈ</string>
     <string name="always_show_package_name">ਹਮੇਸ਼ਾਂ ਪੈਕੇਜ ਨਾਮ ਵਿਖਾਓ</string>
-    <string name="error">ਤਰੁੱਟੀ</string>
-    <string name="checkmark">ਚੈੱਕਮਾਰਕ</string>
-    <string name="request_timeout">ਰਿਕਵੈਸਟ ਟਾਈਮਆਊਟ</string>
     <string name="apps_which_can_open_links_explainer_2">ਉਹਨਾਂ ਸਾਰੀਆਂ ਐਪਾਂ ਨੂੰ ਸੂਚੀਬੱਧ ਕਰਦਾ ਹੈ ਜੋ ਲਿੰਕਸ਼ੀਟ ਦੇ ਵਿਹਾਰ ਵਿੱਚ ਦਖਲ ਦੇ ਸਕਦੀਆਂ ਹਨ</string>
     <string name="set_as_browser_explainer">ਲਿੰਕਸ਼ੀਟ ਨੂੰ ਡਿਫ਼ਾਲਟ ਬ੍ਰਾਊਜ਼ਰ ਬਣਾਉਣ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ</string>
     <string name="current_session">ਮੌਜੂਦਾ ਸੈਸ਼ਨ</string>
@@ -180,9 +167,7 @@
     <string name="follow_only_known_trackers">ਸਿਰਫ਼ ਜਾਣੇ-ਪਛਾਣੇ ਟਰੈਕਰਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ</string>
     <string name="no_browser_installed_explainer">ਲਿੰਕਸ਼ੀਟ ਬ੍ਰਾਊਜ਼ਰ ਹੋਣ ਦਾ ਦਾਅਵਾ ਕਰਨ ਵਾਲੀ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਪਤਾ ਲਗਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ ਰਹੀ। ਸਭ ਤੋਂ ਵਧੀਆ ਅਨੁਭਵ ਲਈ, ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕਰੋ।</string>
     <string name="no_logs_found">ਕੋਈ ਪਿਛਲੇ ਲੌਗ ਨਹੀਂ ਮਿਲੇ!</string>
-    <string name="downloader_url_mime_type">URL ਤੋਂ ਮਾਈਮ ਕਿਸਮ ਦੀ ਵਰਤੋਂ ਕਰੋ</string>
     <string name="at_least_one_known_browser_installed">ਘੱਟੋ-ਘੱਟ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਕੀਤਾ ਗਿਆ ਹੈ</string>
-    <string name="shizuku_integration_no_permission_explainer">Shizuku ਇਜਾਜ਼ਤ ਦੀ ਬੇਨਤੀ ਕਰਨ ਲਈ ਇੱਥੇ ਟੈਪ ਕਰੋ।</string>
     <string name="system">ਸਿਸਟਮ</string>
     <string name="no_log_entries">ਇਸ ਸੈਸ਼ਨ ਵਿੱਚ ਕੋਈ ਲੌਗ ਨਹੀਂ ਹਨ।</string>
     <string name="add">ਜੋੜ੍ਹੋ</string>
@@ -234,13 +219,11 @@
     <string name="url_copied_toast">URL ਨੂੰ ਕਾਪੀ ਕੀਤਾ ਟੋਸਟ</string>
     <string name="dev_mode_enabled">ਵਧਾਈਆਂ, ਤੁਸੀਂ dev-mode ਨੂੰ ਸਮਰੱਥ ਬਣਾਇਆ ਹੈ। ਜਰਾ ਸਾਵਧਾਨੀ ਨਾਲ।</string>
     <string name="clear_urls_version">ClearURLs ਦੇ ਨਿਯਮ</string>
-    <string name="import_settings">ਸੈਟਿੰਗਾਂ ਇੰਪੋਰਟ ਕਰੋ</string>
     <string name="resolve_via_toast">ਜਦੋਂ ਇੱਕ URL ਹੱਲ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਤਾਂ ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ</string>
     <string name="download_started_toast">ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਹੋਣ ਦਾ ਟੋਸਟ</string>
     <string name="notifications">ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="resolve_via_toast_explainer">ਇੱਕ ਟੋਸਟ ਵਿਖਾਓ ਜਦੋਂ ਇੱਕ URL ਨੂੰ ਇੱਕ ਬਾਹਰੀ ਸੇਵਾ ਦੁਆਰਾ ਹੱਲ ਕੀਤਾ ਜਾਂਦਾ ਹੈ</string>
-    <string name="confirm_import">ਤਸਦੀਕ ਕਰੋ</string>
     <string name="dev">ਡਿਵੈਲਪਰ</string>
     <string name="debug_build">ਡੀਬੱਗ ਬਿਲਡ</string>
     <string name="libredirect_version">LibRedirect</string>

@@ -14,4 +14,9 @@
     <string name="settings_shizuku__divider_settings">Settings</string>
     <string name="settings_shizuku__title_auto_disable_link_handling">Auto-disable link handling</string>
     <string name="settings_shizuku__text_auto_disable_link_handling">Automatically disable link handling for newly installed apps.</string>
+    <string name="shizuku_integration_enabled_explainer">Shizuku integration has been successfully enabled!</string>
+    <string name="shizuku_not_running_explainer">Shizuku is not running. Tap here to open Shizuku, then follow the instructions to start it.</string>
+    <string name="shizuku_integration_no_permission_explainer">Tap here to request Shizuku permission.</string>
+    <string name="shizuku_integration_not_setup_explainer">While not strictly necessary for LinkSheet to work, Shizuku is recommended. Tap here to install it.</string>
+    <string name="shizuku_integration">Shizuku integration</string>
 </resources>

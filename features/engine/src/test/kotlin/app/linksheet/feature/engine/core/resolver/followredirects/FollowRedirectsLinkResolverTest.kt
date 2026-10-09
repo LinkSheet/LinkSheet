@@ -30,7 +30,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class FollowRedirectsLinkResolverTest : BaseUnitTest {
     companion object {
         private val SHORT_URL = "https://t.co/JvpSaTXZDi".toStdUrlOrThrow()
@@ -72,7 +72,7 @@ internal class FollowRedirectsLinkResolverTest : BaseUnitTest {
             enabled = { true }
         )
 
-        val result = withTestRunContext(resolver) { it.runStep(SHORT_URL) }
+        val result = withTestRunContext { resolver.runStep(SHORT_URL) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)

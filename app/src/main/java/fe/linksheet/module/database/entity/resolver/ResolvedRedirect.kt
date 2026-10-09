@@ -1,13 +1,13 @@
 package fe.linksheet.module.database.entity.resolver
 
-import androidx.room.Entity
-import androidx.room.Ignore
+import androidx.room3.Entity
 
-@Entity(tableName = "resolved_redirect", primaryKeys = ["shortUrl"])
+@Entity(tableName = ResolvedRedirect.TABLE_NAME, primaryKeys = ["shortUrl"])
 data class ResolvedRedirect(
     val shortUrl: String,
     val resolvedUrl: String? = null
-) : ResolverEntity<ResolvedRedirect>  {
-    @Ignore
-    override val url: String? = resolvedUrl
+) {
+    companion object {
+        const val TABLE_NAME = "resolved_redirect"
+    }
 }

@@ -2,27 +2,23 @@ import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 
 plugins {
     id("com.android.library")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 group = "fe.linksheet.hiddenapi"
 
 android {
     namespace = group.toString()
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
     }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
 }
 
 dependencies {
-    annotationProcessor("dev.rikka.tools.refine:annotation-processor:_")
-    compileOnly("dev.rikka.tools.refine:annotation:_")
+    annotationProcessor("com.github.1fexd.HiddenApiRefinePlugin:annotation-processor:4.4.1")
+    compileOnly("com.github.1fexd.HiddenApiRefinePlugin:annotation:4.4.1")
     compileOnly("org.jetbrains:annotations:_")
     compileOnly(AndroidX.annotation)
 }

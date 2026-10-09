@@ -8,4 +8,10 @@
     <string name="services">Serviços</string>
     <string name="no_libredirect_services">Nenhum serviço LibRedirect encontrado!</string>
     <string name="instance_not_available_anymore">A instância não está mais disponível!</string>
+    <string name="libredirect_via">Via %s</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect - %s</string>
+    <string name="enable_libredirect_explainer">Redirecionar ligações para front-ends favoráveis à privacidade usando a integração experimental <annotation url-id="libredirect-github">LibRedirect</annotation></string>
+    <string name="settings_libredirect__title_add_instance">Adicionar uma instância</string>
+    <string name="settings_libredirect__text_placeholder_instance">Instância</string>
 </resources>

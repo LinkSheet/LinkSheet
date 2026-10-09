@@ -5,8 +5,11 @@ import app.linksheet.api.database.DefaultCrossDatabaseMigration
 import app.linksheet.feature.libredirect.database.LibRedirectDatabase
 import app.linksheet.feature.libredirect.database.repository.LibRedirectDefaultRepository
 import app.linksheet.feature.libredirect.database.repository.LibRedirectStateRepository
+import app.linksheet.feature.libredirect.database.repository.LibRedirectUserInstanceRepository
+import app.linksheet.feature.libredirect.preference.Experiment
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectServiceSettingsViewModel
 import app.linksheet.feature.libredirect.viewmodel.LibRedirectSettingsViewModel
+import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -26,9 +29,13 @@ val LibRedirectFeatureModule = module {
             migrator = get(qualifier<LibRedirectDatabase>())
         )
     }
-    factory { LibRedirectDefaultRepository(dao = get<LibRedirectDatabase>().libRedirectDefaultDao()) }
-    factory { LibRedirectStateRepository(dao = get<LibRedirectDatabase>().libRedirectServiceStateDao()) }
+    factory { LibRedirectDefaultRepository(dao = get<LibRedirectDatabase>().defaultDao()) }
+    factory { LibRedirectStateRepository(dao = get<LibRedirectDatabase>().serviceStateDao()) }
+    factory { LibRedirectUserInstanceRepository(dao = get<LibRedirectDatabase>().userInstanceDao()) }
     factoryOf(::LibRedirectResolver)
+    factory {
+        LibRedirectUseCase(ioDispatcher = Dispatchers.IO)
+    }
     viewModelOf(::LibRedirectSettingsViewModel)
     viewModel { parameters ->
         LibRedirectServiceSettingsViewModel(
@@ -36,6 +43,9 @@ val LibRedirectFeatureModule = module {
             serviceKey = parameters.get(),
             defaultRepository = get(),
             stateRepository = get(),
+            userInstanceRepository = get(),
+            customInstancesExperiment = get(Experiment.CustomInstances.qualifier),
+            useCase = get()
         )
     }
 }

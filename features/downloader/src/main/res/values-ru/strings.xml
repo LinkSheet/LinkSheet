@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Включить загрузчик</string>
+    <string name="enable_downloader_explainer">Добавить кнопку «Скачать» на нижний лист, если URL-адрес содержит прямую ссылку на файл. Это может иметь</string>
+    <string name="downloader_url_mime_type">Использовать тип mime из URL</string>
+    <string name="downloader_url_mime_type_explainer">Проверяет, заканчивается ли URL-адрес расширением файла (например, «.jpg»); Если да, то этот тип используется для загруженного файла.</string>
+    <string name="settings_links_downloader__title_downloader">Загрузчик</string>
+    <string name="action_downloader__try_to_download">Проверьте загружаемый файл</string>
+    <string name="settings_downloader__title_mode_auto">Автоматический режим</string>
+    <string name="settings_downloader__subtitle_mode_auto">Автоматически проверять наличие файлов для скачивания по ссылке</string>
+    <string name="settings_downloader__title_mode_manual">Ручной режим</string>
+    <string name="settings_downloader__subtitle_mode_manual">Показывать кнопку «Проверить файлы» в нижнем меню</string>
+</resources>

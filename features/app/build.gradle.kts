@@ -1,24 +1,25 @@
+
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import com.gitlab.grrfe.gradlebuild.common.CompilerOption
+import com.gitlab.grrfe.gradlebuild.common.PluginOption
+import com.gitlab.grrfe.gradlebuild.extension.addCompilerOptions
+import com.gitlab.grrfe.gradlebuild.extension.addPluginOptions
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
-import fe.buildlogic.common.CompilerOption
-import fe.buildlogic.common.PluginOption
-import fe.buildlogic.common.extension.addCompilerOptions
-import fe.buildlogic.common.extension.addPluginOptions
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
     id("kotlin-parcelize")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {
     namespace = "app.linksheet.feature.app"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -26,17 +27,19 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addCompilerOptions(CompilerOption.WhenGuards)
-        addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
+        compilerOptions.freeCompilerArgs.addCompilerOptions(CompilerOption.SkipPreReleaseCheck)
+        compilerOptions.freeCompilerArgs.addPluginOptions(PluginOption.Parcelize.ExperimentalCodeGeneration to true)
     }
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":compose"))
-    implementation(project(":util"))
+    implementation(project(":lib-compose"))
+    implementation(project(":lib-util"))
     implementation(project(":test-fake"))
-    compileOnly(project(":hidden-api"))
+    compileOnly(project(":lib-hidden-api"))
+
+    api(Grrfe.std.coroutines)
+    implementation(AndroidX.compose.material3)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.foundation)
@@ -47,6 +50,8 @@ dependencies {
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.compose.core)
     implementation(_1fexd.composeKit.compose.component)
+    implementation(_1fexd.composeKit.koin)
+    implementation("com.github.LinkSheet.flavors:core:_")
 
     implementation(Grrfe.gsonExt.core)
     implementation("io.github.reandroid:ARSCLib:_")

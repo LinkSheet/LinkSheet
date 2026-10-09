@@ -4,7 +4,7 @@ enum class ListState {
     Loading, NoItems, NoResult, Items;
 }
 
-fun <T> listState(list: List<T>?, filter: String): ListState {
+fun <T> listState(list: List<T>?, filter: CharSequence): ListState {
     return when {
         list == null -> ListState.Loading
         list.isNotEmpty() -> ListState.Items
@@ -21,10 +21,10 @@ fun <T> listState(list: List<T>?): ListState {
     }
 }
 
-fun <K, V> mapState(list: Map<K, V>?, filter: String): ListState {
+fun <K, V> mapState(map: Map<K, V>?, filter: String): ListState {
     return when {
-        list == null -> ListState.Loading
-        list.isNotEmpty() -> ListState.Items
+        map == null -> ListState.Loading
+        map.isNotEmpty() -> ListState.Items
         filter.isEmpty() -> ListState.NoItems
         else -> ListState.NoResult
     }

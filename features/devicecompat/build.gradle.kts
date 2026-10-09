@@ -1,19 +1,20 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
+    id("dev.rikka.tools.refine")
 }
 
 android {
     namespace = "app.linksheet.feature.devicecompat"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -25,10 +26,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":common"))
-    implementation(project(":util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-util"))
     implementation(project(":feature-systeminfo"))
+    compileOnly(project(":lib-hidden-api"))
+    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:4.4.1")
 
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)

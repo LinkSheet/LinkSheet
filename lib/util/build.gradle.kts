@@ -1,18 +1,17 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
-import fe.build.dependencies.MozillaComponents
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
 
 plugins {
-    kotlin("android")
     id("com.android.library")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {
     namespace = "fe.linksheet.lib.util"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -24,8 +23,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":common"))
+    implementation(project(":lib-api"))
 
     api(KotlinX.coroutines.android)
     implementation(Koin.android)
@@ -37,7 +35,6 @@ dependencies {
     implementation(Square.okHttp3.android)
     implementation(JetBrains.ktor.client.core)
     implementation("org.jsoup:jsoup:_")
-    implementation(MozillaComponents.support.utils)
     implementation("com.github.seancfoley:ipaddress:_")
     implementation(AndroidX.core.ktx)
     implementation(AndroidX.compose.runtime)

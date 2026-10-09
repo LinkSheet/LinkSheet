@@ -5,19 +5,18 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.core.context.AppRoleId
 import app.linksheet.feature.engine.core.context.EngineRunContext
-import app.linksheet.feature.engine.core.rule.PostProcessorRule
 import app.linksheet.feature.engine.core.rule.PostProcessorInput
+import app.linksheet.feature.engine.core.rule.PostProcessorRule
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
-import kotlin.intArrayOf
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class DefaultBrowserRuleTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
@@ -29,14 +28,15 @@ internal class DefaultBrowserRuleTest : BaseUnitTest {
             "github.com" to AndroidAppPackage("org.mozilla.fennec_fdroid")
         )
 
-        override suspend fun EngineRunContext.checkRule(input: PostProcessorInput): EngineResult? {
+        context(context: EngineRunContext)
+        override suspend fun checkRule(input: PostProcessorInput): EngineResult? {
             val url = input.resultUrl
             val appPackage = defaultBrowsers[url.host]
             if (appPackage != null) {
-                put(AppRoleId.Browser, appPackage)
+                context.put(AppRoleId.Browser, appPackage)
             }
 
-            return empty()
+            return context.empty()
         }
     }
     private val base by lazy { DefaultBrowserTestBase(dispatcher, rule) }

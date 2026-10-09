@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_scenario__title_scenarios">シナリオ</string>
+    <string name="settings_scenario__text_scenarios">シナリオ設定</string>
+    <string name="settings_scenario__text_data_type">データ形式</string>
+    <string name="settings_scenario__text_value">値</string>
+    <string name="settings_scenario__title_new_scenario_dialog">新しいシナリオ</string>
+    <string name="settings_scenario__text_placeholder_instance">シナリオ名</string>
+    <string name="settings_scenario__divider_rules">ルール</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_remote_config__title_dialog">Włączyć zdalną konfigurację?</string>
+    <string name="settings_remote_config__text_content">LinkSheet może automatycznie aktualizować wewnętrzne zasoby konfiguracji i dokumentacji, łącząc się ze swoim serwerem konfiguracji. Aby dowiedzieć się więcej, stuknij <annotation url-id="github.linksheet.wiki.privacy.remote-config">tutaj</annotation>.</string>
+    <string name="settings_remote_config__title">Zdalna konfiguracja</string>
+</resources>

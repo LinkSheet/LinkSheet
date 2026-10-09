@@ -20,7 +20,8 @@ object Experiments : PreferenceDefinition(
     "experiment_impr_btm_sheet_url_double_tap",
     "experiment_impr_btm_sheet_expand_fully",
     "experiment_improved_bottom_sheet_auto_launch_single_browser",
-    "experiment_manual_follow_redirects"
+    "experiment_manual_follow_redirects",
+    "experiment_aggressive_follow_redirects"
 ) {
     val interceptAccidentalTaps = boolean(
         key = "experiment_intercept_accidental_taps",
@@ -38,9 +39,6 @@ object Experiments : PreferenceDefinition(
     val noBottomSheetStateSave = boolean(
         key = "experiment_no_bottom_sheet_state_save"
     )
-    val aggressiveFollowRedirects = boolean(
-        key = "experiment_aggressive_follow_redirects"
-    )
     val linkEngine = boolean(
         key = "experiment_link_engine"
     )
@@ -50,6 +48,7 @@ object Experiments : PreferenceDefinition(
 
     val newVlh = boolean(
         key = "experiment_new_vlh",
+        default = false
     )
 
     val newShizuku = boolean(
@@ -60,14 +59,16 @@ object Experiments : PreferenceDefinition(
         key = "experiment_scenario"
     )
 
+    val libRedirectCustomInstances = boolean(
+        key = "libredirect_custom_instances",
+    )
+
     val experiments = listOf(
         group(
             name = "improved_bottom_sheet",
             displayName = "Improved bottom sheet",
-            experiment("LibRedirect QuickJS engine", libRedirectJsEngine),
             experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),
             experiment("Disable bottom sheet state save", noBottomSheetStateSave),
-            experiment("Aggressive follow redirects", aggressiveFollowRedirects),
         ),
         group(
             name = "logging",
@@ -83,6 +84,17 @@ object Experiments : PreferenceDefinition(
             name = "new_vlh",
             displayName = "New verified link handlers page",
             experiment("Enable new VLH page", newVlh)
+        ),
+        group(
+            name = "libredirect",
+            displayName = "LibRedirect",
+            experiment("QuickJS engine", libRedirectJsEngine),
+            experiment("Custom instances", libRedirectCustomInstances)
+        ),
+        group(
+            name = "shizuku",
+            displayName = "Shizuku",
+            experiment("Enable Shizuku", newShizuku)
         )
     )
 

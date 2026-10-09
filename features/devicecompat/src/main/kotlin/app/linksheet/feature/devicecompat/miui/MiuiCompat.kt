@@ -2,13 +2,13 @@ package app.linksheet.feature.devicecompat.miui
 
 import android.app.Activity
 import android.app.AppOpsManager
+import android.app.AppOpsManagerHidden
 import android.content.Context
 import android.os.Process
 import androidx.core.content.getSystemService
-import app.linksheet.api.RefineWrapper
-import app.linksheet.api.WrappedAppOpsManagerHidden
+import app.linksheet.api.SystemInfoService
+import dev.rikka.tools.refine.Refine
 import fe.composekit.intent.buildIntent
-import fe.linksheet.feature.systeminfo.SystemInfoService
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
 
@@ -23,7 +23,6 @@ interface MiuiCompatProvider {
 
 class RealMiuiCompatProvider(
     private val infoService: SystemInfoService,
-    private val refineWrapper: RefineWrapper,
 ) : MiuiCompatProvider {
     override val isXiaomiDevice = infoService.build.manufacturer.contains("xiaomi", ignoreCase = true)
 
@@ -33,14 +32,14 @@ class RealMiuiCompatProvider(
     }
 
     override val isRequired = resettableLazy {
-        isXiaomiDevice && !infoService.isCustomRom && readMiuiVersion() != null
+        isXiaomiDevice && !infoService.isCustomRom() && readMiuiVersion() != null
     }
 
     override fun provideCompat(context: Context): MiuiCompat {
         if (!isRequired.value) return NoOpMiuiCompat
 
         val appOpsManager = context.getSystemService<AppOpsManager>()!!
-        return RealMiuiCompat(refineWrapper.cast(appOpsManager))
+        return RealMiuiCompat(Refine.unsafeCast(appOpsManager))
     }
 }
 
@@ -55,7 +54,7 @@ object NoOpMiuiCompat : MiuiCompat {
 }
 
 class RealMiuiCompat(
-    private val appOpsManager: WrappedAppOpsManagerHidden,
+    private val appOpsManager: AppOpsManagerHidden,
 ) : MiuiCompat {
     companion object {
         private const val OP_BACKGROUND_START_ACTIVITY = 10021

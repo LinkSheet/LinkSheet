@@ -1,18 +1,19 @@
 
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
 
 plugins {
+    kotlin("plugin.serialization")
     id("com.android.library")
-    kotlin("android")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {
     namespace = "fe.linksheet.feature.systeminfo"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -24,8 +25,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-util"))
+    compileOnly(project(":lib-hidden-api"))
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.time.java)
@@ -34,6 +36,8 @@ dependencies {
     implementation(platform(_1fexd.composeKit.bom))
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.process)
+
+    implementation(KotlinX.serialization.core)
 
     implementation(Grrfe.gsonExt.core)
 

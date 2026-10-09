@@ -1,18 +1,52 @@
 package fe.linksheet.module.repository
 
 import android.net.Uri
+import app.linksheet.feature.backup.api.CommonImport
+import app.linksheet.feature.backup.api.ExportableRepository
+import app.linksheet.feature.backup.api.ImportSettings
+import app.linksheet.feature.backup.model.PreferredAppExportModel
+import app.linksheet.feature.backup.model.fromExportModel
+import app.linksheet.feature.backup.model.toExportModel
+import fe.kotlin.extension.iterable.mapToSet
 import fe.linksheet.module.database.dao.PreferredAppDao
 import fe.linksheet.module.database.entity.PreferredApp
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
+import kotlin.reflect.KClass
 
-class PreferredAppRepository(private val dao: PreferredAppDao) {
+class PreferredAppRepository(
+    private val dao: PreferredAppDao
+) : ExportableRepository<PreferredApp, PreferredAppExportModel> {
+
+    override val modelClass: KClass<PreferredAppExportModel>
+        get() = PreferredAppExportModel::class
+
+    override suspend fun exportAll(): List<PreferredAppExportModel> {
+        return CommonImport.export(dao) { it.toExportModel() }
+    }
+
+    override suspend fun eraseAll() {
+        dao.deleteAll()
+    }
+
+    override suspend fun import(
+        settings: ImportSettings,
+        models: List<PreferredAppExportModel>
+    ): List<Pair<PreferredApp, Long>> {
+        return CommonImport.import(dao, settings, models) { it.fromExportModel() }
+    }
+
+    fun getAll(): Flow<List<PreferredApp>> {
+        return dao.getAll()
+    }
+
     fun getAllAlwaysPreferred() = dao.getAllAlwaysPreferred()
 
     suspend fun getByHost(uri: Uri?): PreferredApp? {
         if (uri?.host == null) return null
-        return dao.getByHost(uri.host!!).firstOrNull()
+        val host = uri.host!!.lowercase()
+        return dao.getByHost(host).firstOrNull()
     }
 
 
@@ -22,23 +56,35 @@ class PreferredAppRepository(private val dao: PreferredAppDao) {
         dao.delete(preferredApp)
     }
 
-    suspend fun deleteByPackageNames(packageNames: Set<String>) = dao.deleteByPackageName(packageNames)
+    suspend fun deleteByPackageNames(packageNames: Set<String>) =
+        dao.deleteByPackageName(packageNames)
 
     suspend fun deleteByHostAndPackageName(
         host: String,
         packageName: String,
     ) = dao.deleteByHostAndPackageName(host, packageName)
 
+    suspend fun deleteByHostsAndPackageName(
+        hosts: Set<String>,
+        packageName: String,
+    ) {
+        dao.deleteByHostsAndPackageName(hosts, packageName)
+    }
+
     suspend fun deleteByHost(host: String) {
         dao.deleteByHost(host)
     }
 
-    suspend fun insert(preferredApp: PreferredApp) {
-        dao.insert(preferredApp)
+    suspend fun deleteByHosts(hosts: Set<String>) {
+        dao.deleteByHosts(hosts)
+    }
+
+    suspend fun insert(preferredApp: PreferredApp): Long {
+        return dao.insertReplace(preferredApp)
     }
 
     suspend fun insert(items: List<PreferredApp>) {
-        dao.insert(items)
+        dao.insertReplace(items)
     }
 
     fun getByPackageNameFlow(packageName: String): Flow<List<PreferredApp>> {
@@ -47,5 +93,9 @@ class PreferredAppRepository(private val dao: PreferredAppDao) {
 
     suspend fun getByPackageName(packageName: String): List<PreferredApp> {
         return dao.getByPackageName(packageName).first()
+    }
+
+    suspend fun getPreferredHostSet(packageName: String): Set<String> {
+        return getByPackageName(packageName).mapToSet { it.host }
     }
 }

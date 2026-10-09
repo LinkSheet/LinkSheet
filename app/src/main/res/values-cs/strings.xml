@@ -43,7 +43,6 @@
     <string name="add">Přidat</string>
     <string name="preview_url_explainer">Zobrazí adresu URL, na kterou jste klepnuli (po jejím zpracování)</string>
     <string name="download">Stáhnout</string>
-    <string name="enable_downloader">Povolit stahovač</string>
     <string name="linksheet_download">Stáhnout pomocí LinkSheet</string>
     <string name="always_disable">Vynutit zakázání</string>
     <string name="paste">Vložit</string>
@@ -52,7 +51,6 @@
     <string name="light">Světlý</string>
     <string name="browser_status">Stav prohlížeče</string>
     <string name="credits_explainer">Poděkování, licence</string>
-    <string name="downloader_url_mime_type">Použít typ mime z adresy</string>
     <string name="donate_subtitle">Zakoupit <b>LinkSheet Pro</b></string>
     <string name="select_an_app">Vybrat aplikaci</string>
     <string name="whitelisted_explainer">Zobrazit pouze povolené prohlížeče</string>
@@ -61,7 +59,6 @@
     <string name="always_show_package_name_explainer">Vždy zobrazit názvy balíčků namísto samotných názvů aplikací. Toto platí pro celou aplikaci.</string>
     <string name="hide_after_copying">Automaticky skrýt při akci</string>
     <string name="hide_after_copying_explainer">Automaticky skrýt spodní list při klepnutí na akční tlačítko jako „Kopírovat odkaz“ nebo „Stáhnout“</string>
-    <string name="back">Zpět</string>
     <string name="display_grid_layout">Mřížka</string>
     <string name="display_grid_layout_explainer">Zobrazit mřížku namísto seznamu ve spodním listu</string>
     <string name="set_as_browser_done">Aplikace LinkSheet byla nastavena jako výchozí prohlížeč!</string>
@@ -76,8 +73,6 @@
     <string name="about_explainer">Poděkování, licence, odkazy, verze</string>
     <string name="github">GitHub</string>
     <string name="open_copied_link">Ze schránky</string>
-    <string name="error">Chyba</string>
-    <string name="checkmark">Zaškrtávátko</string>
     <string name="links">Odkazy</string>
     <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url-id="clearurls-github">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
     <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url-id="supabase-privacy">zásady ochrany soukromí</annotation>)</string>
@@ -91,7 +86,6 @@
     <string name="dont_show_filtered_item">Nezobrazovat sekci „naposledy vybraná aplikace“</string>
     <string name="dont_show_filtered_item_explainer">Nezobrazovat horní sekci, která navrhuje naposledy použitou aplikaci pro daného hostitele</string>
     <string name="preview_url">Náhled adresy URL</string>
-    <string name="downloader_url_mime_type_explainer">Zkontroluje, zda adresa URL končí typem souboru (např. „.jpg“); pokud ano, bude pro stažený soubor použit tento typ.</string>
     <string name="in_app_browser">Prohlížeč v aplikaci</string>
     <string name="use_app_settings">Výchozí</string>
     <string name="always_disable_explainer">Zakázat prohlížeč v aplikaci ve všech aplikacích</string>
@@ -107,7 +101,6 @@
     <string name="system">Podle systému</string>
     <string name="theme_explainer">Material You, tmavý motiv, čistě černý motiv</string>
     <string name="fastfoward_rules_explainer">Použít experimentální integraci pravidel <annotation url-id="fastforward-github">FastForward</annotation> (obejde přesměrování některých hostitelů extrahováním cílové adresy z odkazu)</string>
-    <string name="enable_downloader_explainer">Přidá tlačítko „Stáhnout“ do spodního listu, pokud adresa URL obsahuje přímý odkaz na soubor. Tato funkce může mít <annotation url-id="privacy-downloader">následky na soukromí</annotation></string>
     <string name="in_app">V aplikaci</string>
     <string name="export">Export</string>
     <string name="log_privacy">Pro více informací o soukromí navštivte tento <annotation url-id="privacy-logs">odkaz</annotation>.</string>
@@ -122,14 +115,12 @@
     <string name="donate">Přispět</string>
     <string name="built_by_error">Toto sestavení nebylo podepsáno ani vývojářem 1fexd, ani procesem GitHub.</string>
     <string name="manual_build">Ručně sestaveno a podepsáno vývojářem 1fexd</string>
-    <string name="shizuku_not_running_explainer">Shizuku neběží. Klepnutím sem otevřete aplikaci Shizuku a poté ji podle pokynů spusťte.</string>
     <string name="donate_crypto">Přispět kryptoměnou</string>
     <string name="no">Ne</string>
     <string name="no_handlers_found_explainer">Aplikace LinkSheet nedokáže otevřít tento odkaz.</string>
     <string name="thanks_for_donating">Děkujeme za váš příspěvek!</string>
     <string name="donate_explainer_crypto">Při přispívání kryptoměnou pošlete e-mail na adresu <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
     <string name="download_started">Stahování spuštěno</string>
-    <string name="request_timeout_explainer">Určuje, kolik sekund bude aplikace LinkSheet čekat na navázání spojení. Nastavením na 0 se časový limit vypne, to ale nedoporučujeme.</string>
     <string name="resolve_failed">%s selhalo: %s</string>
     <string name="discord">Discord</string>
     <string name="join">Připojit se</string>
@@ -152,11 +143,9 @@
     <string name="debug_explainer">Protokoly aplikací, reset otevírání odkazů</string>
     <string name="logs">Protokoly</string>
     <string name="logs_explainer">Zobrazit protokoly aplikace</string>
-    <string name="options">Možnosti</string>
     <string name="current_session">Aktuální relace</string>
     <string name="log_files">Minulé relace</string>
     <string name="log_viewer">Prohlížeč protokolů</string>
-    <string name="request_timeout">Vypršení požadavku</string>
     <string name="no_browsers_found">Nenalezeny žádné prohlížeče.</string>
     <string name="export_log">Protokol exportu</string>
     <string name="request_private_browsing">Soukromý</string>
@@ -173,8 +162,6 @@
     <string name="shizuku_explainer_short">Přímo interagovat se systémovými rozhraními API</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Režim Shizuku aktivován, klepnutím na aplikaci přepnete její funkce automatického zpracování odkazů. Dlouhým klepnutím na aplikaci otevřete její nabídku nastavení „Otevírání ve výchozím nastavení“.</string>
     <string name="disable_all">Zakázat vše</string>
-    <string name="shizuku_integration_no_permission_explainer">Klepněte sem pro vyžádání oprávnění Shizuku.</string>
-    <string name="shizuku_integration_not_setup_explainer">Přestože není pro fungování LinkSheetu nezbytně nutný, je doporučeno používat službu Shizuku. Klepnutím sem ji nainstalujete.</string>
     <string name="pretend_to_be_app">Zachytit požadavky nativních aplikací</string>
     <string name="general">Různé</string>
     <string name="at_least_one_known_browser_installed_explainer">Aplikace LinkSheet detekovala alespoň jednu aplikaci prohlížeče.</string>
@@ -193,8 +180,6 @@
     <string name="feature_flags_explainer">Povolit nebo zakázat experimentální funkce</string>
     <string name="no_apps_which_can_handle_links_found">Nebyly nalezeny žádné aplikace, které dokážou zpracovat odkazy.</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
-    <string name="shizuku_integration_enabled_explainer">Integrace Shizuku byla úspěšně povolena!</string>
-    <string name="shizuku_integration">Integrace Shizuku</string>
     <string name="configure">Nastavit</string>
     <string name="pretend_to_be_app_explainer">Předstírat nativní aplikaci pro podporované domény pomocí aplikace LinkSheetCompat</string>
     <string name="pretend_to_be_app_explainer_2">Některé aplikace, jako například Google Chrome, výslovně hledají nativní aplikaci, která by zpracovala například odkaz na YouTube, když na něj klepnete ve výsledcích vyhledávání. Aplikace LinkSheetCompat předstírá, že je takovou nativní aplikací pro podporované hostitele, a poté předá požadavek aplikaci LinkSheet.</string>
@@ -213,7 +198,6 @@
     <string name="online_services">Online služby</string>
     <string name="export_explainer">Exportovat vaše aktuální nastavení aplikace do souboru</string>
     <string name="onboarding_0_subtitle">Vyberte si, zda chcete být vždy dotázáni po otevření odkazu, nastavte výchozí prohlížeče a spoustu dalšího</string>
-    <string name="import_settings">Importovat nastavení</string>
     <string name="linksheet_donation_explainer_2">Darováním více než <b>5 €</b> vám umožní přístup k <b>LinkSheet Pro</b>, který zahrnuje <b>exkluzivní funkce</b>, jako například: externí následování přesměrování, externí načtení ne-AMP stránek a již brzy spoustu dalšího!</string>
     <string name="privacy_settings_explainer">Soukromí odkazovatele, telemetrie</string>
     <string name="include_log_hash_key">Zahrnout hash klíč protokolu (klíč používaný k redigování protokolů)</string>
@@ -224,7 +208,7 @@
     <string name="notifications">Vyskakovací zprávy a oznámení</string>
     <string name="amp2html_short">Amp2Html</string>
     <string name="dev_explainer">Vývojářská nastavení</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="show_linksheet_referrer">Zobrazit odkazovatele LinkSheet</string>
     <string name="export_import_settings">Exportovat nebo importovat nastavení</string>
     <string name="export_import_settings_explainer">Exportujte svá aktuální nastavení nebo importujte předchozí export nastavení</string>
@@ -232,7 +216,6 @@
     <string name="import_explainer">Importovat předchozí export ze souboru</string>
     <string name="export_include_recommendation">Doporučujeme zapnout následující nastavení pouze, pokud neplánujete svůj export sdílet s někým jiným!</string>
     <string name="import_settings_override_preferences">Tímto přepíšete všechna existující nastavení. Pokračovat?</string>
-    <string name="confirm_import">Potvrdit</string>
     <string name="clear_urls_version">Pravidla ClearURLs</string>
     <string name="debug_build">Ladicí sestavení</string>
     <string name="dev">Vývojář</string>
@@ -295,16 +278,12 @@
     <string name="select_app">Vybrat aplikaci</string>
     <string name="follow_redirects_allow_darknets_explainer">Povolit následující přesměrování pro darknet (podporováno: %s)</string>
     <string name="experiments">Experimenty</string>
-    <string name="telemetry_level_disabled">Zakázáno</string>
-    <string name="telemetry_level_disabled_description">Žádný sběr dat</string>
-    <string name="telemetry_dialog_title">Aplikace LinkSheet respektuje vaše soukromí</string>
     <string name="nightly_experiments_card_explainer">Klepněte pro zobrazení funkcí, které jsou v současné době ve vývoji</string>
     <string name="experiments_explainer">Vyzkoušejte funkce ve vývoji</string>
     <string name="reset">Reset</string>
     <string name="experiments_explainer_2">Aktivní vývoj</string>
     <string name="theme_mode">Režim motivu</string>
     <string name="tap_customization_dialog_title">Nastavit %s</string>
-    <string name="telemetry_level_minimal">Minimální</string>
     <string name="resolve_embeds_explainer">Zpracovávat vložená zrcadla, jako je fxtwitter.com, na opravdového hostitele</string>
     <string name="hide_bottom_sheet_choice_buttons">Skrýt tlačítka volby</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Skrýt tlačítka „Jednou“ a „Vždy“ ve spodním listu</string>
@@ -323,11 +302,6 @@
     <string name="tap_customization_dialog_text">Vyberte akci, která má být provedena</string>
     <string name="expand_on_app_select">Rozšířit po vybrání aplikace</string>
     <string name="expand_on_app_select_explainer">Automaticky rozšířit spodní list po vybrání aplikace</string>
-    <string name="telemetry_level_standard">Běžná</string>
-    <string name="telemetry_level_exhaustive">Kompletní</string>
-    <string name="telemetry_identity_basic">Základní</string>
-    <string name="telemetry_identity_full">Plná</string>
-    <string name="telemetry_dialog_text">Vyberte typ statistik o používání, se kterým jste nejvíce spokojeni.</string>
     <string name="telemetry_configure_title">Analytika</string>
     <string name="telemetry_identifier_reset">Resetovat identifikátor</string>
     <string name="telemetry_configure_type">Typ analytik</string>
@@ -345,14 +319,9 @@
     <string name="tap_customization">Přizpůsobení klepnutí</string>
     <string name="tap_customization_single_tap">Jedno klepnutí</string>
     <string name="open_app_settings_page">Otevřít nastavení aplikace</string>
-    <string name="cancel">Zrušit</string>
     <string name="share">Sdílet odkaz</string>
-    <string name="telemetry_level_standard_description">Souhrnné statistiky používání</string>
-    <string name="telemetry_level_minimal_description">Informace o nainstalované verzi</string>
-    <string name="telemetry_level_exhaustive_description">Podrobné statistiky o používání</string>
     <string name="opening_with_app">Otevírání v aplikaci %s</string>
     <string name="launch_onboarding">Spustit úvod</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Statistiky o používání zahrnují náhodný, uživatelsky resetovatelný a k instalaci připojený identifikátor a společně s verzí vašeho systému jsou uloženy na serverech <annotation url-id="aptabase">Aptabase (EU)</annotation>. Citlivá data, jako nainstalované aplikace a klepnuté odkazy nejsou <b>nikdy</b> sbírána. Pro více informací klepněte <annotation url-id="privacy-telemetry">sem</annotation>.</string>
     <string name="settings_verified_link_handlers__text_user_apps">Uživatelské aplikace</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Vše</string>
     <string name="settings_notifications__divider_toasts">Vyskakovací zprávy</string>
@@ -416,7 +385,6 @@
     <string name="export_log_dialog__subtitle_include_settings">Doporučeno</string>
     <string name="export_log_dialog__text_log_privacy">Pro více informací o potenciálně citlivých datech ve sdíleném protokolu klepněte <annotation url-id="privacy-logs">sem</annotation>.</string>
     <string name="generic__button_text_copy_clipboard">Zkopírovat do schránky</string>
-    <string name="generic__button_text_cancel">Zrušit</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Prohlížení protokolu zachyceného: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Jejda, tohle se nemělo stát!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
@@ -486,7 +454,6 @@
     <string name="settings_main_setup_success__title_linksheet_setup_success">LinkSheet je nastaven</string>
     <string name="settings_main_setup_success__text_linksheet_setup_success_info">LinkSheet je správně nastaven a připraven k provozu</string>
     <string name="version_name"><b>Verze:</b> <font face="monospace">%s</font></string>
-    <string name="generic__text_url">URL</string>
     <string name="home__clipboard_card_source">Ze schránky</string>
     <string name="generic__text_edit">Upravit</string>
     <string name="generic__button_text_done">Hotovo</string>
@@ -516,7 +483,6 @@
     <string name="settings_verified_link_handlers__text_browser">Prohlížeč</string>
     <string name="generic__button_text_share">Sdílet</string>
     <string name="resolve_event__idle">Nečinný</string>
-
     <string name="settings_home__title_clipboard_card">Karta schránky</string>
     <string name="settings_home__text_clipboard_card">Zobrazit aktuální obsah schránky na domovské stránce, pokud se jedná o adresu</string>
     <string name="settings_language__dialog_title">Jazyk aplikace</string>

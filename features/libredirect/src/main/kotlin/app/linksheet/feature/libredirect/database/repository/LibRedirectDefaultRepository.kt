@@ -11,10 +11,10 @@ class LibRedirectDefaultRepository(private val dao: LibRedirectDefaultDao) {
 
     suspend fun getInstanceUrl(serviceKey: String) = getByServiceKey(serviceKey).firstOrNull()?.instanceUrl
 
-    suspend fun insert(default: LibRedirectDefault) = dao.insert(default)
+    suspend fun insert(default: LibRedirectDefault) = dao.insertReplace(default)
 
     suspend fun insert(service: String, frontend: String, instance: String) {
-        dao.insert(LibRedirectDefault(service, frontend, instance))
+        dao.insertReplace(LibRedirectDefault(service, frontend, instance))
     }
 
     suspend fun delete(default: LibRedirectDefault) {

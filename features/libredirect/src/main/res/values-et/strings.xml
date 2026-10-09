@@ -1,3 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="frontend">Klientliides</string>
+    <string name="instance">Teenuse server</string>
+    <string name="enabled">Kasutusel</string>
+    <string name="services">Teenused</string>
+    <string name="random_instance">Juhuslik server</string>
+    <string name="instance_not_available_anymore">Server pole enam saadaval!</string>
+    <string name="lib_redirect">LibRedirect</string>
+    <string name="lib_redirect_service">LibRedirect: %s</string>
+    <string name="no_libredirect_services">LibRedirecti teenuseid ei leidu!</string>
+    <string name="libredirect_via">Kasutades serverit %s</string>
+    <string name="enable_libredirect">Võta LibRedirect kasutusele</string>
+    <string name="enable_libredirect_explainer">Suuna lingid privaatsussõbralike teenuste kaudu, kasutades selleks katselist <annotation url-id="libredirect-github">LibRedirecti</annotation> lõimingut</string>
+    <string name="settings_libredirect__title_add_instance">Lisa server</string>
+    <string name="settings_libredirect__text_placeholder_instance">Teenuse server</string>
 </resources>

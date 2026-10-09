@@ -7,9 +7,11 @@
     <string name="no_libredirect_services">Nem található LibRedirect szolgáltatás!</string>
     <string name="instance_not_available_anymore">A példány már nem elérhető!</string>
     <string name="enable_libredirect">LibRedirect engedélyezése</string>
-    <string name="enable_libredirect_explainer">Linkek átirányítása adatvédelmibarát frontendekre a kísérleti <annotation url-id="libredirect-github">LibRedirect</annotation> integráció segítségével.</string>
+    <string name="enable_libredirect_explainer">Linkek átirányítása adatvédelmibarát frontendekre a kísérleti <annotation url-id="libredirect-github">LibRedirect</annotation> integráció segítségével</string>
     <string name="lib_redirect">LibRedirect</string>
     <string name="lib_redirect_service">LibRedirect - %s</string>
     <string name="frontend">Frontend</string>
     <string name="instance">Példány</string>
+    <string name="settings_libredirect__title_add_instance">Adjon hozzá egy példát</string>
+    <string name="settings_libredirect__text_placeholder_instance">Példa</string>
 </resources>

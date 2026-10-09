@@ -12,4 +12,6 @@
     <string name="libredirect_via">Melalui %s</string>
     <string name="services">Layanan</string>
     <string name="no_libredirect_services">Tidak ditemukan layanan LibRedirect yang ada!</string>
+    <string name="settings_libredirect__title_add_instance">Tambahakan instance</string>
+    <string name="settings_libredirect__text_placeholder_instance">Instance</string>
 </resources>

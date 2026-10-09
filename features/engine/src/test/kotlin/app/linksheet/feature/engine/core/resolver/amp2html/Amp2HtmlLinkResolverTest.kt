@@ -4,17 +4,14 @@ package app.linksheet.feature.engine.core.resolver.amp2html
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.engine.core.resolver.amp2html.Amp2HtmlLinkResolver
-import app.linksheet.feature.engine.core.resolver.amp2html.Amp2HtmlResult
-import app.linksheet.feature.engine.core.resolver.amp2html.Amp2HtmlSource
-import app.linksheet.feature.engine.database.entity.ResolveType
-import app.linksheet.feature.engine.database.entity.ResolvedUrl
-import app.linksheet.feature.engine.database.entity.UrlEntry
-import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.engine.core.EngineDatabaseTestRule
 import app.linksheet.feature.engine.core.resolver.ResolveOutput
 import app.linksheet.feature.engine.core.rule.withTestRunContext
 import app.linksheet.feature.engine.database.entity.CachedHtml
+import app.linksheet.feature.engine.database.entity.ResolveType
+import app.linksheet.feature.engine.database.entity.ResolvedUrl
+import app.linksheet.feature.engine.database.entity.UrlEntry
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
@@ -24,7 +21,6 @@ import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.IResult
 import fe.std.result.success
 import fe.std.result.unaryPlus
-import fe.std.time.unixMillisOf
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -37,7 +33,7 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
     companion object {
         private val URL = "https://amp.cnn.com/cnn/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html".toStdUrlOrThrow()
@@ -86,7 +82,7 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
             useLocalCache = { false },
         )
 
-        val result = withTestRunContext(resolver) { it.runStep(URL) }
+        val result = withTestRunContext { resolver.runStep(URL) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)
@@ -112,10 +108,10 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
         val entry = UrlEntry(1, url = URL.toString())
         val resolved = ResolvedUrl(entry.id, ResolveType.Companion.Amp2Html.id, testResolvedUrl)
 
-        rule.database.urlEntryDao().insertReturningId(entry)
-        rule.database.resolvedUrlCacheDao().insertReturningId(resolved)
+        rule.database.urlEntryDao().insertReplace(entry)
+        rule.database.resolvedUrlCacheDao().insertReplace(resolved)
 
-        val result = withTestRunContext(resolver) { it.runStep(entry.url.toStdUrlOrThrow()) }
+        val result = withTestRunContext { resolver.runStep(entry.url.toStdUrlOrThrow()) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)
@@ -151,10 +147,10 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
         val entry = UrlEntry(1, url = URL.toString())
         val htmlCache = CachedHtml(entry.id, cachedHtml)
 
-        rule.database.urlEntryDao().insertReturningId(entry)
-        rule.database.htmlCacheDao().insertReturningId(htmlCache)
+        rule.database.urlEntryDao().insertReplace(entry)
+        rule.database.htmlCacheDao().insertReplace(htmlCache)
 
-        val result = withTestRunContext(resolver) { it.runStep(entry.url.toStdUrlOrThrow()) }
+        val result = withTestRunContext { resolver.runStep(entry.url.toStdUrlOrThrow()) }
         assertThat(result)
             .isNotNull()
             .prop(ResolveOutput::url)

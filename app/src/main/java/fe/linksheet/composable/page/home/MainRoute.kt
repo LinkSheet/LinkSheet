@@ -8,22 +8,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboard
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import app.linksheet.compose.theme.HeadlineAlmostLargeStyle
+import app.linksheet.feature.shizuku.ui.ShizukuCard
 import app.linksheet.feature.wiki.navigation.MarkdownViewerRoute
+import app.linksheet.util.buildconfig.BuildType
+import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.composekit.component.ContentType
 import fe.composekit.component.list.column.SaneLazyColumnLayout
 import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
@@ -31,29 +35,31 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.composable.page.home.card.NightlyExperimentsCard
 import fe.linksheet.composable.page.home.card.OpenCopiedLink
-import fe.linksheet.composable.page.home.card.ShizukuCard
 import fe.linksheet.composable.page.home.card.compat.MiuiCompatCardWrapper
+import fe.linksheet.composable.page.home.card.news.ChangelogCard
 import fe.linksheet.composable.page.home.card.news.ExperimentUpdatedCard
 import fe.linksheet.composable.page.home.card.status.StatusCardWrapper
 import fe.linksheet.extension.android.showToast
-import fe.linksheet.extension.compose.ObserveClipboard
-import fe.linksheet.extension.compose.OnFocused
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.navigation.settingsRoute
+import fe.linksheet.usecase.ClipboardState
 import fe.linksheet.util.LinkSheet
-import fe.linksheet.util.buildconfig.Build
-import fe.linksheet.util.buildconfig.BuildType
 import fe.linksheet.util.buildconfig.LinkSheetAppConfig
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.viewmodel.koinActivityViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = koinViewModel()) {
-    val clipboardManager = LocalClipboard.current
-
-    val clipboardUri by viewModel.clipboardContent.collectAsStateWithLifecycle()
+fun MainRoute(
+    navController: NavHostController,
+    viewModel: MainViewModel = koinActivityViewModel()
+) {
+    val clipboardContent by viewModel.clipboardUseCase.contentFlow.collectAsStateWithLifecycle()
+    val newShizuku by viewModel.shizukuEnabled.collectAsStateWithLifecycle()
     val newDefaultsDismissed by viewModel.newDefaultsDismissed.collectAsStateWithLifecycle()
+    val changelogDismissed by viewModel.changelogUseCase.showChangelog.collectAsStateWithLifecycle(
+        initialValue = true
+    )
 
     val showMiuiAlert by viewModel.showMiuiAlert.collectRefreshableAsStateWithLifecycle(
         minActiveState = Lifecycle.State.RESUMED,
@@ -64,24 +70,6 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
         minActiveState = Lifecycle.State.RESUMED,
         initialValue = true
     )
-
-    val shizukuInstalled by viewModel.shizukuInstalled.collectRefreshableAsStateWithLifecycle(
-        minActiveState = Lifecycle.State.RESUMED,
-        initialValue = false
-    )
-
-    val shizukuRunning by viewModel.shizukuRunning.collectRefreshableAsStateWithLifecycle(
-        minActiveState = Lifecycle.State.RESUMED,
-        initialValue = false
-    )
-
-    clipboardManager.ObserveClipboard {
-        viewModel.tryReadClipboard()
-    }
-
-    LocalWindowInfo.current.OnFocused {
-        viewModel.tryReadClipboard()
-    }
 
     val activity = LocalActivity.current
     val coroutineScope = rememberCoroutineScope()
@@ -121,7 +109,7 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
             item(key = R.string.thanks_for_donating, contentType = ContentType.TextItem) {
                 if (!LinkSheetAppConfig.showDonationBanner()) {
                     Text(text = stringResource(id = R.string.thanks_for_donating))
-                } else if (!Build.IsDebug) {
+                } else if (!StaticBuildInfo.IsDebug) {
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }
@@ -159,19 +147,20 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 )
             }
 
-            if (BuildType.current == BuildType.Debug || BuildType.current == BuildType.Nightly) {
-                item(key = R.string.nightly_experiments_card, contentType = ContentType.ClickableAlert) {
+            if (StaticBuildInfo.isType(BuildType.Debug, BuildType.Nightly)) {
+                item(
+                    key = R.string.nightly_experiments_card,
+                    contentType = ContentType.ClickableAlert
+                ) {
                     NightlyExperimentsCard(navigate = { navController.navigate(it) })
                 }
             }
 
-            if (BuildType.current == BuildType.Debug) {
+            if (newShizuku) {
                 item {
                     ShizukuCard(
                         activity = activity!!,
-                        uriHandler = LocalUriHandler.current,
-                        shizukuInstalled = shizukuInstalled,
-                        shizukuRunning = shizukuRunning
+                        useCase = viewModel.shizukuStatusUseCase
                     )
                 }
             }
@@ -192,10 +181,27 @@ fun NewMainRoute(navController: NavHostController, viewModel: MainViewModel = ko
                 }
             }
 
-            if (clipboardUri != null) {
+            if (!changelogDismissed && StaticBuildInfo.CurrentType == BuildType.Debug) {
+                item(
+                    key = R.string.settings_main_changelog__title_changelog,
+                    contentType = ContentType.ClickableAlert
+                ) {
+                    ChangelogCard(
+                        version = viewModel.changelogUseCase.version,
+                        onClick = {
+//                            navController.navigate(MarkdownViewerRoute(LinkSheet.WikiExperiments))
+                        },
+                        onDismiss = {
+                            viewModel.changelogUseCase.dismiss()
+                        }
+                    )
+                }
+            }
+
+            if (clipboardContent is ClipboardState.Content) {
                 item(key = R.string.open_copied_link, contentType = ContentType.ClickableAlert) {
                     OpenCopiedLink(
-                        uri = clipboardUri!!,
+                        uri = (clipboardContent as? ClipboardState.Content)!!.content,
                         navigate = { navController.navigate(it) }
                     )
                 }

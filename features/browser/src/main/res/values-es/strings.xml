@@ -2,4 +2,10 @@
 <resources>
     <string name="enable_request_private_browsing_button">Activar botón \"Navegación privada\"</string>
     <string name="enable_request_private_browsing_button_explainer">Muestra un botón junto a los navegadores que abre el enlace que te tocó en modo de navegación privada.</string>
+    <string name="settings_private_browsing__title_private_browsing">Navegación privada</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">Activar navegación privada</string>
+    <string name="settings_private_browsing__divider_configuration">Configuración</string>
+    <string name="settings_private_browsing_browsers__title_browsers">Activar navegadores privados</string>
+    <string name="settings_private_browsing__title_allowed_browsers">Permitir navegadores</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d navegadores</string>
 </resources>

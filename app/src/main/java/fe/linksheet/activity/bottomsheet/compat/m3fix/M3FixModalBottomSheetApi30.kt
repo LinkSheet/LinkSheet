@@ -3,20 +3,21 @@ package fe.linksheet.activity.bottomsheet.compat.m3fix
 import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.fix.ModalBottomSheet
 import androidx.compose.material3.fix.SheetState
 import androidx.compose.material3.fix.SheetValue
 import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +27,7 @@ import app.linksheet.compose.debugBorder
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun M3FixModalBottomSheetApi30(
+    modifier: Modifier = Modifier,
     contentModifier: Modifier,
     debug: Boolean = false,
     containerColor: Color = MaterialTheme.colorScheme.surface,
@@ -38,7 +40,7 @@ internal fun M3FixModalBottomSheetApi30(
     val landscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     val targetWidth = BottomSheetDefaults.SheetMaxWidth
     ModalBottomSheet(
-        modifier = Modifier.debugBorder(debug, 1.dp, Color.Cyan),
+        modifier = modifier.debugBorder(debug, 1.dp, Color.Cyan),
         sheetMaxWidth = targetWidth,
         containerColor = containerColor,
         shape = shape,

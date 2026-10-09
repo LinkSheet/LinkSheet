@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shizuku_integration_enabled_explainer">Интеграцията с Shizuku е включена!</string>
+    <string name="shizuku_not_running_explainer">Shizuku не работи. За да отворите Shizuku докоснете тук и следвайте инструкциите.</string>
+    <string name="shizuku_integration_no_permission_explainer">За да поискате разрешение за Shizuku докоснете.</string>
+    <string name="shizuku_integration_not_setup_explainer">Въпреки че не е строго необходимо за работата на LinkSheet, препоръчваме използването на Shizuku. За да го инсталирате, докоснете.</string>
+    <string name="shizuku_integration">Интеграция с Shizuku</string>
+</resources>

@@ -12,4 +12,6 @@
     <string name="no_libredirect_services">Nie znaleziono usług LibRedirect!</string>
     <string name="libredirect_via">Przez %s</string>
     <string name="instance_not_available_anymore">Instancja nie jest już dostępna!</string>
+    <string name="settings_libredirect__title_add_instance">Dodaj instancję</string>
+    <string name="settings_libredirect__text_placeholder_instance">Instancja</string>
 </resources>

@@ -13,7 +13,6 @@ import app.linksheet.feature.engine.eval.BundleSerializer
 import app.linksheet.feature.engine.eval.ExpressionBundle
 import app.linksheet.feature.engine.eval.ExpressionStringifier
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlin.uuid.ExperimentalUuidApi
 
 class ScenarioRepository internal constructor(
@@ -25,7 +24,7 @@ class ScenarioRepository internal constructor(
     suspend fun createScenario(name: String): Scenario {
         val count = scenarioDao.getCount()
         val scenario = Scenario(name = name, position = count + 1, referrerApp = null)
-        val id = scenarioDao.insertReturningId(scenario)
+        val id = scenarioDao.insertReplace(scenario)
         scenario.id = id
         return scenario
     }
@@ -50,11 +49,9 @@ class ScenarioRepository internal constructor(
         return true
     }
 
-    fun getScenarioExpressionsById(id: Long): Flow<Pair<Scenario, List<ExpressionRule>>?> {
-        return scenarioExpressionDao.getScenarioExpressions(id).map {
-            it.entries.firstOrNull()?.let {  entry -> entry.key to entry.value }
-        }
-    }
+//    fun getScenarioExpressionsById(id: Long): Flow<ScenarioInfo?> {
+//        return scenarioExpressionDao.getScenarioExpressions(id)
+//    }
 
     fun getById(id: Long): Flow<Scenario> {
         return scenarioDao.getById(id)
@@ -67,13 +64,13 @@ class ScenarioRepository internal constructor(
 
     suspend fun insertExpression(bundle: ExpressionBundle, type: ExpressionRuleType): ExpressionRule {
         val expression = ExpressionRule(bytes = serializer.encodeToByteArray(bundle), type = type)
-        val id = expressionRuleDao.insertReturningId(expression)
+        val id = expressionRuleDao.insertReplace(expression)
         expression.id = id
         return expression
     }
 
     suspend fun insertScenarioExpression(id: Long, expression: ExpressionRule) {
-        scenarioExpressionDao.insert(ScenarioExpression(id, expression.id))
+        scenarioExpressionDao.insertReplace(ScenarioExpression(id, expression.id))
     }
 
     fun toBundle(expression: ExpressionRule): ExpressionBundle {

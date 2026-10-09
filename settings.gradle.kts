@@ -1,12 +1,16 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.gitlab.grrfe.gradlebuild.config.configureRepositories
+import com.gitlab.grrfe.gradlebuild.repository.GradlePluginPortalRepository
+import com.gitlab.grrfe.gradlebuild.repository.MavenRepository
+import com.gitlab.grrfe.gradlebuild.repository.google
+import com.gitlab.grrfe.gradlebuild.repository.jitpack
+import com.gitlab.grrfe.gradlebuild.repository.local
+import com.gitlab.grrfe.gradlebuild.repository.mavenCentral
+import com.gitlab.grrfe.gradlebuild.repository.mozilla
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
 import fe.build.dependencies._1fexd
-import fe.buildsettings.config.GradlePluginPortalRepository
-import fe.buildsettings.config.MavenRepository
-import fe.buildsettings.config.configureRepositories
-import fe.buildsettings.extension.includeProject
 
 rootProject.name = "LinkSheet"
 
@@ -15,51 +19,64 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven { url = uri("https://jitpack.io") }
+        maven {
+            url = uri("https://jitpack.io")
+            content {
+                includeGroupAndSubgroups("com.gitlab.grrfe")
+                includeGroupAndSubgroups("com.github.1fexd")
+            }
+        }
     }
 
     plugins {
         id("de.fayard.refreshVersions") version "0.60.6"
         id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
         id("com.android.library")
-        id("org.jetbrains.kotlin.android")
-        id("net.nemerosa.versioning")
-        id("androidx.navigation.safeargs") version "2.8.2"
+        id("androidx.navigation.safeargs") version "2.9.6"
     }
 
+    val resolveDetails = mutableListOf<PluginResolveDetails.() -> Unit>()
     when (val gradleBuildDir = extra.properties["gradle.build.dir"]) {
         null -> {
             val gradleBuildVersion = extra.properties["gradle.build.version"]
-            val plugins = extra.properties["gradle.build.plugins"]
-                .toString().trim().split(",")
-                .map { it.trim().split("=") }
-                .filter { it.size == 2 }
-                .associate { it[0] to it[1] }
-            resolutionStrategy {
-                eachPlugin {
-                    plugins[requested.id.id]?.let { useModule("$it:$gradleBuildVersion") }
+            resolveDetails.add {
+                with(requested.id) {
+                    if (namespace == "com.gitlab.grrfe") {
+                        useModule("com.gitlab.grrfe.gradle-build:$name:$gradleBuildVersion")
+                    }
                 }
             }
         }
 
         else -> includeBuild(gradleBuildDir.toString())
     }
+    resolveDetails.add {
+        if (requested.id.id == "dev.rikka.tools.refine") {
+            useModule("com.github.1fexd.HiddenApiRefinePlugin:dev.rikka.tools.refine.gradle.plugin:4.4.1")
+        }
+    }
+
+    resolutionStrategy {
+        eachPlugin {
+            resolveDetails.forEach { this.apply(it) }
+        }
+    }
 }
 
 plugins {
     id("de.fayard.refreshVersions")
     id("org.gradle.toolchains.foojay-resolver-convention")
-    id("com.gitlab.grrfe.build-settings-plugin")
+    id("com.gitlab.grrfe.settings-build-plugin")
 }
 
 configureRepositories(
-    MavenRepository.Google,
-    MavenRepository.MavenCentral,
-    MavenRepository.Jitpack,
-    MavenRepository.Mozilla,
+    MavenRepository.local(),
+    MavenRepository.google(),
+    MavenRepository.mavenCentral(),
+    MavenRepository.jitpack(),
+    MavenRepository.mozilla(),
     MavenRepository("https://oss.sonatype.org/content/repositories/snapshots"),
     GradlePluginPortalRepository,
-    MavenRepository("https://storage.googleapis.com/r8-releases/raw"),
     mode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 )
 
@@ -67,43 +84,65 @@ extra.properties["gradle.build.dir"]
     ?.let { includeBuild(it.toString()) }
 
 include(":app", ":config")
-includeProject(":test-instrument", "test-lib/instrument")
-includeProject(":test-core", "test-lib/core")
-includeProject(":test-fake", "test-lib/fake")
-includeProject(":test-koin", "test-lib/koin")
-includeProject(":scaffold", "lib/scaffold")
-includeProject(":bottom-sheet", "lib/bottom-sheet")
-includeProject(":bottom-sheet-new", "lib/bottom-sheet-new")
-includeProject(":hidden-api", "lib/hidden-api")
-includeProject(":util", "lib/util")
-includeProject(":api", "lib/api")
-includeProject(":log", "lib/log")
-includeProject(":common", "lib/common")
-includeProject(":compose", "lib/compose")
-includeProject(":integration-amp2html", "integration/amp2html")
-includeProject(":integration-mime-types", "integration/mime-types")
-includeProject(":integration-clearurl", "integration/clearurl")
-includeProject(":integration-embed-resolve", "integration/embed-resolve")
-includeProject(":feature-app", "features/app")
-includeProject(":feature-browser", "features/browser")
-includeProject(":feature-engine", "features/engine")
-includeProject(":feature-devicecompat", "features/devicecompat")
-includeProject(":feature-downloader", "features/downloader")
-includeProject(":feature-libredirect", "features/libredirect")
-includeProject(":feature-shizuku", "features/shizuku")
-includeProject(":feature-systeminfo", "features/systeminfo")
-includeProject(":feature-profile", "features/profile")
-includeProject(":feature-wiki", "features/wiki")
-includeProject(":sdk-rule-plugin", "sdk/rule-plugin")
-includeProject(":sdk-common", "sdk/common")
 
 buildSettings {
+    projects("features") {
+        projects("analytics") {
+            includeProject(":feature-analytics-service", "service")
+            includeProject(":feature-analytics-aptabase", "aptabase")
+        }
+        includeProject(":feature-app", "app")
+        projects("backup") {
+            includeProject(":feature-backup-api", "api")
+            includeProject(":feature-backup-impl", "impl")
+        }
+        includeProject(":feature-browser", "browser")
+        includeProject(":feature-engine", "engine")
+        includeProject(":feature-devicecompat", "devicecompat")
+        includeProject(":feature-downloader", "downloader")
+        includeProject(":feature-libredirect", "libredirect")
+        includeProject(":feature-remoteconfig", "remoteconfig")
+        includeProject(":feature-shizuku", "shizuku")
+        includeProject(":feature-systeminfo", "systeminfo")
+        includeProject(":feature-profile", "profile")
+        includeProject(":feature-wiki", "wiki")
+    }
+    projects("integration") {
+        includeProject(":integration-amp2html", "amp2html")
+        includeProject(":integration-clearurl", "clearurl")
+        includeProject(":integration-embed-resolve", "embed-resolve")
+        includeProject(":integration-fastforward", "fastforward")
+        includeProject(":integration-mime-types", "mime-types")
+    }
+    projects("lib") {
+        includeProject(":lib-scaffold", "scaffold")
+        includeProject(":lib-bottom-sheet", "bottom-sheet")
+        includeProject(":lib-bottom-sheet-new", "bottom-sheet-new")
+        includeProject(":lib-hidden-api", "hidden-api")
+        includeProject(":lib-http", "http")
+        includeProject(":lib-util", "util")
+        includeProject(":lib-api", "api")
+        includeProject(":lib-compose", "compose")
+    }
+    projects("test-lib") {
+        includeProject(":test-instrument", "instrument")
+        includeProject(":test-core", "core")
+        includeProject(":test-fake", "fake")
+        includeProject(":test-koin", "koin")
+    }
+    projects("test") {
+        includeProject(":test-e2e", "e2e")
+    }
+
     substitutes {
         trySubstitute(Grrfe.std, properties["kotlin-ext.dir"])
         trySubstitute(Grrfe.httpkt, properties["httpkt.dir"])
         trySubstitute(Grrfe.gsonExt, properties["gson-ext.dir"])
         trySubstitute(_1fexd.composeKit, properties["composekit.dir"])
         trySubstitute(LinkSheet.flavors, properties["flavors.dir"])
+        trySubstitute("com.github.1fexd.libredirectkt", properties["libredirectkt.dir"]) {
+            this["lib"] = "lib"
+        }
     }
 }
 

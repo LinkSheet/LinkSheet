@@ -2,11 +2,12 @@
 
 package app.linksheet.feature.engine.core.rule
 
-import app.linksheet.feature.engine.core.ContextualEngineResult
 import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.core.LinkEngine
+import app.linksheet.feature.engine.core.SealedContextualEngineResult
 import app.linksheet.feature.engine.core.context.AppRole
 import app.linksheet.feature.engine.core.context.AppRoleId
+import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
 import app.linksheet.feature.engine.core.context.EngineExtra
 import app.linksheet.feature.engine.core.context.EngineFlag
 import app.linksheet.feature.engine.core.context.EngineRunContext
@@ -18,11 +19,11 @@ import app.linksheet.feature.engine.core.step.EngineStepId
 import app.linksheet.feature.engine.core.step.StepResult
 import assertk.Assert
 import assertk.assertThat
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import fe.std.extension.emptyEnumSet
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher
-import java.util.*
+import java.util.EnumSet
 
 //abstract class BaseRuleEngineTest(closeDb: Boolean = true) : DatabaseTest(closeDb) {
 
@@ -32,6 +33,17 @@ import java.util.*
 //        super.stop()
 //    }
 //}
+
+// TODO: Temporary helper to avoid breaking tests (or having to refactor them), should be removed once design is finished
+suspend fun LinkEngine.processTest(url: StdUrl, context: EngineRunContext = DefaultEngineRunContext()): Pair<SealedRunContext, EngineResult> {
+    val contextualResult = process(url, context)
+    val sealedContext = contextualResult.first.seal()
+    val engineResult = contextualResult.second
+    val result = sealedContext to engineResult
+
+    return result
+}
+
 fun LazyTestLinkEngine(dispatcher: CoroutineDispatcher, vararg rules: Rule<*, *>): Lazy<LinkEngine> {
     return lazy { TestLinkEngine(dispatcher, *rules) }
 }
@@ -47,24 +59,25 @@ fun TestLinkEngine(dispatcher: CoroutineDispatcher, vararg rules: Rule<*, *>): L
     )
 }
 
-fun assertResult(result: ContextualEngineResult): Assert<EngineResult> {
+fun assertResult(result: SealedContextualEngineResult): Assert<EngineResult> {
     return assertThat(result.second)
 }
 
-fun assertContext(result: ContextualEngineResult): Assert<SealedRunContext> {
+fun assertContext(result: SealedContextualEngineResult): Assert<SealedRunContext> {
     return assertThat(result.first)
 }
 
 
 fun TestLinkModifier(
     id: EngineStepId,
-    block: suspend EngineRunContext.(StdUrl) -> StepTestResult? = { null },
+    block: suspend context(EngineRunContext)(StdUrl) -> StepTestResult? = { null },
 ): LinkModifier<StepTestResult> {
     return object : LinkModifier<StepTestResult> {
         override val enabled: () -> Boolean = { true }
         override val id = id
         override suspend fun warmup() {}
-        override suspend fun EngineRunContext.runStep(url: StdUrl) = block(url)
+        context(context: EngineRunContext)
+        override suspend fun runStep(url: StdUrl) = block(url)
         override fun toString() = "TestLinkModifier(id=$id)"
     }
 }
@@ -85,6 +98,6 @@ object TestEngineRunContext : EngineRunContext {
     override fun seal(): SealedRunContext = SealedRunContext(flags, roles, allowCustomTab, emptyMap())
 }
 
-suspend fun <T, R> withTestRunContext(it: T, block: suspend T.(EngineRunContext) -> R): R {
-    return it.block(TestEngineRunContext)
+suspend fun <R> withTestRunContext(block: suspend context(EngineRunContext)() -> R): R {
+    return context(TestEngineRunContext) { block() }
 }

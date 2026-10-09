@@ -1,28 +1,34 @@
 package fe.linksheet.debug.module.debug
 
+import app.linksheet.api.preference.AppPreferenceRepository
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.PreferenceRepository
-import fe.android.preference.helper.compose.StatePreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.composekit.preference.util.reload
+import fe.linksheet.debug.module.preference.DebugPreferenceRepository
+import fe.linksheet.debug.module.preference.DebugPreferences
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
 import fe.linksheet.module.preference.flags.FeatureFlags
 import fe.linksheet.module.preference.state.AppStatePreferences
-import fe.linksheet.module.preference.state.AppStateRepository
-import mozilla.components.support.base.log.logger.Logger
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
 
-data class Repository(val definition: PreferenceDefinition, val preferenceRepository: PreferenceRepository) {
+data class Repository(
+    val definition: PreferenceDefinition,
+    val preferenceRepository: PreferenceRepository
+) {
     val allPreferences by lazy { definition.all.map { it.key } }
 
-    fun set(key: String, value: String) {
+    fun set(key: String, value: String): Boolean {
         val pref = requireNotNull(definition.all[key]) { "'$key' is not defined in '$definition'" }
-        preferenceRepository.setStringValueToPreference(pref, value)
-
-        if (preferenceRepository is StatePreferenceRepository) {
-            preferenceRepository.stateCache.get(key)?.forceRefresh()
+        if (!preferenceRepository.setStringValueToPreference(pref, value)) {
+            return false
         }
+
+        preferenceRepository.reload(key)
+        return true
     }
 }
 
@@ -31,13 +37,15 @@ class MergedPreferenceRepository(
     val appPreferenceRepository: AppPreferenceRepository,
     val featureFlagRepository: FeatureFlagRepository,
     val experimentRepository: ExperimentRepository,
-    val appStateRepository: AppStateRepository,
+    val appStateRepository: DefaultAppStateRepository,
+    val debugRepository: DebugPreferenceRepository,
 ) {
     private val repositories = setOf(
         Repository(AppPreferences, appPreferenceRepository),
         Repository(FeatureFlags, featureFlagRepository),
         Repository(Experiments, experimentRepository),
-        Repository(AppStatePreferences, appStateRepository)
+        Repository(AppStatePreferences, appStateRepository),
+        Repository(DebugPreferences, debugRepository)
     )
 
     private fun createPreferences(): MutableMap<String, Repository> {

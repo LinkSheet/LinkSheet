@@ -12,4 +12,6 @@
     <string name="services">Hizmetler</string>
     <string name="no_libredirect_services">LibRedirect hizmeti bulunamadı!</string>
     <string name="instance_not_available_anymore">Oluşum artık mevcut değil!</string>
+    <string name="settings_libredirect__title_add_instance">Bir örnek ekle</string>
+    <string name="settings_libredirect__text_placeholder_instance">Örnek</string>
 </resources>

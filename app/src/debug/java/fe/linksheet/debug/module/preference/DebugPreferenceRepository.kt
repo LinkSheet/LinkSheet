@@ -10,6 +10,7 @@ class DebugPreferenceRepository(val context: Context) : FlowPreferenceRepository
 object DebugPreferences : PreferenceDefinition() {
     val drawBorders = boolean("draw_borders", default = false)
     val bottomSheetLog = boolean("bottom_sheet_log", default = false)
+    val m3Log = boolean("m3_log", default = false)
 
     init {
         finalize()

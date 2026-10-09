@@ -3,9 +3,9 @@ package fe.linksheet.module.resolver
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Stable
-import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.app.core.ActivityAppInfo
+import app.linksheet.feature.downloader.core.DownloadCheckResult
+import app.linksheet.feature.libredirect.LibRedirectResult
 import fe.linksheet.util.intent.parser.UriException
 import fe.std.uri.StdUrl
 import me.saket.unfurl.UnfurlResult
@@ -24,20 +24,18 @@ sealed interface IntentResolveResult {
     class Default(
         val intent: Intent,
         val uri: Uri?,
+        val referrer: Uri?,
         val unfurlResult: UnfurlResult?,
         referringPackageName: String?,
         val resolved: List<ActivityAppInfo>,
         val filteredItem: ActivityAppInfo?,
-        alwaysPreferred: Boolean?,
+        // TODO: Make it more obvious that this refers to "always" / "auto-launch"
+        val isRegularPreferredApp: Boolean,
         hasSingleMatchingOption: Boolean = false,
         val resolveModuleStatus: ResolveModuleStatus,
         val libRedirectResult: LibRedirectResult? = null,
         val downloadable: DownloadCheckResult? = DownloadCheckResult.NonDownloadable,
     ) : IntentResolveResult {
-        private val totalCount = resolved.size + if (filteredItem != null) 1 else 0
-
-
-        val isRegularPreferredApp = alwaysPreferred == true && filteredItem != null
         val app = filteredItem ?: resolved.firstOrNull()
 
         val hasAutoLaunchApp = (isRegularPreferredApp || hasSingleMatchingOption)

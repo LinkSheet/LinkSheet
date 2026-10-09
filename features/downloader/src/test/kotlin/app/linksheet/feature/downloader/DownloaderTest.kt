@@ -2,8 +2,8 @@ package app.linksheet.feature.app.linksheet.feature.downloader
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.downloader.Downloader
+import app.linksheet.feature.downloader.core.DownloadCheckResult
+import app.linksheet.feature.downloader.core.Downloader
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.uri.toStdUrlOrThrow
 import io.ktor.client.*
@@ -18,7 +18,7 @@ import kotlin.test.assertIs
 
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class DownloaderTest : BaseUnitTest {
     companion object {
         private val FyWt0wvWAAAxgYk = byteArrayOf(

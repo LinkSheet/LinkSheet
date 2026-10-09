@@ -4,7 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.layout.*
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -16,7 +23,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.addOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.semantics.SemanticsOwner
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -35,9 +48,9 @@ import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.lifecycle.setViewTreeViewModelStoreOwner
 import androidx.savedstate.findViewTreeSavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
-import fe.linksheet.debug.ui.layout.ComposableDebugBoxLayout
 import fe.linksheet.activity.bottomsheet.content.success.url.UrlCard
 import fe.linksheet.composable.ui.AppTheme
+import fe.linksheet.debug.ui.layout.ComposableDebugBoxLayout
 import me.saket.unfurl.UnfurlResult
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
@@ -97,7 +110,7 @@ class ComposableRendererActivity : ComponentActivity() {
 
     @Composable
     fun RendererHost(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
-        AppTheme {
+        AppTheme(updateEdgeToEdge = ::enableEdgeToEdge) {
             Surface(color = MaterialTheme.colorScheme.surface) {
 //                LazyColumn(
 //                    modifier = Modifier

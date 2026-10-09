@@ -48,7 +48,6 @@
     <string name="clear">Dọn dẹp</string>
     <string name="import_and_override">Nhập và ghi đè</string>
     <string name="apps_which_can_open_links_explainer">Nhấn vào một ứng dụng để mở menu \"Mở theo mặc định\" cho phép bạn tắt tính năng mở liên kết tự động</string>
-    <string name="request_timeout_explainer">Xác định số giây LinkSheet sẽ đợi để thiết lập kết nối. Đặt giá trị này thành 0 sẽ tắt thời gian chờ nhưng điều này không được khuyến khích.</string>
     <string name="url_copied">URL đã được sao chép vào clipboard</string>
     <string name="copy_url">Sao chép liên kết</string>
     <string name="resolve_failed">%s thất bại: %s</string>
@@ -67,7 +66,6 @@
     <string name="redirect_resolve_type_remote">máy chủ từ xa</string>
     <string name="donate_subtitle">Nâng cấp lên <b>LinkSheet Pro</b></string>
     <string name="built_at"><b>Được dựng lúc:</b> <font face="monospace">%s</font></string>
-    <string name="back">Quay lại</string>
     <string name="linksheet_download">Tải xuống LinkSheet</string>
     <string name="include_fingerprint">Bao gồm dấu vân tay của thiết bị (được khuyến nghị)</string>
     <string name="default_apps">Ứng dụng ưu tiên</string>
@@ -78,13 +76,11 @@
     <string name="preview_url">URL xem trước</string>
     <string name="usage_stats_sorting_explainer">Bao gồm số liệu thống kê sử dụng hệ thống Android trong thuật toán sắp xếp. Quyền được yêu cầu trong lần chuyển đổi đầu tiên.</string>
     <string name="github_explainer">Kho lưu trữ mã nguồn</string>
-    <string name="downloader_url_mime_type_explainer">Kiểm tra xem URL có kết thúc bằng phần mở rộng tệp hay không (ví dụ: \".jpg\"); Nếu có, loại này được sử dụng cho tệp tải xuống.</string>
     <string name="other">Khác</string>
     <string name="credits_explainer">Lời cảm ơn, Giấy phép</string>
     <string name="remove_all">Loại bỏ hết</string>
     <string name="use_unified_preferred_browser">Sử dụng thiết đặt thống nhất</string>
     <string name="always_ask_explainer">Luôn liệt kê mọi trình duyệt</string>
-    <string name="enable_downloader">Bật trình tải xuống</string>
     <string name="paste">Dán</string>
     <string name="download">Tải xuống</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Chuyển hướng theo dõi</string>
@@ -94,7 +90,6 @@
     <string name="in_app_browser_subtitle">Đặt chế độ trình duyệt trong ứng dụng</string>
     <string name="about">Giới thiệu</string>
     <string name="add_all">Thêm hết</string>
-    <string name="options">Tùy chọn</string>
     <string name="about_explainer">Tín dụng, Giấy phép, Liên kết, Phiên bản</string>
     <string name="browser_status">Trạng thái trình duyệt</string>
     <string name="request_private_browsing">Riêng tư</string>
@@ -118,9 +113,6 @@
     <string name="redact_log">Biên tập lại nhật ký (được khuyến nghị, việc tắt tính năng này có thể làm rò rỉ tên gói và tên máy chủ)</string>
     <string name="search">Tìm kiếm</string>
     <string name="always_show_package_name">Luôn hiển thị tên gói</string>
-    <string name="error">Lỗi</string>
-    <string name="checkmark">Đánh dấu</string>
-    <string name="request_timeout">Hết thời gian yêu cầu</string>
     <string name="apps_which_can_open_links_explainer_2">Liệt kê tất cả các ứng dụng có thể can thiệp vào hoạt động của LinkSheet</string>
     <string name="set_as_browser_explainer">Nhấn vào đây để đặt LinkSheet làm trình duyệt mặc định</string>
     <string name="current_session">Phiên hiện tại</string>
@@ -133,7 +125,6 @@
     <string name="browser_mode_subtitle">Đặt chế độ trình duyệt ưu tiên</string>
     <string name="follow_only_known_trackers">Theo dõi chỉ những người theo dõi đã biết</string>
     <string name="no_logs_found">Không tìm thấy nhật ký trước đây!</string>
-    <string name="downloader_url_mime_type">Sử dụng loại mime từ URL</string>
     <string name="system">Theo hệ thống</string>
     <string name="no_log_entries">Phiên này không chứa bất kỳ nhật ký nào.</string>
     <string name="add">Thêm</string>
@@ -148,7 +139,6 @@
     <string name="pretend_to_be_app_explainer_2">Một số ứng dụng như Google Chrome tìm kiếm ứng dụng gốc một cách rõ ràng để xử lý, chẳng hạn như liên kết Youtube khi ứng dụng đó được nhấn vào kết quả tìm kiếm. LinkSheetCompat giả vờ là một ứng dụng gốc dành cho các máy chủ được hỗ trợ và sau đó chuyển tiếp yêu cầu tới LinkSheet.</string>
     <string name="configure">Cấu hình</string>
     <string name="debug">Gỡ lỗi</string>
-    <string name="confirm_import">Xác nhận</string>
     <string name="general">Điều khoản khác</string>
     <string name="compat_installed">LinkSheetCompat đã được cài đặt</string>
     <string name="debug_explainer">Nhật ký ứng dụng, đặt lại trình xử lý đã được xác minh</string>
@@ -175,9 +165,6 @@
     <string name="apps_which_can_open_links_shizuku_explainer">Đã bật chế độ Shizuku, nhấn vào một ứng dụng để chuyển đổi khả năng xử lý liên kết tự động. Nhấn và giữ một ứng dụng để mở thực đơn thiết đặt \"Mở theo mặc định\".</string>
     <string name="enable_all">Bật tất cả</string>
     <string name="disable_all">Tắt tất cả</string>
-    <string name="shizuku_integration_enabled_explainer">Tích hợp Shizuku đã được kích hoạt thành công!</string>
-    <string name="shizuku_not_running_explainer">Shizuku không chạy. Nhấn vào đây để mở Shizuku, sau đó làm theo hướng dẫn để khởi động.</string>
-    <string name="shizuku_integration">Tích hợp Shizuku</string>
     <string name="download_started_toast">Đã bắt đầu tải xuống</string>
     <string name="feature_flags">Cờ tính năng</string>
     <string name="feature_flags_explainer">Bật hoặc tắt các tính năng thử nghiệm</string>
@@ -188,8 +175,6 @@
     <string name="export_include_recommendation">Chúng tôi khuyên bạn chỉ nên bật các thiết đặt sau nếu bạn không có kế hoạch chia sẻ nội dung xuất của mình với người khác!</string>
     <string name="opening_with_app_toast">Ứng dụng tự động khởi chạy</string>
     <string name="discord_explainer">Trò chuyện về LinkSheet trên Discord</string>
-    <string name="shizuku_integration_no_permission_explainer">Nhấn vào đây để yêu cầu sự cho phép của Shizuku.</string>
-    <string name="shizuku_integration_not_setup_explainer">Mặc dù không thực sự cần thiết để LinkSheet hoạt động nhưng bạn nên sử dụng Shizuku. Nhấn vào đây để cài đặt nó.</string>
     <string name="include_throwable">Bao gồm nhật ký sự cố (được khuyến nghị, nhưng không thể chỉnh sửa)</string>
     <string name="running_unofficial_build">Bản dựng không chính thức</string>
     <string name="debug_build">Bản dựng gỡ lỗi</string>
@@ -206,14 +191,13 @@
     <string name="export_import_settings_explainer">Xuất thiết đặt hiện tại của bạn hoặc nhập thiết đặt đã xuất trước đó</string>
     <string name="export_import_settings">Xuất hoặc nhập thiết đặt</string>
     <string name="import_settings_override_preferences">Điều này sẽ ghi đè tất cả các tùy chọn hiện có. Tiếp tục?</string>
-    <string name="import_settings">Nhập thiết đặt</string>
     <string name="onboarding_5_card_explainer">Cấu hình cơ bản cần thiết để LinkSheet hoạt động đã được thực hiện - hãy đi tới phần thiết đặt để khám phá những tính năng khác mà nó cung cấp!</string>
     <string name="urlbar_settings">Thanh url</string>
     <string name="export_settings">Xuất thiết đặt</string>
     <string name="include_log_hash_key">Bao gồm khóa băm nhật ký (khóa được sử dụng để sắp xếp lại nhật ký của bạn)</string>
     <string name="misc_settings">Điều khoản khác</string>
     <string name="export_to_file">Xuất sang tập tin</string>
-    <string name="export_file_name">Xuất_thiết_đặt_linksheet_%s.json</string>
+    <string name="export_file_name">Xuất_thiết_đặt_linksheet_%s</string>
     <string name="import_headline">Nhập</string>
     <string name="import_explainer">Nhập bản xuất trước đó từ một tệp</string>
     <string name="include_history">Bao gồm lịch sử (lịch sử nhấp vào liên kết và ứng dụng của bạn)</string>
@@ -228,7 +212,6 @@
     <string name="preferred_apps_settings">Đặt ứng dụng ưa thích cho các máy chủ mà chúng hỗ trợ</string>
     <string name="apps_which_can_open_links">Trình xử lý liên kết đã được xác minh</string>
     <string name="app_browsers_subtitle">Ứng dụng ưa thích và trình xử lý liên kết đã được xác minh</string>
-    <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. Điều này có thể có <annotation url-id="privacy-downloader">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="enable_amp2html_explainer">Chuyển hướng các trang AMP về phiên bản web thông thường của chúng. Điều này có thể có <annotation url-id="privacy-amp2html">các ngụ ý liên quan đến quyền riêng tư</annotation></string>
     <string name="amp2html_external_service_explainer">Cố gắng lấy phiên bản trang không phải AMP bằng API được triển khai tại supabase.com (<annotation url-id="supabase-privacy">Chính sách quyền riêng tư</annotation>)</string>
     <string name="github">Github</string>
@@ -257,7 +240,6 @@
     <string name="tap_customization_dialog_title_double_tap">nhấn đúp</string>
     <string name="tap_customization_dialog_title_long_tap">nhấn lâu</string>
     <string name="tap_customization_dialog_text">Chọn hành động cần thực hiện</string>
-    <string name="cancel">Hủy</string>
     <string name="open_app_settings_page">Mở trang thiết đặt của ứng dụng</string>
     <string name="open_app">Mở ứng dụng</string>
     <string name="select_app">Chọn ứng dụng</string>
@@ -279,13 +261,11 @@
     <string name="donate">Quyên tặng</string>
     <string name="permission_required_explainer">Một số tùy chọn đã nhập yêu cầu các quyền hiện không được cấp cho LinkSheet. Nhấn vào bên dưới để yêu cầu chúng.</string>
     <string name="reset_app_link_verification_status_subtitle">Nhấn vào đây để đặt lại trạng thái xác minh liên kết ứng dụng của tất cả các ứng dụng, sau đó đợi vài phút trong khi Android xác minh lại chúng. Bạn sẽ không nhận được xác nhận. Yêu cầu Shizuku.</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Các chỉ số sử dụng bao gồm giá trị nhận dạng ngẫu nhiên, do người dùng đặt lại trong quá trình cài đặt, cũng như phiên bản Android của bạn và được lưu trữ tại <annotation url-id="aptabase">Aptabase (EU)</annotation>. Dữ liệu nhạy cảm, chẳng hạn như các ứng dụng đã cài đặt và các liên kết đã nhấp vào sẽ <b>không bao giờ</b> bị thu thập. Để tìm hiểu thêm, hãy nhấn vào <annotation url-id="privacy-telemetry">đây</annotation>.</string>
     <string name="resolve_embeds_explainer">Giải quyết các bản sao nhúng như fxtwitter.com vào máy chủ thực sự</string>
     <string name="experiments_explainer_3">Các thử nghiệm đang được phát triển tích cực và có thể không hoạt động chính xác hoặc hoàn toàn không hoạt động. Vui lòng không báo cáo lỗi trên Github. Nếu bạn muốn cung cấp phản hồi, hãy làm như vậy trên Discord.</string>
     <string name="donate_card_headline">Quyên tặng để hỗ trợ LinkSheet</string>
     <string name="donate_card_subtitle">Nếu bạn thích LinkSheet, hãy cân nhắc để lại một ngôi sao trên Github và/hoặc quyên tặng. \nNhững người quyên tặng nhiều hơn <b>5€</b> đủ điều kiện cho <b> LinkSheet Pro</b>, sẽ có những tính năng độc quyền.</string>
     <string name="resolve_embeds">Giải quyết nhúng</string>
-    <string name="telemetry_dialog_text">Chọn loại số liệu sử dụng mà bạn cảm thấy thoải mái nhất.</string>
     <string name="telemetry_configure_type">Loại phân tích</string>
     <string name="telemetry_configure_title">Phân tích</string>
     <string name="resolve_activity_failure">Không thể giải quyết hoạt động!</string>
@@ -358,17 +338,6 @@
     <string name="settings_shortcuts__subtitle_default_browser">Mở trang thiết đặt trình duyệt mặc định</string>
     <string name="settings_shortcuts__title_link_handlers">Trình xử lý liên kết</string>
     <string name="settings_shortcuts__title_connected_apps">Ứng dụng đã kết nối</string>
-    <string name="telemetry_level_exhaustive">Toàn diện</string>
-    <string name="telemetry_level_disabled">Đã tắt</string>
-    <string name="telemetry_level_minimal">Tối thiểu</string>
-    <string name="telemetry_level_standard">Tiêu chuẩn</string>
-    <string name="telemetry_identity_basic">Cơ bản</string>
-    <string name="telemetry_identity_full">Đầy đủ</string>
-    <string name="telemetry_dialog_title">LinkSheet tôn trọng quyền riêng tư của bạn</string>
-    <string name="telemetry_level_disabled_description">Không thu thập dữ liệu</string>
-    <string name="telemetry_level_minimal_description">Chỉ số phiên bản đã cài đặt</string>
-    <string name="telemetry_level_standard_description">Thống kê sử dụng tổng hợp</string>
-    <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
     <string name="telemetry_identifier_reset">Đặt lại số định danh</string>
     <string name="settings_notifications__divider_toasts">Thông báo ngắn</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Tất cả</string>

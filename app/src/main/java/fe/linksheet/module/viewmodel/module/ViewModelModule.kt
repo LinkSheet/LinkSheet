@@ -1,24 +1,63 @@
+@file:OptIn(SensitivePreference::class, ExperimentalSerializationApi::class)
+
 package fe.linksheet.module.viewmodel.module
 
 
+import app.linksheet.api.SensitivePreference
+import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.exportimport.ExportImportUseCase
 import app.linksheet.feature.profile.ProfileFeatureModule
+import com.akuleshov7.ktoml.Toml
 import fe.gson.GsonQualifier
 import fe.linksheet.module.log.DefaultLogModule
-import fe.linksheet.module.preference.PreferenceRepositoryModule
 import fe.linksheet.module.repository.module.RepositoryModule
-import fe.linksheet.module.viewmodel.*
+import fe.linksheet.module.viewmodel.AboutSettingsViewModel
+import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
+import fe.linksheet.module.viewmodel.AppConfigViewModel
+import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
+import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
+import fe.linksheet.module.viewmodel.DevSettingsViewModel
+import fe.linksheet.module.viewmodel.ExperimentsViewModel
+import fe.linksheet.module.viewmodel.FeatureFlagViewModel
+import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
+import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
+import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
+import fe.linksheet.module.viewmodel.LanguageSettingsViewModel
+import fe.linksheet.module.viewmodel.LinksSettingsViewModel
+import fe.linksheet.module.viewmodel.LoadDumpedPreferencesViewModel
+import fe.linksheet.module.viewmodel.LogSettingsViewModel
+import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
+import fe.linksheet.module.viewmodel.MainViewModel
+import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
+import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
+import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
+import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
+import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
+import fe.linksheet.module.viewmodel.RootViewModel
+import fe.linksheet.module.viewmodel.SelectDomainsConfirmationViewModel
+import fe.linksheet.module.viewmodel.SettingsViewModel
+import fe.linksheet.module.viewmodel.SingleBrowserViewModel
+import fe.linksheet.module.viewmodel.SqlViewModel
+import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
+import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
+import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import kotlinx.coroutines.Dispatchers
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.qualifier
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
 val ViewModelModule = module {
     includes(
-        PreferenceRepositoryModule,
+//        PreferenceRepositoryModule,
         RepositoryModule,
         DefaultLogModule,
         ProfileFeatureModule
@@ -29,15 +68,31 @@ val ViewModelModule = module {
             experimentRepository = get(),
             pasteService = get(),
             gson = get(qualifier(GsonQualifier.Pretty)),
-            systemInfoService = get()
+            toml = Toml.Default,
+            systemInfoService = get(),
+            useCase = get()
         )
     }
+    factory {
+        ExportImportUseCase(
+            repository = get<AppPreferenceRepository>(),
+            json = Json.Default,
+            toml = Toml.Default,
+            ioDispatcher = Dispatchers.IO
+        )
+    }
+//    factory{
+//        ClipboardUseCase(
+//            repository = get<AppPreferenceRepository>(),
+//            clipboardManager = getSystemServiceOrThrow<ClipboardManager>(),
+//        )
+//    }
 
     viewModelOf(::MainViewModel)
     viewModelOf(::VerifiedLinkHandlersViewModel)
     viewModel { parameters ->
         VerifiedLinkHandlerViewModel(
-            packageName = parameters.get(),
+            handle = parameters.get(),
             preferenceRepository = get(),
             preferredAppRepository = get(),
             service = get(),
@@ -49,17 +104,15 @@ val ViewModelModule = module {
     viewModelOf(::BottomSheetSettingsViewModel)
     viewModelOf(::LinksSettingsViewModel)
     viewModelOf(::BottomSheetViewModel)
-    viewModelOf(::ThemeSettingsViewModel)
+    viewModelOf(::ThemeSettingsViewModel).bind<RootViewModel>()
     viewModelOf(::LanguageSettingsViewModel)
     viewModelOf(::FollowRedirectsSettingsViewModel)
-    viewModelOf(::DownloaderSettingsViewModel)
     viewModelOf(::LogSettingsViewModel)
     viewModel { parameters ->
         LogTextSettingsViewModel(
             context = get(),
             sessionId = parameters[0],
             logViewCommon = get(),
-            preferenceRepository = get(),
             logPersistService = get()
         )
     }
@@ -70,20 +123,13 @@ val ViewModelModule = module {
     viewModelOf(::GeneralSettingsViewModel)
     viewModelOf(::LoadDumpedPreferencesViewModel)
     viewModelOf(::PrivacySettingsViewModel)
-    viewModel {
-        ExportSettingsViewModel(
-            context = get(),
-            preferenceRepository = get(),
-            gson = get(qualifier(GsonQualifier.Pretty)),
-            clock = get(),
-            zoneId = get()
-        )
-    }
+
     viewModel {
         AboutSettingsViewModel(
             context = get(),
             gson = get(qualifier(GsonQualifier.Pretty)),
-            preferenceRepository = get()
+            preferenceRepository = get(),
+            infoService = get()
         )
     }
     viewModel {
@@ -91,12 +137,12 @@ val ViewModelModule = module {
             context = get(),
             preferenceRepository = get(),
             experimentRepository = get(),
-            shizukuHandler = get(),
+            shizukuStatusUseCase = get(),
+            shizukuFeatureService = get(),
             miuiCompatProvider = get(),
             gson = get(qualifier(GsonQualifier.Pretty)),
             systemInfoService = get(),
             logPersistService = get(),
-            refineWrapper = get(),
             ioDispatcher = Dispatchers.IO
         )
     }

@@ -4,7 +4,7 @@ import fe.buildsrc.mimetypes.UpdateMimeTypesTask
 
 plugins {
     kotlin("jvm")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 kotlin {
@@ -27,6 +27,7 @@ main.java.srcDir(generatedSrcDir)
 
 val generateMimeTypes = tasks.register<UpdateMimeTypesTask>("generateMimeTypes") {
     group = "build"
+    description = "Generate mime types"
     packageName = "fe.linksheet.mimetype"
     baseDir = generatedSrcDir
     customMimeTypes.set(
@@ -39,3 +40,6 @@ val generateMimeTypes = tasks.register<UpdateMimeTypesTask>("generateMimeTypes")
         )
     )
 }
+
+val compileKotlin by tasks
+compileKotlin.dependsOn(generateMimeTypes)

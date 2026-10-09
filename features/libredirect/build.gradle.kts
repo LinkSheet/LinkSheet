@@ -1,53 +1,47 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
-import fe.buildlogic.common.OptIn
-import fe.buildlogic.common.extension.addOptIn
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("androidx.room")
+    id("androidx.room3")
     id("com.google.devtools.ksp")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {
     namespace = "app.linksheet.feature.libredirect"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addOptIn(OptIn.ExperimentalTime)
     }
 
-    buildFeatures {
-        compose = true
-    }
-
-    room {
+    room3 {
         schemaDirectory("$projectDir/schemas")
-        generateKotlin = true
+
     }
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":util"))
-    implementation(project(":api"))
-    implementation(project(":compose"))
-    compileOnly(project(":hidden-api"))
-    implementation(AndroidX.room.common)
-    implementation(AndroidX.room.runtime)
-    implementation(AndroidX.room.ktx)
-    ksp(AndroidX.room.compiler)
+    implementation(project(":lib-util"))
+    implementation(project(":lib-api"))
+    implementation(project(":lib-compose"))
+    implementation(project(":test-core"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
+    compileOnly(project(":lib-hidden-api"))
+
+    implementation("androidx.room3:room3-runtime:_")
+    ksp("androidx.room3:room3-compiler:_")
 
     implementation("com.github.1fexd.libredirectkt:lib:_")
     implementation(AndroidX.lifecycle.viewModel)
@@ -61,6 +55,7 @@ dependencies {
     implementation(_1fexd.composeKit.compose.app)
     implementation(_1fexd.composeKit.compose.theme.core)
     implementation(_1fexd.composeKit.compose.theme.preference)
+    implementation(_1fexd.composeKit.compose.dialog)
     implementation(_1fexd.composeKit.compose.route)
     implementation(_1fexd.composeKit.preference.core)
     implementation(_1fexd.composeKit.preference.compose.core)
@@ -81,8 +76,14 @@ dependencies {
     testImplementation(Testing.robolectric)
     testImplementation(KotlinX.coroutines.test)
     testImplementation(AndroidX.test.ext.junit.ktx)
-    testImplementation(project(":test-core"))
     testImplementation(Grrfe.std.test)
     testImplementation(Grrfe.std.result.assert)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
+
+    androidTestImplementation(AndroidX.test.runner)
+    androidTestImplementation(AndroidX.test.rules)
+    androidTestImplementation(AndroidX.test.espresso.core)
+    androidTestImplementation(AndroidX.test.ext.junit.ktx)
+    androidTestImplementation(AndroidX.compose.ui.testJunit4)
+    debugImplementation(AndroidX.compose.ui.testManifest)
 }

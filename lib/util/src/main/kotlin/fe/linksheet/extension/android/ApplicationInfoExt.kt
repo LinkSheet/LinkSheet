@@ -1,7 +1,7 @@
 package fe.linksheet.extension.android
 
 import android.content.pm.ApplicationInfo
-import fe.linksheet.util.ApplicationInfoPrivateFlags
+import fe.composekit.flag.ApplicationInfoPrivateFlags
 
 
 val SYSTEM_APP_FLAGS = ApplicationInfoPrivateFlags.select(

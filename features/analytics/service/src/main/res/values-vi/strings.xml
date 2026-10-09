@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_exhaustive">Toàn diện</string>
+    <string name="telemetry_level_disabled">Đã tắt</string>
+    <string name="telemetry_level_minimal">Tối thiểu</string>
+    <string name="telemetry_level_standard">Tiêu chuẩn</string>
+    <string name="telemetry_identity_basic">Cơ bản</string>
+    <string name="telemetry_identity_full">Đầy đủ</string>
+    <string name="telemetry_level_disabled_description">Không thu thập dữ liệu</string>
+    <string name="telemetry_level_minimal_description">Chỉ số phiên bản đã cài đặt</string>
+    <string name="telemetry_level_standard_description">Thống kê sử dụng tổng hợp</string>
+    <string name="telemetry_level_exhaustive_description">Thống kê sử dụng chi tiết</string>
+    <string name="telemetry_dialog_title">LinkSheet tôn trọng quyền riêng tư của bạn</string>
+    <string name="telemetry_dialog_text">Chọn loại số liệu sử dụng mà bạn cảm thấy thoải mái nhất.</string>
+    <string name="telemetry_dialog_text_2" translatable="false">Các chỉ số sử dụng bao gồm giá trị nhận dạng ngẫu nhiên, do người dùng đặt lại trong quá trình cài đặt, cũng như phiên bản Android của bạn và được lưu trữ tại <annotation url-id="aptabase">Aptabase (EU)</annotation>. Dữ liệu nhạy cảm, chẳng hạn như các ứng dụng đã cài đặt và các liên kết đã nhấp vào sẽ <b>không bao giờ</b> bị thu thập. Để tìm hiểu thêm, hãy nhấn vào <annotation url-id="privacy-telemetry">đây</annotation>.</string>
+</resources>

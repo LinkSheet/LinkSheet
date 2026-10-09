@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
-    <string name="back">Back</string>
-    <string name="generic__button_open_external">Open externally</string>
+    <string name="generic__button_text_open_external">Open externally</string>
+    <string name="generic__button_text_cancel">Cancel</string>
+    <string name="generic__button_text_create">Create</string>
+    <string name="generic__button_text_add">Add</string>
+    <string name="generic__button_text_select_all">Select all</string>
+    <string name="generic__button_text_unselect_all">Unselect all</string>
+    <string name="generic__button_text_reset">Reset</string>
+    <string name="generic__action_move_up">Move up</string>
+    <string name="generic__action_move_down">Move Down</string>
+    <string name="generic__button_text_back">Back</string>
+    <string name="generic__button_text_save">Save</string>
+    <string name="generic__n_selected">%d selected</string>
+    <string name="generic__button_text_enable">Enable</string>
+    <string name="generic__button_text_disable">Disable</string>
+    <string name="generic__text_url">Url</string>
+    <string name="options">Options</string>
+    <string name="request_timeout">Request timeout</string>
+    <string name="request_timeout_explainer">Defines how many seconds LinkSheet will wait for a connection to be established. Setting this to 0 disables the timeout, but this is not recommended.</string>
+    <string name="generic__text_mode">Mode</string>
+    <string name="checkmark">Checkmark</string>
+    <string name="error">Error</string>
+    <string name="generic__button_text_confirm">Confirm</string>
 </resources>

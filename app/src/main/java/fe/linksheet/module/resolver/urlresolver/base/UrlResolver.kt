@@ -4,13 +4,10 @@ import android.net.Uri
 import android.net.compatHost
 import app.linksheet.feature.engine.database.entity.ResolveType
 import app.linksheet.feature.engine.database.repository.CacheRepository
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.extension.kotlin.unwrapOrNull
 import fe.linksheet.module.database.entity.resolver.Amp2HtmlMapping
 import fe.linksheet.module.database.entity.resolver.ResolvedRedirect
-import fe.linksheet.module.database.entity.resolver.ResolverEntity
-import fe.linksheet.module.repository.resolver.Amp2HtmlRepository
-import fe.linksheet.module.repository.resolver.ResolvedRedirectRepository
-import fe.linksheet.module.repository.resolver.ResolverRepository
 import fe.linksheet.module.resolver.urlresolver.RemoteResolver
 import fe.linksheet.module.resolver.urlresolver.RemoteTask
 import fe.linksheet.module.resolver.urlresolver.ResolveResultType
@@ -19,30 +16,64 @@ import fe.linksheet.web.HostType
 import fe.linksheet.web.HostUtil
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
-import mozilla.components.support.base.log.logger.Logger
 import org.koin.core.component.KoinComponent
 
 typealias ResolvePredicate = (Uri) -> Boolean
+typealias GetForInputUrl<T> = (String) -> Pair<T, String?>?
+typealias Insert<T> = suspend (inputUrl: String, resolvedUrl: String) -> T
 
-sealed class LocalTask<T : ResolverEntity<T>>(val request: LocalResolveRequest, val repository: ResolverRepository<T>) {
+sealed class LocalTask<T>(
+    val request: LocalResolveRequest,
+    val getForInputUrl: GetForInputUrl<T>,
+    val insert: Insert<T>,
+    val remoteResolveUrlField: String
+) {
     class Amp2Html(
         request: LocalResolveRequest,
-        repository: Amp2HtmlRepository
-    ) : LocalTask<Amp2HtmlMapping>(request, repository)
+        getForInputUrl: GetForInputUrl<Amp2HtmlMapping>,
+        insert: Insert<Amp2HtmlMapping>
+    ) : LocalTask<Amp2HtmlMapping>(request, getForInputUrl, insert, "canonicalUrl")
 
     class Redirector(
         request: LocalResolveRequest,
-        repository: ResolvedRedirectRepository
-    ) : LocalTask<ResolvedRedirect>(request, repository)
+        getForInputUrl: GetForInputUrl<ResolvedRedirect>,
+        insert: Insert<ResolvedRedirect>
+    ) : LocalTask<ResolvedRedirect>(request, getForInputUrl, insert, "resolvedUrl")
 }
 
 class UrlResolver(
     private val redirectorTask: LocalTask.Redirector,
+    private val aggressiveRedirectorTask: LocalTask.Redirector,
     private val amp2HtmlTask: LocalTask.Amp2Html,
     private val remoteResolver: RemoteResolver,
     private val cacheRepository: CacheRepository,
 ) : KoinComponent {
     private val logger = Logger("UrlResolver")
+    suspend fun resolveRedirect(
+        uri: Uri,
+        localCache: Boolean,
+        resolvePredicate: ResolvePredicate? = null,
+        aggressive: Boolean,
+        externalService: Boolean,
+        connectTimeout: Int,
+        canAccessInternet: Boolean,
+        allowDarknets: Boolean,
+        allowLocalNetwork: Boolean,
+    ): Result<ResolveResultType>? {
+        val task = if (aggressive) aggressiveRedirectorTask else redirectorTask
+        return resolve(
+            task,
+            uri,
+            localCache,
+            resolvePredicate,
+            externalService,
+            connectTimeout,
+            canAccessInternet,
+            allowDarknets,
+            allowLocalNetwork,
+            ResolveType.FollowRedirects
+        )
+    }
 
     suspend fun resolve(
         uri: Uri,
@@ -67,8 +98,15 @@ class UrlResolver(
             ResolveType.FollowRedirects -> {
                 resolve(
                     redirectorTask,
-                    uri, localCache, resolvePredicate,
-                    externalService, connectTimeout, canAccessInternet, allowDarknets, allowLocalNetwork, resolveType
+                    uri,
+                    localCache,
+                    resolvePredicate,
+                    externalService,
+                    connectTimeout,
+                    canAccessInternet,
+                    allowDarknets,
+                    allowLocalNetwork,
+                    resolveType
                 )
             }
 
@@ -76,7 +114,7 @@ class UrlResolver(
         }
     }
 
-    private suspend fun <T : ResolverEntity<T>> resolve(
+    private suspend fun <T> resolve(
         task: LocalTask<T>,
         uri: Uri,
         localCache: Boolean,
@@ -120,9 +158,10 @@ class UrlResolver(
                 }
             }
 
-            val entry = task.repository.getForInputUrl(uriString)
-            if (entry != null) {
-                val cachedUrl = entry.url ?: return null
+            val result = task.getForInputUrl(uriString)
+            if (result != null) {
+                val (_, url) = result
+                val cachedUrl = url ?: return null
 
                 logger.debug("From local cache: $cachedUrl")
                 return ResolveResultType.Resolved.LocalCache(cachedUrl).success()
@@ -133,14 +172,22 @@ class UrlResolver(
             return ResolveResultType.NoInternetConnection.success()
         }
 
-        val resolveResult =
-            resolve(task, resolveType, uriString, externalService, darknet, isPublicHost, connectTimeout)
+        val resolveResult = resolve(
+            localTask = task,
+            resolveType = resolveType,
+            uriString = uriString,
+            externalService = externalService,
+            darknet = darknet,
+            isPublicHost = isPublicHost,
+            timeout = connectTimeout
+        )
 
         if (localCache) {
             // TODO: Insert skip
-            val url = resolveResult.unwrapOrNull<ResolveResultType, ResolveResultType.Resolved>()?.url
+            val url =
+                resolveResult.unwrapOrNull<ResolveResultType, ResolveResultType.Resolved>()?.url
             if (url != null) {
-                task.repository.insert(uriString, url)
+                task.insert(uriString, url)
             }
         }
 
@@ -165,7 +212,7 @@ class UrlResolver(
         return true
     }
 
-    private suspend fun <T : ResolverEntity<T>> resolve(
+    private suspend fun <T> resolve(
         localTask: LocalTask<T>,
         resolveType: ResolveType?,
         uriString: String,
@@ -184,9 +231,15 @@ class UrlResolver(
 
             if (remoteTask == null) return Result.failure(Exception("No task found"))
 
-            val result =
-                remoteResolver.resolveRemote(remoteTask, uriString, timeout, localTask.repository.remoteResolveUrlField)
-            if (result.isFailure) logger.error("External resolve failed", result.exceptionOrNull())
+            val result = remoteResolver.resolveRemote(
+                task = remoteTask,
+                url = uriString,
+                timeout = timeout,
+                remoteResolveUrlField = localTask.remoteResolveUrlField
+            )
+            if (result.isFailure) {
+                logger.error("External resolve failed", result.exceptionOrNull())
+            }
 
             return Result.failure(Exception("No task found"))
         }

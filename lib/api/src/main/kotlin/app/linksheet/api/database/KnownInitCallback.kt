@@ -1,12 +1,12 @@
 package app.linksheet.api.database
 
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room3.RoomDatabase
+import androidx.sqlite.SQLiteConnection
 
 class KnownInitCallback(private vararg val knownHolders: KnownHolder<*>) : RoomDatabase.Callback() {
-    override fun onOpen(db: SupportSQLiteDatabase) {
+    override suspend fun onOpen(connection: SQLiteConnection) {
         for (holder in knownHolders) {
-            holder.initialize(db)
+            holder.initialize(connection)
         }
     }
 }

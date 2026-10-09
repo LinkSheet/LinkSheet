@@ -4,7 +4,7 @@ import fe.buildsrc.clearurls.UpdateRulesTask
 
 plugins {
     kotlin("jvm")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 kotlin {
@@ -39,4 +39,5 @@ assemble.dependsOn(generateMetadata)
 
 val updateRules = tasks.register<UpdateRulesTask>("updateRules") {
     file = "src/main/resources/fe/clearurlskt/clearurls.json"
+    rawUrl.set("https://raw.githubusercontent.com/LinkSheet/ClearURLs-Rules/master/data.min.json")
 }

@@ -8,7 +8,8 @@ import app.linksheet.feature.app.core.ManifestParser
 import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.core.domain.VerificationState
 import app.linksheet.feature.app.core.domain.VerificationUnsupportedState
-import fe.linksheet.util.ApplicationInfoFlags
+import fe.composekit.flag.ApplicationInfoFlags
+import fe.composekit.flag.PackageInfoFlags
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -18,7 +19,7 @@ class AllAppsUseCase(
     private val manifestParser: ManifestParser,
     private val domainVerificationManager: DomainVerificationManagerCompat,
     private val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
-    private val getInstalledPackages: () -> List<PackageInfo>,
+    private val getInstalledPackages: (PackageInfoFlags) -> List<PackageInfo>,
 ) {
     fun queryAllAppsFlow(): Flow<List<AppInfo>> = flow {
         val apps = queryAllApps()
@@ -26,7 +27,7 @@ class AllAppsUseCase(
     }
 
     fun queryAllApps(): List<AppInfo> {
-        return getInstalledPackages().mapNotNull { createAppInfo(it) }
+        return getInstalledPackages(PackageInfoFlags.EMPTY).mapNotNull { createAppInfo(it) }
     }
 
     private fun createAppInfo(packageInfo: PackageInfo): AppInfo? {
@@ -45,7 +46,7 @@ class AllAppsUseCase(
 
         val appInfo = creator.toAppInfo(applicationInfo, null)
         val hosts = when (val state = domainVerificationManager.getDomainVerificationUserState(packageName)) {
-            null, is VerificationUnsupportedState -> manifestParser.parse(applicationInfo.sourceDir).toSet()
+            null, is VerificationUnsupportedState -> manifestParser.parseHosts(applicationInfo.sourceDir).toSet()
             is VerificationState -> state.hostToStateMap.keys
             else -> return null
         }

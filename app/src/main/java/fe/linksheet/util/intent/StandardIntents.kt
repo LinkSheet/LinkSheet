@@ -4,10 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import fe.composekit.core.Scheme
+import fe.composekit.core.create
 import fe.composekit.intent.buildIntent
 import fe.linksheet.BuildConfig
-import fe.linksheet.util.Scheme
-import fe.linksheet.util.create
 
 object StandardIntents {
     fun createAppSettingsIntent(packageName: String): Intent {

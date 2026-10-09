@@ -3,6 +3,7 @@ package app.linksheet.feature.profile.viewmodel
 import android.app.Activity
 import androidx.lifecycle.ViewModel
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.profile.core.CrossProfile
 import app.linksheet.feature.profile.core.ProfileStatus
 import app.linksheet.feature.profile.core.ProfileSwitcher
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.mapNotNull
 
 class ProfileSwitchingSettingsViewModel internal constructor(
     private val profileSwitcher: ProfileSwitcher,
+    private val metaDataHandler: MetaDataHandler,
     preferenceRepository: AppPreferenceRepository,
     profilePreferences: ProfilePreferences,
 ) : ViewModel() {
@@ -24,6 +26,7 @@ class ProfileSwitchingSettingsViewModel internal constructor(
         }
 
     val enabled = preferenceRepository.asViewModelState(profilePreferences.enable)
+    val sendTarget = preferenceRepository.asViewModelState(profilePreferences.sendTarget)
 
     fun checkIsManagedProfile(): Boolean {
         return profileSwitcher.checkIsManagedProfile()
@@ -35,7 +38,7 @@ class ProfileSwitchingSettingsViewModel internal constructor(
     }
 
     fun startOther(crossProfile: CrossProfile, activity: Activity?) {
-        if(activity == null) return
+        if (activity == null) return
         profileSwitcher.startOther(crossProfile, activity)
     }
 }

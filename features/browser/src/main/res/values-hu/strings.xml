@@ -2,4 +2,10 @@
 <resources>
     <string name="enable_request_private_browsing_button">Engedélyezze a \"Privát böngészés kérése\" gombot</string>
     <string name="enable_request_private_browsing_button_explainer">A böngészők mellett egy gombot jelenít meg, amely privát böngészési módban nyitja meg a kattintott URL-t.</string>
+    <string name="settings_private_browsing__title_private_browsing">Privát böngészés</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">Privát böngészés engedélyezése</string>
+    <string name="settings_private_browsing__divider_configuration">Konfiguráció</string>
+    <string name="settings_private_browsing_browsers__title_browsers">Engedélyezett privát böngészők</string>
+    <string name="settings_private_browsing__title_allowed_browsers">Engedélyezett böngészők</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d böngésző</string>
 </resources>

@@ -22,9 +22,14 @@ abstract class UpdateMimeTypesTask : DefaultTask() {
     @get:Input
     abstract val customMimeTypes: ListProperty<MimeType>
 
+    @Input
+    val rawUrl: String = "https://raw.githubusercontent.com/apache/tika/main/tika-core/src/main/resources/org/apache/tika/mime/tika-mimetypes.xml"
+
+    private val impl = UpdateMimeTypeTaskImpl(rawUrl)
+
     @TaskAction
     fun fetch() {
-        val mimeTypes = UpdateMimeTypeTaskImpl().fetch()
+        val mimeTypes = impl.fetch()
         val mergedTypes = MimeTypeMerger.merge(mimeTypes, customMimeTypes.get())
 
         val kotlinFile = MimeTypesGenerator.build(packageName.get(), mergedTypes)
@@ -56,14 +61,11 @@ object MimeTypeMerger {
     }
 }
 
-class UpdateMimeTypeTaskImpl {
-    companion object {
-        private const val MIME_TYPES_URL =
-            "https://raw.githubusercontent.com/apache/tika/main/tika-core/src/main/resources/org/apache/tika/mime/tika-mimetypes.xml"
-    }
-
+class UpdateMimeTypeTaskImpl(
+    private val url: String
+) {
     fun fetch(): List<MimeType> {
-        val response = httpClient.send(get(MIME_TYPES_URL)) { asXml() }
+        val response = httpClient.send(get(url)) { asXml }
         val document = response.body()
         val mimeTypes = document.getElementsByTagName("mime-type")
         return mimeTypes

@@ -2,9 +2,9 @@
 
 @file:Repository("https://repo.maven.apache.org/maven2/")
 @file:Repository("https://bindings.krzeminski.it")
-@file:DependsOn("io.github.typesafegithub:github-workflows-kt:3.4.0")
-@file:DependsOn("actions:checkout:v4")
-@file:DependsOn("actions:setup-java:v4")
+@file:DependsOn("io.github.typesafegithub:github-workflows-kt:4.0.0")
+@file:DependsOn("actions:checkout:v6")
+@file:DependsOn("actions:setup-java:v5")
 @file:DependsOn("actions:cache:v4")
 @file:DependsOn("actions:upload-artifact:v4")
 @file:DependsOn("gradle:actions__setup-gradle:v3")
@@ -27,7 +27,6 @@ import io.github.typesafegithub.workflows.dsl.expressions.ExpressionContext
 import io.github.typesafegithub.workflows.dsl.expressions.expr
 import io.github.typesafegithub.workflows.dsl.workflow
 import io.github.typesafegithub.workflows.yaml.ConsistencyCheckJobConfig
-import kotlin.collections.mapOf
 
 
 val KEYSTORE_FILE by Contexts.secrets
@@ -61,7 +60,7 @@ val proBaseOutPathExpr = "app/build/outputs/apk/pro/nightly"
 val base64ToFile = CustomAction(
     actionOwner = "timheuer",
     actionName = "base64-to-file",
-    actionVersion = "v1",
+    actionVersion = "v2",
     inputs = mapOf(
         "fileName" to "keystore.jks",
         "encodedString" to expr(KEYSTORE_FILE)
@@ -318,7 +317,7 @@ fun JobBuilder<*>.setupAndroid() {
         action = CustomAction(
             actionOwner = "android-actions",
             actionName = "setup-android",
-            actionVersion = "v3",
+            actionVersion = "v4",
         )
     )
     uses(action = ActionsSetupGradle())
@@ -331,7 +330,7 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
         runsOn = UbuntuLatest
     ) {
         setupAndroid()
-        run(command = "./gradlew testFossReleaseUnitTest")
+        run(command = "./gradlew test")
     }
     val integrationTestJob = job(
         id = "integration-tests",
@@ -342,9 +341,8 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
             name = "Enable KVM",
             shell = Shell.Bash,
             command =  bash {
-                val echoKvm = echo("""'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"'""")
                 exec {
-                    +(echoKvm pipe tee("/etc/udev/rules.d/99-kvm4all.rules", sudo = true))
+                    +(echo("""'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"'""") pipe sudo(tee("/etc/udev/rules.d/99-kvm4all.rules")))
                     +sudo("udevadm control --reload-rules")
                     +sudo("udevadm trigger --name-match=kvm")
                 }
@@ -373,7 +371,7 @@ fun WorkflowBuilder.setupWorkflow(release: Boolean) {
                     "api-level" to "$apiLevel",
                     "arch" to expr(avdInfoStep.outputs["arch"]),
                     "target" to expr(avdInfoStep.outputs["target"]),
-                    "script" to "./gradlew connectedAndroidTest"
+                    "script" to "./gradlew connectedFossAndroidTest"
                 )
             ),
         )

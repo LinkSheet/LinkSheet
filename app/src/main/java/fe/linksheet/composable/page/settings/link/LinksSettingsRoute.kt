@@ -1,26 +1,20 @@
 package fe.linksheet.composable.page.settings.link
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
-import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.composekit.component.list.item.ContentPosition
-import fe.composekit.component.list.item.type.DividedSwitchListItem
-import fe.composekit.preference.collectAsStateWithLifecycle
-import fe.composekit.route.Route
-import fe.linksheet.*
-import fe.linksheet.composable.page.settings.link.downloader.downloaderPermissionState
-import fe.linksheet.composable.page.settings.link.downloader.requestDownloadPermission
 import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.downloader.ui.downloaderListItem
 import app.linksheet.feature.libredirect.navigation.LibRedirectRoute
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
+import fe.android.compose.text.StringResourceContent.Companion.textContent
+import fe.composekit.route.Route
+import fe.linksheet.R
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.navigation.PreviewUrlRoute
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
-import fe.linksheet.navigation.downloaderSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 import app.linksheet.feature.libredirect.R as LibRedirectR
@@ -33,9 +27,10 @@ fun LinksSettingsRoute(
     navigateNew: (Route) -> Unit,
     viewModel: LinksSettingsViewModel = koinViewModel()
 ) {
-    val writeExternalStoragePermissionState = downloaderPermissionState()
-
-    SaneScaffoldSettingsPage(headline = stringResource(id = R.string.links), onBackPressed = onBackPressed) {
+    SaneScaffoldSettingsPage(
+        headline = stringResource(id = R.string.links),
+        onBackPressed = onBackPressed
+    ) {
         group(size = 8) {
             item(key = R.string.use_clear_urls) { padding, shape ->
                 PreferenceSwitchListItem(
@@ -90,26 +85,10 @@ fun LinksSettingsRoute(
                 )
             }
 
-            item(key = R.string.enable_downloader) { padding, shape ->
-                val enableDownloader by viewModel.enableDownloader.collectAsStateWithLifecycle()
-
-                DividedSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    checked = enableDownloader,
-                    onCheckedChange = {
-                        requestDownloadPermission(
-                            writeExternalStoragePermissionState,
-                            viewModel.enableDownloader,
-                            it
-                        )
-                    },
-                    onContentClick = { navigate(downloaderSettingsRoute) },
-                    position = ContentPosition.Trailing,
-                    headlineContent = textContent(R.string.enable_downloader),
-                    supportingContent = annotatedStringResource(R.string.enable_downloader_explainer)
-                )
-            }
+            downloaderListItem(
+                statePreference = viewModel.enableDownloader,
+                navigate = navigateNew
+            )
 
             item(key = R.string.settings_links_preview__title_preview) { padding, shape ->
                 PreferenceDividedSwitchListItem(

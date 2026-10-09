@@ -2,8 +2,10 @@ package app.linksheet.feature.app.core
 
 import android.content.pm.ComponentInfo
 import android.os.Parcelable
+import androidx.compose.runtime.Immutable
 import fe.android.compose.icon.IconPainter
 import fe.composekit.extension.componentName
+import fe.kotlin.extension.iterable.mapToSet
 import fe.kotlin.util.applyIf
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -17,6 +19,7 @@ enum class LinkHandling {
 }
 
 @Parcelize
+@Immutable
 class DomainVerificationAppInfo(
     val appInfo: AppInfo,
     val linkHandling: LinkHandling,
@@ -39,6 +42,11 @@ class DomainVerificationAppInfo(
     val hostSet by lazy {
         (stateNone + stateSelected + stateVerified).toSet()
     }
+
+    @IgnoredOnParcel
+    val compareHostSet by lazy {
+        hostSet.mapToSet { it.lowercase() }
+    }
 }
 
 data class ActivityAppInfoStatus(
@@ -48,6 +56,7 @@ data class ActivityAppInfoStatus(
 )
 
 @Parcelize
+@Immutable
 class ActivityAppInfo(
     val appInfo: AppInfo,
     val componentInfo: @RawValue ComponentInfo,
@@ -58,18 +67,27 @@ class ActivityAppInfo(
 
     @IgnoredOnParcel
     val flatComponentName by lazy { componentName.flattenToString() }
+
+    @IgnoredOnParcel
+    override val uniqueKey: String by lazy { flatComponentName }
 }
 
 @Parcelize
+@Immutable
 class AppInfo(
     override val packageName: String,
     override val label: String,
     @IgnoredOnParcel override val icon: IconPainter? = null,
     override val flags: Int,
     override val installTime: Long? = null,
-) : Parcelable, IAppInfo
+) : Parcelable, IAppInfo {
+    @IgnoredOnParcel
+    override val uniqueKey: String = packageName
+}
 
 interface IAppInfo {
+    val uniqueKey: String
+
     val packageName: String
     val label: String
 

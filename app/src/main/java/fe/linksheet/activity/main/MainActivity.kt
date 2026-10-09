@@ -2,6 +2,7 @@ package fe.linksheet.activity.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.collection.valueIterator
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.SnackbarHost
@@ -13,29 +14,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
+import app.linksheet.feature.analytics.ui.rememberAnalyticDialog
+import app.linksheet.feature.remoteconfig.ui.RemoteConfigDialogLauncher
+import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.composekit.preference.collectAsStateWithLifecycle
-import fe.linksheet.activity.util.DebugStatePublisher
+import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
 import fe.linksheet.activity.util.NavGraphDebugState
 import fe.linksheet.activity.util.UiEvent
-import fe.linksheet.activity.UiEventReceiverBaseComponentActivity
-import fe.linksheet.composable.page.settings.privacy.analytics.rememberAnalyticDialog
-import fe.linksheet.composable.page.settings.privacy.remoteconfig.rememberRemoteConfigDialog
 import fe.linksheet.composable.ui.BoxAppHost
 import fe.linksheet.extension.compose.AddIntentDeepLinkHandler
 import fe.linksheet.extension.compose.ObserveDestination
 import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.util.buildconfig.Build
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : UiEventReceiverBaseComponentActivity() {
     private val viewModel by viewModel<MainViewModel>()
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent(edgeToEdge = true) {
-            BoxAppHost {
+            BoxAppHost(updateEdgeToEdge = ::enableEdgeToEdge) {
                 val snackbarHostState = remember { SnackbarHostState() }
                 val navController = rememberNavController()
 
@@ -50,22 +51,9 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                 }
 
                 AddIntentDeepLinkHandler(navController = navController)
+                RemoteConfigDialogLauncher(useCase = viewModel.remoteConfigUseCase)
 
-                val remoteConfigDialogDismissed by viewModel.remoteConfigDialogDismissed.collectAsStateWithLifecycle(
-                    // Assume true to avoid having to show, then quickly dismiss the dialog, once the actual state is emitted to the flow
-                    initialValue = true
-                )
-                val remoteConfigDialog = rememberRemoteConfigDialog(
-                    onChanged = { viewModel.setRemoteConfig(it) }
-                )
-
-                LaunchedEffect(key1 = remoteConfigDialogDismissed) {
-                    if (!remoteConfigDialogDismissed) {
-                        remoteConfigDialog.open()
-                    }
-                }
-
-                if (Build.IsDebug) {
+                if (StaticBuildInfo.IsDebug) {
                     navController.ObserveDestination { _, destination, args ->
                         viewModel.enqueueNavEvent(destination, args)
                     }
@@ -92,11 +80,10 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                     onBackPressed = { navController.popBackStack() }
                 )
 
-                if (Build.IsDebug) {
+                if (StaticBuildInfo.IsDebug) {
                     LaunchedEffect(key1 = Unit) {
-                        @SuppressLint("RestrictedApi")
                         val graphNodes = navController.graph.nodes.valueIterator().asSequence().toList()
-                        DebugStatePublisher.publishDebugState(NavGraphDebugState(graphNodes))
+                        publishDebugState(NavGraphDebugState(navController::findDestination, graphNodes))
                     }
                 }
 
@@ -107,6 +94,12 @@ class MainActivity : UiEventReceiverBaseComponentActivity() {
                     hostState = snackbarHostState
                 )
             }
+        }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        if (hasFocus) {
+            viewModel.clipboardUseCase.refresh()
         }
     }
 }

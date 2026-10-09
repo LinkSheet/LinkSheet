@@ -12,7 +12,8 @@ class FastForwardLinkModifier(override val enabled: () -> Boolean) : LinkModifie
     override suspend fun warmup() {
     }
 
-    override suspend fun EngineRunContext.runStep(url: StdUrl): FastForwardModifyOutput? {
+    context(context: EngineRunContext)
+    override suspend fun runStep(url: StdUrl): FastForwardModifyOutput? {
         val result = FastForward.getRuleRedirect(url.toString())
         return result?.let { FastForwardModifyOutput(it.toStdUrlOrThrow()) }
     }

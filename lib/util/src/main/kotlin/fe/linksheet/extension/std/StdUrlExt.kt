@@ -1,8 +1,8 @@
-package fe.linksheet.extension
+package fe.linksheet.extension.std
 
 import android.net.Uri
-import fe.std.uri.StdUrl
 import androidx.core.net.toUri
+import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrNull
 import fe.std.uri.toStdUrlOrThrow
 

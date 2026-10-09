@@ -9,13 +9,17 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import app.linksheet.compose.theme.DialogTitleStyle
+import app.linksheet.feature.exportimport.ExportImportUseCase
 import fe.android.compose.dialog.helper.result.ResultDialog
 import fe.android.compose.dialog.helper.result.ResultDialogState
 import fe.android.compose.dialog.helper.result.rememberResultDialogState
@@ -30,9 +34,9 @@ import fe.composekit.component.dialog.DialogDefaults
 import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
-import app.linksheet.compose.theme.HkGroteskFontFamily
 import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.viewmodel.util.LogViewCommon
+import app.linksheet.compose.R as CommonR
 
 @Composable
 fun rememberExportLogDialog(
@@ -47,7 +51,7 @@ fun rememberExportLogDialog(
     }
 
     val onClose: (LogViewCommon.ExportSettings) -> Unit = { settings ->
-        val text = logViewCommon.buildExportText(context, settings, logEntries)
+        val text = logViewCommon.buildExportText(context, ExportImportUseCase.Format.Toml, settings, logEntries)
         interaction.copy(text, FeedbackType.Confirm)
     }
 
@@ -96,9 +100,7 @@ private fun ExportLogDialog(
         title = {
             Text(
                 text = stringResource(id = R.string.export_log_dialog__title_share_logs),
-                fontFamily = HkGroteskFontFamily,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp
+                style = DialogTitleStyle
             )
         },
         text = {
@@ -191,7 +193,7 @@ private fun ExportLogDialog(
         onDismissRequest = dismiss,
         dismissButton = {
             TextButton(onClick = dismiss) {
-                Text(text = stringResource(id = R.string.generic__button_text_cancel))
+                Text(text = stringResource(id = CommonR.string.generic__button_text_cancel))
             }
         },
         confirmButton = {

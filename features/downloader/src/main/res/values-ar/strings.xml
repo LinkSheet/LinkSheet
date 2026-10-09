@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">تمكين أداة التنزيل</string>
+    <string name="enable_downloader_explainer">أضف زر \"تنزيل\" إلى الورقة السفلية إذا كان عنوان URL يحتوي على رابط مباشر للملف. قد يكون لهذا</string>
+    <string name="settings_links_downloader__title_downloader">أداة التنزيل</string>
+    <string name="downloader_url_mime_type">استخدام نوع mime من عنوان الرابط</string>
+    <string name="downloader_url_mime_type_explainer">يتحقق مما إذا كان عنوان URL ينتهي بامتداد ملف (على سبيل المثال \".jpg\") ؛ إذا حدث ذلك ، استخدام هذا النوع للملف الذي تم تنزيله.</string>
+</resources>

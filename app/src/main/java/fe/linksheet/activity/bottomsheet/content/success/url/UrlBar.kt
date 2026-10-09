@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.FastForward
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.rounded.DoubleArrow
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.Icon
@@ -26,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import app.linksheet.compose.extension.toImageBitmap
-import app.linksheet.feature.downloader.DownloadCheckResult
-import app.linksheet.feature.downloader.isDownloadable
+import app.linksheet.feature.downloader.core.DownloadCheckResult
+import app.linksheet.feature.downloader.core.isDownloadable
 import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.profile.core.CrossProfile
 import coil3.ImageLoader
@@ -39,19 +40,31 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
 import fe.linksheet.R
 import fe.linksheet.activity.TextEditorActivity
-import fe.linksheet.activity.bottomsheet.*
+import fe.linksheet.activity.bottomsheet.BottomSheetStateController
+import fe.linksheet.activity.bottomsheet.ClickModifier
+import fe.linksheet.activity.bottomsheet.CopyUrlInteraction
+import fe.linksheet.activity.bottomsheet.IgnoreLibRedirectInteraction
+import fe.linksheet.activity.bottomsheet.ManualDownloadInteraction
+import fe.linksheet.activity.bottomsheet.ManualRedirectInteraction
+import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
+import fe.linksheet.activity.bottomsheet.ShareUrlInteraction
+import fe.linksheet.activity.bottomsheet.StartDownloadInteraction
+import fe.linksheet.activity.bottomsheet.SwitchProfileInteraction
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.util.intent.StandardIntents
 import me.saket.unfurl.UnfurlResult
+import app.linksheet.feature.downloader.R as DownloaderR
 
 
 @Composable
 fun UrlBarWrapper(
     result: IntentResolveResult.Default,
     imageLoader: ImageLoader?,
+    enableDownloader: Boolean,
     enableIgnoreLibRedirectButton: Boolean,
     enableUrlCardDoubleTap: Boolean,
     enableManualRedirect: Boolean,
+    enableManualDownload: Boolean,
     controller: BottomSheetStateController,
     profiles: List<CrossProfile>?,
 ) {
@@ -62,7 +75,7 @@ fun UrlBarWrapper(
         uri = uriString,
         imageLoader = imageLoader,
         profiles = profiles,
-        switchProfile = { crossProfile, url ->
+        switchProfile = profiles?.isNotEmpty()?.if2 { crossProfile, url ->
             controller.dispatch(SwitchProfileInteraction(url, crossProfile))
         },
         unfurlResult = result.unfurlResult,
@@ -88,25 +101,30 @@ fun UrlBarWrapper(
 //            controller.editorLauncher.launch(intent)
             text
         },
-        downloadUri = { uri, downloadResult ->
+        downloadUri = enableDownloader.if2 { uri, downloadResult ->
             controller.dispatch(StartDownloadInteraction(uri, downloadResult))
         },
-        ignoreLibRedirect = { redirectedResult ->
+        ignoreLibRedirect = enableIgnoreLibRedirectButton.if2 { redirectedResult ->
             controller.dispatch(IgnoreLibRedirectInteraction(redirectedResult))
         },
-        manualRedirect = if (enableManualRedirect) { uri ->
+        manualRedirect = enableManualRedirect.if2 { uri ->
             controller.dispatch(ManualRedirectInteraction(uri))
-        } else null,
-        onDoubleClick = {
+        },
+        manualDownload = enableManualDownload.if2 { uri ->
+            controller.dispatch(ManualDownloadInteraction(uri))
+        },
+        onDoubleClick = enableUrlCardDoubleTap.if2 {
             if (result.app != null) {
                 controller.dispatch(PreferredAppChoiceButtonInteraction(result.app, ClickModifier.None, result.intent))
             }
-
-            Unit
-        }.takeIf { enableUrlCardDoubleTap }
+        }
     )
 }
 
+@Suppress("NOTHING_TO_INLINE")
+inline fun <T> Boolean.if2(fn: T): T? {
+    return if(this) fn else null
+}
 
 @Composable
 fun UrlBar(
@@ -123,6 +141,7 @@ fun UrlBar(
     downloadUri: ((String, DownloadCheckResult.Downloadable) -> Unit)? = null,
     ignoreLibRedirect: ((LibRedirectResult.Redirected) -> Unit)? = null,
     manualRedirect: ((String) -> Unit)? = null,
+    manualDownload: ((String) -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
 ) {
     Column(
@@ -174,6 +193,14 @@ fun UrlBar(
                         text = textContent(R.string.download),
                         icon = Icons.Filled.Download.iconPainter,
                         onClick = { downloadUri!!(uri, downloadable as DownloadCheckResult.Downloadable) }
+                    )
+                }
+            } else if (manualDownload != null) {
+                item {
+                    UrlActionButton(
+                        text = textContent(DownloaderR.string.action_downloader__try_to_download),
+                        icon = Icons.Rounded.Search.iconPainter,
+                        onClick = { manualDownload(uri) }
                     )
                 }
             }

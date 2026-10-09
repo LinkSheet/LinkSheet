@@ -5,7 +5,8 @@ import app.linksheet.feature.engine.core.context.EngineRunContext
 
 
 interface Rule<in Input : RuleInput, out Result : EngineResult> {
-    suspend fun EngineRunContext.checkRule(input: Input): Result?
+    context(context: EngineRunContext)
+    suspend fun checkRule(input: Input): Result?
 }
 
 interface RuleInput

@@ -1,21 +1,19 @@
+import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
-import fe.buildlogic.Version
-import fe.buildlogic.common.OptIn
-import fe.buildlogic.common.extension.addOptIn
 
 plugins {
-    kotlin("android")
     kotlin("plugin.compose")
     kotlin("plugin.serialization")
     id("com.android.library")
-    id("com.gitlab.grrfe.new-build-logic-plugin")
+    id("com.gitlab.grrfe.android-build-plugin")
 }
 
 android {
     namespace = "app.linksheet.feature.shizuku"
-    compileSdk = AndroidSdk.COMPILE_SDK
+    compileSdk = app.linksheet.buildsrc.Sdk.CompileSdk
+    compileSdkMinor = app.linksheet.buildsrc.Sdk.CompileSdkMinor
 
     defaultConfig {
         minSdk = AndroidSdk.MIN_SDK
@@ -23,16 +21,20 @@ android {
 
     kotlin {
         jvmToolchain(Version.JVM)
-        addOptIn(OptIn.ExperimentalTime)
+    }
+
+    buildFeatures {
+        aidl = true
+        buildConfig = true
     }
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":util"))
-    implementation(project(":common"))
-    implementation(project(":compose"))
-    compileOnly(project(":hidden-api"))
+    implementation(project(":lib-api"))
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
+    implementation(project(":lib-util"))
+    implementation(project(":lib-compose"))
+    compileOnly(project(":lib-hidden-api"))
     implementation(AndroidX.lifecycle.viewModelKtx)
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
@@ -47,8 +49,10 @@ dependencies {
     implementation(_1fexd.composeKit.compose.theme.preference)
     implementation(_1fexd.composeKit.compose.dialog)
     implementation(_1fexd.composeKit.compose.route)
+    implementation(_1fexd.composeKit.lifecycle.koin)
     implementation(_1fexd.composeKit.core)
     implementation(_1fexd.composeKit.koin)
+    implementation(_1fexd.composeKit.process)
     implementation(_1fexd.composeKit.preference.core)
     implementation(_1fexd.composeKit.preference.compose.core)
     implementation(_1fexd.composeKit.preference.compose.core2)
@@ -60,16 +64,16 @@ dependencies {
 
     implementation(Koin.android)
     implementation(Koin.compose)
-    implementation(AndroidX.room.common)
 
     implementation(Grrfe.std.core)
+    implementation(Grrfe.std.process.core)
     implementation(Grrfe.std.coroutines)
     implementation(Grrfe.std.result.core)
 
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
-    implementation("dev.rikka.tools.refine:runtime:_")
+    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:4.4.1")
 
     implementation(AndroidX.core.ktx)
 

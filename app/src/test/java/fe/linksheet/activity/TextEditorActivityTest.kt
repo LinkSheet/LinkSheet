@@ -1,20 +1,15 @@
 package fe.linksheet.activity
 
 import android.app.Instrumentation
-import android.os.Build
-import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import fe.composekit.core.putEnumExtra
+import fe.linksheet.Validator
 import fe.linksheet.testlib.core.ActivityInvoker
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.testlib.core.JunitTest
-import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
 
 //@RunWith(AndroidJUnit4::class)
-//@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+//@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class TextEditorActivityTest : BaseUnitTest {
     companion object {
         private const val INPUT_TEXT = "Hello World"
@@ -24,7 +19,7 @@ internal class TextEditorActivityTest : BaseUnitTest {
     private val intent = ActivityInvoker.getIntentForActivity<TextEditorActivity> {
         putExtra(TextEditorActivity.EXTRA_TEXT, INPUT_TEXT)
         putEnumExtra(TextEditorActivity.EXTRA_SOURCE, TextEditorActivity.ExtraSource.ClipboardCard)
-        putEnumExtra(TextEditorActivity.EXTRA_VALIDATOR, TextEditorActivity.ExtraValidator.WebUriTextValidator)
+        putEnumExtra(TextEditorActivity.EXTRA_VALIDATOR, Validator.WebUriTextValidator)
     }
 
     private fun Instrumentation.ActivityResult.assertValid(result: Int, text: String? = null) {

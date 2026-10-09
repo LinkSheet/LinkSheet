@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.kotlin.extension.iterable.mapCatching
 import fe.kotlin.extension.iterable.onEachFailure
 import fe.kotlin.extension.iterable.toSuccess
@@ -12,10 +13,10 @@ import fe.linksheet.activity.util.UiEvent
 import fe.linksheet.activity.util.UiEventReceiver
 import fe.linksheet.debug.DebugBroadcastReceiver
 import fe.linksheet.debug.module.debug.MergedPreferenceRepository
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import fe.linksheet.debug.module.preference.DebugPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.flags.FeatureFlagRepository
-import fe.linksheet.module.preference.state.AppStateRepository
+import fe.linksheet.module.preference.state.DefaultAppStateRepository
 import org.koin.core.component.get
 import org.koin.core.component.inject
 
@@ -30,7 +31,8 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
             appPreferenceRepository = get<AppPreferenceRepository>(),
             featureFlagRepository = get<FeatureFlagRepository>(),
             experimentRepository = get<ExperimentRepository>(),
-            appStateRepository = get<AppStateRepository>()
+            appStateRepository = get<DefaultAppStateRepository>(),
+            debugRepository = get<DebugPreferenceRepository>()
         )
     }
 
@@ -49,7 +51,7 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
 
             val activity = app.currentActivity().value
             if (activity != null && activity is UiEventReceiver) {
-                activity.send(UiEvent.ShowSnackbar(text = msg))
+                activity.onEvent(UiEvent.ShowSnackbar(text = msg))
             } else {
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
             }
@@ -61,7 +63,9 @@ object UpdatePreferenceCommand : DebugCommand<UpdatePreferenceCommand>(
         val repository = requireNotNull(repositories.getPreference(key)) { "No repository found for '$key'" }
 
         // TODO: Implement success in pref indicator in pref lib
-        repository.set(key, value)
+        if(!repository.set(key, value)) {
+            throw IllegalArgumentException("Provided value is not valid for preference")
+        }
         return value
     }
 }

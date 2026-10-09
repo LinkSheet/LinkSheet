@@ -8,26 +8,27 @@ import app.linksheet.feature.engine.core.context.findExtraOrNull
 import app.linksheet.feature.engine.core.rule.PreProcessorInput
 import app.linksheet.feature.engine.core.rule.PreProcessorRule
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.linksheet.util.AndroidAppPackage
+import fe.composekit.core.AndroidAppPackage
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 //@RunWith(AndroidJUnit4::class)
-//@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+//@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class EngineExtraTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 
     private val rule = object : PreProcessorRule {
         private val chromePackage = AndroidAppPackage("com.google.chrome")
 
-        override suspend fun EngineRunContext.checkRule(input: PreProcessorInput): EngineResult? {
-            val extra = findExtraOrNull<SourceAppExtra>()
+        context(context: EngineRunContext)
+        override suspend fun checkRule(input: PreProcessorInput): EngineResult? {
+            val extra = context.findExtraOrNull<SourceAppExtra>()
             if (extra?.appPackage == chromePackage.packageName) {
-                flags.add(EngineFlag.DisablePreview)
+                context.flags.add(EngineFlag.DisablePreview)
             }
 
-            return empty()
+            return context.empty()
         }
     }
 

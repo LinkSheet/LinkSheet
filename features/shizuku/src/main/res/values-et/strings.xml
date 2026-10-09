@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="settings_shizuku__title_shizuku">Shizuku</string>
+    <string name="settings_shizuku__text_shizuku">Seadista Shizukuga seotud funktsionaalsust</string>
+    <string name="settings_shizuku__title_not_installed">Shizuku pole paigaldatud</string>
+    <string name="settings_shizuku__text_not_installed">Paigaldusjuhiste avamiseks klõpsa</string>
+    <string name="settings_shizuku__text_info">Shizuku on tööriistakomplekt, mis kasutab (traadita) ADB/juurkasutaja-õigusi, et võimaldada teistel rakendustel juurdepääsu süsteemi erifunktsioonidele, mis on kättesaadavad ainult eripääsuõigustega kasutajaliidese kaudu.\n\nLinkSheet kasutab Shizukut, et saaks lülitada sisse või välja lingihalduse mis tahes rakenduses, ilma et kasutaja peaks selleks ise seadistusi avama ja seda tegema.</string>
+    <string name="settings_shizuku__title_missing_permission">Õigused on puudu</string>
+    <string name="settings_shizuku__text_missing_permission">Klõpsu Shizuku õiguste lubamiseks</string>
+    <string name="settings_shizuku__title_not_running">Shizuku ei tööta</string>
+    <string name="settings_shizuku__text_not_running">Halduri avamiseks klõpsa</string>
+    <string name="settings_shizuku__title_enable">Võta Shizuku lõiming kasutusele</string>
+    <string name="settings_shizuku__text">Shizuku</string>
+    <string name="settings_shizuku__divider_settings">Seadistused</string>
+    <string name="settings_shizuku__title_auto_disable_link_handling">Lülita linkide töötlus automaatselt välja</string>
+    <string name="settings_shizuku__text_auto_disable_link_handling">Linkide automaatne töötlus lülitatakse uute rakenduste jaoks välja.</string>
+    <string name="shizuku_integration_enabled_explainer">Shizuku lõimingu sisselülitamine õnnestus!</string>
+    <string name="shizuku_not_running_explainer">Shizuku ei tööta. Shizuku avamiseks klõpsa siin ja seejärel järgi käivitusjuhendit.</string>
+    <string name="shizuku_integration_no_permission_explainer">Klõpsa siin Shizuku õiguste seadistamiseks.</string>
+    <string name="shizuku_integration_not_setup_explainer">Kuigi Shizuku pole LinkSheeti tööks otseselt vajalik, on ta siiski soovitatav. Paigaldamiseks klõpsa siia.</string>
+    <string name="shizuku_integration">Shizuku lõiming</string>
 </resources>

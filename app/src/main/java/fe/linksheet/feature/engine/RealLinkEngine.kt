@@ -6,7 +6,7 @@ import android.content.Context
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
 import app.linksheet.feature.browser.core.PrivateBrowsingService
-import app.linksheet.feature.downloader.Downloader
+import app.linksheet.feature.downloader.core.Downloader
 import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.core.EngineScenario
 import app.linksheet.feature.engine.core.LinkEngine
@@ -30,20 +30,18 @@ import app.linksheet.feature.engine.database.repository.ScenarioRepository
 import app.linksheet.feature.engine.eval.rule.ExpressionPostProcessorRule
 import app.linksheet.feature.engine.eval.rule.ExpressionPreProcessorRule
 import app.linksheet.feature.libredirect.LibRedirectResolver
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.lifecycle.network.core.NetworkStateService
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersRepository
-import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
-import io.ktor.client.*
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
-import mozilla.components.support.base.log.logger.Logger
 import kotlin.uuid.ExperimentalUuidApi
 
 class RealLinkEngine(
@@ -51,8 +49,6 @@ class RealLinkEngine(
     private val client: HttpClient,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
-    private val normalBrowsersRepository: WhitelistedNormalBrowsersRepository,
-    private val inAppBrowsersRepository: WhitelistedInAppBrowsersRepository,
     private val packageIntentHandler: PackageIntentHandler,
     private val packageLauncherService: PackageLauncherService,
     private val appSorter: AppSorter,
@@ -79,8 +75,6 @@ class RealLinkEngine(
             client = client,
             appSelectionHistoryRepository = appSelectionHistoryRepository,
             preferredAppRepository = preferredAppRepository,
-            normalBrowsersRepository = normalBrowsersRepository,
-            inAppBrowsersRepository = inAppBrowsersRepository,
             packageIntentHandler = packageIntentHandler,
             packageLauncherService = packageLauncherService,
             appSorter = appSorter,

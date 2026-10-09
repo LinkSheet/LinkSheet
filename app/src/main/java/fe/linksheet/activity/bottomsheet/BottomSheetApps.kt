@@ -10,7 +10,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,7 +28,7 @@ import app.linksheet.compose.preview.PreviewContainer
 import app.linksheet.compose.theme.HkGroteskFontFamily
 import app.linksheet.feature.app.core.ActivityAppInfo
 import app.linksheet.feature.browser.core.Browser
-import app.linksheet.feature.downloader.DownloadCheckResult
+import app.linksheet.feature.downloader.core.DownloadCheckResult
 import app.linksheet.feature.profile.core.CrossProfile
 import app.linksheet.testing.asPreferredApp
 import app.linksheet.testing.fake.PackageInfoFakes
@@ -50,8 +55,10 @@ fun BottomSheetApps(
     modifier: Modifier = Modifier,
     result: IntentResolveResult.Default,
     imageLoader: ImageLoader?,
+    enableDownloader: Boolean,
     enableIgnoreLibRedirectButton: Boolean,
     enableManualRedirect: Boolean,
+    enableManualDownload: Boolean,
     bottomSheetNativeLabel: Boolean,
     gridLayout: Boolean,
     appListSelectedIdx: Int,
@@ -83,10 +90,12 @@ fun BottomSheetApps(
                 UrlBarWrapper(
                     imageLoader = imageLoader,
                     result = result,
+                    enableDownloader = enableDownloader,
                     enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
                     profiles = profiles,
                     enableUrlCardDoubleTap = urlCardDoubleTap,
                     enableManualRedirect = enableManualRedirect,
+                    enableManualDownload = enableManualDownload,
                     controller = controller,
                 )
 
@@ -299,11 +308,12 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
     val result = IntentResolveResult.Default(
         intent = Intent(),
         uri = Uri.parse("https://google.com"),
+        referrer = null,
         unfurlResult = null,
         referringPackageName = null,
         resolved = sorted,
         filteredItem = filtered,
-        alwaysPreferred = state.lastChosen.alwaysPreferred,
+        isRegularPreferredApp = state.lastChosen.alwaysPreferred && filtered != null,
         hasSingleMatchingOption = state.hasSingleMatchingOption,
         resolveModuleStatus = ResolveModuleStatus(),
         libRedirectResult = null,
@@ -314,8 +324,10 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
         BottomSheetApps(
             result = result,
             imageLoader = null,
+            enableDownloader = false,
             enableIgnoreLibRedirectButton = false,
             enableManualRedirect = false,
+            enableManualDownload = false,
             bottomSheetNativeLabel = false,
             gridLayout = gridLayout,
             appListSelectedIdx = -1,

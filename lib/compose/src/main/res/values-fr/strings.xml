@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="generic__button_open_external">Ouverture externe</string>
+    <string name="generic__button_text_open_external">Ouverture externe</string>
+    <string name="generic__button_text_back">Retour</string>
+    <string name="generic__button_text_enable">Activer</string>
+    <string name="generic__button_text_disable">Désactiver</string>
+    <string name="generic__text_url">Url</string>
+    <string name="options">Options</string>
+    <string name="request_timeout">Délai de requête</string>
+    <string name="request_timeout_explainer">Définit le nombre de secondes pendant lesquelles LinkSheet attendra qu\'une connexion soit établie. La valeur 0 désactive le délai d\'attente, mais ce n\'est pas recommandé.</string>
+    <string name="checkmark">Cochez la case</string>
+    <string name="error">Erreur</string>
+    <string name="generic__button_text_cancel">Annuler</string>
+    <string name="generic__button_text_confirm">Confirmer</string>
 </resources>

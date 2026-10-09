@@ -1,16 +1,22 @@
 package app.linksheet.feature.libredirect.database.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room3.ColumnInfo
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
 
-@Entity(tableName = "lib_redirect_default")
+@Entity(tableName = LibRedirectDefault.TABLE_NAME)
 data class LibRedirectDefault(
     @PrimaryKey
     val serviceKey: String,
     val frontendKey: String,
     val instanceUrl: String,
+    @ColumnInfo(defaultValue = "0")
+    val version: Int = 0,
+    @ColumnInfo(defaultValue = "'false'")
+    val userDefined: Boolean = false,
 ) {
     companion object {
+        const val TABLE_NAME = "lib_redirect_default"
         const val randomInstance = "RANDOM_INSTANCE"
         const val IgnoreIntentKey = "IGNORE_LIBREDIRECT"
     }

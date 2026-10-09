@@ -1,12 +1,26 @@
 package fe.linksheet.activity.bottomsheet.content.failure
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.RestartAlt
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.Public
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -25,7 +39,9 @@ import fe.android.compose.text.ProvideContentColorTextStyle
 import fe.composekit.component.dialog.AlertDialogFlowRow
 import fe.composekit.route.Route
 import fe.linksheet.R
-import fe.linksheet.util.intent.parser.*
+import fe.linksheet.util.intent.parser.NoUriFoundRecoverableException
+import fe.linksheet.util.intent.parser.UriException
+import app.linksheet.compose.R as CommonR
 
 
 @Composable
@@ -153,7 +169,7 @@ private fun LinkCard(data: String, navigate: (Route) -> Unit) {
     FailureSheetLinkCard(
         onClick = { },
         icon = Icons.Rounded.Public.iconPainter,
-        iconContentDescription = stringResource(id = R.string.generic__text_url),
+        iconContentDescription = stringResource(id = CommonR.string.generic__text_url),
 //        headline = textContent(R.string.nightly_experiments_card),
 //        subtitle = text(data),
         text = content {

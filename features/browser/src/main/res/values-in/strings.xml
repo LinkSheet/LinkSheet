@@ -2,4 +2,10 @@
 <resources>
     <string name="enable_request_private_browsing_button">Aktifkan tombol \"Minta penjelajahan pribadi\"</string>
     <string name="enable_request_private_browsing_button_explainer">Menampilkan tombol di sebelah peramban yang membuka URL yang diklik dalam mode penjelajahan pribadi.</string>
+    <string name="settings_private_browsing__title_private_browsing">Penjelajahan Pribadi</string>
+    <string name="settings_private_browsing__title_enable_private_browsing">Nyalakan penjelajahan pribadi</string>
+    <string name="settings_private_browsing__divider_configuration">Konfigurasi</string>
+    <string name="settings_private_browsing_browsers__title_browsers">Penjelajahan pribadi aktif</string>
+    <string name="settings_private_browsing__title_allowed_browsers">Browser yang diizinkan</string>
+    <string name="settings_private_browsing__text_allowed_browsers">%d browser</string>
 </resources>

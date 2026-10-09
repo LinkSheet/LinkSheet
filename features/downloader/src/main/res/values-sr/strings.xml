@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Омогући програм за преузимање</string>
+    <string name="enable_downloader_explainer">Додајте дугме „Преузми“ на доњи лист ако URL адреса садржи директан линк до фајла. Ово може имати</string>
+    <string name="settings_links_downloader__title_downloader">Програм за преузимање</string>
+    <string name="downloader_url_mime_type">Користите тип пантомиме из URL адресе</string>
+    <string name="downloader_url_mime_type_explainer">Проверава да ли се URL адреса завршава екстензијом фајла (нпр. .jpg); Ако је тако, овај тип се користи за преузети фајл.</string>
+</resources>

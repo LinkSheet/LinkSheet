@@ -9,7 +9,6 @@ const val CONTENT_TYPE_HEADER = "Content-Type"
 fun HttpURLConnection.normalizedContentType(): String? {
     return headerFields[CONTENT_TYPE_HEADER]
         ?.firstOrNull()
-        ?.toString()
         ?.substringBefore(";")
         ?.lowercase()
 }

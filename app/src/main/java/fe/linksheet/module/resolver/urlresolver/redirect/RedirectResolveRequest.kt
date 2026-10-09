@@ -14,39 +14,11 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
-class RedirectResolveRequest(
-    private val httpClient: HttpClient,
-    private val aggressiveExperiment: () -> Boolean = { false },
-) : LocalResolveRequest {
-
-    override suspend fun resolveLocal(url: String, timeout: Int): Result<ResolveResultType> {
-        if (aggressiveExperiment()) {
-            return resolveAggressive(url)
-        }
-        val headResult = tryCatch { httpClient.head(urlString = url) }
-        if (headResult.isFailure()) {
-            return Result.failure(headResult.exception)
-        }
-
-        val headResponse = headResult.value
-        val refreshHeaderUrl = headResponse.handleRefreshHeader()
-        if (refreshHeaderUrl != null) {
-            return refreshHeaderUrl.toSuccessResult()
-        }
-
-        if (headResponse.status.value !in 400..499) {
-            return headResponse.toSuccessResult()
-        }
-
-        val getResult = tryCatch { httpClient.get(urlString = url) }
-        if (getResult.isFailure()) {
-            return Result.failure(getResult.exception)
-        }
-
-        return getResult.value.toSuccessResult()
-    }
-
-    private suspend fun resolveAggressive(url: String): Result<ResolveResultType> {
+class AggressiveRedirectResolveRedirect(private val httpClient: HttpClient) : LocalResolveRequest {
+    override suspend fun resolveLocal(
+        url: String,
+        timeout: Int
+    ): Result<ResolveResultType> {
         val result = tryCatch { httpClient.get(urlString = url) }
         if (result.isFailure()) {
             return Result.failure(result.exception)
@@ -69,29 +41,56 @@ class RedirectResolveRequest(
 
         return response.toSuccessResult()
     }
+}
 
-    private suspend fun HttpResponse.handleRefreshMeta(): String? {
-        return runCatching {
-            val document = parseHeadAsStream()
-            RefreshParser.parseHtml(document)?.takeIfValid()
-        }.getOrNull()
-    }
+class RedirectResolveRequest(private val httpClient: HttpClient) : LocalResolveRequest {
 
-    private fun HttpResponse.handleRefreshHeader(): String? {
-        return refresh()?.let { RefreshParser.parseRefreshHeader(it) }?.takeIfValid()
-    }
+    override suspend fun resolveLocal(url: String, timeout: Int): Result<ResolveResultType> {
+        val headResult = tryCatch { httpClient.head(urlString = url) }
+        if (headResult.isFailure()) {
+            return Result.failure(headResult.exception)
+        }
 
-    private fun RefreshHeader.takeIfValid(): String? {
-        return takeIf { it.first == 0 }
-            ?.takeIf { it.second.toHttpUrlOrNull() != null }
-            ?.second
-    }
+        val headResponse = headResult.value
+        val refreshHeaderUrl = headResponse.handleRefreshHeader()
+        if (refreshHeaderUrl != null) {
+            return refreshHeaderUrl.toSuccessResult()
+        }
 
-    private fun String.toSuccessResult(): Result<ResolveResultType> {
-        return ResolveResultType.Resolved.Local(this).success()
-    }
+        if (headResponse.status.value !in 400..499) {
+            return headResponse.toSuccessResult()
+        }
 
-    private fun HttpResponse.toSuccessResult(): Result<ResolveResultType> {
-        return urlString().toSuccessResult()
+        val getResult = tryCatch { httpClient.get(urlString = url) }
+        if (getResult.isFailure()) {
+            return Result.failure(getResult.exception)
+        }
+
+        return getResult.value.toSuccessResult()
     }
+}
+
+private fun String.toSuccessResult(): Result<ResolveResultType> {
+    return ResolveResultType.Resolved.Local(this).success()
+}
+
+private fun HttpResponse.toSuccessResult(): Result<ResolveResultType> {
+    return urlString().toSuccessResult()
+}
+
+private suspend fun HttpResponse.handleRefreshMeta(): String? {
+    return runCatching {
+        val document = parseHeadAsStream()
+        RefreshParser.parseHtml(document)?.takeIfValid()
+    }.getOrNull()
+}
+
+private fun HttpResponse.handleRefreshHeader(): String? {
+    return refresh()?.let { RefreshParser.parseRefreshHeader(it) }?.takeIfValid()
+}
+
+private fun RefreshHeader.takeIfValid(): String? {
+    return takeIf { it.first == 0 }
+        ?.takeIf { it.second.toHttpUrlOrNull() != null }
+        ?.second
 }

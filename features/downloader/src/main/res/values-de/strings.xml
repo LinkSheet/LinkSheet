@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Downloader aktivieren</string>
+    <string name="enable_downloader_explainer">Fügt einen \"Herunterladen\"-Knopf zum unteren Fenster hinzu, wenn die URL einen direkten Link zu einer Datei enthält. Dies kann haben</string>
+    <string name="downloader_url_mime_type">Mime-Typ aus URL verwenden</string>
+    <string name="downloader_url_mime_type_explainer">Überprüft, ob die URL mit einer Dateiendung endet (z.B. \".jpg\"); Wenn sie dies tut, wird dieser Typ für die heruntergeladene Datei verwendet.</string>
+</resources>

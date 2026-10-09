@@ -1,15 +1,8 @@
 package fe.linksheet.feature.systeminfo
 
 import android.os.Build
+import app.linksheet.api.BuildConstants
 import app.linksheet.api.SystemProperties
-
-interface BuildConstants {
-    val manufacturer: String
-    val fingerprint: String
-    val release: String
-    val model: String
-    val sdk: Int
-}
 
 object StaticBuildConstants : BuildConstants {
     override val manufacturer: String = Build.MANUFACTURER

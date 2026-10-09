@@ -53,7 +53,6 @@
     <string name="enable_ignore_libredirect_button">Knop \"LibRedirect negeren\" tonen</string>
     <string name="debug">Debuggen</string>
     <string name="debug_explainer">App-logs, geverifieerde linkverwerkers resetten</string>
-    <string name="request_timeout">Time-out verbindingen</string>
     <string name="resolve_failed">%s mislukt: %s</string>
     <string name="redact_log">Gevoelige informatie afschermen (aanbevolen, uitschakelen kan pakketnamen en hostnamen lekken)</string>
     <string name="copy_to_clipboard">Naar klembord kopiëren</string>
@@ -67,16 +66,13 @@
     <string name="credits_explainer">Dankbetuigingen, licenties</string>
     <string name="always_ask">Altijd vragen</string>
     <string name="none">Geen</string>
-    <string name="back">Terug</string>
     <string name="default_apps_subtitle">Stel standaardapps voor hosts in</string>
     <string name="browser_status">Browserstatus</string>
     <string name="fastfoward_rules">FastForward-regels gebruiken</string>
     <string name="always_show_package_name_explainer">Toon naast de app-namen ook altijd de pakketnamen. Dit geldt overal in LinkSheet.</string>
     <string name="hide_after_copying">Automatisch verbergen na een actie</string>
     <string name="whitelisted">Alleen gekozen</string>
-    <string name="error">Fout</string>
     <string name="open_with_linksheet">Openen met LinkSheet</string>
-    <string name="checkmark">Vinkje</string>
     <string name="download">Downloaden</string>
     <string name="export">Exporteren</string>
     <string name="save">Opslaan</string>
@@ -129,15 +125,10 @@
     <string name="github">GitHub</string>
     <string name="links">Links</string>
     <string name="links_explainer">ClearUrls, LibRedirect, omleidingen volgen</string>
-    <string name="enable_downloader">Downloaden inschakelen</string>
     <string name="use_clear_urls">ClearURLs gebruiken</string>
-    <string name="downloader_url_mime_type">Mime-type van URL gebruiken</string>
     <string name="dont_show_filtered_item">Sectie \"laatst gekozen app\" niet tonen</string>
-    <string name="enable_downloader_explainer">Toon een knop \"Downloaden\" indien de URL een directe link naar een bestand is. Dit kan <annotation url-id="privacy-downloader">privacy-gerelateerde implicaties</annotation> hebben.</string>
-    <string name="downloader_url_mime_type_explainer">Controleer of de URL eindigt op een bestandsextensie (bijv. \".jpg\"). Als dit het geval is, dan wordt dit type gebruikt voor het gedownloade bestand.</string>
     <string name="log_files">Vorige sessies</string>
     <string name="log_viewer">Logboek</string>
-    <string name="request_timeout_explainer">Bepaal hoeveel seconden LinkSheet wacht totdat een verbinding tot stand is gebracht. Bij de waarde 0 wordt de time-out uitgeschakeld, maar dit wordt niet aangeraden.</string>
     <string name="no_browsers_found">Geen browsers gevonden.</string>
     <string name="follow_redirects_short">Omleidingen</string>
     <string name="always_disable_explainer">Schakel in-app browsers uit voor alle apps</string>
@@ -146,7 +137,6 @@
     <string name="dont_show_filtered_item_explainer">Verberg het bovenste gedeelte dat de laatst gebruikte app voor de gekozen host suggereert</string>
     <string name="preview_url_explainer">Toon de aangeklikte URL (nadat deze is verwerkt)</string>
     <string name="use_app_settings_explainer">Apps bepalen zelf of de in-app browser wordt gebruikt</string>
-    <string name="options">Opties</string>
     <string name="include_settings">Instellingen meesturen (aanbevolen)</string>
     <string name="log_privacy">Voor meer informatie over de privacy van logs kun je <annotation url-id="privacy-logs">hier terecht</annotation>.</string>
     <string name="use_unified_preferred_browser_explainer">Wanneer ingeschakeld worden de onderstaande instellingen toegepast bij zowel het openen van normale links als bij in-app links. Gebruik anders de onderstaande knoppen om te schakelen tussen de modus voor normale links en in-app links.</string>
@@ -158,11 +148,7 @@
     <string name="domain_selection_confirmation_title">Domeinen kiezen?</string>
     <string name="shizuku_explainer_short">Schakel directe interactie met systeem-API\'s in</string>
     <string name="apps_which_can_open_links_shizuku_explainer">De Shizuku-modus is geactiveerd: klik op een app om de automatische linkverwerking in te stellen. Druk lang op een app voor het instellingenmenu \"Standaard openen\".</string>
-    <string name="shizuku_not_running_explainer">Shizuku wordt niet uitgevoerd. Klik hier om Shizuku te openen en volg de instructies om het te starten.</string>
     <string name="warning">Waarschuwing</string>
-    <string name="shizuku_integration_no_permission_explainer">Klik hier om toestemming te vragen in Shizuku.</string>
-    <string name="shizuku_integration_not_setup_explainer">Hoewel het niet strikt noodzakelijk is om LinkSheet te laten werken, wordt Shizuku wel aanbevolen. Klik hier om het te installeren.</string>
-    <string name="shizuku_integration">Integratie met Shizuku</string>
     <string name="no_browser_installed_explainer">LinkSheet heeft geen browser gevonden. Het wordt aanbevolen om eerst een browser te installeren.</string>
     <string name="feature_flags_explainer">Schakel experimentele functies in</string>
     <string name="pretend_to_be_app_explainer_2">Sommige apps, zoals Google Chrome, zoeken expliciet naar een native app om bijvoorbeeld een Youtube-link af te handelen wanneer deze wordt aangeklikt in de zoekresultaten. LinkSheetCompat doet zich voor als zo\'n native app voor ondersteunde hosts en stuurt het verzoek door naar LinkSheet.</string>
@@ -190,7 +176,6 @@
     <string name="mastodon_redirect">MastodonRedirect</string>
     <string name="enable_all">Alles inschakelen</string>
     <string name="disable_all">Alles uitschakelen</string>
-    <string name="shizuku_integration_enabled_explainer">De integratie met Shizuku is ingeschakeld!</string>
     <string name="feature_flags">Extra functies</string>
     <string name="launch_onboarding">Introductie starten</string>
     <string name="pretend_to_be_app_explainer">Presenteer LinkSheet als een native app bij ondersteunde domeinen via LinkSheetCompat</string>
@@ -226,10 +211,8 @@
     <string name="include_log_hash_key">Hash-sleutel waarmee gevoelige informatie in het logboek wordt afgeschermd bijvoegen</string>
     <string name="include_history">Geschiedenis van verwerkte links en apps bijvoegen</string>
     <string name="export_privacy"><annotation url-id="privacy-exports">Lees meer</annotation> over het privacybeleid bij exporteren.</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
-    <string name="import_settings">Instellingen importeren</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="import_settings_override_preferences">Dit zal de huidige instellingen overschrijven. Doorgaan?</string>
-    <string name="confirm_import">OK</string>
     <string name="fastforward_version">Regels voor FastForward</string>
     <string name="dev_mode_enabled">Je hebt de ontwikkelaarsmodus ingeschakeld. Wees voorzichtig.</string>
     <string name="debug_build">Debug-build</string>
@@ -330,23 +313,13 @@
     <string name="tap_customization_dialog_title_long_tap">lang drukken</string>
     <string name="expand_on_app_select_explainer">Vouw het paneel automatisch uit wanneer een app is gekozen</string>
     <string name="expand_on_app_select">Uitvouwen wanneer een app is gekozen</string>
-    <string name="telemetry_level_disabled">Uitgeschakeld</string>
-    <string name="telemetry_level_minimal">Minimaal</string>
-    <string name="telemetry_level_standard">Standaard</string>
-    <string name="telemetry_level_exhaustive">Uitgebreid</string>
-    <string name="telemetry_identity_basic">Beperkt</string>
-    <string name="telemetry_identity_full">Volledig</string>
-    <string name="telemetry_level_disabled_description">Geen gegevensverzameling</string>
     <string name="onboarding_2_subtitle">Als je veel apps hebt geïnstalleerd, kan Shizuku de ervaring aanzienlijk verbeteren</string>
     <string name="experiments_explainer_3">Experimenten zijn nog in ontwikkeling en werken mogelijk niet goed of helemaal niet. Meld hiervoor geen bugs op Github. Als je feedback wilt geven, doe dat dan op Discord.</string>
-    <string name="telemetry_dialog_text">Kies het type gebruiksstatistieken waar jij je het beste bij voelt.</string>
-    <string name="telemetry_dialog_title">LinkSheet respecteert je privacy</string>
     <string name="select_app">App kiezen</string>
     <string name="allow_darknets">Darknets toestaan</string>
     <string name="open_app">App openen</string>
     <string name="no_action">Geen actie</string>
     <string name="tap_customization_dialog_text">Kies de actie die moet worden uitgevoerd</string>
-    <string name="cancel">Annuleren</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="one">%d host: %s</item>
         <item quantity="other">%d hosts: %s</item>
@@ -368,9 +341,6 @@
     <string name="onboarding_5_subtitle">LinkSheet is ingeschakeld</string>
     <string name="onboarding_5_title">Helemaal klaar!</string>
     <string name="onboarding_5_card_explainer">De basisconfiguratie die nodig is om LinkSheet te laten werken is voltooid. Ga naar de instellingen om te ontdekken wat LinkSheet nog meer te bieden heeft!</string>
-    <string name="telemetry_level_minimal_description">Statistieken geïnstalleerde versie</string>
-    <string name="telemetry_level_standard_description">Geaggregeerde gebruiksstatistieken</string>
-    <string name="telemetry_level_exhaustive_description">Gedetailleerde gebruiksstatistieken</string>
     <string name="telemetry_configure_title">Telemetrie</string>
     <string name="telemetry_configure_type">Niveau telemetrie</string>
     <string name="telemetry_identifier_reset">Uniek ID resetten</string>
@@ -427,7 +397,6 @@
     <string name="export_log_dialog__title_include_throwable">Crashlogs bijvoegen</string>
     <string name="export_log_dialog__title_include_settings">Instellingen bijvoegen</string>
     <string name="export_log_dialog__subtitle_include_settings">Aanbevolen</string>
-    <string name="generic__button_text_cancel">Annuleren</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">Log aangemaakt op: %s</string>
     <string name="crash_viewer__subtitle_app_crashed">Oef, dat had niet mogen gebeuren!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>

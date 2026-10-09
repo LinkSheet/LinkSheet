@@ -12,7 +12,7 @@ import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class HostPublicityTest : BaseUnitTest {
     companion object {
         private val data = mapOf(

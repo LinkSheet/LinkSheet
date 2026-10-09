@@ -3,23 +3,22 @@ package app.linksheet.feature.devicecompat.miui
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.linksheet.feature.devicecompat.util.BuildInfoFake
-import app.linksheet.feature.devicecompat.util.RefineWrapperDummy
 import app.linksheet.testing.fake.device.*
 import assertk.assertThat
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
-import fe.linksheet.feature.systeminfo.SystemInfoService
+import fe.linksheet.feature.systeminfo.RealSystemInfoService
 import fe.linksheet.testlib.core.BaseUnitTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class MiuiCompatProviderTest : BaseUnitTest {
     private fun Device.isProviderRequired(): Boolean {
-        val service = SystemInfoService(this, buildInfo = BuildInfoFake.Info)
-        val provider = RealMiuiCompatProvider(service, RefineWrapperDummy)
+        val service = RealSystemInfoService(this, buildInfo = BuildInfoFake.Info)
+        val provider = RealMiuiCompatProvider(service)
 
         return provider.isRequired.value
     }

@@ -5,10 +5,10 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
+import app.linksheet.api.SystemInfoService
+import fe.composekit.core.Scheme
+import fe.composekit.core.create
 import fe.composekit.intent.buildIntent
-import fe.linksheet.feature.systeminfo.SystemInfoService
-import fe.linksheet.util.Scheme
-import fe.linksheet.util.create
 import fe.std.lazy.ResettableLazy
 import fe.std.lazy.resettableLazy
 
@@ -33,7 +33,7 @@ class RealOneUiCompatProvider(
     }
 
     override val isRequired = resettableLazy {
-        isSamsungDevice && !infoService.isCustomRom && infoService.build.sdk == Build.VERSION_CODES.S && readOneUiVersion() != null
+        isSamsungDevice && !infoService.isCustomRom() && infoService.build.sdk == Build.VERSION_CODES.S && readOneUiVersion() != null
     }
 
     override fun provideCompat(context: Context): OneUiCompat = when {

@@ -30,7 +30,7 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class LinkEngineTest : BaseUnitTest {
     private val dispatcher = StandardTestDispatcher()
 

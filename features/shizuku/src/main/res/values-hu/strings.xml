@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shizuku_integration_enabled_explainer">A Shizuku integráció sikeresen engedélyezve!</string>
+    <string name="shizuku_not_running_explainer">Shizuku nem fut. Koppintson ide a Shizuku megnyitásához, majd kövesse az utasításokat az indításhoz.</string>
+    <string name="shizuku_integration_no_permission_explainer">Koppintson ide a Shizuku engedélykéréséhez.</string>
+    <string name="shizuku_integration_not_setup_explainer">Bár nem feltétlenül szükséges a LinkSheet működéséhez, a Shizuku használata ajánlott. A telepítéshez koppints ide.</string>
+    <string name="shizuku_integration">Shizuku integráció</string>
+</resources>

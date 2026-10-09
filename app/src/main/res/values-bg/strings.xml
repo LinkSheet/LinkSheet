@@ -6,13 +6,10 @@
     <string name="follow_redirects_external_service_explainer">Последване на пренасочванията с помощта на ППИ, намиращ се на supabase.com (<annotation url-id="supabase-privacy">Политика за поверителност</annotation>)</string>
     <string name="download">Изтегляне</string>
     <string name="usage_stats_sorting">Сортиране на приложенията според използването им</string>
-    <string name="back">Назад</string>
     <string name="links">Препратки</string>
     <string name="version">Издание на LinkSheet</string>
-    <string name="checkmark">Отметка</string>
     <string name="donate_subtitle">Надградете до <b>LinkSheet Pro</b></string>
     <string name="follow_redirects">Последване на пренасочвания</string>
-    <string name="enable_downloader_explainer">Добавя бутон „Изтегляне“ в долното меню, ако адресът съдържа директна препратка към файл. Възможно е да има <annotation url-id="privacy-follow-redirects">последствия, свързани с поверителността</annotation></string>
     <string name="opening_with_app">Отваряне от %s</string>
     <string name="default_apps">Предпочитани приложения</string>
     <string name="open_with">Изберете приложение</string>
@@ -30,7 +27,6 @@
     <string name="credits_explainer">Благодарности, лицензи</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="paste">Поставяне</string>
-    <string name="error">Грешка</string>
     <string name="github">Гитхъб</string>
     <string name="donate_crypto">Дарение на криптовалута</string>
     <string name="links_explainer">ClearUrls, LibRedirect, разрешаване на препращане</string>
@@ -38,9 +34,6 @@
     <string name="follow_redirects_external_service">Последване на пренасочванията от външна услуга</string>
     <string name="follow_redirects_local_cache_explainer">Запазва резултатите от пренасочванията</string>
     <string name="redirect_resolve_type_local">местно откриване</string>
-    <string name="enable_downloader">Бутон за изтегляне</string>
-    <string name="downloader_url_mime_type_explainer">Проверява дали адресът завършва с файлово разширение (напр. „.jpg“); ако е така, се използва за изтегления файл.</string>
-    <string name="downloader_url_mime_type">Намиране на вида на файла от адреса</string>
     <string name="just_once">Веднъж</string>
     <string name="copy_url">Копиране</string>
     <string name="confirm">Потвърждаване</string>
@@ -85,7 +78,6 @@
     <string name="normal">Обикновен</string>
     <string name="use_unified_preferred_browser">Използване на общи настройки</string>
     <string name="enable_ignore_libredirect_button">Бутон за пренебрегване на LibRedirect</string>
-    <string name="options">Настройки</string>
     <string name="enable_request_private_browsing_button_explainer">Добавя в долното меню бутон, който отваря посетената препратка в поверителен режим. Поддържани мрежови четци: %s</string>
     <string name="request_private_browsing">Поверителен</string>
     <string name="enable_request_private_browsing_button">Бутон за поверително разглеждане</string>
@@ -120,15 +112,12 @@
     <string name="use_app_settings">Подразбирани</string>
     <string name="disable_in_selected">Винаги изключено…</string>
     <string name="feature_flags_explainer">Включва или изключва експериментални възможности</string>
-    <string name="request_timeout_explainer">Задава колко секунди LinkSheet да изчака за установяване на връзка. Стойност 0 изключва времето за изчакване, но не се препоръчва.</string>
     <string name="enable_amp2html_explainer">Пренасочва страниците на AMP към техните нормални уеб версии. Възможно е да има <annotation url-id="privacy-amp2html">последствия, свързани с поверителността</annotation></string>
     <string name="amp2html_local_cache_explainer">Запазване на получените нормалните версии на страници в местна временна памет</string>
     <string name="amp2html_external_service">Опит за получаване на нормална версия на страницата чрез външна услуга</string>
     <string name="amp2html_external_service_explainer">Опит за получаване на нормална версия на страницата чрез ППИ, разположен на supabase.com (<annotation url-id="supabase-privacy">Политика за поверителност</annotation>)</string>
     <string name="shizuku">Интеграция с Shizuku</string>
     <string name="apps_which_can_open_links_shizuku_explainer">Включен е режим на „Shizuku“, докосване на приложение превключва автоматичното отваряне на препратки. При задържане се отваря менюто „Отваряне по подразбиране“ на приложението.</string>
-    <string name="shizuku_not_running_explainer">Shizuku не работи. За да отворите Shizuku докоснете тук и следвайте инструкциите.</string>
-    <string name="shizuku_integration_not_setup_explainer">Въпреки че не е строго необходимо за работата на LinkSheet, препоръчваме използването на Shizuku. За да го инсталирате, докоснете.</string>
     <string name="feature_flags">Флагове</string>
     <string name="ignore_libredirect">Пренебрегване на LibRedirect</string>
     <string name="debug">Отстраняване на грешки</string>
@@ -139,7 +128,6 @@
     <string name="log_viewer">Преглед на дневник</string>
     <string name="no_log_entries">Сеансът не съдържа дневници.</string>
     <string name="download_started">Изтеглянето започна</string>
-    <string name="request_timeout">Изчакване на заявката</string>
     <string name="no_browsers_found">Не са открити мрежови четци.</string>
     <string name="no_apps_found">Не са открити приложения.</string>
     <string name="export">Изнасяне</string>
@@ -157,9 +145,6 @@
     <string name="amp2html">Amp2Html</string>
     <string name="enable_all">Включване на всички</string>
     <string name="disable_all">Изключване на всички</string>
-    <string name="shizuku_integration_enabled_explainer">Интеграцията с Shizuku е включена!</string>
-    <string name="shizuku_integration_no_permission_explainer">За да поискате разрешение за Shizuku докоснете.</string>
-    <string name="shizuku_integration">Интеграция с Shizuku</string>
     <string name="advanced">Разширени</string>
     <string name="shizuku_explainer_short">Директно взаимодейства със системните ППИ</string>
     <string name="mastodon_redirect">MastodonRedirect</string>
@@ -193,7 +178,7 @@
     <string name="built_at"><b>Време на изграждане:</b> <font face="monospace">%s</font></string>
     <string name="github_workflow_run_id"><b>Работен процес на изграждане:</b> <font face="monospace">%s</font></string>
     <string name="version_name"><b>Издание:</b> <font face="monospace">%s</font></string>
-    <string name="privacy_settings_explainer">Поверителност на източник, статистика</string>
+    <string name="privacy_settings_explainer">Поверителност на източник</string>
     <string name="show_linksheet_referrer">Попълване на LinkSheet като източник</string>
     <string name="privacy">Поверителност</string>
     <string name="pretend_to_be_app_explainer_2">Някои приложения, като Google Chrome, изрично търсят приложение, което да отваря, например препратка към Youtube, когато тя бъде докосната в резултатите от търсенето. LinkSheetCompat се преструва на такова приложение за поддържаните домейни и след това препраща заявката към LinkSheet.</string>
@@ -217,11 +202,9 @@
     <string name="donate">Дарение</string>
     <string name="built_by_error">Приложението не е подписано нито от 1fexd, нито от работен процес на Гитхъб.</string>
     <string name="export_to_file">Изнасяне във файл</string>
-    <string name="import_settings">Внасяне на настройки</string>
     <string name="export_import_settings">Изнасяне и внасяне на настройки</string>
     <string name="import_headline">Внасяне</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
-    <string name="confirm_import">Потвърждаване</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="import_explainer">Внася вече изнесен файл с настройки</string>
     <string name="export_import_settings_explainer">Изнася текущите или внася вече изнесени настройки</string>
     <string name="export_settings">Изнасяне на настройки</string>
@@ -279,7 +262,6 @@
     <string name="onboarding_1_card_explainer">LinkSheet не може да работи ако не е зададен като подразбиран мрежов четец.</string>
     <string name="onboarding_2_title">Желаете ли да използвате Shizuku?</string>
     <string name="start_setup_explainer">Възможностите на LinkSheet изискват определена настройка на Андроид. Помощникът ще ви преведе през стъпките на процеса.</string>
-    <string name="telemetry_dialog_text">Изберете вида на статистиките за използване, които смятате за най-удачни.</string>
     <string name="reset_app_link_verification_status">Нулиране на проверените препратки</string>
     <string name="base_config">Допълнителни настройки</string>
     <string name="tap_customization_dialog_text">Изберете действието, което да бъде изпълнено</string>
@@ -296,21 +278,16 @@
     <string name="experiments">Експерименти</string>
     <string name="onboarding_4_card_title">Изключване на отварянето на препратки</string>
     <string name="nightly_experiments_card_explainer">Докоснете, за да видите какво разработваме в момента</string>
-    <string name="telemetry_level_minimal_description">Обща статистика</string>
     <string name="onboarding_5_title">Всичко е готово!</string>
     <string name="no_action">Без действие</string>
     <string name="tap_customization_single_tap">Действие при единично докосване</string>
     <string name="follow_redirects_allow_darknets_explainer">Препращания в darknet (поддържано от %s)</string>
     <string name="amp2html_allow_darknets_explainer">Изпълняване на Amp2Html за darknet (поддържано от %s)</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">Включени</string>
-    <string name="telemetry_identity_basic">Основна</string>
     <string name="customization">Нагласяне</string>
     <string name="onboarding_2_request_shizuku_permission">Искане на права</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Статистиката за използването включва произволен, свързан с инсталацията идентификатор, който може да бъде сменян от потребителя, изданието на Андроид и се пази в <annotation url-id="aptabase">Aptabase (EU)</annotation>. Чувствителна информация като инсталираните приложения и посетените препратки <b>никога</b> не бива събирана. За да научите повече <annotation url-id="privacy-telemetry">докоснете тук</annotation>.</string>
-    <string name="telemetry_level_standard_description">Обобщена статистика за използването</string>
     <string name="telemetry_configure_title">Статистики</string>
     <string name="nightly_experiments_card">Нощни експерименти</string>
-    <string name="telemetry_level_standard">Стандартна</string>
     <string name="onboarding_3_card_explainer">В Андроид 12 Гугъл въведе т.нар. проверени препратки, които дават възможност на приложенията по криптографски начин да докажат собственост върху даден домейн. За да може LinkSheet да прехваща препратки, това поведение трябва да бъде изключено ръчно.</string>
     <string name="hide_bottom_sheet_choice_buttons">Скриване на бутоните за избор</string>
     <string name="open_app_settings_page">Настройки на приложението</string>
@@ -318,23 +295,19 @@
     <string name="something_went_wrong">Нещо се обърка, пробвайте отново.</string>
     <string name="open_app">Отваряне на приложението</string>
     <string name="tap_customization_dialog_title_double_tap">двукратно докосване</string>
-    <string name="telemetry_dialog_title">LinkSheet уважава поверителността ви</string>
     <string name="theme_enable_material_you_explainer">Използва темата Material You за Андроид 12 и по-нов</string>
     <string name="tap_customization">Настройки на докосване</string>
     <string name="onboarding_2_shizuku_enabled">Напред</string>
     <string name="settings__title_shortcuts">Преки пътища</string>
-    <string name="telemetry_level_disabled_description">Не се събират сведения</string>
     <string name="onboarding_5_subtitle">Приложението LinkSheet е включено</string>
     <string name="onboarding_2_start_shizuku">Отваряне на Shizuku</string>
     <string name="onboarding_4_button">Напред</string>
     <string name="settings_verified_link_handlers__text_user_apps">Потребителски приложения</string>
     <string name="urlbar_settings">Адресна лента</string>
     <string name="experiments_explainer_2">Активна разработка</string>
-    <string name="telemetry_identity_full">Пълна</string>
     <string name="switch_profile">Превключване на профили</string>
     <string name="tap_customization_dialog_title_long_tap">продължително докосване</string>
     <string name="onboarding_2_card_title">Shizuku</string>
-    <string name="cancel">Отказ</string>
     <string name="permission_required">Необходимо е разрешение</string>
     <string name="permission_required_explainer">Някои от внесените настройки се нуждаят от разрешения, които в мометна LinkSheet няма. За да ги поискате докоснете долу.</string>
     <string name="tap_customization_dialog_title">Настройки на %s</string>
@@ -345,7 +318,6 @@
     <string name="reset">Нулиране</string>
     <string name="expand_on_app_select">Разтваряне при избор на приложение</string>
     <string name="tap_customization_dialog_title_single_tap">единично докосване</string>
-    <string name="telemetry_level_exhaustive_description">Подробна статистика за използването</string>
     <string name="link_handle_failed_text">LinkSheet не може да отвори препратката, защото изглежда е повредена. По-долу можете да я промените и да направите повторен опит или да потърсите в интернет.</string>
     <string name="link_handle_failed_text_field_label">Заявка</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_false">Отварянето на препратки е забранено</string>
@@ -355,12 +327,10 @@
     <string name="settings_app_config__description_browsers">Инсталирани мрежови четци</string>
     <string name="settings_shortcuts__title_link_handlers">Приложения, отварящи препратки</string>
     <string name="settings_links_amp2html__text_skip_browser">Без изпълняване на Amp2Html ако приложението отворило LinkSheet е познат мрежов четец</string>
-    <string name="telemetry_level_disabled">Изключена</string>
     <string name="settings_app_config_rules__subtitle_default_rule">Това е използваното правило ако другите не съвпадат</string>
     <string name="settings_main_setup_success__button_connected_apps">Свързани приложения</string>
     <string name="delete_log_dialog__subtitle_delete_info">Желаете ли дневникът на сеанса да бъде премахнат? Действието е необратимо!</string>
     <string name="verified_link_handlers">Проверени приложения, отварящи препратки</string>
-    <string name="telemetry_level_minimal">Минимална</string>
     <string name="resolve_event__initialized">Подготвено</string>
     <string name="settings_edit_rule__title_edit_rule">Променяне</string>
     <string name="settings_main_setup_success__button_link_handlers">Отваряне на препратки</string>
@@ -388,7 +358,6 @@
     <string name="theme_mode">Режим на темата</string>
     <string name="select_app">Избиране на приложението</string>
     <string name="theme_enable_amoled_explainer">Чисто черна тема ако е избрана тъмната тема</string>
-    <string name="telemetry_level_exhaustive">Подробна</string>
     <string name="reset_app_link_verification_status_subtitle">Нулиране на състоянието на проверените препратки на всички приложения. Изчакайте няколко минути докато Андроид ги провери отново. Няма да получите потвърждение. Изисква Shuzuku.</string>
     <string name="build_info">Информация за компилацията</string>
     <string name="settings_verified_link_handlers__text_handling_filter_all_short">Всички</string>
@@ -410,7 +379,6 @@
     <string name="settings_credits__app_name_seal" translatable="false">Seal</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">Пропускане</string>
     <string name="settings_verified_link_handlers__text_link_handling_allowed_true">Отварянето на препратки е разрешено</string>
-    <string name="generic__button_text_cancel">Отказ</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="crash_viewer__subtitle_app_crashed">Олеле, това не биваше да се случва!</string>
     <string name="export_log_dialog__text_log_privacy">За да научите повече за потенциално чувствителната информация в споделяните дневници <annotation url-id="privacy-logs">докоснете тук</annotation>.</string>
@@ -476,7 +444,6 @@
         <item quantity="one">%d включено</item>
         <item quantity="other">%d включени</item>
     </plurals>
-    <string name="generic__text_url">Адрес</string>
     <string name="generic__text_edit">Променяне</string>
     <string name="generic__button_text_done">Готово</string>
     <string name="home__clipboard_card_source">От копираното</string>
@@ -491,7 +458,7 @@
     <string name="settings_main_experiment_news__title_experiment_state_updated">Промяна на поведението</string>
     <string name="generic__button_dismiss">Затваряне</string>
     <string name="settings_main_experiment_changelog__title_changelog">Дневник на промените на експериментите</string>
-    <string name="settings__subtitle_advanced"><![CDATA[Експерименти и внасяне/изнасяне]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[Експерименти, резервно копие и възстановяване]]></string>
     <string name="bottom_sheet__button_manual_redirect">Последване на пренасочвания</string>
     <string name="app_host_dialog__title_hosts">Подразбирани хостове</string>
     <string name="generic__button_text_save">Запазване</string>
@@ -513,10 +480,6 @@
     <string name="import_settings__text_failure">Грешка при внасяне на настройки!</string>
     <string name="export_settings__text_success">Изнесено!</string>
     <string name="export_settings__text_failure">Грешка при изнасяне на настройки!</string>
-    <string name="settings_remote_config__title_dialog">Включване на отдалечени настройки?</string>
-    <string name="settings_remote_config__text_content">Приложението LinkSheet може автоматично да обновява настройките и документацията като се свързва със сървър за настройки. <annotation url-id="github.linksheet.wiki.privacy.remote-config">Научете повече</annotation>.</string>
-    <string name="generic__button_text_enable">Включване</string>
-    <string name="generic__button_text_disable">Изключване</string>
     <string name="bottom_sheet__text_launch_illegal">Непозволен опит за стартиране!</string>
     <string name="bottom_sheet__text_launch_not_allowed">Стартирането е непозволено!</string>
     <string name="bottom_sheet__text_launch_failure_unknown">Неизвестна грешка при стартиране!</string>
@@ -567,4 +530,18 @@
     <string name="settings_bottom_sheet__subtitle_expand_fully">Разгъване на долното меню до пълната му височина</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">Автоматично отваряне при един мрежов четец</string>
     <string name="settings_browser_mode__subtitle_auto_launch_single_browser">Ако има само едно приложение и то е мрежов четец, да бъде отворено</string>
+    <string name="settings_follow_redirects__title_mode_auto">Автоматично</string>
+    <string name="settings_follow_redirects__title_mode_manual">Ръчно</string>
+    <string name="settings_follow_redirects__subtitle_mode_auto">Следване на пренасочванията</string>
+    <string name="settings_follow_redirects__subtitle_mode_manual">Бутон за следване на пренасочванията в долното меню</string>
+    <string name="settings_follow_redirects__title_aggressive">Агресивен режим</string>
+    <string name="settings_follow_redirects__subtitle_aggressive">Изтегляне на цялата страница с цел съвместимост със страници, не използващи пренасочвания по HTTP</string>
+    <string name="handler_target__label_switch_profile_view_intent">Смяна на профила</string>
+    <string name="settings_main_changelog__title_changelog">Дневник на промените</string>
+    <string name="settings_advanced__divider_backup"><![CDATA[Резервно копие и възстановяване]]></string>
+    <string name="settings_main_changelog__text_changelog">Вижте какви са промените в издание %s.</string>
+    <string name="settings_verified_link_handler__placeholder_filter_">Филтър на хостове</string>
+    <string name="settings_verified_link_handler__text_no_hosts">Липсват хостове!</string>
+    <string name="settings_verified_link_handler__text_no_such_host_found">Не е намерен такъв хост!</string>
+    <string name="settings_verified_link_handler__placeholder_filter_hosts">Филтър на хостове</string>
 </resources>

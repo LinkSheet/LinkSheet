@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_such_app_found">Tāda lietotne nav atrasta!</string>
+    <string name="settings__title_filter_apps">Atlasīt lietotnes</string>
+    <string name="no_apps_found">Nav atrasta neviena lietotne.</string>
 </resources>

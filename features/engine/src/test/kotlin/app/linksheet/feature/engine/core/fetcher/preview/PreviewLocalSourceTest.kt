@@ -27,7 +27,7 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 internal class PreviewLocalSourceTest : BaseUnitTest {
     companion object {
         private const val URL = "https://linksheet.app"

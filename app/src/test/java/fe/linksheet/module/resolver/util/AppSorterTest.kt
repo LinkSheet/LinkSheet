@@ -23,7 +23,7 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.UPSIDE_DOWN_CAKE])
+@Config(sdk = [Build.VERSION_CODES.BAKLAVA])
 class AppSorterTest : BaseUnitTest {
     companion object {
         private val sorter = AppSorter(

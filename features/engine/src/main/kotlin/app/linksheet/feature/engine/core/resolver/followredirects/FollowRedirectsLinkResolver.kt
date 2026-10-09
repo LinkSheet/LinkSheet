@@ -1,7 +1,5 @@
 package app.linksheet.feature.engine.core.resolver.followredirects
 
-import app.linksheet.feature.engine.database.entity.ResolveType
-import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.engine.core.context.EngineRunContext
 import app.linksheet.feature.engine.core.context.SkipFollowRedirectsExtra
 import app.linksheet.feature.engine.core.context.hasExtra
@@ -9,6 +7,8 @@ import app.linksheet.feature.engine.core.resolver.LinkResolver
 import app.linksheet.feature.engine.core.resolver.ResolveOutput
 import app.linksheet.feature.engine.core.resolver.UrlChecker
 import app.linksheet.feature.engine.core.step.EngineStepId
+import app.linksheet.feature.engine.database.entity.ResolveType
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import fe.fastforwardkt.FastForward
 import fe.std.result.isFailure
 import fe.std.uri.StdUrl
@@ -40,9 +40,10 @@ class FollowRedirectsLinkResolver(
         }
     }
 
-    override suspend fun EngineRunContext.runStep(url: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
+    context(context: EngineRunContext)
+    override suspend fun runStep(url: StdUrl): ResolveOutput? = withContext(ioDispatcher) {
         val urlString = url.toString()
-        if (hasExtra<SkipFollowRedirectsExtra>()) {
+        if (context.hasExtra<SkipFollowRedirectsExtra>()) {
             return@withContext ResolveOutput(url)
         }
 

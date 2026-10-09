@@ -20,10 +20,16 @@ import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.fix.SheetState.Companion.Saver
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.saveable.Saver
@@ -69,6 +75,9 @@ class SheetState(
     initialValue: SheetValue = SheetValue.Hidden,
     confirmValueChange: (SheetValue) -> Boolean = { true },
     internal val skipHiddenState: Boolean = false,
+    //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+    private val isReducedMotionEnabled: () -> Boolean,
+    //</editor-fold>
 ) {
     init {
         if (skipPartiallyExpanded) {
@@ -236,6 +245,9 @@ class SheetState(
         confirmValueChange = confirmValueChange,
         positionalThreshold = { with(density) { 56.dp.toPx() } },
         velocityThreshold = { with(density) { 125.dp.toPx() } },
+        //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+        isReducedMotionEnabled = isReducedMotionEnabled
+        //</editor-fold>
     )
 
     internal val offset: Float? get() = anchoredDraggableState.offset
@@ -249,6 +261,9 @@ class SheetState(
             confirmValueChange: (SheetValue) -> Boolean,
             density: Density,
             skipHiddenState: Boolean,
+            //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+            isReducedMotionEnabled: () -> Boolean,
+            //</editor-fold>
         ) = Saver<androidx.compose.material3.fix.SheetState, androidx.compose.material3.fix.SheetValue>(
             save = { it.currentValue },
             restore = { savedValue ->
@@ -258,6 +273,9 @@ class SheetState(
                     savedValue,
                     confirmValueChange,
                     skipHiddenState,
+                    //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+                    isReducedMotionEnabled = isReducedMotionEnabled
+                    //</editor-fold>
                 )
             }
         )
@@ -425,6 +443,9 @@ internal fun rememberSheetState(
     confirmValueChange: (SheetValue) -> Boolean = { true },
     initialValue: SheetValue = SheetValue.Hidden,
     skipHiddenState: Boolean = false,
+    //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+    isReducedMotionEnabled: () -> Boolean,
+    //</editor-fold>
 ): SheetState {
     val density = LocalDensity.current
     return rememberSaveable(
@@ -434,6 +455,9 @@ internal fun rememberSheetState(
             confirmValueChange = confirmValueChange,
             density = density,
             skipHiddenState = skipHiddenState,
+            //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+            isReducedMotionEnabled = isReducedMotionEnabled
+            //</editor-fold>
         )
     ) {
         SheetState(
@@ -442,6 +466,9 @@ internal fun rememberSheetState(
             initialValue,
             confirmValueChange,
             skipHiddenState,
+            //<editor-fold desc="https://github.com/LinkSheet/LinkSheet/issues/699">
+            isReducedMotionEnabled
+            //</editor-fold>
         )
     }
 }

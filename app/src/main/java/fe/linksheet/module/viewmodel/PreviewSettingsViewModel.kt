@@ -1,6 +1,6 @@
 package fe.linksheet.module.viewmodel
 
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 

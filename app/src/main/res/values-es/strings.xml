@@ -38,9 +38,7 @@
     <string name="domain_selection_confirmation_title">¿Seleccionar Dominios?</string>
     <string name="log_files">Sesiones antiguas</string>
     <string name="open_link_with_subtitle_2">LinkSheet estaba originalmente basado en OpenLinkWith</string>
-    <string name="shizuku_integration_enabled_explainer">¡La integración con Shizuku se ha activado exitosamente!</string>
     <string name="warning">Alerta</string>
-    <string name="enable_downloader_explainer">Añadir un botón \"Descargar\" a la hoja inferior si URL contiene enlace directo al archivo. Esto puede tener <annotation url-id="privacy-downloader">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="logs_explainer">Ver el registro de la aplicación</string>
     <string name="enable_all">Activar todo</string>
     <string name="selected_browser_explainer">Este navegador se abrirá automáticamente si ninguna aplicación nativa puede abrir el enlace seleccionado</string>
@@ -66,7 +64,6 @@
     <string name="import_and_override">Importar e invalidar</string>
     <string name="apps_which_can_open_links_explainer">Toca una aplicación para abrir el menú \"Abrir de forma predeterminada\" que te permite desactivar la apertura automática de enlaces</string>
     <string name="success">Éxito</string>
-    <string name="request_timeout_explainer">Define cuántos segundos esperará LinkSheet hasta que se establezca una conexión. Establecer esto en 0 desactiva el tiempo de espera, pero no se recomienda.</string>
     <string name="github">Github</string>
     <string name="configure">Configurar</string>
     <string name="show_linksheet_referrer">Mostrar referencias de LinkSheet</string>
@@ -91,7 +88,6 @@
     <string name="advanced">Avanzado</string>
     <string name="built_at"><b>Compilado a las:</b> <font face="monospace">%s</font></string>
     <string name="shizuku_explainer_short">Interactuar con las APIs del sistema directamente</string>
-    <string name="back">Atrás</string>
     <string name="linksheet_download">Descarga de LinkSheet</string>
     <string name="follow_redirects_external_service_explainer">Sigue las redirecciones mediante una API desplegada en supabase.com (<annotation url-id="supabase-privacy">Política de privacidad</annotation>)</string>
     <string name="include_fingerprint">Incluir huella digital del dispositivo (recomendado)</string>
@@ -105,14 +101,11 @@
     <string name="amp2html_external_service_explainer">Intento de obtener una versión de página no AMP mediante una API desplegada en supabase.com (<annotation url-id="supabase-privacy">Política de privacidad</annotation>)</string>
     <string name="github_explainer">Repositorio de código fuente</string>
     <string name="launch_onboarding">Iniciar la incorporación</string>
-    <string name="shizuku_integration">Integración con Shizuku</string>
     <string name="debug">Depurar</string>
-    <string name="downloader_url_mime_type_explainer">Comprueba si el enlace termina con una extensión de archivo (por ejemplo, \".jpg\"); Si es así, este tipo se utiliza para el archivo descargado.</string>
     <string name="credits_explainer">Agradecimientos, Licencias</string>
     <string name="remove_all">Borrar todo</string>
     <string name="use_unified_preferred_browser">Usar ajustes indefinidos</string>
     <string name="always_ask_explainer">Mostrar siempre todos los navegadores</string>
-    <string name="enable_downloader">Activar descargador</string>
     <string name="paste">Pegar</string>
     <string name="download">Descargar</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Seguir redirecciones</string>
@@ -124,9 +117,7 @@
     <string name="about">Acerca de</string>
     <string name="add_all">Añadir todo</string>
     <string name="feature_flags_explainer">Activar o desactivar características experimentales</string>
-    <string name="options">Opciones</string>
     <string name="about_explainer">Créditos, Licencia, Enlaces, Versión</string>
-    <string name="shizuku_not_running_explainer">Shizuku no se está ejecutando. Pulse aquí para abrir Shizuku y siga las instrucciones para iniciarlo.</string>
     <string name="browser_status">Estado del navegador</string>
     <string name="request_private_browsing">Privado</string>
     <string name="always">Siempre</string>
@@ -140,7 +131,6 @@
     <string name="follow_redirects_explainer">Sigue automáticamente todas las redirecciones antes de abrir la hoja inferior. Esto puede tener <annotation url-id="privacy-follow-redirects">implicaciones relacionadas con la privacidad</annotation></string>
     <string name="browser_mode">Navegador predeterminado</string>
     <string name="dark">Oscuro</string>
-    <string name="shizuku_integration_not_setup_explainer">Si bien no es estrictamente necesario para que LinkSheet funcione, se recomienda Shizuku. Toca aquí para instalarlo.</string>
     <string name="fastfoward_rules_explainer">Usar la integración experimental de reglas <annotation url-id="fastforward-github">FastForward</annotation> (evita los redireccionamientos de algunos hosts extrayendo el redireccionamiento del enlace)</string>
     <string name="set_as_browser">Seleccionar como navegador</string>
     <string name="whitelisted">En la lista blanca</string>
@@ -156,9 +146,6 @@
     <string name="search">Buscar</string>
     <string name="at_least_one_unknown_browser_installer">Al menos un navegador (desconocido) instalado</string>
     <string name="always_show_package_name">Mostrar siempre el nombre del paquete</string>
-    <string name="error">Error</string>
-    <string name="checkmark">Marca de verificación</string>
-    <string name="request_timeout">Tiempo de respuesta expirado</string>
     <string name="apps_which_can_open_links_explainer_2">Mostrar todas las aplicaciones que puedan interferir con el comportamiento de LinkSheet</string>
     <string name="set_as_browser_explainer">Toca aquí para hacer de LinkSheet el navegador predeterminado</string>
     <string name="current_session">Sesión actual</string>
@@ -180,9 +167,7 @@
     <string name="follow_only_known_trackers">Seguir únicamente a rastreadores conocidos</string>
     <string name="no_browser_installed_explainer">LinkSheet no pudo detectar ninguna una aplicación que afirme ser un navegador. Para obtener la mejor experiencia, instale un navegador.</string>
     <string name="no_logs_found">¡No se han encontrado registros pasados!</string>
-    <string name="downloader_url_mime_type">Usar el tipo mime desde el enlace</string>
     <string name="at_least_one_known_browser_installed">Debe haber al menos un navegador instalado</string>
-    <string name="shizuku_integration_no_permission_explainer">Toca aquí para solicitar el permiso de Shizuku.</string>
     <string name="system">Seguir el sistema</string>
     <string name="no_log_entries">La sesión no contiene ningún registro.</string>
     <string name="add">Añadir</string>
@@ -215,12 +200,10 @@
     <string name="built_by_error">Esta compilación no ha sido firmada por 1fexd ni por el flujo de trabajo de Github.</string>
     <string name="export_to_file">Exportar a un archivo</string>
     <string name="linksheet_donation_explainer_2">Una donación de más de <b>5€</b> te permite acceder a <b>LinkSheet Pro</b>, que incluye <b>características exclusivas Pro</b> como: seguir redirecciones externamente, obtener páginas no AMP externamente y ¡mucho más por venir!</string>
-    <string name="import_settings">Importar los ajustes</string>
     <string name="export_import_settings">Exportar o importar los ajustes</string>
     <string name="import_headline">Importar</string>
     <string name="export_include_recommendation">¡Le recomendamos que active la siguiente configuración sólo si no planea compartir su exportación con otra persona!</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
-    <string name="confirm_import">Confirmar</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="include_log_hash_key">Incluya la clave hash del registro (la clave utilizada para redactar sus registros)</string>
     <string name="import_explainer">Importar una exportación anterior desde un archivo</string>
     <string name="export_privacy">Para obtener información sobre la privacidad de las exportaciones, puede visitar este <annotation url-id="privacy-exports">enlace</annotation>.</string>
@@ -333,25 +316,11 @@
     <string name="tap_customization_dialog_title">Configurar %s</string>
     <string name="tap_customization_dialog_title_single_tap">una sola pulsación</string>
     <string name="tap_customization_dialog_text">Elija la acción que debe realizarse</string>
-    <string name="cancel">Cancelar</string>
     <string name="expand_on_app_select_explainer">Expandir automáticamente la hoja inferior cuando se selecciona una aplicación</string>
     <string name="expand_on_app_select">Expandir cuando se selecciona una aplicación</string>
-    <string name="telemetry_level_disabled">Desactivado</string>
-    <string name="telemetry_level_minimal">Mínimo</string>
-    <string name="telemetry_level_standard">Estándar</string>
-    <string name="telemetry_level_exhaustive">Exhaustivo</string>
-    <string name="telemetry_identity_basic">Básico</string>
-    <string name="telemetry_identity_full">Completo</string>
-    <string name="telemetry_level_minimal_description">Métricas de la versión instalada</string>
-    <string name="telemetry_level_standard_description">Estadísticas de uso agregadas</string>
-    <string name="telemetry_level_exhaustive_description">Estadísticas de uso detalladas</string>
     <string name="telemetry_configure_title">Analíticas</string>
     <string name="telemetry_identifier_reset">Reiniciar el identificador</string>
     <string name="telemetry_configure_type">Tipo de análisis</string>
-    <string name="telemetry_dialog_title">LinkSheet respeta su privacidad</string>
-    <string name="telemetry_dialog_text">Elija el tipo de métrica de uso con el que se sienta más cómodo.</string>
-    <string name="telemetry_level_disabled_description">Sin recopilación de datos</string>
-    <string name="telemetry_dialog_text_2" translatable="false">Las métricas de uso incluyen un identificador aleatorio enlazado a la instalación que el usuario puede restablecer, así como su versión de Android, y se almacenan en <annotation url-id="aptabase">Aptabase (EU)</annotation>. Los datos confidenciales, como las aplicaciones instaladas y los enlaces en los que se hace clic, <b>nunca</b> se recopilarán. Para obtener más información, toque <annotation url-id="privacy-telemetry">aquí</annotation>.</string>
     <string name="something_went_wrong">Algo salió mal. Por favor, vuelva a intentarlo.</string>
     <string name="link_handle_failed">Ocurrió un error</string>
     <string name="retry">Volver a intentarlo</string>
@@ -410,7 +379,6 @@
     <string name="export_log_dialog__title_redact_log">Editar registro</string>
     <string name="export_log_dialog__title_include_throwable">Incluir registro de errores</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Recomendado</string>
-    <string name="generic__button_text_cancel">Cancelar</string>
     <string name="crash_viewer__subtitle_app_crashed">¡Vaya, eso no debería haber ocurrido!</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Descargador</string>
@@ -479,7 +447,6 @@
         <item quantity="many">%d desactivados</item>
         <item quantity="other">%d desactivados</item>
     </plurals>
-    <string name="generic__text_url">Url</string>
     <string name="home__clipboard_card_source">Desde el portapapeles</string>
     <string name="generic__text_edit">Editar</string>
     <string name="generic__button_text_done">Hecho</string>
@@ -508,5 +475,4 @@
     <string name="bottom_sheet__button_manual_redirect">Seguir redirecciones</string>
     <string name="generic__button_text_share">Compartir</string>
     <string name="resolve_event__idle">Sin uso</string>
-
 </resources>

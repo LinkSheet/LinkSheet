@@ -10,10 +10,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ExpressionInputChip(
     label: @Composable () -> Unit,
+    leadingIcon: @Composable (() -> Unit)? = null,
 ) {
     InputChip(
         modifier = Modifier.height(32.dp),
         selected = true,
+        leadingIcon = leadingIcon,
         label = label,
         onClick = {
 

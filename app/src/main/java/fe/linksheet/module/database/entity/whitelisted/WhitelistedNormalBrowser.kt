@@ -1,20 +1,16 @@
 package fe.linksheet.module.database.entity.whitelisted
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
-import fe.linksheet.module.database.dao.base.PackageEntityCreator
+import androidx.room3.ColumnInfo
+import androidx.room3.Entity
+import androidx.room3.Index
+import androidx.room3.PrimaryKey
 
-@Entity(tableName = "whitelisted_browser", indices = [Index("packageName", unique = true)])
+@Entity(tableName = WhitelistedNormalBrowser.TABLE_NAME, indices = [Index("packageName", unique = true)])
 data class WhitelistedNormalBrowser(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "_id") val id: Int = 0,
-    override val packageName: String
-) : WhitelistedBrowser<WhitelistedNormalBrowser>(packageName) {
-
-    companion object Creator : PackageEntityCreator<WhitelistedNormalBrowser> {
-        override fun createInstance(packageName: String) = WhitelistedNormalBrowser(
-            packageName = packageName
-        )
+    val packageName: String
+) {
+    companion object {
+        const val TABLE_NAME = "whitelisted_browser"
     }
 }

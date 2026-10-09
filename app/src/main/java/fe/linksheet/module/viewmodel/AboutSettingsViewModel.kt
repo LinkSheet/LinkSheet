@@ -1,20 +1,21 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
+import app.linksheet.api.SystemInfoService
 import com.google.gson.Gson
-import fe.linksheet.module.preference.app.AppPreferenceRepository
+import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.linksheet.util.buildconfig.LinkSheetInfo
 
 class AboutSettingsViewModel(
     val context: Application,
     val gson: Gson,
+    val infoService: SystemInfoService,
     preferenceRepository: AppPreferenceRepository
 ) : BaseViewModel(preferenceRepository) {
     val devModeEnabled = preferenceRepository.asViewModelState(AppPreferences.devModeEnabled)
 
     fun getBuildInfo(): String {
-        return gson.toJson(LinkSheetInfo.buildInfo)
+        return gson.toJson(infoService.buildInfo)
     }
 }

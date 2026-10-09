@@ -1,8 +1,18 @@
 package fe.linksheet.composable.dialog
 
 import android.os.Parcelable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.WebAssetOff
 import androidx.compose.material3.Icon
@@ -32,7 +42,7 @@ import fe.composekit.component.list.item.type.CheckboxListItem
 import fe.linksheet.R
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
-
+import app.linksheet.compose.R as CommonR
 
 fun Map<String, Boolean>.createResult(selectedStates: Map<String, Boolean>): List<HostState> {
     return mapNotNull { (host, initialState) ->
@@ -85,7 +95,7 @@ fun AppHostDialog(
         },
         dismissButton = rememberOptionalContent(hasHosts) {
             SaneAlertDialogTextButton(
-                content = textContent(R.string.generic__button_text_cancel),
+                content = textContent(CommonR.string.generic__button_text_cancel),
                 onClick = onDismiss
             )
         }

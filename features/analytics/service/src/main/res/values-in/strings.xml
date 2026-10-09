@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="telemetry_level_disabled">Dinonaktifkan</string>
+    <string name="telemetry_level_minimal">Minimal</string>
+    <string name="telemetry_level_standard">Standar</string>
+    <string name="telemetry_level_exhaustive">Menyeluruh</string>
+    <string name="telemetry_identity_basic">Dasar</string>
+    <string name="telemetry_identity_full">Penuh</string>
+    <string name="telemetry_level_disabled_description">Tanpa pengumpulan data</string>
+    <string name="telemetry_level_minimal_description">Metrik versi terinstal</string>
+    <string name="telemetry_level_standard_description">Statistik penggunaan teragregasi</string>
+    <string name="telemetry_level_exhaustive_description">Statistik penggunaan terperinci</string>
+    <string name="telemetry_dialog_title">LinkSheet menghormati privasi Anda</string>
+    <string name="telemetry_dialog_text">Pilih jenis metrik penggunaan yang paling Anda nyaman.</string>
+</resources>

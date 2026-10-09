@@ -1,10 +1,7 @@
 package app.linksheet.api.database
 
-import android.content.Context
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.RoomDatabase.Builder
-import androidx.room.migration.Migration
+import androidx.room3.RoomDatabase
+import androidx.room3.migration.Migration
 
 interface DatabaseCompanion<T : RoomDatabase> {
     private fun buildMigrations(): Array<Migration> {

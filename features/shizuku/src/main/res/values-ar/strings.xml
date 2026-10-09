@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shizuku_integration_enabled_explainer">تم تمكين تكامل شيزوكو بنجاح!</string>
+    <string name="shizuku_not_running_explainer">شيزوكو لا يعمل. انقر هنا لفتح شيزوكو ، ثم اتبع التعليمات لبدء تشغيله.</string>
+    <string name="shizuku_integration_no_permission_explainer">انقر هنا لطلب إذن شيزوكو.</string>
+    <string name="shizuku_integration_not_setup_explainer">في حين أنه ليس ضروريًا تمامًا لعمل ورقة الروابط ، يوصى باستخدام شيزوكو. اضغط هنا لتثبيته.</string>
+    <string name="shizuku_integration">دمج شيزوكو</string>
+</resources>

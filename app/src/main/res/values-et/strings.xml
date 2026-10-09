@@ -6,7 +6,6 @@
     <string name="clear">Tühjenda</string>
     <string name="browser_mode_divider">Režiim</string>
     <string name="none">Määramata</string>
-    <string name="back">Tagasi</string>
     <string name="settings">Seadistused</string>
     <string name="disabled">Pole kasutusel</string>
     <string name="whitelisted">Lubatud valik</string>
@@ -15,8 +14,6 @@
     <string name="credits">Tänuavaldused</string>
     <string name="github">GitHub</string>
     <string name="paste">Aseta</string>
-    <string name="error">Viga</string>
-    <string name="checkmark">Märkeruut</string>
     <string name="links">Lingid</string>
     <string name="theme">Kujundus</string>
     <string name="light">Hele kujundus</string>
@@ -29,7 +26,6 @@
     <string name="in_app">Rakendusesisene</string>
     <string name="debug">Veaotsing</string>
     <string name="logs">Logid</string>
-    <string name="options">Valikud</string>
     <string name="export">Ekspordi</string>
     <string name="request_private_browsing">Privaatne</string>
     <string name="log">Logi</string>
@@ -50,8 +46,7 @@
     <string name="donate">Toeta meid rahaliselt</string>
     <string name="other">Muu</string>
     <string name="import_headline">Impordi</string>
-    <string name="export_file_name">linksheet_seadistused_%s.json</string>
-    <string name="confirm_import">Kinnita</string>
+    <string name="export_file_name">linksheet_seadistused_%s</string>
     <string name="dev">Arendaja</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="amp2html_short">Amp2Html</string>
@@ -65,13 +60,6 @@
     <string name="onboarding_5_button">Lõpeta</string>
     <string name="experiments">Katsed</string>
     <string name="reset">Lähtesta</string>
-    <string name="cancel">Katkesta</string>
-    <string name="telemetry_level_disabled">Pole kasutusel</string>
-    <string name="telemetry_level_minimal">Minimaalne</string>
-    <string name="telemetry_level_standard">Standardne</string>
-    <string name="telemetry_level_exhaustive">Väga mahukas</string>
-    <string name="telemetry_identity_basic">Lihtne</string>
-    <string name="telemetry_identity_full">Täismahuline</string>
     <string name="telemetry_configure_title">Analüütika</string>
     <string name="link_handle_failed_text_field_label">Päring</string>
     <string name="customization">Kohandamine</string>
@@ -83,7 +71,6 @@
     <string name="bottom_sheet_loading_indicator__button_skip_job">Jäta vahele</string>
     <string name="export_log_dialog__subtitle_include_fingerprint">Soovitatud</string>
     <string name="export_log_dialog__subtitle_include_settings">Soovitatud</string>
-    <string name="generic__button_text_cancel">Katkesta</string>
     <string name="settings_links_amp2html__title_amp2html">Amp2Html</string>
     <string name="settings_links_downloader__title_downloader">Allalaadija</string>
     <string name="resolve_event__initialized">Valmendatud</string>
@@ -91,7 +78,6 @@
     <string name="settings_app_config__title_native_apps">Rakendused</string>
     <string name="settings_app_config_rules__title_rules">Reeglid</string>
     <string name="generic__button_text_delete">Kustuta</string>
-    <string name="generic__text_url">Võrguaadress</string>
     <string name="generic__text_edit">Muuda</string>
     <string name="generic__button_text_done">Valmis</string>
     <string name="settings__hint_search">Otsi</string>
@@ -103,8 +89,6 @@
     <string name="resolve_event__idle">Jõude</string>
     <string name="export_settings__text_success">Eksportimine õnnestus!</string>
     <string name="import_settings__text_success">Importimine õnnestus!</string>
-    <string name="generic__button_text_enable">Võta kasutusele</string>
-    <string name="generic__button_text_disable">Eemalda kasutuselt</string>
     <string name="settings_verified_link_handler__text_hosts">Hostid</string>
     <string name="settings_verified_link_handler__title_details">Üksikasjad</string>
     <string name="generic__button_text_settings">Seadistused</string>
@@ -120,4 +104,67 @@
     <string name="just_once">Vaid üks kord</string>
     <string name="default_apps">Vaikimisi rakendused</string>
     <string name="copy_url">Kopeeri link</string>
+    <string name="settings_scenario__title_scenarios">Stsenaariumid</string>
+    <string name="settings_scenario__text_scenarios">Seadista stsenaariume</string>
+    <string name="settings_scenario__text_data_type">Andmetüüp</string>
+    <string name="open_with_app">Ava rakendusega %s</string>
+    <string name="use_a_different_app">Ava muu rakendusega</string>
+    <string name="opening_with_app">Avan rakendusega %s</string>
+    <string name="always_ask">Alati küsi</string>
+    <string name="whitelisted_explainer">Näita vaid lubatud brausereid</string>
+    <string name="usage_stats_sorting">Järjesta rakendusi kasutuse alusel</string>
+    <string name="default_apps_subtitle">Seadista vaikimisi rakendused konkreetsete hostide jaoks</string>
+    <string name="always_show_package_name">Näita alati paketi nime</string>
+    <string name="always_show_package_name_explainer">Rakenduse nime asemel näita alati paketi nime. See kehtib tervele rakendusele.</string>
+    <string name="remove_all">Eemalda kõik</string>
+    <string name="add_all">Lisa kõik</string>
+    <string name="display_grid_layout">Paigutus ruudustikuna</string>
+    <string name="display_grid_layout_explainer">Näita alumisel lehel loendi asemel kirjete ruudustikku</string>
+    <string name="set_as_browser_done">LinkSheet on määratud sinu vaikimisi brauseriks!</string>
+    <string name="browser_status">Brauseri olek</string>
+    <string name="app_browsers">Rakendused ja brauserid</string>
+    <string name="bottom_sheet">Alumine leht</string>
+    <string name="open_with_linksheet">Ava rakenduses LinkSheet</string>
+    <string name="about_explainer">Tänuavaldused, litsents, lingid, versioon</string>
+    <string name="credits_explainer">Tänuavaldused, litsentseerimine</string>
+    <string name="version">LinkSheeti versioon</string>
+    <string name="github_explainer">Lähtekoodi hoidla</string>
+    <string name="donate_subtitle">Uuenda <b>LinkSheet Pro</b> versiooniks</string>
+    <string name="open_copied_link">Lõikelaualt</string>
+    <string name="select_an_app">Vali rakendus</string>
+    <string name="dont_show_filtered_item">Ära näita valikut „viimati valitud rakendus“</string>
+    <string name="download_started">Allalaadimine algas</string>
+    <string name="url_copied">Võrguaadress on kopeeritud lõikelauale</string>
+    <string name="usage_stats_sorting_explainer">Kaasta järjestusalgoritmi Androidi süsteemikasutuse statistika. Esimese sisselülitamisel korral pead lubama ka vastavad õigused.</string>
+    <string name="app_browsers_subtitle">Eelistatud rakendused, brauseri seadistused</string>
+    <string name="bottom_sheet_explainer">Seadistamine ja kohendamine</string>
+    <string name="loading_link">Töötlen linki…</string>
+    <string name="follow_redirects_external_service">Järgi välise teenuse edasisuunamisi</string>
+    <string name="launch_onboarding">Käivita tervitusvaade</string>
+    <string name="feature_flags_explainer">Lülita katselised funktsionaalsused sisse/välja</string>
+    <string name="compat_installed">LinkSheetCompat on juba paigaldatud</string>
+    <string name="configure_explainer">Klõpsa siin LinkSheetCompati seadistamiseks</string>
+    <string name="general_settings_explainer">Näita alati pakettide nimesid</string>
+    <string name="no_handlers_found_explainer">LinkSheet ei saa seda linki avada.</string>
+    <string name="version_name"><b>Versioon:</b> <font face="monospace">%s</font></string>
+    <string name="built_at"><b>Kompileeritud:</b> <font face="monospace">%s</font></string>
+    <string name="flavor"><b>Variatsioon:</b> <font face="monospace">%s</font></string>
+    <string name="github_workflow_run_id"><b>Töövoo tunnus:</b> <font face="monospace">%s</font></string>
+    <string name="discord_explainer">Räägi LinkSheetist Discordis</string>
+    <string name="donate_crypto">Toeta kasutades krüptoraha</string>
+    <string name="donate_card">Toeta kaardimaksega (BuyMeACoffee vahendusel)</string>
+    <string name="donate_learn_more">Lisateave</string>
+    <string name="donate_explainer_crypto">Toetuse saatmisel krüptorahas saada e-kiri aadressile <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation>.</string>
+    <string name="thanks_for_donating">Tänud rahalise toetuse eest!</string>
+    <string name="app_setup">Rakenduse seadistus</string>
+    <string name="set_as_browser">Määra veebibrauseriks</string>
+    <string name="set_as_browser_explainer">Klõpsi siin ja määra LinkSheet vaikimisi veebibrauseriks</string>
+    <string name="apps_which_can_open_links">Kinnitatud linkidetöötlejad</string>
+    <string name="theme_explainer">Material You, tume kujundus, süsimust taust</string>
+    <string name="system">Järgi süsteemi kujundust</string>
+    <string name="theme_enable_material_you">Dünaamilised värvid</string>
+    <string name="theme_enable_amoled">Süsimust kujundus</string>
+    <string name="theme_mode">Kujunduse valik</string>
+    <string name="theme_enable_amoled_explainer">Tumeda kujunduse korral kasuta süsimusti värve</string>
+    <string name="theme_enable_material_you_explainer">Kasuta Android 12+ puhul Material You kohast seadme kujundust</string>
 </resources>

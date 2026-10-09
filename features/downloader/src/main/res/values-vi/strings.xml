@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_downloader">Bật trình tải xuống</string>
+    <string name="enable_downloader_explainer">Thêm nút \"Tải xuống\" vào trang dưới cùng nếu URL chứa liên kết trực tiếp tới tệp. Điều này có thể có</string>
+    <string name="downloader_url_mime_type">Sử dụng loại mime từ URL</string>
+    <string name="downloader_url_mime_type_explainer">Kiểm tra xem URL có kết thúc bằng phần mở rộng tệp hay không (ví dụ: \".jpg\"); Nếu có, loại này được sử dụng cho tệp tải xuống.</string>
+</resources>

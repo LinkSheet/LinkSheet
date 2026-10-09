@@ -1,5 +1,6 @@
 package fe.linksheet.module.versiontracker
 
+import app.linksheet.api.BuildInfo
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -9,7 +10,6 @@ import fe.gson.extension.json.array.elementsFilterNull
 import fe.gson.extension.json.element.arrayOrNull
 import fe.gson.extension.json.`object`.asIntOrNull
 import fe.gson.extension.json.`object`.asStringOrNull
-import fe.linksheet.feature.systeminfo.BuildInfo
 
 // TODO: Find a better way to do this
 class LastVersionService(

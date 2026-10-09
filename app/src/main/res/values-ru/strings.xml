@@ -32,8 +32,6 @@
     <string name="disable_all">Отключить всё</string>
     <string name="always_show_package_name_explainer">Всегда показывать название пакетов, а не только имена приложений. Это относится ко всему приложению.</string>
     <string name="log_files">Прошлые лог файлы</string>
-    <string name="shizuku_integration_enabled_explainer">Интеграция с Shizuku успешно включена!</string>
-    <string name="enable_downloader_explainer">Добавить кнопку «Скачать» на нижний лист, если URL-адрес содержит прямую ссылку на файл. Это может иметь <annotation url-id="privacy-downloader">последствия, связанные с конфиденциальностью</annotation></string>
     <string name="logs_explainer">Просмотр логов приложений</string>
     <string name="enable_all">Включить всё</string>
     <string name="selected_browser_explainer">Этот браузер откроется автоматически, если ни одно нативное приложение не сможет обработать выбранную ссылку</string>
@@ -52,7 +50,6 @@
     <string name="normal">Нормально</string>
     <string name="clear">Очистить</string>
     <string name="apps_which_can_open_links_explainer">Коснитесь приложения, чтобы открыть меню «Открыть по умолчанию», которое позволяет отключить автоматическое открытие ссылки</string>
-    <string name="request_timeout_explainer">Определяет, сколько секунд LinkSheet будет ждать установления соединения. Установка значения 0 отключает тайм-аут, но это не рекомендуется.</string>
     <string name="github">Github</string>
     <string name="url_copied">URL был скопирован в буфер обмена</string>
     <string name="copy_url">Скопировать URL</string>
@@ -73,7 +70,6 @@
     <string name="donate_subtitle">Если вы хотите сделать пожертвование и получить <b>LinkSheet Pro</b></string>
     <string name="advanced">Расширенные настройки</string>
     <string name="shizuku_explainer_short">Взаимодействие с системными API напрямую</string>
-    <string name="back">Назад</string>
     <string name="linksheet_download">Скачать LinkSheet</string>
     <string name="follow_redirects_external_service_explainer">Следовать перенаправлениям с помощью API, развернутого на сайте supabase.com (<annotation url-id="supabase-privacy">Политика конфиденциальности</annotation>)</string>
     <string name="include_fingerprint">Включить отпечаток пальца устройства (рекомендуется)</string>
@@ -86,14 +82,11 @@
     <string name="usage_stats_sorting_explainer">Включите статистику использования системы Android в алгоритм сортировки. Разрешение запрашивается при первом переключении.</string>
     <string name="amp2html_external_service_explainer">Попытка получить версию страницы, отличающееся от AMP, с помощью API, развернутого на сайте supabase.com (<annotation url-id="supabase-privacy">Политика конфиденциальности</annotation>)</string>
     <string name="github_explainer">Репозиторий исходного кода</string>
-    <string name="shizuku_integration">Интеграция Shizuku</string>
     <string name="debug">Дебаг</string>
-    <string name="downloader_url_mime_type_explainer">Проверяет, заканчивается ли URL-адрес расширением файла (например, «.jpg»); Если да, то этот тип используется для загруженного файла.</string>
     <string name="credits_explainer">Лицензирование открытого исходного кода</string>
     <string name="remove_all">Убрать всё</string>
     <string name="use_unified_preferred_browser">Использовать единые настройки</string>
     <string name="always_ask_explainer">Всегда перечислять все браузеры</string>
-    <string name="enable_downloader">Включить загрузчик</string>
     <string name="paste">Вставить</string>
     <string name="download">Скачать</string>
     <string name="links_explainer">Настройки, касающиеся манипулирования ссылками</string>
@@ -104,9 +97,7 @@
     <string name="about">О</string>
     <string name="add_all">Добавить всё</string>
     <string name="feature_flags_explainer">Включить или отключить экспериментальные функции</string>
-    <string name="options">Опции</string>
     <string name="about_explainer">Об этом приложении, лицензии</string>
-    <string name="shizuku_not_running_explainer">Shizuku не запущен. Нажмите здесь, чтобы открыть Shizuku, затем следуйте инструкциям, чтобы запустить его</string>
     <string name="browser_status">Статус браузера</string>
     <string name="request_private_browsing">Приватный</string>
     <string name="always">Всегда</string>
@@ -119,7 +110,6 @@
     <string name="follow_redirects_explainer">Автоматически следовать всем перенаправлениям перед открытием нижнего листа. Это может иметь <annotation url-id="privacy-follow-redirects">последствия, связанные с конфиденциальностью</annotation></string>
     <string name="browser_mode">Предпочитаемый браузер</string>
     <string name="dark">Тёмная</string>
-    <string name="shizuku_integration_not_setup_explainer">Хотя для работы LinkSheet это не обязательно, рекомендуется использовать Shizuku. Нажмите здесь, чтобы установить его</string>
     <string name="fastfoward_rules_explainer">Использовать экспериментальную интеграцию правил <annotation url-id="fastforward-github">FastForward</annotation> (обход перенаправлений некоторых хостов, извлекая перенаправление из ссылки)</string>
     <string name="set_as_browser">Установить как браузер</string>
     <string name="whitelisted">В белом списке</string>
@@ -130,9 +120,6 @@
     <string name="redact_log">Редактировать лог (рекомендуется, отключение может привести к утечке названия пакетов и имен хостов)</string>
     <string name="search">Поиск</string>
     <string name="always_show_package_name">Всегда показывать название пакета</string>
-    <string name="error">Ошибка</string>
-    <string name="checkmark">Галочка</string>
-    <string name="request_timeout">Запросить тайм-аут</string>
     <string name="apps_which_can_open_links_explainer_2">Содержит список приложений, которые могут мешать работе LinkSheet</string>
     <string name="set_as_browser_explainer">Нажмите здесь, чтобы сделать LinkSheet браузером по умолчанию</string>
     <string name="current_session">Текущая сессия</string>
@@ -148,8 +135,6 @@
     <string name="browser_mode_subtitle">Установить предпочтительный режим браузера</string>
     <string name="follow_only_known_trackers">Следовать только за известными трекерами</string>
     <string name="no_logs_found">Прошлые логи не найдены!</string>
-    <string name="downloader_url_mime_type">Использовать тип mime из URL</string>
-    <string name="shizuku_integration_no_permission_explainer">Нажмите здесь, чтобы запросить разрешение Shizuku</string>
     <string name="system">Системная</string>
     <string name="no_log_entries">Эта сессия не содержит логов.</string>
     <string name="add">Добавить</string>
@@ -189,17 +174,15 @@
     <string name="built_at">Построено в (UTC):</string>
     <string name="linksheet_donation_explainer_2">Пожертвование на сумму более <b>5€</b> (<b>4€</b>, если вы делаете пожертвование в криптовалюте!) открывает вам доступ к <b>LinkSheet Pro</b>, который в настоящее время только скрывает баннер пожертвования на главном экране приложения, но в будущем появятся <b>эксклюзивные Pro функции.</b></string>
     <string name="github_pipeline_build">Создан и подписан рабочим процессом Github</string>
-    <string name="import_settings">Импортировать настройки</string>
     <string name="launch_onboarding">Запустить процесс адаптации</string>
     <string name="other">Другое</string>
     <string name="export_import_settings">Экспорт или импорт настроек</string>
     <string name="import_headline">Импорт</string>
     <string name="export_include_recommendation">Мы рекомендуем вам включить следующие настройки, только если вы не планируете делиться экспортированными данными с кем-то ещё!</string>
     <string name="no_handlers_found">Ни браузер, ни нативное приложение не найдены!</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="thanks_for_donating">Спасибо за пожертвование!</string>
     <string name="app_setup">Настройка приложения</string>
-    <string name="confirm_import">Подтвердить</string>
     <string name="include_log_hash_key">Включите хэш-ключ журнала (ключ, используемый для редактирования ваших журналов)</string>
     <string name="import_explainer">Импортировать предыдущий экспорт из файла</string>
     <string name="github_workflow_run_id">Идентификатор рабочего процесса сборки:</string>

@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.linksheet.compose.extension.toImageBitmap
+import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewContainer
 import app.linksheet.feature.profile.R
@@ -31,11 +32,10 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.ContentType
 import fe.composekit.component.card.AlertCard
 import fe.composekit.component.icon.IconOffset
-import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.component.list.item.default.DefaultTwoLineIconClickableShapeListItem
-import fe.composekit.component.list.item.type.SwitchListItem
 import fe.composekit.layout.column.group
-import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.preference.BooleanVmPref
+import fe.composekit.preference.fakeBooleanVM
 import org.koin.androidx.compose.koinViewModel
 
 @RequiresApi(Build.VERSION_CODES.P)
@@ -44,7 +44,6 @@ internal fun ProfileSwitchingSettings(
     onBackPressed: () -> Unit,
     viewModel: ProfileSwitchingSettingsViewModel = koinViewModel(),
 ) {
-    val enabled by viewModel.enabled.collectAsStateWithLifecycle()
     val status by viewModel.status.collectAsStateWithLifecycle(ProfileStatus.Unsupported)
     val userProfileInfo by viewModel.userProfileInfo.collectAsStateWithLifecycle(null)
 
@@ -52,11 +51,11 @@ internal fun ProfileSwitchingSettings(
         status = status,
         userProfileInfo = userProfileInfo,
         isManagedProfile = viewModel.checkIsManagedProfile(),
-        enabled = enabled,
-        onEnable = viewModel.enabled,
+        enabledPref = viewModel.enabled,
+        sendTargetPref = viewModel.sendTarget,
         onBackPressed = onBackPressed,
         launchCrossProfileInteractSettings = viewModel::launchCrossProfileInteractSettings,
-        startOther = viewModel::startOther
+        startOther = viewModel::startOther,
     )
 }
 
@@ -66,8 +65,8 @@ private fun ProfileSwitchingSettingsRouteInternal(
     status: ProfileStatus,
     userProfileInfo: UserProfileInfo?,
     isManagedProfile: Boolean,
-    enabled: Boolean,
-    onEnable: (Boolean) -> Unit,
+    enabledPref: BooleanVmPref,
+    sendTargetPref: BooleanVmPref,
     onBackPressed: () -> Unit,
     launchCrossProfileInteractSettings: (Activity?) -> Unit,
     startOther: (CrossProfile, Activity?) -> Unit,
@@ -79,10 +78,6 @@ private fun ProfileSwitchingSettingsRouteInternal(
         onBackPressed = onBackPressed
     ) {
         when (status) {
-            is ProfileStatus.Available -> {
-
-            }
-
             ProfileStatus.NoProfiles -> {
                 item(
                     key = R.string.settings_profile_switcher__title_no_profile,
@@ -100,7 +95,6 @@ private fun ProfileSwitchingSettingsRouteInternal(
                     )
                 }
             }
-
             ProfileStatus.NotConnected -> {
                 item(
                     key = R.string.settings_profile_switcher__title_enable_cross_profile,
@@ -119,20 +113,25 @@ private fun ProfileSwitchingSettingsRouteInternal(
                     )
                 }
             }
-
-            ProfileStatus.Unsupported -> {
-
-            }
+            else -> {}
         }
 
         if (status is ProfileStatus.Available) {
             item(key = R.string.switch_profile, contentType = ContentType.SingleGroupItem) {
-                SwitchListItem(
-                    checked = enabled,
-                    onCheckedChange = onEnable,
-                    position = ContentPosition.Trailing,
+                PreferenceSwitchListItem(
+                    statePreference = enabledPref,
                     headlineContent = textContent(R.string.switch_profile),
                     supportingContent = textContent(R.string.settings_bottom_sheet__text_profile_switcher),
+                )
+            }
+
+            divider(id = R.string.settings_profile_switcher__divider_options)
+
+            item(key = R.string.settings_profile_switcher__title_send_target, contentType = ContentType.SingleGroupItem) {
+                PreferenceSwitchListItem(
+                    statePreference = sendTargetPref,
+                    headlineContent = textContent(R.string.settings_profile_switcher__title_send_target),
+                    supportingContent = textContent(R.string.settings_profile_switcher__text_send_target),
                 )
             }
         }
@@ -141,13 +140,11 @@ private fun ProfileSwitchingSettingsRouteInternal(
             divider(id = R.string.settings_profile_switcher__divider_current_profile)
 
             item(key = userProfileInfo.userHandle, contentType = ContentType.SingleGroupItem) {
-                val textId = when {
-                    isManagedProfile -> R.string.generic__label_work_profile
-                    else -> R.string.generic__label_personal_profile
-                }
-
                 DefaultTwoLineIconClickableShapeListItem(
-                    headlineContent = textContent(textId),
+                    headlineContent = textContent(id = when {
+                        isManagedProfile -> R.string.generic__label_work_profile
+                        else -> R.string.generic__label_personal_profile
+                    }),
                     supportingContent = textContent(R.string.settings_profile_switcher__text_current_profile),
                     icon = Icons.Rounded.Person.iconPainter,
                     onClick = {}
@@ -242,8 +239,8 @@ private fun ProfileSwitchingSettingsRouteBase(status: ProfileStatus, userProfile
             status = status,
             userProfileInfo = userProfileInfo,
             isManagedProfile = false,
-            enabled = false,
-            onEnable = {},
+            enabledPref = fakeBooleanVM(true),
+            sendTargetPref = fakeBooleanVM(true),
             onBackPressed = {},
             launchCrossProfileInteractSettings = {
             },

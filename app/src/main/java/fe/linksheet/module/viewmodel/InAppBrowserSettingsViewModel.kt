@@ -2,11 +2,11 @@ package fe.linksheet.module.viewmodel
 
 
 import androidx.lifecycle.viewModelScope
-import app.linksheet.feature.app.applist.AppListCommon
+import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.app.applist.AppListModel
 import app.linksheet.feature.app.core.AppInfo
 import app.linksheet.feature.app.usecase.AllAppsUseCase
 import fe.kotlin.extension.iterable.mapToSet
-import fe.linksheet.module.preference.app.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.repository.DisableInAppBrowserInSelectedRepository
 import fe.linksheet.module.viewmodel.base.BaseViewModel
@@ -20,7 +20,7 @@ class InAppBrowserSettingsViewModel(
     preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val list by lazy { AppListCommon(apps = useCase.queryAllAppsFlow(), scope = viewModelScope) }
+    val appListModel by lazy { AppListModel(queryApps = useCase::queryAllApps, scope = viewModelScope) }
     val inAppBrowserMode = preferenceRepository.asViewModelState(AppPreferences.browserMode.inAppBrowserSettings)
 
     val disabledPackages = repository.getAll().map { list ->

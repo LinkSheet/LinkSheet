@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="generic__button_text_back">戻る</string>
+    <string name="generic__button_text_enable">有効化</string>
+    <string name="generic__button_text_disable">無効化</string>
+    <string name="generic__text_url">URL</string>
+    <string name="options">オプション</string>
+    <string name="request_timeout">リクエストタイムアウト</string>
+    <string name="request_timeout_explainer">LinkSheet が接続の確立を待機する秒数を定義します。この値を 0 に設定するとタイムアウトは無効になりますが、推奨されません。</string>
+    <string name="generic__text_mode">モード</string>
+    <string name="checkmark">チェックマーク</string>
+    <string name="error">エラー</string>
+    <string name="generic__button_text_cancel">キャンセル</string>
+    <string name="generic__button_text_confirm">確認</string>
+</resources>

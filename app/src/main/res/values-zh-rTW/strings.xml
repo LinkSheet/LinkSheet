@@ -6,7 +6,7 @@
     <string name="open_with_app">透過「%s」開啟</string>
     <string name="use_a_different_app">使用其他應用程式</string>
     <string name="opening_with_app">正在透過「%s」開啟</string>
-    <string name="default_apps">偏好應用程式</string>
+    <string name="default_apps">預設應用程式</string>
     <string name="set_as_browser">設為瀏覽器</string>
     <string name="set_as_browser_explainer">輕觸此處以將 LinkSheet 設為預設的瀏覽器</string>
     <string name="apps_which_can_open_links_explainer">點擊應用程式以打開「預設開啟方式」選單，允許您停用自動連結開啟功能</string>
@@ -18,12 +18,12 @@
     <string name="confirm">確認</string>
     <string name="clear">清除</string>
     <string name="usage_stats_sorting">依使用頻率排序應用程式</string>
-    <string name="browser_mode">偏好瀏覽器</string>
+    <string name="browser_mode">瀏覽器模式</string>
     <string name="browser_mode_subtitle">選擇欲列出的瀏覽器</string>
     <string name="always_ask">每次都詢問</string>
     <string name="none">無</string>
     <string name="always_ask_explainer">一律列出所有瀏覽器</string>
-    <string name="send_to">分享</string>
+    <string name="send_to">分享至</string>
     <string name="default_apps_subtitle">偏好應用程式是您設定為「始終」開啟特定主機的應用程式</string>
     <string name="always_show_package_name">一律顯示套件名稱</string>
     <string name="always_show_package_name_explainer">一律顯示套件名稱而非僅是應用程式名稱，此選項適用於整個應用程式。</string>
@@ -31,7 +31,6 @@
     <string name="add_all">全部新增</string>
     <string name="hide_after_copying">採取行動後自動隱藏</string>
     <string name="hide_after_copying_explainer">當輕觸諸如「複製連結」或「下載」等按鈕後自動隱藏底部功能表</string>
-    <string name="back">返回</string>
     <string name="display_grid_layout">格狀版面配置</string>
     <string name="display_grid_layout_explainer">在底部功能表以格狀檢視而非清單</string>
     <string name="set_as_browser_done">已將 LinkSheet 設為預設瀏覽器！</string>
@@ -50,7 +49,7 @@
     <string name="about">關於</string>
     <string name="about_explainer">鳴謝、授權、連結、版本</string>
     <string name="credits">鳴謝</string>
-    <string name="credits_explainer">謝辭、開放原始碼授權</string>
+    <string name="credits_explainer">謝辭、授權條款</string>
     <string name="version">LinkSheet 版本</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github">GitHub</string>
@@ -59,8 +58,6 @@
     <string name="donate_subtitle">升級至 <b>LinkSheet Pro</b></string>
     <string name="open_copied_link">來自剪貼簿</string>
     <string name="paste">貼上</string>
-    <string name="error">錯誤</string>
-    <string name="checkmark">勾選符號</string>
     <string name="links">連結</string>
     <string name="links_explainer">ClearURLs、LibRedirect、跟進重新導向</string>
     <string name="use_clear_urls">使用 ClearURLs</string>
@@ -92,10 +89,6 @@
     <string name="preview_url_explainer">顯示點選的網址 (經處理的結果)</string>
     <string name="download">下載</string>
     <string name="linksheet_download">LinkSheet 下載器</string>
-    <string name="enable_downloader">啟用下載器</string>
-    <string name="enable_downloader_explainer">當網址直接連結至檔案時，在底部功能表顯示一個「下載」按鈕。這可能引發<annotation url-id="privacy-downloader">隱私顧慮</annotation></string>
-    <string name="downloader_url_mime_type">採用網址提供的 MIME 類型</string>
-    <string name="downloader_url_mime_type_explainer">若網址結尾為副檔名 (例如「.jpg」)，則將該類型套用至下載的檔案。</string>
     <string name="app_name" translatable="false">LinkSheet</string>
     <string name="in_app_browser">程式內瀏覽</string>
     <string name="in_app_browser_subtitle">覆寫程式內瀏覽設定</string>
@@ -119,11 +112,10 @@
     <string name="generic__button_text_share">分享</string>
     <string name="donate_card">以刷卡捐款 (透過 BuyMeACoffee)</string>
     <string name="discord">Discord</string>
-    <string name="confirm_import">確認</string>
     <string name="reset">重設</string>
     <string name="follow_redirects_short">重新導向</string>
     <string name="experiments_explainer_2">活躍開發中</string>
-    <string name="settings__subtitle_advanced"><![CDATA[實驗功能、匯出或匯入]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[實驗功能、備份與還原]]></string>
     <string name="apps_which_can_open_links">已驗證的連結處理常式</string>
     <string name="debug">偵錯</string>
     <string name="download_started">已開始下載</string>
@@ -146,13 +138,11 @@
     <string name="onboarding_2_skip_button">略過</string>
     <string name="settings_verified_link_handlers__text_handling_filter_disabled_short">已停用</string>
     <string name="donate_card_headline">捐款以支持 LinkSheet</string>
-    <string name="generic__text_url">網址</string>
     <string name="warning">警告</string>
     <string name="yes">是</string>
     <string name="advanced">進階</string>
     <string name="libredirect_version">LibRedirect</string>
     <string name="no">否</string>
-    <string name="options">選項</string>
     <string name="other">其他</string>
     <string name="url_copied_toast">已複製網址</string>
     <string name="generic__button_text_done">完成</string>
@@ -163,7 +153,7 @@
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">已啟用</string>
     <string name="experiments_explainer">試用開發中的功能</string>
     <string name="import_headline">匯入</string>
-    <string name="export_file_name">linksheet_settings_export_%s.json</string>
+    <string name="export_file_name">linksheet_settings_export_%s</string>
     <string name="feature_flags">功能標記</string>
     <string name="amp2html_short">Amp2Html</string>
     <string name="nightly_experiments_card">每日建構版實驗功能</string>
@@ -171,13 +161,10 @@
     <string name="settings_verified_link_handlers__text_user_apps">使用者應用程式</string>
     <string name="app_browsers_subtitle">偏好的應用程式、瀏覽器設定</string>
     <string name="enable_amp2html">啟用 Amp2Html</string>
-    <string name="generic__button_text_cancel">取消</string>
     <string name="nightly_experiments_card_explainer">輕觸以查看正在開發的功能</string>
     <string name="bottom_sheet__button_manual_redirect">跟進重新導向</string>
     <string name="share">分享連結</string>
     <string name="generic__button_text_settings">設定</string>
-    <string name="generic__button_text_enable">啟用</string>
-    <string name="generic__button_text_disable">停用</string>
     <string name="generic__button_learn_more">瞭解詳情</string>
     <string name="amp2html_local_cache_explainer">在本機暫存獲取的非 AMP 版網頁</string>
     <string name="fastforward_version">FastForward 規則</string>
@@ -191,7 +178,6 @@
     <string name="use_unified_preferred_browser_explainer">如要分別設定一般連結和程式內瀏覽連結的模式，請停用此選項並從下方的按鈕切換兩者。</string>
     <string name="allow_darknets">允許暗網</string>
     <string name="amp2html_allow_darknets_explainer">允許對暗網連結執行 Amp2Html (支援：%s)</string>
-    <string name="cancel">取消</string>
     <string name="verified_link_handlers_subtitle">控制應用程式網域驗證狀態</string>
     <string name="resolve_event__resolving_redirects">正在解析重新導向</string>
     <string name="resolve_event__unamping_link">正在為連結去 AMP 化</string>
@@ -242,8 +228,6 @@
     <string name="home__clipboard_card_source">來自剪貼簿</string>
     <string name="resolve_event__idle">閒置中</string>
     <string name="onboarding_1_card_title">預設瀏覽器</string>
-    <string name="request_timeout_explainer">調整 LinkSheet 等候連線建立的秒數。設為 0 表示停用逾時，但不建議這麼做。</string>
-    <string name="request_timeout">請求逾時</string>
     <string name="theme_mode">主題模式</string>
     <string name="theme_enable_material_you_explainer">使用 Android 12 版以上的 Material You 裝置主題</string>
     <string name="follow_redirects_allow_darknets_explainer">允許對暗網連結跟進重新導向 (支援：%s)</string>
@@ -259,7 +243,7 @@
     <string name="version_name"><b>版本：</b><font face="monospace">%s</font></string>
     <string name="built_at"><b>建構於：</b><font face="monospace">%s</font></string>
     <string name="settings_main_experiment_news__title_experiment_state_updated">行為變更</string>
-    <string name="settings_main_experiment_news__text_experiment_state_updated">部分實驗功能選項已功成身退並轉為預設行為。</string>
+    <string name="settings_main_experiment_news__text_experiment_state_updated">部分實驗功能選項已功成身退並成為預設行為。</string>
     <string name="logs">記錄檔</string>
     <string name="log_viewer">記錄檔檢視器</string>
     <string name="current_session">目前工作階段</string>
@@ -270,7 +254,6 @@
     <string name="github_workflow_run_id"><b>工作流程識別碼：</b><font face="monospace">%s</font></string>
     <string name="crash_viewer__subtitle_app_crashed">糟糕，這不該發生的！</string>
     <string name="settings_debug_log_viewer__title_log_captured_at">記錄檔擷取於：%s</string>
-    <string name="shizuku_integration">Shizuku 整合</string>
     <string name="log">記錄檔</string>
     <string name="onboarding_2_install_shizuku">安裝 Shizuku</string>
     <string name="tap_customization_dialog_text">選擇欲執行的動作</string>
@@ -339,14 +322,11 @@
     <string name="export_log_dialog__text_log_privacy">如欲瞭解分享記錄檔時可能包含的私密資料，請參見<annotation url-id="privacy-logs">隱私權政策</annotation>。</string>
     <string name="general">其他</string>
     <string name="misc_settings">其他</string>
-    <string name="settings_remote_config__text_content">LinkSheet 能夠藉由連線至遠端設定伺服器來自動更新內部設定和文件資源。如欲瞭解詳情，請參見<annotation url-id="github.linksheet.wiki.privacy.remote-config">隱私權政策</annotation>。</string>
-    <string name="settings_remote_config__title_dialog">啟用遠端設定？</string>
     <string name="export_settings__text_success">已匯出！</string>
     <string name="import_settings__text_success">已匯入！</string>
     <string name="export_settings__text_failure">無法匯出設定！</string>
     <string name="import_settings__text_failure">無法匯入設定！</string>
     <string name="export_import_settings">匯出或匯入</string>
-    <string name="import_settings">匯入設定</string>
     <string name="export_settings">匯出設定</string>
     <string name="import_settings_override_preferences">這將會覆寫現有的偏好設定，確定要繼續嗎？</string>
     <string name="export_import_settings_explainer">匯出目前的設定或匯入先前的設定</string>
@@ -357,7 +337,7 @@
     <string name="export_include_recommendation">建議僅當你不會將匯出的檔案與他人分享時再勾選下列選項！</string>
     <string name="export_privacy">如欲瞭解與匯出相關的隱私權資訊，請參見<annotation url-id="privacy-exports">隱私權政策</annotation>。</string>
     <string name="no_handlers_found_explainer">LinkSheet 無法開啟此連結。</string>
-    <string name="privacy_settings_explainer">參照隱私、遙測</string>
+    <string name="privacy_settings_explainer">參照隱私</string>
     <string name="show_linksheet_referrer">表明參照為 LinkSheet</string>
     <string name="customization">自訂</string>
     <string name="notifications">訊息與通知</string>
@@ -414,4 +394,26 @@
     <string name="no_internet_connection">沒有網際網路連線</string>
     <string name="link_handle_failed_text">由於連結的格式似乎有誤，LinkSheet 無法處理。你可以在下方編輯後再試一次，或在網上搜尋之。</string>
     <string name="link_handle_failed">發生錯誤</string>
+    <string name="browser_mode_divider">模式</string>
+    <string name="settings_follow_redirects__title_mode_auto">自動</string>
+    <string name="settings_follow_redirects__title_mode_manual">手動</string>
+    <string name="settings_follow_redirects__subtitle_mode_auto">自動跟進所有重新導向</string>
+    <string name="settings_follow_redirects__subtitle_mode_manual">在底部功能表中顯示「跟進重新導向」按鈕</string>
+    <string name="settings_follow_redirects__title_aggressive">積極模式</string>
+    <string name="settings_apps_browsers_mode__text_none">無</string>
+    <string name="settings_apps_browsers_mode__title_selected">指定瀏覽器</string>
+    <string name="tap_customization__action_always_open_app">設為預設值並開啟</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">輕觸兩下網址</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">輕觸兩下網址即可開啟建議的應用程式</string>
+    <string name="handler_target__label_switch_profile_view_intent">切換資料夾</string>
+    <string name="settings_follow_redirects__subtitle_aggressive">擷取完整網頁以與未使用 HTTP 重新導向的網站更加相容</string>
+    <string name="show_linksheet_referrer_explainer">每個應用程式啟動時，可以得知其是被何者所發起 (或稱其「參照」之)。在預設情況下，當 LinkSheet 啟動了某個應用程式時，會隱藏自身並宣稱先前啟動 LinkSheet 的應用程式才是發起者。如啟用此選項，LinkSheet 將重新成為被啟動的應用程式的參照。</string>
+    <string name="settings_bottom_sheet__title_hide_referring_app">隱藏參照應用程式</string>
+    <string name="settings_bottom_sheet__subtitle_hide_referring_app">即使來源應用程式能夠處理連結，也不要將其列入</string>
+    <string name="settings_browser_mode__subtitle_auto_launch_single_browser">若僅有一款支援的應用程式，且其為瀏覽器，則自動啟動之</string>
+    <string name="settings_browser_mode__title_auto_launch_single_browser">自動採用唯一瀏覽器</string>
+    <string name="settings_bottom_sheet__subtitle_expand_fully">自動將底部功能表完全展開</string>
+    <string name="settings_bottom_sheet__title_expand_fully">完全展開</string>
+    <string name="debug_build">偵錯建構</string>
+    <string name="settings_advanced__divider_backup"><![CDATA[備份與還原]]></string>
 </resources>

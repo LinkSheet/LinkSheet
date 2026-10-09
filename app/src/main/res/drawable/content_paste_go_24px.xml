@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+  <!-- Material Symbols "content_paste_go" (outlined, 24dp)
+       Source: https://github.com/google/material-design-icons (Apache License 2.0)
+       Y coordinates shifted by +960 from SVG viewBox "0 -960 960 960" -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="m720 840 -56 -57 63 -63H480v-80h247l-63 -64 56 -56 160 160 -160 160Zm120 -400h-80v-240h-80v120H280v-120h-80v560h200v80H200q-33 0 -56.5 -23.5T120 760v-560q0 -33 23.5 -56.5T200 120h167q11 -35 43 -57.5t70 -22.5q40 0 71.5 22.5T594 120h166q33 0 56.5 23.5T840 200v240ZM480 200q17 0 28.5 -11.5T520 160q0 -17 -11.5 -28.5T480 120q-17 0 -28.5 11.5T440 160q0 17 11.5 28.5T480 200Z"/>
+</vector>

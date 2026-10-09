@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.getSystemService
+import fe.composekit.extension.getFirstText
 import fe.linksheet.R
 import fe.linksheet.activity.BottomSheetActivity
 import fe.linksheet.web.UriUtil
@@ -27,19 +28,7 @@ class ClipboardProxyActivity : ComponentActivity() {
     }
 
     private fun handleClipboard() {
-        val clipboardManager = getSystemService<ClipboardManager>()
-        if (clipboardManager == null || !clipboardManager.hasPrimaryClip()) {
-            showErrorAndFinish()
-            return
-        }
-
-        val clip = clipboardManager.primaryClip
-        if (clip == null || clip.itemCount == 0) {
-            showErrorAndFinish()
-            return
-        }
-
-        val text = clip.getItemAt(0).text?.toString()
+        val text = getSystemService<ClipboardManager>()?.getFirstText()
         if (text.isNullOrBlank()) {
             showErrorAndFinish()
             return

@@ -193,6 +193,12 @@
             </intent-filter>
         </activity-alias>
 
+        <activity
+                android:name="app.linksheet.activity.ClipboardProxyActivity"
+                android:exported="false"
+                android:excludeFromRecents="true"
+                android:theme="@style/DialogTheme"/>
+
         <service android:name=".customtab.LinkSheetCustomTabsService"
                  android:exported="true"
                  tools:ignore="ExportedService">
@@ -221,6 +227,18 @@
             <meta-data android:name="autoStoreLocales"
                        android:value="true"/>
         </service>
+        <service
+                android:name="app.linksheet.tile.ClipboardLinkTileService"
+                android:label="@string/qs_tile_label"
+                android:icon="@drawable/content_paste_go_24px"
+                android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
         <provider
                 android:name="androidx.startup.InitializationProvider"
                 android:authorities="${applicationId}.androidx-startup"

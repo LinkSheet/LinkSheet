@@ -1,13 +1,12 @@
 package fe.clearurlskt.provider
 
-public data class Provider(
-    val sortPosition: Int,
-    val key: String,
-    val url: Regex,
-    val completeProvider: Boolean,
-    val rules: List<Regex>,
-    val rawRules: List<Regex>,
-    val referralMarketing: List<Regex>,
-    val exceptions: List<Regex>,
-    val redirections: List<Regex>,
-)
+public sealed interface Provider {
+    public val sortPosition: Int
+    public val key: String
+    public val url: Regex
+    public val completeProvider: Boolean
+    public val rawRules: List<Regex>
+    public val referralMarketing: List<Regex>
+    public val exceptions: List<Regex>
+    public val redirections: List<Regex>
+}

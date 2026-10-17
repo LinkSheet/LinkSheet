@@ -20,7 +20,8 @@ enum class LinkHandling {
 
 @Parcelize
 @Immutable
-class DomainVerificationAppInfo(
+// TODO: Remove open once we no longer need PreferredAppCompatInfo
+open class DomainVerificationAppInfo(
     val appInfo: AppInfo,
     val linkHandling: LinkHandling,
     val stateNone: MutableList<String>,

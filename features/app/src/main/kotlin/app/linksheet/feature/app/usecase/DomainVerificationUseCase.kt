@@ -35,7 +35,7 @@ class DomainVerificationUseCase(
         return domainVerificationManager.getDomainVerificationUserState(applicationInfo.packageName)
     }
 
-    fun getDomainVerificationAppInfoList() = getInstalledPackages(PackageInfoFlags.EMPTY).mapNotNull { packageInfo ->
+    fun getDomainVerificationAppInfoList(): List<DomainVerificationAppInfo> = getInstalledPackages(PackageInfoFlags.EMPTY).mapNotNull { packageInfo ->
         createDomainVerificationAppInfo(packageInfo)
     }
     fun getDomainVerificationAppInfoListRefreshableFlow(): BaseRefreshableFlow<List<DomainVerificationAppInfo>?> {

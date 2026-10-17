@@ -3,11 +3,13 @@
 package fe.linksheet.module.viewmodel.module
 
 
+import android.content.pm.getApplicationInfoCompatOrNull
 import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.exportimport.ExportImportUseCase
 import app.linksheet.feature.profile.ProfileFeatureModule
 import com.akuleshov7.ktoml.Toml
+import fe.droidkit.koin.getPackageManager
 import fe.gson.GsonQualifier
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.repository.module.RepositoryModule
@@ -30,6 +32,7 @@ import fe.linksheet.module.viewmodel.LogSettingsViewModel
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import fe.linksheet.module.viewmodel.MainViewModel
 import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
+import fe.linksheet.module.viewmodel.PreferredAppCompatHelper
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
 import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
@@ -89,6 +92,12 @@ val ViewModelModule = module {
 //    }
 
     viewModelOf(::MainViewModel)
+    factory {
+        PreferredAppCompatHelper(
+            creator = get(),
+            getApplicationInfoOrNull = getPackageManager()::getApplicationInfoCompatOrNull,
+        )
+    }
     viewModelOf(::VerifiedLinkHandlersViewModel)
     viewModel { parameters ->
         VerifiedLinkHandlerViewModel(

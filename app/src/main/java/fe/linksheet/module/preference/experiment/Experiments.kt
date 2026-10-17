@@ -50,6 +50,10 @@ object Experiments : PreferenceDefinition(
         key = "experiment_new_vlh",
         default = false
     )
+    val mergeWithPreferred = boolean(
+        key = "experiment_vlh_merge_with_preferred",
+        default = false
+    )
 
     val newShizuku = boolean(
         key = "experiment_new_shizuku"
@@ -83,7 +87,8 @@ object Experiments : PreferenceDefinition(
         group(
             name = "new_vlh",
             displayName = "New verified link handlers page",
-            experiment("Enable new VLH page", newVlh)
+            experiment("Enable new VLH page", newVlh),
+                    experiment("Display preferred apps without declared hosts", mergeWithPreferred)
         ),
         group(
             name = "libredirect",

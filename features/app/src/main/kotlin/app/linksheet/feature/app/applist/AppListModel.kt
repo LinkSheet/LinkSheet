@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 
 class AppListModel<T : IAppInfo>(
-    queryApps: () -> List<T>,
+    queryApps: suspend () -> List<T>,
     private val scope: CoroutineScope,
     dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
@@ -65,6 +65,10 @@ class AppListModel<T : IAppInfo>(
         appDataFlow.refresh(RefreshTrigger.User)
     }
 
+    fun refreshOnChange() = scope.launch {
+        appDataFlow.refresh(RefreshTrigger.PreferredAppCompatInfoChanged)
+    }
+
     fun search(query: String?) {
         _searchQuery.value = query ?: ""
     }
@@ -96,4 +100,5 @@ data class AppListState<T : IAppInfo>(
 
 sealed interface RefreshTrigger {
     object User : RefreshTrigger
+    object PreferredAppCompatInfoChanged : RefreshTrigger
 }

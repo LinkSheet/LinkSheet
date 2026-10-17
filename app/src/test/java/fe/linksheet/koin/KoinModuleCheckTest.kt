@@ -21,6 +21,7 @@ import app.linksheet.api.preference.RemoteConfigRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.feature.analytics.preference.AnalyticsPreferences
 import app.linksheet.feature.analytics.service.BaseAnalyticsService
+import app.linksheet.feature.app.core.AppInfoCreator
 import app.linksheet.feature.app.core.MetaDataHandler
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLabelService
@@ -124,6 +125,7 @@ import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.module.viewmodel.LoadDumpedPreferencesViewModel
 import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
 import fe.linksheet.module.viewmodel.MainViewModel
+import fe.linksheet.module.viewmodel.PreferredAppCompatHelper
 import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
 import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
 import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
@@ -250,12 +252,14 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             ShizukuStatusUseCase::class
         ),
         definition<ShizukuStatusUseCase>(RemoteConfigRepository::class),
+        definition<PreferredAppCompatHelper>(AppInfoCreator::class),
         definition<VerifiedLinkHandlersViewModel>(
             AppPreferenceRepository::class,
             ExperimentRepository::class,
 //            PreferredAppRepository::class,
             DomainVerificationUseCase::class,
-            OneUiCompat::class
+            OneUiCompat::class,
+            PreferredAppCompatHelper::class
         ),
         definition<PreferredBrowserViewModel>(
             BrowsersUseCase::class,

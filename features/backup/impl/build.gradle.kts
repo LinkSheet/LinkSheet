@@ -11,7 +11,7 @@ plugins {
     id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit")
     id("kotlin-parcelize")
-    id("de.infix.testBalloon") version "1.0.0-K2.4.0"
+    id("de.infix.testBalloon") version "1.1.0"
 }
 
 android {

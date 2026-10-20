@@ -54,7 +54,8 @@
         <activity
                 android:name=".activity.main.MainActivity"
                 android:exported="true"
-                android:launchMode="singleTask"
+                android:excludeFromRecents="false"
+                android:taskAffinity="${applicationId}.affinity.main"
                 android:screenOrientation="unspecified"
                 android:theme="@style/AppTheme"
                 android:windowSoftInputMode="adjustResize">
@@ -78,19 +79,21 @@
         <activity
                 android:name=".activity.CrashHandlerActivity"
                 android:exported="true"
-                android:launchMode="singleTask"
+                android:taskAffinity="${applicationId}.affinity.main"
                 android:screenOrientation="unspecified"
                 android:theme="@style/AppTheme"/>
         <activity
                 android:name=".activity.TextEditorActivity"
                 android:excludeFromRecents="true"
                 android:exported="false"
+                android:taskAffinity="${applicationId}.affinity.main"
                 android:screenOrientation="unspecified"
                 android:theme="@style/AppTheme"/>
         <activity
                 android:name=".activity.SelectDomainsConfirmationActivity"
                 android:excludeFromRecents="true"
                 android:exported="false"
+                android:taskAffinity="${applicationId}.affinity.external"
                 android:screenOrientation="unspecified"
                 android:theme="@style/DialogTheme"/>
 
@@ -99,6 +102,7 @@
                 android:name=".activity.BottomSheetActivity"
                 android:excludeFromRecents="true"
                 android:exported="true"
+                android:taskAffinity="${applicationId}.affinity.sheet"
                 android:launchMode="singleInstance"
                 android:theme="@style/DialogTheme"
                 android:windowSoftInputMode="adjustResize">

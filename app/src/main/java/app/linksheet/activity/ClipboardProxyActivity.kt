@@ -1,43 +1,53 @@
 package app.linksheet.activity
 
-import android.content.ClipboardManager
 import android.content.Intent
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.core.content.getSystemService
-import fe.composekit.extension.getFirstText
+import androidx.annotation.StringRes
+import androidx.lifecycle.lifecycleScope
 import fe.linksheet.R
-import fe.linksheet.activity.BottomSheetActivity
-import fe.linksheet.util.intent.parser.IntentParser
-import fe.std.result.getOrNull
+import fe.linksheet.module.viewmodel.ClipboardProxyException
+import fe.linksheet.module.viewmodel.ClipboardProxyViewModel
+import fe.linksheet.util.intent.StandardIntents
+import fe.std.result.isFailure
+import fe.std.result.isSuccess
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.time.Duration.Companion.milliseconds
 
 class ClipboardProxyActivity : ComponentActivity() {
-
+    private val viewModel by viewModel<ClipboardProxyViewModel>()
     private var hasHandledClipboard = false
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus && !hasHandledClipboard && !isFinishing) {
-            hasHandledClipboard = true
-            handleClipboard()
+        if (!hasFocus || hasHandledClipboard || isFinishing) return
+        hasHandledClipboard = true
+        val result = viewModel.handleClipboard()
+        if (result.isFailure()) {
+            when (result.exception) {
+                is ClipboardProxyException.NoText -> {
+                    showToastAndFinish(R.string.qs_tile_no_link)
+                }
+                else -> {
+                    showToastAndFinish(R.string.qs_tile_failed_to_parse_links)
+                }
+            }
+        }
+        if (result.isSuccess()) {
+            val intent = StandardIntents.createSelfIntent(result.value)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            finish()
         }
     }
-
-    private fun handleClipboard() {
-        val text = getSystemService<ClipboardManager>()?.getFirstText()
-        val uri = text?.let(IntentParser::parseText)?.getOrNull()
-
-        if (uri != null) {
-            val intent = Intent(this, BottomSheetActivity::class.java).apply {
-                action = Intent.ACTION_VIEW
-                data = uri
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            startActivity(intent)
-        } else {
-            Toast.makeText(this, R.string.qs_tile_no_link, Toast.LENGTH_SHORT).show()
+    private fun showToastAndFinish(@StringRes resId: Int) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            Toast.makeText(this@ClipboardProxyActivity, resId, Toast.LENGTH_LONG).show()
+            delay(Toast.LENGTH_LONG.milliseconds)
+            finish()
         }
-
-        finish()
     }
 }

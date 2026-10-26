@@ -115,6 +115,7 @@ import fe.linksheet.module.viewmodel.AboutSettingsViewModel
 import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import fe.linksheet.module.viewmodel.ClipboardProxyViewModel
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
 import fe.linksheet.module.viewmodel.ExportSettingsViewModel
@@ -362,6 +363,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             AppPreferenceRepository::class
         ),
         definition<LinksSettingsViewModel>(AppPreferenceRepository::class),
+        definition<ClipboardProxyViewModel>(ExperimentRepository::class),
         definition<WhitelistedBrowsersViewModel>(
             PreferredBrowserViewModel.BrowserType::class,
             BrowsersUseCase::class,

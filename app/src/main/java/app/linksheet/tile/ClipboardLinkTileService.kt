@@ -1,12 +1,12 @@
 package app.linksheet.tile
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
-import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-import androidx.annotation.RequiresApi
 import app.linksheet.activity.ClipboardProxyActivity
+import fe.composekit.core.AndroidVersion
 
 /**
  * Known issue: TileService might cause memory leaks on some Android versions.
@@ -14,9 +14,9 @@ import app.linksheet.activity.ClipboardProxyActivity
  * See: https://issuetracker.google.com/issues/410432415
  * After extensive exploration, this appears to be a system-level issue that cannot be resolved here.
  */
-@RequiresApi(Build.VERSION_CODES.N)
 class ClipboardLinkTileService : TileService() {
 
+    @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
         super.onClick()
 
@@ -26,7 +26,7 @@ class ClipboardLinkTileService : TileService() {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
 
-        if (Build.VERSION.SDK_INT >= 34) {
+        if (AndroidVersion.isAtLeastApi34U()) {
             val pendingIntent = PendingIntent.getActivity(
                 this,
                 0,

@@ -35,6 +35,7 @@ object Experiments : PreferenceDefinition(
     val scenario = boolean(key = "experiment_scenario")
     val libRedirectCustomInstances = boolean(key = "libredirect_custom_instances")
     val parseTextUrlsToHttps = boolean(key = "experiment_intent_parse_urls_https_default", default = true)
+    val clearUrlsSkipUnchanged = boolean(key = "experiment_clear_urls_skip_unchanged", default = true)
 
     val experiments = listOf(
         group(
@@ -76,6 +77,14 @@ object Experiments : PreferenceDefinition(
             experiment(
                 "Parse URLs in text to https by default instead of http",
                 parseTextUrlsToHttps
+            )
+        ),
+        group(
+            name = "clearurls",
+            displayName = "ClearURLs",
+            experiment(
+                "Don't rebuild URLs if no modifications have been made",
+                clearUrlsSkipUnchanged
             )
         )
     )

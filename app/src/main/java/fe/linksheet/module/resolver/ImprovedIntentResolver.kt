@@ -20,6 +20,7 @@ import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.mozilla.components.support.utils.SafeIntent
+import fe.clearurlskt.ClearUrlSettings
 import fe.clearurlskt.ClearUrls
 import fe.clearurlskt.loader.BundledClearURLConfigLoader
 import fe.composekit.core.AndroidAppPackage
@@ -163,6 +164,7 @@ class ImprovedIntentResolver(
 
         val resolveEmbeds = settings.resolveEmbeds()
         val useClearUrls = settings.useClearUrls()
+        val clearUrlsSkipUnchanged = settings.clearUrlsSkipUnchanged()
         val useFastForwardRules = settings.useFastForwardRules()
 
         val shouldRunUriModifiers = resolveEmbeds || useClearUrls || useFastForwardRules
@@ -177,7 +179,8 @@ class ImprovedIntentResolver(
             uri = uri,
             resolveEmbeds = resolveEmbeds,
             clearUrl = useClearUrls,
-            fastForward = useFastForwardRules
+            fastForward = useFastForwardRules,
+            skipUnchanged = clearUrlsSkipUnchanged
         )
 
         if (uri == null) {
@@ -252,7 +255,8 @@ class ImprovedIntentResolver(
             uri = resolvedUri,
             resolveEmbeds = resolveEmbeds,
             clearUrl = useClearUrls,
-            fastForward = useFastForwardRules
+            fastForward = useFastForwardRules,
+            skipUnchanged = clearUrlsSkipUnchanged
         )
 
         if (uri == null) {
@@ -565,6 +569,7 @@ class ImprovedIntentResolver(
         resolveEmbeds: Boolean,
         clearUrl: Boolean,
         fastForward: Boolean,
+        skipUnchanged: Boolean
     ): Uri? {
         if (uri?.host == null || uri.scheme == null) return null
         var url = uri.toString()
@@ -580,7 +585,7 @@ class ImprovedIntentResolver(
         if (clearUrl && clearUrls == null) {
             logger.error("ClearURLs is enabled, but rules failed to load, ignoring..")
         }
-        runUriModifier(clearUrl) { clearUrls?.clearUrl(url) }?.let { url = it.first }
+        runUriModifier(clearUrl) { clearUrls?.clearUrl(url, ClearUrlSettings(skipUnchanged = skipUnchanged)) }?.let { url = it.first }
 
         return runCatching { Uri.parse(url) }.getOrNull()
     }

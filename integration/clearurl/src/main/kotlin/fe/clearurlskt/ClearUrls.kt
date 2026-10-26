@@ -1,7 +1,9 @@
 package fe.clearurlskt
 
 
-import fe.clearurlskt.Modification.*
+import fe.clearurlskt.Modification.ParameterRemoval
+import fe.clearurlskt.Modification.RawRule
+import fe.clearurlskt.Modification.Redirection
 import fe.clearurlskt.provider.Provider
 import fe.clearurlskt.util.keyValueMapToString
 import fe.clearurlskt.util.toFragmentMap
@@ -14,8 +16,12 @@ import fe.std.uri.extension.buildUrl
 
 public class ClearUrls(
     private val providers: List<Provider>,
+    private val skipUnchanged: () -> Boolean = { true },
 ) {
-    private suspend fun SequenceScope<ClearUrlOperation>.isException(provider: Provider, editUrl: String): Boolean {
+    private suspend fun SequenceScope<ClearUrlOperation>.isException(
+        provider: Provider,
+        editUrl: String
+    ): Boolean {
         for (regex in provider.exceptions) {
             if (!regex.containsMatchIn(editUrl)) continue
 
@@ -26,7 +32,11 @@ public class ClearUrls(
         return false
     }
 
-    private suspend fun SequenceScope<ClearUrlOperation>.handleRedirections(provider: Provider, url: String): String? {
+    private suspend fun SequenceScope<ClearUrlOperation>.handleRedirections(
+        provider: Provider,
+        url: String,
+        settings: ClearUrlSettings
+    ): String? {
         for (regex in provider.redirections) {
             val result = regex.find(url) ?: continue
 
@@ -38,13 +48,16 @@ public class ClearUrls(
             }
 
             yield(Redirection(provider.key, url, resultUrl, regex))
-            return clearUrl(resultUrl.toString())
+            return clearUrl(resultUrl.toString(), settings)
         }
 
         return null
     }
 
-    private suspend fun SequenceScope<ClearUrlOperation>.applyRawRules(provider: Provider, url: String): String {
+    private suspend fun SequenceScope<ClearUrlOperation>.applyRawRules(
+        provider: Provider,
+        url: String
+    ): String {
         var mutUrl = url
         for (regex in provider.rawRules) {
             val preReplaceUrl = mutUrl
@@ -84,7 +97,11 @@ public class ClearUrls(
         return removeKeys
     }
 
-    private suspend fun SequenceScope<ClearUrlOperation>.applyRules(provider: Provider, url: StdUrl): String? {
+    private suspend fun SequenceScope<ClearUrlOperation>.applyRules(
+        provider: Provider,
+        url: StdUrl,
+        settings: ClearUrlSettings
+    ): String? {
         val fields = url.queryParams.toMutableList()
         val fragments = url.toFragmentMap()
 
@@ -96,6 +113,9 @@ public class ClearUrls(
         for (rule in provider.rules) {
             fieldChanges.addAll(fields.removeIfKey { rule.containsMatchIn(it) })
             fragmentChanges.addAll(fragments.removeIfKey { rule.containsMatchIn(it) })
+        }
+        if (settings.skipUnchanged) {
+            if (fieldChanges.isEmpty() && fragmentChanges.isEmpty()) return null
         }
 
         val inputUrl = url.toString()
@@ -115,7 +135,10 @@ public class ClearUrls(
         return resultUrl
     }
 
-    private suspend fun SequenceScope<ClearUrlOperation>.clearUrl(url: String): String {
+    private suspend fun SequenceScope<ClearUrlOperation>.clearUrl(
+        url: String,
+        settings: ClearUrlSettings
+    ): String {
         var mutUrl = url.trim()
         for (provider in providers) {
             if (!provider.url.containsMatchIn(mutUrl)) continue
@@ -124,30 +147,39 @@ public class ClearUrls(
                 return mutUrl
             }
 
-            val redirectionUrl = handleRedirections(provider, mutUrl)
+            val redirectionUrl = handleRedirections(provider, mutUrl, settings)
             if (redirectionUrl != null) {
                 return redirectionUrl
             }
 
             mutUrl = applyRawRules(provider, mutUrl)
 
-            val parseResult = StdUrlFactory.parse(mutUrl, encodingPolicy = EncodingPolicy.RFC_3986, setPlusAsBlanks = true)
+            val parseResult = StdUrlFactory.parse(
+                mutUrl,
+                encodingPolicy = EncodingPolicy.RFC_3986,
+                setPlusAsBlanks = true
+            )
             if (parseResult.isFailure()) {
                 yield(ParseFailure(provider.key, mutUrl, parseResult))
                 return mutUrl
             }
 
-            mutUrl = applyRules(provider, parseResult.value) ?: continue
+            mutUrl = applyRules(provider, parseResult.value, settings) ?: continue
         }
 
         return mutUrl
     }
 
-    public fun clearUrl(url: String): Pair<String, List<ClearUrlOperation>> {
+    public fun clearUrl(
+        url: String,
+        settings: ClearUrlSettings
+    ): Pair<String, List<ClearUrlOperation>> {
         var result = url
-        val operations = sequence<ClearUrlOperation> { result = clearUrl(url) }.toList()
+        val operations = sequence<ClearUrlOperation> { result = clearUrl(url, settings) }.toList()
         return result to operations
     }
 }
 
-
+public data class ClearUrlSettings(
+    val skipUnchanged: Boolean = true
+)

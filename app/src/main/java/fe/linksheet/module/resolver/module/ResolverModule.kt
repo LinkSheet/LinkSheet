@@ -102,6 +102,7 @@ val ResolverModule = module {
 
 data class IntentResolverSettings(
     val useClearUrls: () -> Boolean,
+    val clearUrlsSkipUnchanged: () -> Boolean,
     val useFastForwardRules: () -> Boolean,
     val requestTimeout: () -> Int,
     val resolveEmbeds: () -> Boolean,
@@ -231,6 +232,7 @@ fun createSettings(
             previewUrl = prefRepo.asFunction(AppPreferences.bottomSheet.openGraphPreview.enable),
             previewUrlSkipBrowser = prefRepo.asFunction(AppPreferences.bottomSheet.openGraphPreview.skipBrowser),
         ),
-        parseTextUrlsToHttps = experimentRepository.asFunction(Experiments.parseTextUrlsToHttps)
+        parseTextUrlsToHttps = experimentRepository.asFunction(Experiments.parseTextUrlsToHttps),
+        clearUrlsSkipUnchanged = experimentRepository.asFunction(Experiments.clearUrlsSkipUnchanged),
     )
 }

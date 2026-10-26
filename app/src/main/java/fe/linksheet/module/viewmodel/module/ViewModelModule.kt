@@ -18,6 +18,7 @@ import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
 import fe.linksheet.module.viewmodel.AppConfigViewModel
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
 import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import fe.linksheet.module.viewmodel.ClipboardProxyViewModel
 import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
 import fe.linksheet.module.viewmodel.DevSettingsViewModel
 import fe.linksheet.module.viewmodel.ExperimentsViewModel
@@ -113,6 +114,7 @@ val ViewModelModule = module {
     viewModelOf(::BottomSheetSettingsViewModel)
     viewModelOf(::LinksSettingsViewModel)
     viewModelOf(::BottomSheetViewModel)
+    viewModelOf(::ClipboardProxyViewModel)
     viewModelOf(::ThemeSettingsViewModel).bind<RootViewModel>()
     viewModelOf(::LanguageSettingsViewModel)
     viewModelOf(::FollowRedirectsSettingsViewModel)

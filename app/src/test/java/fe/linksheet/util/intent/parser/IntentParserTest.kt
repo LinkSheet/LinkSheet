@@ -25,7 +25,7 @@ internal class IntentParserTest : BaseUnitTest {
         val uri = Uri.parse("https://linksheet.app")
         val intent = Intent(NfcAdapter.ACTION_NDEF_DISCOVERED, uri).toSafeIntent()
 
-        assertSuccess(IntentParser.getUriFromIntent(intent)).isEqualTo(uri)
+        assertSuccess(IntentParser.getUriFromIntent(intent, true)).isEqualTo(uri)
     }
 
     @org.junit.Test
@@ -55,8 +55,10 @@ internal class IntentParserTest : BaseUnitTest {
 
     @org.junit.Test
     fun `test text parsing`() {
-        val result = IntentParser.parseText("foo bar google.com hello world").getOrNull()?.toString()
-        assertThat(result).isEqualTo("http://google.com")
+        val httpsResult = IntentParser.parseText("foo bar google.com hello world", true).getOrNull()?.toString()
+        assertThat(httpsResult).isEqualTo("https://google.com")
+        val httpResult = IntentParser.parseText("foo bar google.com hello world", false).getOrNull()?.toString()
+        assertThat(httpResult).isEqualTo("http://google.com")
     }
 
 //    @org.junit.Test

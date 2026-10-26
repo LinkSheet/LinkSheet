@@ -20,12 +20,12 @@ import app.linksheet.feature.engine.core.fetcher.ContextResultId
 import app.linksheet.feature.engine.core.fetcher.preview.toUnfurlResult
 import app.linksheet.feature.engine.core.fetcher.toFetchResult
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
-import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 import fe.composekit.core.AndroidAppPackage
 import fe.composekit.core.Scheme
 import fe.composekit.core.getAndroidAppPackage
 import fe.composekit.lifecycle.network.core.NetworkStateService
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.extension.std.toAndroidUri
 import fe.linksheet.extension.std.toStdUrl
 import fe.linksheet.module.database.entity.PreferredApp
@@ -119,7 +119,7 @@ class LinkEngineIntentResolver(
     }
 
     private fun parseIntent(intent: SafeIntent): IResult<StdUrl> {
-        val uriResult = IntentParser.getUriFromIntent(intent)
+        val uriResult = IntentParser.getUriFromIntent(intent, settings.parseTextUrlsToHttps())
         if (uriResult.isFailure()) {
             logger.error("Failed to parse intent ${intent.action}")
             return +uriResult

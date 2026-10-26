@@ -23,49 +23,18 @@ object Experiments : PreferenceDefinition(
     "experiment_manual_follow_redirects",
     "experiment_aggressive_follow_redirects"
 ) {
-    val interceptAccidentalTaps = boolean(
-        key = "experiment_intercept_accidental_taps",
-        default = true
-    )
-
-    val libRedirectJsEngine = boolean(
-        key = "experiment_enable_libredirect_js_engine"
-    )
-
-    val enableAnalytics = boolean(
-        key = "experiment_enable_analytics",
-        default = false
-    )
-    val noBottomSheetStateSave = boolean(
-        key = "experiment_no_bottom_sheet_state_save"
-    )
-    val linkEngine = boolean(
-        key = "experiment_link_engine"
-    )
-    val disableLogging = boolean(
-        key = "experiment_disable_log_persistence"
-    )
-
-    val newVlh = boolean(
-        key = "experiment_new_vlh",
-        default = false
-    )
-    val mergeWithPreferred = boolean(
-        key = "experiment_vlh_merge_with_preferred",
-        default = false
-    )
-
-    val newShizuku = boolean(
-        key = "experiment_new_shizuku"
-    )
-
-    val scenario = boolean(
-        key = "experiment_scenario"
-    )
-
-    val libRedirectCustomInstances = boolean(
-        key = "libredirect_custom_instances",
-    )
+    val interceptAccidentalTaps = boolean(key = "experiment_intercept_accidental_taps", default = true)
+    val libRedirectJsEngine = boolean(key = "experiment_enable_libredirect_js_engine")
+    val enableAnalytics = boolean(key = "experiment_enable_analytics", default = false)
+    val noBottomSheetStateSave = boolean(key = "experiment_no_bottom_sheet_state_save")
+    val linkEngine = boolean(key = "experiment_link_engine")
+    val disableLogging = boolean(key = "experiment_disable_log_persistence")
+    val newVlh = boolean(key = "experiment_new_vlh", default = false)
+    val mergeWithPreferred = boolean(key = "experiment_vlh_merge_with_preferred", default = false)
+    val newShizuku = boolean(key = "experiment_new_shizuku")
+    val scenario = boolean(key = "experiment_scenario")
+    val libRedirectCustomInstances = boolean(key = "libredirect_custom_instances")
+    val parseTextUrlsToHttps = boolean(key = "experiment_intent_parse_urls_https_default", default = true)
 
     val experiments = listOf(
         group(
@@ -88,7 +57,7 @@ object Experiments : PreferenceDefinition(
             name = "new_vlh",
             displayName = "New verified link handlers page",
             experiment("Enable new VLH page", newVlh),
-                    experiment("Display preferred apps without declared hosts", mergeWithPreferred)
+            experiment("Display preferred apps without declared hosts", mergeWithPreferred)
         ),
         group(
             name = "libredirect",
@@ -100,6 +69,14 @@ object Experiments : PreferenceDefinition(
             name = "shizuku",
             displayName = "Shizuku",
             experiment("Enable Shizuku", newShizuku)
+        ),
+        group(
+            name = "other",
+            displayName = "Other",
+            experiment(
+                "Parse URLs in text to https by default instead of http",
+                parseTextUrlsToHttps
+            )
         )
     )
 
@@ -120,7 +97,11 @@ object Experiments : PreferenceDefinition(
     }
 }
 
-private fun group(name: String, displayName: String, vararg experiments: ExperimentPreference): ExperimentGroup {
+private fun group(
+    name: String,
+    displayName: String,
+    vararg experiments: ExperimentPreference
+): ExperimentGroup {
     val group = ExperimentGroup(name, displayName)
     for (preference in experiments) {
         group.addPreference(preference)

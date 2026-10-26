@@ -112,6 +112,7 @@ data class IntentResolverSettings(
     val followRedirectsSettings: FollowRedirectsSettings,
     val downloaderSettings: DownloaderSettings,
     val previewSettings: PreviewSettings,
+    val parseTextUrlsToHttps: () -> Boolean
 )
 
 data class BottomSheetSettings(
@@ -230,5 +231,6 @@ fun createSettings(
             previewUrl = prefRepo.asFunction(AppPreferences.bottomSheet.openGraphPreview.enable),
             previewUrlSkipBrowser = prefRepo.asFunction(AppPreferences.bottomSheet.openGraphPreview.skipBrowser),
         ),
+        parseTextUrlsToHttps = experimentRepository.asFunction(Experiments.parseTextUrlsToHttps)
     )
 }

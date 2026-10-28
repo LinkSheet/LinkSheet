@@ -11,9 +11,11 @@ class BottomSheetActionBarSettingsViewModel(
     preferenceRepository: AppPreferenceRepository,
 ) : BaseViewModel(preferenceRepository) {
 
-    val enable = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.enable)
+    val enableActionBar = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.enable)
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enableIgnoreLibRedirectButton)
-    val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.hideAfterCopying)
     val enableOpenExternallyButton = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.enableOpenExternallyButton)
+    val enableDownloader = preferenceRepository.asViewModelState(AppPreferences.downloader.enable)
+    val urlPreview = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.openGraphPreview.enable)
+    val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.hideAfterCopying)
     val doubleTapUrl = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.doubleTapUrl)
 }

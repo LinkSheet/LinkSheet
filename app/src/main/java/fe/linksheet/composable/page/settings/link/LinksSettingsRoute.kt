@@ -5,7 +5,6 @@ import androidx.compose.ui.res.stringResource
 import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import app.linksheet.feature.downloader.ui.downloaderListItem
 import app.linksheet.feature.libredirect.navigation.LibRedirectRoute
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
@@ -13,7 +12,6 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.route.Route
 import fe.linksheet.R
 import fe.linksheet.module.viewmodel.LinksSettingsViewModel
-import fe.linksheet.navigation.PreviewUrlRoute
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import org.koin.androidx.compose.koinViewModel
@@ -31,7 +29,7 @@ fun LinksSettingsRoute(
         headline = stringResource(id = R.string.links),
         onBackPressed = onBackPressed
     ) {
-        group(size = 8) {
+        group(size = 6) {
             item(key = R.string.use_clear_urls) { padding, shape ->
                 PreferenceSwitchListItem(
                     shape = shape,
@@ -82,22 +80,6 @@ fun LinksSettingsRoute(
                     onContentClick = { navigate(amp2HtmlSettingsRoute) },
                     headlineContent = textContent(R.string.enable_amp2html),
                     supportingContent = annotatedStringResource(R.string.enable_amp2html_explainer),
-                )
-            }
-
-            downloaderListItem(
-                statePreference = viewModel.enableDownloader,
-                navigate = navigateNew
-            )
-
-            item(key = R.string.settings_links_preview__title_preview) { padding, shape ->
-                PreferenceDividedSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    statePreference = viewModel.urlPreview,
-                    onContentClick = { navigateNew(PreviewUrlRoute) },
-                    headlineContent = textContent(R.string.settings_links_preview__title_preview),
-                    supportingContent = annotatedStringResource(R.string.settings_links_preview__subtitle_preview),
                 )
             }
 

@@ -10,6 +10,7 @@ import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotate
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.preference.helper.Preference
 import fe.composekit.component.list.item.ContentPosition
+import fe.composekit.component.list.item.toEnabledContentSet
 import fe.composekit.component.list.item.type.DividedSwitchListItem
 import fe.composekit.layout.column.SaneLazyColumnGroupScope
 import fe.composekit.preference.ViewModelStatePreference
@@ -17,6 +18,7 @@ import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.composekit.route.Route
 
 fun SaneLazyColumnGroupScope.downloaderListItem(
+    enabled: Boolean,
     statePreference: ViewModelStatePreference<Boolean, Boolean, Preference.Default<Boolean>>,
     navigate: (Route) -> Unit,
 ) {
@@ -24,6 +26,7 @@ fun SaneLazyColumnGroupScope.downloaderListItem(
         val writeExternalStoragePermissionState = downloaderPermissionState()
         val enableDownloader by statePreference.collectAsStateWithLifecycle()
         DividedSwitchListItem(
+            enabled = enabled.toEnabledContentSet(),
             shape = shape,
             padding = padding,
             checked = enableDownloader,

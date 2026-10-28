@@ -86,7 +86,7 @@ fun MainNavHost(
             attachNav(ProfileNav, navController)
         }
         animatedComposable<BottomSheetActionBarRoute>  { _, route ->
-            BottomSheetActionBarSettingsRoute(onBackPressed = onBackPressed)
+            BottomSheetActionBarSettingsRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
         }
 
         animatedComposable<ExperimentRoute> { _, route ->

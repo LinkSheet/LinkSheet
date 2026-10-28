@@ -285,15 +285,16 @@ class BottomSheetViewModel(
         activity: BottomSheetActivity,
         result: IntentResolveResult.Default,
         interaction: AppInteraction,
+        expanded: Boolean,
+        requestExpand: () -> Unit
     ): LaunchIntent? {
         val info = interaction.info ?: return null
         if (interaction is AppClickInteraction) {
             return handleClick(
                 activity = activity,
                 index = interaction.index,
-                isExpanded = false,
-//                    isExpanded = sheetState.isExpanded(),
-                requestExpand = { },
+                isExpanded = expanded,
+                requestExpand = requestExpand,
                 result = result.intent,
                 info = info,
                 type = interaction.type,

@@ -182,6 +182,10 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     handleInteraction(
                         interaction = interaction,
                         resolveResult = resolveResult,
+                        isExpanded = sheetState.isExpanded(),
+                        expandSheet = {
+                            coroutineScope.launch { sheetState.expand() }
+                        },
                         hideSheet = {
                             coroutineScope.launch { sheetState.hide() }
                         }
@@ -298,6 +302,8 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
     private fun handleInteraction(
         interaction: BottomSheetInteraction,
         resolveResult: IntentResolveResult,
+        isExpanded: Boolean,
+        expandSheet: () -> Unit,
         hideSheet: () -> Job
     ) {
         when (interaction) {
@@ -307,7 +313,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                         showToast(R.string.something_went_wrong, Toast.LENGTH_SHORT)
                     } else {
                         (resolveResult as? IntentResolveResult.Default)
-                            ?.let { viewModel.handle(this@BottomSheetActivity, it, interaction) }
+                            ?.let { viewModel.handle(this@BottomSheetActivity, it, interaction, isExpanded, expandSheet) }
                             ?.let { handleLaunch(it) }
                     }
                 }

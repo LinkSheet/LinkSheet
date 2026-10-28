@@ -64,7 +64,7 @@
     <string name="open_copied_link">From clipboard</string>
     <string name="paste">Paste</string>
     <string name="links">Links</string>
-    <string name="links_explainer">ClearUrls, LibRedirect, Redirect following</string>
+    <string name="links_explainer">ClearURLs, LibRedirect, Redirect following</string>
     <string name="use_clear_urls">Use ClearURLs</string>
     <string name="use_clear_urls_explainer">Use experimental <annotation url-id="clearurls-github">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
     <string name="follow_redirects">Follow redirects</string>
@@ -110,7 +110,7 @@
     <string name="in_app">In-App</string>
     <string name="use_unified_preferred_browser">Use unified settings</string>
     <string name="enable_ignore_libredirect_button">Enable \"Ignore LibRedirect\" button</string>
-    <string name="enable_ignore_libredirect_button_explainer">Shows a button in the bottom sheet if the URL has been redirected via LibRedirect, which opens the original URL instead</string>
+    <string name="enable_ignore_libredirect_button_explainer">Show a button in the bottom sheet if the URL has been redirected via LibRedirect, which opens the original URL instead</string>
     <string name="ignore_libredirect">Ignore LibRedirect</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="debug">Debug</string>
@@ -286,7 +286,7 @@
     <string name="hide_bottom_sheet_choice_buttons">Hide choice buttons</string>
     <string name="hide_bottom_sheet_choice_buttons_explainer">Hide the \"Once\" and \"Always\" buttons in the bottom sheet</string>
     <string name="base_config">Additional configuration</string>
-    <string name="urlbar_settings">Url-bar</string>
+    <string name="urlbar_settings">URL-bar</string>
     <string name="permission_required">Permission required</string>
     <string name="permission_required_explainer">Some imported preferences require permissions that are currently not given to LinkSheet. Tap below to request them.</string>
     <string name="allow_darknets">Allow darknets</string>
@@ -385,7 +385,7 @@
     <string name="bottom_sheet_loading_indicator__button_skip_job">Skip</string>
     <string name="export_log_dialog__title_share_logs">Share log</string>
     <string name="export_log_dialog__title_redact_log">Redact log</string>
-    <string name="export_log_dialog__subtitle_redact_log">Recommended, redacts app names and urls</string>
+    <string name="export_log_dialog__subtitle_redact_log">Recommended, redacts app names and URLs</string>
     <string name="export_log_dialog__title_include_throwable">Include crash logs</string>
     <string name="export_log_dialog__subtitle_include_throwable">Recommended, but can not be redacted</string>
     <string name="export_log_dialog__title_include_fingerprint">Include build fingerprint</string>
@@ -469,7 +469,7 @@
     <string name="generic__button_text_share">Share</string>
     <string name="resolve_event__idle">Idle</string>
     <string name="settings_home__title_clipboard_card">Clipboard card</string>
-    <string name="settings_home__text_clipboard_card">Show the current clipboard content on the home page if it is a url</string>
+    <string name="settings_home__text_clipboard_card">Show the current clipboard content on the home page if it is a URL</string>
     <plurals name="settings_verified_link_handlers__text_app_host_default_host">
         <item quantity="one">%d default host</item>
         <item quantity="other">%d default hosts</item>
@@ -504,7 +504,7 @@
     <string name="settings_links_amp2html__text_local_network">Allow running Amp2Html for non-public hosts</string>
     <string name="settings_links_follow_redirects__title_local_network">Allow local network</string>
     <string name="settings_links_follow_redirects__text_local_network">Allow following redirects for non-public hosts</string>
-    <string name="settings_links_preview__title_preview">Show url preview</string>
+    <string name="settings_links_preview__title_preview">Show URL preview</string>
     <string name="settings_links_preview__subtitle_preview">Attempt to load and show OpenGraph preview in bottom sheet. This may have <annotation url-id="github.linksheet.wiki.privacy.preview">privacy-related implications</annotation></string>
     <string name="settings_links_preview__title_preview_skip_browser">Disable browser preview</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">Disable preview if referrer is browser</string>
@@ -525,8 +525,8 @@
     <string name="notification_interconnect_description">Interconnect is active</string>
     <string name="settings_bottom_sheet__title_hide_referring_app">Hide referring app</string>
     <string name="settings_bottom_sheet__subtitle_hide_referring_app">Don\'t list referring/source app, even if it can handle link</string>
-    <string name="settings_bottom_sheet__title_double_tap_url">Double-tap url</string>
-    <string name="settings_bottom_sheet__subtitle_double_tap_url">Open suggested app when url is double-tapped</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">Double-tap to open</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">Open suggested app when URL is double-tapped</string>
     <string name="settings_bottom_sheet__title_expand_fully">Expand fully</string>
     <string name="settings_bottom_sheet__subtitle_expand_fully">Auto-expand bottom sheet to its full height</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">Auto launch single browser</string>
@@ -548,5 +548,9 @@
     <string name="qs_tile_no_link">No link in clipboard!</string>
     <string name="qs_tile_failed_to_parse_links">Clipboard content could not be parsed!</string>
     <string name="settings_bottom_sheet__title_enable_open_externally_button">Enable \"Open externally\" button</string>
-    <string name="settings_bottom_sheet__subtitle_enable_open_externally_button">Shows a button in the bottom sheet if the source app requests the URL to be opened in-app which allows the user to open it externally instead</string>
+    <string name="settings_bottom_sheet__subtitle_enable_open_externally_button">Show a button in the bottom sheet if the source app requests the URL to be opened in-app which allows the user to open it externally instead</string>
+    <string name="settings_bottom_sheet_action_bar__title_action_bar">Bottom sheet action bar</string>
+    <string name="settings_bottom_sheet_action_bar__title_enable_action_bar">Enable action bar</string>
+    <string name="settings_bottom_sheet_action_bar__subtitle_enable_action_bar">Display an URL- and action-bar at the top of the bottom sheet</string>
+    <string name="settings_bottom_sheet_action_bar__divider_actions">Actions</string>
 </resources>

@@ -81,6 +81,7 @@ val ViewModelModule = module {
     viewModelOf(::InAppBrowserSettingsViewModel)
     viewModelOf(::PreferredBrowserViewModel)
     viewModelOf(::BottomSheetSettingsViewModel)
+    viewModelOf(::BottomSheetActionBarSettingsViewModel)
     viewModelOf(::LinksSettingsViewModel)
     single { SelfIntentUseCase(selfPackage = get<SystemInfoService>().getApplicationId()) }
     viewModelOf(::BottomSheetViewModel)

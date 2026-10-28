@@ -19,6 +19,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.feature.browser.ui.privateBrowsingListItem
@@ -31,7 +32,6 @@ import fe.android.compose.feedback.wrap
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.preference.helper.Preference
-import fe.composekit.component.ContentType
 import fe.composekit.component.icon.FilledIcon
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.component.list.item.ContentPosition
@@ -45,6 +45,7 @@ import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.TapConfig
 import fe.linksheet.extension.compose.ObserveStateChange
 import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
+import fe.linksheet.navigation.BottomSheetActionBarRoute
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -98,13 +99,30 @@ fun BottomSheetSettingsRoute(
     }
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.bottom_sheet), onBackPressed = onBackPressed) {
-        item(key = R.string.display_grid_layout, contentType = ContentType.SingleGroupItem) {
-            PreferenceSwitchListItem(
-                statePreference = viewModel.gridLayout,
-                headlineContent = textContent(R.string.display_grid_layout),
-                supportingContent = textContent(R.string.display_grid_layout_explainer),
-            )
+        group(size = 2) {
+            item(key = R.string.display_grid_layout) { padding, shape ->
+                PreferenceSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.gridLayout,
+                    headlineContent = textContent(R.string.display_grid_layout),
+                    supportingContent = textContent(R.string.display_grid_layout_explainer),
+                )
+            }
+            item(key = R.string.settings_bottom_sheet_action_bar__title_enable_action_bar) { padding, shape ->
+                PreferenceDividedSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.enableActionBar,
+                    onContentClick = { navigateNew(BottomSheetActionBarRoute) },
+                    headlineContent = textContent(id = R.string.settings_bottom_sheet_action_bar__title_enable_action_bar),
+                    supportingContent = textContent(
+                        id = R.string.settings_bottom_sheet_action_bar__subtitle_enable_action_bar
+                    )
+                )
+            }
         }
+
 
         divider(id = R.string.base_config)
 
@@ -212,60 +230,6 @@ fun BottomSheetSettingsRoute(
                     statePreference = viewModel.expandOnAppSelect,
                     headlineContent = textContent(R.string.expand_on_app_select),
                     supportingContent = textContent(R.string.expand_on_app_select_explainer),
-                )
-            }
-        }
-
-        divider(id = R.string.urlbar_settings)
-
-        group(size = 5) {
-            item(key = R.string.preview_url) { padding, shape ->
-                PreferenceSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    statePreference = viewModel.previewUrl,
-                    headlineContent = textContent(R.string.preview_url),
-                    supportingContent = textContent(R.string.preview_url_explainer),
-                )
-            }
-
-            item(key = R.string.hide_after_copying) { padding, shape ->
-                PreferenceSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    statePreference = viewModel.hideAfterCopying,
-                    headlineContent = textContent(R.string.hide_after_copying),
-                    supportingContent = textContent(R.string.hide_after_copying_explainer),
-                )
-            }
-
-            item(key = R.string.enable_ignore_libredirect_button) { padding, shape ->
-                PreferenceSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    statePreference = viewModel.enableIgnoreLibRedirectButton,
-                    headlineContent = textContent(R.string.enable_ignore_libredirect_button),
-                    supportingContent = textContent(R.string.enable_ignore_libredirect_button_explainer),
-                )
-            }
-
-            item(key = R.string.settings_bottom_sheet__title_enable_open_externally_button) { padding, shape ->
-                PreferenceSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    statePreference = viewModel.enableOpenExternallyButton,
-                    headlineContent = textContent(R.string.settings_bottom_sheet__title_enable_open_externally_button),
-                    supportingContent = textContent(R.string.settings_bottom_sheet__subtitle_enable_open_externally_button),
-                )
-            }
-
-            item(key = R.string.settings_bottom_sheet__title_double_tap_url) { padding, shape ->
-                PreferenceSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    statePreference = viewModel.doubleTapUrl,
-                    headlineContent = textContent(R.string.settings_bottom_sheet__title_double_tap_url),
-                    supportingContent = textContent(R.string.settings_bottom_sheet__subtitle_double_tap_url),
                 )
             }
         }

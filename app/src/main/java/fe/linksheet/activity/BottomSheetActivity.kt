@@ -247,7 +247,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 val bottomSheetProfileSwitcher by viewModel.bottomSheetProfileSwitcher.collectAsStateWithLifecycle()
                 val bottomSheetNativeLabel by viewModel.bottomSheetNativeLabel.collectAsStateWithLifecycle()
                 val gridLayout by viewModel.gridLayout.collectAsStateWithLifecycle()
-                val previewUrl by viewModel.previewUrl.collectAsStateWithLifecycle()
+                val enableActionBar by viewModel.enableActionBar.collectAsStateWithLifecycle()
                 val hideBottomSheetChoiceButtons by viewModel.hideBottomSheetChoiceButtons.collectAsStateWithLifecycle()
                 val alwaysShowPackageName by viewModel.alwaysShowPackageName.collectAsStateWithLifecycle()
                 val followRedirectsEnabled by viewModel.followRedirectsEnabled.collectAsStateWithLifecycle()
@@ -273,7 +273,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     isPrivateBrowser = viewModel::isPrivateBrowser,
                     controller = controller,
                     showPackage = alwaysShowPackageName,
-                    previewUrl = previewUrl,
+                    enableActionBar = enableActionBar,
                     hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
                     urlCardDoubleTap = doubleTapUrl
                 )

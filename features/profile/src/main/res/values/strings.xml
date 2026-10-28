@@ -17,7 +17,7 @@
     <string name="settings_profile_switcher__title_no_profile">No profile(s) available</string>
     <string name="settings_profile_switcher__title_profile_switcher">Profile switching</string>
     <string name="settings_profile_switcher__title_send_target">Enable send target</string>
-    <string name="settings_profile_switcher__text_send_target">Provide an option that sends an url to another profile</string>
+    <string name="settings_profile_switcher__text_send_target">Provide an option that sends an URL to another profile</string>
     <string name="switch_profile">Enable profile switching</string>
     <string name="switch_profile_explainer">Displays a button in the bottom sheet to open the tapped link in a (work-) profile. Requires LinkSheet to be installed in both profiles, and manually linked via Settings -&gt; Special app access -&gt;Connected work &amp; personal apps</string>
 </resources>

@@ -66,7 +66,7 @@ fun BottomSheetApps(
     isPrivateBrowser: suspend (Boolean, ActivityAppInfo) -> Browser?,
     controller: BottomSheetStateController,
     showPackage: Boolean,
-    previewUrl: Boolean,
+    enableActionBar: Boolean,
     hideBottomSheetChoiceButtons: Boolean,
     urlCardDoubleTap: Boolean,
     profiles: List<CrossProfile>?,
@@ -79,7 +79,7 @@ fun BottomSheetApps(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        if (previewUrl && hasUri) {
+        if (enableActionBar && hasUri) {
             Column(
                 modifier = Modifier
                     .padding(horizontal = 15.dp)
@@ -337,7 +337,7 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
             isPrivateBrowser = { hasUri, info -> null },
             controller = BottomSheetStateControllerStub,
             showPackage = false,
-            previewUrl = true,
+            enableActionBar = true,
             hideBottomSheetChoiceButtons = state.hideBottomSheetChoiceButtons,
             urlCardDoubleTap = false,
             profiles = null

@@ -18,16 +18,13 @@ class BottomSheetSettingsViewModel(
 ) : BaseViewModel(preferenceRepository) {
 
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enableIgnoreLibRedirectButton)
-    val hideAfterCopying = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideAfterCopying)
+    val enableActionBar = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.enable)
     val gridLayout = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.gridLayout)
     val dontShowFilteredItem = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.dontShowFilteredItem)
-    val previewUrl = preferenceRepository.asViewModelState(AppPreferences.previewUrl)
     val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.browser.enable)
-    val enableOpenExternallyButton = preferenceRepository.asViewModelState(AppPreferences.enableOpenExternallyButton)
     val usageStatsSorting = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.usageStatsSorting)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideBottomSheetChoiceButtons)
     val hideReferringApp = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideReferringApp)
-    val doubleTapUrl = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.doubleTapUrl)
 
     val tapConfigSingle = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.single)
     val tapConfigDouble = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.tapConfig.double)

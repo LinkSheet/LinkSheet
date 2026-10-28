@@ -124,6 +124,9 @@ data object LanguageRoute : Route
 @Serializable
 data object SqlRoute : Route
 
+@Keep
+@Serializable
+data object BottomSheetActionBarRoute : Route
 //@Keep
 //data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {
 //    companion object : Route1<ExperimentSettingsRouteArg, String?>(

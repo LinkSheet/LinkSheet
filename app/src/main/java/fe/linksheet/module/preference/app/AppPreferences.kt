@@ -16,7 +16,7 @@ import fe.android.preference.helper.UnsafePreferenceInteraction
 import fe.gson.dsl.jsonObject
 import fe.gson.util.jsonArrayItems
 import fe.linksheet.module.preference.LinkSheetPreferenceDefinition
-import java.util.UUID
+import java.util.*
 
 object AppPreferences : LinkSheetPreferenceDefinition(
     "enable_copy_button",
@@ -58,8 +58,6 @@ object AppPreferences : LinkSheetPreferenceDefinition(
 //    val lastVersionsV1 = jsonMapped<LastVersion?>("last_versions", null)
 
     val homeClipboardCard = boolean("home_clipboard_card", true)
-    val previewUrl = boolean("preview_url", true)
-    val enableOpenExternallyButton = boolean("enable_open_externally_button", false)
 
     val browserMode = BrowserMode(registry)
     val bottomSheet = BottomSheet(registry)

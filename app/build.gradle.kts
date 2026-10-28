@@ -12,12 +12,7 @@ import com.gitlab.grrfe.gradlebuild.android.version.createAndroidVersionProvider
 import com.gitlab.grrfe.gradlebuild.common.CompilerOption
 import com.gitlab.grrfe.gradlebuild.common.KotlinCompilerArgs
 import com.gitlab.grrfe.gradlebuild.common.PluginOption
-import com.gitlab.grrfe.gradlebuild.util.LocalPropertiesFile
-import com.gitlab.grrfe.gradlebuild.util.PropertiesFile
-import com.gitlab.grrfe.gradlebuild.util.PublicLocalPropertiesFile
-import com.gitlab.grrfe.gradlebuild.util.SystemEnvironment
-import com.gitlab.grrfe.gradlebuild.util.propertiesProvider
-import com.gitlab.grrfe.gradlebuild.util.withProviders
+import com.gitlab.grrfe.gradlebuild.util.*
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies._1fexd
 import fe.buildsrc.LocaleConfigTask
@@ -33,6 +28,7 @@ plugins {
     id("dev.rikka.tools.refine")
     id("com.gitlab.grrfe.android-build-plugin")
     id("de.mannodermaus.android-junit")
+    id("de.infix.testBalloon")
 }
 
 val appName = "LinkSheet"
@@ -235,6 +231,21 @@ android {
 tasks.register<LocaleConfigTask>("createLocaleConfig") {
     locales.set(supportedLocales)
     outputFile.set(file("src/main/res/xml/locales_config.xml"))
+}
+
+// Via https://github.com/tyejaedon/TigerPlayer/pull/114:
+
+// Robolectric's FileDescriptorInterceptor reflectively reaches into the JDK-internal
+// jdk.internal.access.SharedSecrets class while shimming android.os.SharedMemory on JDK 17+.
+// That package isn't exported to unnamed modules by default, so every Robolectric test fails
+// during environment setup with "Failed to interact with raw FileDescriptor internals" unless
+// the test JVM explicitly opens it up. See issue #113 and robolectric/robolectric#11434.
+tasks.withType<Test>().configureEach {
+    jvmArgs(
+        "--add-exports=java.base/jdk.internal.access=ALL-UNNAMED",
+        "--add-opens=java.base/java.io=ALL-UNNAMED",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+    )
 }
 
 kotlin {
@@ -455,6 +466,8 @@ dependencies {
         testImplementation(notation)
     }
 
+    testImplementation("de.infix.testBalloon:testBalloon-framework-core:_")
+    testImplementation("de.infix.testBalloon:testBalloon-integration-robolectric:_")
     testImplementation(Testing.robolectric)
 
     testImplementation("org.mock-server:mockserver-client-java:_")

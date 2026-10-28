@@ -5,10 +5,9 @@ import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import app.linksheet.feature.profile.core.ProfileSwitcher
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.profile.core.ProfileSwitcher
 import fe.linksheet.module.preference.app.AppPreferences
-import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.permission.UsageStatsPermission
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 
@@ -24,7 +23,7 @@ class BottomSheetSettingsViewModel(
     val dontShowFilteredItem = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.dontShowFilteredItem)
     val previewUrl = preferenceRepository.asViewModelState(AppPreferences.previewUrl)
     val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.browser.enable)
-
+    val enableOpenExternallyButton = preferenceRepository.asViewModelState(AppPreferences.enableOpenExternallyButton)
     val usageStatsSorting = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.usageStatsSorting)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideBottomSheetChoiceButtons)
     val hideReferringApp = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideReferringApp)

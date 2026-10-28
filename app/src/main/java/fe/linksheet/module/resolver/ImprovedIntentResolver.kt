@@ -47,19 +47,9 @@ import fe.linksheet.util.intent.parser.UriException
 import fe.linksheet.util.intent.parser.UriParseException
 import fe.std.result.getOrNull
 import fe.std.result.isFailure
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.withContext
 import me.saket.unfurl.UnfurlResult
 import me.saket.unfurl.Unfurler
 
@@ -368,7 +358,8 @@ class ImprovedIntentResolver(
             hasSingleMatchingOption = appList.isSingleOption || appList.noBrowsersOnlySingleApp,
             resolveModuleStatus = resolveStatus,
             libRedirectResult = libRedirectResult,
-            downloadable = downloadable
+            downloadable = downloadable,
+            customTab = customTab
         )
     }
 

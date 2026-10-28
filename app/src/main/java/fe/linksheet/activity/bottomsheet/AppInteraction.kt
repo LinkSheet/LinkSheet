@@ -13,6 +13,8 @@ sealed interface BottomSheetInteraction {
 data class ManualRedirectInteraction(val uri: String) : BottomSheetInteraction
 data class ManualDownloadInteraction(val uri: String) : BottomSheetInteraction
 data class IgnoreLibRedirectInteraction(val result: LibRedirectResult.Redirected) : BottomSheetInteraction
+data class OpenExternallyInteraction(val intent: Intent) : BottomSheetInteraction
+
 data class StartDownloadInteraction(
     val url: String,
     val downloadable: DownloadCheckResult.Downloadable

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.FastForward
@@ -40,16 +41,7 @@ import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
 import fe.linksheet.R
 import fe.linksheet.activity.TextEditorActivity
-import fe.linksheet.activity.bottomsheet.BottomSheetStateController
-import fe.linksheet.activity.bottomsheet.ClickModifier
-import fe.linksheet.activity.bottomsheet.CopyUrlInteraction
-import fe.linksheet.activity.bottomsheet.IgnoreLibRedirectInteraction
-import fe.linksheet.activity.bottomsheet.ManualDownloadInteraction
-import fe.linksheet.activity.bottomsheet.ManualRedirectInteraction
-import fe.linksheet.activity.bottomsheet.PreferredAppChoiceButtonInteraction
-import fe.linksheet.activity.bottomsheet.ShareUrlInteraction
-import fe.linksheet.activity.bottomsheet.StartDownloadInteraction
-import fe.linksheet.activity.bottomsheet.SwitchProfileInteraction
+import fe.linksheet.activity.bottomsheet.*
 import fe.linksheet.module.resolver.IntentResolveResult
 import fe.linksheet.util.intent.StandardIntents
 import me.saket.unfurl.UnfurlResult
@@ -62,6 +54,7 @@ fun UrlBarWrapper(
     imageLoader: ImageLoader?,
     enableDownloader: Boolean,
     enableIgnoreLibRedirectButton: Boolean,
+    enableOpenExternallyButton: Boolean,
     enableUrlCardDoubleTap: Boolean,
     enableManualRedirect: Boolean,
     enableManualDownload: Boolean,
@@ -81,6 +74,7 @@ fun UrlBarWrapper(
         unfurlResult = result.unfurlResult,
         downloadable = result.downloadable,
         libRedirected = if (enableIgnoreLibRedirectButton) result.libRedirectResult as? LibRedirectResult.Redirected else null,
+        canOpenExternally = enableOpenExternallyButton && result.customTab,
         copyUri = { uri ->
             controller.dispatch(CopyUrlInteraction(uri))
         },
@@ -106,6 +100,9 @@ fun UrlBarWrapper(
         },
         ignoreLibRedirect = enableIgnoreLibRedirectButton.if2 { redirectedResult ->
             controller.dispatch(IgnoreLibRedirectInteraction(redirectedResult))
+        },
+        openExternally = {
+            controller.dispatch(OpenExternallyInteraction(result.intent))
         },
         manualRedirect = enableManualRedirect.if2 { uri ->
             controller.dispatch(ManualRedirectInteraction(uri))
@@ -134,12 +131,14 @@ fun UrlBar(
     profiles: List<CrossProfile>?,
     downloadable: DownloadCheckResult?,
     libRedirected: LibRedirectResult.Redirected?,
+    canOpenExternally: Boolean,
     copyUri: (String) -> Unit,
     shareUri: (String) -> Unit,
     editUri: (String) -> String,
     switchProfile: ((CrossProfile, String) -> Unit)?,
     downloadUri: ((String, DownloadCheckResult.Downloadable) -> Unit)? = null,
     ignoreLibRedirect: ((LibRedirectResult.Redirected) -> Unit)? = null,
+    openExternally: () -> Unit,
     manualRedirect: ((String) -> Unit)? = null,
     manualDownload: ((String) -> Unit)? = null,
     onDoubleClick: (() -> Unit)? = null,
@@ -225,6 +224,16 @@ fun UrlBar(
                 }
             }
 
+            if (canOpenExternally) {
+                item {
+                    UrlActionButton(
+                        text = textContent(R.string.bottom_sheet__button_open_externally),
+                        icon = Icons.AutoMirrored.Rounded.OpenInNew.iconPainter,
+                        onClick = openExternally
+                    )
+                }
+            }
+
             if (switchProfile != null && profiles != null) {
                 for (target in profiles) {
                     item {
@@ -280,5 +289,10 @@ private fun UrlBarPreview() {
         ignoreLibRedirect = null,
         manualRedirect = null,
         onDoubleClick = null,
+        canOpenExternally = false,
+        openExternally = {
+
+        },
+        manualDownload = null,
     )
 }

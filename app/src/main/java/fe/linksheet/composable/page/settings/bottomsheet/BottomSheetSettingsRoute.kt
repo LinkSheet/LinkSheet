@@ -218,7 +218,7 @@ fun BottomSheetSettingsRoute(
 
         divider(id = R.string.urlbar_settings)
 
-        group(size = 4) {
+        group(size = 5) {
             item(key = R.string.preview_url) { padding, shape ->
                 PreferenceSwitchListItem(
                     shape = shape,
@@ -246,6 +246,16 @@ fun BottomSheetSettingsRoute(
                     statePreference = viewModel.enableIgnoreLibRedirectButton,
                     headlineContent = textContent(R.string.enable_ignore_libredirect_button),
                     supportingContent = textContent(R.string.enable_ignore_libredirect_button_explainer),
+                )
+            }
+
+            item(key = R.string.settings_bottom_sheet__title_enable_open_externally_button) { padding, shape ->
+                PreferenceSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.enableOpenExternallyButton,
+                    headlineContent = textContent(R.string.settings_bottom_sheet__title_enable_open_externally_button),
+                    supportingContent = textContent(R.string.settings_bottom_sheet__subtitle_enable_open_externally_button),
                 )
             }
 

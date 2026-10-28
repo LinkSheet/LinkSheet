@@ -460,6 +460,7 @@
     <string name="settings_main_experiment_changelog__title_changelog">Experiments changelog</string>
     <string name="settings__subtitle_advanced"><![CDATA[Experiments, Backup & Restore]]></string>
     <string name="bottom_sheet__button_manual_redirect">Follow redirects</string>
+    <string name="bottom_sheet__button_open_externally">Open externally</string>
     <string name="app_host_dialog__title_hosts">Default hosts</string>
     <string name="generic__button_text_save">Save</string>
     <string name="app_host_dialog__text_no_hosts">No hosts have been set to open by default in this app!</string>
@@ -546,4 +547,6 @@
     <string name="qs_tile_label">Open copied link</string>
     <string name="qs_tile_no_link">No link in clipboard!</string>
     <string name="qs_tile_failed_to_parse_links">Clipboard content could not be parsed!</string>
+    <string name="settings_bottom_sheet__title_enable_open_externally_button">Enable \"Open externally\" button</string>
+    <string name="settings_bottom_sheet__subtitle_enable_open_externally_button">Shows a button in the bottom sheet if the source app requests the URL to be opened in-app which allows the user to open it externally instead</string>
 </resources>

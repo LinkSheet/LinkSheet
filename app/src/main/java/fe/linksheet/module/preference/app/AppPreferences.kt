@@ -59,6 +59,7 @@ object AppPreferences : LinkSheetPreferenceDefinition(
 
     val homeClipboardCard = boolean("home_clipboard_card", true)
     val previewUrl = boolean("preview_url", true)
+    val enableOpenExternallyButton = boolean("enable_open_externally_button", false)
 
     val browserMode = BrowserMode(registry)
     val bottomSheet = BottomSheet(registry)

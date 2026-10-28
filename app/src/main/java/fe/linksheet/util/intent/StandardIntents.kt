@@ -19,10 +19,17 @@ object StandardIntents {
         }
     }
 
-    fun createSelfIntent(uri: Uri?, extras: Bundle? = null): Intent {
+    fun createSelfIntent(uri: Uri?, extras: Bundle? = null, selfPackage: String = BuildConfig.APPLICATION_ID): Intent {
         return buildIntent(Intent.ACTION_VIEW, uri) {
-            `package` = BuildConfig.APPLICATION_ID
+            `package` = selfPackage
             extras?.let { putExtras(it) }
         }
+    }
+
+    fun createSelfIntent(intent: Intent, selfPackage: String = BuildConfig.APPLICATION_ID): Intent {
+        val newIntent = Intent(intent)
+        newIntent.action = Intent.ACTION_VIEW
+        newIntent.`package` = selfPackage
+        return newIntent
     }
 }

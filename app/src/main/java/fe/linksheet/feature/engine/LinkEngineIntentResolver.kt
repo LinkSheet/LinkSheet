@@ -7,11 +7,7 @@ import android.net.Uri
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
 import app.linksheet.feature.browser.core.PrivateBrowsingService
-import app.linksheet.feature.engine.core.EngineScenarioInput
-import app.linksheet.feature.engine.core.ForwardOtherProfileResult
-import app.linksheet.feature.engine.core.IntentEngineResult
-import app.linksheet.feature.engine.core.ScenarioSelector
-import app.linksheet.feature.engine.core.UrlEngineResult
+import app.linksheet.feature.engine.core.*
 import app.linksheet.feature.engine.core.context.DefaultEngineRunContext
 import app.linksheet.feature.engine.core.context.IgnoreLibRedirectExtra
 import app.linksheet.feature.engine.core.context.SkipFollowRedirectsExtra
@@ -31,17 +27,8 @@ import fe.linksheet.extension.std.toStdUrl
 import fe.linksheet.module.database.entity.PreferredApp
 import fe.linksheet.module.repository.AppSelectionHistoryRepository
 import fe.linksheet.module.repository.PreferredAppRepository
-import fe.linksheet.module.resolver.ImprovedBrowserHandler
-import fe.linksheet.module.resolver.ImprovedIntentResolver
+import fe.linksheet.module.resolver.*
 import fe.linksheet.module.resolver.ImprovedIntentResolver.Companion.IntentKeyResolveRedirects
-import fe.linksheet.module.resolver.InAppBrowserHandler
-import fe.linksheet.module.resolver.IntentResolveResult
-import fe.linksheet.module.resolver.IntentResolver
-import fe.linksheet.module.resolver.IntentResolverCommon
-import fe.linksheet.module.resolver.ResolveEvent
-import fe.linksheet.module.resolver.ResolveModuleStatus
-import fe.linksheet.module.resolver.ResolveOptions
-import fe.linksheet.module.resolver.ResolverInteraction
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
@@ -54,7 +41,7 @@ import fe.std.result.IResult
 import fe.std.result.isFailure
 import fe.std.result.unaryPlus
 import fe.std.uri.StdUrl
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -277,7 +264,8 @@ class LinkEngineIntentResolver(
             hasSingleMatchingOption = appList.isSingleOption || appList.noBrowsersOnlySingleApp,
             resolveModuleStatus = ResolveModuleStatus(),
             libRedirectResult = sealedContext[ContextResultId.LibRedirect]?.wrapped,
-            downloadable = downloadResult?.toFetchResult()
+            downloadable = downloadResult?.toFetchResult(),
+            customTab = customTab is CustomTabInfo2.Allowed
         )
     }
 

@@ -10,22 +10,14 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import app.linksheet.api.BuildConstants
-import app.linksheet.api.BuildInfo
-import app.linksheet.api.CachedRequest
-import app.linksheet.api.SystemInfoService
-import app.linksheet.api.SystemProperties
+import app.linksheet.api.*
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.api.preference.RemoteConfigRepository
 import app.linksheet.compose.debug.DebugMenuSlotProvider
 import app.linksheet.feature.analytics.preference.AnalyticsPreferences
 import app.linksheet.feature.analytics.service.BaseAnalyticsService
-import app.linksheet.feature.app.core.AppInfoCreator
-import app.linksheet.feature.app.core.MetaDataHandler
-import app.linksheet.feature.app.core.PackageIntentHandler
-import app.linksheet.feature.app.core.PackageLabelService
-import app.linksheet.feature.app.core.PackageLauncherService
+import app.linksheet.feature.app.core.*
 import app.linksheet.feature.app.core.domain.DomainVerificationManagerCompat
 import app.linksheet.feature.app.usecase.AllAppsUseCase
 import app.linksheet.feature.app.usecase.BrowsersUseCase
@@ -101,6 +93,7 @@ import fe.linksheet.module.repository.whitelisted.WhitelistedInAppBrowsersReposi
 import fe.linksheet.module.repository.whitelisted.WhitelistedNormalBrowsersRepository
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.IntentResolver
+import fe.linksheet.module.resolver.SelfIntentUseCase
 import fe.linksheet.module.resolver.urlresolver.RealCachedRequest
 import fe.linksheet.module.resolver.urlresolver.RemoteResolver
 import fe.linksheet.module.resolver.urlresolver.amp2html.Amp2HtmlResolveRequest
@@ -111,37 +104,11 @@ import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.IntentLauncher
 import fe.linksheet.module.statistic.StatisticsService
 import fe.linksheet.module.versiontracker.VersionTracker
-import fe.linksheet.module.viewmodel.AboutSettingsViewModel
-import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
-import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
-import fe.linksheet.module.viewmodel.BottomSheetViewModel
-import fe.linksheet.module.viewmodel.ClipboardProxyViewModel
-import fe.linksheet.module.viewmodel.DevSettingsViewModel
-import fe.linksheet.module.viewmodel.ExperimentsViewModel
-import fe.linksheet.module.viewmodel.ExportSettingsViewModel
-import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
-import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
-import fe.linksheet.module.viewmodel.LanguageSettingsViewModel
-import fe.linksheet.module.viewmodel.LinksSettingsViewModel
-import fe.linksheet.module.viewmodel.LoadDumpedPreferencesViewModel
-import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
-import fe.linksheet.module.viewmodel.MainViewModel
-import fe.linksheet.module.viewmodel.PreferredAppCompatHelper
-import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
-import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
-import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
-import fe.linksheet.module.viewmodel.SelectDomainsConfirmationViewModel
-import fe.linksheet.module.viewmodel.SettingsViewModel
-import fe.linksheet.module.viewmodel.SingleBrowserViewModel
-import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
-import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
-import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
-import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
+import fe.linksheet.module.viewmodel.*
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import fe.linksheet.testlib.core.BaseUnitTest
-import io.ktor.client.HttpClient
-import io.ktor.client.HttpClientConfig
-import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.*
+import io.ktor.client.engine.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.json.Json
@@ -294,7 +261,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             IntentResolver::class,
             IntentLauncher::class,
             MetaDataHandler::class,
-            PrivateBrowserUseCase::class
+            PrivateBrowserUseCase::class,
+            SelfIntentUseCase::class
         ),
         definition<Request>(
             HttpData.Builder::class,

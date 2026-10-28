@@ -1,5 +1,6 @@
 package fe.linksheet.module.resolver.util
 
+import android.os.Bundle
 import androidx.browser.customtabs.CustomTabsIntent
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 
@@ -12,7 +13,7 @@ object CustomTabHandler {
     )
 
     fun getInfo(intent: SafeIntent, allowCustomTab: Boolean): CustomTabInfo {
-        return when(val info = getInfo2(intent, allowCustomTab)) {
+        return when (val info = getInfo2(intent, allowCustomTab)) {
             is CustomTabInfo2.Allowed -> CustomTabInfo(true, info.dropExtras)
             // Not strictly correct as isCustomTab should be true even if we don't allow custom tabs; This is addressed by getInfo2
             CustomTabInfo2.NotAllowed -> CustomTabInfo(false, null)
@@ -30,12 +31,18 @@ object CustomTabHandler {
             return CustomTabInfo2.NotAllowed
         }
 
-        val dropExtras = intent.extras
-            ?.keySet()
-            ?.filter { extra -> !CUSTOM_TAB_EXTRAS_PREFIXES.any { extra.startsWith(it) } }
-            ?: emptyList()
+        val nonCustomTabExtrasToDrop = filterExtras(intent.extras, false)
+        return CustomTabInfo2.Allowed(nonCustomTabExtrasToDrop)
+    }
 
-        return CustomTabInfo2.Allowed(dropExtras)
+    fun filterExtras(extras: Bundle?, returnCustomTabExtras: Boolean): List<String> {
+        return extras
+            ?.keySet()
+            ?.filter { extra ->
+                val isCustomTabExtra = CUSTOM_TAB_EXTRAS_PREFIXES.any { extra.startsWith(it) }
+                if (returnCustomTabExtras) isCustomTabExtra else !isCustomTabExtra
+            }
+            ?: emptyList()
     }
 }
 
@@ -47,5 +54,5 @@ sealed interface CustomTabInfo2 {
 
     data object NotApplicable : CustomTabInfo2
     data object NotAllowed : CustomTabInfo2
-    data class Allowed(override val dropExtras: List<String> ) : CustomTabInfo2
+    data class Allowed(override val dropExtras: List<String>) : CustomTabInfo2
 }

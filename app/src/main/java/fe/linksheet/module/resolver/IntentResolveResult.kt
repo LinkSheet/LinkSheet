@@ -35,6 +35,7 @@ sealed interface IntentResolveResult {
         val resolveModuleStatus: ResolveModuleStatus,
         val libRedirectResult: LibRedirectResult? = null,
         val downloadable: DownloadCheckResult? = DownloadCheckResult.NonDownloadable,
+        val customTab: Boolean = false
     ) : IntentResolveResult {
         val app = filteredItem ?: resolved.firstOrNull()
 

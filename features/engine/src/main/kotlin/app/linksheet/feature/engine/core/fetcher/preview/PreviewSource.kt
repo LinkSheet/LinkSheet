@@ -1,6 +1,6 @@
 package app.linksheet.feature.engine.core.fetcher.preview
 
-import androidx.room3.TypeConverter
+import androidx.room3.ColumnTypeConverter
 import app.linksheet.feature.engine.core.fetcher.FetchResult
 import fe.std.result.IResult
 import me.saket.unfurl.UnfurlResult
@@ -23,12 +23,12 @@ enum class PreviewFetchResultId {
     }
 
     companion object Converter {
-        @TypeConverter
+        @ColumnTypeConverter
         fun toInt(id: PreviewFetchResultId): Int {
             return id.ordinal
         }
 
-        @TypeConverter
+        @ColumnTypeConverter
         fun toPreviewFetchResultId(ordinal: Int): PreviewFetchResultId {
             return entries[ordinal]
         }

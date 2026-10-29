@@ -3,7 +3,7 @@ package app.linksheet.feature.engine.database.entity
 import androidx.room3.Entity
 import androidx.room3.ForeignKey
 import androidx.room3.PrimaryKey
-import androidx.room3.TypeConverters
+import androidx.room3.ColumnTypeConverters
 import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResultId
 
 @Entity(
@@ -12,7 +12,7 @@ import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResultId
         ForeignKey(entity = UrlEntry::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
     ]
 )
-@TypeConverters(value = [PreviewFetchResultId.Converter::class])
+@ColumnTypeConverters(value = [PreviewFetchResultId.Converter::class])
 data class PreviewCache(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String?,

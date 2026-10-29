@@ -31,6 +31,7 @@ dependencies {
     api(project(":lib-api"))
     api(AndroidX.test.runner)
     api(AndroidX.test.coreKtx)
+    api(platform(Testing.junit.bom))
     api(Testing.junit.jupiter.api)
     api(Koin.test)
 

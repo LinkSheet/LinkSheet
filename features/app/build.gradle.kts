@@ -43,6 +43,7 @@ dependencies {
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.ui.toolingPreview)
     implementation(AndroidX.compose.foundation)
+    implementation(AndroidX.compose.material.icons.core)
 
     implementation(Grrfe.std.core)
     implementation(Grrfe.std.result.core)

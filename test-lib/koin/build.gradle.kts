@@ -29,5 +29,5 @@ android {
 dependencies {
     api(Koin.core)
     api(Koin.test)
-    api("org.junit.jupiter:junit-jupiter-api:6.1.0")
+    api(Testing.junit.jupiter.api)
 }

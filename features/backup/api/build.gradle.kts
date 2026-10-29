@@ -45,10 +45,10 @@ dependencies {
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.espresso.core)
-    androidTestImplementation(platform("org.junit:junit-bom:5.14.1"))
-    androidTestImplementation("org.junit.jupiter:junit-jupiter-api")
+    androidTestImplementation(platform(Testing.junit.bom))
+    androidTestImplementation(Testing.junit.jupiter.api)
     androidTestImplementation(AndroidX.compose.ui.test)
-    androidTestImplementation("io.mockk:mockk-android:1.14.9")
+    androidTestImplementation(Testing.mockK.android)
     androidTestImplementation(project(":test-core"))
 
     testImplementation(Testing.junit.jupiter.api)

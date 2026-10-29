@@ -30,7 +30,7 @@ dependencies {
     implementation(project(":lib-util"))
     implementation(project(":feature-systeminfo"))
     compileOnly(project(":lib-hidden-api"))
-    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:4.4.1")
+    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:_")
 
     implementation(AndroidX.core.ktx)
     implementation(Koin.android)

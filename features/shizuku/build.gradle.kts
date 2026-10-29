@@ -73,7 +73,7 @@ dependencies {
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
-    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:4.4.1")
+    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:_")
 
     implementation(AndroidX.core.ktx)
 

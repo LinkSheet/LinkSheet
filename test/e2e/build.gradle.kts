@@ -43,7 +43,7 @@ dependencies {
     implementation(Testing.junit.jupiter.api)
     implementation("com.willowtreeapps.assertk:assertk:_")
 
-    implementation("de.mannodermaus.junit5:android-test-core-junit6:2.0.1")
-    implementation("de.mannodermaus.junit5:android-test-compose-junit6:2.0.1")
-    implementation("de.mannodermaus.junit5:android-test-runner-junit6:2.0.1")
+    implementation("de.mannodermaus.junit5:android-test-core-junit6:_")
+    implementation("de.mannodermaus.junit5:android-test-compose-junit6:_")
+    implementation("de.mannodermaus.junit5:android-test-runner-junit6:_")
 }

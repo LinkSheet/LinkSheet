@@ -436,7 +436,7 @@ dependencies {
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
-    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:4.4.1")
+    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:_")
 
     implementation(KotlinX.serialization.json)
     implementation(KotlinX.serialization.json.okio)
@@ -458,7 +458,7 @@ dependencies {
         AndroidX.test.ext.junit.ktx,
         "com.willowtreeapps.assertk:assertk:_",
 //        AndroidX.test.espresso.core,
-        "io.mockk:mockk-android:1.14.9"
+        Testing.mockK.android
     )
 
     for (notation in commonTestDependencies) {
@@ -484,13 +484,13 @@ dependencies {
     androidTestImplementation(AndroidX.test.runner)
     androidTestImplementation(AndroidX.test.rules)
     androidTestImplementation(AndroidX.test.espresso.core)
-//    androidTestImplementation("de.mannodermaus.junit5:android-test-compose-junit6:2.0.1")
-//    androidTestImplementation("de.mannodermaus.junit5:android-test-runner-junit6:2.0.1")
-    androidTestImplementation(platform("org.junit:junit-bom:5.14.1"))
-    androidTestImplementation("org.junit.jupiter:junit-jupiter-api")
+//    androidTestImplementation("de.mannodermaus.junit5:android-test-compose-junit6:_")
+//    androidTestImplementation("de.mannodermaus.junit5:android-test-runner-junit6:_")
+    androidTestImplementation(platform(Testing.junit.bom))
+    androidTestImplementation(Testing.junit.jupiter.api)
     androidTestImplementation(AndroidX.compose.ui.test)
-//    androidTestImplementation("io.insert-koin:koin-test-junit5:4.2.1")
-//    androidTestImplementation("io.insert-koin:koin-test-junit4:4.2.1")
+//    androidTestImplementation(Koin.junit5)
+//    androidTestImplementation(Koin.junit4)
 
     testImplementation("com.github.gmazzo.okhttp.mock:mock-client:_")
     debugImplementation(Square.leakCanary.android)

@@ -11,12 +11,14 @@ import androidx.room3.ForeignKey
         ForeignKey(
             entity = Scenario::class,
             parentColumns = arrayOf("id"),
-            childColumns = arrayOf(ScenarioExpression.COLUMN_SCENARIO_ID)
+            childColumns = arrayOf(ScenarioExpression.COLUMN_SCENARIO_ID),
+            onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = ExpressionRule::class,
             parentColumns = arrayOf("id"),
-            childColumns = arrayOf(ScenarioExpression.COLUMN_EXPRESSION_ID)
+            childColumns = arrayOf(ScenarioExpression.COLUMN_EXPRESSION_ID),
+            onDelete = ForeignKey.CASCADE
         )
     ]
 )

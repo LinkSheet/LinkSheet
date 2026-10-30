@@ -1,25 +1,29 @@
-package fe.linksheet.composable.page.settings.privacy
+package app.linksheet.composable.page.settings.privacy
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.feature.analytics.ui.rememberAnalyticDialog
 import app.linksheet.feature.remoteconfig.ui.remoteConfigListItem
+import app.linksheet.module.viewmodel.privacy.PrivacySettingsViewModel
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.composekit.component.list.column.shape.ClickableShapeListItem
 import fe.composekit.preference.collectAsStateWithLifecycle
+import fe.composekit.route.Route
 import fe.linksheet.R
-import fe.linksheet.module.viewmodel.PrivacySettingsViewModel
+import fe.linksheet.navigation.PrivacyIncognitoRoute
 import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun PrivacySettingsRoute(
     onBackPressed: () -> Unit,
+    navigate: (Route) -> Unit,
     viewModel: PrivacySettingsViewModel = koinViewModel(),
 ) {
     val telemetryLevel by viewModel.telemetryLevel.collectAsStateWithLifecycle()
@@ -31,7 +35,7 @@ fun PrivacySettingsRoute(
     val enableAnalytics by viewModel.enableAnalytics.collectAsStateWithLifecycle()
 
     SaneScaffoldSettingsPage(headline = stringResource(id = R.string.privacy), onBackPressed = onBackPressed) {
-        group(2) {
+        group(3) {
             item(key = R.string.show_linksheet_referrer) { padding, shape ->
                 PreferenceSwitchListItem(
                     statePreference = viewModel.showAsReferrer,
@@ -39,6 +43,17 @@ fun PrivacySettingsRoute(
                     padding = padding,
                     headlineContent = textContent(R.string.show_linksheet_referrer),
                     supportingContent = textContent(R.string.show_linksheet_referrer_explainer),
+                )
+            }
+
+            item(key = R.string.settings_privacy_incognito__title_enable_incognito) { padding, shape ->
+                PreferenceDividedSwitchListItem(
+                    statePreference = viewModel.enableIncognito,
+                    shape = shape,
+                    padding = padding,
+                    onContentClick = { navigate(PrivacyIncognitoRoute) },
+                    headlineContent = textContent(R.string.settings_privacy_incognito__title_enable_incognito),
+                    supportingContent = textContent(R.string.settings_privacy_incognito__subtitle_incognito),
                 )
             }
 

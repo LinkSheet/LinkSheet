@@ -57,6 +57,8 @@ import app.linksheet.feature.wiki.core.GithubClient
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
+import app.linksheet.module.viewmodel.privacy.PrivacyIncognitoSettingsViewModel
+import app.linksheet.module.viewmodel.privacy.PrivacySettingsViewModel
 import app.linksheet.testlib.koin.definition
 import app.linksheet.testlib.koin.injectedParameters
 import app.linksheet.testlib.koin.verifyAll
@@ -278,7 +280,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         definition<StatisticsService>(AppPreferenceRepository::class),
         definition<AppLocaleService>(List::class),
         definition<LanguageSettingsViewModel>(AppLocaleService::class),
-        definition<fe.linksheet.module.viewmodel.NotificationSettingsViewModel>(
+        definition<NotificationSettingsViewModel>(
             AppPreferenceRepository::class
         ),
         definition<SettingsViewModel>(
@@ -303,6 +305,9 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             BaseAnalyticsService::class,
             AnalyticsPreferences::class,
             RemoteConfigPreferences::class
+        ),
+        definition<PrivacyIncognitoSettingsViewModel>(
+            AppPreferenceRepository::class,
         ),
         definition<fe.linksheet.module.viewmodel.AboutSettingsViewModel>(
             Gson::class,

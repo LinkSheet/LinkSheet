@@ -3,9 +3,9 @@
 package fe.linksheet.module.preference.state
 
 import androidx.lifecycle.LifecycleOwner
-import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.android.lifecycle.LifecycleAwareService
 import fe.android.lifecycle.koin.extension.service
+import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.linksheet.extension.kotlin.nowMillis
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.experiment.ExperimentRepository
@@ -42,6 +42,7 @@ internal class AppStateService(
         AppStatePreferences.newDefaults.`2025-08-03` to NewDefaults20250803,
         AppStatePreferences.newDefaults.`2025-12-15` to NewDefaults20251215(preferenceRepository),
         AppStatePreferences.newDefaults.`2026-04-27` to NewDefaults20260427,
+        AppStatePreferences.newDefaults.`2026-10-29` to NewDefaults20261029(preferenceRepository),
     )
 
     override suspend fun onAppInitialized(owner: LifecycleOwner) {

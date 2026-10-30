@@ -13,4 +13,5 @@
     <string name="error">錯誤</string>
     <string name="generic__button_text_cancel">取消</string>
     <string name="generic__button_text_confirm">確認</string>
+    <string name="generic__button_text_delete">刪除</string>
 </resources>

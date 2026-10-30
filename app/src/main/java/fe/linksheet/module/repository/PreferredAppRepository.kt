@@ -16,7 +16,8 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlin.reflect.KClass
 
 class PreferredAppRepository(
-    private val dao: PreferredAppDao
+    private val dao: PreferredAppDao,
+    private val incognitoMode: () -> Boolean
 ) : ExportableRepository<PreferredApp, PreferredAppExportModel> {
 
     override val modelClass: KClass<PreferredAppExportModel>
@@ -34,7 +35,11 @@ class PreferredAppRepository(
         settings: ImportSettings,
         models: List<PreferredAppExportModel>
     ): List<Pair<PreferredApp, Long>> {
-        return CommonImport.import(dao, settings, models) { it.fromExportModel() }
+        val isIncognito = incognitoMode()
+        return CommonImport.import(dao, settings, models) {
+            val entity = it.fromExportModel()
+            if (!isIncognito || entity.alwaysPreferred) entity else null
+        }
     }
 
     fun getAll(): Flow<List<PreferredApp>> {
@@ -51,6 +56,10 @@ class PreferredAppRepository(
 
 
     suspend fun deleteByPackageName(packageName: String) = dao.deleteByPackageName(packageName)
+
+    suspend fun deleteAllNotAlwaysPreferred() {
+        dao.deleteAllNotAlwaysPreferred()
+    }
 
     suspend fun delete(preferredApp: PreferredApp) {
         dao.delete(preferredApp)
@@ -79,12 +88,17 @@ class PreferredAppRepository(
         dao.deleteByHosts(hosts)
     }
 
-    suspend fun insert(preferredApp: PreferredApp): Long {
+    suspend fun insert(preferredApp: PreferredApp): Long? {
+        if (incognitoMode() && !preferredApp.alwaysPreferred) return null
         return dao.insertReplace(preferredApp)
     }
 
     suspend fun insert(items: List<PreferredApp>) {
-        dao.insertReplace(items)
+        var mutItems = items
+        if (incognitoMode()) {
+            mutItems = items.filter { it.alwaysPreferred }
+        }
+        dao.insertReplace(mutItems)
     }
 
     fun getByPackageNameFlow(packageName: String): Flow<List<PreferredApp>> {

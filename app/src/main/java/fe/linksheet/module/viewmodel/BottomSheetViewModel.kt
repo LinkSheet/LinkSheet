@@ -82,7 +82,7 @@ class BottomSheetViewModel(
     val resolveViaFailedToast = preferenceRepository.asViewModelState(AppPreferences.notifications.resolveViaFailedToast)
     val enableActionBar = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.enable)
     val enableRequestPrivateBrowsingButton = preferenceRepository.asViewModelState(AppPreferences.browser.enable)
-    val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
+    val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.privacy.showLinkSheetAsReferrer)
     val hideBottomSheetChoiceButtons = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.hideBottomSheetChoiceButtons)
     val enableIgnoreLibRedirectButton = preferenceRepository.asViewModelState(AppPreferences.libRedirect.enableIgnoreLibRedirectButton)
     val enableOpenExternallyButton = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.enableOpenExternallyButton)

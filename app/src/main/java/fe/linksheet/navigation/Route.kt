@@ -127,6 +127,10 @@ data object SqlRoute : Route
 @Keep
 @Serializable
 data object BottomSheetActionBarRoute : Route
+
+@Keep
+@Serializable
+data object PrivacyIncognitoRoute : Route
 //@Keep
 //data class ExperimentSettingsRouteArg(val experiment: String?) : RouteData {
 //    companion object : Route1<ExperimentSettingsRouteArg, String?>(

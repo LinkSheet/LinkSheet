@@ -7,8 +7,22 @@ import androidx.room3.Room
 import androidx.room3.RoomDatabase
 import androidx.room3.migration.Migration
 import app.linksheet.api.database.KnownInitCallback
-import app.linksheet.feature.engine.database.dao.*
-import app.linksheet.feature.engine.database.entity.*
+import app.linksheet.feature.engine.database.dao.ExpressionRuleDao
+import app.linksheet.feature.engine.database.dao.HtmlCacheDao
+import app.linksheet.feature.engine.database.dao.PreviewCacheDao
+import app.linksheet.feature.engine.database.dao.ResolveTypeDao
+import app.linksheet.feature.engine.database.dao.ResolvedUrlCacheDao
+import app.linksheet.feature.engine.database.dao.ScenarioDao
+import app.linksheet.feature.engine.database.dao.ScenarioExpressionDao
+import app.linksheet.feature.engine.database.dao.UrlEntryDao
+import app.linksheet.feature.engine.database.entity.CachedHtml
+import app.linksheet.feature.engine.database.entity.ExpressionRule
+import app.linksheet.feature.engine.database.entity.PreviewCache
+import app.linksheet.feature.engine.database.entity.ResolveType
+import app.linksheet.feature.engine.database.entity.ResolvedUrl
+import app.linksheet.feature.engine.database.entity.Scenario
+import app.linksheet.feature.engine.database.entity.ScenarioExpression
+import app.linksheet.feature.engine.database.entity.UrlEntry
 
 @Database(
     entities = [
@@ -24,6 +38,7 @@ import app.linksheet.feature.engine.database.entity.*
     version = EngineDatabase.LATEST_VERSION,
     autoMigrations = [
         AutoMigration(from = 1, to = 2),
+        AutoMigration(from = 2, to = 3),
     ],
     exportSchema = true
 )
@@ -38,7 +53,7 @@ abstract class EngineDatabase internal constructor() : RoomDatabase() {
     abstract fun scenarioExpressionDao(): ScenarioExpressionDao
 
     companion object {
-        const val LATEST_VERSION = 2
+        const val LATEST_VERSION = 3
 
         private fun buildMigrations(): Array<Migration> {
             return arrayOf(

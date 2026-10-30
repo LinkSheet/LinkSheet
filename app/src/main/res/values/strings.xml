@@ -187,7 +187,7 @@
     <string name="privacy">Privacy</string>
     <string name="show_linksheet_referrer">Show LinkSheet referrer</string>
     <string name="show_linksheet_referrer_explainer">When an app is launched, it can check to see which app launched, or \"referred\" to it. By default, when LinkSheet launches an app, it hides itself, saying that the app that launched LinkSheet is the launched target. Enable this to reinsert LinkSheet as the referrer for apps it opens.</string>
-    <string name="privacy_settings_explainer">Referrer privacy</string>
+    <string name="privacy_settings_explainer">Referrer privacy, Incognito-Mode, Remote config</string>
     <string name="thanks_for_donating">Thank you for donating!</string>
     <string name="discord">Discord</string>
     <string name="discord_explainer">Chat about LinkSheet on Discord</string>
@@ -442,7 +442,6 @@
     <string name="settings_app_config_rules__text_custom_rules">Custom rules</string>
     <string name="delete_log_dialog__title_delete_log">Delete session?</string>
     <string name="delete_log_dialog__subtitle_delete_info">Do you want to delete this log session? This can not be undone!</string>
-    <string name="generic__button_text_delete">Delete</string>
     <string name="generic__text_edit">Edit</string>
     <string name="generic__button_text_done">Done</string>
     <string name="home__clipboard_card_source">From clipboard</string>
@@ -553,4 +552,17 @@
     <string name="settings_bottom_sheet_action_bar__title_enable_action_bar">Enable action bar</string>
     <string name="settings_bottom_sheet_action_bar__subtitle_enable_action_bar">Display an URL- and action-bar at the top of the bottom sheet</string>
     <string name="settings_bottom_sheet_action_bar__divider_actions">Actions</string>
+    <string name="settings_privacy_incognito__title_incognito">Incognito-Mode</string>
+    <string name="settings_privacy_incognito__title_enable_incognito">Incognito-Mode</string>
+    <string name="settings_privacy_incognito__subtitle_incognito">Disable storing any URL-related information</string>
+    <string name="settings_privacy_incognito__title_disable_logs">Disable logging</string>
+    <string name="settings_privacy_incognito__subtitle_disable_logs">Applies to both in-app logs and logcat</string>
+    <string name="settings_privacy_incognito__title_disable_log_persistence">Disable log persistence</string>
+    <string name="settings_privacy_incognito__subtitle_disable_log_persistence">Disable log file creation</string>
+    <string name="settings_privacy_incognito__text_info">Most users should <b>not</b> enable this feature, as it is intended for users with threat-models that need to defend against an attacker that is able to access the user\'s device in an unlocked state.\n\nIf enabled, LinkSheet will no longer store, and skip the import of,\n • the history of hosts and the apps used to open them, and\n • redirection/Amp2Html/preview results.\n\nOnly data on apps set to \"Always\" open a specific host is retained.\n\nThis feature acts as a \"killswitch\" and therefore overrides any other settings that enable/disable features like redirection caching.</string>
+    <string name="settings_privacy_incognito__title_stored_data">Stored data</string>
+    <string name="settings_privacy_incognito__subtitle_stored_data">History, preferred apps, cache, logs</string>
+    <string name="settings_privacy_incognito__toast_text_deleted">Data deleted</string>
+    <string name="settings_privacy_incognito_delete_dialog__title_delete_data">Delete data?</string>
+    <string name="settings_privacy_incognito_delete_dialog__subtitle_delete_data">This can not be undone!</string>
 </resources>

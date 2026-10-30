@@ -13,6 +13,7 @@ import kotlin.reflect.KClass
 
 class Amp2HtmlRepository(
     private val dao: Amp2HtmlMappingDao,
+    private val incognitoMode: () -> Boolean
 ) : ExportableRepository<Amp2HtmlMapping, Amp2HtmlMappingExportModel> {
 
     override val modelClass: KClass<Amp2HtmlMappingExportModel>
@@ -22,7 +23,8 @@ class Amp2HtmlRepository(
         return dao.getAll()
     }
 
-    suspend fun insert(inputUrl: String, resolvedUrl: String): Amp2HtmlMapping {
+    suspend fun insert(inputUrl: String, resolvedUrl: String): Amp2HtmlMapping? {
+        if (incognitoMode()) return null
         val item = Amp2HtmlMapping(inputUrl, resolvedUrl)
         dao.insertReplace(item)
         return item
@@ -41,7 +43,11 @@ class Amp2HtmlRepository(
         dao.deleteAll()
     }
 
-    override suspend fun import(settings: ImportSettings, models: List<Amp2HtmlMappingExportModel>): List<Pair<Amp2HtmlMapping, Long>> {
+    override suspend fun import(
+        settings: ImportSettings,
+        models: List<Amp2HtmlMappingExportModel>
+    ): List<Pair<Amp2HtmlMapping, Long>> {
+        if (incognitoMode()) return emptyList()
         return CommonImport.import(dao, settings, models) { it.fromExportModel() }
     }
 }

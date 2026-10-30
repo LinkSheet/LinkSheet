@@ -10,4 +10,5 @@
     <string name="error">Viga</string>
     <string name="generic__button_text_cancel">Katkesta</string>
     <string name="generic__button_text_confirm">Kinnita</string>
+    <string name="generic__button_text_delete">Kustuta</string>
 </resources>

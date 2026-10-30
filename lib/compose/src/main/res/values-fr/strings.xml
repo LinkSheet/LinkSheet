@@ -12,4 +12,5 @@
     <string name="error">Erreur</string>
     <string name="generic__button_text_cancel">Annuler</string>
     <string name="generic__button_text_confirm">Confirmer</string>
+    <string name="generic__button_text_delete">Supprimer</string>
 </resources>

@@ -12,7 +12,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlin.reflect.KClass
 
 class ResolvedRedirectRepository(
-    private val dao: ResolvedRedirectDao
+    private val dao: ResolvedRedirectDao,
+    private val incognitoMode: () -> Boolean
 ) : ExportableRepository<ResolvedRedirect, ResolvedRedirectExportModel> {
 
     override val modelClass: KClass<ResolvedRedirectExportModel>
@@ -22,7 +23,8 @@ class ResolvedRedirectRepository(
         return dao.getAll()
     }
 
-    suspend fun insert(inputUrl: String, resolvedUrl: String): ResolvedRedirect {
+    suspend fun insert(inputUrl: String, resolvedUrl: String): ResolvedRedirect? {
+        if (incognitoMode()) return null
         val item = ResolvedRedirect(inputUrl, resolvedUrl)
         dao.insertReplace(item)
         return item
@@ -45,6 +47,7 @@ class ResolvedRedirectRepository(
         settings: ImportSettings,
         models: List<ResolvedRedirectExportModel>
     ): List<Pair<ResolvedRedirect, Long>> {
+        if (incognitoMode()) return emptyList()
         return CommonImport.import(dao, settings, models) { it.fromExportModel() }
     }
 }

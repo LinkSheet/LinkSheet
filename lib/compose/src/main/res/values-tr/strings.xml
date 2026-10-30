@@ -13,4 +13,5 @@
     <string name="error">Hata</string>
     <string name="generic__button_text_cancel">İptal</string>
     <string name="generic__button_text_confirm">Onayla</string>
+    <string name="generic__button_text_delete">Sil</string>
 </resources>

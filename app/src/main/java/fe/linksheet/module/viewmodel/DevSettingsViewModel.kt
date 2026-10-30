@@ -12,8 +12,7 @@ import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import com.google.gson.Gson
 import fe.composekit.core.AndroidVersion
 import fe.linksheet.module.log.file.LogPersistService
-import fe.linksheet.module.preference.experiment.ExperimentRepository
-import fe.linksheet.module.preference.experiment.Experiments
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -22,7 +21,6 @@ import kotlinx.coroutines.withContext
 class DevSettingsViewModel(
     private val context: Application,
     preferenceRepository: AppPreferenceRepository,
-    experimentRepository: ExperimentRepository,
     val shizukuStatusUseCase: ShizukuStatusUseCase,
     private val shizukuFeatureService: ShizukuFeatureService,
     miuiCompatProvider: MiuiCompatProvider,
@@ -31,7 +29,7 @@ class DevSettingsViewModel(
     private val logPersistService: LogPersistService,
     private val ioDispatcher: CoroutineDispatcher,
 ) : BaseViewModel(preferenceRepository) {
-    val disableLogging = experimentRepository.asViewModelState(Experiments.disableLogging)
+    val disableLogging = preferenceRepository.asViewModelState(AppPreferences.privacy.incognito.disableLogsPersistence)
     private val auditor = MiuiAuditor(systemInfoService)
     val miuiCompatRequired by miuiCompatProvider.isRequired
 

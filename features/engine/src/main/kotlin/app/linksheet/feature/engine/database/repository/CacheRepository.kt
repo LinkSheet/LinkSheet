@@ -1,22 +1,11 @@
-@file:OptIn(ExperimentalTime::class)
-
 package app.linksheet.feature.engine.database.repository
 
 import app.linksheet.feature.engine.core.fetcher.preview.HtmlPreviewResult
 import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResult
 import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResultId
-import app.linksheet.feature.engine.database.dao.HtmlCacheDao
-import app.linksheet.feature.engine.database.dao.PreviewCacheDao
-import app.linksheet.feature.engine.database.dao.ResolveTypeDao
-import app.linksheet.feature.engine.database.dao.ResolvedUrlCacheDao
-import app.linksheet.feature.engine.database.dao.UrlEntryDao
-import app.linksheet.feature.engine.database.entity.CachedHtml
-import app.linksheet.feature.engine.database.entity.PreviewCache
-import app.linksheet.feature.engine.database.entity.ResolveType
-import app.linksheet.feature.engine.database.entity.ResolvedUrl
-import app.linksheet.feature.engine.database.entity.UrlEntry
+import app.linksheet.feature.engine.database.dao.*
+import app.linksheet.feature.engine.database.entity.*
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 
 class CacheRepository internal constructor(
     val htmlCacheDao: HtmlCacheDao,
@@ -25,8 +14,12 @@ class CacheRepository internal constructor(
     val resolveTypeDao: ResolveTypeDao,
     val urlEntryDao: UrlEntryDao,
     val clock: Clock,
+    private val incognitoMode: () -> Boolean
 ) {
-    suspend fun getOrCreateCacheEntry(url: String): UrlEntry {
+    suspend fun eraseAll() {
+        urlEntryDao.deleteAll()
+    }
+    suspend fun getOrCreateCacheEntry(url: String): UrlEntry? {
         val entry = urlEntryDao.getUrlEntry(url)
         if (entry != null) return entry
 
@@ -59,7 +52,8 @@ class CacheRepository internal constructor(
         return CacheData(resolveType, resolved?.result, html?.content)
     }
 
-    suspend fun createUrlEntry(url: String): UrlEntry {
+    suspend fun createUrlEntry(url: String): UrlEntry? {
+        if (incognitoMode()) return null
         val now = clock.now()
         val entry = UrlEntry(timestamp = now.toEpochMilliseconds(), url = url)
         val id = urlEntryDao.insertReplace(entry)
@@ -69,14 +63,17 @@ class CacheRepository internal constructor(
     }
 
     suspend fun insertResolved(entryId: Long, resolveType: ResolveType, resolvedUrl: String?) {
+        if (incognitoMode()) return
         resolvedUrlCacheDao.insertReplace(ResolvedUrl(entryId, resolveType.id, resolvedUrl))
     }
 
     suspend fun insertHtml(entryId: Long, html: String) {
+        if (incognitoMode()) return
         htmlCacheDao.insertReplace(CachedHtml(entryId, html))
     }
 
     suspend fun insertPreview(entryId: Long, result: PreviewFetchResult) {
+        if (incognitoMode()) return
         if (!result.id.hasPreview()) {
             // TODO: Should we cache the info that there has not been a cache hit?
             // TODO: Caching non-hits would obviously help an unnecessary round-trip to the remote host, but what would that mean

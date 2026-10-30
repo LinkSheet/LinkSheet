@@ -22,4 +22,5 @@
     <string name="checkmark">Checkmark</string>
     <string name="error">Error</string>
     <string name="generic__button_text_confirm">Confirm</string>
+    <string name="generic__button_text_delete">Delete</string>
 </resources>

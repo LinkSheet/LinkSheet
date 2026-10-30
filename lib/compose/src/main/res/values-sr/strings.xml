@@ -12,4 +12,5 @@
     <string name="error">Грешка</string>
     <string name="generic__button_text_cancel">Откажи</string>
     <string name="generic__button_text_confirm">Потврди</string>
+    <string name="generic__button_text_delete">Избриши</string>
 </resources>

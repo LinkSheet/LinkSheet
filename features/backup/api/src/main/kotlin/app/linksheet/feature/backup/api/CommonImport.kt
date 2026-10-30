@@ -16,9 +16,9 @@ object CommonImport {
         dao: BaseDao<Entity>,
         settings: ImportSettings,
         models: List<Model>,
-        fromModel: (Model) -> Entity
+        fromModel: (Model) -> Entity?
     ): List<Pair<Entity, Long>> {
-        val entities = models.map(fromModel)
+        val entities = models.mapNotNull(fromModel)
         val ids = when {
             settings.replace -> dao.insertReplace(entities)
             else -> dao.insert(entities)

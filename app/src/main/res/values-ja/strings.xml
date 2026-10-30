@@ -306,7 +306,6 @@
     <string name="settings_app_config_rules__btn_new_rule">新しいルール</string>
     <string name="delete_log_dialog__title_delete_log">セッションを削除しますか？</string>
     <string name="delete_log_dialog__subtitle_delete_info">このログセッションを削除しますか？ 元に戻すことはできません！</string>
-    <string name="generic__button_text_delete">消去</string>
     <string name="redirect_resolve_type_local">ローカルリゾルバー</string>
     <string name="select_an_app">アプリを選択</string>
     <string name="dont_show_filtered_item">「最後に選んだアプリ」セクションを表示しない</string>

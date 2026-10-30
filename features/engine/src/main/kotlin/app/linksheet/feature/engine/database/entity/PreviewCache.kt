@@ -1,15 +1,20 @@
 package app.linksheet.feature.engine.database.entity
 
+import androidx.room3.ColumnTypeConverters
 import androidx.room3.Entity
 import androidx.room3.ForeignKey
 import androidx.room3.PrimaryKey
-import androidx.room3.ColumnTypeConverters
 import app.linksheet.feature.engine.core.fetcher.preview.PreviewFetchResultId
 
 @Entity(
     tableName = PreviewCache.TABLE_NAME,
     foreignKeys = [
-        ForeignKey(entity = UrlEntry::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
+        ForeignKey(
+            entity = UrlEntry::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("id"),
+            onDelete = ForeignKey.CASCADE
+        )
     ]
 )
 @ColumnTypeConverters(value = [PreviewFetchResultId.Converter::class])

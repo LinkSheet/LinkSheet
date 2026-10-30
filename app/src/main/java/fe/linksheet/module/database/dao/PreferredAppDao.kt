@@ -41,4 +41,7 @@ interface PreferredAppDao : BaseDao<PreferredApp>, UserDataDao {
 
     @Query("DELETE FROM ${PreferredApp.TABLE_NAME} WHERE packageName IN (:packageNames)")
     suspend fun deleteByPackageName(packageNames: Set<String>)
+
+    @Query("DELETE FROM ${PreferredApp.TABLE_NAME} WHERE alwaysPreferred = 0")
+    suspend fun deleteAllNotAlwaysPreferred()
 }

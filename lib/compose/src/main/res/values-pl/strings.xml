@@ -12,4 +12,5 @@
     <string name="error">Błąd</string>
     <string name="generic__button_text_cancel">Anuluj</string>
     <string name="generic__button_text_confirm">Potwierdzam</string>
+    <string name="generic__button_text_delete">Usuń</string>
 </resources>

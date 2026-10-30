@@ -4,15 +4,14 @@ package app.linksheet.feature.engine.core.fetcher.preview
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.engine.core.EngineDatabaseTestRule
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import assertk.assertThat
 import assertk.assertions.isInstanceOf
 import assertk.assertions.isNotNull
 import fe.linksheet.testlib.core.BaseUnitTest
 import fe.std.result.IResult
 import fe.std.result.success
-import fe.std.time.unixMillisOf
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -40,7 +39,8 @@ internal class PreviewLinkFetcherTest : BaseUnitTest {
             rule.database.resolvedUrlCacheDao(),
             rule.database.resolveTypeDao(),
             rule.database.urlEntryDao(),
-            clock = Clock.System
+            clock = Clock.System,
+            incognitoMode = { false }
         )
     }
 

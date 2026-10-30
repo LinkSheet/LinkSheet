@@ -395,7 +395,6 @@
     <string name="settings_app_config_rules__btn_new_rule">Új szabály</string>
     <string name="resolve_event__running_libredirect">Megpróbálja megtalálni a FOSS-frontendet</string>
     <string name="settings_app_config_rules__title_default_rule">Alapértelmezett szabály</string>
-    <string name="generic__button_text_delete">Törlés</string>
     <string name="settings_main_setup_success__text_linksheet_setup_failure_info">A LinkSheet nincs beállítva a rendszer alapértelmezett böngészőjeként</string>
     <string name="settings_app_config_rules__title_rules">Szabályok</string>
     <string name="settings__hint_search">Keresés</string>

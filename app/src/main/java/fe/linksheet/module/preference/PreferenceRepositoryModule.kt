@@ -53,5 +53,8 @@ fun PreferenceRepositoryModule(appPreferenceRepository: AppPreferenceRepository)
         single<RemoteConfigPreferences> { AppPreferences.remoteConfig }
         single<RemoteConfigStatePreferences> { AppStatePreferences.remoteConfig }
         single<DownloaderPreferences> { AppPreferences.downloader }
+        single<() -> Boolean>(DiQualifier.PrivacyIncognitoModePreference) {
+            get<AppPreferenceRepository>().asFunction(AppPreferences.privacy.incognito.enable)
+        }
     }
 }

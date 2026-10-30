@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import app.linksheet.composable.page.settings.privacy.PrivacyIncognitoSettingsRoute
+import app.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import app.linksheet.compose.util.animatedComposable
 import app.linksheet.compose.util.predictivePopEnterTransition
 import app.linksheet.compose.util.predictivePopExitTransition
@@ -53,10 +55,39 @@ import fe.linksheet.composable.page.settings.link.preview.PreviewSettingsRoute
 import fe.linksheet.composable.page.settings.link.redirect.FollowRedirectsSettingsRoute
 import fe.linksheet.composable.page.settings.misc.MiscSettingsRoute
 import fe.linksheet.composable.page.settings.notification.NotificationSettingsRoute
-import fe.linksheet.composable.page.settings.privacy.PrivacySettingsRoute
 import fe.linksheet.composable.page.settings.shortcuts.ShortcutsRoute
 import fe.linksheet.composable.page.settings.theme.ThemeSettingsRoute
-import fe.linksheet.navigation.*
+import fe.linksheet.navigation.AdvancedRoute
+import fe.linksheet.navigation.AppsWhichCanOpenLinksSettingsRoute
+import fe.linksheet.navigation.BottomSheetActionBarRoute
+import fe.linksheet.navigation.DebugRoute
+import fe.linksheet.navigation.ExperimentRoute
+import fe.linksheet.navigation.LogTextViewerRoute
+import fe.linksheet.navigation.PreferredBrowserSettingsRoute
+import fe.linksheet.navigation.PreviewUrlRoute
+import fe.linksheet.navigation.PrivacyIncognitoRoute
+import fe.linksheet.navigation.Routes
+import fe.linksheet.navigation.SingleBrowserSettingsRoute
+import fe.linksheet.navigation.SqlRoute
+import fe.linksheet.navigation.VlhAppRoute
+import fe.linksheet.navigation.WhitelistedBrowsersSettingsRoute
+import fe.linksheet.navigation.aboutSettingsRoute
+import fe.linksheet.navigation.amp2HtmlSettingsRoute
+import fe.linksheet.navigation.bottomSheetSettingsRoute
+import fe.linksheet.navigation.browserSettingsRoute
+import fe.linksheet.navigation.creditsSettingsRoute
+import fe.linksheet.navigation.devModeRoute
+import fe.linksheet.navigation.followRedirectsSettingsRoute
+import fe.linksheet.navigation.generalSettingsRoute
+import fe.linksheet.navigation.inAppBrowserSettingsDisableInSelectedRoute
+import fe.linksheet.navigation.inAppBrowserSettingsRoute
+import fe.linksheet.navigation.linksSettingsRoute
+import fe.linksheet.navigation.loadDumpedPreferences
+import fe.linksheet.navigation.logViewerSettingsRoute
+import fe.linksheet.navigation.notificationSettingsRoute
+import fe.linksheet.navigation.privacySettingsRoute
+import fe.linksheet.navigation.settingsRoute
+import fe.linksheet.navigation.themeSettingsRoute
 
 @Composable
 fun MainNavHost(
@@ -85,8 +116,11 @@ fun MainNavHost(
         if (AndroidVersion.isAtLeastApi30R()) {
             attachNav(ProfileNav, navController)
         }
-        animatedComposable<BottomSheetActionBarRoute>  { _, route ->
+        animatedComposable<BottomSheetActionBarRoute> { _, route ->
             BottomSheetActionBarSettingsRoute(onBackPressed = onBackPressed, navigateNew = navigateNew)
+        }
+        animatedComposable<PrivacyIncognitoRoute> { _, route ->
+            PrivacyIncognitoSettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
         }
 
         animatedComposable<ExperimentRoute> { _, route ->
@@ -146,7 +180,7 @@ fun MainNavHost(
         }
 
         animatedComposable(route = privacySettingsRoute) {
-            PrivacySettingsRoute(onBackPressed = onBackPressed)
+            PrivacySettingsRoute(onBackPressed = onBackPressed, navigate = navigateNew)
         }
 
         animatedComposable(route = bottomSheetSettingsRoute) {

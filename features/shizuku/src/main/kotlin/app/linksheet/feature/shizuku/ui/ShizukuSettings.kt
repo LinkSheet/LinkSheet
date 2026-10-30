@@ -1,17 +1,13 @@
 package app.linksheet.feature.shizuku.ui
 
 import androidx.activity.compose.LocalActivity
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.InstallMobile
 import androidx.compose.material.icons.rounded.NotStarted
 import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
+import app.linksheet.compose.InfoText
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewTheme
 import app.linksheet.feature.shizuku.R
@@ -28,8 +25,6 @@ import app.linksheet.feature.shizuku.service.ShizukuStatus
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
-import fe.android.compose.text.TextContent
-import fe.android.compose.text.TextOptions
 import fe.composekit.component.ContentType
 import fe.composekit.component.PreviewThemeNew
 import fe.composekit.component.card.AlertCard
@@ -203,19 +198,6 @@ private fun ShizukuPreviewBase(status: ShizukuStatus) {
         )
     }
 }
-
-@Composable
-private fun InfoText(textContent: TextContent) {
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
-
-        TextContent(
-            textContent = textContent,
-            textOptions = TextOptions(style = MaterialTheme.typography.bodySmall),
-        )
-    }
-}
-
 
 @Preview(showBackground = true)
 @Composable

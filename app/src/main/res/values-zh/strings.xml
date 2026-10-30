@@ -280,7 +280,6 @@
     <string name="switch_profile">启用档案切换</string>
     <string name="reset_app_link_verification_status_toast">已请求重新验证</string>
     <string name="no_internet_connection">网络未连接</string>
-    <string name="generic__button_text_delete">删除</string>
     <string name="delete_log_dialog__subtitle_delete_info">要删除此日志会话吗？此操作不可逆！</string>
     <string name="delete_log_dialog__title_delete_log">删除会话？</string>
     <string name="preferred_apps_settings">为支持的主机设置偏好应用</string>

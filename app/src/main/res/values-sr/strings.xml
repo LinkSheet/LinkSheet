@@ -403,7 +403,6 @@
     <string name="settings_app_config_rules__text_custom_rules">Прилагођена правила</string>
     <string name="delete_log_dialog__title_delete_log">Избрисати сесију?</string>
     <string name="delete_log_dialog__subtitle_delete_info">Желите ли да избришете ову сесију евиденције? Ово се не може поништити!</string>
-    <string name="generic__button_text_delete">Избриши</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_verified_alt">
         <item quantity="one">%d верификован хост</item>
         <item quantity="few">%d верификована хоста</item>

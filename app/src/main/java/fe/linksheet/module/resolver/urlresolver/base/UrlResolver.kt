@@ -25,19 +25,19 @@ typealias Insert<T> = suspend (inputUrl: String, resolvedUrl: String) -> T
 sealed class LocalTask<T>(
     val request: LocalResolveRequest,
     val getForInputUrl: GetForInputUrl<T>,
-    val insert: Insert<T>,
+    val insert: Insert<T?>,
     val remoteResolveUrlField: String
 ) {
     class Amp2Html(
         request: LocalResolveRequest,
         getForInputUrl: GetForInputUrl<Amp2HtmlMapping>,
-        insert: Insert<Amp2HtmlMapping>
+        insert: Insert<Amp2HtmlMapping?>
     ) : LocalTask<Amp2HtmlMapping>(request, getForInputUrl, insert, "canonicalUrl")
 
     class Redirector(
         request: LocalResolveRequest,
         getForInputUrl: GetForInputUrl<ResolvedRedirect>,
-        insert: Insert<ResolvedRedirect>
+        insert: Insert<ResolvedRedirect?>
     ) : LocalTask<ResolvedRedirect>(request, getForInputUrl, insert, "resolvedUrl")
 }
 

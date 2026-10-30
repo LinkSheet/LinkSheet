@@ -11,6 +11,7 @@ import app.linksheet.feature.libredirect.preference.libRedirectPreferences
 import app.linksheet.feature.profile.preference.profilePreferences
 import app.linksheet.feature.remoteconfig.preference.remoteConfigPreferences
 import app.linksheet.feature.shizuku.preference.shizukuPreferences
+import app.linksheet.module.preference.app.PrivacyPreferences
 import com.google.gson.JsonArray
 import fe.android.preference.helper.UnsafePreferenceInteraction
 import fe.gson.dsl.jsonObject
@@ -42,7 +43,6 @@ object AppPreferences : LinkSheetPreferenceDefinition(
     @SensitivePreference
     val useTimeMs = long("use_time", 0)
 
-    val showLinkSheetAsReferrer = boolean("show_as_referrer")
     val devModeEnabled = boolean("dev_mode_enabled")
     val firstRun = boolean("first_run", true)
 
@@ -73,6 +73,7 @@ object AppPreferences : LinkSheetPreferenceDefinition(
     val profileSwitcher = profilePreferences(registry)
     val analytics = analyticsPreferences(registry)
     val remoteConfig = remoteConfigPreferences(registry)
+    val privacy = PrivacyPreferences(registry)
 
     init {
         migrate("theme") { repository ->

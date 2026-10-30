@@ -12,4 +12,5 @@
     <string name="error">Hiba</string>
     <string name="generic__button_text_cancel">Mégse</string>
     <string name="generic__button_text_confirm">Megerősítem</string>
+    <string name="generic__button_text_delete">Törlés</string>
 </resources>

@@ -56,6 +56,7 @@ import fe.linksheet.module.log.file.entry.LogEntry
 import fe.linksheet.module.log.file.entry.LogEntryDeserializer
 import fe.linksheet.module.paste.PasteServiceModule
 import fe.linksheet.module.preference.PreferenceRepositoryModule
+import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.app.DefaultAppPreferenceRepository
 import fe.linksheet.module.preference.state.AppStateServiceModule
 import fe.linksheet.module.receiver.BroadcastEventBusModule
@@ -98,7 +99,13 @@ open class LinkSheetApp : Application(), DependencyProvider {
 
         StaticBuildInfo.init(BuildConfig.DEBUG, BuildConfig.BUILD_TYPE)
         registerActivityLifecycleCallbacks(currentActivityObserver)
-        Log.addSink(LinkSheetLogSink(logsDebug = StaticBuildInfo.IsDebug, AndroidLogSink()))
+        Log.addSink(
+            LinkSheetLogSink(
+                logsDebug = StaticBuildInfo.IsDebug,
+                enabled = !preferenceRepository.get(AppPreferences.privacy.incognito.disableLogs),
+                delegateToSink = AndroidLogSink()
+            )
+        )
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             CrashHandlerActivity.start(this, throwable)

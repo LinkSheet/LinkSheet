@@ -52,7 +52,8 @@ internal class FollowRedirectsLinkResolverTest : BaseUnitTest {
                 override fun now(): Instant {
                     return Instant.fromEpochMilliseconds(timestamp)
                 }
-            }
+            },
+            incognitoMode = { false }
         )
     }
 

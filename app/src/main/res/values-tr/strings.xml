@@ -412,7 +412,6 @@
     <string name="settings_edit_rule__title_edit_rule">Kural düzenleniyor</string>
     <string name="settings_app_config_rules__text_custom_rules">Özel kurallar</string>
     <string name="delete_log_dialog__subtitle_delete_info">Bu günlük oturumunu silmek istiyor musunuz? Bu geri alınamaz!</string>
-    <string name="generic__button_text_delete">Sil</string>
     <string name="export_log_dialog__subtitle_include_settings">Önerilir</string>
     <string name="settings_credits__app_name_gmsflags" translatable="false">GMS-Flags</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">Atla</string>

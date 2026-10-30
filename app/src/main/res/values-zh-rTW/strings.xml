@@ -149,7 +149,6 @@
     <string name="export">匯出</string>
     <string name="generic__button_text_copy_clipboard">複製到剪貼簿</string>
     <string name="bottom_sheet_loading_indicator__button_skip_job">略過</string>
-    <string name="generic__button_text_delete">刪除</string>
     <string name="settings_verified_link_handlers__text_handling_filter_enabled_short">已啟用</string>
     <string name="experiments_explainer">試用開發中的功能</string>
     <string name="import_headline">匯入</string>

@@ -21,14 +21,14 @@ object Experiments : PreferenceDefinition(
     "experiment_impr_btm_sheet_expand_fully",
     "experiment_improved_bottom_sheet_auto_launch_single_browser",
     "experiment_manual_follow_redirects",
-    "experiment_aggressive_follow_redirects"
+    "experiment_aggressive_follow_redirects",
+    "experiment_disable_log_persistence"
 ) {
     val interceptAccidentalTaps = boolean(key = "experiment_intercept_accidental_taps", default = true)
     val libRedirectJsEngine = boolean(key = "experiment_enable_libredirect_js_engine")
     val enableAnalytics = boolean(key = "experiment_enable_analytics", default = false)
     val noBottomSheetStateSave = boolean(key = "experiment_no_bottom_sheet_state_save")
     val linkEngine = boolean(key = "experiment_link_engine")
-    val disableLogging = boolean(key = "experiment_disable_log_persistence")
     val newVlh = boolean(key = "experiment_new_vlh", default = false)
     val mergeWithPreferred = boolean(key = "experiment_vlh_merge_with_preferred", default = false)
     val newShizuku = boolean(key = "experiment_new_shizuku")
@@ -43,11 +43,6 @@ object Experiments : PreferenceDefinition(
             displayName = "Improved bottom sheet",
             experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),
             experiment("Disable bottom sheet state save", noBottomSheetStateSave),
-        ),
-        group(
-            name = "logging",
-            displayName = "Logging",
-            experiment("Disable log persistence", disableLogging)
         ),
         group(
             name = "link_engine",

@@ -1,14 +1,14 @@
-package fe.linksheet.module.viewmodel
+package app.linksheet.module.viewmodel.privacy
 
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import app.linksheet.api.SensitivePreference
+import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.analytics.preference.AnalyticsPreferences
 import app.linksheet.feature.analytics.service.BaseAnalyticsService
 import app.linksheet.feature.analytics.service.TelemetryLevel
 import app.linksheet.feature.remoteconfig.preference.RemoteConfigPreferences
-import app.linksheet.api.preference.AppPreferenceRepository
 import fe.linksheet.module.preference.app.AppPreferences
 import fe.linksheet.module.preference.experiment.ExperimentRepository
 import fe.linksheet.module.preference.experiment.Experiments
@@ -23,7 +23,8 @@ class PrivacySettingsViewModel(
     private val analyticsPreferences: AnalyticsPreferences,
     private val remoteConfigPreferences: RemoteConfigPreferences,
 ) : BaseViewModel(preferenceRepository) {
-    val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.showLinkSheetAsReferrer)
+    val showAsReferrer = preferenceRepository.asViewModelState(AppPreferences.privacy.showLinkSheetAsReferrer)
+    val enableIncognito = preferenceRepository.asViewModelState(AppPreferences.privacy.incognito.enable)
     val enableAnalytics = experimentsRepository.asViewModelState(Experiments.enableAnalytics)
     val remoteConfig = preferenceRepository.asViewModelState(remoteConfigPreferences.enable)
 

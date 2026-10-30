@@ -7,14 +7,19 @@ import androidx.room3.PrimaryKey
 @Entity(
     tableName = CachedHtml.TABLE_NAME,
     foreignKeys = [
-        ForeignKey(entity = UrlEntry::class, parentColumns = arrayOf("id"), childColumns = arrayOf("id"))
+        ForeignKey(
+            entity = UrlEntry::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("id"),
+            onDelete = ForeignKey.CASCADE
+        )
     ]
 )
 data class CachedHtml(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val content: String
 ) {
-    companion object{
+    companion object {
         const val TABLE_NAME = "html_cache"
     }
 }

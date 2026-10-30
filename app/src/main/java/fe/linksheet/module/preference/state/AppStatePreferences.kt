@@ -20,6 +20,7 @@ object AppStatePreferences : LinkSheetPreferenceDefinition() {
         val `2025-08-03` = long("has_new_defaults_2025_08_03")
         val `2025-12-15` = long("has_new_defaults_2025_12_15")
         val `2026-04-27` = long("has_new_defaults_2026_04_27")
+        val `2026-10-29` = long("has_new_defaults_2026_10_29")
     }
 
     val newDefaults = NewDefaults

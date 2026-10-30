@@ -382,7 +382,6 @@
     <string name="settings_app_config__title_configure_app_behavior">تكوين %s</string>
     <string name="settings_app_config__title_preferred_browser">المتصفح المفضل</string>
     <string name="settings_new_rule__title_new_rule">قاعدة جديدة</string>
-    <string name="generic__button_text_delete">حذف</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="zero">%d مضيف: %s</item>
         <item quantity="one">%d مضيف: %s</item>

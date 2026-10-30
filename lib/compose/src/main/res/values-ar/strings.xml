@@ -12,4 +12,5 @@
     <string name="error">خطأ</string>
     <string name="generic__button_text_cancel">إلغاء</string>
     <string name="generic__button_text_confirm">تاكيد</string>
+    <string name="generic__button_text_delete">حذف</string>
 </resources>

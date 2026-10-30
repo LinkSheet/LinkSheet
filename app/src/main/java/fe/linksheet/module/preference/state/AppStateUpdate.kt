@@ -67,6 +67,15 @@ object NewDefaults20260427 : AppStateUpdate {
     }
 }
 
+
+class NewDefaults20261029(private val preferenceRepository: AppPreferenceRepository) : AppStateUpdate {
+    private val disableLogging = "experiment_disable_log_persistence"
+
+    override fun execute(experimentsRepository: ExperimentRepository) {
+        migrate(experimentsRepository, preferenceRepository, disableLogging, AppPreferences.privacy.incognito.disableLogsPersistence)
+    }
+}
+
 private fun migrate(
     experimentsRepository: ExperimentRepository,
     preferenceRepository: AppPreferenceRepository,

@@ -13,4 +13,5 @@
     <string name="error">Грешка</string>
     <string name="generic__button_text_cancel">Отказ</string>
     <string name="generic__button_text_confirm">Потвърждаване</string>
+    <string name="generic__button_text_delete">Премахване</string>
 </resources>

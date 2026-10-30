@@ -50,7 +50,7 @@ fun DeleteLogDialog(
         },
         confirmButton = {
             TextButton(onClick = confirm) {
-                Text(text = stringResource(id = R.string.generic__button_text_delete))
+                Text(text = stringResource(id = CommonR.string.generic__button_text_delete))
             }
         }
     )

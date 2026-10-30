@@ -52,7 +52,8 @@ internal class Amp2HtmlLinkResolverTest : BaseUnitTest {
             rule.database.resolvedUrlCacheDao(),
             rule.database.resolveTypeDao(),
             rule.database.urlEntryDao(),
-            clock = Clock.System
+            clock = Clock.System,
+            incognitoMode = { false }
         )
     }
 

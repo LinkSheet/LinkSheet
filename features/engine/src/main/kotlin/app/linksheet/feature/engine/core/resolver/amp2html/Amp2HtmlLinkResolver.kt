@@ -36,7 +36,7 @@ class Amp2HtmlLinkResolver(
     }
 
     private suspend fun handleResult(
-        entryId: Long,
+        entryId: Long?,
         url: StdUrl,
         localCache: Boolean,
         result: IResult<Amp2HtmlResult>,
@@ -46,7 +46,7 @@ class Amp2HtmlLinkResolver(
         }
 
         val result = result.value
-        if (localCache) {
+        if (localCache && entryId != null) {
             insertCache(entryId, result)
         }
 
@@ -60,9 +60,9 @@ class Amp2HtmlLinkResolver(
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(url.toString())
 
-        if (localCache) {
+        if (localCache && entry != null) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.Amp2Html)
-            if (resolvedUrl != null && resolvedUrl.result != null) {
+            if (resolvedUrl?.result != null) {
                 return@withContext ResolveOutput(resolvedUrl.result.toStdUrlOrThrow())
             }
 
@@ -74,6 +74,6 @@ class Amp2HtmlLinkResolver(
         }
 
         val result = source.resolve(url)
-        handleResult(entry.id, url, localCache, result)
+        handleResult(entry?.id, url, localCache, result)
     }
 }

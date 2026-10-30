@@ -2,16 +2,21 @@ package fe.linksheet.module.log.file
 
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
-import fe.composekit.mozilla.components.support.base.log.Log
+import androidx.lifecycle.lifecycleScope
+import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.android.lifecycle.LifecycleAwareService
+import fe.composekit.mozilla.components.support.base.log.Log
 import fe.gson.extension.io.fromJsonOrNull
 import fe.gson.extension.io.toJson
 import fe.linksheet.module.log.FileLogSink
 import fe.linksheet.module.log.file.entry.LogEntry
+import fe.linksheet.util.LinkSheetLogSink
 import fe.std.javatime.extension.unixMillisUtc
 import fe.std.javatime.time.localizedString
 import fe.std.javatime.time.unixMillis
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.time.LocalDateTime
@@ -43,6 +48,7 @@ abstract class LogSession(
 internal class LogFileService(
     logDir: Lazy<File>,
     override val startupTime: LocalDateTime,
+    private val disableLogs: StateFlow<Boolean>,
     private val persistenceDisabled: () -> Boolean,
 ) : LogPersistService {
     private val logDir by logDir
@@ -78,7 +84,7 @@ internal class LogFileService(
         }
     }
 
-    val logEntries = mutableListOf<LogEntry>()
+    private val logEntries = mutableListOf<LogEntry>()
 
     fun readLogFile(name: String): List<LogEntry> {
         val logFile = File(logDir, name)
@@ -95,11 +101,19 @@ internal class LogFileService(
     }
 
     override fun write(entry: LogEntry) {
-        logEntries.add(entry)
+        synchronized(logEntries) {
+            logEntries.add(entry)
+        }
     }
 
     override fun readEntries(sessionId: String?): List<LogEntry> {
-        return if (sessionId == null) logEntries else readLogFile(sessionId)
+        return when (sessionId) {
+            null -> synchronized(logEntries) {
+                logEntries.toList()
+            }
+
+            else -> readLogFile(sessionId)
+        }
     }
 
     override fun getLogSessions(): List<LogFile> {
@@ -119,17 +133,38 @@ internal class LogFileService(
         return session.file.delete()
     }
 
-    override suspend fun onAppInitialized(owner: LifecycleOwner) = withContext(Dispatchers.IO) {
-        Log.addSink(FileLogSink(this@LogFileService))
+    override suspend fun onAppInitialized(owner: LifecycleOwner) {
+        val sink = LinkSheetLogSink(
+            logsDebug = StaticBuildInfo.IsDebug,
+            enabled = !disableLogs.value,
+            delegateToSink = FileLogSink(this@LogFileService)
+        )
+        Log.addSink(sink)
 
         val startupMillis = startupTime.minusWeeks(2).unixMillis.millis
-        getLogSessions().filter { it.millis < startupMillis }.forEach { delete(it) }
+        withContext(Dispatchers.IO) {
+            getLogSessions().filter { it.millis < startupMillis }.forEach { delete(it) }
+        }
+
+        owner.lifecycleScope.launch {
+            disableLogs.collect { disabled ->
+                LinkSheetLogSink.setEnabled(!disabled)
+                if (disabled) {
+                    synchronized(logEntries) {
+                        logEntries.clear()
+                    }
+                }
+            }
+        }
     }
 
-    override suspend fun onStop() = withContext(Dispatchers.IO) {
-        if (persistenceDisabled()) return@withContext
-        val immutable = logEntries.toList()
-        if (immutable.isNotEmpty()) {
+    override suspend fun onStop() {
+        if (persistenceDisabled()) return
+        val immutable = synchronized(logEntries) {
+            logEntries.toList()
+        }
+        if (immutable.isEmpty()) return
+        withContext(Dispatchers.IO) {
             LogFile.new(logDir).file.toJson(immutable)
         }
     }

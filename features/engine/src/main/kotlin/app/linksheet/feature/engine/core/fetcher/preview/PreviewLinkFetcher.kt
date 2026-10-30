@@ -1,9 +1,9 @@
 package app.linksheet.feature.engine.core.fetcher.preview
 
-import app.linksheet.feature.engine.database.entity.PreviewCache
-import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.engine.core.fetcher.AbstractLinkFetcher
 import app.linksheet.feature.engine.core.fetcher.ContextResultId
+import app.linksheet.feature.engine.database.entity.PreviewCache
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import fe.std.result.isFailure
 import fe.std.uri.StdUrl
 import kotlinx.coroutines.CoroutineDispatcher
@@ -65,20 +65,21 @@ class PreviewLinkFetcher(
 
     override suspend fun fetch(url: StdUrl): PreviewFetchResult? {
         val localCache = useLocalCache()
-        val entry = cacheRepository.getOrCreateCacheEntry(url.toString())
-        if (localCache) {
+        val urlStr = url.toString()
+        val entry = cacheRepository.getOrCreateCacheEntry(urlStr)
+        if (localCache && entry != null) {
             val cachedPreview = handleCached(entry.id, entry.url)
             if (cachedPreview != null) {
                 return cachedPreview
             }
         }
 
-        val result = source.fetch(entry.url)
+        val result = source.fetch(urlStr)
         if (result.isFailure()) {
-            return PreviewFetchResult.NoPreview(entry.url)
+            return PreviewFetchResult.NoPreview(urlStr)
         }
 
-        if (localCache) {
+        if (localCache && entry != null) {
             insertCache(entry.id, result.value)
         }
 

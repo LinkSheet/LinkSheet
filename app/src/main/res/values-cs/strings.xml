@@ -350,7 +350,6 @@
     <string name="settings_app_config__description_preferred_browser">Uživatelem zvolený upřednostňovaný prohlížeč</string>
     <string name="settings_edit_rule__title_edit_rule">Úprava pravidla</string>
     <string name="delete_log_dialog__title_delete_log">Odstranit relaci?</string>
-    <string name="generic__button_text_delete">Odstranit</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info_none_alt">
         <item quantity="one">%d zakázaný hostitel</item>
         <item quantity="few">%d zakázaní hostitelé</item>

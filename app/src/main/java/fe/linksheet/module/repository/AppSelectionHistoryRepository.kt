@@ -15,17 +15,20 @@ import kotlin.reflect.KClass
 
 
 class AppSelectionHistoryRepository(
-    private val dao: AppSelectionHistoryDao
+    private val dao: AppSelectionHistoryDao,
+    private val incognitoMode: () -> Boolean
 ) : ExportableRepository<AppSelectionHistory, AppSelectionHistoryExportModel> {
 
     override val modelClass: KClass<AppSelectionHistoryExportModel>
         get() = AppSelectionHistoryExportModel::class
 
-    suspend fun insert(appSelectionHistory: AppSelectionHistory): Long {
+    suspend fun insert(appSelectionHistory: AppSelectionHistory): Long? {
+        if (incognitoMode()) return null
         return dao.insertReplace(appSelectionHistory)
     }
 
-    suspend fun insert(appSelectionHistories: List<AppSelectionHistory>): List<Long> {
+    suspend fun insert(appSelectionHistories: List<AppSelectionHistory>): List<Long>? {
+        if (incognitoMode()) return null
         return dao.insertReplace(appSelectionHistories)
     }
 
@@ -56,6 +59,7 @@ class AppSelectionHistoryRepository(
         settings: ImportSettings,
         models: List<AppSelectionHistoryExportModel>
     ): List<Pair<AppSelectionHistory, Long>> {
+        if (incognitoMode()) return emptyList()
         return CommonImport.import(dao, settings, models) { it.fromExportModel() }
     }
 }

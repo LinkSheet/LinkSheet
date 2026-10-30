@@ -57,9 +57,9 @@ class FollowRedirectsLinkResolver(
         val localCache = useLocalCache()
         val entry = cacheRepository.getOrCreateCacheEntry(urlString)
 
-        if (localCache) {
+        if (localCache && entry != null) {
             val resolvedUrl = cacheRepository.getResolved(entry.id, ResolveType.FollowRedirects)
-            if (resolvedUrl != null && resolvedUrl.result != null) {
+            if (resolvedUrl?.result != null) {
                 return@withContext ResolveOutput(resolvedUrl.result.toStdUrlOrThrow())
             }
         }
@@ -69,7 +69,7 @@ class FollowRedirectsLinkResolver(
             return@withContext ResolveOutput(url)
         }
 
-        if (localCache) {
+        if (localCache && entry != null) {
             insertCache(entry.id, result.value)
         }
 

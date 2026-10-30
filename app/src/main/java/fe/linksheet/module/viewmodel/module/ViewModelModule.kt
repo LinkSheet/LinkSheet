@@ -1,33 +1,62 @@
-@file:OptIn(SensitivePreference::class, ExperimentalSerializationApi::class)
-
 package fe.linksheet.module.viewmodel.module
 
 
 import android.content.pm.getApplicationInfoCompatOrNull
-import app.linksheet.api.SensitivePreference
 import app.linksheet.api.SystemInfoService
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.exportimport.ExportImportUseCase
 import app.linksheet.feature.profile.ProfileFeatureModule
+import app.linksheet.module.viewmodel.privacy.PrivacyIncognitoSettingsViewModel
+import app.linksheet.module.viewmodel.privacy.PrivacySettingsViewModel
 import com.akuleshov7.ktoml.Toml
 import fe.droidkit.koin.getPackageManager
 import fe.gson.GsonQualifier
 import fe.linksheet.module.log.DefaultLogModule
 import fe.linksheet.module.repository.module.RepositoryModule
 import fe.linksheet.module.resolver.SelfIntentUseCase
-import fe.linksheet.module.viewmodel.*
+import fe.linksheet.module.viewmodel.AboutSettingsViewModel
+import fe.linksheet.module.viewmodel.Amp2HtmlSettingsViewModel
+import fe.linksheet.module.viewmodel.AppConfigViewModel
+import fe.linksheet.module.viewmodel.BottomSheetActionBarSettingsViewModel
+import fe.linksheet.module.viewmodel.BottomSheetSettingsViewModel
+import fe.linksheet.module.viewmodel.BottomSheetViewModel
+import fe.linksheet.module.viewmodel.ClipboardProxyViewModel
+import fe.linksheet.module.viewmodel.CrashHandlerViewerViewModel
+import fe.linksheet.module.viewmodel.DevSettingsViewModel
+import fe.linksheet.module.viewmodel.ExperimentsViewModel
+import fe.linksheet.module.viewmodel.FeatureFlagViewModel
+import fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel
+import fe.linksheet.module.viewmodel.GeneralSettingsViewModel
+import fe.linksheet.module.viewmodel.InAppBrowserSettingsViewModel
+import fe.linksheet.module.viewmodel.LanguageSettingsViewModel
+import fe.linksheet.module.viewmodel.LinksSettingsViewModel
+import fe.linksheet.module.viewmodel.LoadDumpedPreferencesViewModel
+import fe.linksheet.module.viewmodel.LogSettingsViewModel
+import fe.linksheet.module.viewmodel.LogTextSettingsViewModel
+import fe.linksheet.module.viewmodel.MainViewModel
+import fe.linksheet.module.viewmodel.NotificationSettingsViewModel
+import fe.linksheet.module.viewmodel.PreferredAppCompatHelper
+import fe.linksheet.module.viewmodel.PreferredBrowserViewModel
+import fe.linksheet.module.viewmodel.PretendToBeAppSettingsViewModel
+import fe.linksheet.module.viewmodel.PreviewSettingsViewModel
+import fe.linksheet.module.viewmodel.RootViewModel
+import fe.linksheet.module.viewmodel.SelectDomainsConfirmationViewModel
+import fe.linksheet.module.viewmodel.SettingsViewModel
+import fe.linksheet.module.viewmodel.SingleBrowserViewModel
+import fe.linksheet.module.viewmodel.SqlViewModel
+import fe.linksheet.module.viewmodel.ThemeSettingsViewModel
+import fe.linksheet.module.viewmodel.VerifiedLinkHandlerViewModel
+import fe.linksheet.module.viewmodel.VerifiedLinkHandlersViewModel
+import fe.linksheet.module.viewmodel.WhitelistedBrowsersViewModel
 import fe.linksheet.module.viewmodel.util.LogViewCommon
 import kotlinx.coroutines.Dispatchers
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.bind
 import org.koin.dsl.module
-import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalTime::class)
 val ViewModelModule = module {
     includes(
 //        PreferenceRepositoryModule,
@@ -105,6 +134,19 @@ val ViewModelModule = module {
     viewModelOf(::GeneralSettingsViewModel)
     viewModelOf(::LoadDumpedPreferencesViewModel)
     viewModelOf(::PrivacySettingsViewModel)
+    viewModel {
+        PrivacyIncognitoSettingsViewModel(
+            context = get(),
+            preferenceRepository = get(),
+            amp2HtmlRepository = get(),
+            resolvedRedirectRepository = get(),
+            appSelectionHistoryRepository =get(),
+            preferredAppRepository = get(),
+            cacheRepository = get(),
+            logPersistService = get(),
+            ioDispatcher = Dispatchers.IO
+        )
+    }
 
     viewModel {
         AboutSettingsViewModel(
@@ -118,7 +160,6 @@ val ViewModelModule = module {
         DevSettingsViewModel(
             context = get(),
             preferenceRepository = get(),
-            experimentRepository = get(),
             shizukuStatusUseCase = get(),
             shizukuFeatureService = get(),
             miuiCompatProvider = get(),

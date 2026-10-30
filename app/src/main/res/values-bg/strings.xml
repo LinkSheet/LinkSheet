@@ -414,7 +414,6 @@
     <string name="settings_new_rule__title_new_rule">Ново правило</string>
     <string name="delete_log_dialog__title_delete_log">Премахване на сеанс?</string>
     <string name="settings_app_config_rules__title_default_rule">Подразбирано правило</string>
-    <string name="generic__button_text_delete">Премахване</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="one">%d хост: %s</item>
         <item quantity="other">%d хоста: %s</item>

@@ -358,6 +358,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             AppPreferenceRepository::class
         ),
         definition<SelectDomainsConfirmationViewModel>(AllAppsUseCase::class),
+        definition<BottomSheetActionBarSettingsViewModel>(AppPreferenceRepository::class),
         definition<LibRedirectUserInstanceRepository>(LibRedirectUserInstanceDao::class),
         definition<ProfileService>(MetaDataHandler::class),
         definition<ExportImportUseCase>(PreferenceRepository::class, Json::class, Toml::class),

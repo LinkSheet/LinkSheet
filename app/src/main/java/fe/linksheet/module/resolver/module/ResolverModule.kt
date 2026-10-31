@@ -24,7 +24,6 @@ import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.DefaultIntentLauncher
 import fe.linksheet.module.resolver.util.IntentLauncher
 import kotlinx.coroutines.flow.firstOrNull
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import kotlin.time.ExperimentalTime
 
@@ -47,7 +46,9 @@ val ResolverModule = module {
             selfPackage = BuildConfig.APPLICATION_ID
         )
     }
-    singleOf(::InAppBrowserHandler)
+    single<InAppBrowserHandler> {
+        InAppBrowserHandler(repository = get())
+    }
     single<IntentResolver> {
         val settings = createSettings(get(), get(), get(), get())
         val experimentRepository = get<ExperimentRepository>()

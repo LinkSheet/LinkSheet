@@ -184,7 +184,7 @@ class LinkEngineIntentResolver(
 
 
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(
-            referrer = options.referrer,
+            referrer = referringPackage,
             inAppBrowserMode = browserSettings.inAppBrowserSettings()
         )
         val customTab = CustomTabHandler.getInfo2(intent, allowCustomTab)

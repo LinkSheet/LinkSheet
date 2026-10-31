@@ -273,7 +273,7 @@ class ImprovedIntentResolver(
         }
 
         val allowCustomTab = inAppBrowserHandler.shouldAllowCustomTab(
-            referrer = options.referrer,
+            referrer = referringPackage,
             inAppBrowserMode = browserSettings.inAppBrowserSettings()
         )
         val (customTab, dropExtras) = CustomTabHandler.getInfo(intent, allowCustomTab)

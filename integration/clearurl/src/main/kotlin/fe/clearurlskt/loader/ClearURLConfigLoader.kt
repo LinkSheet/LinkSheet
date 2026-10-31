@@ -3,7 +3,7 @@ package fe.clearurlskt.loader
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import fe.clearurlskt.Resource
-import fe.clearurlskt.provider.Provider
+import fe.clearurlskt.provider.ProviderV1
 import fe.clearurlskt.provider.ProviderSerializer
 import fe.signify.Ed25519
 import fe.signify.Ed25519PublicKey
@@ -15,7 +15,7 @@ import java.io.InputStream
 import java.net.URL
 
 public interface ClearURLConfigLoader {
-    public fun load(): StdResult<List<Provider>?>
+    public fun load(): StdResult<List<ProviderV1>?>
 }
 
 public object BundledClearURLConfigLoader : ClearURLConfigLoader {
@@ -37,7 +37,7 @@ public object BundledClearURLConfigLoader : ClearURLConfigLoader {
         return ClassLoader.getSystemResource(filePath)
     }
 
-    override fun load(): StdResult<List<Provider>?> {
+    override fun load(): StdResult<List<ProviderV1>?> {
         if (url == null) return +LoaderException.UrlNull()
         val stream = url!!.openStream()
         return tryCatch {
@@ -49,7 +49,7 @@ public object BundledClearURLConfigLoader : ClearURLConfigLoader {
 }
 
 public class StreamClearURLConfigLoader(private val stream: InputStream) : ClearURLConfigLoader {
-    override fun load(): StdResult<List<Provider>?> {
+    override fun load(): StdResult<List<ProviderV1>?> {
         return tryCatch {
             ProviderSerializer.handle(stream)
         }

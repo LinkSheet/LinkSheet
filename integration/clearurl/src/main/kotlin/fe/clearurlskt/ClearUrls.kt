@@ -1,10 +1,8 @@
 package fe.clearurlskt
 
 
-import fe.clearurlskt.Modification.ParameterRemoval
-import fe.clearurlskt.Modification.RawRule
-import fe.clearurlskt.Modification.Redirection
-import fe.clearurlskt.provider.Provider
+import fe.clearurlskt.Modification.*
+import fe.clearurlskt.provider.*
 import fe.clearurlskt.util.keyValueMapToString
 import fe.clearurlskt.util.toFragmentMap
 import fe.relocated.org.apache.hc.core5.core5.net.PercentCodec
@@ -16,7 +14,6 @@ import fe.std.uri.extension.buildUrl
 
 public class ClearUrls(
     private val providers: List<Provider>,
-    private val skipUnchanged: () -> Boolean = { true },
 ) {
     private suspend fun SequenceScope<ClearUrlOperation>.isException(
         provider: Provider,
@@ -69,28 +66,22 @@ public class ClearUrls(
         return mutUrl
     }
 
-    private fun MutableList<Pair<String, String?>>.removeIfKey(predicate: (String) -> Boolean): MutableSet<String> {
+    private fun MutableList<Pair<String, String?>>.removeIf(predicate: (String, String?) -> Boolean): MutableSet<String> {
         val removeKeys = mutableSetOf<String>()
-        for (pair in this) {
-            if (!predicate(pair.first)) continue
-            removeKeys.add(pair.first)
-        }
-
-        for (key in removeKeys) {
-            removeIf { key == it.first }
-        }
-
-        return removeKeys
-    }
-
-    private fun <K, V> MutableMap<K, V>.removeIfKey(predicate: (K) -> Boolean): MutableSet<K> {
-        val removeKeys = mutableSetOf<K>()
-        for (key in keys) {
-            if (!predicate(key)) continue
+        for ((key, value) in this) {
+            if (!predicate(key, value)) continue
             removeKeys.add(key)
         }
 
-        for (key in removeKeys) {
+        removeAll { (k, _) -> k in removeKeys }
+        return removeKeys
+    }
+
+    private fun <K, V> MutableMap<K, V>.removeIf(predicate: (K, V) -> Boolean): MutableSet<K> {
+        val removeKeys = mutableSetOf<K>()
+        for ((key, value) in this) {
+            if (!predicate(key, value)) continue
+            removeKeys.add(key)
             remove(key)
         }
 
@@ -110,9 +101,22 @@ public class ClearUrls(
 
         if (fields.isEmpty() && fragments.isEmpty()) return null
 
-        for (rule in provider.rules) {
-            fieldChanges.addAll(fields.removeIfKey { rule.containsMatchIn(it) })
-            fragmentChanges.addAll(fragments.removeIfKey { rule.containsMatchIn(it) })
+        if (provider is ProviderV1) {
+            for (rule in provider.rules) {
+                fieldChanges.addAll(fields.removeIf { key, _ -> rule.containsMatchIn(key) })
+                fragmentChanges.addAll(fragments.removeIf { key, _ -> rule.containsMatchIn(key) })
+            }
+        } else if (provider is ProviderV2) {
+            for (rule in provider.rules) {
+                if (RuleType.QueryParameter in rule.ruleType) {
+                    val changes = fields.removeIf { k, v -> matchRuleV2(rule, k, v) }
+                    fieldChanges.addAll(changes)
+                }
+                if (RuleType.Fragment in rule.ruleType) {
+                    val changes = fragments.removeIf { k, v -> matchRuleV2(rule, k, v) }
+                    fragmentChanges.addAll(changes)
+                }
+            }
         }
         if (settings.skipUnchanged) {
             if (fieldChanges.isEmpty() && fragmentChanges.isEmpty()) return null
@@ -168,6 +172,45 @@ public class ClearUrls(
         }
 
         return mutUrl
+    }
+
+    private fun matchRuleV2(rule: RuleV2, key: String, value: String?): Boolean {
+        if (rule is RegexRule) {
+            return rule.regex.containsMatchIn(key)
+        }
+        if (rule !is ComplexRule) {
+            return false
+        }
+
+        fun handleMatcher(matcher: Matcher, str: String): Boolean {
+            for (condition in matcher.conditions) {
+                when (condition) {
+                    is LengthExactMatchCondition if (str.length != condition.length) -> {
+                        return false
+                    }
+
+                    is RegexMatchCondition if (!condition.regex.containsMatchIn(str)) -> {
+                        return false
+                    }
+
+                    else -> {
+                        // fine, continue
+                    }
+                }
+            }
+            return true
+        }
+
+        if (rule.keyMatcher != null && !handleMatcher(rule.keyMatcher, key)) {
+            return false
+        }
+
+        // TODO: is it a good idea to treat absent values as an empty string? (values are only ever null for fragments)
+        if (rule.valueMatcher != null && !handleMatcher(rule.valueMatcher, value ?: "")) {
+            return false
+        }
+
+        return true
     }
 
     public fun clearUrl(

@@ -4,7 +4,11 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import fe.gson.extension.io.parseJsonOrNull
 import fe.gson.extension.json.array.elementsOrNull
-import fe.gson.extension.json.`object`.*
+import fe.gson.extension.json.`object`.asArray
+import fe.gson.extension.json.`object`.asBooleanOrNull
+import fe.gson.extension.json.`object`.asObjectOrNull
+import fe.gson.extension.json.`object`.asString
+import fe.gson.extension.json.`object`.elements
 import java.io.InputStream
 
 public object ProviderSerializer {
@@ -19,8 +23,8 @@ public object ProviderSerializer {
             .mapNotNull { it?.asString?.toIgnoreCaseRegex(exactly) }
     }
 
-    internal fun createProviderFromObject(key: String, index: Int, obj: JsonObject): Provider {
-        return Provider(
+    internal fun createProviderFromObject(key: String, index: Int, obj: JsonObject): ProviderV1 {
+        return ProviderV1(
             // make sure the globalRules provider is the last one in the list and used as a fallback
             sortPosition = if (key == "globalRules") Int.MAX_VALUE else index,
             key,
@@ -34,14 +38,14 @@ public object ProviderSerializer {
         )
     }
 
-    private fun handleProviders(providers: JsonObject): List<Provider> {
+    private fun handleProviders(providers: JsonObject): List<ProviderV1> {
         return providers
             .elements<JsonObject>()
             .mapIndexed { idx, (key, obj) -> createProviderFromObject(key, idx, obj) }
             .sortedBy { it.sortPosition }
     }
 
-    public fun handle(stream: InputStream): List<Provider>? {
+    public fun handle(stream: InputStream): List<ProviderV1>? {
         return stream
             .parseJsonOrNull<JsonObject>()
             ?.asObjectOrNull("providers")

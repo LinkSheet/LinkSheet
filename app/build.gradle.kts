@@ -364,8 +364,8 @@ dependencies {
 
 //    implementation(LinkSheet.flavors.core)
 //    implementation(LinkSheet.flavors.interconnect.core)
-    implementation("com.github.LinkSheet.flavors:interconnect-core:_")
-    implementation("com.github.LinkSheet.flavors:core:_")
+    implementation("com.github.linksheet.flavors:interconnect-core:_")
+    implementation("com.github.linksheet.flavors:core:_")
 
     implementation(JetBrains.ktor.client.core)
     implementation(JetBrains.ktor.client.gson)
@@ -436,7 +436,7 @@ dependencies {
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
-    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:_")
+    implementation("com.github.1fexd.hiddenapirefineplugin:runtime:_")
 
     implementation(KotlinX.serialization.json)
     implementation(KotlinX.serialization.json.okio)

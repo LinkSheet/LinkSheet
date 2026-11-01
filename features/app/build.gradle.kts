@@ -52,7 +52,7 @@ dependencies {
     implementation(_1fexd.composeKit.compose.core)
     implementation(_1fexd.composeKit.compose.component)
     implementation(_1fexd.composeKit.koin)
-    implementation("com.github.LinkSheet.flavors:core:_")
+    implementation("com.github.linksheet.flavors:core:_")
 
     implementation(Grrfe.gsonExt.core)
     implementation("io.github.reandroid:ARSCLib:_")

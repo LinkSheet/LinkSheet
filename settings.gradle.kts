@@ -1,13 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.gitlab.grrfe.gradlebuild.config.configureRepositories
-import com.gitlab.grrfe.gradlebuild.repository.GradlePluginPortalRepository
-import com.gitlab.grrfe.gradlebuild.repository.MavenRepository
-import com.gitlab.grrfe.gradlebuild.repository.google
-import com.gitlab.grrfe.gradlebuild.repository.jitpack
-import com.gitlab.grrfe.gradlebuild.repository.local
-import com.gitlab.grrfe.gradlebuild.repository.mavenCentral
-import com.gitlab.grrfe.gradlebuild.repository.mozilla
+import com.gitlab.grrfe.gradlebuild.repository.*
 import fe.build.dependencies.Grrfe
 import fe.build.dependencies.LinkSheet
 import fe.build.dependencies._1fexd
@@ -52,7 +46,7 @@ pluginManagement {
     }
     resolveDetails.add {
         if (requested.id.id == "dev.rikka.tools.refine") {
-            useModule("com.github.1fexd.HiddenApiRefinePlugin:dev.rikka.tools.refine.gradle.plugin:4.4.1")
+            useModule("com.github.1fexd.hiddenapirefineplugin:dev.rikka.tools.refine.gradle.plugin:4.4.1")
         }
     }
 
@@ -70,9 +64,12 @@ plugins {
 }
 
 configureRepositories(
-    MavenRepository.local(),
+//    MavenRepository.local(),
     MavenRepository.google(),
     MavenRepository.mavenCentral(),
+    GrrfeRepository.std(),
+    GrrfeRepository.gsonExt(),
+    GrrfeRepository.signifykt(),
     MavenRepository.jitpack(),
     MavenRepository.mozilla(),
     MavenRepository("https://oss.sonatype.org/content/repositories/snapshots"),

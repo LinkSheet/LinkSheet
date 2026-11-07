@@ -104,7 +104,6 @@
     <string name="github_explainer">ソースコードリポジトリ</string>
     <string name="open_copied_link">クリップボードから</string>
     <string name="links_explainer">ClearUrls、LibRedirect、リダイレクトの許可</string>
-    <string name="use_clear_urls_explainer">実験的な <annotation url-id="clearurls-github">ClearURLs</annotation> 統合を使用します (URL から追跡パラメータを除去します)</string>
     <string name="follow_redirects_external_service">外部サービス経由でリダイレクトを追跡</string>
     <string name="follow_only_known_trackers">既知のトラッカーだけを許可する</string>
     <string name="follow_only_known_trackers_explainer">特定のウェブサイトがトラッカーやリダイレクトであることが判明している場合にのみリダイレクトを試みます。「外部サービスを介してリダイレクトを許可する」が有効になっている場合、これは常に有効になります</string>
@@ -114,7 +113,6 @@
     <string name="apps_which_can_open_links">デフォルトで開く</string>
     <string name="app_browsers_subtitle">優先アプリ、ブラウザの設定</string>
     <string name="donate_subtitle"><b>LinkSheet Pro</b> にアップグレード</string>
-    <string name="use_clear_urls">ClearURLs を使用する</string>
     <string name="follow_redirects_explainer">ボトムシートを開く前に、すべてのリダイレクトを自動的に実行します。<annotation url-id="privacy-follow-redirects">プライバシーに悪影響</annotation>を及ぼす可能性があります</string>
     <string name="preferred_apps_settings">サポートされているウェブリンクの優先アプリを設定</string>
     <string name="follow_redirects_external_service_explainer">supabase.com にデプロイされた API を使用してリダイレクトを追跡します (<annotation url-id="supabase-privacy">プライバシーポリシー</annotation>)</string>

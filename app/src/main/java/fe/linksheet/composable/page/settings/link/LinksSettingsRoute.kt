@@ -5,6 +5,7 @@ import androidx.compose.ui.res.stringResource
 import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
+import app.linksheet.feature.clearurls.ui.clearURLsListItem
 import app.linksheet.feature.libredirect.navigation.LibRedirectRoute
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
@@ -17,7 +18,6 @@ import fe.linksheet.navigation.followRedirectsSettingsRoute
 import org.koin.androidx.compose.koinViewModel
 import app.linksheet.feature.libredirect.R as LibRedirectR
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun LinksSettingsRoute(
     onBackPressed: () -> Unit,
@@ -30,15 +30,7 @@ fun LinksSettingsRoute(
         onBackPressed = onBackPressed
     ) {
         group(size = 6) {
-            item(key = R.string.use_clear_urls) { padding, shape ->
-                PreferenceSwitchListItem(
-                    shape = shape,
-                    padding = padding,
-                    statePreference = viewModel.useClearUrls,
-                    headlineContent = textContent(R.string.use_clear_urls),
-                    supportingContent = annotatedStringResource(R.string.use_clear_urls_explainer),
-                )
-            }
+            clearURLsListItem(statePreference = viewModel.useClearUrls, navigate = navigateNew)
 
             item(key = R.string.fastfoward_rules) { padding, shape ->
                 PreferenceSwitchListItem(

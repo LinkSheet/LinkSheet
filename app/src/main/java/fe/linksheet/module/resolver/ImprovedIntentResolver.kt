@@ -11,7 +11,7 @@ import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
 import app.linksheet.feature.app.core.labelSorted
 import app.linksheet.feature.browser.core.PrivateBrowsingService
-import app.linksheet.feature.clearurls.ClearUrlsProviderLoader
+import app.linksheet.feature.clearurls.core.ClearUrlsProviderLoader
 import app.linksheet.feature.downloader.core.DownloadCheckResult
 import app.linksheet.feature.downloader.core.Downloader
 import app.linksheet.feature.downloader.core.DownloaderMode
@@ -21,6 +21,7 @@ import app.linksheet.feature.libredirect.LibRedirectResolver
 import app.linksheet.feature.libredirect.LibRedirectResult
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.mozilla.components.support.utils.SafeIntent
+import app.linksheet.util.SuspendingLazy
 import fe.clearurlskt.ClearUrlSettings
 import fe.clearurlskt.ClearUrls
 import fe.composekit.core.AndroidAppPackage
@@ -41,7 +42,6 @@ import fe.linksheet.module.resolver.urlresolver.base.UrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
-import app.linksheet.util.SuspendingLazy
 import fe.linksheet.util.intent.cloneIntent
 import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.parser.UriException

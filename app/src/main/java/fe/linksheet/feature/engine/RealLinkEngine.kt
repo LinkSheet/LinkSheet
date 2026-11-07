@@ -6,7 +6,7 @@ import android.content.Context
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
 import app.linksheet.feature.browser.core.PrivateBrowsingService
-import app.linksheet.feature.clearurls.ClearUrlsProviderLoader
+import app.linksheet.feature.clearurls.core.ClearUrlsProviderLoader
 import app.linksheet.feature.downloader.core.Downloader
 import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.core.EngineScenario
@@ -39,7 +39,7 @@ import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map

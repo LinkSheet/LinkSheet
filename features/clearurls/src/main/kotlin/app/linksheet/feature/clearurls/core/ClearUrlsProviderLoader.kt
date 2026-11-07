@@ -1,10 +1,10 @@
-package app.linksheet.feature.clearurls
+package app.linksheet.feature.clearurls.core
 
 import android.content.Context
+import app.linksheet.feature.clearurls.R
 import fe.clearurlskt.config.provider.ClearUrlBundleSerializer
 import fe.clearurlskt.config.provider.ClearUrlV1Bundle
 import fe.clearurlskt.config.provider.Provider
-import fe.linksheet.R
 import fe.std.result.StdResult
 import fe.std.result.isFailure
 import fe.std.result.tryCatch

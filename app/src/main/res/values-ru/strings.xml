@@ -8,11 +8,9 @@
     <string name="include_settings">Включить настройки (рекомендуется)</string>
     <string name="download_started">Загрузка началась</string>
     <string name="close">Закрыть</string>
-    <string name="use_clear_urls">Использовать ClearURLs</string>
     <string name="opening_with_app">Открытие с помощью %s</string>
     <string name="save">Сохранить</string>
     <string name="enable_amp2html">Включить Amp2Html</string>
-    <string name="use_clear_urls_explainer">Использовать экспериментальную интеграцию <annotation url-id="clearurls-github">ClearURLs</annotation> (удаляет параметры отслеживания из URL-адресов)</string>
     <string name="follow_only_known_trackers_explainer">Попытаться следовать перенаправлениям только в том случае, если известно, что хост является трекером/перенаправлением. Если включен параметр «Следовать за перенаправлениями через внешний сервис», то он всегда будет включен.</string>
     <string name="always_disable">Всегда отключать</string>
     <string name="copy_to_clipboard">Скопировать в буфер обмена</string>

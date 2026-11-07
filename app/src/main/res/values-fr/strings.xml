@@ -7,7 +7,6 @@
     <string name="app_browsers_subtitle">Applications préférées, Paramètres du navigateur</string>
     <string name="always_show_package_name_explainer">Toujours afficher le nom des paquets au lieu du noms des applications. Cela s\'applique à l\'ensemble de l\'application.</string>
     <string name="github_explainer">Référentiel du code source</string>
-    <string name="use_clear_urls_explainer">Utiliser l\'intégration expérimentale <annotation url-id="clearurls-github">ClearURLs</annotation> (efface les paramètres de suivi des Url)</string>
     <string name="usage_stats_sorting_explainer">Inclure les statistiques d\'utilisation du système Android dans l\'algorithme de tri. L\'autorisation est demandée lors de la première activation.</string>
     <string name="open_with">Ouvrir avec</string>
     <string name="set_as_browser_explainer">Cliquez ici pour faire de LinkSheet le navigateur par défaut</string>
@@ -63,7 +62,6 @@
     <string name="open_copied_link">À partir du presse-papiers</string>
     <string name="paste">Coller</string>
     <string name="links">Liens</string>
-    <string name="use_clear_urls">Utiliser ClearURLs</string>
     <string name="follow_redirects">Suivre les redirections</string>
     <string name="follow_redirects_explainer">Suivre automatiquement toutes les redirections avant d\'ouvrir la feuille de fond. Cela peut avoir des <annotation url-id="privacy-follow-redirects"> implications liées à la vie privée</annotation></string>
     <string name="loading_link">Traitement du lien…</string>

@@ -94,6 +94,7 @@ buildSettings {
             includeProject(":feature-backup-impl", "impl")
         }
         includeProject(":feature-browser", "browser")
+        includeProject(":feature-clearurls", "clearurls")
         includeProject(":feature-engine", "engine")
         includeProject(":feature-devicecompat", "devicecompat")
         includeProject(":feature-downloader", "downloader")

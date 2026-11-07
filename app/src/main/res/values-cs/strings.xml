@@ -31,7 +31,6 @@
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="version">Verze aplikace LinkSheet</string>
     <string name="github_explainer">Repozitář se zdrojovým kódem</string>
-    <string name="use_clear_urls">Použít ClearURLs</string>
     <string name="follow_redirects">Následovat přesměrování</string>
     <string name="follow_redirects_explainer">Automaticky následovat všechna přesměrování před otevřením spodního listu. Tato funkce může mít <annotation url-id="privacy-follow-redirects">následky na vaše soukromí</annotation></string>
     <string name="loading_link">Zpracovávání odkazu…</string>
@@ -74,7 +73,6 @@
     <string name="github">GitHub</string>
     <string name="open_copied_link">Ze schránky</string>
     <string name="links">Odkazy</string>
-    <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url-id="clearurls-github">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
     <string name="follow_redirects_external_service_explainer">Následovat odkazy pomocí rozhraní API provozovaného na supabase.com (<annotation url-id="supabase-privacy">zásady ochrany soukromí</annotation>)</string>
     <string name="follow_only_known_trackers_explainer">Pokusit se o následování přesměrování pouze v případě, že je známo, že hostitel je sledovací stránka/přesměrování. Pokud je povoleno „Následovat přesměrování skrze externí službu“, bude tato funkce vždy povolena</string>
     <string name="theme">Motiv</string>

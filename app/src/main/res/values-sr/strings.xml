@@ -12,12 +12,10 @@
     <string name="no_browser_installed">Ниједан прегледач није инсталиран</string>
     <string name="download_started">Преузимање је започето</string>
     <string name="close">Затвори</string>
-    <string name="use_clear_urls">Користи ClearURLs</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet је открио најмање једну апликацију за коју се зна да је прегледач.</string>
     <string name="opening_with_app">Отварање помоћу %s</string>
     <string name="save">Сачувај</string>
     <string name="enable_amp2html">Омогући Amp2Html</string>
-    <string name="use_clear_urls_explainer">Користите експерименталну интеграцију <annotation url-id="clearurls-github">ClearURLs</annotation> (брише параметре праћења са URL адреса)</string>
     <string name="follow_only_known_trackers_explainer">Покушајте да пратите преусмеравања само када је познато да је хост програм за праћење/преусмеравање. Ако је омогућено „Прати преусмеравања путем спољне услуге“, ово ће увек бити омогућено</string>
     <string name="always_disable">Присилно онемогући</string>
     <string name="copy_to_clipboard">Копирај у привремену меморију</string>

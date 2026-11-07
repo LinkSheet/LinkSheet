@@ -4,7 +4,6 @@ import android.app.usage.UsageStatsManager
 import app.linksheet.api.SensitivePreference
 import app.linksheet.api.preference.AppPreferenceRepository
 import app.linksheet.feature.app.core.AppInfoCreator
-import app.linksheet.feature.clearurls.ClearUrlsProviderLoader
 import app.linksheet.feature.downloader.core.DownloaderMode
 import fe.composekit.preference.asFunction
 import fe.droidkit.koin.getPackageManager
@@ -22,12 +21,10 @@ import fe.linksheet.module.resolver.browser.BrowserMode
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.DefaultIntentLauncher
 import fe.linksheet.module.resolver.util.IntentLauncher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
 import org.koin.dsl.module
 
 val ResolverModule = module {
-    single { ClearUrlsProviderLoader(context = get(), ioDispatcher = Dispatchers.IO) }
     single {
         ImprovedBrowserHandler()
     }

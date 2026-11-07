@@ -66,7 +66,7 @@
     <string name="links">Links</string>
     <string name="links_explainer">ClearURLs, LibRedirect, Redirect following</string>
     <string name="use_clear_urls">Use ClearURLs</string>
-    <string name="use_clear_urls_explainer">Use experimental <annotation url-id="clearurls-github">ClearURLs</annotation> integration (clears tracking parameters from URLs)</string>
+    <string name="use_clear_urls_explainer">Use <annotation url-id="clearurls-github">ClearURLs</annotation> integration to clear tracking parameters from URLs</string>
     <string name="follow_redirects">Follow redirects</string>
     <string name="follow_redirects_explainer">Automatically follow all redirects before opening bottom sheet. This may have <annotation url-id="privacy-follow-redirects">privacy-related implications</annotation></string>
     <string name="loading_link">Processing link…</string>

@@ -4,6 +4,7 @@ import android.content.Context
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
 import app.linksheet.feature.browser.core.PrivateBrowsingService
+import app.linksheet.feature.clearurls.ClearUrlsProviderLoader
 import app.linksheet.feature.downloader.core.Downloader
 import app.linksheet.feature.engine.core.EngineScenario
 import app.linksheet.feature.engine.core.LinkEngine
@@ -38,6 +39,7 @@ import kotlin.uuid.ExperimentalUuidApi
 fun DefaultLinkEngineIntentResolver(
     context: Context,
     client: HttpClient,
+    clearUrlsProviderLoader: ClearUrlsProviderLoader,
     appSelectionHistoryRepository: AppSelectionHistoryRepository,
     preferredAppRepository: PreferredAppRepository,
     packageIntentHandler: PackageIntentHandler,
@@ -68,6 +70,7 @@ fun DefaultLinkEngineIntentResolver(
             ClearURLsLinkModifier(
                 enabled = settings.useClearUrls,
                 skipUnchanged = settings.clearUrlsSkipUnchanged,
+                getProviders = clearUrlsProviderLoader::getProviders,
                 ioDispatcher = dispatcher
             ),
             FollowRedirectsLinkResolver(

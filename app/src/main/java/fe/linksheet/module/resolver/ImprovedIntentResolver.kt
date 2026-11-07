@@ -11,6 +11,7 @@ import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
 import app.linksheet.feature.app.core.labelSorted
 import app.linksheet.feature.browser.core.PrivateBrowsingService
+import app.linksheet.feature.clearurls.ClearUrlsProviderLoader
 import app.linksheet.feature.downloader.core.DownloadCheckResult
 import app.linksheet.feature.downloader.core.Downloader
 import app.linksheet.feature.downloader.core.DownloaderMode
@@ -22,7 +23,6 @@ import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 import fe.clearurlskt.ClearUrlSettings
 import fe.clearurlskt.ClearUrls
-import fe.clearurlskt.loader.BundledClearURLConfigLoader
 import fe.composekit.core.AndroidAppPackage
 import fe.composekit.core.AndroidPackageUri
 import fe.composekit.core.Scheme
@@ -41,6 +41,7 @@ import fe.linksheet.module.resolver.urlresolver.base.UrlResolver
 import fe.linksheet.module.resolver.util.AppSorter
 import fe.linksheet.module.resolver.util.CustomTabHandler
 import fe.linksheet.module.resolver.util.IntentSanitizer
+import app.linksheet.util.SuspendingLazy
 import fe.linksheet.util.intent.cloneIntent
 import fe.linksheet.util.intent.parser.IntentParser
 import fe.linksheet.util.intent.parser.UriException
@@ -56,6 +57,7 @@ import me.saket.unfurl.Unfurler
 @Stable
 class ImprovedIntentResolver(
     val context: Context,
+    private val clearUrlsProviderLoader: ClearUrlsProviderLoader,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val appInfoCreator: AppInfoCreator,
@@ -497,7 +499,6 @@ class ImprovedIntentResolver(
 
     companion object {
         // TODO: Is this a good idea? Do we leak memory? (=> also check libredirect settings)
-        private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull() }
         private val embedResolverConfig by lazy {
             BundledEmbedResolveConfigLoader.load().getOrNull()
         }
@@ -545,17 +546,23 @@ class ImprovedIntentResolver(
             }
         }
     }
+    private val clearUrls = SuspendingLazy {
+        val result = clearUrlsProviderLoader.getProviders()
+        // TODO: Log this
+        if (result.isFailure()) return@SuspendingLazy null
+        ClearUrls(result.value)
+    }
 
-    private val clearUrls by lazy { clearUrlProviders?.let { ClearUrls(it) } }
+//    private val clearUrls by lazy { ClearUrls(clearUrlsProviderLoader.getProviders()) }
     private val embedResolver by lazy { embedResolverConfig?.let { EmbedResolver(it) } }
 
     override suspend fun warmup(): Unit = withContext(Dispatchers.IO) {
-        clearUrlProviders
+        clearUrls.value()
         embedResolverConfig
         libRedirectResolver.warmup()
     }
 
-    private fun runUriModifiers(
+    private suspend fun runUriModifiers(
         uri: Uri?,
         resolveEmbeds: Boolean,
         clearUrl: Boolean,
@@ -576,7 +583,12 @@ class ImprovedIntentResolver(
         if (clearUrl && clearUrls == null) {
             logger.error("ClearURLs is enabled, but rules failed to load, ignoring..")
         }
-        runUriModifier(clearUrl) { clearUrls?.clearUrl(url, ClearUrlSettings(skipUnchanged = skipUnchanged)) }?.let { url = it.first }
+        runUriModifier(clearUrl) {
+            clearUrls.value()?.clearUrl(
+                url,
+                ClearUrlSettings(skipUnchanged = skipUnchanged)
+            )
+        }?.let { url = it.first }
 
         return runCatching { Uri.parse(url) }.getOrNull()
     }

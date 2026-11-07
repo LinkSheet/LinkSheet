@@ -283,7 +283,7 @@ dependencies {
     implementation(project(":feature-profile"))
     implementation(project(":feature-remoteconfig"))
     implementation(project(":feature-wiki"))
-    implementation(project(":integration-clearurl"))
+    implementation("com.github.1fexd.clearurlkt:core:_")
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
     implementation("androidx.sqlite:sqlite-bundled:_")

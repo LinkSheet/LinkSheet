@@ -28,6 +28,21 @@ subprojects {
             extensions.findByType<TestExtension>()?.packaging?.configurePickFirsts()
         }
 
+        // Via https://github.com/tyejaedon/TigerPlayer/pull/114:
+
+        // Robolectric's FileDescriptorInterceptor reflectively reaches into the JDK-internal
+        // jdk.internal.access.SharedSecrets class while shimming android.os.SharedMemory on JDK 17+.
+        // That package isn't exported to unnamed modules by default, so every Robolectric test fails
+        // during environment setup with "Failed to interact with raw FileDescriptor internals" unless
+        // the test JVM explicitly opens it up. See issue #113 and robolectric/robolectric#11434.
+        tasks.withType<Test>().configureEach {
+            jvmArgs(
+                "--add-exports=java.base/jdk.internal.access=ALL-UNNAMED",
+                "--add-opens=java.base/java.io=ALL-UNNAMED",
+                "--add-opens=java.base/java.lang=ALL-UNNAMED",
+            )
+        }
+
         dependencies {
             configurations.findByName("implementation")?.let { implementation ->
                 implementation(platform(LinkSheet.flavors.bom))

@@ -34,6 +34,7 @@ dependencies {
     implementation(project(":lib-api"))
     implementation(project(":lib-util"))
     implementation(project(":lib-compose"))
+    implementation(project(":lib-github"))
 
     implementation("androidx.room3:room3-runtime:_")
     ksp("androidx.room3:room3-compiler:_")
@@ -53,15 +54,6 @@ dependencies {
     implementation(Grrfe.std.time.java)
     implementation(Grrfe.std.result.core)
     implementation("com.github.jeziellago:compose-markdown:_")
-    implementation(JetBrains.ktor.client.core)
-    implementation(JetBrains.ktor.client.gson)
-    implementation(JetBrains.ktor.client.okHttp)
-    implementation(JetBrains.ktor.client.android)
-    implementation(JetBrains.ktor.client.logging)
-    implementation(JetBrains.ktor.client.contentNegotiation)
-    implementation(JetBrains.ktor.client.json)
-    implementation(JetBrains.ktor.client.encoding)
-    implementation(JetBrains.ktor.plugins.serialization.gson)
 
     testImplementation(AndroidX.test.ext.junit.ktx)
     testImplementation(project(":test-core"))

@@ -120,6 +120,7 @@ buildSettings {
         includeProject(":lib-util", "util")
         includeProject(":lib-api", "api")
         includeProject(":lib-compose", "compose")
+        includeProject(":lib-github", "github")
     }
     projects("test-lib") {
         includeProject(":test-instrument", "instrument")

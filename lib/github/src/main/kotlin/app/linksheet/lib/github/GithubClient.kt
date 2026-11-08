@@ -1,16 +1,15 @@
-package app.linksheet.feature.wiki.core
+package app.linksheet.lib.github
 
-import app.linksheet.feature.wiki.core.model.ReleaseByTagName
+import app.linksheet.lib.github.model.Release
 import fe.std.result.StdResult
 import fe.std.result.isFailure
 import fe.std.result.tryCatch
 import fe.std.result.unaryPlus
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
-import io.ktor.http.HttpHeaders
-import io.ktor.http.isSuccess
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -53,10 +52,23 @@ class GithubClient(
         val response = result.value
         if (!response.status.isSuccess()) return@withContext null
 
-        val bodyResult = tryCatch { response.body<ReleaseByTagName>() }
+        val bodyResult = tryCatch { response.body<Release>() }
         if (bodyResult.isFailure()) return@withContext null
 
         bodyResult.value
+    }
+
+    suspend fun fetchReleases(
+        owner: String,
+        repo: String,
+    ) {
+        val result = tryCatch {
+            client.get(urlString = "https://api.github.com/repos/$owner/$repo/releases") {
+                headers.append(HttpHeaders.Accept, "application/vnd.github+json")
+                headers.append("X-GitHub-Api-Version", "2026-03-10")
+            }
+        }
+
     }
 }
 

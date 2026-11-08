@@ -144,7 +144,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         Clock::class,
         Preference.Mapped::class,
         // TODO: Hook up CacheRepository to DI, then remove here
-        CacheRepository::class
+        CacheRepository::class,
+        CoroutineDispatcher::class
     )
 
     private val injections = injectedParameters(

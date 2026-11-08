@@ -43,7 +43,7 @@ dependencies {
     implementation(project(":feature-browser"))
     implementation(project(":feature-downloader"))
     implementation(project(":feature-libredirect"))
-    implementation("com.github.1fexd.clearurlkt:core:_")
+    implementation("com.github.linksheet.clearurlkt:core:_")
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
 //    implementation(project(":sdk-common"))

@@ -34,7 +34,7 @@ dependencies {
     implementation(project(":lib-api"))
     implementation(project(":lib-util"))
     implementation(project(":lib-compose"))
-    api("com.github.1fexd.clearurlkt:core:_")
+    api("com.github.linksheet.clearurlkt:core:_")
 
 //    implementation("androidx.room3:room3-runtime:_")
 //    ksp("androidx.room3:room3-compiler:_")

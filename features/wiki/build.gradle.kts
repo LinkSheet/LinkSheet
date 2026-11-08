@@ -34,7 +34,8 @@ dependencies {
     implementation(project(":lib-api"))
     implementation(project(":lib-util"))
     implementation(project(":lib-compose"))
-    implementation(project(":lib-github"))
+    // TODO: We probably shouldn't leak this into consumers, but we need it in KoinModuleCheckTest
+    api(project(":lib-github"))
 
     implementation("androidx.room3:room3-runtime:_")
     ksp("androidx.room3:room3-compiler:_")

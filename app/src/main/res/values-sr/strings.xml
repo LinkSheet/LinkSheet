@@ -570,4 +570,5 @@
     <string name="generic__label_permission_group_interconnect" translatable="false"></string>
     <string name="qs_tile_no_link"></string>
     <string name="settings_scenario__title_scenarios"></string>
+    <string name="app_name" translatable="false"></string>
 </resources>

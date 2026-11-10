@@ -543,4 +543,5 @@
     <string name="settings_verified_link_handler__text_no_hosts">Sem hosts!</string>
     <string name="settings_verified_link_handler__text_no_such_host_found">Host não encontrado!</string>
     <string name="settings_verified_link_handler__placeholder_filter_hosts">Filtrar hosts</string>
+    <string name="app_name" translatable="false"></string>
 </resources>

@@ -543,32 +543,4 @@
     <string name="settings_verified_link_handler__text_no_hosts">Sem hosts!</string>
     <string name="settings_verified_link_handler__text_no_such_host_found">Host não encontrado!</string>
     <string name="settings_verified_link_handler__placeholder_filter_hosts">Filtrar hosts</string>
-    <string name="app_name" translatable="false"></string>
-    <string name="settings_privacy_incognito__toast_text_deleted"></string>
-    <string name="settings_bottom_sheet_action_bar__title_action_bar"></string>
-    <string name="settings_privacy_incognito__subtitle_disable_logs"></string>
-    <string name="settings_bottom_sheet_action_bar__subtitle_enable_action_bar"></string>
-    <string name="settings_bottom_sheet_action_bar__title_enable_action_bar"></string>
-    <string name="settings_privacy_incognito__title_disable_log_persistence"></string>
-    <string name="settings_privacy_incognito__title_stored_data"></string>
-    <string name="settings_privacy_incognito__title_enable_incognito"></string>
-    <string name="settings_privacy_incognito__subtitle_incognito"></string>
-    <string name="settings_credits__app_name_seal" translatable="false"></string>
-    <string name="settings_privacy_incognito__title_incognito"></string>
-    <string name="bottom_sheet__button_open_externally"></string>
-    <string name="settings_privacy_incognito_delete_dialog__title_delete_data"></string>
-    <string name="settings_bottom_sheet__title_enable_open_externally_button"></string>
-    <string name="settings_bottom_sheet__subtitle_enable_open_externally_button"></string>
-    <string name="generic__description_permission_group_interconnect" translatable="false"></string>
-    <string name="settings_privacy_incognito_delete_dialog__subtitle_delete_data"></string>
-    <string name="settings_bottom_sheet_action_bar__divider_actions"></string>
-    <string name="qs_tile_label"></string>
-    <string name="settings_privacy_incognito__text_info"></string>
-    <string name="settings_privacy_incognito__subtitle_disable_log_persistence"></string>
-    <string name="settings_credits__app_name_gmsflags" translatable="false"></string>
-    <string name="settings_privacy_incognito__subtitle_stored_data"></string>
-    <string name="settings_privacy_incognito__title_disable_logs"></string>
-    <string name="qs_tile_failed_to_parse_links"></string>
-    <string name="generic__label_permission_group_interconnect" translatable="false"></string>
-    <string name="qs_tile_no_link"></string>
 </resources>

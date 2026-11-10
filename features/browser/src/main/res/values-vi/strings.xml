@@ -2,10 +2,4 @@
 <resources>
     <string name="enable_request_private_browsing_button">Bật nút \"Yêu cầu duyệt web riêng tư\"</string>
     <string name="enable_request_private_browsing_button_explainer">Hiển thị nút bên cạnh các trình duyệt mở URL đã nhấp vào ở chế độ duyệt web riêng tư.</string>
-    <string name="settings_private_browsing__text_allowed_browsers"></string>
-    <string name="settings_private_browsing__title_private_browsing"></string>
-    <string name="settings_private_browsing_browsers__title_browsers"></string>
-    <string name="settings_private_browsing__title_enable_private_browsing"></string>
-    <string name="settings_private_browsing__title_allowed_browsers"></string>
-    <string name="settings_private_browsing__divider_configuration"></string>
 </resources>

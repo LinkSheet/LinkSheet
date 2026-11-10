@@ -2,10 +2,4 @@
 <resources>
     <string name="enable_request_private_browsing_button">Abilita il pulsante \'Navigazione privata\'</string>
     <string name="enable_request_private_browsing_button_explainer">Visualizza accanto ai browser un tasto che apre l\'URL in modalità di navigazione privata ﹙o \'incognito\'﹚.</string>
-    <string name="settings_private_browsing__text_allowed_browsers"></string>
-    <string name="settings_private_browsing__title_private_browsing"></string>
-    <string name="settings_private_browsing_browsers__title_browsers"></string>
-    <string name="settings_private_browsing__title_enable_private_browsing"></string>
-    <string name="settings_private_browsing__title_allowed_browsers"></string>
-    <string name="settings_private_browsing__divider_configuration"></string>
 </resources>

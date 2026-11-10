@@ -2,10 +2,4 @@
 <resources>
     <string name="enable_request_private_browsing_button">Омогући дугме „Захтевај приватно прегледање“</string>
     <string name="enable_request_private_browsing_button_explainer">Приказује дугме поред прегледача које отвара URL на који је кликнуто у режиму приватног прегледања.</string>
-    <string name="settings_private_browsing__text_allowed_browsers"></string>
-    <string name="settings_private_browsing__title_private_browsing"></string>
-    <string name="settings_private_browsing_browsers__title_browsers"></string>
-    <string name="settings_private_browsing__title_enable_private_browsing"></string>
-    <string name="settings_private_browsing__title_allowed_browsers"></string>
-    <string name="settings_private_browsing__divider_configuration"></string>
 </resources>

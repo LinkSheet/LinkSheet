@@ -2,10 +2,4 @@
 <resources>
     <string name="enable_request_private_browsing_button">Бутон за поверително разглеждане</string>
     <string name="enable_request_private_browsing_button_explainer">Добавя в долното меню бутон, който отваря посетената препратка в поверителен режим.</string>
-    <string name="settings_private_browsing__text_allowed_browsers"></string>
-    <string name="settings_private_browsing__title_private_browsing"></string>
-    <string name="settings_private_browsing_browsers__title_browsers"></string>
-    <string name="settings_private_browsing__title_enable_private_browsing"></string>
-    <string name="settings_private_browsing__title_allowed_browsers"></string>
-    <string name="settings_private_browsing__divider_configuration"></string>
 </resources>

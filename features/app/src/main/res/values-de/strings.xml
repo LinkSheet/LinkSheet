@@ -2,4 +2,5 @@
 <resources>
     <string name="no_apps_found">Keine Apps gefunden.</string>
     <string name="no_such_app_found">Keine solche App gefunden!</string>
+    <string name="settings__title_filter_apps"></string>
 </resources>

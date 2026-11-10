@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="shizuku_integration">Shizuku 整合</string>
+    <string name="settings_shizuku__text_info"></string>
+    <string name="shizuku_integration_enabled_explainer"></string>
+    <string name="settings_shizuku__text_not_running"></string>
+    <string name="settings_shizuku__text_not_installed"></string>
+    <string name="settings_shizuku__divider_settings"></string>
+    <string name="settings_shizuku__title_enable"></string>
+    <string name="settings_shizuku__text_missing_permission"></string>
+    <string name="settings_shizuku__title_shizuku"></string>
+    <string name="settings_shizuku__text"></string>
+    <string name="settings_shizuku__text_shizuku"></string>
+    <string name="shizuku_not_running_explainer"></string>
+    <string name="shizuku_integration_not_setup_explainer"></string>
+    <string name="settings_shizuku__title_missing_permission"></string>
+    <string name="settings_shizuku__title_not_running"></string>
+    <string name="settings_shizuku__title_auto_disable_link_handling"></string>
+    <string name="settings_shizuku__title_not_installed"></string>
+    <string name="shizuku_integration_no_permission_explainer"></string>
+    <string name="settings_shizuku__text_auto_disable_link_handling"></string>
 </resources>

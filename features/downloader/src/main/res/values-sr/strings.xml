@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">Програм за преузимање</string>
     <string name="downloader_url_mime_type">Користите тип пантомиме из URL адресе</string>
     <string name="downloader_url_mime_type_explainer">Проверава да ли се URL адреса завршава екстензијом фајла (нпр. .jpg); Ако је тако, овај тип се користи за преузети фајл.</string>
+    <string name="settings_downloader__title_mode_manual"></string>
+    <string name="action_downloader__try_to_download"></string>
+    <string name="settings_downloader__subtitle_mode_auto"></string>
+    <string name="settings_downloader__title_mode_auto"></string>
+    <string name="settings_downloader__subtitle_mode_manual"></string>
 </resources>

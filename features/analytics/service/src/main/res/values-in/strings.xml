@@ -12,5 +12,4 @@
     <string name="telemetry_level_exhaustive_description">Statistik penggunaan terperinci</string>
     <string name="telemetry_dialog_title">LinkSheet menghormati privasi Anda</string>
     <string name="telemetry_dialog_text">Pilih jenis metrik penggunaan yang paling Anda nyaman.</string>
-    <string name="telemetry_dialog_text_2" translatable="false"></string>
 </resources>

@@ -12,5 +12,4 @@
     <string name="telemetry_level_minimal_description">Métrica de versão instalada</string>
     <string name="telemetry_level_standard_description">Estatísticas de uso agregadas</string>
     <string name="telemetry_level_exhaustive_description">Estatísticas de uso detalhadas</string>
-    <string name="telemetry_dialog_text_2" translatable="false"></string>
 </resources>

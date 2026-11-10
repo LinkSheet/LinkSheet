@@ -2,15 +2,4 @@
 <resources>
     <string name="telemetry_level_disabled">Atspējots</string>
     <string name="telemetry_level_standard_description">Apkopotie lietojuma dati</string>
-    <string name="telemetry_level_disabled_description"></string>
-    <string name="telemetry_level_exhaustive_description"></string>
-    <string name="telemetry_identity_basic"></string>
-    <string name="telemetry_level_minimal"></string>
-    <string name="telemetry_identity_full"></string>
-    <string name="telemetry_level_exhaustive"></string>
-    <string name="telemetry_level_standard"></string>
-    <string name="telemetry_dialog_title"></string>
-    <string name="telemetry_level_minimal_description"></string>
-    <string name="telemetry_dialog_text_2" translatable="false"></string>
-    <string name="telemetry_dialog_text"></string>
 </resources>

@@ -2,4 +2,10 @@
 <resources>
     <string name="enable_request_private_browsing_button">\"ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਦੀ ਬੇਨਤੀ ਕਰੋ\" ਬਟਨ ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
     <string name="enable_request_private_browsing_button_explainer">ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੇ ਅੱਗੇ ਇੱਕ ਬਟਨ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਦਾ ਹੈ ਜੋ ਪ੍ਰਾਈਵੇਟ ਬ੍ਰਾਊਜ਼ਿੰਗ ਮੋਡ ਵਿੱਚ ਕਲਿੱਕ ਕੀਤੇ URL ਨੂੰ ਖੋਲ੍ਹਦਾ ਹੈ। ਸਮਰਥਿਤ ਬ੍ਰਾਊਜ਼ਰ: %s</string>
+    <string name="settings_private_browsing__text_allowed_browsers"></string>
+    <string name="settings_private_browsing__title_private_browsing"></string>
+    <string name="settings_private_browsing_browsers__title_browsers"></string>
+    <string name="settings_private_browsing__title_enable_private_browsing"></string>
+    <string name="settings_private_browsing__title_allowed_browsers"></string>
+    <string name="settings_private_browsing__divider_configuration"></string>
 </resources>

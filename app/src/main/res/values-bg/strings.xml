@@ -73,7 +73,6 @@
     <string name="display_grid_layout_explainer">Подрежда долното меню в редове и колони вместо списък</string>
     <string name="default_apps_subtitle">Предпочитаните приложения са тези, които сте настроили винаги да отварят определени адреси</string>
     <string name="no_apps_which_can_handle_links_found">Не са намерени приложения, които да отварят препратки.</string>
-    <string name="use_clear_urls">Използване на ClearURLs</string>
     <string name="in_app">Вграден</string>
     <string name="normal">Обикновен</string>
     <string name="use_unified_preferred_browser">Използване на общи настройки</string>
@@ -98,7 +97,6 @@
     <string name="in_app_browser_subtitle">Задава режима на вградения мрежов четец</string>
     <string name="always_disable_explainer">Вграденият мрежов четец не се използва от приложенията</string>
     <string name="disable_in_selected_explainer">В избраните приложения вграденият мрежов четец не се използва</string>
-    <string name="use_clear_urls_explainer">Използва експерименталната интеграция с <annotation url-id="clearurls-github">ClearURLs</annotation> (изчиства параметрите за проследяване от адресите)</string>
     <string name="use_unified_preferred_browser_explainer">Когато е отметнато следните настройки се прилагат както за обикновената, така и за вградената обработката на препратки. Когато липсва отметка използвайте бутоните по-долу, за да превключвате между обикновен и вграден режим.</string>
     <string name="enable_ignore_libredirect_button_explainer">Добавя в долното меню бутон ако посетената препратка е пренасочена от LibRedirect, който отваря оригиналния адрес</string>
     <string name="close">Затваряне</string>

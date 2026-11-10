@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="use_clear_urls">Usar enlaces limpios</string>
+    <string name="use_clear_urls_explainer">Usar la integración experimental de <annotation url-id="clearurls-github">ClearURLs</annotation> (borra los parámetros de seguimiento de las URL)</string>
+</resources>

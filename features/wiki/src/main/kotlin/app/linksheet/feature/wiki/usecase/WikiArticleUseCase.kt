@@ -1,8 +1,8 @@
 package app.linksheet.feature.wiki.usecase
 
-import app.linksheet.feature.wiki.core.GithubClient
 import app.linksheet.feature.wiki.database.entity.WikiCache
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
+import app.linksheet.lib.github.GithubClient
 import fe.linksheet.util.CacheResult
 import fe.linksheet.util.StoredCacheResult
 import fe.std.result.StdResult

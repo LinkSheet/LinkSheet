@@ -34,6 +34,7 @@ android {
 dependencies {
     api(AndroidX.test.runner)
     api(AndroidX.test.coreKtx)
+    api("de.infix.testBalloon:testBalloon-framework-core:_")
     api(platform(Testing.junit.bom))
     api(Testing.junit.jupiter.api)
     api(Koin.test)

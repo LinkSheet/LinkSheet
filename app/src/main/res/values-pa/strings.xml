@@ -11,12 +11,10 @@
     <string name="no_browser_installed">ਕੋਈ ਬ੍ਰਾਊਜ਼ਰ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ</string>
     <string name="download_started">ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ</string>
     <string name="close">ਬੰਦ ਕਰੋ</string>
-    <string name="use_clear_urls">ClearURLs ਵਰਤੋ</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet ਨੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਐਪ ਦਾ ਪਤਾ ਲਗਾਇਆ ਹੈ ਜੋ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਵਜੋਂ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ।</string>
     <string name="opening_with_app">%s ਨਾਲ ਖੋਲ੍ਹਿਆ ਜਾ ਰਿਹਾ</string>
     <string name="save">ਸਾਂਭੋ</string>
     <string name="enable_amp2html">Amp2Html ਨੂੰ ਇਨੇਬਲ ਕਰੋ</string>
-    <string name="use_clear_urls_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url-id="clearurls-github">ClearURLs</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (URLs ਤੋਂ ਟਰੈਕਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ)</string>
     <string name="follow_only_known_trackers_explainer">ਸਿਰਫ਼ ਰੀਡਾਇਰੈਕਟਸ ਦੀ ਪਾਲਣਾ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜਦੋਂ ਹੋਸਟ ਨੂੰ ਟਰੈਕਰ/ਰੀਡਾਇਰੈਕਟ ਵਜੋਂ ਜਾਣਿਆ ਜਾਂਦਾ ਹੈ। ਜੇਕਰ \"ਬਾਹਰੀ ਸੇਵਾ ਰਾਹੀਂ ਰੀਡਾਇਰੈਕਟਸ ਦਾ ਪਾਲਣ ਕਰੋ\" ਇਨੇਬਲ ਹੈ, ਤਾਂ ਇਹ ਹਮੇਸ਼ਾਂ ਚਾਲੂ ਰਹੇਗਾ।</string>
     <string name="always_disable">ਹਮੇਸ਼ਾਂ ਡਿਸੇਬਲ ਕਰੋ</string>
     <string name="copy_to_clipboard">ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ</string>

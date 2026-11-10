@@ -10,11 +10,9 @@
     <string name="include_settings">Bao gồm các thiết đặt (được khuyến nghị)</string>
     <string name="download_started">Đã bắt đầu tải xuống</string>
     <string name="close">Đóng</string>
-    <string name="use_clear_urls">Sử dụng ClearURL</string>
     <string name="opening_with_app">Đang mở bằng %s</string>
     <string name="save">Lưu</string>
     <string name="enable_amp2html">Bật Amp2Html</string>
-    <string name="use_clear_urls_explainer">Sử dụng tích hợp <annotation url-id="clearurls-github">ClearURLs</annotation> thử nghiệm (xóa tham số theo dõi khỏi URL)</string>
     <string name="follow_only_known_trackers_explainer">Chỉ cố gắng theo dõi các chuyển hướng khi máy chủ được xác định là trình theo dõi/chuyển hướng. Nếu \"Theo dõi chuyển hướng qua dịch vụ bên ngoài\" được bật thì tính năng này sẽ luôn được bật.</string>
     <string name="always_disable">Buộc tắt</string>
     <string name="preview_url_explainer">Hiển thị URL được nhấp (sau khi được xử lý)</string>

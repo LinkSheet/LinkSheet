@@ -233,21 +233,6 @@ tasks.register<LocaleConfigTask>("createLocaleConfig") {
     outputFile.set(file("src/main/res/xml/locales_config.xml"))
 }
 
-// Via https://github.com/tyejaedon/TigerPlayer/pull/114:
-
-// Robolectric's FileDescriptorInterceptor reflectively reaches into the JDK-internal
-// jdk.internal.access.SharedSecrets class while shimming android.os.SharedMemory on JDK 17+.
-// That package isn't exported to unnamed modules by default, so every Robolectric test fails
-// during environment setup with "Failed to interact with raw FileDescriptor internals" unless
-// the test JVM explicitly opens it up. See issue #113 and robolectric/robolectric#11434.
-tasks.withType<Test>().configureEach {
-    jvmArgs(
-        "--add-exports=java.base/jdk.internal.access=ALL-UNNAMED",
-        "--add-opens=java.base/java.io=ALL-UNNAMED",
-        "--add-opens=java.base/java.lang=ALL-UNNAMED",
-    )
-}
-
 kotlin {
     jvmToolchain(Version.JVM)
 //    addCompilerOptions()
@@ -274,6 +259,7 @@ dependencies {
     implementation(project(":feature-backup-impl"))
     implementation(project(":feature-app"))
     implementation(project(":feature-browser"))
+    implementation(project(":feature-clearurls"))
     implementation(project(":feature-devicecompat"))
     implementation(project(":feature-engine"))
     implementation(project(":feature-downloader"))
@@ -283,7 +269,6 @@ dependencies {
     implementation(project(":feature-profile"))
     implementation(project(":feature-remoteconfig"))
     implementation(project(":feature-wiki"))
-    implementation(project(":integration-clearurl"))
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
     implementation("androidx.sqlite:sqlite-bundled:_")
@@ -364,8 +349,8 @@ dependencies {
 
 //    implementation(LinkSheet.flavors.core)
 //    implementation(LinkSheet.flavors.interconnect.core)
-    implementation("com.github.LinkSheet.flavors:interconnect-core:_")
-    implementation("com.github.LinkSheet.flavors:core:_")
+    implementation("com.github.linksheet.flavors:interconnect-core:_")
+    implementation("com.github.linksheet.flavors:core:_")
 
     implementation(JetBrains.ktor.client.core)
     implementation(JetBrains.ktor.client.gson)
@@ -436,7 +421,7 @@ dependencies {
     implementation("dev.rikka.shizuku:api:_")
     implementation("dev.rikka.shizuku:provider:_")
     implementation("org.lsposed.hiddenapibypass:hiddenapibypass:_")
-    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:_")
+    implementation("com.github.1fexd.hiddenapirefineplugin:runtime:_")
 
     implementation(KotlinX.serialization.json)
     implementation(KotlinX.serialization.json.okio)

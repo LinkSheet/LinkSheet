@@ -1,25 +1,24 @@
-@file:OptIn(ExperimentalTime::class)
-
 package app.linksheet.feature.engine.core
 
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import app.linksheet.feature.engine.database.repository.CacheRepository
 import app.linksheet.feature.engine.core.modifier.ClearURLsLinkModifier
 import app.linksheet.feature.engine.core.modifier.EmbedLinkModifier
 import app.linksheet.feature.engine.core.resolver.amp2html.Amp2HtmlLinkResolver
 import app.linksheet.feature.engine.core.resolver.amp2html.Amp2HtmlLocalSource
 import app.linksheet.feature.engine.core.resolver.followredirects.FollowRedirectsLinkResolver
 import app.linksheet.feature.engine.core.resolver.followredirects.FollowRedirectsLocalSource
+import app.linksheet.feature.engine.database.repository.CacheRepository
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
+import fe.clearurlskt.config.provider.Provider
 import fe.linksheet.testlib.core.BaseUnitTest
-import fe.std.time.unixMillisOf
+import fe.std.result.unaryPlus
 import fe.std.uri.toStdUrlOrThrow
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.*
+import io.ktor.client.engine.okhttp.*
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -27,7 +26,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.BAKLAVA])
@@ -44,7 +42,8 @@ internal class LinkEngineTest : BaseUnitTest {
             rule.database.resolvedUrlCacheDao(),
             rule.database.resolveTypeDao(),
             rule.database.urlEntryDao(),
-            clock = Clock.System
+            clock = Clock.System,
+            incognitoMode = { false }
         )
     }
 
@@ -62,7 +61,9 @@ internal class LinkEngineTest : BaseUnitTest {
                 ),
                 ClearURLsLinkModifier(
                     enabled = { true },
-                    ioDispatcher = dispatcher
+                    ioDispatcher = dispatcher,
+                    getProviders = { +emptyList<Provider>() },
+                    skipUnchanged = { true }
                 ),
                 FollowRedirectsLinkResolver(
                     enabled = { true },

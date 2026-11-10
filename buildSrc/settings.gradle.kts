@@ -1,10 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.gitlab.grrfe.gradlebuild.config.configureRepositories
-import com.gitlab.grrfe.gradlebuild.repository.GradlePluginPortalRepository
-import com.gitlab.grrfe.gradlebuild.repository.MavenRepository
-import com.gitlab.grrfe.gradlebuild.repository.jitpack
-import com.gitlab.grrfe.gradlebuild.repository.mavenCentral
+import com.gitlab.grrfe.gradlebuild.repository.*
 
 pluginManagement {
     repositories {
@@ -22,6 +19,8 @@ plugins {
 
 configureRepositories(
     MavenRepository.mavenCentral(),
+    MavenRepository.local(),
+    GrrfeRepository.std(),
     MavenRepository.jitpack(),
     GradlePluginPortalRepository,
     mode = RepositoriesMode.PREFER_SETTINGS

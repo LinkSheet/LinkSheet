@@ -53,10 +53,10 @@ import app.linksheet.feature.shizuku.service.UserServiceConfig
 import app.linksheet.feature.shizuku.service.WrappedShizuku
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
-import app.linksheet.feature.wiki.core.GithubClient
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
 import app.linksheet.feature.wiki.viewmodel.MarkdownViewModel
+import app.linksheet.lib.github.GithubClient
 import app.linksheet.module.viewmodel.privacy.PrivacyIncognitoSettingsViewModel
 import app.linksheet.module.viewmodel.privacy.PrivacySettingsViewModel
 import app.linksheet.testlib.koin.definition
@@ -144,7 +144,8 @@ internal class KoinModuleCheckTest : BaseUnitTest {
         Clock::class,
         Preference.Mapped::class,
         // TODO: Hook up CacheRepository to DI, then remove here
-        CacheRepository::class
+        CacheRepository::class,
+        CoroutineDispatcher::class
     )
 
     private val injections = injectedParameters(
@@ -306,9 +307,7 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             AnalyticsPreferences::class,
             RemoteConfigPreferences::class
         ),
-        definition<PrivacyIncognitoSettingsViewModel>(
-            AppPreferenceRepository::class,
-        ),
+        definition<PrivacyIncognitoSettingsViewModel>(AppPreferenceRepository::class, CoroutineDispatcher::class),
         definition<fe.linksheet.module.viewmodel.AboutSettingsViewModel>(
             Gson::class,
             SystemInfoService::class,

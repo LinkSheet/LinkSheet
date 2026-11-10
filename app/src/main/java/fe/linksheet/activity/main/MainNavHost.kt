@@ -13,6 +13,7 @@ import app.linksheet.compose.util.predictivePopEnterTransition
 import app.linksheet.compose.util.predictivePopExitTransition
 import app.linksheet.feature.backup.impl.navigation.BackupNav
 import app.linksheet.feature.browser.navigation.PrivateBrowsingNavSubGraph
+import app.linksheet.feature.clearurls.navigation.ClearURLsNav
 import app.linksheet.feature.downloader.navigation.DownloaderNav
 import app.linksheet.feature.engine.navigation.ScenarioNavSubGraph
 import app.linksheet.feature.libredirect.navigation.LibRedirectNavSubGraph
@@ -112,6 +113,7 @@ fun MainNavHost(
         attachSubGraph(PrivateBrowsingNavSubGraph, navController)
         attachNav(DownloaderNav, navController)
         attachNav(WikiNav, navController)
+        attachNav(ClearURLsNav, navController)
         attachNav(BackupNav, navController)
         if (AndroidVersion.isAtLeastApi30R()) {
             attachNav(ProfileNav, navController)

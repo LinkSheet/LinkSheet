@@ -8,11 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.DeleteOutline
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -78,7 +74,7 @@ fun PrivacyIncognitoSettingsRouteInternal(
     onBackPressed: () -> Unit,
 ) {
     val interaction = LocalHapticFeedbackInteraction.current
-    val confirmDeleteDialog = rememberConfirmActionDialog<Unit>()
+    val confirmDeleteDialog = rememberConfirmActionDialog<Boolean>()
 
     ConfirmActionDialog(
         state = confirmDeleteDialog,
@@ -158,7 +154,7 @@ fun PrivacyIncognitoSettingsRouteInternal(
                         contentAlignment = Alignment.Center
                     ) {
                         TextButton(
-                            onClick = { confirmDeleteDialog.open(Unit) },
+                            onClick = { confirmDeleteDialog.open(true) },
                             contentPadding = ButtonDefaults.contentPaddingFor(
                                 ButtonDefaults.MinHeight,
                                 hasStartIcon = true

@@ -83,10 +83,8 @@
     <string name="include_settings">Einstellungen einbeziehen (empfohlen)</string>
     <string name="no_browser_installed">Kein Browser installiert</string>
     <string name="close">Schließen</string>
-    <string name="use_clear_urls">ClearURLs verwenden</string>
     <string name="at_least_one_known_browser_installed_explainer">LinkSheet hat mindestens eine App erkannt, die als Browser bekannt ist.</string>
     <string name="enable_amp2html">Amp2Html aktivieren</string>
-    <string name="use_clear_urls_explainer">Experimentelle <annotation url-id="clearurls-github">ClearURLs</annotation>-Integration verwenden (entfernt Tracking-Parameter von URLs)</string>
     <string name="follow_only_known_trackers_explainer">Es wird nur versucht, Weiterleitungen zu folgen, wenn der Host als Tracker/Weiterleitung bekannt ist. Wenn „Weiterleitungen über einen externen Dienst folgen“ aktiviert ist, wird dies immer aktiviert sein</string>
     <string name="theme_explainer">Material You, dunkles Thema, rein schwarzer Modus</string>
     <string name="bottom_sheet">Unteres Fenster</string>

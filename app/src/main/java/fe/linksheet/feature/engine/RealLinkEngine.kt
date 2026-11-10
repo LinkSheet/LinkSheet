@@ -6,6 +6,7 @@ import android.content.Context
 import app.linksheet.feature.app.core.PackageIntentHandler
 import app.linksheet.feature.app.core.PackageLauncherService
 import app.linksheet.feature.browser.core.PrivateBrowsingService
+import app.linksheet.feature.clearurls.core.ClearUrlsProviderLoader
 import app.linksheet.feature.downloader.core.Downloader
 import app.linksheet.feature.engine.core.EngineResult
 import app.linksheet.feature.engine.core.EngineScenario
@@ -38,7 +39,7 @@ import fe.linksheet.module.resolver.ImprovedBrowserHandler
 import fe.linksheet.module.resolver.InAppBrowserHandler
 import fe.linksheet.module.resolver.module.IntentResolverSettings
 import fe.linksheet.module.resolver.util.AppSorter
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
@@ -47,6 +48,7 @@ import kotlin.uuid.ExperimentalUuidApi
 class RealLinkEngine(
     private val context: Context,
     private val client: HttpClient,
+    private val clearUrlsProviderLoader: ClearUrlsProviderLoader,
     private val appSelectionHistoryRepository: AppSelectionHistoryRepository,
     private val preferredAppRepository: PreferredAppRepository,
     private val packageIntentHandler: PackageIntentHandler,
@@ -119,7 +121,8 @@ class RealLinkEngine(
                 ClearURLsLinkModifier(
                     enabled = settings.useClearUrls,
                     skipUnchanged = settings.clearUrlsSkipUnchanged,
-                    ioDispatcher = dispatcher
+                    ioDispatcher = dispatcher,
+                    getProviders = clearUrlsProviderLoader::getProviders
                 ),
                 FollowRedirectsLinkResolver(
                     enabled = settings.followRedirectsSettings.followRedirects,

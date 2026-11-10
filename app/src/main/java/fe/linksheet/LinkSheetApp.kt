@@ -19,6 +19,7 @@ import app.linksheet.feature.app.AppModule
 import app.linksheet.feature.backup.BackupFeatureConfigurationModule
 import app.linksheet.feature.backup.impl.BackupFeatureModule
 import app.linksheet.feature.browser.PrivateBrowsingModule
+import app.linksheet.feature.clearurls.ClearURLsFeatureModule
 import app.linksheet.feature.devicecompat.CompatModule
 import app.linksheet.feature.devicecompat.miui.MiuiCompatProvider
 import app.linksheet.feature.devicecompat.miui.RealMiuiCompatProvider
@@ -177,7 +178,8 @@ open class LinkSheetApp : Application(), DependencyProvider {
             WikiFeatureModule,
             PrivateBrowsingModule,
             BackupFeatureConfigurationModule,
-            BackupFeatureModule()
+            BackupFeatureModule(),
+            ClearURLsFeatureModule
         )
     }
 

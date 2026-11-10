@@ -17,8 +17,8 @@ android {
 }
 
 dependencies {
-    annotationProcessor("com.github.1fexd.HiddenApiRefinePlugin:annotation-processor:_")
-    compileOnly("com.github.1fexd.HiddenApiRefinePlugin:annotation:_")
+    annotationProcessor("com.github.1fexd.hiddenapirefineplugin:annotation-processor:_")
+    compileOnly("com.github.1fexd.hiddenapirefineplugin:annotation:_")
     compileOnly("org.jetbrains:annotations:_")
     compileOnly(AndroidX.annotation)
 }

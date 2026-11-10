@@ -43,11 +43,11 @@ dependencies {
     implementation(project(":feature-browser"))
     implementation(project(":feature-downloader"))
     implementation(project(":feature-libredirect"))
-    implementation(project(":integration-clearurl"))
+    implementation("com.github.linksheet.clearurlkt:core:_")
     implementation(project(":integration-embed-resolve"))
     implementation(project(":integration-amp2html"))
 //    implementation(project(":sdk-common"))
-    implementation("com.github.LinkSheet.flavors:sdk-common:_")
+    implementation("com.github.linksheet.flavors:sdk-common:_")
 
     implementation("androidx.room3:room3-runtime:_")
     ksp("androidx.room3:room3-compiler:_")

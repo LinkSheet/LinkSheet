@@ -556,4 +556,5 @@
     <string name="qs_tile_failed_to_parse_links"></string>
     <string name="generic__label_permission_group_interconnect" translatable="false"></string>
     <string name="qs_tile_no_link"></string>
+    <string name="app_name" translatable="false"></string>
 </resources>

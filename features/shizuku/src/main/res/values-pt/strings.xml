@@ -5,4 +5,18 @@
     <string name="shizuku_integration_no_permission_explainer">Toque aqui para solicitar a permissão ao Shizuku.</string>
     <string name="shizuku_integration_not_setup_explainer">Embora não seja estritamente necessário para que o LinkSheet funcione, o Shizuku é recomendado. Toque aqui para instalá-lo.</string>
     <string name="shizuku_integration">Integração com o Shizuku</string>
+    <string name="settings_shizuku__text_info"></string>
+    <string name="settings_shizuku__text_not_running"></string>
+    <string name="settings_shizuku__text_not_installed"></string>
+    <string name="settings_shizuku__divider_settings"></string>
+    <string name="settings_shizuku__title_enable"></string>
+    <string name="settings_shizuku__text_missing_permission"></string>
+    <string name="settings_shizuku__title_shizuku"></string>
+    <string name="settings_shizuku__text"></string>
+    <string name="settings_shizuku__text_shizuku"></string>
+    <string name="settings_shizuku__title_missing_permission"></string>
+    <string name="settings_shizuku__title_not_running"></string>
+    <string name="settings_shizuku__title_auto_disable_link_handling"></string>
+    <string name="settings_shizuku__title_not_installed"></string>
+    <string name="settings_shizuku__text_auto_disable_link_handling"></string>
 </resources>

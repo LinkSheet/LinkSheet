@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">أداة التنزيل</string>
     <string name="downloader_url_mime_type">استخدام نوع mime من عنوان الرابط</string>
     <string name="downloader_url_mime_type_explainer">يتحقق مما إذا كان عنوان URL ينتهي بامتداد ملف (على سبيل المثال \".jpg\") ؛ إذا حدث ذلك ، استخدام هذا النوع للملف الذي تم تنزيله.</string>
+    <string name="settings_downloader__title_mode_manual"></string>
+    <string name="action_downloader__try_to_download"></string>
+    <string name="settings_downloader__subtitle_mode_auto"></string>
+    <string name="settings_downloader__title_mode_auto"></string>
+    <string name="settings_downloader__subtitle_mode_manual"></string>
 </resources>

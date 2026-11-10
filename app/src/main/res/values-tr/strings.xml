@@ -537,4 +537,5 @@
     <string name="settings_verified_link_handler__text_no_hosts">Sunucu yok!</string>
     <string name="settings_verified_link_handler__text_no_such_host_found">Böyle bir sunucu bulunamadı!</string>
     <string name="settings_verified_link_handler__placeholder_filter_hosts">Sunucuları filtrele</string>
+    <string name="app_name" translatable="false"></string>
 </resources>

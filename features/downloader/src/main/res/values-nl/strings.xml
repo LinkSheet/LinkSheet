@@ -5,9 +5,4 @@
     <string name="settings_links_downloader__title_downloader">Downloader</string>
     <string name="downloader_url_mime_type">Mime-type van URL gebruiken</string>
     <string name="downloader_url_mime_type_explainer">Controleer of de URL eindigt op een bestandsextensie (bijv. \".jpg\"). Als dit het geval is, dan wordt dit type gebruikt voor het gedownloade bestand.</string>
-    <string name="settings_downloader__title_mode_manual"></string>
-    <string name="action_downloader__try_to_download"></string>
-    <string name="settings_downloader__subtitle_mode_auto"></string>
-    <string name="settings_downloader__title_mode_auto"></string>
-    <string name="settings_downloader__subtitle_mode_manual"></string>
 </resources>

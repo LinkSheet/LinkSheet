@@ -5,9 +5,4 @@
     <string name="settings_links_downloader__title_downloader">Изтегляне</string>
     <string name="downloader_url_mime_type">Намиране на вида на файла от адреса</string>
     <string name="downloader_url_mime_type_explainer">Проверява дали адресът завършва с файлово разширение (напр. „.jpg“); ако е така, се използва за изтегления файл.</string>
-    <string name="settings_downloader__title_mode_manual"></string>
-    <string name="action_downloader__try_to_download"></string>
-    <string name="settings_downloader__subtitle_mode_auto"></string>
-    <string name="settings_downloader__title_mode_auto"></string>
-    <string name="settings_downloader__subtitle_mode_manual"></string>
 </resources>

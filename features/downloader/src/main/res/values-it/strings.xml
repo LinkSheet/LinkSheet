@@ -4,4 +4,10 @@
     <string name="enable_downloader_explainer">Aggiungi un pulsante \'Download\' nel foglio inferiore se l\'URL contiene un collegamento diretto a un file. Potrebbe avere</string>
     <string name="downloader_url_mime_type">Ricava il tipo MIME dall\'URL</string>
     <string name="downloader_url_mime_type_explainer">Controlla se l\'URL termina con un\'estensione che determina con certezza il tipo di file (ad es. \'.jpg\').</string>
+    <string name="settings_downloader__title_mode_manual"></string>
+    <string name="action_downloader__try_to_download"></string>
+    <string name="settings_downloader__subtitle_mode_auto"></string>
+    <string name="settings_downloader__title_mode_auto"></string>
+    <string name="settings_downloader__subtitle_mode_manual"></string>
+    <string name="settings_links_downloader__title_downloader"></string>
 </resources>

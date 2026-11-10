@@ -12,6 +12,4 @@
     <string name="no_libredirect_services">لم يتم العثور على خدمات LibRedirect!</string>
     <string name="services">الخدمات</string>
     <string name="instance_not_available_anymore">المثيل غير متوفر بعد الآن!</string>
-    <string name="settings_libredirect__text_placeholder_instance"></string>
-    <string name="settings_libredirect__title_add_instance"></string>
 </resources>

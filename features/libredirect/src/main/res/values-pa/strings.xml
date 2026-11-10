@@ -12,6 +12,4 @@
     <string name="no_libredirect_services">ਕੋਈ LibRedirect ਸੇਵਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ!</string>
     <string name="enable_libredirect">LibRedirect ਇਨੇਬਲ ਕਰੋ</string>
     <string name="enable_libredirect_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url-id="libredirect-github">LibRedirect</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋਏ ਗੋਪਨੀਯਤਾ ਅਨੁਕੂਲ ਫਰੰਟਐਂਡਸ ਲਈ ਲਿੰਕ ਰੀਡਾਇਰੈਕਟ ਕਰੋ</string>
-    <string name="settings_libredirect__text_placeholder_instance"></string>
-    <string name="settings_libredirect__title_add_instance"></string>
 </resources>

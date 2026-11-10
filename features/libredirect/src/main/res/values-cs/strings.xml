@@ -12,6 +12,4 @@
     <string name="no_libredirect_services">Nenalezeny žádné služby LibRedirect!</string>
     <string name="instance_not_available_anymore">Instance již není dostupná!</string>
     <string name="services">Služby</string>
-    <string name="settings_libredirect__text_placeholder_instance"></string>
-    <string name="settings_libredirect__title_add_instance"></string>
 </resources>

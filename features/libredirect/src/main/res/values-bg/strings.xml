@@ -12,6 +12,4 @@
     <string name="libredirect_via">От %s</string>
     <string name="services">Услуги</string>
     <string name="no_libredirect_services">Не са намерени услуги на LibRedirect!</string>
-    <string name="settings_libredirect__text_placeholder_instance"></string>
-    <string name="settings_libredirect__title_add_instance"></string>
 </resources>

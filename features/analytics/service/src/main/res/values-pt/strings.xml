@@ -12,4 +12,5 @@
     <string name="telemetry_level_exhaustive_description">Estatísticas de uso detalhadas</string>
     <string name="telemetry_dialog_title">LinkSheet respeita a sua privacidade</string>
     <string name="telemetry_dialog_text">Escolha o tipo de métrica de uso que se sinta mais confortável.</string>
+    <string name="telemetry_dialog_text_2" translatable="false"></string>
 </resources>

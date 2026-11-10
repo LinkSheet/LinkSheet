@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">Letöltő</string>
     <string name="downloader_url_mime_type">Használja az URL-ből származó MIME típust</string>
     <string name="downloader_url_mime_type_explainer">Ellenőrzi, hogy az URL fájlkiterjesztéssel végződik-e (pl. \".jpg\"); Ha igen, akkor a rendszer ezt a típust használja a letöltött fájlhoz.</string>
+    <string name="settings_downloader__title_mode_manual"></string>
+    <string name="action_downloader__try_to_download"></string>
+    <string name="settings_downloader__subtitle_mode_auto"></string>
+    <string name="settings_downloader__title_mode_auto"></string>
+    <string name="settings_downloader__subtitle_mode_manual"></string>
 </resources>

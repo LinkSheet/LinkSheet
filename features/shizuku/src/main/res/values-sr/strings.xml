@@ -5,4 +5,18 @@
     <string name="shizuku_integration_no_permission_explainer">Додирните овде да бисте затражили Shizuku дозволу.</string>
     <string name="shizuku_integration_not_setup_explainer">Иако није стриктно неопходно да би LinkSheet радио, препоручује се Shizuku. Додирните овде да бисте га инсталирали.</string>
     <string name="shizuku_integration">Shizuku интеграција</string>
+    <string name="settings_shizuku__text_info"></string>
+    <string name="settings_shizuku__text_not_running"></string>
+    <string name="settings_shizuku__text_not_installed"></string>
+    <string name="settings_shizuku__divider_settings"></string>
+    <string name="settings_shizuku__title_enable"></string>
+    <string name="settings_shizuku__text_missing_permission"></string>
+    <string name="settings_shizuku__title_shizuku"></string>
+    <string name="settings_shizuku__text"></string>
+    <string name="settings_shizuku__text_shizuku"></string>
+    <string name="settings_shizuku__title_missing_permission"></string>
+    <string name="settings_shizuku__title_not_running"></string>
+    <string name="settings_shizuku__title_auto_disable_link_handling"></string>
+    <string name="settings_shizuku__title_not_installed"></string>
+    <string name="settings_shizuku__text_auto_disable_link_handling"></string>
 </resources>

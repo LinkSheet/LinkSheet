@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">下载器</string>
     <string name="downloader_url_mime_type">使用来自链接的媒体类型</string>
     <string name="downloader_url_mime_type_explainer">检查链接是否以文件扩展名结尾（例如“.jpg”）；如果是，则此类型用于下载的文件。</string>
+    <string name="settings_downloader__title_mode_manual"></string>
+    <string name="action_downloader__try_to_download"></string>
+    <string name="settings_downloader__subtitle_mode_auto"></string>
+    <string name="settings_downloader__title_mode_auto"></string>
+    <string name="settings_downloader__subtitle_mode_manual"></string>
 </resources>

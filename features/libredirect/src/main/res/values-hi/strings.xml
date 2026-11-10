@@ -1,3 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="enabled"></string>
+    <string name="settings_libredirect__text_placeholder_instance"></string>
+    <string name="settings_libredirect__title_add_instance"></string>
+    <string name="frontend"></string>
+    <string name="lib_redirect"></string>
+    <string name="instance"></string>
+    <string name="random_instance"></string>
+    <string name="services"></string>
+    <string name="lib_redirect_service"></string>
+    <string name="instance_not_available_anymore"></string>
+    <string name="libredirect_via"></string>
+    <string name="no_libredirect_services"></string>
+    <string name="enable_libredirect"></string>
+    <string name="enable_libredirect_explainer"></string>
 </resources>

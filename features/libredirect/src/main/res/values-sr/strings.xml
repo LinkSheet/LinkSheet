@@ -12,4 +12,6 @@
     <string name="no_libredirect_services">Нису пронађене LibRedirect услуге!</string>
     <string name="enable_libredirect">Омогући LibRedirect</string>
     <string name="enable_libredirect_explainer">Преусмерите линкове на фронтендове прилагођене приватности користећи експерименталну <annotation url-id="libredirect-github">LibRedirect</annotation> интеграцију</string>
+    <string name="settings_libredirect__text_placeholder_instance"></string>
+    <string name="settings_libredirect__title_add_instance"></string>
 </resources>

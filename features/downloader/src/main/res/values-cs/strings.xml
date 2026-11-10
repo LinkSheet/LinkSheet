@@ -5,4 +5,9 @@
     <string name="settings_links_downloader__title_downloader">Služba stahování</string>
     <string name="downloader_url_mime_type">Použít typ mime z adresy</string>
     <string name="downloader_url_mime_type_explainer">Zkontroluje, zda adresa URL končí typem souboru (např. „.jpg“); pokud ano, bude pro stažený soubor použit tento typ.</string>
+    <string name="settings_downloader__title_mode_manual"></string>
+    <string name="action_downloader__try_to_download"></string>
+    <string name="settings_downloader__subtitle_mode_auto"></string>
+    <string name="settings_downloader__title_mode_auto"></string>
+    <string name="settings_downloader__subtitle_mode_manual"></string>
 </resources>

@@ -59,7 +59,7 @@
     <string name="open_copied_link">从剪贴板</string>
     <string name="paste">粘贴</string>
     <string name="links">链接</string>
-    <string name="links_explainer">ClearUrls，LibRedirect，跟随重定向</string>
+    <string name="links_explainer">ClearURLs，LibRedirect，跟随重定向</string>
     <string name="follow_redirects">跟踪重定向</string>
     <string name="follow_redirects_explainer">在打开底栏前自动跟踪所有重定向。这可能带来<annotation url-id="privacy-follow-redirects">隐私方面的影响</annotation></string>
     <string name="loading_link">处理链接中…</string>
@@ -377,7 +377,7 @@
     <string name="settings_new_rule__title_new_rule">新规则</string>
     <string name="theme_enable_amoled_explainer">启用深色模式时使用纯黑主题</string>
     <string name="show_linksheet_referrer_explainer">当应用被启动时，可以检查启动（或“引用”）它的应用。默认情况下，LinkSheet 启动应用时会隐藏自身，声称启动 LinkSheet 的应用是启动目标。启用此选项来将 LinkSheet 重新插入为应用的引用来源。</string>
-    <string name="privacy_settings_explainer">引用来源隐私，遥测</string>
+    <string name="privacy_settings_explainer">引用来源隐私，无痕模式，远程配置</string>
     <string name="nightly_experiments_card_explainer">点击看看我们正在开发的功能</string>
     <string name="experiments_explainer_2">活跃开发中</string>
     <string name="onboarding_1_title">将 LinkSheet 设置为默认浏览器</string>
@@ -446,7 +446,7 @@
     <string name="settings_main_miui_compat__button_linksheet_auto_start_allow">请求权限</string>
     <string name="generic__button_dismiss">知道了</string>
     <string name="settings_main_experiment_news__text_experiment_state_updated">部分实验设置已被移除，现已成为默认行为。</string>
-    <string name="settings__subtitle_advanced"><![CDATA[实验与导入导出]]></string>
+    <string name="settings__subtitle_advanced"><![CDATA[实验功能，备份与还原]]></string>
     <plurals name="settings_verified_link_handlers__text_app_host_default_host">
         <item quantity="other">%d 个默认主机</item>
     </plurals>
@@ -492,7 +492,7 @@
     <string name="settings_links_follow_redirects__title_local_network">允许局域网访问</string>
     <string name="settings_links_follow_redirects__text_local_network">允许追踪私有主机的重定向</string>
     <string name="settings_links_preview__title_preview">显示链接预览</string>
-    <string name="settings_links_preview__subtitle_preview">尝试在底部菜单中加载并显示 OpenGraph 预览。这可能会涉及<annotation url-id="github.linksheet.wiki.privacy.preview">隐私风险</annotation></string>
+    <string name="settings_links_preview__subtitle_preview">尝试加载并显示链接的 OpenGraph 预览。这可能涉及 <annotation url-id="github.linksheet.wiki.privacy.preview">隐私风险</annotation></string>
     <string name="settings_links_preview__title_preview_skip_browser">禁用浏览器预览</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">不预览来自浏览器的链接</string>
     <string name="settings_scenario__title_scenarios">场景</string>
@@ -510,8 +510,8 @@
     <string name="notification_interconnect_description">应用互联服务正在运行</string>
     <string name="settings_bottom_sheet__title_hide_referring_app">隐藏来源应用</string>
     <string name="settings_bottom_sheet__subtitle_hide_referring_app">在选择列表中排除来源应用</string>
-    <string name="settings_bottom_sheet__title_double_tap_url">双击链接</string>
-    <string name="settings_bottom_sheet__subtitle_double_tap_url">双击链接直接跳转推荐应用</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">双击直接打开</string>
+    <string name="settings_bottom_sheet__subtitle_double_tap_url">双击链接时，直接用推荐应用打开</string>
     <string name="settings_bottom_sheet__title_expand_fully">完全展开</string>
     <string name="settings_bottom_sheet__subtitle_expand_fully">自动将底栏展开至全高</string>
     <string name="settings_browser_mode__title_auto_launch_single_browser">自动启动指定浏览器</string>
@@ -519,4 +519,22 @@
     <string name="generic__label_arrow_rotation">箭头旋转动画</string>
     <string name="settings_follow_redirects__title_mode_auto">自动</string>
     <string name="settings_follow_redirects__title_mode_manual">手动</string>
+    <string name="settings_main_changelog__title_changelog">更新日志</string>
+    <string name="settings_follow_redirects__subtitle_mode_auto">自动跟随所有重定向</string>
+    <string name="settings_follow_redirects__title_aggressive">激进模式</string>
+    <string name="settings_advanced__divider_backup"><![CDATA[备份与还原]]></string>
+    <string name="qs_tile_label">打开复制的链接</string>
+    <string name="qs_tile_no_link">剪贴板内没有链接！</string>
+    <string name="qs_tile_failed_to_parse_links">无法解析剪贴板内容！</string>
+    <string name="settings_privacy_incognito__title_incognito">无痕模式</string>
+    <string name="settings_privacy_incognito__title_enable_incognito">无痕模式</string>
+    <string name="settings_privacy_incognito__title_disable_logs">禁用日志</string>
+    <string name="settings_privacy_incognito__subtitle_disable_logs">适用于应用内日志和 logcat</string>
+    <string name="settings_privacy_incognito__title_disable_log_persistence">禁用日志持久化</string>
+    <string name="settings_privacy_incognito_delete_dialog__title_delete_data">是否删除数据？</string>
+    <string name="settings_privacy_incognito_delete_dialog__subtitle_delete_data">此操作无法撤销！</string>
+    <string name="settings_privacy_incognito__toast_text_deleted">数据已删除</string>
+    <string name="settings_privacy_incognito__subtitle_stored_data">历史记录，偏好应用，缓存，日志</string>
+    <string name="settings_privacy_incognito__title_stored_data">保存的数据</string>
+    <string name="settings_privacy_incognito__subtitle_incognito">不存储任何与链接有关的信息</string>
 </resources>

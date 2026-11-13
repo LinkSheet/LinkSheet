@@ -24,7 +24,7 @@
     <string name="none">无</string>
     <string name="always_ask_explainer">始终列出所有浏览器</string>
     <string name="send_to">分享</string>
-    <string name="default_apps_subtitle">首选应用是您设置为“始终”打开某些链接的应用</string>
+    <string name="default_apps_subtitle">为主机设置默认应用</string>
     <string name="always_show_package_name">始终显示包名</string>
     <string name="always_show_package_name_explainer">始终显示包名而非仅是应用名称。这项设置影响整个应用页面。</string>
     <string name="remove_all">移除所有</string>
@@ -322,7 +322,7 @@
     <string name="onboarding_5_title">一切就绪！</string>
     <string name="onboarding_1_subtitle">LinkSheet 需要成为默认浏览器来处理点击的链接</string>
     <string name="onboarding_3_title">禁用默认链接处理器</string>
-    <string name="resolve_embeds_explainer">将短链接镜像（如 fxtwitter.com）解析到真实主机</string>
+    <string name="resolve_embeds_explainer">将短链接镜像（如 fxtwitter.com）解析到原始网站</string>
     <string name="theme_enable_material_you">动态颜色</string>
     <string name="theme_enable_amoled">纯黑</string>
     <string name="tap_customization_dialog_title_double_tap">双击</string>
@@ -537,4 +537,21 @@
     <string name="settings_privacy_incognito__subtitle_stored_data">历史记录，偏好应用，缓存，日志</string>
     <string name="settings_privacy_incognito__title_stored_data">保存的数据</string>
     <string name="settings_privacy_incognito__subtitle_incognito">不存储任何与链接有关的信息</string>
+    <string name="settings_follow_redirects__subtitle_mode_manual">在底栏中显示“跟随重定向”按钮</string>
+    <string name="settings_follow_redirects__subtitle_aggressive">获取完整页面正文，以更好地兼容不使用 HTTP 重定向的网站</string>
+    <string name="settings_main_changelog__text_changelog">查看版本 %s 的更新内容。</string>
+    <string name="settings_bottom_sheet_action_bar__title_action_bar">底栏上的操作栏</string>
+    <string name="settings_bottom_sheet_action_bar__title_enable_action_bar">启用操作栏</string>
+    <string name="settings_bottom_sheet_action_bar__subtitle_enable_action_bar">在底栏顶部显示链接和操作栏</string>
+    <string name="settings_bottom_sheet_action_bar__divider_actions">操作</string>
+    <string name="settings_privacy_incognito__subtitle_disable_log_persistence">禁止生成日志文件</string>
+    <string name="settings_privacy_incognito__text_info">大多数用户 <b>不应该</b> 启用此功能；它旨在满足特定威胁模型下的用户需求，即需要防范能够接触到已解锁设备（处于解锁状态）的攻击者。\n\n启用此功能后，LinkSheet 将不再存储或导入以下内容：\n• 主机历史记录与用于打开的应用程序，以及\n• 重定向/Amp2Html/链接预览结果。\n\n只有当应用被设置为“始终”打开特定主机时，才会保存该数据。\n\n此功能相当于一个“终止开关”，因此会覆盖任何其他启用/禁用重定向缓存等功能的设置。</string>
+    <string name="handler_target__label_switch_profile_view_intent">切换配置</string>
+    <string name="settings_verified_link_handler__placeholder_filter_">过滤主机</string>
+    <string name="settings_verified_link_handler__text_no_hosts">没有主机！</string>
+    <string name="settings_verified_link_handler__text_no_such_host_found">找不到主机！</string>
+    <string name="settings_verified_link_handler__placeholder_filter_hosts">过滤主机</string>
+    <string name="settings_bottom_sheet__subtitle_enable_open_externally_button">如果来源应用请求在应用内打开某个链接，则在底栏中显示一个按钮，允许用户在应用外打开该链接</string>
+    <string name="settings_bottom_sheet__title_enable_open_externally_button">启用“在应用外打开”按钮</string>
+    <string name="bottom_sheet__button_open_externally">在应用外打开</string>
 </resources>

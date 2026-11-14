@@ -18,7 +18,8 @@ import fe.composekit.core.AndroidVersion
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun M3FixModalBottomSheet(
-    contentModifier: Modifier,
+    modifier: Modifier = Modifier,
+    contentModifier: Modifier = Modifier,
     debug: Boolean = false,
     isBlackTheme: Boolean = isSystemInDarkTheme(),
     sheetState: M3FixSheetState = rememberM3FixModalBottomSheetState(),
@@ -27,7 +28,7 @@ fun M3FixModalBottomSheet(
     sheetContent: @Composable (Modifier) -> Unit = {},
 ) {
     M3FixModalBottomSheet(
-        modifier = Modifier
+        modifier = modifier
             .semantics { testTagsAsResourceId = true }
             .testTag(BOTTOM_SHEET_TEST_TAG),
         contentModifier = contentModifier,

@@ -28,6 +28,7 @@ object Experiments : PreferenceDefinition(
     val libRedirectJsEngine = boolean(key = "experiment_enable_libredirect_js_engine")
     val enableAnalytics = boolean(key = "experiment_enable_analytics", default = false)
     val noBottomSheetStateSave = boolean(key = "experiment_no_bottom_sheet_state_save")
+    val bottomSheetExpandFix = boolean(key = "experiment_bottom_sheet_expand_fix")
     val linkEngine = boolean(key = "experiment_link_engine")
     val newVlh = boolean(key = "experiment_new_vlh", default = false)
     val mergeWithPreferred = boolean(key = "experiment_vlh_merge_with_preferred", default = false)
@@ -40,9 +41,10 @@ object Experiments : PreferenceDefinition(
     val experiments = listOf(
         group(
             name = "improved_bottom_sheet",
-            displayName = "Improved bottom sheet",
+            displayName = "Bottom sheet",
             experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),
             experiment("Disable bottom sheet state save", noBottomSheetStateSave),
+            experiment("Expand fix (A17 QPR2, ColorOS)", bottomSheetExpandFix)
         ),
         group(
             name = "link_engine",

@@ -2,14 +2,15 @@ package fe.linksheet.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
@@ -22,13 +23,14 @@ import app.linksheet.compose.extension.collectOnIO
 import app.linksheet.feature.downloader.core.DownloaderMode
 import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.feature.profile.core.switchTo
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.ComposeMaterial3Flags
 import app.linksheet.mozilla.components.support.utils.toSafeIntent
+import fe.android.compose.extension.thenIf
 import fe.composekit.extension.setText
 import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
 import fe.linksheet.activity.bottomsheet.*
-import fe.linksheet.activity.bottomsheet.compat.SettingsObserver
 import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheet
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
 import fe.linksheet.activity.bottomsheet.content.failure.FailureSheetContentWrapper
@@ -44,7 +46,8 @@ import fe.linksheet.util.intent.Intents
 import fe.linksheet.util.intent.StandardIntents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -89,26 +92,16 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         onNewIntent(intent!!)
     }
 
-    private val isReducedMotionEnabledFlow by lazy {
-        val settingsObserver = SettingsObserver(
-            applicationContext = applicationContext,
-            settingName = Settings.Global.ANIMATOR_DURATION_SCALE,
-            getValue = { ctx, name -> Settings.Global.getFloat(ctx.contentResolver, name, 1.0f) },
-            getUri = Settings.Global::getUriFor,
-        )
-
-        settingsObserver
-            .createFlow()
-            .map { it == 0.0f }
-            .stateIn(
-                scope = lifecycleScope,
-                started = SharingStarted.WhileSubscribed(),
-                initialValue = settingsObserver.readValue() == 0.0f
-            )
-    }
-
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Set to true to so we always have a partial expanded state, otherwise bottom sheet cuts off always/once buttons for small app lists (e.g. one app)
+        ComposeMaterial3Flags.isBottomSheetPartiallyExpandedDeterministicEnabled = false
+        // Set to true so .show() is always called, otherwise sheet will not properly show up in cases where first
+        // frame already shows the app list (due to the processing being either very fast or a proving a cached? result),
+        // since the app list is not intrinsically measurable
+        ComposeMaterial3Flags.isModalBottomSheetStateRestorationFixEnabled = false
+
         window.decorView.addOnLayoutChangeListener { view, _, _, _, _, _, _, _, _ ->
             logger.debug("Activity window size: ${view.width}x${view.height}")
         }
@@ -149,8 +142,9 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 //        )
 
         LaunchedEffect(key1 = resolveResult) {
-            logger.debug("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")
-            if (resolveResult != IntentResolveResult.Pending) {
+            val expand = resolveResult != IntentResolveResult.Pending
+            logger.debug("Resolve result: $resolveResult, will expand=$expand")
+            if (expand) {
                 // Need to do this in a separate effect as otherwise the preview image seems to mess up the layout-ing
                 if (viewModel.expandFully.value) {
                     sheetState.expand()
@@ -161,9 +155,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         }
 
         LaunchedEffect(key1 = interaction) {
-            Log.d(
-                "LoadingIndicatorSheetContent",
-                "Interaction=$interaction, isClear=${interaction == ResolverInteraction.Clear}, " +
+            logger.debug("Interaction=$interaction, isClear=${interaction == ResolverInteraction.Clear}, " +
                         "isInitialized=${interaction == ResolverInteraction.Initialized}"
             )
             if (resolveResult == IntentResolveResult.Pending && interaction != ResolverInteraction.Initialized) {
@@ -197,11 +189,17 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
 
         val themeAmoled by viewModel.themeAmoled.collectAsStateWithLifecycle()
         val interceptAccidentalTaps by viewModel.interceptAccidentalTaps.collectAsStateWithLifecycle()
+        val bottomSheetLog by LocalUiDebug.current.bottomSheetLog.collectAsStateWithLifecycle()
         val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
         M3FixModalBottomSheet(
-            modifier = Modifier
+            contentModifier = Modifier
                 .interceptTaps(sheetState, interceptAccidentalTaps)
-                .debugBorder(debug, 1.dp, Color.Red),
+                .debugBorder(debug, 1.dp, Color.Red)
+                .thenIf(bottomSheetLog) { modifier ->
+                    modifier.onPlaced {
+                        logger.debug("Bottom sheet placed; size=${it.size}, parent coords=${it.parentCoordinates?.size}")
+                    }
+                },
             debug = debug,
             // TODO: Replace with pref
             isBlackTheme = themeAmoled,
@@ -216,6 +214,11 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 finish()
             },
             sheetContent = { modifier ->
+                if(bottomSheetLog) {
+                    SideEffect {
+                        logger.debug("Sheet content for result=$resolveResult, event=$event, interaction=$interaction")
+                    }
+                }
                 SheetContent(
                     resolveResult = resolveResult,
                     modifier = modifier,
@@ -238,6 +241,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         when (resolveResult) {
             is IntentResolveResult.Pending -> {
                 LoadingIndicatorWrapper(
+                    modifier = modifier,
                     event = event,
                     interaction = interaction,
                 )

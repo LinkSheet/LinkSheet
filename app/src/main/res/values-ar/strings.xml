@@ -60,7 +60,6 @@
     <string name="donate_subtitle">قم بالترقية إلى <b>LinkSheet Pro</b></string>
     <string name="links">الروابط</string>
     <string name="paste">لصق</string>
-    <string name="use_clear_urls_explainer">استخدام تكامل <annotation url-id="clearurls-github"> ClearURLs</annotation> التجريبي (مسح معلمات التتبع من عناوين URL)</string>
     <string name="links_explainer">ClearUrls، LibRedirect، تتبع إعادة التوجيه</string>
     <string name="system">اتباع النظام</string>
     <string name="light">مظيء</string>
@@ -118,7 +117,6 @@
     <string name="export_log">تصدير السجلات</string>
     <string name="export">تصدير</string>
     <string name="request_private_browsing">خاص</string>
-    <string name="use_clear_urls">استخدام ClearURLs</string>
     <string name="log">سجل</string>
     <string name="redact_log">سجل التنقيح (مستحسن ، قد يؤدي تعطيل هذا إلى تسريب أسماء الحزم وأسماء المضيفين)</string>
     <string name="include_settings">تضمين الإعدادات (موصى به)</string>

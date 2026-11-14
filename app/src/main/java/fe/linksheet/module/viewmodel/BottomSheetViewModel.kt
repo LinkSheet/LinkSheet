@@ -44,7 +44,7 @@ import fe.linksheet.module.resolver.SelfIntentUseCase
 import fe.linksheet.module.resolver.util.*
 import fe.linksheet.module.resolver.workaround.GithubWorkaround
 import fe.linksheet.module.viewmodel.base.BaseViewModel
-import fe.clearurlskt.removeAllQueryParameters
+import app.linksheet.feature.clearurls.core.removeAllQueryParameters
 import fe.linksheet.util.intent.StandardIntents
 import fe.std.result.isSuccess
 import kotlinx.coroutines.Dispatchers

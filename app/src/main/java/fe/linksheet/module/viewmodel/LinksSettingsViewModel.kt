@@ -2,7 +2,7 @@ package fe.linksheet.module.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import fe.clearurlskt.loader.BundledClearURLConfigLoader
+import app.linksheet.feature.clearurls.core.ClearUrlsProviderLoader
 import fe.composekit.preference.asFlow
 import fe.composekit.preference.util.reload
 import fe.std.result.getOrNull
@@ -16,7 +16,8 @@ import fe.linksheet.module.viewmodel.base.BaseViewModel
 
 class LinksSettingsViewModel(
     val context: Application,
-    private val preferenceRepository: AppPreferenceRepository
+    private val preferenceRepository: AppPreferenceRepository,
+    private val clearUrlsProviderLoader: ClearUrlsProviderLoader,
 ) : BaseViewModel(preferenceRepository) {
     val useClearUrls = preferenceRepository.asViewModelState(AppPreferences.useClearUrls)
     val useFastForwardRules = preferenceRepository.asViewModelState(AppPreferences.useFastForwardRules)
@@ -44,7 +45,7 @@ class LinksSettingsViewModel(
     init {
         viewModelScope.launch {
             val providers = withContext(Dispatchers.IO) {
-                BundledClearURLConfigLoader.load().getOrNull()
+                clearUrlsProviderLoader.getProviders().getOrNull()
                     ?.map { it.key }?.filter { it != "globalRules" }?.sortedBy { it.lowercase() }
             }
             providerDialog.update { it.copy(providers = providers.orEmpty(), loading = false, failed = providers == null) }

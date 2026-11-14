@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="use_clear_urls">ClearURLs を使用する</string>
+    <string name="use_clear_urls_explainer">実験的な <annotation url-id="clearurls-github">ClearURLs</annotation> 統合を使用します (URL から追跡パラメータを除去します)</string>
+</resources>

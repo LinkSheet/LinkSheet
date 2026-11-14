@@ -63,8 +63,6 @@
     <string name="paste">Colar</string>
     <string name="links">Ligações</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
-    <string name="use_clear_urls">Usar ClearURLs</string>
-    <string name="use_clear_urls_explainer">Usar a integração experimental com o <annotation url-id="clearurls-github">ClearURLs</annotation> (limpa parâmetros de rastreamento de URLs)</string>
     <string name="follow_redirects">Seguir redirecionamentos</string>
     <string name="follow_redirects_explainer">Siga automaticamente todos os redirecionamentos antes de abrir a folha inferior. Isto pode ter <annotation url-id="privacy-follow-redirects">implicações relacionadas à privacidade</annotation></string>
     <string name="loading_link">A processar a ligação…</string>

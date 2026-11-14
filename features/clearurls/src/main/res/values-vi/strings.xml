@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="use_clear_urls">Sử dụng ClearURL</string>
+    <string name="use_clear_urls_explainer">Sử dụng tích hợp <annotation url-id="clearurls-github">ClearURLs</annotation> thử nghiệm (xóa tham số theo dõi khỏi URL)</string>
+</resources>

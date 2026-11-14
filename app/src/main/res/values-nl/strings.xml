@@ -116,7 +116,6 @@
     <string name="follow_redirects_allow_darknets_explainer">Sta de volgende omleidingen toe voor darknets (ondersteund: %s)</string>
     <string name="bottom_sheet">Paneel</string>
     <string name="about">Over</string>
-    <string name="use_clear_urls_explainer">Gebruik experimentele <annotation url-id="clearurls-github">ClearURLs</annotation> integratie (verwijdert trackingparameters uit URL\'s)</string>
     <string name="export_log">Log exporteren</string>
     <string name="disabled">Uitgeschakeld</string>
     <string name="version">LinkSheet-versie</string>
@@ -125,7 +124,6 @@
     <string name="github">GitHub</string>
     <string name="links">Links</string>
     <string name="links_explainer">ClearUrls, LibRedirect, omleidingen volgen</string>
-    <string name="use_clear_urls">ClearURLs gebruiken</string>
     <string name="dont_show_filtered_item">Sectie \"laatst gekozen app\" niet tonen</string>
     <string name="log_files">Vorige sessies</string>
     <string name="log_viewer">Logboek</string>

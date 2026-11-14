@@ -1,6 +1,7 @@
 package fe.linksheet.module.viewmodel
 
 import android.app.Application
+import app.linksheet.feature.clearurls.core.ClearUrlsProviderLoader
 import androidx.lifecycle.ViewModelStore
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -45,7 +46,7 @@ class LinksSettingsViewModelTest {
             repository.put(preference, emptySet())
             // The resolver can already be observing this preference before settings opens.
             val resolverSelection = repository.asFunction(preference)
-            val model = LinksSettingsViewModel(application, repository)
+            val model = LinksSettingsViewModel(application, repository, ClearUrlsProviderLoader(application, Dispatchers.IO))
             store.put("links", model)
             withTimeout(10_000) { model.clearUrlsProviders.first { !it.loading } }
             model.showClearUrlsProviders(true)

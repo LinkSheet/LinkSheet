@@ -56,7 +56,6 @@
     <string name="about_explainer">Contributi, licenze, link, versione</string>
     <string name="credits">Contributi</string>
     <string name="links_explainer">Pulizia e modifica dei link</string>
-    <string name="use_clear_urls">Utilizza ClearURLs</string>
     <string name="fastfoward_rules">Utilizza le regole FastForward</string>
     <string name="follow_redirects_local_cache">Abilita la cache di reindirizzamento locale</string>
     <string name="dont_show_filtered_item">Non mostrare la sezione \'ultima app selezionata\'</string>
@@ -76,7 +75,6 @@
     <string name="open_copied_link">Contenuto degli appunti</string>
     <string name="dont_show_filtered_item_explainer">Disabilita la sezione superiore che suggerisce l\'ultima app utilizzata per l\'host specifico</string>
     <string name="fastfoward_rules_explainer">Utilizza l\'integrazione sperimentale delle regole di <annotation url-id="fastforward-github">FastForward</annotation> (salta i reindirizzamenti di alcuni host estraendo il reindirizzamento dal link)</string>
-    <string name="use_clear_urls_explainer">Utilizza l\'integrazione sperimentale di <annotation url-id="clearurls-github">ClearURLs</annotation> (cancella i parametri di tracciamento dagli URL)</string>
     <string name="follow_redirects">Segui reindirizzamenti</string>
     <string name="follow_redirects_external_service">Risolvi i reindirizzamenti tramite un servizio esterno</string>
     <string name="follow_redirects_external_service_explainer">Segui i reindirizzamenti utilizzando un\'API distribuita su supabase.com (<annotation url-id="supabase-privacy">Informativa sulla privacy</annotation>)</string>

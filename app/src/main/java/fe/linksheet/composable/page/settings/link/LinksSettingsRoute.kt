@@ -17,9 +17,9 @@ import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import org.koin.androidx.compose.koinViewModel
+import app.linksheet.feature.clearurls.R as ClearUrlsR
 import app.linksheet.feature.libredirect.R as LibRedirectR
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun LinksSettingsRoute(
     onBackPressed: () -> Unit,
@@ -41,15 +41,15 @@ fun LinksSettingsRoute(
         onBackPressed = onBackPressed
     ) {
         group(size = 8) {
-            item(key = R.string.use_clear_urls) { padding, shape ->
+            item(key = ClearUrlsR.string.use_clear_urls) { padding, shape ->
                 PreferenceDividedSwitchListItem(
                     shape = shape,
                     padding = padding,
                     statePreference = viewModel.useClearUrls,
                     onContentClick = { viewModel.showClearUrlsProviders(true) },
-                    headlineContent = textContent(R.string.use_clear_urls),
+                    headlineContent = textContent(ClearUrlsR.string.use_clear_urls),
                     overlineContent = textContent(R.string.clear_urls_providers_hint),
-                    supportingContent = annotatedStringResource(R.string.use_clear_urls_explainer),
+                    supportingContent = annotatedStringResource(ClearUrlsR.string.use_clear_urls_explainer),
                 )
             }
 

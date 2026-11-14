@@ -41,7 +41,7 @@ import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.DefaultContent.Companion.text
 import fe.android.compose.text.StringResourceContent.Companion.textContent
 import fe.android.compose.text.TextContent
-import fe.clearurlskt.queryRange
+import app.linksheet.feature.clearurls.core.queryRange
 import fe.linksheet.R
 import fe.linksheet.activity.TextEditorActivity
 import fe.linksheet.activity.bottomsheet.BottomSheetStateController

@@ -1,5 +1,9 @@
 package fe.buildsrc.clearurls
 
+import fe.clearurlskt.config.provider.ClearUrlBundleSerializer
+import fe.clearurlskt.config.provider.ClearUrlV1Bundle
+import fe.clearurlskt.config.provider.ProviderV1Serializer
+import fe.clearurlskt.config.provider.toV2
 import fe.buildsrc.util.asString
 import fe.buildsrc.util.get
 import fe.buildsrc.util.httpClient
@@ -21,7 +25,7 @@ abstract class UpdateRulesTask : DefaultTask() {
 
     @TaskAction
     fun fetch() {
-        val jsonFile = project.file(file.get())
+        val bundleFile = project.file(file.get())
 
         val rulesUrl = rawUrl.get()
         val response = httpClient.send(get(rulesUrl), asString)
@@ -30,6 +34,9 @@ abstract class UpdateRulesTask : DefaultTask() {
             "Unable to download ClearURLs rules: HTTP ${response.statusCode()} from $rulesUrl"
         }
 
-        jsonFile.writeText(response.body())
+        val providers = response.body().byteInputStream().use { ProviderV1Serializer.handle(it) }
+        check(!providers.isNullOrEmpty()) { "Downloaded ClearURLs rules contain no providers" }
+        val bundle = ClearUrlV1Bundle(version = 1, providers = providers.map { it.toV2() })
+        bundleFile.writeBytes(ClearUrlBundleSerializer.encodeBundle(bundle))
     }
 }

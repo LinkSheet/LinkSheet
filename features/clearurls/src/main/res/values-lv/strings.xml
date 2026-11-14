@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="use_clear_urls">Lietot ClearURLs</string>
+    <string name="use_clear_urls_explainer">Izmanto eksperimentālo <annotation url-id="clearurls-github">ClearURLs</annotation> integrāciju (noņem izsekošanas parametrus no vietņu URL adresēm)</string>
+</resources>

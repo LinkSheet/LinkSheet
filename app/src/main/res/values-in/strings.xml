@@ -48,7 +48,6 @@
     <string name="open_copied_link">Dari papan klip</string>
     <string name="paste">Tempel</string>
     <string name="links">Tautan</string>
-    <string name="use_clear_urls">Gunakan ClearURLs</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Mengikuti pengalihan</string>
     <string name="follow_redirects">Ikuti pengalihan</string>
     <string name="theme">Tema</string>
@@ -67,7 +66,6 @@
     <string name="hide_after_copying_explainer">Sembunyikan lembar bawah secara otomatis saat tombol tindakan seperti \"Salin tautan\" atau \"Unduh\" diketuk</string>
     <string name="open_link_with_subtitle_2">LinkSheet awalnya berbasis pada OpenLinkWith</string>
     <string name="version">Versi LinkSheet</string>
-    <string name="use_clear_urls_explainer">Gunakan integrasi <annotation url-id="clearurls-github">ClearURLs</annotation> eksperimental (membersihkan parameter pelacakan dari URL)</string>
     <string name="loading_link">Memproses tautan…</string>
     <string name="open_with_linksheet">Buka dengan LinkSheet</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="use_clear_urls">ClearURLs ਵਰਤੋ</string>
+    <string name="use_clear_urls_explainer">ਪ੍ਰਯੋਗਾਤਮਕ <annotation url-id="clearurls-github">ClearURLs</annotation> ਇੰਟੀਗਰੇਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕਰੋ (URLs ਤੋਂ ਟਰੈਕਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਸਾਫ਼ ਕਰਦਾ ਹੈ)</string>
+</resources>

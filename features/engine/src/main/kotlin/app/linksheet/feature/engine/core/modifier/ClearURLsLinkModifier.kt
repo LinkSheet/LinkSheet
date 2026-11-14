@@ -7,9 +7,11 @@ import app.linksheet.feature.engine.core.step.InPlaceStep
 import app.linksheet.feature.engine.core.step.StepResult
 import fe.clearurlskt.ClearUrlOperation
 import fe.clearurlskt.ClearUrlSettings
-import fe.clearurlskt.ClearUrls
-import fe.clearurlskt.loader.BundledClearURLConfigLoader
-import fe.std.result.getOrNull
+import app.linksheet.feature.clearurls.core.ConfiguredClearUrls
+import fe.clearurlskt.config.provider.Provider
+import app.linksheet.util.SuspendingLazy
+import fe.std.result.StdResult
+import fe.std.result.isFailure
 import fe.std.uri.StdUrl
 import fe.std.uri.toStdUrlOrThrow
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ClearURLsLinkModifier(
+    private val getProviders: suspend () -> StdResult<List<Provider>>,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     override val enabled: () -> Boolean,
     private val removeAllQueryProviders: () -> Set<String> = { emptySet() },
@@ -24,23 +27,21 @@ class ClearURLsLinkModifier(
 ) : LinkModifier<ClearURLsModifyOutput>, InPlaceStep {
     override val id = EngineStepId.ClearURLs
 
-    companion object {
-        private val clearUrlProviders by lazy { BundledClearURLConfigLoader.load().getOrNull() }
-    }
-
-    private val clearUrls by lazy {
-        clearUrlProviders?.let { ClearUrls(it) }
+    private val clearUrls = SuspendingLazy {
+        val result = getProviders()
+        // TODO: Log this
+        if (result.isFailure()) return@SuspendingLazy null
+        ConfiguredClearUrls(result.value)
     }
 
     override suspend fun warmup() = withContext(ioDispatcher) {
-        clearUrls
+        clearUrls.value()
         Unit
     }
 
-
     context(context: EngineRunContext)
     override suspend fun runStep(url: StdUrl) = withContext(ioDispatcher) {
-        val result = clearUrls?.clearUrl(
+        val result = clearUrls.value()?.clearUrl(
             url = url.toString(),
             settings = ClearUrlSettings(skipUnchanged = skipUnchanged()),
             removeAllQueryProviders = removeAllQueryProviders()

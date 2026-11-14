@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="use_clear_urls">استخدام ClearURLs</string>
+    <string name="use_clear_urls_explainer">استخدام تكامل &lt;annotation url-id="clearurls-github"&gt; ClearURLs&lt;/annotation&gt; التجريبي (مسح معلمات التتبع من عناوين URL)</string>
+</resources>

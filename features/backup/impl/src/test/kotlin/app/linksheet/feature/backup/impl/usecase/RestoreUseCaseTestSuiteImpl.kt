@@ -17,16 +17,17 @@ import de.infix.testBalloon.integration.robolectric.robolectricTestSuite
 import fe.android.preference.helper.Preference
 import fe.android.preference.helper.PreferenceDefinition
 import fe.android.preference.helper.PreferenceRepository
+import fe.linksheet.testlib.core.baseTest
 import okio.Buffer
 
-val RestoreUseCaseTestSuite by testSuite {
-    for (apiLevel in listOf(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)) {
+val RestoreUseCaseTestSuite by testSuite(testConfig = TestConfig.baseTest()) {
+    for (apiLevel in listOf(Build.VERSION_CODES.BAKLAVA)) {
         robolectricTestSuite<RestoreUseCaseTestSuiteImpl>(
             "API level $apiLevel",
             testConfig = TestConfig.robolectric {
                 sdk = apiLevel
                 qualifiers = "xlarge-port"
-                applicationLifetime = ApplicationLifetime.RobolectricTestSuite
+                applicationLifetime = ApplicationLifetime.Test
             }
         )
     }

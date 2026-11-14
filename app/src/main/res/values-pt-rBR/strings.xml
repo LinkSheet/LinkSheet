@@ -45,7 +45,6 @@
     <string name="github_explainer">Repositório de código-fonte</string>
     <string name="donate_subtitle">Atualizar para <b>LinkSheet Pro</b></string>
     <string name="links">Links</string>
-    <string name="use_clear_urls">Usar ClearURLs</string>
     <string name="follow_redirects">Seguir redirecionamentos</string>
     <string name="loading_link">Processando link…</string>
     <string name="follow_only_known_trackers">Seguir apenas rastreadores conhecidos</string>
@@ -62,7 +61,6 @@
     <string name="open_copied_link">Da área de transferência</string>
     <string name="hide_after_copying">Ocultar ao selecionar ação</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Redirecionamento</string>
-    <string name="use_clear_urls_explainer">Usar a integração experimental com o <annotation url-id="clearurls-github">ClearURLs</annotation> (limpa parâmetros de rastreamento de URLs)</string>
     <string name="selected_browser_explainer">Esse navegador será aberto automaticamente se nenhum aplicativo nativo puder lidar com o link clicado</string>
     <string name="display_grid_layout_explainer">Mostrar uma grade em vez de uma lista na folha inferior</string>
     <string name="follow_redirects_external_service">Seguir redirecionamentos via serviço externo</string>

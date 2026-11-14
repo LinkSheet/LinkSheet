@@ -2,6 +2,8 @@ package fe.linksheet.testlib.core
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import de.infix.testBalloon.framework.core.TestConfig
+import de.infix.testBalloon.framework.core.aroundEach
 import org.junit.After
 import org.junit.Before
 import org.junit.jupiter.api.AfterEach
@@ -40,6 +42,24 @@ interface BaseUnitTest : KoinTest {
 //            runCatching { fs?.close() }
 //        }
     }
+}
+
+fun maybeStopKoin(): Boolean {
+    if (KoinPlatformTools.defaultContext().getOrNull() != null) {
+        stopKoin()
+        return true
+    }
+    return false
+}
+
+fun TestConfig.baseTest(): TestConfig = aroundEach { testAction ->
+    val stopped = maybeStopKoin()
+    println("Test: $testAction")
+    println("Stopped koin before test: $stopped")
+    testAction()
+    val stoppedAfter = maybeStopKoin()
+    println("Stopped koin after test: $stoppedAfter")
+    //        closeJarFs()
 }
 
 class BaseUnitTestRule : TestWatcher() {

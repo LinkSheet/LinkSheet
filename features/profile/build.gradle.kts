@@ -31,7 +31,7 @@ dependencies {
     implementation(project(":lib-compose"))
     implementation(project(":lib-util"))
     compileOnly(project(":lib-hidden-api"))
-    implementation("com.github.1fexd.HiddenApiRefinePlugin:runtime:_")
+    implementation("com.github.1fexd.hiddenapirefineplugin:runtime:_")
 
     implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(AndroidX.core.ktx)

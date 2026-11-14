@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="use_clear_urls">Použít ClearURLs</string>
+    <string name="use_clear_urls_explainer">Použít experimentální integraci <annotation url-id="clearurls-github">ClearURLs</annotation> (odstraní sledovací prvky z adres URL)</string>
+</resources>

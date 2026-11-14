@@ -45,7 +45,7 @@ jobs:
           encodedString: ${{ secrets.KEYSTORE_FILE }}
 
       - name: Update bundled CleanURLs rules
-        run: ./gradlew :integration-clearurl:updateRules
+        run: ./gradlew :feature-clearurls:updateRules
 
       - name: Build signed FOSS nightly APK
         env:

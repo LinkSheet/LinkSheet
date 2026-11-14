@@ -60,8 +60,6 @@
     <string name="paste">粘贴</string>
     <string name="links">链接</string>
     <string name="links_explainer">ClearUrls，LibRedirect，跟随重定向</string>
-    <string name="use_clear_urls">使用 ClearURLs</string>
-    <string name="use_clear_urls_explainer">使用实验性 <annotation url-id="clearurls-github">ClearURLs</annotation> 集成（清除链接中的跟踪参数）</string>
     <string name="follow_redirects">跟踪重定向</string>
     <string name="follow_redirects_explainer">在打开底栏前自动跟踪所有重定向。这可能带来<annotation url-id="privacy-follow-redirects">隐私方面的影响</annotation></string>
     <string name="loading_link">处理链接中…</string>

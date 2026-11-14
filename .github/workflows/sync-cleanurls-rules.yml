@@ -18,7 +18,7 @@ concurrency:
 
 env:
   BASE_BRANCH: master
-  RULES_FILE: integration/clearurl/src/main/resources/fe/clearurlskt/clearurls.json
+  RULES_FILE: features/clearurls/src/main/res/raw/clearurls.bin
 
 jobs:
   sync:
@@ -49,7 +49,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Download latest rules
-        run: ./gradlew :integration-clearurl:updateRules
+        run: ./gradlew :feature-clearurls:updateRules
 
       - name: Commit changed rules and start nightly release
         env:

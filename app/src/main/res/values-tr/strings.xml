@@ -52,7 +52,6 @@
     <string name="donate_subtitle"><b>LinkSheet Pro</b>\'ya yükselt</string>
     <string name="paste">Yapıştır</string>
     <string name="links">Bağlantılar</string>
-    <string name="use_clear_urls">Temiz URL\'leri kullanın</string>
     <string name="follow_redirects">Yönlendirmeleri takip et</string>
     <string name="loading_link">Bağlantı işleniyor…</string>
     <string name="display_grid_layout_explainer">Alt sayfada bir liste yerine bir ızgara göster</string>
@@ -64,7 +63,6 @@
     <string name="open_copied_link">Panodan</string>
     <string name="open_link_with" translatable="false">OpenLinkWith</string>
     <string name="github_explainer">Kaynak kodu deposu</string>
-    <string name="use_clear_urls_explainer">Deneysel <annotation url-id="clearurls-github">ClearURLs</annotation> entegrasyonunu kullan (URLlerden izleme parametrelerini temizler)</string>
     <string name="links_explainer">ClearUrls, LibRedirect, Yönlendirmeleri takip etme</string>
     <string name="follow_redirects_explainer">Alt sayfayı açmadan önce bütün yönlendirmeleri takip et. Bunun <annotation url-id="privacy-follow-redirects">gizlilikle ilgili etkileri</annotation> olabilir</string>
     <string name="follow_redirects_external_service">Harici hizmet üzerinden yönlendirmeleri takip et</string>

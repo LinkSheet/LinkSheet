@@ -89,7 +89,6 @@
     <string name="donate_subtitle">Frissítsen a <b>LinkSheet Pro</b>-ra</string>
     <string name="paste">Beillesztés</string>
     <string name="links">Linkek</string>
-    <string name="use_clear_urls">ClearURLs használata</string>
     <string name="loading_link">Link feldolgozása…</string>
     <string name="follow_redirects_local_cache_explainer">Gyorsítótárazza az átirányítások eredményét helyileg</string>
     <string name="export_log">Napló exportálása</string>
@@ -135,7 +134,6 @@
     <string name="none_explainer">Csak a natív alkalmazások listázása, az összes böngésző eltávolítása. Ha csak egyetlen natív alkalmazás van jelen, az automatikusan megnyílik. Ha nincs natív alkalmazás, az összes böngésző listázásra kerül.</string>
     <string name="app_browsers">Alkalmazások &amp; Böngészők</string>
     <string name="github_explainer">Forráskód tároló</string>
-    <string name="use_clear_urls_explainer">Kísérleti <annotation url-id="clearurls-github">ClearURLs</annotation> integráció használata (törli a követési paramétereket az URL-ekből)</string>
     <string name="follow_redirects_explainer">Automatikusan követi az összes átirányítást az alsó panel megnyitása előtt. Ennek lehetnek <annotation url-id="privacy-follow-redirects">adatvédelemre vonatkozó következményei</annotation></string>
     <string name="follow_only_known_trackers_explainer">Csak akkor próbálja követni az átirányításokat, ha a fogadóról ismert, hogy nyomkövető/átirányító. Ha a \"Kövesse az átirányításokat külső szolgáltatáson keresztül\" opció be van kapcsolva, akkor ez mindig engedélyezve lesz</string>
     <string name="fastfoward_rules_explainer">Kísérleti <annotation url-id="fastforward-github">FastForward</annotation> szabály integrálása (egyes hostok átirányításainak megkerülése a linkből történő átirányítás kivonásával)</string>

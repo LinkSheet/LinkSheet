@@ -60,8 +60,6 @@
     <string name="paste">貼上</string>
     <string name="links">連結</string>
     <string name="links_explainer">ClearURLs、LibRedirect、跟進重新導向</string>
-    <string name="use_clear_urls">使用 ClearURLs</string>
-    <string name="use_clear_urls_explainer">使用實驗性的 <annotation url-id="clearurls-github">ClearURLs</annotation> 整合 (清除網址中的追蹤參數)</string>
     <string name="follow_redirects">跟進重新導向</string>
     <string name="follow_redirects_explainer">在開啟底部功能表之前自動跟進所有的重新導向。這可能引發<annotation url-id="privacy-follow-redirects">隱私顧慮</annotation></string>
     <string name="loading_link">處理連結中…</string>

@@ -3,8 +3,6 @@ package fe.linksheet.activity.bottomsheet.compat.m3fix
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.fix.SheetState
-import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
@@ -12,6 +10,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import app.linksheet.api.BOTTOM_SHEET_TEST_TAG
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.SheetState
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.rememberModalBottomSheetState
 import fe.composekit.core.AndroidVersion
 
 

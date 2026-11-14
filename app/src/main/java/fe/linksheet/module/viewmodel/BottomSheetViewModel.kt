@@ -95,7 +95,6 @@ class BottomSheetViewModel(
     val expandFully = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.expandFully)
     val doubleTapUrl = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.doubleTapUrl)
     val interceptAccidentalTaps = experimentRepository.asViewModelState(Experiments.interceptAccidentalTaps)
-    val bottomSheetExpandFix = experimentRepository.asViewModelState(Experiments.bottomSheetExpandFix)
     val downloaderEnabled = preferenceRepository.asViewModelState(AppPreferences.downloader.enable)
     val downloaderMode = preferenceRepository.asViewModelState(AppPreferences.downloader.mode)
     val followRedirectsEnabled = preferenceRepository.asViewModelState(AppPreferences.followRedirects.enable)

@@ -3,19 +3,11 @@ package fe.linksheet.activity.bottomsheet.compat.m3fix
 import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.fix.ModalBottomSheet
-import androidx.compose.material3.fix.SheetState
-import androidx.compose.material3.fix.SheetValue
-import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -26,6 +18,10 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.debugBorder
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.ModalBottomSheet
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.SheetState
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.SheetValue
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.rememberModalBottomSheetState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +51,7 @@ internal fun M3FixModalBottomSheetPreApi30(
         shape = shape,
         scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
         sheetState = sheetState,
-        windowInsets = WindowInsets(insetHorizontal, 0.dp, 0.dp, 0.dp),
+        contentWindowInsets = { WindowInsets(0.dp, 0.dp, 0.dp, 0.dp) },
         onDismissRequest = hide
     ) {
             if (landscape) {

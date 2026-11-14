@@ -6,17 +6,10 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetValue
-import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.onPlaced
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
@@ -134,12 +127,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         setInitialIntent(intent)
         setContent(edgeToEdge = true) {
             AppTheme {
-                val expandFix by viewModel.bottomSheetExpandFix.collectAsStateWithLifecycle()
-                if (expandFix) {
-                    Wrapper2()
-                } else {
-                    Wrapper()
-                }
+                Wrapper()
             }
         }
     }
@@ -153,9 +141,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
         val currentIntent by viewModel.intentFlow.collectAsStateWithLifecycle()
 
         val coroutineScope = rememberCoroutineScope()
-        val sheetState = rememberM3FixModalBottomSheetState(
-            isReducedMotionEnabled = isReducedMotionEnabledFlow::value
-        )
+        val sheetState = rememberM3FixModalBottomSheetState()
 //        val sheetState = rememberModalBottomSheetState(
 ////            confirmValueChange = {
 ////                if(it == SheetValue.Hidden) true else true
@@ -240,106 +226,6 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
             }
         )
     }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    private fun Wrapper2() {
-        val event by viewModel.events.collectOnIO()
-        val interaction by viewModel.interactions.collectOnIO()
-
-        val resolveResult by viewModel.resolveResultFlow.collectAsStateWithLifecycle()
-
-        val coroutineScope = rememberCoroutineScope()
-        val sheetState = rememberBottomSheetState(SheetValue.Hidden)
-
-        LaunchedEffect(key1 = resolveResult) {
-            logger.debug("Expanding bottom sheet, status: $resolveResult, isPending=${resolveResult == IntentResolveResult.Pending}")
-            if (resolveResult != IntentResolveResult.Pending) {
-                // Need to do this in a separate effect as otherwise the preview image seems to mess up the layout-ing
-                if (viewModel.expandFully.value) {
-                    sheetState.expand()
-                } else {
-                    sheetState.partialExpand()
-                }
-            }
-        }
-
-        LaunchedEffect(key1 = interaction) {
-            Log.d(
-                "LoadingIndicatorSheetContent",
-                "Interaction=$interaction, isClear=${interaction == ResolverInteraction.Clear}, " +
-                        "isInitialized=${interaction == ResolverInteraction.Initialized}"
-            )
-            if (resolveResult == IntentResolveResult.Pending && interaction != ResolverInteraction.Initialized) {
-                // Request resize on interaction change to accommodate interaction UI
-                sheetState.expand()
-            }
-        }
-
-        LaunchedEffect(key1 = event) {
-            logger.debug("Latest event: $event")
-        }
-
-        val controller = remember {
-            DefaultBottomSheetStateController(
-                editorLauncher = editorLauncher,
-                dispatch = { interaction ->
-                    handleInteraction(
-                        interaction = interaction,
-                        resolveResult = resolveResult,
-                        isExpanded = sheetState.currentValue == SheetValue.Expanded,
-                        expandSheet = {
-                            coroutineScope.launch { sheetState.expand() }
-                        },
-                        hideSheet = {
-                            coroutineScope.launch { sheetState.hide() }
-                        }
-                    )
-                },
-            )
-        }
-
-        val themeAmoled by viewModel.themeAmoled.collectAsStateWithLifecycle()
-        val interceptAccidentalTaps by viewModel.interceptAccidentalTaps.collectAsStateWithLifecycle()
-        val debug by LocalUiDebug.current.drawBorders.collectAsStateWithLifecycle()
-        ModalBottomSheet(
-//            contentModifier = Modifier
-//                .interceptTaps(sheetState, interceptAccidentalTaps)
-//                .debugBorder(debug, 1.dp, Color.Red)
-//                .heightIn(100.dp)
-//                .onPlaced {
-//                    logger.debug( "Bottom sheet placed at: ${it.size}")
-//                }
-//                .onSizeChanged {
-//                    logger.debug( "Bottom sheet size: ${it.width}x${it.height}")
-//                },
-//            debug = debug,
-//            isBlackTheme = themeAmoled,
-            sheetState = sheetState,
-            shape = RoundedCornerShape(
-                topStart = 22.0.dp,
-                topEnd = 22.0.dp,
-                bottomEnd = 0.0.dp,
-                bottomStart = 0.0.dp
-            ),
-            onDismissRequest = {
-                finish()
-            },
-//            hide = {
-//                finish()
-//            },
-            content = {
-                SheetContent(
-                    resolveResult = resolveResult,
-                    modifier = Modifier,
-                    event = event,
-                    interaction = interaction,
-                    controller = controller
-                )
-            }
-        )
-    }
-
 
     @Composable
     private fun SheetContent(

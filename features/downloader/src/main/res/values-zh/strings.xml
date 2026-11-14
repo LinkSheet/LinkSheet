@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="enable_downloader">启用下载器</string>
-    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加“下载”按钮。这可能带来</string>
+    <string name="enable_downloader_explainer">如果链接包含指向文件的直接链接，则在底栏添加“下载”按钮。这可能会 <annotation url-id="privacy-downloader">对隐私造成影响</annotation></string>
     <string name="settings_links_downloader__title_downloader">下载器</string>
-    <string name="downloader_url_mime_type">使用来自链接的媒体类型</string>
+    <string name="downloader_url_mime_type">使用来自链接的 MIME 媒体类型</string>
     <string name="downloader_url_mime_type_explainer">检查链接是否以文件扩展名结尾（例如“.jpg”）；如果是，则此类型用于下载的文件。</string>
+    <string name="action_downloader__try_to_download">检查是否可下载</string>
+    <string name="settings_downloader__title_mode_auto">自动</string>
+    <string name="settings_downloader__subtitle_mode_auto">自动检查链接是否包含可下载内容</string>
+    <string name="settings_downloader__title_mode_manual">手动</string>
+    <string name="settings_downloader__subtitle_mode_manual">在底栏显示“检查是否可下载”按钮</string>
 </resources>

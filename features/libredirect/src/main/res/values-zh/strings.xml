@@ -10,6 +10,8 @@
     <string name="random_instance">随机实例</string>
     <string name="services">服务</string>
     <string name="instance_not_available_anymore">实例已经不再可用！</string>
-    <string name="libredirect_via">通过%s</string>
-    <string name="no_libredirect_services">未找到LibRedirect服务！</string>
+    <string name="libredirect_via">通过 %s</string>
+    <string name="no_libredirect_services">未找到 LibRedirect 服务！</string>
+    <string name="settings_libredirect__title_add_instance">添加实例</string>
+    <string name="settings_libredirect__text_placeholder_instance">实例</string>
 </resources>

@@ -1,11 +1,12 @@
 package fe.linksheet.composable.page.settings.link
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.res.stringResource
 import app.linksheet.compose.list.item.PreferenceDividedSwitchListItem
 import app.linksheet.compose.list.item.PreferenceSwitchListItem
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
-import app.linksheet.feature.clearurls.ui.clearURLsListItem
 import app.linksheet.feature.libredirect.navigation.LibRedirectRoute
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import fe.android.compose.text.AnnotatedStringResourceContent.Companion.annotatedStringResource
@@ -16,6 +17,7 @@ import fe.linksheet.module.viewmodel.LinksSettingsViewModel
 import fe.linksheet.navigation.amp2HtmlSettingsRoute
 import fe.linksheet.navigation.followRedirectsSettingsRoute
 import org.koin.androidx.compose.koinViewModel
+import app.linksheet.feature.clearurls.R as ClearUrlsR
 import app.linksheet.feature.libredirect.R as LibRedirectR
 
 @Composable
@@ -25,12 +27,51 @@ fun LinksSettingsRoute(
     navigateNew: (Route) -> Unit,
     viewModel: LinksSettingsViewModel = koinViewModel()
 ) {
+    val providers by viewModel.clearUrlsProviders.collectAsStateWithLifecycle()
+    if (providers.visible) {
+        ClearUrlsProviderDialog(
+            state = providers,
+            onSearch = viewModel::searchClearUrlsProviders,
+            onToggle = viewModel::setRemoveAllQueryParameters,
+            onDismiss = { viewModel.showClearUrlsProviders(false) },
+        )
+    }
     SaneScaffoldSettingsPage(
         headline = stringResource(id = R.string.links),
         onBackPressed = onBackPressed
     ) {
-        group(size = 6) {
-            clearURLsListItem(statePreference = viewModel.useClearUrls, navigate = navigateNew)
+        group(size = 8) {
+            item(key = ClearUrlsR.string.use_clear_urls) { padding, shape ->
+                PreferenceDividedSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.useClearUrls,
+                    onContentClick = { viewModel.showClearUrlsProviders(true) },
+                    headlineContent = textContent(ClearUrlsR.string.use_clear_urls),
+                    overlineContent = textContent(R.string.clear_urls_providers_hint),
+                    supportingContent = annotatedStringResource(ClearUrlsR.string.use_clear_urls_explainer),
+                )
+            }
+
+            item(key = R.string.settings_links__title_open_without_tracking) { padding, shape ->
+                PreferenceSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.openWithoutTrackingButton,
+                    headlineContent = textContent(R.string.settings_links__title_open_without_tracking),
+                    supportingContent = textContent(R.string.settings_links__subtitle_open_without_tracking),
+                )
+            }
+
+            item(key = R.string.select_link_parameters_title) { padding, shape ->
+                PreferenceSwitchListItem(
+                    shape = shape,
+                    padding = padding,
+                    statePreference = viewModel.selectLinkParameters,
+                    headlineContent = textContent(R.string.select_link_parameters_title),
+                    supportingContent = textContent(R.string.select_link_parameters_description),
+                )
+            }
 
             item(key = R.string.fastfoward_rules) { padding, shape ->
                 PreferenceSwitchListItem(

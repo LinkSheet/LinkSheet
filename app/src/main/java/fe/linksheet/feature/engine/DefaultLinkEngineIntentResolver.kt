@@ -69,6 +69,7 @@ fun DefaultLinkEngineIntentResolver(
             ),
             ClearURLsLinkModifier(
                 enabled = settings.useClearUrls,
+                removeAllQueryProviders = settings.clearUrlsRemoveAllQueryProviders,
                 skipUnchanged = settings.clearUrlsSkipUnchanged,
                 getProviders = clearUrlsProviderLoader::getProviders,
                 ioDispatcher = dispatcher

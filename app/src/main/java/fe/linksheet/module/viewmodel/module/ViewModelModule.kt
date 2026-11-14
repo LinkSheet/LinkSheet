@@ -4,6 +4,7 @@ package fe.linksheet.module.viewmodel.module
 import android.content.pm.getApplicationInfoCompatOrNull
 import app.linksheet.api.SystemInfoService
 import app.linksheet.api.preference.AppPreferenceRepository
+import app.linksheet.feature.clearurls.ClearURLsFeatureModule
 import app.linksheet.feature.exportimport.ExportImportUseCase
 import app.linksheet.feature.profile.ProfileFeatureModule
 import app.linksheet.module.viewmodel.privacy.PrivacyIncognitoSettingsViewModel
@@ -62,7 +63,8 @@ val ViewModelModule = module {
 //        PreferenceRepositoryModule,
         RepositoryModule,
         DefaultLogModule,
-        ProfileFeatureModule
+        ProfileFeatureModule,
+        ClearURLsFeatureModule
     )
     factory {
         LogViewCommon(

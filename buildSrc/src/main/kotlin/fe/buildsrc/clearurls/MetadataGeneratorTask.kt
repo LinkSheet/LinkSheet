@@ -23,7 +23,7 @@ abstract class MetadataGeneratorTask : DefaultTask() {
     }
 
     private fun getRulesHash(): String {
-        val process = Runtime.getRuntime().exec("git ls-remote https://github.com/ClearURLs/rules")
+        val process = Runtime.getRuntime().exec("git ls-remote https://github.com/RBN-Apps/CleanURLs-Rules")
         val line = process.inputReader().use { it.readLine() }
 
         return line.substring(0, line.indexOf("\t"))

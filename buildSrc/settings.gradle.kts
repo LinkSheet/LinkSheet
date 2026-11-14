@@ -21,6 +21,8 @@ configureRepositories(
     MavenRepository.mavenCentral(),
     MavenRepository.local(),
     GrrfeRepository.std(),
+    GrrfeRepository.gsonExt(),
+    GrrfeRepository.signifykt(),
     MavenRepository.jitpack(),
     GradlePluginPortalRepository,
     mode = RepositoriesMode.PREFER_SETTINGS

@@ -5,6 +5,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -17,7 +18,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -45,7 +50,9 @@ fun UrlCard(
     uri: String,
     unfurlResult: UnfurlResult?,
     imageLoader: ImageLoader?,
+    dimmedRange: IntRange? = null,
     onDoubleClick: (() -> Unit)? = null,
+    onClick: (() -> Unit)? = null,
 ) {
     val data = when (unfurlResult) {
         null -> null
@@ -56,6 +63,8 @@ fun UrlCard(
         uri = uri,
         data = data,
         imageLoader = imageLoader,
+        dimmedRange = dimmedRange,
+        onClick = onClick,
         onDoubleClick = onDoubleClick
     )
 }
@@ -72,7 +81,9 @@ fun UrlCard(
     uri: String,
     data: UrlCardData? = null,
     imageLoader: ImageLoader? = null,
+    dimmedRange: IntRange? = null,
     onDoubleClick: (() -> Unit)? = null,
+    onClick: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
     var showFullUrl by remember { mutableStateOf(false) }
@@ -89,7 +100,8 @@ fun UrlCard(
             .fillMaxWidth()
             .clip(CardDefaults.shape)
             .combinedClickable(
-                onClick = {},
+                onClick = { onClick?.invoke() },
+                onClickLabel = if (onClick != null) androidx.compose.ui.res.stringResource(fe.linksheet.R.string.link_parameters_title) else null,
                 onDoubleClick = onDoubleClick,
                 onLongClick = {
                     showFullUrl = !showFullUrl
@@ -201,13 +213,36 @@ fun UrlCard(
                     }
 
                     Text(
-                        text = uri,
+                        text = rememberDimmedUrl(uri, dimmedRange),
                         maxLines = if (showFullUrl) Int.MAX_VALUE else 3,
                         overflow = TextOverflow.Ellipsis,
                         fontSize = 14.sp,
                     )
                 }
             }
+        }
+    }
+}
+
+/**
+ * Renders [uri] with the characters in [dimmedRange] greyed out, to signal that this part of the
+ * url is about to be dropped.
+ */
+@Composable
+private fun rememberDimmedUrl(uri: String, dimmedRange: IntRange?): AnnotatedString {
+    val dimmedColor = LocalContentColor.current.copy(alpha = 0.45f)
+
+    return remember(uri, dimmedRange, dimmedColor) {
+        if (dimmedRange == null || dimmedRange.isEmpty() || dimmedRange.last >= uri.length) {
+            return@remember AnnotatedString(uri)
+        }
+
+        buildAnnotatedString {
+            append(uri.substring(0, dimmedRange.first))
+            withStyle(SpanStyle(color = dimmedColor)) {
+                append(uri.substring(dimmedRange.first, dimmedRange.last + 1))
+            }
+            append(uri.substring(dimmedRange.last + 1))
         }
     }
 }

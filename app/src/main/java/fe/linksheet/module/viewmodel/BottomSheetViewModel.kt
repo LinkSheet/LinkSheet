@@ -44,6 +44,7 @@ import fe.linksheet.module.resolver.SelfIntentUseCase
 import fe.linksheet.module.resolver.util.*
 import fe.linksheet.module.resolver.workaround.GithubWorkaround
 import fe.linksheet.module.viewmodel.base.BaseViewModel
+import app.linksheet.feature.clearurls.core.removeAllQueryParameters
 import fe.linksheet.util.intent.StandardIntents
 import fe.std.result.isSuccess
 import kotlinx.coroutines.Dispatchers
@@ -94,6 +95,9 @@ class BottomSheetViewModel(
     val bottomSheetNativeLabel = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.bottomSheetNativeLabel)
     val expandFully = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.expandFully)
     val doubleTapUrl = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.actionBar.doubleTapUrl)
+    val selectLinkParameters = preferenceRepository.asViewModelState(AppPreferences.bottomSheet.selectLinkParameters)
+    val openWithoutTrackingButton =
+        preferenceRepository.asViewModelState(AppPreferences.bottomSheet.openWithoutTrackingButton)
     val interceptAccidentalTaps = experimentRepository.asViewModelState(Experiments.interceptAccidentalTaps)
     val downloaderEnabled = preferenceRepository.asViewModelState(AppPreferences.downloader.enable)
     val downloaderMode = preferenceRepository.asViewModelState(AppPreferences.downloader.mode)
@@ -106,6 +110,76 @@ class BottomSheetViewModel(
 
     private val _resolveResultFlow = MutableStateFlow<IntentResolveResult>(IntentResolveResult.Pending)
     val resolveResultFlow = _resolveResultFlow.asStateFlow()
+
+    private val _trackingParametersRemoved = MutableStateFlow(false)
+    val trackingParametersRemoved = _trackingParametersRemoved.asStateFlow()
+
+    private val _parameterSelection = MutableStateFlow<LinkParameterSelection?>(null)
+    val parameterSelection = _parameterSelection.asStateFlow()
+    private val _parameterDraft = MutableStateFlow<LinkParameterSelection?>(null)
+    val parameterDraft = _parameterDraft.asStateFlow()
+
+    fun showParameterSelection() {
+        if (!selectLinkParameters.value) return
+        val result = _resolveResultFlow.value as? IntentResolveResult.Default ?: return
+        val source = result.uri?.toString() ?: return
+        val selection = _parameterSelection.value?.takeIf { it.source == source }
+            ?: LinkParameterSelection.from(source).let {
+                if (_trackingParametersRemoved.value) it.selectAll(false) else it
+            }
+        _parameterDraft.value = selection
+    }
+
+    fun selectParameter(index: Int, keep: Boolean) {
+        _parameterDraft.value = _parameterDraft.value?.select(index, keep)
+    }
+
+    fun selectAllParameters(keep: Boolean) {
+        _parameterDraft.value = _parameterDraft.value?.selectAll(keep)
+    }
+
+    fun dismissParameterSelection() {
+        _parameterDraft.value = null
+    }
+
+    fun applyParameterSelection() {
+        val draft = _parameterDraft.value ?: return
+        val result = _resolveResultFlow.value as? IntentResolveResult.Default ?: return
+        if (selectLinkParameters.value && draft.source == result.uri?.toString()) {
+            _parameterSelection.value = draft
+            _trackingParametersRemoved.value = false
+        }
+        _parameterDraft.value = null
+    }
+
+    fun removeTrackingParameters() {
+        _parameterSelection.value = null
+        _parameterDraft.value = null
+        _trackingParametersRemoved.value = true
+    }
+
+    fun displayUri(
+        result: IntentResolveResult.Default,
+        selection: LinkParameterSelection?,
+        removed: Boolean,
+    ): String? {
+        val url = result.uri?.toString() ?: return null
+        if (removed) return removeAllQueryParameters(url)
+        return selection?.takeIf { selectLinkParameters.value && it.source == url }?.url ?: url
+    }
+
+    /**
+     * The intent to launch, which is [IntentResolveResult.Default.intent] unless the user asked
+     * for query parameters to be removed or selected manually.
+     */
+    private fun effectiveIntent(result: IntentResolveResult.Default): Intent {
+        val url = result.uri?.toString() ?: return result.intent
+        val stripped = displayUri(result, _parameterSelection.value, _trackingParametersRemoved.value) ?: url
+        if (stripped == url) return result.intent
+
+        // Copy, since the resolve result (and thus its intent) stays in use afterwards
+        return Intent(result.intent).setDataAndType(stripped.toUri(), result.intent.type)
+    }
 
     fun warmupAsync() = viewModelScope.launch {
         intentResolver.warmup()
@@ -126,6 +200,9 @@ class BottomSheetViewModel(
     }
 
     fun resolveAsync(intent: SafeIntent, options: ResolveOptions, reset: Boolean = true) = viewModelScope.launch(Dispatchers.IO) {
+        _trackingParametersRemoved.value = false
+        _parameterSelection.value = null
+        _parameterDraft.value = null
         if (reset) {
             _resolveResultFlow.emit(IntentResolveResult.Pending)
         }
@@ -289,13 +366,14 @@ class BottomSheetViewModel(
         requestExpand: () -> Unit
     ): LaunchIntent? {
         val info = interaction.info ?: return null
+        val intent = effectiveIntent(result)
         if (interaction is AppClickInteraction) {
             return handleClick(
                 activity = activity,
                 index = interaction.index,
                 isExpanded = expanded,
                 requestExpand = requestExpand,
-                result = result.intent,
+                result = intent,
                 info = info,
                 type = interaction.type,
                 modifier = interaction.modifier
@@ -306,7 +384,7 @@ class BottomSheetViewModel(
             val modifier = interaction.modifier
             return makeOpenAppIntent(
                 info = info,
-                intent = result.intent,
+                intent = intent,
                 referrer = activity.referrer,
                 always = modifier is ClickModifier.Always,
                 privateBrowsingBrowser = (modifier as? ClickModifier.Private)?.browser,

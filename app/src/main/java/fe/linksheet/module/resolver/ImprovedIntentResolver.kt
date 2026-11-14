@@ -23,7 +23,7 @@ import app.linksheet.feature.libredirect.database.entity.LibRedirectDefault
 import app.linksheet.mozilla.components.support.utils.SafeIntent
 import app.linksheet.util.SuspendingLazy
 import fe.clearurlskt.ClearUrlSettings
-import fe.clearurlskt.ClearUrls
+import app.linksheet.feature.clearurls.core.ConfiguredClearUrls
 import fe.composekit.core.AndroidAppPackage
 import fe.composekit.core.AndroidPackageUri
 import fe.composekit.core.Scheme
@@ -550,7 +550,7 @@ class ImprovedIntentResolver(
         val result = clearUrlsProviderLoader.getProviders()
         // TODO: Log this
         if (result.isFailure()) return@SuspendingLazy null
-        ClearUrls(result.value)
+        ConfiguredClearUrls(result.value)
     }
 
 //    private val clearUrls by lazy { ClearUrls(clearUrlsProviderLoader.getProviders()) }
@@ -580,13 +580,14 @@ class ImprovedIntentResolver(
 
         runUriModifier(fastForward) { FastForward.getRuleRedirect(url) }?.let { url = it }
 
-        if (clearUrl && clearUrls == null) {
+        if (clearUrl && clearUrls.value() == null) {
             logger.error("ClearURLs is enabled, but rules failed to load, ignoring..")
         }
         runUriModifier(clearUrl) {
             clearUrls.value()?.clearUrl(
                 url,
-                ClearUrlSettings(skipUnchanged = skipUnchanged)
+                ClearUrlSettings(skipUnchanged = skipUnchanged),
+                settings.clearUrlsRemoveAllQueryProviders()
             )
         }?.let { url = it.first }
 

@@ -20,6 +20,9 @@ data class StartDownloadInteraction(
     val downloadable: DownloadCheckResult.Downloadable
 ) : BottomSheetInteraction
 
+/** Drops all remaining query parameters from the resolved link before it is opened. */
+data object RemoveTrackingParametersInteraction : BottomSheetInteraction
+
 data class CopyUrlInteraction(val url: String) : BottomSheetInteraction
 data class ShareUrlInteraction(val url: String) : BottomSheetInteraction
 

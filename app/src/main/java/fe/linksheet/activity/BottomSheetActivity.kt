@@ -28,7 +28,25 @@ import fe.composekit.extension.setText
 import fe.composekit.mozilla.components.support.base.log.logger.Logger
 import fe.composekit.preference.collectAsStateWithLifecycle
 import fe.linksheet.R
-import fe.linksheet.activity.bottomsheet.*
+import fe.linksheet.activity.bottomsheet.AppInteraction
+import fe.linksheet.activity.bottomsheet.BottomSheetApps
+import fe.linksheet.activity.bottomsheet.BottomSheetInteraction
+import fe.linksheet.activity.bottomsheet.BottomSheetStateController
+import fe.linksheet.activity.bottomsheet.CopyUrlInteraction
+import fe.linksheet.activity.bottomsheet.DefaultBottomSheetStateController
+import fe.linksheet.activity.bottomsheet.IgnoreLibRedirectInteraction
+import fe.linksheet.activity.bottomsheet.LaunchFailure
+import fe.linksheet.activity.bottomsheet.LaunchHandler
+import fe.linksheet.activity.bottomsheet.LaunchResult
+import fe.linksheet.activity.bottomsheet.ManualDownloadInteraction
+import fe.linksheet.activity.bottomsheet.ManualRedirectInteraction
+import fe.linksheet.activity.bottomsheet.RemoveTrackingParametersInteraction
+import fe.linksheet.activity.bottomsheet.content.success.url.LinkParameterDialog
+import fe.linksheet.activity.bottomsheet.ShareUrlInteraction
+import fe.linksheet.activity.bottomsheet.StartDownloadInteraction
+import fe.linksheet.activity.bottomsheet.SwitchProfileInteraction
+import fe.linksheet.activity.bottomsheet.OpenExternallyInteraction
+import fe.linksheet.activity.bottomsheet.hideAndFinish
 import fe.linksheet.activity.bottomsheet.compat.SettingsObserver
 import fe.linksheet.activity.bottomsheet.compat.m3fix.M3FixModalBottomSheet
 import fe.linksheet.activity.bottomsheet.compat.m3fix.rememberM3FixModalBottomSheetState
@@ -255,6 +273,23 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                 val downloaderEnable by viewModel.downloaderEnabled.collectAsStateWithLifecycle()
                 val downloaderMode by viewModel.downloaderMode.collectAsStateWithLifecycle()
                 val doubleTapUrl by viewModel.doubleTapUrl.collectAsStateWithLifecycle()
+                val openWithoutTrackingButton by viewModel.openWithoutTrackingButton.collectAsStateWithLifecycle()
+                val trackingParametersRemoved by viewModel.trackingParametersRemoved.collectAsStateWithLifecycle()
+
+                val selectLinkParameters by viewModel.selectLinkParameters.collectAsStateWithLifecycle()
+                val parameterSelection by viewModel.parameterSelection.collectAsStateWithLifecycle()
+                val parameterDraft by viewModel.parameterDraft.collectAsStateWithLifecycle()
+                if (selectLinkParameters) {
+                    parameterDraft?.let { draft ->
+                        LinkParameterDialog(
+                            state = draft,
+                            onToggle = viewModel::selectParameter,
+                            onSelectAll = viewModel::selectAllParameters,
+                            onApply = viewModel::applyParameterSelection,
+                            onDismiss = viewModel::dismissParameterSelection,
+                        )
+                    }
+                }
                 val enableOpenExternallyButton by viewModel.enableOpenExternallyButton.collectAsStateWithLifecycle()
 
                 BottomSheetApps(
@@ -267,6 +302,7 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     profiles = if (bottomSheetProfileSwitcher) viewModel.profileSwitcher.getProfiles() else null,
                     enableManualRedirect = followRedirectsEnabled && followRedirectsMode == FollowRedirectsMode.Manual,
                     enableManualDownload = downloaderEnable && downloaderMode == DownloaderMode.Manual,
+                    enableRemoveTrackingParameters = openWithoutTrackingButton,
                     bottomSheetNativeLabel = bottomSheetNativeLabel,
                     gridLayout = gridLayout,
                     appListSelectedIdx = viewModel.appListSelectedIdx.intValue,
@@ -275,7 +311,9 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     showPackage = alwaysShowPackageName,
                     enableActionBar = enableActionBar,
                     hideBottomSheetChoiceButtons = hideBottomSheetChoiceButtons,
-                    urlCardDoubleTap = doubleTapUrl
+                    urlCardDoubleTap = doubleTapUrl,
+                    displayUri = viewModel.displayUri(resolveResult, parameterSelection, trackingParametersRemoved),
+                    onSelectParameters = if (selectLinkParameters) viewModel::showParameterSelection else null,
                 )
             }
 
@@ -352,6 +390,10 @@ class BottomSheetActivity : BaseComponentActivity(), KoinComponent {
                     }
                 )
                 onNewIntent(intent)
+            }
+
+            is RemoveTrackingParametersInteraction -> {
+                viewModel.removeTrackingParameters()
             }
 
             is OpenExternallyInteraction -> {

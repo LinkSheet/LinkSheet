@@ -60,6 +60,7 @@ fun BottomSheetApps(
     enableOpenExternallyButton: Boolean,
     enableManualRedirect: Boolean,
     enableManualDownload: Boolean,
+    enableRemoveTrackingParameters: Boolean,
     bottomSheetNativeLabel: Boolean,
     gridLayout: Boolean,
     appListSelectedIdx: Int,
@@ -70,6 +71,8 @@ fun BottomSheetApps(
     hideBottomSheetChoiceButtons: Boolean,
     urlCardDoubleTap: Boolean,
     profiles: List<CrossProfile>?,
+    displayUri: String? = result.uri?.toString(),
+    onSelectParameters: (() -> Unit)? = null,
 ) {
     val hasUri = result.uri != null
     val hasResolvedApps = result.resolved.isNotEmpty()
@@ -91,6 +94,8 @@ fun BottomSheetApps(
                 UrlBarWrapper(
                     imageLoader = imageLoader,
                     result = result,
+                    uri = displayUri.orEmpty(),
+                    onSelectParameters = onSelectParameters,
                     enableDownloader = enableDownloader,
                     enableIgnoreLibRedirectButton = enableIgnoreLibRedirectButton,
                     enableOpenExternallyButton = enableOpenExternallyButton,
@@ -98,6 +103,7 @@ fun BottomSheetApps(
                     enableUrlCardDoubleTap = urlCardDoubleTap,
                     enableManualRedirect = enableManualRedirect,
                     enableManualDownload = enableManualDownload,
+                    enableRemoveTrackingParameters = enableRemoveTrackingParameters,
                     controller = controller,
                 )
 
@@ -331,6 +337,7 @@ private fun BottomSheetAppsBasePreview(state: PreviewState, gridLayout: Boolean)
             enableOpenExternallyButton = false,
             enableManualRedirect = false,
             enableManualDownload = false,
+            enableRemoveTrackingParameters = false,
             bottomSheetNativeLabel = false,
             gridLayout = gridLayout,
             appListSelectedIdx = -1,

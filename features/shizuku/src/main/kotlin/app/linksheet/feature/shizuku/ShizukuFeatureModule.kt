@@ -10,6 +10,7 @@ import app.linksheet.feature.shizuku.service.AndroidShizukuService
 import app.linksheet.feature.shizuku.service.ShizukuFeatureService
 import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.service.UserServiceConfig
+import app.linksheet.feature.shizuku.service.readManagerSelection
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.util.buildconfig.StaticBuildInfo
@@ -22,6 +23,8 @@ import org.koin.dsl.module
 val ShizukuFeatureModule = module {
     single {
         val info = get<SystemInfoService>()
+        val repo = get<AppPreferenceRepository>()
+        val preferences = get<ShizukuPreferences>()
         AndroidShizukuService(
             eventBus = get(),
             packageManager = getPackageManager(),
@@ -30,7 +33,13 @@ val ShizukuFeatureModule = module {
                 versionCode = info.buildInfo.versionCode + if (StaticBuildInfo.IsDebug) 9999 else 0,
                 debuggable = StaticBuildInfo.IsDebug,
                 tag = info.getApplicationId()
-            )
+            ),
+            readManagerSelection = {
+                readManagerSelection(
+                    repo.get(preferences.managerPackage),
+                    repo.get(preferences.managerCertSha256)
+                )
+            }
         )
     }
     service<ShizukuFeatureService> {

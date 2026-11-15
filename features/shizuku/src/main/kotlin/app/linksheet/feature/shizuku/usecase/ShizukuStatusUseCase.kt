@@ -32,7 +32,8 @@ class ShizukuStatusUseCase(
     }
 
     fun startManager(activity: Activity?) {
-        val success = activity?.tryStartActivity(shizukuService.managerIntent)
+        val intent = shizukuService.managerIntent() ?: return
+        val success = activity?.tryStartActivity(intent)
 
 //        if (!success) {
 //            Toast.makeText(activity, R.string.shizuku_manager_start_failed, Toast.LENGTH_LONG).show()

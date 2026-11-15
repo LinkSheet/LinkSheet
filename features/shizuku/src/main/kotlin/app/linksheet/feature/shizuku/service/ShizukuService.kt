@@ -7,6 +7,7 @@ import android.content.ServiceConnection
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.getApplicationInfoCompatOrNull
+import android.content.pm.getSignature
 import android.os.IBinder
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.eventbus.IntentEventHandler
@@ -20,26 +21,30 @@ import fe.std.coroutines.RefreshableStateFlow
 import fe.std.coroutines.asStateFlow
 import fe.std.result.getOrNull
 import fe.std.result.ifFailure
+import fe.std.result.tryCatch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import rikka.shizuku.Shizuku
-import rikka.shizuku.ShizukuProvider
 
 @Suppress("FunctionName")
 internal fun AndroidShizukuService(
     eventBus: BroadcastEventBus,
     packageManager: PackageManager,
     config: UserServiceConfig,
+    readManagerSelection: () -> ManagerSelection?,
 ): ShizukuService {
     val service = ShizukuService(
         config = config,
         getApplicationInfoOrNull = packageManager::getApplicationInfoCompatOrNull,
         wrappedShizuku = RealWrappedShizuku,
-        managerComponent = ComponentName(
-            ShizukuProvider.MANAGER_APPLICATION_ID,
-            "moe.shizuku.manager.MainActivity"
-        )
+        readManagerSelection = readManagerSelection,
+        // getSignature returns the oldest signer of the signing lineage, not the current one
+        getCertSha256 = { packageName ->
+            tryCatch { packageManager.getSignature(packageName) }
+                .getOrNull()?.toByteArray()?.let(::sha256Hex)
+        },
+        getLaunchIntent = packageManager::getLaunchIntentForPackage
     )
     Shizuku.addBinderReceivedListenerSticky(service)
     Shizuku.addBinderDeadListener(service)
@@ -53,7 +58,9 @@ class ShizukuService(
     config: UserServiceConfig,
     private val getApplicationInfoOrNull: (String, ApplicationInfoFlags) -> ApplicationInfo?,
     private val wrappedShizuku: WrappedShizuku,
-    private val managerComponent: ComponentName,
+    private val readManagerSelection: () -> ManagerSelection?,
+    private val getCertSha256: (String) -> String?,
+    private val getLaunchIntent: (String) -> Intent?,
 ) : Shizuku.OnRequestPermissionResultListener,
     Shizuku.OnBinderReceivedListener,
     Shizuku.OnBinderDeadListener,
@@ -73,10 +80,17 @@ class ShizukuService(
         .daemon(false)
         .tag("${config.tag}_shizuku")
 
-    val managerIntent = buildIntent(
-        action = Intent.ACTION_VIEW,
-        componentName = managerComponent
-    )
+    fun managerIntent(): Intent? = when (val check = currentManagerCheck()) {
+        is ManagerCheck.Default -> buildIntent(
+            action = Intent.ACTION_VIEW,
+            componentName = ComponentName(ORIGINAL_MANAGER_PACKAGE, MANAGER_ACTIVITY_CLASS)
+        )
+        is ManagerCheck.Verified -> getLaunchIntent(check.packageName) ?: buildIntent(
+            action = Intent.ACTION_VIEW,
+            componentName = ComponentName(check.packageName, MANAGER_ACTIVITY_CLASS)
+        )
+        is ManagerCheck.NotInstalled, is ManagerCheck.CertMismatch -> null
+    }
 
     companion object {
         private const val REQUEST_CODE = 10000
@@ -88,11 +102,14 @@ class ShizukuService(
     private val _userServiceFlow = MutableStateFlow<IShizukuUserService?>(null)
     val userServiceFlow = _userServiceFlow.asStateFlow()
 
+    private fun currentManagerCheck(): ManagerCheck = checkManager(
+        selection = readManagerSelection(),
+        isInstalled = { getApplicationInfoOrNull(it, ApplicationInfoFlags.EMPTY) != null },
+        currentCertSha256 = getCertSha256
+    )
+
     private suspend fun computeShizukuStatus(): ShizukuStatus {
-        val installed = getApplicationInfoOrNull(managerComponent.packageName, ApplicationInfoFlags.EMPTY) != null
-        if (!installed) {
-            return ShizukuStatus.Unknown
-        }
+        if (!currentManagerCheck().isUsable) return ShizukuStatus.Unknown
 
         val running = isShizukuRunning()
         return ShizukuStatus(
@@ -142,9 +159,10 @@ class ShizukuService(
     //<editor-fold desc="IntentEventHandler">
     override val filter = IntentFilters.packageState
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.data?.schemeSpecificPart != managerComponent.packageName) return
+        val packageName = readManagerSelection()?.packageName ?: ORIGINAL_MANAGER_PACKAGE
+        if (intent.data?.schemeSpecificPart != packageName) return
         val newStatus = when (intent.action) {
-            Intent.ACTION_PACKAGE_ADDED -> ShizukuStatus.Unknown.copy(installed = true)
+            Intent.ACTION_PACKAGE_ADDED -> ShizukuStatus.Unknown.copy(installed = currentManagerCheck().isUsable)
             Intent.ACTION_PACKAGE_REMOVED -> ShizukuStatus.Unknown
             else -> null
         }

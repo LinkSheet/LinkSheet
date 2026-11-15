@@ -1,5 +1,6 @@
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
+import fe.build.dependencies._1fexd
 
 plugins {
     id("com.android.library")
@@ -28,6 +29,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(platform("androidx.compose:compose-bom-alpha:_"))
     implementation(AndroidX.compose.ui)
     implementation(AndroidX.compose.material3)

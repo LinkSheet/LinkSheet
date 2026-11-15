@@ -19,9 +19,11 @@ class RealDebugPreferenceProvider(
 
     init {
         M3Log.setEnabled(m3Log.value)
+        app.linksheet.M3Log.setEnabled(m3Log.value)
         lifecycleScope.launch {
             m3Log.collect {
                 M3Log.setEnabled(it)
+                app.linksheet.M3Log.setEnabled(it)
             }
         }
     }

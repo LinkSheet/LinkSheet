@@ -10,10 +10,6 @@ import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.fix.ModalBottomSheet
-import androidx.compose.material3.fix.SheetState
-import androidx.compose.material3.fix.SheetValue
-import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +19,11 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import app.linksheet.compose.debugBorder
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.ModalBottomSheet
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.SheetState
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.SheetValue
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.rememberModalBottomSheetState
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,13 +48,14 @@ internal fun M3FixModalBottomSheetApi30(
         scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0f),
         sheetState = sheetState,
 //        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
-        windowInsets = WindowInsets(0.dp, 0.dp, 0.dp, 0.dp),
+        contentWindowInsets = { WindowInsets(0.dp, 0.dp, 0.dp, 0.dp) },
+//        windowInsets = WindowInsets(0.dp, 0.dp, 0.dp, 0.dp),
 //        windowInsets = androidx.compose.material3.fix.BottomSheetDefaults.windowInsets,
 //        windowInsets =  WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
 //        windowInsets = if (landscape) WindowInsets.systemBars else WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom),
         onDismissRequest = hide
     ) {
-        if(landscape) {
+        if (landscape) {
             sheetContent(contentModifier)
         } else {
             Box(modifier = Modifier.navigationBarsPadding()) {
@@ -62,7 +64,13 @@ internal fun M3FixModalBottomSheetApi30(
         }
     }
 }
-@Preview(showSystemUi = true, showBackground = true, device = Devices.AUTOMOTIVE_1024p, apiLevel = 35)
+
+@Preview(
+    showSystemUi = true,
+    showBackground = true,
+    device = Devices.AUTOMOTIVE_1024p,
+    apiLevel = 35
+)
 @Preview(showSystemUi = true, showBackground = true, device = Devices.PIXEL_7, apiLevel = 35)
 private annotation class OrientationPreviewsApi30
 

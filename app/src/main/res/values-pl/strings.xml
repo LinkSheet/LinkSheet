@@ -100,7 +100,7 @@
     <string name="in_app">W aplikacji</string>
     <string name="use_unified_preferred_browser">Użyj ujednoliconych ustawień</string>
     <string name="enable_ignore_libredirect_button">Przycisk „Ignoruj LibRedirect”</string>
-    <string name="enable_ignore_libredirect_button_explainer">Wyświetla przycisk, jeśli link został przekierowany przez LibRedirect, który zamiast tego otwiera oryginalny link</string>
+    <string name="enable_ignore_libredirect_button_explainer">Wyświetlaj przycisk w dolnym panelu, jeśli adres URL został przekierowany przez LibRedirect. Przycisk powinien otwierać oryginalny adres URL</string>
     <string name="ignore_libredirect">Ignoruj LibRedirect</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
     <string name="none_explainer">Wyświetlaj tylko aplikacje natywne, usuń wszystkie przeglądarki. Jeśli obecna jest tylko jedna aplikacja natywna, zostanie automatycznie otwarta. Jeśli nie ma takiej aplikacji, wszystkie przeglądarki są wyświetlane na liście.</string>
@@ -176,7 +176,7 @@
     <string name="version_name"><b>Wersja:</b> <font face="monospace">%s</font></string>
     <string name="built_at"><b>Data:</b> <font face="monospace">%s</font></string>
     <string name="github_workflow_run_id"><b>ID workflow:</b> <font face="monospace">%s</font></string>
-    <string name="privacy_settings_explainer">Prywatność odsyłacza</string>
+    <string name="privacy_settings_explainer">Prywatność odsyłacza, tryb incognito, zdalna konfiguracja</string>
     <string name="show_linksheet_referrer">Pokazuj odsyłacz LinkSheet</string>
     <string name="show_linksheet_referrer_explainer">Kiedy uruchamiana jest aplikacja, może sprawdzić, która aplikacja ją uruchomiła, lub \"odwołała\" się do niej. Domyślnie, gdy LinkSheet uruchamia aplikację, ukrywa się, twierdząc, że to aplikacja, która uruchomiła LinkSheet, jest docelową aplikacją. Włącz to, aby ponownie wstawić LinkSheet jako odwołującą się aplikację dla aplikacji, które otwiera.</string>
     <string name="privacy">Prywatność</string>
@@ -377,7 +377,7 @@
     <string name="settings_new_rule__title_new_rule">Nowa reguła</string>
     <string name="resolve_event__download_check">Sprawdzanie możliwości pobrania</string>
     <string name="settings_app_config__button_add_item">Dodaj pozycję</string>
-    <string name="export_log_dialog__subtitle_redact_log">Zalecane, anonimizuje nazwy aplikacji i linki</string>
+    <string name="export_log_dialog__subtitle_redact_log">Zalecane, anonimizuje nazwy aplikacji i adresy URL</string>
     <plurals name="settings_verified_link_handlers__text_app_host_info">
         <item quantity="one">%d link: %s</item>
         <item quantity="few">%d linki: %s</item>
@@ -515,7 +515,7 @@
     <string name="settings_links_follow_redirects__title_local_network">Zezwalaj na sieć lokalną</string>
     <string name="settings_links_follow_redirects__text_local_network">Zezwalaj na następujące przekierowania dla niepublicznych hostów</string>
     <string name="settings_links_preview__title_preview">Pokaż podgląd linku</string>
-    <string name="settings_links_preview__subtitle_preview">Próbuj załadować i wyświetlić podgląd OpenGraph w dolnym panelu. Może to mieć <annotation url-id="github.linksheet.wiki.privacy.preview">komplikacje związane z prywatnością</annotation></string>
+    <string name="settings_links_preview__subtitle_preview">Spróbuj pobrać i wyświetlić podgląd OpenGraph linku. Może to mieć <annotation url-id="github.linksheet.wiki.privacy.preview">konsekwencje dla prywatności</annotation></string>
     <string name="settings_links_preview__title_preview_skip_browser">Wyłącz podgląd przeglądarki</string>
     <string name="settings_links_preview__subtitle_preview_skip_browser">Wyłącz podgląd, jeśli odsyłaczem jest przeglądarka</string>
     <string name="settings_scenario__title_scenarios">Scenariusze</string>
@@ -535,7 +535,7 @@
     <string name="notification_interconnect_description">Interconnect jest aktywny</string>
     <string name="settings_bottom_sheet__title_hide_referring_app">Ukryj aplikację odsyłającą</string>
     <string name="settings_bottom_sheet__subtitle_hide_referring_app">Nie wyświetlaj aplikacji odsyłającej/źródłowej, nawet jeśli obsługuje ona linki</string>
-    <string name="settings_bottom_sheet__title_double_tap_url">Dwukrotne dotknięcie linku</string>
+    <string name="settings_bottom_sheet__title_double_tap_url">Kliknij dwukrotnie, aby otworzyć</string>
     <string name="settings_bottom_sheet__subtitle_double_tap_url">Otwórz sugerowaną aplikację po dwukrotnym dotknięciu linku</string>
     <string name="settings_bottom_sheet__title_expand_fully">Rozwiń całkowicie</string>
     <string name="settings_bottom_sheet__subtitle_expand_fully">Automatycznie rozszerz dolny panel do pełnej wysokości</string>
@@ -549,4 +549,33 @@
     <string name="settings_follow_redirects__subtitle_aggressive">Pobierz treść całej strony, aby zapewnić lepszą zgodność ze stronami, które nie korzystają z przekierowań HTTP</string>
     <string name="handler_target__label_switch_profile_view_intent">Przełącz profil</string>
     <string name="settings_advanced__divider_backup"><![CDATA[Kopia i przywracanie]]></string>
+    <string name="settings_main_changelog__title_changelog">Dziennik zmian</string>
+    <string name="bottom_sheet__button_open_externally">Otwórz zewnętrznie</string>
+    <string name="settings_main_changelog__text_changelog">Sprawdź co nowego w wersji %s.</string>
+    <string name="settings_verified_link_handler__placeholder_filter_">Filtruj hosty</string>
+    <string name="settings_verified_link_handler__text_no_hosts">Brak hostów!</string>
+    <string name="settings_verified_link_handler__text_no_such_host_found">Nie znaleziono takiego hosta!</string>
+    <string name="settings_verified_link_handler__placeholder_filter_hosts">Filtruj hosty</string>
+    <string name="qs_tile_label">Otwórz skopiowany link</string>
+    <string name="qs_tile_no_link">Brak linku w schowku!</string>
+    <string name="qs_tile_failed_to_parse_links">Nie można przeanalizować zawartości schowka!</string>
+    <string name="settings_bottom_sheet__title_enable_open_externally_button">Włącz przycisk „Otwórz zewnętrznie”</string>
+    <string name="settings_bottom_sheet__subtitle_enable_open_externally_button">Wyświetlaj przycisk w dolnym panelu, jeśli aplikacja źródłowa żąda otwarcia linku w aplikacji. Przycisk powinien umożliwiać otwarcie go w przeglądarce zewnętrznej</string>
+    <string name="settings_bottom_sheet_action_bar__title_action_bar">Pasek akcji dolnego panelu</string>
+    <string name="settings_bottom_sheet_action_bar__title_enable_action_bar">Włącz pasek akcji</string>
+    <string name="settings_bottom_sheet_action_bar__subtitle_enable_action_bar">Wyświetlaj pasek adresu i pasek akcji u góry dolnego panelu</string>
+    <string name="settings_bottom_sheet_action_bar__divider_actions">Akcje</string>
+    <string name="settings_privacy_incognito__title_incognito">Tryb incognito</string>
+    <string name="settings_privacy_incognito__title_enable_incognito">Tryb incognito</string>
+    <string name="settings_privacy_incognito__subtitle_incognito">Wyłącz zapisywanie wszelkich informacji związanych z adresami URL</string>
+    <string name="settings_privacy_incognito__title_disable_logs">Wyłącz rejestrowanie zdarzeń</string>
+    <string name="settings_privacy_incognito__subtitle_disable_logs">Dotyczy zarówno logów aplikacji, jak i logcat</string>
+    <string name="settings_privacy_incognito__title_disable_log_persistence">Wyłącz trwałe zapisywanie logów</string>
+    <string name="settings_privacy_incognito__subtitle_disable_log_persistence">Wyłącz tworzenie pliku dziennika</string>
+    <string name="settings_privacy_incognito__text_info">Większość użytkowników <b>nie powinna</b> włączać tej funkcji. Jest ona przeznaczona dla osób, których model zagrożeń uwzględnia atakującego mającego dostęp do odblokowanego urządzenia użytkownika.\n\nPo włączeniu LinkSheet przestanie zapisywać i pomijać import następujących danych:\n- historii odwiedzanych hostów i aplikacji używanych do ich otwierania,\n- wyników przekierowań, Amp2Html i podglądów.\n\nZachowane zostaną wyłącznie dane dotyczące aplikacji ustawionych jako domyślne („Zawsze”) do otwierania określonego hosta.\n\nFunkcja działa jak wyłącznik awaryjny (killswitch), dlatego ma pierwszeństwo przed wszystkimi innymi ustawieniami włączającymi lub wyłączającymi funkcje, takie jak buforowanie przekierowań.</string>
+    <string name="settings_privacy_incognito__title_stored_data">Zapisane dane</string>
+    <string name="settings_privacy_incognito__subtitle_stored_data">Historia, preferowane aplikacje, pamięć podręczna, logi</string>
+    <string name="settings_privacy_incognito__toast_text_deleted">Usunięto dane</string>
+    <string name="settings_privacy_incognito_delete_dialog__title_delete_data">Usunąć dane?</string>
+    <string name="settings_privacy_incognito_delete_dialog__subtitle_delete_data">Tego nie da się cofnąć!</string>
 </resources>

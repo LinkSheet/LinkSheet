@@ -1,19 +1,17 @@
 package fe.linksheet.activity.bottomsheet.compat.m3fix
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.fix.SheetState
-import androidx.compose.material3.fix.SheetValue
-import androidx.compose.material3.fix.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.SheetState
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.SheetValue
+import app.linksheet.m3sheet.androidx.compose.material3_1_5_0_rc01.rememberModalBottomSheetState
 import fe.linksheet.activity.bottomsheet.compat.CompatSheetState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun rememberM3FixModalBottomSheetState(
-    isReducedMotionEnabled: () -> Boolean = { false }
-): M3FixSheetState {
-    val state = rememberModalBottomSheetState(isReducedMotionEnabled = isReducedMotionEnabled)
+fun rememberM3FixModalBottomSheetState(): M3FixSheetState {
+    val state = rememberModalBottomSheetState()
     return M3FixSheetState(state)
 }
 

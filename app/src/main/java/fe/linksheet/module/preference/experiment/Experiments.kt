@@ -22,7 +22,8 @@ object Experiments : PreferenceDefinition(
     "experiment_improved_bottom_sheet_auto_launch_single_browser",
     "experiment_manual_follow_redirects",
     "experiment_aggressive_follow_redirects",
-    "experiment_disable_log_persistence"
+    "experiment_disable_log_persistence",
+    "experiment_bottom_sheet_expand_fix"
 ) {
     val interceptAccidentalTaps = boolean(key = "experiment_intercept_accidental_taps", default = true)
     val libRedirectJsEngine = boolean(key = "experiment_enable_libredirect_js_engine")
@@ -40,7 +41,7 @@ object Experiments : PreferenceDefinition(
     val experiments = listOf(
         group(
             name = "improved_bottom_sheet",
-            displayName = "Improved bottom sheet",
+            displayName = "Bottom sheet",
             experiment("Ignore accidental taps while sheet is animating", interceptAccidentalTaps),
             experiment("Disable bottom sheet state save", noBottomSheetStateSave),
         ),

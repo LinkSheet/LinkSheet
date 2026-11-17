@@ -2,4 +2,5 @@
 <resources>
     <string name="telemetry_level_disabled">Atspējots</string>
     <string name="telemetry_level_standard_description">Apkopotie lietojuma dati</string>
+    <string name="telemetry_level_minimal">Minimāls</string>
 </resources>

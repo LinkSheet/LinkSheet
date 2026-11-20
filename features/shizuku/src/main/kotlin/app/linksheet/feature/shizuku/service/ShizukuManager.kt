@@ -5,6 +5,12 @@ import rikka.shizuku.ShizukuProvider
 
 internal const val ORIGINAL_MANAGER_PACKAGE = ShizukuProvider.MANAGER_APPLICATION_ID
 internal const val MANAGER_ACTIVITY_CLASS = "moe.shizuku.manager.MainActivity"
+internal const val MANAGER_PROVIDER_CLASS = "moe.shizuku.manager.ShizukuManagerProvider"
+
+/** True if one of the provider class names is the Shizuku manager provider. Client apps declare rikka.shizuku.ShizukuProvider, which does not count. */
+internal fun declaresManagerProvider(providerClassNames: Iterable<String?>): Boolean {
+    return providerClassNames.any { it == MANAGER_PROVIDER_CLASS }
+}
 
 /** A manager picked by the user: its package and the SHA-256 (lowercase hex) of its signing certificate. */
 data class ManagerSelection(val packageName: String, val certSha256: String)

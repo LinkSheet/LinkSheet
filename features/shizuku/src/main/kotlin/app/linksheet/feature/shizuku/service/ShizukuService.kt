@@ -7,7 +7,6 @@ import android.content.ServiceConnection
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.getApplicationInfoCompatOrNull
-import android.content.pm.getSignature
 import android.os.IBinder
 import app.linksheet.api.eventbus.BroadcastEventBus
 import app.linksheet.api.eventbus.IntentEventHandler
@@ -21,7 +20,6 @@ import fe.std.coroutines.RefreshableStateFlow
 import fe.std.coroutines.asStateFlow
 import fe.std.result.getOrNull
 import fe.std.result.ifFailure
-import fe.std.result.tryCatch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -39,11 +37,7 @@ internal fun AndroidShizukuService(
         getApplicationInfoOrNull = packageManager::getApplicationInfoCompatOrNull,
         wrappedShizuku = RealWrappedShizuku,
         readManagerSelection = readManagerSelection,
-        // getSignature returns the oldest signer of the signing lineage, not the current one
-        getCertSha256 = { packageName ->
-            tryCatch { packageManager.getSignature(packageName) }
-                .getOrNull()?.toByteArray()?.let(::sha256Hex)
-        },
+        getCertSha256 = packageManager::getCertSha256,
         getLaunchIntent = packageManager::getLaunchIntentForPackage
     )
     Shizuku.addBinderReceivedListenerSticky(service)

@@ -154,4 +154,27 @@ internal class ShizukuManagerTest {
     fun `the original manager package is the shizuku one`() {
         assertThat(ORIGINAL_MANAGER_PACKAGE).isEqualTo("moe.shizuku.privileged.api")
     }
+
+    @Test
+    fun `exact manager provider class is a manager`() {
+        assertThat(declaresManagerProvider(listOf(MANAGER_PROVIDER_CLASS))).isTrue()
+    }
+
+    @Test
+    fun `only the client provider is not a manager`() {
+        assertThat(declaresManagerProvider(listOf("rikka.shizuku.ShizukuProvider"))).isFalse()
+    }
+
+    @Test
+    fun `empty or null-only provider list is not a manager`() {
+        assertThat(declaresManagerProvider(emptyList())).isFalse()
+        assertThat(declaresManagerProvider(listOf(null, null))).isFalse()
+    }
+
+    @Test
+    fun `manager class among others and nulls is a manager`() {
+        assertThat(
+            declaresManagerProvider(listOf("rikka.shizuku.ShizukuProvider", null, MANAGER_PROVIDER_CLASS, "androidx.startup.InitializationProvider"))
+        ).isTrue()
+    }
 }

@@ -34,6 +34,7 @@ dependencies {
     implementation(_1fexd.composeKit.ext.mozillaSupportBase)
     implementation(project(":lib-util"))
     implementation(project(":lib-compose"))
+    implementation(project(":feature-app"))
     compileOnly(project(":lib-hidden-api"))
     implementation(AndroidX.lifecycle.viewModelKtx)
     implementation(AndroidX.compose.ui)

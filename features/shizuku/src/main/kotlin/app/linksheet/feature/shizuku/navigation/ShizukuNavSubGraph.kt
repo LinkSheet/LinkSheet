@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import app.linksheet.compose.util.animatedComposable
 import app.linksheet.feature.shizuku.R
+import app.linksheet.feature.shizuku.ui.ShizukuManagerSettings
 import app.linksheet.feature.shizuku.ui.ShizukuSettings
 import fe.android.compose.icon.iconPainter
 import fe.android.compose.text.StringResourceContent.Companion.textContent
@@ -22,7 +23,10 @@ object ShizukuNavSubGraph : NavSubGraph<ShizukuNavSubGraph, ShizukuRoute>, Route
     override val startDestination = ShizukuRoute
     override val graph: NavGraphBuilder.(NavHostController) -> Unit = { navController ->
         animatedComposable<ShizukuRoute> { _, route ->
-            ShizukuSettings(onBackPressed = navController::popBackStack)
+            ShizukuSettings(onBackPressed = navController::popBackStack, navigate = navController::navigate)
+        }
+        animatedComposable<ShizukuManagerRoute> { _, route ->
+            ShizukuManagerSettings(onBackPressed = navController::popBackStack)
         }
     }
 }
@@ -40,4 +44,6 @@ data object ShizukuRoute : Route {
     }
 }
 
-
+@Keep
+@Serializable
+data object ShizukuManagerRoute : Route

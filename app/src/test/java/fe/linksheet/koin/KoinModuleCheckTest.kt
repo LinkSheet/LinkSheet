@@ -50,7 +50,9 @@ import app.linksheet.feature.shizuku.service.ShizukuFeatureService
 import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.service.UserServiceConfig
 import app.linksheet.feature.shizuku.service.WrappedShizuku
+import app.linksheet.feature.shizuku.usecase.ShizukuManagerUseCase
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
+import app.linksheet.feature.shizuku.viewmodel.ShizukuManagerViewModel
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
@@ -324,6 +326,12 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             ShizukuService::class,
             AppPreferenceRepository::class,
             ShizukuPreferences::class
+        ),
+        definition<ShizukuManagerUseCase>(AppInfoCreator::class, String::class),
+        definition<ShizukuManagerViewModel>(
+            AppPreferenceRepository::class,
+            ShizukuPreferences::class,
+            ShizukuManagerUseCase::class
         ),
         definition<fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel>(
             AppPreferenceRepository::class

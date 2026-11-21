@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="settings_links__title_open_without_tracking">Button „Ohne Tracking öffnen“</string>
+    <string name="settings_links__subtitle_open_without_tracking">Fügt dem Bottom Sheet einen Button hinzu, der alle verbliebenen Query-Parameter aus dem Link entfernt, bevor er geöffnet wird. Die Parameter, die dabei entfernt würden, werden in der URL-Vorschau ausgegraut.</string>
+    <string name="bottom_sheet__button_open_without_tracking">Ohne Tracking öffnen</string>
+    <string name="clear_urls_providers_title">Alle Query-Parameter entfernen</string>
+    <string name="clear_urls_providers_hint">Tippen, um Provider zu konfigurieren</string>
+    <string name="clear_urls_providers_description">Bei aktivierten Providern immer alle Query-Parameter entfernen, solange ClearURLs eingeschaltet ist. Gilt für den Ziel-Link nach Weiterleitungen. Links, die Parameter benötigen, können dadurch unbrauchbar werden. Änderungen werden sofort gespeichert.</string>
+    <string name="clear_urls_providers_load_error">ClearURLs-Provider konnten nicht geladen werden.</string>
+    <string name="clear_urls_providers_empty">Keine passenden Provider.</string>
     <string name="always">Immer</string>
     <string name="just_once">Nur einmal</string>
     <string name="default_apps">Bevorzugte Apps</string>
@@ -195,4 +203,13 @@
     <string name="app_browsers_subtitle">Bevorzugte Apps, Browser-Einstellungen</string>
     <string name="settings_language__text_system_language_with_language">%s (Systemsprache)</string>
     <string name="settings_language__text_system_language">Systemsprache</string>
+
+    <string name="select_link_parameters_title">Link-Parameter auswählen</string>
+    <string name="select_link_parameters_description">Tippe im Öffnen-Dialog auf den Link, um auszuwählen, welche URL-Parameter erhalten bleiben.</string>
+    <string name="link_parameters_title">Link-Parameter</string>
+    <string name="link_parameters_description">Ausgewählte Parameter bleiben im Link. Übernimm die Auswahl und wähle anschließend eine App zum Öffnen.</string>
+    <string name="link_parameters_select_all">Alle auswählen</string>
+    <string name="link_parameters_deselect_all">Alle abwählen</string>
+    <string name="link_parameters_apply">Übernehmen</string>
+    <string name="link_parameters_empty">Dieser Link enthält keine URL-Parameter.</string>
 </resources>

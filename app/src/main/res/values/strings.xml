@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+    <string name="settings_links__title_open_without_tracking">“Open without tracking” button</string>
+    <string name="settings_links__subtitle_open_without_tracking">Adds a button to the bottom sheet which drops all remaining query parameters from the link before opening it. The parameters that would be dropped are greyed out in the URL preview.</string>
+    <string name="bottom_sheet__button_open_without_tracking">Open without tracking</string>
+    <string name="clear_urls_providers_title">Remove all query parameters</string>
+    <string name="clear_urls_providers_hint">Tap to configure providers</string>
+    <string name="clear_urls_providers_description">Always remove all query parameters for enabled providers when ClearURLs is on. Applies to the final link after redirects. This can break links that need parameters. Changes are saved immediately.</string>
+    <string name="clear_urls_providers_load_error">Could not load ClearURLs providers.</string>
+    <string name="clear_urls_providers_empty">No matching providers.</string>
     <string name="open_with">Open with</string>
     <string name="just_once">Just once</string>
     <string name="always">Always</string>
@@ -541,6 +549,15 @@
     <string name="settings_verified_link_handler__text_no_hosts">No hosts!</string>
     <string name="settings_verified_link_handler__text_no_such_host_found">No such host found!</string>
     <string name="settings_verified_link_handler__placeholder_filter_hosts">Filter hosts</string>
+
+    <string name="select_link_parameters_title">Select link parameters</string>
+    <string name="select_link_parameters_description">Tap the link in the open dialog to choose which URL parameters to keep.</string>
+    <string name="link_parameters_title">Link parameters</string>
+    <string name="link_parameters_description">Selected parameters stay in the link. Apply your selection, then choose an app to open it.</string>
+    <string name="link_parameters_select_all">Select all</string>
+    <string name="link_parameters_deselect_all">Deselect all</string>
+    <string name="link_parameters_apply">Apply</string>
+    <string name="link_parameters_empty">This link has no query parameters.</string>
     <string name="qs_tile_label">Open copied link</string>
     <string name="qs_tile_no_link">No link in clipboard!</string>
     <string name="qs_tile_failed_to_parse_links">Clipboard content could not be parsed!</string>

@@ -148,10 +148,14 @@ android {
             initWith(buildTypes.getByName("release"))
             matchingFallbacks.add("release")
 
-            applicationIdSuffix = ".nightly"
+            applicationIdSuffix = localProviders.get("NIGHTLY_APPLICATION_ID_SUFFIX") ?: ".nightly"
             versionNameSuffix = "-nightly"
 
-            resValue("string", "app_name", "$appName Nightly")
+            resValue(
+                "string",
+                "app_name",
+                localProviders.get("NIGHTLY_APP_NAME") ?: "$appName Nightly",
+            )
         }
 
         register("releaseDebug") {

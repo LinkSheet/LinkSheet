@@ -7,7 +7,7 @@ import app.linksheet.feature.engine.core.step.InPlaceStep
 import app.linksheet.feature.engine.core.step.StepResult
 import fe.clearurlskt.ClearUrlOperation
 import fe.clearurlskt.ClearUrlSettings
-import fe.clearurlskt.ClearUrls
+import app.linksheet.feature.clearurls.core.ConfiguredClearUrls
 import fe.clearurlskt.config.provider.Provider
 import app.linksheet.util.SuspendingLazy
 import fe.std.result.StdResult
@@ -22,6 +22,7 @@ class ClearURLsLinkModifier(
     private val getProviders: suspend () -> StdResult<List<Provider>>,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     override val enabled: () -> Boolean,
+    private val removeAllQueryProviders: () -> Set<String> = { emptySet() },
     val skipUnchanged: () -> Boolean,
 ) : LinkModifier<ClearURLsModifyOutput>, InPlaceStep {
     override val id = EngineStepId.ClearURLs
@@ -30,7 +31,7 @@ class ClearURLsLinkModifier(
         val result = getProviders()
         // TODO: Log this
         if (result.isFailure()) return@SuspendingLazy null
-        ClearUrls(result.value)
+        ConfiguredClearUrls(result.value)
     }
 
     override suspend fun warmup() = withContext(ioDispatcher) {
@@ -42,7 +43,8 @@ class ClearURLsLinkModifier(
     override suspend fun runStep(url: StdUrl) = withContext(ioDispatcher) {
         val result = clearUrls.value()?.clearUrl(
             url = url.toString(),
-            settings = ClearUrlSettings(skipUnchanged = skipUnchanged())
+            settings = ClearUrlSettings(skipUnchanged = skipUnchanged()),
+            removeAllQueryProviders = removeAllQueryProviders()
         )
         result?.let { (url, operations) ->
             ClearURLsModifyOutput(

@@ -1,3 +1,4 @@
+import fe.buildsrc.clearurls.UpdateRulesTask
 import com.gitlab.grrfe.gradlebuild.Version
 import com.gitlab.grrfe.gradlebuild.android.AndroidSdk
 import fe.build.dependencies.Grrfe
@@ -78,4 +79,10 @@ dependencies {
     testImplementation(Grrfe.std.test)
     testImplementation(Grrfe.std.result.assert)
     testImplementation("com.willowtreeapps.assertk:assertk:_")
+}
+
+// Keep the fork's scheduled rules sync compatible with upstream's protobuf bundle loader.
+tasks.register<UpdateRulesTask>("updateRules") {
+    file.set("src/main/res/raw/clearurls.bin")
+    rawUrl.set("https://raw.githubusercontent.com/RBN-Apps/CleanURLs-Rules/master/data.min.json")
 }

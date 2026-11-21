@@ -1,0 +1,138 @@
+name: Sync with upstream
+
+on:
+  schedule:
+    # Run once a week, shortly after the upstream project is likely to have changed.
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: repository-maintenance
+  cancel-in-progress: false
+
+env:
+  UPSTREAM_REPOSITORY: LinkSheet/LinkSheet
+  UPSTREAM_BRANCH: master
+  SYNC_BRANCH: automation/sync-upstream
+
+jobs:
+  sync:
+    name: Import upstream changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out this repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SYNC_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch upstream
+        run: |
+          git remote add upstream "https://github.com/${UPSTREAM_REPOSITORY}.git"
+          git fetch --prune upstream "${UPSTREAM_BRANCH}"
+
+      - name: Sync master or prepare pull request
+        id: sync
+        env:
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git checkout -B "${SYNC_BRANCH}" "origin/${BASE_BRANCH}"
+
+          # Nothing needs to be synchronized when the upstream tip is already
+          # contained in this repository's default branch.
+          if git merge-base --is-ancestor "upstream/${UPSTREAM_BRANCH}" HEAD; then
+            echo "needs_pr=false" >> "$GITHUB_OUTPUT"
+            echo "Upstream is already up to date."
+            exit 0
+          fi
+
+          # Use a fast-forward where possible. If this fork has its own commits,
+          # Git creates one merge commit that keeps both histories connected.
+          if git merge --no-edit "upstream/${UPSTREAM_BRANCH}"; then
+            if git push origin "HEAD:${BASE_BRANCH}"; then
+              echo "needs_pr=false" >> "$GITHUB_OUTPUT"
+              echo "Upstream changes were merged directly into ${BASE_BRANCH}."
+
+              # SYNC_TOKEN is used for this push, so the nightly push trigger
+              # runs normally after a successful direct synchronization.
+              exit 0
+            fi
+
+            echo "::warning::The direct push to ${BASE_BRANCH} was rejected; preparing a pull request instead."
+          else
+            git merge --abort || true
+            echo "::warning::Upstream changes conflict with the current repository; preparing a pull request."
+          fi
+
+          existing_pr="$(gh api \
+            --method GET \
+            "repos/${GITHUB_REPOSITORY}/pulls" \
+            -f state=open \
+            -f base="${BASE_BRANCH}" \
+            -f head="${GITHUB_REPOSITORY_OWNER}:${SYNC_BRANCH}" \
+            --jq '.[0].number // empty')"
+
+          if [ -n "${existing_pr}" ]; then
+            echo "needs_pr=true" >> "$GITHUB_OUTPUT"
+            echo "An existing synchronization PR (#${existing_pr}) will be kept intact."
+            exit 0
+          fi
+
+          # SYNC_TOKEN has Contents and Workflows write access, allowing this
+          # branch to contain upstream changes to GitHub Actions workflows.
+          git checkout -B "${SYNC_BRANCH}" "upstream/${UPSTREAM_BRANCH}"
+          git push --force origin "HEAD:${SYNC_BRANCH}"
+          echo "needs_pr=true" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update pull request
+        if: steps.sync.outputs.needs_pr == 'true'
+        env:
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          pr_number="$(gh api \
+            --method GET \
+            "repos/${GITHUB_REPOSITORY}/pulls" \
+            -f state=open \
+            -f base="${BASE_BRANCH}" \
+            -f head="${GITHUB_REPOSITORY_OWNER}:${SYNC_BRANCH}" \
+            --jq '.[0].number // empty')"
+
+          title="Sync upstream (${UPSTREAM_REPOSITORY})"
+          body=$'This pull request is maintained automatically by the upstream sync workflow.\n\nIt imports changes from ['"${UPSTREAM_REPOSITORY}"'](https://github.com/'"${UPSTREAM_REPOSITORY}"'/tree/'"${UPSTREAM_BRANCH}"'). The changes could not be merged directly into '"${BASE_BRANCH}"', so please resolve the conflicts and merge this pull request manually.'
+
+          if [ -n "${pr_number}" ]; then
+            gh api \
+              --method PATCH \
+              "repos/${GITHUB_REPOSITORY}/pulls/${pr_number}" \
+              -f title="${title}" \
+              -f body="${body}" \
+              --silent
+          else
+            gh api \
+              --method POST \
+              "repos/${GITHUB_REPOSITORY}/pulls" \
+              -f base="${BASE_BRANCH}" \
+              -f head="${SYNC_BRANCH}" \
+              -f title="${title}" \
+              -f body="${body}" \
+              --jq '.html_url'
+          fi

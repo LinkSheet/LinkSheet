@@ -8,6 +8,7 @@ dependencies {
     implementation("com.squareup:javapoet:_")
     implementation(Square.kotlinPoet)
     implementation("com.google.code.gson:gson:_")
+    implementation("com.github.linksheet.clearurlkt:config-core:0.0.81")
     implementation(platform(Grrfe.std.bom))
     implementation(Grrfe.std.extension.dom)
 

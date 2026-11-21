@@ -10,6 +10,7 @@ import app.linksheet.feature.downloader.preference.downloaderPreferences
 import app.linksheet.feature.libredirect.preference.libRedirectPreferences
 import app.linksheet.feature.profile.preference.profilePreferences
 import app.linksheet.feature.remoteconfig.preference.remoteConfigPreferences
+import app.linksheet.feature.remoteconfig.preference.jsonMapped
 import app.linksheet.feature.shizuku.preference.shizukuPreferences
 import app.linksheet.module.preference.app.PrivacyPreferences
 import com.google.gson.JsonArray
@@ -37,6 +38,7 @@ object AppPreferences : LinkSheetPreferenceDefinition(
 ) {
     val alwaysShowPackageName = boolean("always_show_package_name")
     val useClearUrls = boolean("use_clear_urls")
+    val clearUrlsRemoveAllQueryProviders = jsonMapped<Set<String>>("clear_urls_remove_all_query_providers", emptySet())
     val useFastForwardRules = boolean("fast_forward_rules")
     val requestTimeout = int("follow_redirects_timeout", 15)
 
@@ -116,5 +118,4 @@ object AppPreferences : LinkSheetPreferenceDefinition(
         return jsonArrayItems(objs)
     }
 }
-
 

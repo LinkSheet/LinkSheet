@@ -65,7 +65,7 @@
     <string name="follow_redirects">Sekot pāradresēšanām</string>
     <string name="follow_redirects_external_service">Sekot pāradresēšanām, izmantojot ārējo pakalpojumu</string>
     <string name="follow_only_known_trackers">Sekot tikai zināmiem izsekotājiem</string>
-    <string name="theme_explainer">Material You, tumšais motīvs, tīri melns režīms</string>
+    <string name="theme_explainer">Material You dizains, tumšais motīvs un pilnīgi melnais režīms</string>
     <string name="dark">Tumšs</string>
     <string name="light">Gaišs</string>
     <string name="fastfoward_rules">Lietot FastForward noteikumus</string>
@@ -96,4 +96,43 @@
     <string name="export">Izgūt</string>
     <string name="log">Žurnāls</string>
     <string name="settings_links_downloader__title_downloader">Lejupielādētājs</string>
+    <string name="settings_scenario__title_scenarios">Scenāriji</string>
+    <string name="settings_scenario__text_scenarios">Konfigurēt scenārijus</string>
+    <string name="settings_scenario__text_data_type">Datu tips</string>
+    <string name="settings_scenario__text_value">Vērtība</string>
+    <string name="import_headline">Ievietot</string>
+    <string name="onboarding_2_card_title">Shizuku</string>
+    <string name="settings_links_amp2html__title_amp2html">AMP2HTML</string>
+    <string name="libredirect_version">LibRedirect</string>
+    <string name="no">Nē</string>
+    <string name="telemetry_configure_title">Analītika</string>
+    <string name="dev">Izstrādātājs</string>
+    <string name="warning">Brīdinājums</string>
+    <string name="settings_app_config__title_browsers">Pārlūki</string>
+    <string name="follow_redirects_short">Novirzīšanas</string>
+    <string name="reset">Atiestatīt</string>
+    <string name="urlbar_settings">URL adreses josla</string>
+    <string name="settings_app_config__title_native_apps">Lietotnes</string>
+    <string name="start_setup">Turpināt</string>
+    <string name="generic__description_permission_interconnect">konfigurēt LinkSheet</string>
+    <string name="generic__label_permission_interconnect">konfigurēt LinkSheet</string>
+    <string name="settings_app_config_rules__text_custom_rules">Pielāgotie noteikumi</string>
+    <string name="settings_app_config_rules__subtitle_default_rule">Izmantos šo noteikumu, ja neviens cits noteikums neatbilst</string>
+    <string name="settings_app_config_rules__title_default_rule">Noklusējuma noteikums</string>
+    <string name="settings_app_config_rules__btn_new_rule">Jauns noteikums</string>
+    <string name="settings_app_config_rules__title_rules">Noteikumi</string>
+    <string name="settings_app_config__description_preferred_browser">Lietotāja vēlamais pārlūks</string>
+    <string name="settings_app_config__title_preferred_browser">Vēlamais pārlūks</string>
+    <string name="settings_app_config__description_native_apps">Lietotnes, kas var atvērt šī domēna saites</string>
+    <string name="settings_app_config__description_browsers">Uzstādītie pārlūki</string>
+    <string name="fastfoward_rules_explainer">Izmanto eksperimentālo <annotation url-id="fastforward-github">FastForward</annotation> noteikumu integrāciju (apiet dažu domēnu novirzīšanu, iegūstot galamērķa adresi no saites)</string>
+    <string name="clear_urls_version">ClearURLs noteikumi</string>
+    <string name="fastforward_version">FastForward noteikumi</string>
+    <string name="settings_new_rule__title_new_rule">Jauns noteikums</string>
+    <string name="settings_edit_rule__title_edit_rule">Noteikuma rediģēšana</string>
+    <string name="donate">Ziedot</string>
+    <string name="onboarding_0_title">Laipni lūdzam\nLinkSheet!</string>
+    <string name="donate_crypto">Ziedot kriptovalūtu</string>
+    <string name="donate_card">Ziedot naudu ar karti, izmantojot Buy Me a Coffee</string>
+    <string name="donate_explainer_crypto">Kad ziedojat kriptovalūtā, lai saņemtu <b>LinkSheet Pro</b>, nosūtiet maksājuma apliecinājumu uz <annotation url="mailto:1fexd@420blaze.it">1fexd@420blaze.it</annotation> e-pasta adresi.</string>
 </resources>

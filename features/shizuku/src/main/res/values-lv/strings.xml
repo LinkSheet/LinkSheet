@@ -5,4 +5,18 @@
     <string name="settings_shizuku__title_not_installed">Shizuku nav uzstādīts⁣</string>
     <string name="settings_shizuku__title_shizuku">Shizuku</string>
     <string name="shizuku_integration">Shizuku integrācija</string>
+    <string name="settings_shizuku__title_enable">Iespējot Shizuku integrāciju</string>
+    <string name="settings_shizuku__text_shizuku">Konfigurēt Shizuku iespējotās funkcijas</string>
+    <string name="settings_shizuku__text_not_running">Pieskarieties, lai atvērtu pārvaldnieku</string>
+    <string name="settings_shizuku__text_missing_permission">Pieskarieties, lai pieprasītu Shizuku atļauju</string>
+    <string name="settings_shizuku__text_not_installed">Pieskarieties, lai atvērtu uzstādīšanas instrukciju</string>
+    <string name="shizuku_integration_no_permission_explainer">Pieskarieties šeit, lai pieprasītu Shizuku atļauju.</string>
+    <string name="shizuku_integration_enabled_explainer">Shizuku integrācija veiksmīgi iespējota!</string>
+    <string name="settings_shizuku__text_auto_disable_link_handling">Automātiski atspējot saišu apstrādi tikko uzstādītajām lietotnēm.</string>
+    <string name="shizuku_integration_not_setup_explainer">LinkSheet darbojas arī bez Shizuku, taču iesakām to izmantot. Pieskarieties šeit, lai to uzstādītu.</string>
+    <string name="shizuku_not_running_explainer">Shizuku nav palaists. Pieskarieties šeit, lai atvērtu Shizuku, un pēc tam izpildiet norādījumus, lai to palaistu.</string>
+    <string name="settings_shizuku__text_info">Shizuku — rīkkopa, kas ar (bezvadu) ADB vai root piekļuvi ļauj citām lietotnēm piekļūt privileģētām sistēmas funkcijām, kuras parasti pieejamas tikai privileģētajam shell lietotājam.\n\nLinkSheet izmanto Shizuku, lai ieslēgtu vai izslēgtu saišu apstrādi jebkurai lietotnei, tāpēc lietotājam tas nav jādara pašam, atverot iestatījumus.</string>
+    <string name="settings_shizuku__title_missing_permission">Trūkst atļaujas</string>
+    <string name="settings_shizuku__text">Shizuku</string>
+    <string name="settings_shizuku__title_auto_disable_link_handling">Automātiski atspējot saišu apstrādi</string>
 </resources>

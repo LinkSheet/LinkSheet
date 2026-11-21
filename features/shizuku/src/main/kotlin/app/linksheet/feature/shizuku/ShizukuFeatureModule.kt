@@ -1,6 +1,7 @@
 package app.linksheet.feature.shizuku
 
 import android.content.Context
+import android.content.pm.getInstalledPackagesCompat
 import app.linksheet.api.DiQualifier
 import app.linksheet.api.SystemInfoService
 import app.linksheet.api.preference.AppPreferenceRepository
@@ -10,18 +11,25 @@ import app.linksheet.feature.shizuku.service.AndroidShizukuService
 import app.linksheet.feature.shizuku.service.ShizukuFeatureService
 import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.service.UserServiceConfig
+import app.linksheet.feature.shizuku.service.getCertSha256
+import app.linksheet.feature.shizuku.service.readManagerSelection
+import app.linksheet.feature.shizuku.usecase.ShizukuManagerUseCase
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
+import app.linksheet.feature.shizuku.viewmodel.ShizukuManagerViewModel
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.util.buildconfig.StaticBuildInfo
 import fe.android.lifecycle.koin.extension.service
 import fe.composekit.preference.asFlow
 import fe.droidkit.koin.getPackageManager
+import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val ShizukuFeatureModule = module {
     single {
         val info = get<SystemInfoService>()
+        val repo = get<AppPreferenceRepository>()
+        val preferences = get<ShizukuPreferences>()
         AndroidShizukuService(
             eventBus = get(),
             packageManager = getPackageManager(),
@@ -30,7 +38,13 @@ val ShizukuFeatureModule = module {
                 versionCode = info.buildInfo.versionCode + if (StaticBuildInfo.IsDebug) 9999 else 0,
                 debuggable = StaticBuildInfo.IsDebug,
                 tag = info.getApplicationId()
-            )
+            ),
+            readManagerSelection = {
+                readManagerSelection(
+                    repo.get(preferences.managerPackage),
+                    repo.get(preferences.managerCertSha256)
+                )
+            }
         )
     }
     service<ShizukuFeatureService> {
@@ -52,4 +66,20 @@ val ShizukuFeatureModule = module {
         )
     }
     viewModelOf(::ShizukuSettingsViewModel)
+    factory {
+        val pm = getPackageManager()
+        ShizukuManagerUseCase(
+            creator = get(),
+            selfPackage = get<Context>().packageName,
+            getInstalledPackages = pm::getInstalledPackagesCompat,
+            getCertSha256 = pm::getCertSha256
+        )
+    }
+    viewModel {
+        ShizukuManagerViewModel(
+            preferenceRepository = get(),
+            shizukuPreferences = get(),
+            useCase = get()
+        )
+    }
 }

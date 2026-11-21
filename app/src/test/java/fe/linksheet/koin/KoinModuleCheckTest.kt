@@ -1,7 +1,6 @@
 package fe.linksheet.koin
 
 import android.app.Application
-import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -51,7 +50,9 @@ import app.linksheet.feature.shizuku.service.ShizukuFeatureService
 import app.linksheet.feature.shizuku.service.ShizukuService
 import app.linksheet.feature.shizuku.service.UserServiceConfig
 import app.linksheet.feature.shizuku.service.WrappedShizuku
+import app.linksheet.feature.shizuku.usecase.ShizukuManagerUseCase
 import app.linksheet.feature.shizuku.usecase.ShizukuStatusUseCase
+import app.linksheet.feature.shizuku.viewmodel.ShizukuManagerViewModel
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import app.linksheet.feature.wiki.database.dao.WikiCacheDao
 import app.linksheet.feature.wiki.database.repository.WikiCacheRepository
@@ -320,11 +321,17 @@ internal class KoinModuleCheckTest : BaseUnitTest {
             AppPreferenceRepository::class,
             ProfileSwitcher::class
         ),
-        definition<ShizukuService>(UserServiceConfig::class, ComponentName::class, WrappedShizuku::class),
+        definition<ShizukuService>(UserServiceConfig::class, WrappedShizuku::class),
         definition<ShizukuSettingsViewModel>(
             ShizukuService::class,
             AppPreferenceRepository::class,
             ShizukuPreferences::class
+        ),
+        definition<ShizukuManagerUseCase>(AppInfoCreator::class, String::class),
+        definition<ShizukuManagerViewModel>(
+            AppPreferenceRepository::class,
+            ShizukuPreferences::class,
+            ShizukuManagerUseCase::class
         ),
         definition<fe.linksheet.module.viewmodel.FollowRedirectsSettingsViewModel>(
             AppPreferenceRepository::class

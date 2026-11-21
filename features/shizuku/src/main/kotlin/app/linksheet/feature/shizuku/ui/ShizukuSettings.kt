@@ -21,6 +21,7 @@ import app.linksheet.compose.InfoText
 import app.linksheet.compose.page.SaneScaffoldSettingsPage
 import app.linksheet.compose.preview.PreviewTheme
 import app.linksheet.feature.shizuku.R
+import app.linksheet.feature.shizuku.navigation.ShizukuManagerRoute
 import app.linksheet.feature.shizuku.service.ShizukuStatus
 import app.linksheet.feature.shizuku.viewmodel.ShizukuSettingsViewModel
 import fe.android.compose.icon.iconPainter
@@ -29,14 +30,18 @@ import fe.composekit.component.ContentType
 import fe.composekit.component.PreviewThemeNew
 import fe.composekit.component.card.AlertCard
 import fe.composekit.component.card.AlertCardDefaults
+import fe.composekit.component.list.column.shape.SelectableShapeListItem
+import fe.composekit.component.list.item.ContentPosition
 import fe.composekit.layout.column.SaneLazyListScope
 import fe.composekit.lifecycle.collectRefreshableAsStateWithLifecycle
 import fe.composekit.preference.FakePreferences
+import fe.composekit.route.Route
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ShizukuSettings(
     onBackPressed: () -> Unit,
+    navigate: (Route) -> Unit,
     viewModel: ShizukuSettingsViewModel = koinViewModel(),
 ) {
     val activity = LocalActivity.current
@@ -49,6 +54,7 @@ fun ShizukuSettings(
         status = status,
         openWeb = { viewModel.statusUseCase.openShizukuWeb(activity) },
         openManager = { viewModel.statusUseCase.startManager(activity) },
+        selectManager = { navigate(ShizukuManagerRoute) },
         requestPermission = viewModel.statusUseCase::requestPermission,
         onBackPressed = onBackPressed,
         content = {
@@ -65,6 +71,7 @@ private fun ShizukuSettingsInternal(
     status: ShizukuStatus,
     openWeb: () -> Unit,
     openManager: () -> Unit,
+    selectManager: () -> Unit,
     requestPermission: () -> Unit,
     onBackPressed: () -> Unit,
     content: SaneLazyListScope.() -> Unit,
@@ -74,8 +81,8 @@ private fun ShizukuSettingsInternal(
         onBackPressed = onBackPressed
     ) {
         when {
-            !status.installed -> notInstalled(openWeb = openWeb)
-            !status.running -> notRunning(openManager = openManager)
+            !status.installed -> notInstalled(openWeb = openWeb, selectManager = selectManager)
+            !status.running -> notRunning(openManager = openManager, selectManager = selectManager)
             !status.permission -> noPermission(requestPermission = requestPermission)
             else -> content()
         }
@@ -90,7 +97,7 @@ private fun ShizukuSettingsInternal(
     }
 }
 
-private fun SaneLazyListScope.notInstalled(openWeb: () -> Unit) {
+private fun SaneLazyListScope.notInstalled(openWeb: () -> Unit, selectManager: () -> Unit) {
     item(
         key = R.string.settings_shizuku__title_not_installed,
         contentType = ContentType.SingleGroupItem
@@ -106,9 +113,11 @@ private fun SaneLazyListScope.notInstalled(openWeb: () -> Unit) {
             onClick = openWeb
         )
     }
+
+    selectManagerItem(selectManager)
 }
 
-private fun SaneLazyListScope.notRunning(openManager: () -> Unit) {
+private fun SaneLazyListScope.notRunning(openManager: () -> Unit, selectManager: () -> Unit) {
     item(
         key = R.string.settings_shizuku__title_not_running,
         contentType = ContentType.SingleGroupItem
@@ -121,6 +130,26 @@ private fun SaneLazyListScope.notRunning(openManager: () -> Unit) {
             headline = textContent(R.string.settings_shizuku__title_not_running),
             subtitle = textContent(R.string.settings_shizuku__text_not_running),
             onClick = openManager
+        )
+    }
+
+    selectManagerItem(selectManager)
+}
+
+private fun SaneLazyListScope.selectManagerItem(onClick: () -> Unit) {
+    item(contentType = ContentType.Spacer) {
+        Spacer(modifier = Modifier.height(12.dp))
+    }
+
+    item(
+        key = R.string.settings_shizuku__title_select_manager,
+        contentType = ContentType.SingleGroupItem
+    ) {
+        SelectableShapeListItem(
+            headlineContent = textContent(R.string.settings_shizuku__title_select_manager),
+            supportingContent = textContent(R.string.settings_shizuku__text_select_manager),
+            position = ContentPosition.Trailing,
+            onClick = onClick
         )
     }
 }
@@ -187,6 +216,7 @@ private fun ShizukuPreviewBase(status: ShizukuStatus) {
             status = status,
             openWeb = {},
             openManager = {},
+            selectManager = {},
             requestPermission = {},
             onBackPressed = {},
             content = {
